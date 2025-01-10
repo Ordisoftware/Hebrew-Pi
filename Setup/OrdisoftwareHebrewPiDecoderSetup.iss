@@ -1,9 +1,9 @@
 #define MyAppVersion "0.1"
-#define MyAppName "Hebrew Pi Decoder"
+#define MyAppName "Hebrew PiDecoder"
 #define MyAppNameNoSpace "HebrewPiDecoder"
 #define MyAppExeName "Ordisoftware.Hebrew.PiDecoder.exe"
 #define MyAppPublisher "Ordisoftware"
-#define MyAppURL "https://www.ordisoftware.com/projects/hebrew-pi-decoder"
+#define MyAppURL "https://www.ordisoftware.com/projects/hebrew-pidecoder"
 
 [Setup]
 MinVersion=0,6.1sp1
