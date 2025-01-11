@@ -1,16 +1,16 @@
 #define MyAppVersion "0.1"
-#define MyAppName "Hebrew PiDecoder"
-#define MyAppNameNoSpace "HebrewPiDecoder"
-#define MyAppExeName "Ordisoftware.Hebrew.PiDecoder.exe"
+#define MyAppName "Hebrew Pi"
+#define MyAppNameNoSpace "HebrewPi"
+#define MyAppExeName "Ordisoftware.Hebrew.Pi.exe"
 #define MyAppPublisher "Ordisoftware"
-#define MyAppURL "https://www.ordisoftware.com/projects/hebrew-pidecoder"
+#define MyAppURL "https://www.ordisoftware.com/projects/hebrew-pi"
 
 [Setup]
 MinVersion=0,6.1sp1
 LicenseFile=..\Project\Licenses\MPL 2.0.rtf
 AppCopyright=Copyright 2025 Olivier Rogier
 AppId={{61CBB6A1-8EBC-4C9F-A517-D872F06C6983}
-;AppMutex=
+;AppMutex=68dc2d2f-143a-4d06-9b04-534539b6051d
 #include "Scripts\Setup.iss"
 
 [Languages]

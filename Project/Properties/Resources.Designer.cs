@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ordisoftware.Hebrew.PiDecoder.Properties {
+namespace Ordisoftware.Hebrew.Pi.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Ordisoftware.Hebrew.PiDecoder.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ordisoftware.Hebrew.PiDecoder.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ordisoftware.Hebrew.Pi.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

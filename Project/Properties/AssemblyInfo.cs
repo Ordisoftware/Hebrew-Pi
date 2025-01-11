@@ -1,11 +1,11 @@
 ﻿// Les informations générales relatives à un assembly dépendent de
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
-[assembly: AssemblyTitle("Hebrew PiDecoder")]
+[assembly: AssemblyTitle("Hebrew Pi")]
 [assembly: AssemblyDescription("Pi's decimal sequences decoder and translator using Hebrew gematria")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ordisoftware")]
-[assembly: AssemblyProduct("www.ordisoftware.com/projects/hebrew-pidecoder")]
+[assembly: AssemblyProduct("www.ordisoftware.com/projects/hebrew-pi")]
 [assembly: AssemblyCopyright("Copyright © 2025")]
 [assembly: AssemblyTrademark("www.ordisoftware.com")]
 [assembly: AssemblyCulture("")]

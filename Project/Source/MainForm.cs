@@ -1,4 +1,6 @@
-﻿namespace Ordisoftware.Hebrew.PiDecoder;
+﻿using SQLite;
+
+namespace Ordisoftware.Hebrew.Pi;
 
 public partial class MainForm : Form
 {
@@ -25,11 +27,13 @@ public partial class MainForm : Form
     GDPI120K,
     GDPI1M,
     GDPI1B,
+    GDPI10B,
     GDPI1MCorrected,
-    GDPI1BCorrected
+    GDPI1BCorrected,
+    GDPI10BCorrected
   }
 
-  FileSizeType FileName = FileSizeType.GDPI1B;
+  FileSizeType FileName = FileSizeType.GDPI10B;
 
   public MainForm()
   {
@@ -37,24 +41,6 @@ public partial class MainForm : Form
   }
 
   private Dictionary<string, GroupInfo> PiGroups;
-
-  private void MainForm_Load(object sender, EventArgs e)
-  {
-    string piDecimals = File.ReadAllText(Path.Combine(Globals.DocumentsFolderPath, FileName.ToString()) + ".txt").Trim();
-    if ( piDecimals.StartsWith("3.") )
-      piDecimals = piDecimals.Substring(2);
-    PiGroups = Enumerable
-      .Range(0, piDecimals.Length / 10)
-      .Select(i => new { Index = i + 1, Group = piDecimals.Substring(i * 10, 10) })
-      .GroupBy(x => x.Group)
-      .ToDictionary(g => g.Key,
-                    g => new GroupInfo(g.Count(),
-                                       string.Join(", ", g.Select(x => x.Index))));
-    Grid.DataSource = PiGroups
-      .Select(kvp => new { Group = kvp.Key, kvp.Value.Count, kvp.Value.Indices })
-      .OrderByDescending(item => item.Count)
-      .ToList();
-  }
 
   private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
   {
@@ -81,6 +67,24 @@ public partial class MainForm : Form
       }
       Clipboard.SetText(builder.ToString());
     }
+  }
+
+  private void ActionLoadFile_Click(object sender, EventArgs e)
+  {
+    string piDecimals = File.ReadAllText(Path.Combine(Globals.DocumentsFolderPath, FileName.ToString()) + ".txt").Trim();
+    if ( piDecimals.StartsWith("3.") )
+      piDecimals = piDecimals.Substring(2);
+    PiGroups = Enumerable
+      .Range(0, piDecimals.Length / 10)
+      .Select(i => new { Index = i + 1, Group = piDecimals.Substring(i * 10, 10) })
+      .GroupBy(x => x.Group)
+      .ToDictionary(g => g.Key,
+                    g => new GroupInfo(g.Count(),
+                                       string.Join(", ", g.Select(x => x.Index))));
+    Grid.DataSource = PiGroups
+      .Select(kvp => new { Group = kvp.Key, kvp.Value.Count, kvp.Value.Indices })
+      .OrderByDescending(item => item.Count)
+      .ToList();
   }
 
   private void ActionCheck_Click(object sender, EventArgs e)
@@ -130,7 +134,7 @@ public partial class MainForm : Form
     MessageBox.Show(MsgSavedCorrected);
   }
 
-  private void ComparePiDecimals(string file1, string file2)
+  private void CompareFiles(string file1, string file2)
   {
     string piDecimals1 = File.ReadAllText(file1).Trim();
     string piDecimals2 = File.ReadAllText(file2).Trim();
@@ -152,6 +156,96 @@ public partial class MainForm : Form
       MessageBox.Show("Les fichiers sont identiques.");
     else
       MessageBox.Show($"Il y a {differences} différences.");
+  }
+
+  Stopwatch chrono;
+
+  private async void ActionCreateTable_Click(object sender, EventArgs e)
+  {
+    await Task.Run(() =>
+    {
+      chrono = new Stopwatch();
+      chrono.Start();
+      CreateTable();
+      chrono.Stop();
+      var ts = chrono.Elapsed;
+      LabelStatusTime.Text = string.Format("{0:00}:{1:00}:{2:00}", ts.Hours, ts.Minutes, ts.Seconds);
+    });
+  }
+
+  private async void CreateTable()
+  {
+    string dbPath = Path.Combine(Globals.UserDataFolderPath, "Hebrew-Pi.sqlite");
+    string inputFilePath = Path.Combine(Globals.DocumentsFolderPath, FileSizeType.GDPI10B.ToString()) + ".txt";
+    int blockSize = 10;
+    try
+    {
+      using var db = new SQLiteConnection(dbPath);
+      db.CreateTable<DecupletRow>();
+      using var fileStream = new FileStream(inputFilePath, FileMode.Open, FileAccess.Read);
+      using var reader = new StreamReader(fileStream);
+      char[] buffer = new char[1024 * 1024];
+      int charsRead;
+      long totalBlocks = 0;
+      db.BeginTransaction();
+      while ( ( charsRead = reader.Read(buffer, 0, buffer.Length) ) > 0 )
+      {
+        string chunk = new string(buffer, 0, charsRead);
+        for ( int i = 0; i < chunk.Length; i += blockSize )
+          if ( i + blockSize <= chunk.Length )
+          {
+            db.Insert(new DecupletRow { Value = long.Parse(chunk.Substring(i, blockSize)) });
+            totalBlocks++;
+            if ( totalBlocks % 100000 == 0 )
+              UpdateStatusInfo($"{totalBlocks / 1000}k blocs insérés");
+          }
+      }
+      UpdateStatusInfo($"{totalBlocks / 1000}k blocs insérés - Do commit...");
+      db.Commit();
+      db.Execute("CREATE INDEX idx_decuplets_value ON Decuplets(Value);");
+      UpdateStatusInfo($"{totalBlocks / 1000}k blocs insérés - Commit done...");
+    }
+    catch ( Exception ex )
+    {
+      UpdateStatusInfo($"Erreur : {ex.Message}");
+    }
+  }
+
+  private void UpdateStatusInfo(string message)
+  {
+    if ( StatusStrip.InvokeRequired )
+      StatusStrip.Invoke(process);
+    else
+      process();
+    //
+    void process()
+    {
+      LabelStatusProgress.Text = message;
+      var ts = chrono.Elapsed;
+      LabelStatusTime.Text = string.Format("{0:00}:{1:00}:{2:00}", ts.Hours, ts.Minutes, ts.Seconds);
+    }
+  }
+
+  public static void ApplyOptimizations(SQLiteConnection connection)
+  {
+    return;
+    string sql = @"PRAGMA journal_mode = OFF;
+                   PRAGMA synchronous = OFF;
+                   PRAGMA cache_size = -200000;
+                   PRAGMA locking_mode = EXCLUSIVE;
+                   PRAGMA temp_store = MEMORY;";
+    var command = connection.CreateCommand(sql);
+    command.ExecuteNonQuery();
+  }
+
+  public static void ResetOptimizations(SQLiteConnection connection)
+  {
+    return;
+    var sql = @"PRAGMA journal_mode = DELETE;
+                PRAGMA synchronous = FULL;
+                PRAGMA locking_mode = NORMAL;";
+    var command = connection.CreateCommand(sql);
+    command.ExecuteNonQuery();
   }
 
 }

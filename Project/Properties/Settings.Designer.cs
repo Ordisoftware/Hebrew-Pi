@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ordisoftware.Hebrew.PiDecoder.Properties {
+namespace Ordisoftware.Hebrew.Pi.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

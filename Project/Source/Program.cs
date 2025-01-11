@@ -1,4 +1,4 @@
-﻿namespace Ordisoftware.Hebrew.PiDecoder;
+﻿namespace Ordisoftware.Hebrew.Pi;
 
 internal static class Program
 {

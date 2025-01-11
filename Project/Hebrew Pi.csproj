@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{68DC2D2F-143A-4D06-9B04-534539B6051D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Ordisoftware.Hebrew.PiDecoder</RootNamespace>
-    <AssemblyName>Ordisoftware.Hebrew.PiDecoder</AssemblyName>
+    <RootNamespace>Ordisoftware.Hebrew.Pi</RootNamespace>
+    <AssemblyName>Ordisoftware.Hebrew.Pi</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -24,7 +24,7 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <LangVersion>latest</LangVersion>
-    <DocumentationFile>..\Bin\Debug\Ordisoftware.Hebrew.PiDecoder.xml</DocumentationFile>
+    <DocumentationFile>..\Bin\Debug\Ordisoftware.Hebrew.Pi.xml</DocumentationFile>
     <NoWarn>1587, 1591, 0649</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -37,7 +37,7 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <LangVersion>latest</LangVersion>
-    <DocumentationFile>..\Bin\Release\Ordisoftware.Hebrew.PiDecoder.xml</DocumentationFile>
+    <DocumentationFile>..\Bin\Release\Ordisoftware.Hebrew.Pi.xml</DocumentationFile>
     <NoWarn>1587, 1591, 0649</NoWarn>
   </PropertyGroup>
   <ItemGroup>
@@ -370,6 +370,7 @@
     <Compile Include="Source\Common\Hebrew\WinForms\CelebrationVersesBoardForm.Designer.cs">
       <DependentUpon>CelebrationVersesBoardForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Source\DecupletRow.cs" />
     <Compile Include="Source\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -634,8 +635,8 @@
       <Link>README.html</Link>
       <DependentUpon>README.md</DependentUpon>
     </Content>
-    <Content Include="..\Setup\OrdisoftwareHebrewPiDecoderSetup.iss">
-      <Link>Properties\OrdisoftwareHebrewPiDecoderSetup.iss</Link>
+    <Content Include="..\Setup\OrdisoftwareHebrewPiSetup.iss">
+      <Link>OrdisoftwareHebrewPiSetup.iss</Link>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
