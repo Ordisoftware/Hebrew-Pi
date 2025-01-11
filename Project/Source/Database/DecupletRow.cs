@@ -21,10 +21,12 @@ using SQLite;
 public class DecupletRow : AbstractRow
 {
 
+  public const string TableName = "Decuplets";
+
   [PrimaryKey, AutoIncrement]
   public long Position { get; set; }
 
-  [Indexed]
+  //[Indexed]
   public long Motif { get; set; }
 
 }

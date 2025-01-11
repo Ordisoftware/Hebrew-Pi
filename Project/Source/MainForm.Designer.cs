@@ -30,11 +30,11 @@
     {
       this.Grid = new System.Windows.Forms.DataGridView();
       this.Panel = new System.Windows.Forms.Panel();
-      this.comboBox1 = new System.Windows.Forms.ComboBox();
+      this.SelectFileName = new System.Windows.Forms.ComboBox();
       this.ActionCreateTable = new System.Windows.Forms.Button();
       this.ActionLoadFile = new System.Windows.Forms.Button();
-      this.ActionSave = new System.Windows.Forms.Button();
-      this.ActionCheck = new System.Windows.Forms.Button();
+      this.ActionSaveFixedDuplicatesToFile = new System.Windows.Forms.Button();
+      this.ActionCheckDuplicates = new System.Windows.Forms.Button();
       this.StatusStrip = new System.Windows.Forms.StatusStrip();
       this.LabelStatusProgress = new System.Windows.Forms.ToolStripStatusLabel();
       this.LabelStatusTime = new System.Windows.Forms.ToolStripStatusLabel();
@@ -50,6 +50,7 @@
       this.Grid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.Grid.Location = new System.Drawing.Point(0, 75);
       this.Grid.Name = "Grid";
+      this.Grid.RowHeadersWidth = 100;
       this.Grid.Size = new System.Drawing.Size(800, 620);
       this.Grid.TabIndex = 0;
       this.Grid.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.Grid_RowPostPaint);
@@ -57,24 +58,25 @@
       // 
       // Panel
       // 
-      this.Panel.Controls.Add(this.comboBox1);
+      this.Panel.Controls.Add(this.SelectFileName);
       this.Panel.Controls.Add(this.ActionCreateTable);
       this.Panel.Controls.Add(this.ActionLoadFile);
-      this.Panel.Controls.Add(this.ActionSave);
-      this.Panel.Controls.Add(this.ActionCheck);
+      this.Panel.Controls.Add(this.ActionSaveFixedDuplicatesToFile);
+      this.Panel.Controls.Add(this.ActionCheckDuplicates);
       this.Panel.Dock = System.Windows.Forms.DockStyle.Top;
       this.Panel.Location = new System.Drawing.Point(0, 0);
       this.Panel.Name = "Panel";
       this.Panel.Size = new System.Drawing.Size(800, 75);
       this.Panel.TabIndex = 1;
       // 
-      // comboBox1
+      // SelectFileName
       // 
-      this.comboBox1.FormattingEnabled = true;
-      this.comboBox1.Location = new System.Drawing.Point(12, 12);
-      this.comboBox1.Name = "comboBox1";
-      this.comboBox1.Size = new System.Drawing.Size(121, 21);
-      this.comboBox1.TabIndex = 3;
+      this.SelectFileName.FormattingEnabled = true;
+      this.SelectFileName.Location = new System.Drawing.Point(12, 12);
+      this.SelectFileName.Name = "SelectFileName";
+      this.SelectFileName.Size = new System.Drawing.Size(121, 21);
+      this.SelectFileName.TabIndex = 3;
+      this.SelectFileName.SelectedIndexChanged += new System.EventHandler(this.SelectFileName_SelectedIndexChanged);
       // 
       // ActionCreateTable
       // 
@@ -96,26 +98,26 @@
       this.ActionLoadFile.UseVisualStyleBackColor = true;
       this.ActionLoadFile.Click += new System.EventHandler(this.ActionLoadFile_Click);
       // 
-      // ActionSave
+      // ActionSaveFixedDuplicatesToFile
       // 
-      this.ActionSave.Enabled = false;
-      this.ActionSave.Location = new System.Drawing.Point(341, 10);
-      this.ActionSave.Name = "ActionSave";
-      this.ActionSave.Size = new System.Drawing.Size(95, 23);
-      this.ActionSave.TabIndex = 0;
-      this.ActionSave.Text = "Save fix dup.";
-      this.ActionSave.UseVisualStyleBackColor = true;
-      this.ActionSave.Click += new System.EventHandler(this.ActionSave_Click);
+      this.ActionSaveFixedDuplicatesToFile.Enabled = false;
+      this.ActionSaveFixedDuplicatesToFile.Location = new System.Drawing.Point(341, 10);
+      this.ActionSaveFixedDuplicatesToFile.Name = "ActionSaveFixedDuplicatesToFile";
+      this.ActionSaveFixedDuplicatesToFile.Size = new System.Drawing.Size(95, 23);
+      this.ActionSaveFixedDuplicatesToFile.TabIndex = 0;
+      this.ActionSaveFixedDuplicatesToFile.Text = "Save fix dup.";
+      this.ActionSaveFixedDuplicatesToFile.UseVisualStyleBackColor = true;
+      this.ActionSaveFixedDuplicatesToFile.Click += new System.EventHandler(this.ActionSaveFixedDuplicatesToFile_Click);
       // 
-      // ActionCheck
+      // ActionCheckDuplicates
       // 
-      this.ActionCheck.Location = new System.Drawing.Point(240, 10);
-      this.ActionCheck.Name = "ActionCheck";
-      this.ActionCheck.Size = new System.Drawing.Size(95, 23);
-      this.ActionCheck.TabIndex = 0;
-      this.ActionCheck.Text = "Check dup.";
-      this.ActionCheck.UseVisualStyleBackColor = true;
-      this.ActionCheck.Click += new System.EventHandler(this.ActionCheck_Click);
+      this.ActionCheckDuplicates.Location = new System.Drawing.Point(240, 10);
+      this.ActionCheckDuplicates.Name = "ActionCheckDuplicates";
+      this.ActionCheckDuplicates.Size = new System.Drawing.Size(95, 23);
+      this.ActionCheckDuplicates.TabIndex = 0;
+      this.ActionCheckDuplicates.Text = "Check dup.";
+      this.ActionCheckDuplicates.UseVisualStyleBackColor = true;
+      this.ActionCheckDuplicates.Click += new System.EventHandler(this.ActionCheckDuplicates_Click);
       // 
       // StatusStrip
       // 
@@ -163,9 +165,9 @@
 
     private DataGridView Grid;
     private Panel Panel;
-    private Button ActionCheck;
-    private Button ActionSave;
-    private ComboBox comboBox1;
+    private Button ActionCheckDuplicates;
+    private Button ActionSaveFixedDuplicatesToFile;
+    private ComboBox SelectFileName;
     private Button ActionCreateTable;
     private Button ActionLoadFile;
     private StatusStrip StatusStrip;

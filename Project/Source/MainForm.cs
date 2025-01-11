@@ -12,9 +12,11 @@
 /// </license>
 /// <created> 2025-01-10 </created>
 /// <edited> 2025-01-11 </edited>
-using SQLite;
-
 namespace Ordisoftware.Hebrew.Pi;
+
+using System;
+using System.Diagnostics;
+using SQLite;
 
 public partial class MainForm : Form
 {
@@ -47,7 +49,13 @@ public partial class MainForm : Form
     PiDecimals_10B_Fixed
   }
 
-  PiDecimalsExtractSize FileName = PiDecimalsExtractSize.PiDecimals_10B;
+  private PiDecimalsExtractSize FileName;
+
+  private Dictionary<string, GroupInfo> PiGroups;
+
+  private SQLiteConnection DB;
+
+  private Stopwatch chrono;
 
   #region Singleton
 
@@ -69,9 +77,36 @@ public partial class MainForm : Form
   public MainForm()
   {
     InitializeComponent();
+    foreach ( var value in Enums.GetValues<PiDecimalsExtractSize>() )
+      SelectFileName.Items.Add(value);
+    SelectFileName.SelectedIndex = 0;
   }
 
-  private Dictionary<string, GroupInfo> PiGroups;
+  private void UpdateStatusInfo(string message)
+  {
+    if ( StatusStrip.InvokeRequired )
+      StatusStrip.Invoke(process);
+    else
+      process();
+    //
+    void process()
+    {
+      LabelStatusProgress.Text = message;
+      UpdateStatusTime();
+    }
+  }
+
+  private void UpdateStatusTime()
+  {
+    if ( StatusStrip.InvokeRequired )
+      StatusStrip.Invoke(process);
+    else
+      process();
+    void process()
+    {
+      LabelStatusTime.Text = chrono.Elapsed.ToString(@"mm\:ss");
+    }
+  }
 
   private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
   {
@@ -100,6 +135,11 @@ public partial class MainForm : Form
     }
   }
 
+  private void SelectFileName_SelectedIndexChanged(object sender, EventArgs e)
+  {
+    FileName = (PiDecimalsExtractSize)SelectFileName.SelectedItem;
+  }
+
   private void ActionLoadFile_Click(object sender, EventArgs e)
   {
     string piDecimals = File.ReadAllText(Path.Combine(Globals.DocumentsFolderPath, FileName.ToString()) + ".txt").Trim();
@@ -118,7 +158,7 @@ public partial class MainForm : Form
       .ToList();
   }
 
-  private void ActionCheck_Click(object sender, EventArgs e)
+  private void ActionCheckDuplicates_Click(object sender, EventArgs e)
   {
     var duplicates = PiGroups.Where(g => g.Value.Count > 1);
     if ( duplicates.Count() == 0 )
@@ -139,11 +179,11 @@ public partial class MainForm : Form
         }
       }
       MessageBox.Show(MsgOk);
-      ActionSave.Enabled = true;
+      ActionSaveFixedDuplicatesToFile.Enabled = true;
     }
   }
 
-  private void ActionSave_Click(object sender, EventArgs e)
+  private void ActionSaveFixedDuplicatesToFile_Click(object sender, EventArgs e)
   {
     var piDecimals = new Dictionary<int, string>();
     foreach ( var group in PiGroups )
@@ -189,8 +229,6 @@ public partial class MainForm : Form
       MessageBox.Show($"Il y a {differences} différences.");
   }
 
-  Stopwatch chrono;
-
   private async void ActionCreateTable_Click(object sender, EventArgs e)
   {
     await Task.Run(() =>
@@ -205,36 +243,44 @@ public partial class MainForm : Form
 
   private async void CreateTable(string fileName)
   {
-    string dbPath = Path.Combine(Globals.DatabaseFolderPath, Globals.ApplicationDatabaseFileName);
+    string dbPath = Path.Combine(Globals.DatabaseFolderPath, FileName.ToString()) + Globals.DatabaseFileExtension;
     string inputFilePath = fileName;
     int blockSize = 10;
     try
     {
-      using var db = new SQLiteConnection(dbPath);
-      db.CreateTable<DecupletRow>();
-      using var fileStream = new FileStream(inputFilePath, FileMode.Open, FileAccess.Read);
-      using var reader = new StreamReader(fileStream);
-      char[] buffer = new char[1024 * 1024];
-      int charsRead;
-      long totalBlocks = 0;
-      db.BeginTransaction();
-      while ( ( charsRead = reader.Read(buffer, 0, buffer.Length) ) > 0 )
+      if ( DB is not null )
       {
-        string chunk = new string(buffer, 0, charsRead);
-        for ( int i = 0; i < chunk.Length; i += blockSize )
-          if ( i + blockSize <= chunk.Length )
+        DB.Close();
+        DB.Dispose();
+      }
+      DB = new SQLiteConnection(dbPath);
+      DB.CreateTable<DecupletRow>();
+      DB.BeginTransaction();
+      UpdateStatusInfo($"0k - Started");
+      int bufferLength = 10_000_000;
+      char[] buffer = new char[bufferLength];
+      int charsRead;
+      long motif = 0;
+      long totalBlocks = 0;
+      using var reader = new StreamReader(inputFilePath);
+      while ( ( charsRead = reader.Read(buffer, 0, bufferLength) ) > 0 )
+      {
+        for ( int indexBuffer = 0; indexBuffer < charsRead; indexBuffer += blockSize )
+          if ( indexBuffer + blockSize <= charsRead )
           {
-            db.Insert(new DecupletRow { Motif = long.Parse(chunk.Substring(i, blockSize)) });
+            motif = 0;
+            for ( int indexMotif = 0; indexMotif < blockSize; indexMotif++ )
+              motif = motif * 10 + ( buffer[indexBuffer + indexMotif] - '0' );
+            DB.Insert(new DecupletRow { Motif = motif });
             totalBlocks++;
-            if ( totalBlocks % 100000 == 0 )
+            if ( totalBlocks % 1000000 == 0 )
               UpdateStatusInfo($"{totalBlocks / 1000}k blocs insérés");
           }
       }
-      fileStream.Close();
       UpdateStatusInfo($"{totalBlocks / 1000}k - Committing");
-      db.Commit();
+      DB.Commit();
       UpdateStatusInfo($"{totalBlocks / 1000}k - Indexing");
-      db.Execute("CREATE INDEX idx_decuplets_value ON Decuplets(Value);");
+      DB.Execute($"CREATE INDEX idx_decuplets_value ON {DecupletRow.TableName} ({nameof(DecupletRow.Motif)})");
       UpdateStatusInfo($"{totalBlocks / 1000}k - Finished");
     }
     catch ( Exception ex )
@@ -243,23 +289,32 @@ public partial class MainForm : Form
     }
   }
 
-  private void UpdateStatusInfo(string message)
+  private void CreateDataTable()
   {
-    if ( StatusStrip.InvokeRequired )
-      StatusStrip.Invoke(process);
-    else
-      process();
-    //
-    void process()
+    try
     {
-      LabelStatusProgress.Text = message;
-      UpdateStatusTime();
+      var dataTable = new DataTable();
+      var command = DB.CreateCommand("SELECT * FROM Decuplets LIMIT 1000000 OFFSET 0");
+      var list = command.ExecuteQuery<DecupletRow>();
+      if ( list.Count > 0 )
+      {
+        foreach ( var prop in typeof(DecupletRow).GetProperties() )
+          dataTable.Columns.Add(prop.Name);
+        foreach ( var row in list )
+        {
+          var dataRow = dataTable.NewRow();
+          foreach ( var prop in typeof(DecupletRow).GetProperties() )
+            dataRow[prop.Name] = prop.GetValue(row);
+          dataTable.Rows.Add(dataRow);
+        }
+      }
+      Grid.DataSource = dataTable;
     }
-  }
+    catch ( Exception ex )
+    {
+      UpdateStatusInfo(ex.Message);
+    }
 
-  private void UpdateStatusTime()
-  {
-    LabelStatusTime.Text = chrono.Elapsed.ToString(@"mm\:ss");
   }
 
 }
