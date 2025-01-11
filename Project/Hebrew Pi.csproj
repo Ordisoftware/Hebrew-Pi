@@ -494,6 +494,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="..\README.md">
+      <Link>README.md</Link>
+    </None>
     <None Include="Dependencies\BindingListView\BindingListView %28BSD-2-Clause%29.url" />
     <None Include="Dependencies\BindingListView\BindingListView-1.4.1.0.zip" />
     <None Include="Dependencies\CommandLineParser\commandline-2.9.1.zip" />
@@ -636,7 +639,7 @@
       <DependentUpon>README.md</DependentUpon>
     </Content>
     <Content Include="..\Setup\OrdisoftwareHebrewPiSetup.iss">
-      <Link>OrdisoftwareHebrewPiSetup.iss</Link>
+      <Link>Properties\OrdisoftwareHebrewPiSetup.iss</Link>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

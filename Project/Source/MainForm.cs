@@ -200,10 +200,12 @@ public partial class MainForm : Form
               UpdateStatusInfo($"{totalBlocks / 1000}k blocs insérés");
           }
       }
-      UpdateStatusInfo($"{totalBlocks / 1000}k blocs insérés - Do commit...");
+      fileStream.Close();
+      UpdateStatusInfo($"{totalBlocks / 1000}k blocs insérés - Do commit");
       db.Commit();
+      UpdateStatusInfo($"{totalBlocks / 1000}k blocs insérés - Commit done, creating index");
       db.Execute("CREATE INDEX idx_decuplets_value ON Decuplets(Value);");
-      UpdateStatusInfo($"{totalBlocks / 1000}k blocs insérés - Commit done...");
+      UpdateStatusInfo($"{totalBlocks / 1000}k blocs insérés - Finished");
     }
     catch ( Exception ex )
     {
