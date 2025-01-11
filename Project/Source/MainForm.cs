@@ -224,7 +224,7 @@ public partial class MainForm : Form
         for ( int i = 0; i < chunk.Length; i += blockSize )
           if ( i + blockSize <= chunk.Length )
           {
-            db.Insert(new DecupletRow { Value = long.Parse(chunk.Substring(i, blockSize)) });
+            db.Insert(new DecupletRow { Motif = long.Parse(chunk.Substring(i, blockSize)) });
             totalBlocks++;
             if ( totalBlocks % 100000 == 0 )
               UpdateStatusInfo($"{totalBlocks / 1000}k blocs insérés");

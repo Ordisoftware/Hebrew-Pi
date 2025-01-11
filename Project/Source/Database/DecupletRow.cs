@@ -22,9 +22,9 @@ public class DecupletRow : AbstractRow
 {
 
   [PrimaryKey, AutoIncrement]
-  public long Index { get; set; }
+  public long Position { get; set; }
 
-  //[Indexed]
-  public long Value { get; set; }
+  [Indexed]
+  public long Motif { get; set; }
 
 }
