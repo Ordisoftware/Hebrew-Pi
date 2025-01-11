@@ -9,7 +9,7 @@ public partial class MainForm : Form
   const string MsgPrefix = "Sur l'échantillon donné, la théorie des répétés ajoutés aux positions";
   const string MsgOk = $"{MsgPrefix} fonctionne.";
   const string MsgNotOk = $"{MsgPrefix} ne fonctionne pas.";
-  const string MsgSavedCorrected = "Les groupes dupliquée ont été corrigés et le fichier reconstruit.";
+  const string MsgSaved_Fixed = "Les groupes dupliquée ont été corrigés et le fichier reconstruit.";
 
   public class GroupInfo
   {
@@ -22,18 +22,18 @@ public partial class MainForm : Form
     }
   }
 
-  public enum FileSizeType
+  public enum PiDecimalsExtractSize
   {
-    GDPI120K,
-    GDPI1M,
-    GDPI1B,
-    GDPI10B,
-    GDPI1MCorrected,
-    GDPI1BCorrected,
-    GDPI10BCorrected
+    PiDecimals_128K,
+    PiDecimals_1M,
+    PiDecimals_1B,
+    PiDecimals_10B,
+    PiDecimals_1M_Fixed,
+    PiDecimals_1B_Fixed,
+    PiDecimals_10B_Fixed
   }
 
-  FileSizeType FileName = FileSizeType.GDPI10B;
+  PiDecimalsExtractSize FileName = PiDecimalsExtractSize.PiDecimals_10B;
 
   public MainForm()
   {
@@ -130,8 +130,8 @@ public partial class MainForm : Form
     var builder = new StringBuilder();
     foreach ( var index in indicesOrdered )
       builder.Append(piDecimals[index]);
-    File.WriteAllText(Path.Combine(Globals.DocumentsFolderPath, FileName.ToString()) + "Corrected.txt", builder.ToString());
-    MessageBox.Show(MsgSavedCorrected);
+    File.WriteAllText(Path.Combine(Globals.DocumentsFolderPath, FileName.ToString()) + "_Fixed.txt", builder.ToString());
+    MessageBox.Show(MsgSaved_Fixed);
   }
 
   private void CompareFiles(string file1, string file2)
@@ -166,17 +166,16 @@ public partial class MainForm : Form
     {
       chrono = new Stopwatch();
       chrono.Start();
-      CreateTable();
+      CreateTable(Path.Combine(Globals.DocumentsFolderPath, FileName.ToString()) + ".txt");
       chrono.Stop();
-      var ts = chrono.Elapsed;
-      LabelStatusTime.Text = string.Format("{0:00}:{1:00}:{2:00}", ts.Hours, ts.Minutes, ts.Seconds);
+      UpdateStatusTime();
     });
   }
 
-  private async void CreateTable()
+  private async void CreateTable(string fileName)
   {
-    string dbPath = Path.Combine(Globals.UserDataFolderPath, "Hebrew-Pi.sqlite");
-    string inputFilePath = Path.Combine(Globals.DocumentsFolderPath, FileSizeType.GDPI10B.ToString()) + ".txt";
+    string dbPath = Path.Combine(Globals.DatabaseFolderPath, Globals.ApplicationDatabaseFileName);
+    string inputFilePath = fileName;
     int blockSize = 10;
     try
     {
@@ -201,15 +200,15 @@ public partial class MainForm : Form
           }
       }
       fileStream.Close();
-      UpdateStatusInfo($"{totalBlocks / 1000}k blocs insérés - Do commit");
+      UpdateStatusInfo($"{totalBlocks / 1000}k - Committing");
       db.Commit();
-      UpdateStatusInfo($"{totalBlocks / 1000}k blocs insérés - Commit done, creating index");
+      UpdateStatusInfo($"{totalBlocks / 1000}k - Indexing");
       db.Execute("CREATE INDEX idx_decuplets_value ON Decuplets(Value);");
-      UpdateStatusInfo($"{totalBlocks / 1000}k blocs insérés - Finished");
+      UpdateStatusInfo($"{totalBlocks / 1000}k - Finished");
     }
     catch ( Exception ex )
     {
-      UpdateStatusInfo($"Erreur : {ex.Message}");
+      UpdateStatusInfo($"Error : {ex.Message}");
     }
   }
 
@@ -223,31 +222,13 @@ public partial class MainForm : Form
     void process()
     {
       LabelStatusProgress.Text = message;
-      var ts = chrono.Elapsed;
-      LabelStatusTime.Text = string.Format("{0:00}:{1:00}:{2:00}", ts.Hours, ts.Minutes, ts.Seconds);
+      UpdateStatusTime();
     }
   }
 
-  public static void ApplyOptimizations(SQLiteConnection connection)
+  private void UpdateStatusTime()
   {
-    return;
-    string sql = @"PRAGMA journal_mode = OFF;
-                   PRAGMA synchronous = OFF;
-                   PRAGMA cache_size = -200000;
-                   PRAGMA locking_mode = EXCLUSIVE;
-                   PRAGMA temp_store = MEMORY;";
-    var command = connection.CreateCommand(sql);
-    command.ExecuteNonQuery();
-  }
-
-  public static void ResetOptimizations(SQLiteConnection connection)
-  {
-    return;
-    var sql = @"PRAGMA journal_mode = DELETE;
-                PRAGMA synchronous = FULL;
-                PRAGMA locking_mode = NORMAL;";
-    var command = connection.CreateCommand(sql);
-    command.ExecuteNonQuery();
+    LabelStatusTime.Text = chrono.Elapsed.ToString(@"mm\:ss");
   }
 
 }

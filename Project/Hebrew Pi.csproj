@@ -370,7 +370,7 @@
     <Compile Include="Source\Common\Hebrew\WinForms\CelebrationVersesBoardForm.Designer.cs">
       <DependentUpon>CelebrationVersesBoardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Source\DecupletRow.cs" />
+    <Compile Include="Source\Database\DecupletRow.cs" />
     <Compile Include="Source\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
