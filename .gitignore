@@ -1,4 +1,7 @@
-﻿/Setup/**/*.exe
+﻿/Documents/PiDecimals1B.txt
+/Documents/PiDecimals10B.txt
+
+/Setup/**/*.exe
 *.sha512
 *.bak
 
