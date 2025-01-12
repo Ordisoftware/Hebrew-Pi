@@ -26,31 +26,4 @@ static partial class Program
   static public readonly Properties.Settings Settings
     = Properties.Settings.Default;
 
-  static public readonly NullSafeOfStringDictionary<DataExportTarget> BoardExportTargets
-    = ExportHelper.CreateExportTargets(DataExportTarget.TXT, DataExportTarget.CSV, DataExportTarget.JSON);
-
-  /// <summary>
-  /// Indicates image export targets
-  /// </summary>
-  static public readonly NullSafeOfStringDictionary<ImageExportTarget> ImageExportTargets
-    = ExportHelper.CreateExportTargets<ImageExportTarget>().SetUnsupported(ImageExportTarget.GIF);
-
-  /// <summary>
-  /// Indicates application tanak documents folder.
-  /// </summary>
-  static public string TanakFolderPath
-    => Path.Combine(Globals.DocumentsFolderPath, "Tanak");
-
-  /// <summary>
-  /// Indicates file path of the bookmarks.
-  /// </summary>
-  static public string BookmarksFilePath
-    => Path.Combine(Globals.UserDataFolderPath, "Bookmarks.txt");
-
-  /// <summary>
-  /// Indicates file path of the history.
-  /// </summary>
-  static public string HistoryFilePath
-  => Path.Combine(Globals.UserDataFolderPath, "History.txt");
-
 }

@@ -205,32 +205,9 @@ public partial class MainForm : Form
     MessageBox.Show(MsgSaved_Fixed);
   }
 
-  private void CompareFiles(string file1, string file2)
-  {
-    string piDecimals1 = File.ReadAllText(file1).Trim();
-    string piDecimals2 = File.ReadAllText(file2).Trim();
-    if ( piDecimals1.Length != piDecimals2.Length )
-    {
-      MessageBox.Show("Les fichiers ont des tailles différentes.");
-      return;
-    }
-    int differences = 0;
-    int groupSize = 10;
-    for ( int index = 0; index < piDecimals1.Length; index += groupSize )
-    {
-      string chunk1 = piDecimals1.Substring(index, groupSize);
-      string chunk2 = piDecimals2.Substring(index, groupSize);
-      if ( chunk1 != chunk2 )
-        differences++;
-    }
-    if ( differences == 0 )
-      MessageBox.Show("Les fichiers sont identiques.");
-    else
-      MessageBox.Show($"Il y a {differences} différences.");
-  }
-
   private async void ActionCreateTable_Click(object sender, EventArgs e)
   {
+    ActionCreateTable.Enabled = false;
     await Task.Run(() =>
     {
       chrono = new Stopwatch();
@@ -239,6 +216,7 @@ public partial class MainForm : Form
       chrono.Stop();
       UpdateStatusTime();
     });
+    ActionCreateTable.Enabled = true;
   }
 
   private async void CreateTable(string fileName)
