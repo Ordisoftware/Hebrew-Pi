@@ -53,8 +53,8 @@ static class SettingsHelper
     DisplayManager.FormStyle = MessageBoxFormStyle.Advanced;
     //MainForm.EditShowSuccessDialogs.Checked = false;
     DisplayManager.ShowSuccessDialogs = false;
-    //settings.ApplicationVolume = 100;
-    //MediaMixer.SetApplicationVolume(Globals.ProcessId, settings.ApplicationVolume);
+    settings.ApplicationVolume = 100;
+    MediaMixer.SetApplicationVolume(Globals.ProcessId, settings.ApplicationVolume);
     //MainForm.SetView(ViewMode.ChapterVerses);
     settings.Store();
   }
@@ -70,19 +70,19 @@ static class SettingsHelper
     try
     {
       var area = SystemInformation.WorkingArea;
-      //MainForm.Left = settings.MainFormLeft >= area.Left && settings.MainFormLeft <= area.Width
-      //  ? settings.MainFormLeft
-      //  : area.Left;
-      //MainForm.Top = settings.MainFormTop >= area.Top && settings.MainFormTop <= area.Height
-      //  ? settings.MainFormTop
-      //  : area.Top;
-      //MainForm.Width = settings.MainFormWidth >= MainForm.MinimumSize.Width && settings.MainFormWidth <= area.Width
-      //  ? settings.MainFormWidth
-      //  : MainForm.MinimumSize.Width;
-      //MainForm.Height = settings.MainFormHeight >= MainForm.MinimumSize.Height
-      //               && settings.MainFormHeight <= area.Height
-      //  ? settings.MainFormHeight
-      //  : MainForm.MinimumSize.Height;
+      MainForm.Left = settings.MainFormLeft >= area.Left && settings.MainFormLeft <= area.Width
+        ? settings.MainFormLeft
+        : area.Left;
+      MainForm.Top = settings.MainFormTop >= area.Top && settings.MainFormTop <= area.Height
+        ? settings.MainFormTop
+        : area.Top;
+      MainForm.Width = settings.MainFormWidth >= MainForm.MinimumSize.Width && settings.MainFormWidth <= area.Width
+        ? settings.MainFormWidth
+        : MainForm.MinimumSize.Width;
+      MainForm.Height = settings.MainFormHeight >= MainForm.MinimumSize.Height
+                     && settings.MainFormHeight <= area.Height
+        ? settings.MainFormHeight
+        : MainForm.MinimumSize.Height;
       //MainForm.EditScreenNone.Checked = settings.MainFormPosition == ControlLocation.Loose;
       //MainForm.EditScreenTopLeft.Checked = settings.MainFormPosition == ControlLocation.TopLeft;
       //MainForm.EditScreenTopRight.Checked = settings.MainFormPosition == ControlLocation.TopRight;
@@ -91,35 +91,32 @@ static class SettingsHelper
       //MainForm.EditScreenCenter.Checked = settings.MainFormPosition == ControlLocation.Center;
       //MainForm.EditScreenPosition_Click(null, null);
       //MainForm.WindowState = settings.MainFormState;
-      ////
+      //
       //MainForm.EditConfirmClosing.Checked = settings.ConfirmClosing;
       //MainForm.EditShowTips.Checked = settings.ShowTips;
       //MainForm.EditSoundsEnabled.Checked = settings.SoundsEnabled;
       //MainForm.EditUseAdvancedDialogBoxes.Checked = settings.AdvancedDialogBoxes;
       //MainForm.EditShowSuccessDialogs.Checked = settings.ShowSuccessDialogs;
-      //DisplayManager.ShowSuccessDialogs = settings.ShowSuccessDialogs;
+      DisplayManager.ShowSuccessDialogs = settings.ShowSuccessDialogs;
       //MainForm.EditDialogBoxesSettings_CheckedChanged(null, null);
       //MainForm.EditExportUseHebrewFontElseUnicodeChars.Checked = settings.ExportUseHebrewFontElseUnicodeChars;
       //MainForm.EditIncludeOriginalText.Checked = settings.IncludeOriginalTextInChapterTranslation;
       //MainForm.EditIncludeComment.Checked = settings.IncludeCommentInChapterTranslation;
-      ////
-      //EditMemoForm.LastLocation = settings.EditMemoFormLastLocation;
-      //EditMemoForm.LastSize = settings.EditMemoFormLastSize;
-      ////
-      //if ( settings.AutoOpenExportedFile && settings.AutoOpenExportFolder )
-      //  settings.AutoOpenExportFolder = false;
-      //if ( settings.ExportFolder.Length == 0 )
-      //{
-      //  string path = Globals.UserDocumentsFolderPath;
-      //  Directory.CreateDirectory(path);
-      //  settings.ExportFolder = path;
-      //}
-      //if ( settings.BackupFolder.Length == 0 )
-      //{
-      //  string path = Path.Combine(Globals.UserDocumentsFolderPath, "Backup");
-      //  Directory.CreateDirectory(path);
-      //  settings.BackupFolder = path;
-      //}
+      //
+      if ( settings.AutoOpenExportedFile && settings.AutoOpenExportFolder )
+        settings.AutoOpenExportFolder = false;
+      if ( settings.ExportFolder.Length == 0 )
+      {
+        string path = Globals.UserDocumentsFolderPath;
+        Directory.CreateDirectory(path);
+        settings.ExportFolder = path;
+      }
+      if ( settings.BackupFolder.Length == 0 )
+      {
+        string path = Path.Combine(Globals.UserDocumentsFolderPath, "Backup");
+        Directory.CreateDirectory(path);
+        settings.BackupFolder = path;
+      }
     }
     finally
     {
@@ -137,23 +134,23 @@ static class SettingsHelper
     Mutex = true;
     try
     {
-      //var winState = MainForm.WindowState;
-      //if ( winState != FormWindowState.Minimized )
-      //  settings.MainFormState = winState;
-      //if ( winState == FormWindowState.Normal )
-      //{
-      //  settings.MainFormLeft = MainForm.Left;
-      //  settings.MainFormTop = MainForm.Top;
-      //  settings.MainFormWidth = MainForm.Width;
-      //  settings.MainFormHeight = MainForm.Height;
-      //}
+      var winState = MainForm.WindowState;
+      if ( winState != FormWindowState.Minimized )
+        settings.MainFormState = winState;
+      if ( winState == FormWindowState.Normal )
+      {
+        settings.MainFormLeft = MainForm.Left;
+        settings.MainFormTop = MainForm.Top;
+        settings.MainFormWidth = MainForm.Width;
+        settings.MainFormHeight = MainForm.Height;
+      }
       //if ( MainForm.EditScreenNone.Checked ) settings.MainFormPosition = ControlLocation.Loose;
       //if ( MainForm.EditScreenTopLeft.Checked ) settings.MainFormPosition = ControlLocation.TopLeft;
       //if ( MainForm.EditScreenTopRight.Checked ) settings.MainFormPosition = ControlLocation.TopRight;
       //if ( MainForm.EditScreenBottomLeft.Checked ) settings.MainFormPosition = ControlLocation.BottomLeft;
       //if ( MainForm.EditScreenBottomRight.Checked ) settings.MainFormPosition = ControlLocation.BottomRight;
       //if ( MainForm.EditScreenCenter.Checked ) settings.MainFormPosition = ControlLocation.Center;
-      ////
+      //
       //settings.ConfirmClosing = MainForm.EditConfirmClosing.Checked;
       //settings.ShowTips = MainForm.EditShowTips.Checked;
       //settings.SoundsEnabled = MainForm.EditSoundsEnabled.Checked;
@@ -162,10 +159,10 @@ static class SettingsHelper
       //settings.ExportUseHebrewFontElseUnicodeChars = MainForm.EditExportUseHebrewFontElseUnicodeChars.Checked;
       //settings.IncludeOriginalTextInChapterTranslation = MainForm.EditIncludeOriginalText.Checked;
       //settings.IncludeCommentInChapterTranslation = MainForm.EditIncludeComment.Checked;
-      ////
-      //settings.EditMemoFormLastLocation = EditMemoForm.LastLocation;
-      //settings.EditMemoFormLastSize = EditMemoForm.LastSize;
-      //SystemManager.TryCatch(settings.Save);
+      //
+      settings.EditMemoFormLastLocation = EditMemoForm.LastLocation;
+      settings.EditMemoFormLastSize = EditMemoForm.LastSize;
+      SystemManager.TryCatch(settings.Save);
     }
     finally
     {
@@ -178,7 +175,7 @@ static class SettingsHelper
   /// </summary>
   static internal void SetUpgradeFlagsOff(this Settings settings)
   {
-    //settings.UpgradeRequired = false;
+    settings.UpgradeRequired = false;
   }
 
   /// <summary>
@@ -187,67 +184,67 @@ static class SettingsHelper
   static internal void SetFirstAndUpgradeFlagsOff(this Settings settings)
   {
     settings.SetUpgradeFlagsOff();
-    //settings.FirstLaunch = false;
+    settings.FirstLaunch = false;
   }
 
   /// <summary>
   /// Gets the backup directory.
   /// </summary>
-  //static internal string GetBackupDirectory(this Settings settings)
-  //{
-  //  string result = settings.BackupFolder.Replace("%USER_APP_DOCUMENTS%", Globals.UserDocumentsFolderPath);
-  //  if ( !Directory.Exists(result) ) Directory.CreateDirectory(result);
-  //  return result;
-  //}
+  static internal string GetBackupDirectory(this Settings settings)
+  {
+    string result = settings.BackupFolder.Replace("%USER_APP_DOCUMENTS%", Globals.UserDocumentsFolderPath);
+    if ( !Directory.Exists(result) ) Directory.CreateDirectory(result);
+    return result;
+  }
 
   /// <summary>
   /// Gets the export directory.
   /// </summary>
-  //static internal string GetExportDirectory(this Settings settings)
-  //{
-  //  string result = settings.ExportFolder.Replace("%USER_APP_DOCUMENTS%", Globals.UserDocumentsFolderPath);
-  //  if ( !Directory.Exists(result) ) Directory.CreateDirectory(result);
-  //  return result;
-  //}
+  static internal string GetExportDirectory(this Settings settings)
+  {
+    string result = settings.ExportFolder.Replace("%USER_APP_DOCUMENTS%", Globals.UserDocumentsFolderPath);
+    if ( !Directory.Exists(result) ) Directory.CreateDirectory(result);
+    return result;
+  }
 
   /// <summary>
   /// Gets the settings export directory.
   /// </summary>
-  //static internal string GetExportSettingsDirectory(this Settings settings)
-  //{
-  //  string result = Path.Combine(settings.GetExportDirectory(), "Settings");
-  //  if ( !Directory.Exists(result) ) Directory.CreateDirectory(result);
-  //  return result;
-  //}
+  static internal string GetExportSettingsDirectory(this Settings settings)
+  {
+    string result = Path.Combine(settings.GetExportDirectory(), "Settings");
+    if ( !Directory.Exists(result) ) Directory.CreateDirectory(result);
+    return result;
+  }
 
   /// <summary>
   /// Gets the images export directory.
   /// </summary>
-  //static internal string GetExportImagesDirectory(this Settings settings)
-  //{
-  //  string result = Path.Combine(settings.GetExportDirectory(), "Images");
-  //  if ( !Directory.Exists(result) ) Directory.CreateDirectory(result);
-  //  return result;
-  //}
+  static internal string GetExportImagesDirectory(this Settings settings)
+  {
+    string result = Path.Combine(settings.GetExportDirectory(), "Images");
+    if ( !Directory.Exists(result) ) Directory.CreateDirectory(result);
+    return result;
+  }
 
   /// <summary>
   /// Gets the boards export directory.
   /// </summary>
-  //static internal string GetExportBoardsDirectory(this Settings settings)
-  //{
-  //  string result = Path.Combine(settings.GetExportDirectory(), "Boards");
-  //  if ( !Directory.Exists(result) ) Directory.CreateDirectory(result);
-  //  return result;
-  //}
+  static internal string GetExportBoardsDirectory(this Settings settings)
+  {
+    string result = Path.Combine(settings.GetExportDirectory(), "Boards");
+    if ( !Directory.Exists(result) ) Directory.CreateDirectory(result);
+    return result;
+  }
 
   /// <summary>
   /// Gets the verses export directory.
   /// </summary>
-  //static internal string GetExportVersesDirectory(this Settings settings)
-  //{
-  //  string result = Path.Combine(settings.GetExportDirectory(), "Verses");
-  //  if ( !Directory.Exists(result) ) Directory.CreateDirectory(result);
-  //  return result;
-  //}
+  static internal string GetExportVersesDirectory(this Settings settings)
+  {
+    string result = Path.Combine(settings.GetExportDirectory(), "Verses");
+    if ( !Directory.Exists(result) ) Directory.CreateDirectory(result);
+    return result;
+  }
 
 }

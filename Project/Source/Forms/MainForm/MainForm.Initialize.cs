@@ -30,32 +30,23 @@ partial class MainForm : Form
   [SuppressMessage("Design", "GCop179:Do not hardcode numbers, strings or other values. Use constant fields, enums, config files or database as appropriate.", Justification = "<En attente>")]
   private void DoConstructor()
   {
-    //Interlocks.Take();
-    //InitializeViewConnectors();
-    //new Task(InitializeIconsAndSound).Start();
-    //new Task(InitializeDialogsDirectory).Start();
+    Interlocks.Take();
+    InitializeViewConnectors();
+    new Task(InitializeIconsAndSound).Start();
+    new Task(InitializeDialogsDirectory).Start();
     //new Task(() => BookmarkItems = new Bookmarks(Program.BookmarksFilePath)).Start();
     //new Task(() => HistoryItems = new History(Program.HistoryFilePath)).Start();
-    //SystemManager.TryCatch(() => Icon = new Icon(Globals.ApplicationIconFilePath));
-    //Text = Globals.AssemblyTitle;
+    SystemManager.TryCatch(() => Icon = new Icon(Globals.ApplicationIconFilePath));
+    Text = Globals.AssemblyTitle;
     //ToolStrip.Renderer = new CheckedButtonsToolStripRenderer();
-    //CurrentReference = new ReferenceItem(null, null, null, null);
     //ActionGoToBookmarkMain.Click += GoToBookmark;
-    //SystemEvents.SessionEnding += SessionEnding;
-    //EditELS50HScrollBar.Minimum = -100;
-    //EditELS50HScrollBar.Maximum = 0;
-    //EditELS50HScrollBar.LargeChange = 20;
-    //EditELS50HScrollBar.SmallChange = 10;
-    //EditSearchWord.ContextMenuDetailsVisible = false;
-    //NativeMethods.ClipboardViewerNext = NativeMethods.SetClipboardViewer(Handle);
-    //HebrewGlobals.GetHebrewLettersExecutablePath = () => Settings.HebrewLettersExe;
-    //InitializeTheme();
-    //if ( !ApplicationCommandLine.Instance.IsPreviewEnabled ) // TODO remove when ready
-    //{
-    //  ActionNormalizeTexts.Visible = false;
-    //  SeparatorActionNormalizeTexts.Visible = false;
-    //  ActionViewWorkingStatistics.Visible = false;
-    //}
+    SystemEvents.SessionEnding += SessionEnding;
+    NativeMethods.ClipboardViewerNext = NativeMethods.SetClipboardViewer(Handle);
+    HebrewGlobals.GetHebrewLettersExecutablePath = () => Settings.HebrewLettersExe;
+    InitializeTheme();
+    if ( !ApplicationCommandLine.Instance.IsPreviewEnabled ) // TODO remove when ready
+    {
+    }
   }
 
   /// <summary>
@@ -65,30 +56,27 @@ partial class MainForm : Form
   {
     if ( Globals.IsExiting ) return;
     Settings.Retrieve();
-    //EditSearchWord.HebrewCharsInBold = Settings.LettersControlHebrewCharsInBold;
     //PreviousWindowsState = WindowState; // TODO move in settings helper and update calendar & letters
-    //Program.UpdateLocalization();
-    //StatisticsForm.Run(true, Settings.UsageStatisticsEnabled);
-    //Globals.ChronoStartingApp.Stop();
-    //var lastdone = Settings.CheckUpdateLastDone;
-    //bool exit = WebCheckUpdate.Run(ref lastdone,
-    //                               Settings.CheckUpdateAtStartupDaysInterval,
-    //                               Settings.CheckUpdateAtStartup,
-    //                               true);
-    //Settings.CheckUpdateLastDone = lastdone;
-    //if ( exit )
-    //{
-    //  SystemManager.Exit();
-    //  return;
-    //}
-    //Globals.ChronoStartingApp.Start();
+    Program.UpdateLocalization();
+    StatisticsForm.Run(true, Settings.UsageStatisticsEnabled);
+    Globals.ChronoStartingApp.Stop();
+    var lastdone = Settings.CheckUpdateLastDone;
+    bool exit = WebCheckUpdate.Run(ref lastdone,
+                                   Settings.CheckUpdateAtStartupDaysInterval,
+                                   Settings.CheckUpdateAtStartup,
+                                   true);
+    Settings.CheckUpdateLastDone = lastdone;
+    if ( exit )
+    {
+      SystemManager.Exit();
+      return;
+    }
+    Globals.ChronoStartingApp.Start();
     //MainForm_ResizeEnd(null, null);
     //MainForm_Resize(null, null);
     //UpdateSearchButtons();
     //BookmarkMenuIndex = ActionBookmarks.DropDownItems.Count;
     //HistoryIndexMenu = ActionHistory.DropDownItems.Count;
-    //EditSearchWord.ActionClear.Visible = false;
-    //EditSearchWord.PanelSeparatorActionClear.Visible = false;
     DebugManager.TraceEnabledChanged += value => CommonMenusControl.Instance.ActionViewLog.Enabled = value;
   }
 
@@ -102,20 +90,11 @@ partial class MainForm : Form
     this.InitDropDowns();
     Refresh();
     //DoBackupDB();
-    //LoadData();
+    LoadData();
     //TimerAutoSave.Enabled = Settings.AutoSaveDelay != 0;
     //if ( TimerAutoSave.Enabled )
     //  TimerAutoSave.Interval = Settings.AutoSaveDelay * Globals.MilliSecondsInOneMinute;
-    //Globals.IsReady = true;
-    //int height = TextRenderer.MeasureText("A", SelectBook.Font).Height;
-    //SelectBook.DropDownHeight = Math.Min(600, height * ( SelectBook.Items.Count + 1 ));
-    //SelectVerse.DropDownWidth = Math.Max(SelectVerse.DropDownWidth, ActionEditChapterMemo.Right - SelectVerse.Left + 5);
-    //FilterModified = new()
-    //{
-    //  { EditFilterBook, false },
-    //  { EditFilterChapter, false },
-    //  { EditFilterVerse, false },
-    //};
+    Globals.IsReady = true;
     Globals.KeyboardShortcutsNotice = new ShowTextForm(AppTranslations.NoticeKeyboardShortcutsTitle,
                                                            AppTranslations.NoticeKeyboardShortcuts,
                                                            true, false,
@@ -131,7 +110,6 @@ partial class MainForm : Form
     SystemManager.TryCatchManage(ProcessNewsAndCommandLine);
     //ApplicationDatabase.Instance.Modified += (_, _) => ActionSave.Enabled = true;
     //ApplicationDatabase.Instance.Saved += _ => ActionSave.Enabled = false;
-    //PanelTitleInner.Controls.OfType<Label>().ForEach(label => label.Visible = true);
     Settings.SetFirstAndUpgradeFlagsOff();
   }
 
@@ -146,7 +124,6 @@ partial class MainForm : Form
       Application.DoEvents();
       Thread.Sleep(500);
     }
-    bool auto = false;
     if ( SystemManager.CommandLineOptions is not null )
       try
       {
@@ -155,7 +132,6 @@ partial class MainForm : Form
       catch
       {
       }
-    //if ( !auto ) DoStartGoToReference();
   }
 
   /// <summary>

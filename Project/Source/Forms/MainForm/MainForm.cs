@@ -222,8 +222,6 @@ public partial class MainForm : Form
   private async void CreateTable(string fileName)
   {
     string dbPath = Path.Combine(Globals.DatabaseFolderPath, FileName.ToString()) + Globals.DatabaseFileExtension;
-    string inputFilePath = fileName;
-    int blockSize = 10;
     try
     {
       if ( DB is not null )
@@ -235,12 +233,13 @@ public partial class MainForm : Form
       DB.CreateTable<DecupletRow>();
       DB.BeginTransaction();
       UpdateStatusInfo($"0k - Started");
+      int charsRead;
+      int blockSize = 10;
+      long totalBlocks = 0;
+      long motif = 0;
       int bufferLength = 10_000_000;
       char[] buffer = new char[bufferLength];
-      int charsRead;
-      long motif = 0;
-      long totalBlocks = 0;
-      using var reader = new StreamReader(inputFilePath);
+      using var reader = new StreamReader(fileName);
       while ( ( charsRead = reader.Read(buffer, 0, bufferLength) ) > 0 )
       {
         for ( int indexBuffer = 0; indexBuffer < charsRead; indexBuffer += blockSize )
