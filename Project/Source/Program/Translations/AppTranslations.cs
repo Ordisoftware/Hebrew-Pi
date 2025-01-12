@@ -10,8 +10,8 @@
 /// relevant directory) where a recipient would be likely to look for such a notice.
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
-/// <created> 2025-01-11 </created>
-/// <edited> 2025-01-11 </edited>
+/// <created> 2025-01-12 </created>
+/// <edited> 2025-01-12 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 static partial class AppTranslations
@@ -21,6 +21,34 @@ static partial class AppTranslations
   {
     [Language.EN] = "",
     [Language.FR] = ""
+  };
+
+  static public readonly TranslationsDictionary AskToCreateNewDatabase = new()
+  {
+    [Language.EN] = "Do you want to create a new database which will replace the actual?",
+    [Language.FR] = "Voulez-vous créer une nouvelle base de données qui remplacera l'actuelle ?"
+  };
+
+  static public readonly TranslationsDictionary AskToReplaceDatabase = new()
+  {
+    [Language.EN] = "Do you want to replace the actual database with the selected backup?" + Globals.NL2 + "{0}",
+    [Language.FR] = "Voulez-vous remplacer la base de données actuelle avec l'archive sélectionnée ?" + Globals.NL2 + "{0}"
+  };
+
+  static public readonly TranslationsDictionary AskToBackupDatabaseBeforeReplace = new()
+  {
+    [Language.EN] = "Do you want to backup database before replace it?",
+    [Language.FR] = "Voulez-vous archiver la base de données avant de la remplacer ?"
+  };
+
+  static public readonly TranslationsDictionary NoSearchResultFound = new()
+  {
+    [Language.EN] = "No result found",
+    [Language.FR] = "Aucun résultat trouvé"
+  };
+
+  static public readonly NullSafeDictionary<ViewMode, TranslationsDictionary> ViewPanelTitle = new()
+  {
   };
 
 }

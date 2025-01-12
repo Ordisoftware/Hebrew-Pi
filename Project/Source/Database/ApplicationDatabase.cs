@@ -17,7 +17,7 @@ namespace Ordisoftware.Hebrew.Pi;
 using Equin.ApplicationFramework;
 
 [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP006:Implement IDisposable", Justification = "<En attente>")]
-sealed class ApplicationDatabase : SQLiteDatabase
+sealed partial class ApplicationDatabase : SQLiteDatabase
 {
 
   static public ApplicationDatabase Instance { get; }
@@ -75,7 +75,10 @@ sealed class ApplicationDatabase : SQLiteDatabase
 
   protected override bool CreateDataIfNotExist(bool reset = false)
   {
+    /* if non empty */
     return false;
+    //FillFromFile();
+    //return true;
   }
 
 }

@@ -372,15 +372,50 @@
     </Compile>
     <Compile Include="Source\Database\AbstractRow.cs" />
     <Compile Include="Source\Database\ApplicationDatabase.cs" />
+    <Compile Include="Source\Database\ApplicationDatabase.Fill.cs" />
     <Compile Include="Source\Database\DecupletRow.cs" />
-    <Compile Include="Source\MainForm.cs">
+    <Compile Include="Source\Entities\Bookmarks.cs" />
+    <Compile Include="Source\Entities\History.cs" />
+    <Compile Include="Source\Enums\ViewMode.cs" />
+    <Compile Include="Source\Forms\Boxes\StatisticsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\MainForm.Designer.cs">
+    <Compile Include="Source\Forms\Boxes\StatisticsForm.designer.cs">
+      <DependentUpon>StatisticsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\MainForm\Data\MainForm.DB.LoadData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\MainForm\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\MainForm\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\MainForm\MainForm.Initialize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\MainForm\MainForm.Initialize.Menus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\MainForm\MainForm.Vars.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\MainForm\UI\MainForm.Keys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\MainForm\UI\MainForm.SetView.Connectors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\MainForm\UI\MainForm.SetView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\MainForm\UI\MainForm.UpdateUI.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Program\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\Program\Program.Guides.cs" />
     <Compile Include="Source\Program\Program.Interop.cs" />
     <Compile Include="Source\Program\Program.Localization.cs" />
     <Compile Include="Source\Program\Program.Vars.cs" />
@@ -493,7 +528,13 @@
     <EmbeddedResource Include="Source\Common\Hebrew\WinForms\CelebrationVersesBoardForm.resx">
       <DependentUpon>CelebrationVersesBoardForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\MainForm.resx">
+    <EmbeddedResource Include="Source\Forms\Boxes\StatisticsForm.fr.resx">
+      <DependentUpon>StatisticsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Boxes\StatisticsForm.resx">
+      <DependentUpon>StatisticsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\MainForm\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -654,6 +695,8 @@
       <Link>Properties\OrdisoftwareHebrewPiSetup.iss</Link>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Source\Forms\Config\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
