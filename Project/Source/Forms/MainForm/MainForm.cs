@@ -30,7 +30,7 @@ public partial class MainForm : Form
 
   private Stopwatch chrono;
   private SQLiteConnection DB;
-  private string SQLiteTempDir;
+  private string SQLiteTempDir = @"D:\";
 
   private PiDecimalsExtractSize FileName;
   private Dictionary<string, GroupInfo> PiGroups;

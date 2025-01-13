@@ -51,6 +51,11 @@ public partial class MainForm
       int bufferLength = 10_000_000;
       char[] buffer = new char[bufferLength];
       using var reader = new StreamReader(fileName);
+      charsRead = reader.Read(buffer, 0, 2);
+      if ( charsRead != 2 )
+        throw new IndexOutOfRangeException("Bad file.");
+      if ( new string(buffer) != "3," )
+        reader.BaseStream.Seek(0, SeekOrigin.Begin);
       while ( ( charsRead = reader.Read(buffer, 0, bufferLength) ) > 0 )
       {
         for ( int indexBuffer = 0; indexBuffer < charsRead; indexBuffer += blockSize )
