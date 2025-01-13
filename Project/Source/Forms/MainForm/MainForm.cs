@@ -60,13 +60,35 @@ public partial class MainForm : Form
     foreach ( var value in Enums.GetValues<PiDecimalsExtractSize>() )
       SelectFileName.Items.Add(value);
     SelectFileName.SelectedIndex = 0;
+    ClearStatusLabel();
+    DisplayManager.AdvancedFormUseSounds = false;
+  }
+
+  private void ClearStatusLabel()
+  {
+    LabelStatusTime.Text = "-";
+    LabelStatusIteration.Text = "-";
+    LabelStatusInfo.Text = "-";
+  }
+
+  private void UpdateStatusProgress(string message)
+  {
+    void process()
+    {
+      LabelStatusIteration.Text = message;
+      UpdateStatusTime();
+    }
+    if ( StatusStrip.InvokeRequired )
+      StatusStrip.Invoke(process);
+    else
+      process();
   }
 
   private void UpdateStatusInfo(string message)
   {
     void process()
     {
-      LabelStatusProgress.Text = message;
+      LabelStatusInfo.Text = message;
       UpdateStatusTime();
     }
     if ( StatusStrip.InvokeRequired )
@@ -79,7 +101,13 @@ public partial class MainForm : Form
   {
     void process()
     {
-      LabelStatusTime.Text = Chrono.Elapsed.ToString(@"mm\:ss");
+      var elapsed = Chrono.Elapsed;
+      List<string> parts = new List<string>();
+      if ( elapsed.Days > 0 ) parts.Add($"{elapsed.Days}j");
+      if ( elapsed.Hours > 0 ) parts.Add($"{elapsed.Hours}h");
+      if ( elapsed.Minutes > 0 ) parts.Add($"{elapsed.Minutes}m");
+      if ( elapsed.Seconds > 0 || elapsed.TotalSeconds == 0 ) parts.Add($"{elapsed.Seconds}s");
+      LabelStatusTime.Text = parts.Count == 0 ? "0s" : string.Join(" ", parts);
     }
     if ( StatusStrip.InvokeRequired )
       StatusStrip.Invoke(process);
@@ -155,6 +183,7 @@ public partial class MainForm : Form
     ActionDbConnect.Enabled = false;
     ActionCreateTables.Enabled = false;
     ActionRunBatch.Enabled = false;
+    ClearStatusLabel();
     await Task.Run(() =>
     {
       Chrono.Restart();
@@ -169,18 +198,20 @@ public partial class MainForm : Form
 
   private async void ActionRunBatch_Click(object sender, EventArgs e)
   {
-    if ( !DisplayManager.QueryYesNo("Start reducing repeated adding their position?") ) return;
+    //if ( !DisplayManager.QueryYesNo("Start reducing repeated adding their position?") ) return;
     ActionDbConnect.Enabled = false;
     ActionCreateTables.Enabled = false;
     ActionRunBatch.Enabled = false;
     ActionStopBatch.Enabled = true;
+    CancelRequired = false;
+    ClearStatusLabel();
     await Task.Run(() =>
-    {
-      Chrono.Restart();
-      ProcessIterationsAsync(0);
-      Chrono.Stop();
-      UpdateStatusTime();
-    });
+  {
+    Chrono.Restart();
+    ProcessIterationsAsync(0);
+    Chrono.Stop();
+    UpdateStatusTime();
+  });
     ActionCreateTables.Enabled = true;
     ActionDbConnect.Enabled = true;
     ActionRunBatch.Enabled = true;
@@ -190,6 +221,7 @@ public partial class MainForm : Form
   private void ActionStopBatch_Click(object sender, EventArgs e)
   {
     CancelRequired = true;
+    ActionStopBatch.Enabled = false;
   }
 
 }

@@ -39,8 +39,11 @@
       this.ActionSaveFixedDuplicatesToFile = new System.Windows.Forms.Button();
       this.ActionCheckDuplicates = new System.Windows.Forms.Button();
       this.StatusStrip = new System.Windows.Forms.StatusStrip();
-      this.LabelStatusProgress = new System.Windows.Forms.ToolStripStatusLabel();
       this.LabelStatusTime = new System.Windows.Forms.ToolStripStatusLabel();
+      this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+      this.LabelStatusIteration = new System.Windows.Forms.ToolStripStatusLabel();
+      this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+      this.LabelStatusInfo = new System.Windows.Forms.ToolStripStatusLabel();
       ((System.ComponentModel.ISupportInitialize)(this.Grid)).BeginInit();
       this.Panel.SuspendLayout();
       this.StatusStrip.SuspendLayout();
@@ -162,25 +165,46 @@
       // StatusStrip
       // 
       this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.LabelStatusProgress,
-            this.LabelStatusTime});
+            this.LabelStatusTime,
+            this.toolStripStatusLabel1,
+            this.LabelStatusIteration,
+            this.toolStripStatusLabel2,
+            this.LabelStatusInfo});
       this.StatusStrip.Location = new System.Drawing.Point(0, 439);
       this.StatusStrip.Name = "StatusStrip";
       this.StatusStrip.Size = new System.Drawing.Size(784, 22);
       this.StatusStrip.TabIndex = 2;
       this.StatusStrip.Text = "statusStrip1";
       // 
-      // LabelStatusProgress
-      // 
-      this.LabelStatusProgress.Name = "LabelStatusProgress";
-      this.LabelStatusProgress.Size = new System.Drawing.Size(19, 17);
-      this.LabelStatusProgress.Text = "0k";
-      // 
       // LabelStatusTime
       // 
       this.LabelStatusTime.Name = "LabelStatusTime";
-      this.LabelStatusTime.Size = new System.Drawing.Size(49, 17);
-      this.LabelStatusTime.Text = "00:00:00";
+      this.LabelStatusTime.Size = new System.Drawing.Size(33, 17);
+      this.LabelStatusTime.Text = "Time";
+      // 
+      // toolStripStatusLabel1
+      // 
+      this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+      this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
+      this.toolStripStatusLabel1.Text = "|";
+      // 
+      // LabelStatusIteration
+      // 
+      this.LabelStatusIteration.Name = "LabelStatusIteration";
+      this.LabelStatusIteration.Size = new System.Drawing.Size(51, 17);
+      this.LabelStatusIteration.Text = "Iteration";
+      // 
+      // toolStripStatusLabel2
+      // 
+      this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+      this.toolStripStatusLabel2.Size = new System.Drawing.Size(10, 17);
+      this.toolStripStatusLabel2.Text = "|";
+      // 
+      // LabelStatusInfo
+      // 
+      this.LabelStatusInfo.Name = "LabelStatusInfo";
+      this.LabelStatusInfo.Size = new System.Drawing.Size(28, 17);
+      this.LabelStatusInfo.Text = "Info";
       // 
       // MainForm
       // 
@@ -214,8 +238,11 @@
     private StatusStrip StatusStrip;
     private Button ActionRunBatch;
     private Button ActionDbConnect;
-    private ToolStripStatusLabel LabelStatusProgress;
+    private ToolStripStatusLabel LabelStatusIteration;
     private ToolStripStatusLabel LabelStatusTime;
     private Button ActionStopBatch;
+    private ToolStripStatusLabel LabelStatusInfo;
+    private ToolStripStatusLabel toolStripStatusLabel1;
+    private ToolStripStatusLabel toolStripStatusLabel2;
   }
 }

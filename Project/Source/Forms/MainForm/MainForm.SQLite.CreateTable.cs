@@ -31,7 +31,8 @@ public partial class MainForm
       DB.CreateTable<DecupletRow>();
       DB.CreateTable<IterationRow>();
       DB.BeginTransaction();
-      UpdateStatusInfo($"0k - Started");
+      UpdateStatusProgress("0k");
+      UpdateStatusInfo("Started");
       int charsRead;
       int blockSize = 10;
       long totalBlocks = 0;
@@ -55,15 +56,15 @@ public partial class MainForm
             DB.Insert(new DecupletRow { Motif = motif });
             totalBlocks++;
             if ( totalBlocks % 1000000 == 0 )
-              UpdateStatusInfo($"{totalBlocks / 1000}k decuplets inserted");
+              UpdateStatusProgress($"{totalBlocks / 1000}k decuplets inserted");
           }
       }
-      UpdateStatusInfo($"{totalBlocks / 1000}k - Committing");
+      UpdateStatusInfo("Committing...");
       DB.Commit();
-      UpdateStatusInfo($"{totalBlocks / 1000}k - Indexing");
+      UpdateStatusInfo("Indexing...");
       string sql = $"CREATE INDEX idx_decuplets_value ON {DecupletRow.TableName} ({nameof(DecupletRow.Motif)})";
       DB.Execute(sql);
-      UpdateStatusInfo($"{totalBlocks / 1000}k - Finished");
+      UpdateStatusInfo("Finished");
     }
     catch ( Exception ex )
     {

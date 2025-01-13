@@ -18,16 +18,24 @@ public partial class MainForm
 {
 
   static private string RepeatedAtIteration = $"repeated motifs at iteration #{{0}}{Globals.NL2}";
-  static private string PreviousCount = $"Previous: {{1}}{Globals.NL2}";
-  static private string CurrentCount = $"Current: {{2}}{Globals.NL2}";
+  static private string PreviousAndCurrentCount = $"Previous: {{1}}{Globals.NL}Current: {{2}}{Globals.NL2}";
   static private string LessAtIteration = $"There are less {RepeatedAtIteration}{Globals.NL2}";
   static private string MoreAtIteration = $"There are more {RepeatedAtIteration}{Globals.NL2}";
   static private string StartNextIteration = "Start next iteration?";
-  static private string AskStartNextIfLess = $"{LessAtIteration}{PreviousCount}{CurrentCount}{StartNextIteration}";
-  static private string AskStartNextIfMore = $"{MoreAtIteration}{PreviousCount}{CurrentCount}{StartNextIteration}";
+  static private string AskStartNextIfLess = $"{LessAtIteration}{PreviousAndCurrentCount}{StartNextIteration}";
+  static private string AskStartNextIfMore = $"{MoreAtIteration}{PreviousAndCurrentCount}{StartNextIteration}";
+
+  static private string NoRepeatedText = $"There is no repeated motif at iteration {{0}}";
+  static private string IterationText = $"Iteration {{0}} : {{1}} repeated";
+  static private string CountingText = "Counting...";
+  static private string UpdatingText = "Updating...";
+  static private string ReadyText = "Ready";
+  static private string FinishedText = "Finished";
+  static private string CanceledText = "Canceled";
 
   private async Task ProcessIterationsAsync(long startingIterationNumber)
   {
+    count = 10;
     if ( startingIterationNumber == 0 )
     {
       DB.DropTable<IterationRow>();
@@ -39,36 +47,41 @@ public partial class MainForm
     long iteration = 0;
     while ( true )
     {
-      if ( CancelRequired )
-      {
-        UpdateStatusInfo("Canceled");
-        break;
-      }
-      countCurrent = GetRepeatedCount();
+      if ( CancelRequired ) break;
+      UpdateStatusProgress(string.Format(IterationText, iteration, "?"));
+      UpdateStatusInfo(CountingText);
+      countCurrent = GetRepeatedCount().Result;
       AddIteration(countCurrent);
-      string message = $"Iteration #{iteration:000} - Number of repeated motifs : {countCurrent}";
-      UpdateStatusInfo(message);
+      UpdateStatusProgress(string.Format(IterationText, iteration, countCurrent));
+      UpdateStatusInfo(ReadyText);
+      if ( CancelRequired ) break;
       if ( countCurrent == 0 )
       {
-        DisplayManager.Show("There is no repeated motif at iteration #" + iteration);
+        DisplayManager.Show(string.Format(NoRepeatedText, iteration));
         break;
       }
-      if ( firstIteration )
+      if ( !firstIteration )
         if ( countPrevious > countCurrent )
         {
           if ( !DisplayManager.QueryYesNo(string.Format(AskStartNextIfMore, iteration, countPrevious, countCurrent)) )
-            break;
+            CancelRequired = true;
         }
         else
         {
           if ( !DisplayManager.QueryYesNo(string.Format(AskStartNextIfLess, iteration, countPrevious, countCurrent)) )
-            break;
+            CancelRequired = true;
         }
       countPrevious = countCurrent;
       firstIteration = false;
+      UpdateStatusInfo(UpdatingText);
       UpdateMotifs();
+      if ( CancelRequired ) break;
       iteration++;
     }
+    if ( CancelRequired )
+      UpdateStatusInfo(CanceledText);
+    else
+      UpdateStatusInfo(FinishedText);
   }
 
   private void AddIteration(long repeatedCount)
@@ -76,8 +89,12 @@ public partial class MainForm
     DB.Insert(new IterationRow(repeatedCount, DateTime.Now));
   }
 
-  private int GetRepeatedCount()
+  int count = 10;
+
+  private async Task<int> GetRepeatedCount()
   {
+    await Task.Delay(1000);
+    return count--;
     try
     {
       var query = @"SELECT COUNT(DISTINCT Motif) AS UniqueRepeated
@@ -98,8 +115,9 @@ public partial class MainForm
     }
   }
 
-  private void UpdateMotifs()
+  private async void UpdateMotifs()
   {
+    return;
     var query = @"UPDATE Decuplets
                   SET Motif = Motif + Position
                   WHERE Motif IN (
