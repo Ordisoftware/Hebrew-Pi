@@ -35,11 +35,11 @@ public partial class MainForm
       .ToList();
   }
 
-  private void DoActionCheckDuplicates()
+  private void DoActionCheckRepeated()
   {
     var duplicates = PiGroups.Where(g => g.Value.Count > 1);
     if ( duplicates.Count() == 0 )
-      MessageBox.Show(MsgNoDuplicates);
+      MessageBox.Show(MsgNoRepeated);
     else
     {
       foreach ( var group in duplicates )
@@ -60,7 +60,7 @@ public partial class MainForm
     }
   }
 
-  private void DoActionSaveFixedDuplicatesToFile()
+  private void DoActionSaveFixedRepeatedToFile()
   {
     var piDecimals = new Dictionary<int, string>();
     foreach ( var group in PiGroups )

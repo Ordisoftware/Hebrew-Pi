@@ -109,7 +109,7 @@
       this.ActionSaveFixedDuplicatesToFile.TabIndex = 0;
       this.ActionSaveFixedDuplicatesToFile.Text = "Save fix dup.";
       this.ActionSaveFixedDuplicatesToFile.UseVisualStyleBackColor = true;
-      this.ActionSaveFixedDuplicatesToFile.Click += new System.EventHandler(this.ActionSaveFixedDuplicatesToFile_Click);
+      this.ActionSaveFixedDuplicatesToFile.Click += new System.EventHandler(this.ActionSaveFixedRepeatedToFile_Click);
       // 
       // ActionCheckDuplicates
       // 
@@ -119,7 +119,7 @@
       this.ActionCheckDuplicates.TabIndex = 0;
       this.ActionCheckDuplicates.Text = "Check dup.";
       this.ActionCheckDuplicates.UseVisualStyleBackColor = true;
-      this.ActionCheckDuplicates.Click += new System.EventHandler(this.ActionCheckDuplicates_Click);
+      this.ActionCheckDuplicates.Click += new System.EventHandler(this.ActionCheckRepeated_Click);
       // 
       // StatusStrip
       // 

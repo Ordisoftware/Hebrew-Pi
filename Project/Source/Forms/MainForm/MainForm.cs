@@ -11,7 +11,7 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-10 </created>
-/// <edited> 2025-01-11 </edited>
+/// <edited> 2025-01-13 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 using System;
@@ -21,7 +21,7 @@ using SQLite;
 public partial class MainForm : Form
 {
 
-  const string MsgNoDuplicates = "Aucun dupliqué.";
+  const string MsgNoRepeated = "Aucun répété.";
   const string MsgPrefix = "Sur l'échantillon donné, la théorie des répétés ajoutés aux positions";
   const string MsgOk = $"{MsgPrefix} fonctionne.";
   const string MsgNotOk = $"{MsgPrefix} ne fonctionne pas.";
@@ -29,6 +29,7 @@ public partial class MainForm : Form
 
   private Stopwatch chrono;
   private SQLiteConnection DB;
+
   private PiDecimalsExtractSize FileName;
   private Dictionary<string, GroupInfo> PiGroups;
 
@@ -119,14 +120,14 @@ public partial class MainForm : Form
     DoActionLoad();
   }
 
-  private void ActionCheckDuplicates_Click(object sender, EventArgs e)
+  private void ActionCheckRepeated_Click(object sender, EventArgs e)
   {
-    DoActionCheckDuplicates();
+    DoActionCheckRepeated();
   }
 
-  private void ActionSaveFixedDuplicatesToFile_Click(object sender, EventArgs e)
+  private void ActionSaveFixedRepeatedToFile_Click(object sender, EventArgs e)
   {
-    DoActionSaveFixedDuplicatesToFile();
+    DoActionSaveFixedRepeatedToFile();
   }
 
   private async void ActionCreateTable_Click(object sender, EventArgs e)
@@ -136,7 +137,8 @@ public partial class MainForm : Form
 
   private async void ActionDbBatch_Click(object sender, EventArgs e)
   {
-    await ProcessPiDecimalsAsync();
+    if ( DisplayManager.QueryYesNo("Start reducing repeated adding their position?") )
+      await ProcessIterationsAsync(0);
   }
 
 }

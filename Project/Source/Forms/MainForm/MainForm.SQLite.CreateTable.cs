@@ -11,16 +11,13 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-10 </created>
-/// <edited> 2025-01-11 </edited>
+/// <edited> 2025-01-13 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 using SQLite;
 
 public partial class MainForm
 {
-
-  private SQLiteConnection _connection;
-  private int _iterationCount = 0;
 
   private async void DoActionCreateTable()
   {
@@ -68,7 +65,7 @@ public partial class MainForm
             DB.Insert(new DecupletRow { Motif = motif });
             totalBlocks++;
             if ( totalBlocks % 1000000 == 0 )
-              UpdateStatusInfo($"{totalBlocks / 1000}k blocs insérés");
+              UpdateStatusInfo($"{totalBlocks / 1000}k decuplets inserted");
           }
       }
       UpdateStatusInfo($"{totalBlocks / 1000}k - Committing");
@@ -83,79 +80,31 @@ public partial class MainForm
     }
   }
 
-  private void CreateDataTable()
-  {
-    try
-    {
-      var dataTable = new DataTable();
-      var command = DB.CreateCommand("SELECT * FROM Decuplets LIMIT 1000000 OFFSET 0");
-      var list = command.ExecuteQuery<DecupletRow>();
-      if ( list.Count > 0 )
-      {
-        foreach ( var prop in typeof(DecupletRow).GetProperties() )
-          dataTable.Columns.Add(prop.Name);
-        foreach ( var row in list )
-        {
-          var dataRow = dataTable.NewRow();
-          foreach ( var prop in typeof(DecupletRow).GetProperties() )
-            dataRow[prop.Name] = prop.GetValue(row);
-          dataTable.Rows.Add(dataRow);
-        }
-      }
-      Grid.DataSource = dataTable;
-    }
-    catch ( Exception ex )
-    {
-      UpdateStatusInfo(ex.Message);
-    }
-  }
-
-  public async Task ProcessPiDecimalsAsync()
-  {
-    while ( true )
-    {
-      _iterationCount++;
-      var duplicateCount = CountDuplicateMotifs();
-      Console.WriteLine($"Itération {_iterationCount}: Nombre de motifs dupliqués : {duplicateCount}");
-      Console.WriteLine("Voulez-vous effectuer une autre itération ? (O/N)");
-      string response = Console.ReadLine();
-      if ( response.ToUpper() != "O" )
-        break;
-      UpdateMotifs();
-      if ( duplicateCount == 0 )
-      {
-        Console.WriteLine("Aucun motif dupliqué trouvé, le processus est terminé.");
-        break;
-      }
-    }
-    _connection.Close();
-  }
-
-  private int CountDuplicateMotifs()
-  {
-    var query = @"SELECT COUNT(DISTINCT Motif) AS UniqueDuplicates
-                  FROM Decuplets
-                  WHERE Motif IN (
-                    SELECT Motif
-                    FROM Decuplets
-                    GROUP BY Motif
-                    HAVING COUNT(Motif) > 1
-                  );";
-
-    return _connection.Query<int>(query).FirstOrDefault();
-  }
-
-  private void UpdateMotifs()
-  {
-    var query = @"UPDATE Decuplets
-                  SET Motif = Motif + Position
-                  WHERE Motif IN (
-                    SELECT Motif
-                    FROM Decuplets
-                    GROUP BY Motif
-                    HAVING COUNT(*) > 1
-                  );";
-    _connection.Execute(query);
-  }
+  //private void CreateDataTable()
+  //{
+  //  try
+  //  {
+  //    var dataTable = new DataTable();
+  //    var command = DB.CreateCommand("SELECT * FROM Decuplets LIMIT 1000000 OFFSET 0");
+  //    var list = command.ExecuteQuery<DecupletRow>();
+  //    if ( list.Count > 0 )
+  //    {
+  //      foreach ( var prop in typeof(DecupletRow).GetProperties() )
+  //        dataTable.Columns.Add(prop.Name);
+  //      foreach ( var row in list )
+  //      {
+  //        var dataRow = dataTable.NewRow();
+  //        foreach ( var prop in typeof(DecupletRow).GetProperties() )
+  //          dataRow[prop.Name] = prop.GetValue(row);
+  //        dataTable.Rows.Add(dataRow);
+  //      }
+  //    }
+  //    Grid.DataSource = dataTable;
+  //  }
+  //  catch ( Exception ex )
+  //  {
+  //    UpdateStatusInfo(ex.Message);
+  //  }
+  //}
 
 }

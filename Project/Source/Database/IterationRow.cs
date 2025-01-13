@@ -10,22 +10,30 @@
 /// relevant directory) where a recipient would be likely to look for such a notice.
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
-/// <created> 2025-01-11 </created>
-/// <edited> 2025-01-11 </edited>
+/// <created> 2025-01-13 </created>
+/// <edited> 2025-01-13 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 using SQLite;
 
 [Serializable]
-[Table("Decuplets")]
-public class DecupletRow : AbstractRow
+[Table("Iterations")]
+public class AddPositionIterationRow : AbstractRow
 {
 
-  public const string TableName = "Decuplets";
+  public const string TableName = "Iterations";
 
   [PrimaryKey, AutoIncrement]
-  public long Position { get; set; }
+  public long Iteration { get; set; }
 
-  public long Motif { get; set; }
+  public long RepeatedCount { get; set; }
+
+  public DateTime Timestamp { get; set; }
+
+  public AddPositionIterationRow(long repeatedCount, DateTime timestamp)
+  {
+    RepeatedCount = repeatedCount;
+    Timestamp = timestamp;
+  }
 
 }
