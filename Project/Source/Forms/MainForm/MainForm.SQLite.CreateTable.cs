@@ -17,20 +17,6 @@ namespace Ordisoftware.Hebrew.Pi;
 public partial class MainForm
 {
 
-  private async Task DoActionCreateTable()
-  {
-    ActionCreateTable.Enabled = false;
-    await Task.Run(() =>
-    {
-      chrono = new Stopwatch();
-      chrono.Start();
-      CreateTable(Path.Combine(Globals.DocumentsFolderPath, FileName.ToString()) + ".txt");
-      chrono.Stop();
-      UpdateStatusTime();
-    });
-    ActionCreateTable.Enabled = true;
-  }
-
   private async void CreateTable(string fileName)
   {
     if ( !File.Exists(fileName) )
@@ -41,7 +27,9 @@ public partial class MainForm
     try
     {
       DB.DropTable<DecupletRow>();
+      DB.DropTable<IterationRow>();
       DB.CreateTable<DecupletRow>();
+      DB.CreateTable<IterationRow>();
       DB.BeginTransaction();
       UpdateStatusInfo($"0k - Started");
       int charsRead;

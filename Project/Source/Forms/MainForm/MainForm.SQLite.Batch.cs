@@ -17,30 +17,63 @@ namespace Ordisoftware.Hebrew.Pi;
 public partial class MainForm
 {
 
-  private async Task ProcessIterationsAsync(long firstIteration)
+  static private string RepeatedAtIteration = $"repeated motifs at iteration #{{0}}{Globals.NL2}";
+  static private string PreviousCount = $"Previous: {{1}}{Globals.NL2}";
+  static private string CurrentCount = $"Current: {{2}}{Globals.NL2}";
+  static private string LessAtIteration = $"There are less {RepeatedAtIteration}{Globals.NL2}";
+  static private string MoreAtIteration = $"There are more {RepeatedAtIteration}{Globals.NL2}";
+  static private string StartNextIteration = "Start next iteration?";
+  static private string AskStartNextIfLess = $"{LessAtIteration}{PreviousCount}{CurrentCount}{StartNextIteration}";
+  static private string AskStartNextIfMore = $"{MoreAtIteration}{PreviousCount}{CurrentCount}{StartNextIteration}";
+
+  private async Task ProcessIterationsAsync(long startingIterationNumber)
   {
-    long countIteration = 0;
+    if ( startingIterationNumber == 0 )
+    {
+      DB.DropTable<IterationRow>();
+      DB.CreateTable<IterationRow>();
+    }
+    bool firstIteration = true;
+    long countPrevious = 0;
+    long countCurrent = 0;
+    long iteration = 0;
     while ( true )
     {
-      long countRepeated = GetRepeatedCount();
-      string message = $"Iteration #{countIteration:000} - Number of duplicated motifs : {countRepeated}";
-      UpdateStatusInfo(message);
-      SaveIteration(countRepeated);
-      if ( countRepeated == 0 )
+      if ( CancelRequired )
       {
-        DisplayManager.Show("There are no more repeating motifs at iteration #" + countIteration);
+        UpdateStatusInfo("Canceled");
         break;
       }
-      if ( !DisplayManager.QueryYesNo(message + Globals.NL2 + "Start next iteration?") )
+      countCurrent = GetRepeatedCount();
+      AddIteration(countCurrent);
+      string message = $"Iteration #{iteration:000} - Number of repeated motifs : {countCurrent}";
+      UpdateStatusInfo(message);
+      if ( countCurrent == 0 )
+      {
+        DisplayManager.Show("There is no repeated motif at iteration #" + iteration);
         break;
+      }
+      if ( firstIteration )
+        if ( countPrevious > countCurrent )
+        {
+          if ( !DisplayManager.QueryYesNo(string.Format(AskStartNextIfMore, iteration, countPrevious, countCurrent)) )
+            break;
+        }
+        else
+        {
+          if ( !DisplayManager.QueryYesNo(string.Format(AskStartNextIfLess, iteration, countPrevious, countCurrent)) )
+            break;
+        }
+      countPrevious = countCurrent;
+      firstIteration = false;
       UpdateMotifs();
-      countIteration++;
+      iteration++;
     }
   }
 
-  private void SaveIteration(long repeatedCount)
+  private void AddIteration(long repeatedCount)
   {
-    DB.Insert(new AddPositionIterationRow(repeatedCount, DateTime.Now));
+    DB.Insert(new IterationRow(repeatedCount, DateTime.Now));
   }
 
   private int GetRepeatedCount()

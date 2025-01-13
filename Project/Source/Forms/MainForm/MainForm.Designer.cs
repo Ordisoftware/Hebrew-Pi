@@ -31,9 +31,10 @@
       this.Grid = new System.Windows.Forms.DataGridView();
       this.Panel = new System.Windows.Forms.Panel();
       this.SelectFileName = new System.Windows.Forms.ComboBox();
-      this.ActionDbBatch = new System.Windows.Forms.Button();
+      this.ActionStopBatch = new System.Windows.Forms.Button();
+      this.ActionRunBatch = new System.Windows.Forms.Button();
       this.ActionDbConnect = new System.Windows.Forms.Button();
-      this.ActionCreateTable = new System.Windows.Forms.Button();
+      this.ActionCreateTables = new System.Windows.Forms.Button();
       this.ActionLoadFile = new System.Windows.Forms.Button();
       this.ActionSaveFixedDuplicatesToFile = new System.Windows.Forms.Button();
       this.ActionCheckDuplicates = new System.Windows.Forms.Button();
@@ -61,9 +62,10 @@
       // Panel
       // 
       this.Panel.Controls.Add(this.SelectFileName);
-      this.Panel.Controls.Add(this.ActionDbBatch);
+      this.Panel.Controls.Add(this.ActionStopBatch);
+      this.Panel.Controls.Add(this.ActionRunBatch);
       this.Panel.Controls.Add(this.ActionDbConnect);
-      this.Panel.Controls.Add(this.ActionCreateTable);
+      this.Panel.Controls.Add(this.ActionCreateTables);
       this.Panel.Controls.Add(this.ActionLoadFile);
       this.Panel.Controls.Add(this.ActionSaveFixedDuplicatesToFile);
       this.Panel.Controls.Add(this.ActionCheckDuplicates);
@@ -75,6 +77,7 @@
       // 
       // SelectFileName
       // 
+      this.SelectFileName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.SelectFileName.FormattingEnabled = true;
       this.SelectFileName.Location = new System.Drawing.Point(12, 12);
       this.SelectFileName.Name = "SelectFileName";
@@ -82,15 +85,27 @@
       this.SelectFileName.TabIndex = 3;
       this.SelectFileName.SelectedIndexChanged += new System.EventHandler(this.SelectFileName_SelectedIndexChanged);
       // 
-      // ActionDbBatch
+      // ActionStopBatch
       // 
-      this.ActionDbBatch.Location = new System.Drawing.Point(240, 39);
-      this.ActionDbBatch.Name = "ActionDbBatch";
-      this.ActionDbBatch.Size = new System.Drawing.Size(95, 23);
-      this.ActionDbBatch.TabIndex = 2;
-      this.ActionDbBatch.Text = "Batch";
-      this.ActionDbBatch.UseVisualStyleBackColor = true;
-      this.ActionDbBatch.Click += new System.EventHandler(this.ActionDbBatch_Click);
+      this.ActionStopBatch.Enabled = false;
+      this.ActionStopBatch.Location = new System.Drawing.Point(341, 39);
+      this.ActionStopBatch.Name = "ActionStopBatch";
+      this.ActionStopBatch.Size = new System.Drawing.Size(95, 23);
+      this.ActionStopBatch.TabIndex = 2;
+      this.ActionStopBatch.Text = "Stop batch";
+      this.ActionStopBatch.UseVisualStyleBackColor = true;
+      this.ActionStopBatch.Click += new System.EventHandler(this.ActionStopBatch_Click);
+      // 
+      // ActionRunBatch
+      // 
+      this.ActionRunBatch.Enabled = false;
+      this.ActionRunBatch.Location = new System.Drawing.Point(240, 39);
+      this.ActionRunBatch.Name = "ActionRunBatch";
+      this.ActionRunBatch.Size = new System.Drawing.Size(95, 23);
+      this.ActionRunBatch.TabIndex = 2;
+      this.ActionRunBatch.Text = "Run batch";
+      this.ActionRunBatch.UseVisualStyleBackColor = true;
+      this.ActionRunBatch.Click += new System.EventHandler(this.ActionRunBatch_Click);
       // 
       // ActionDbConnect
       // 
@@ -102,15 +117,16 @@
       this.ActionDbConnect.UseVisualStyleBackColor = true;
       this.ActionDbConnect.Click += new System.EventHandler(this.ActionDbConnect_Click);
       // 
-      // ActionCreateTable
+      // ActionCreateTables
       // 
-      this.ActionCreateTable.Location = new System.Drawing.Point(139, 39);
-      this.ActionCreateTable.Name = "ActionCreateTable";
-      this.ActionCreateTable.Size = new System.Drawing.Size(95, 23);
-      this.ActionCreateTable.TabIndex = 2;
-      this.ActionCreateTable.Text = "Create table";
-      this.ActionCreateTable.UseVisualStyleBackColor = true;
-      this.ActionCreateTable.Click += new System.EventHandler(this.ActionCreateTable_Click);
+      this.ActionCreateTables.Enabled = false;
+      this.ActionCreateTables.Location = new System.Drawing.Point(139, 39);
+      this.ActionCreateTables.Name = "ActionCreateTables";
+      this.ActionCreateTables.Size = new System.Drawing.Size(95, 23);
+      this.ActionCreateTables.TabIndex = 2;
+      this.ActionCreateTables.Text = "Create tables";
+      this.ActionCreateTables.UseVisualStyleBackColor = true;
+      this.ActionCreateTables.Click += new System.EventHandler(this.ActionCreateTables_Click);
       // 
       // ActionLoadFile
       // 
@@ -193,12 +209,13 @@
     private Button ActionCheckDuplicates;
     private Button ActionSaveFixedDuplicatesToFile;
     private ComboBox SelectFileName;
-    private Button ActionCreateTable;
+    private Button ActionCreateTables;
     private Button ActionLoadFile;
     private StatusStrip StatusStrip;
-    private Button ActionDbBatch;
+    private Button ActionRunBatch;
     private Button ActionDbConnect;
     private ToolStripStatusLabel LabelStatusProgress;
     private ToolStripStatusLabel LabelStatusTime;
+    private Button ActionStopBatch;
   }
 }

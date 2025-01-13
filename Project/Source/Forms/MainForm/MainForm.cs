@@ -28,12 +28,14 @@ public partial class MainForm : Form
   const string MsgNotOk = $"{MsgPrefix} ne fonctionne pas.";
   const string MsgSaved_Fixed = "Les groupes dupliquée ont été corrigés et le fichier reconstruit.";
 
-  private Stopwatch chrono;
-  private SQLiteConnection DB;
-  private string SQLiteTempDir = @"D:\";
+  private Stopwatch Chrono = new Stopwatch();
 
   private PiDecimalsExtractSize FileName;
   private Dictionary<string, GroupInfo> PiGroups;
+
+  private bool CancelRequired;
+  private SQLiteConnection DB;
+  private string SQLiteTempDir = @"D:\";
 
   #region Singleton
 
@@ -77,7 +79,7 @@ public partial class MainForm : Form
   {
     void process()
     {
-      LabelStatusTime.Text = chrono.Elapsed.ToString(@"mm\:ss");
+      LabelStatusTime.Text = Chrono.Elapsed.ToString(@"mm\:ss");
     }
     if ( StatusStrip.InvokeRequired )
       StatusStrip.Invoke(process);
@@ -143,17 +145,51 @@ public partial class MainForm : Form
     DB = new SQLiteConnection(dbPath);
     if ( SQLiteTempDir.Length > 0 )
       DB.Execute($"PRAGMA temp_store_directory = '{SQLiteTempDir}'");
+    ActionCreateTables.Enabled = true;
+    ActionRunBatch.Enabled = true;
   }
 
-  private async void ActionCreateTable_Click(object sender, EventArgs e)
+  private async void ActionCreateTables_Click(object sender, EventArgs e)
   {
-    await DoActionCreateTable();
+    if ( !DisplayManager.QueryYesNo("Delete and create tables?") ) return;
+    ActionDbConnect.Enabled = false;
+    ActionCreateTables.Enabled = false;
+    ActionRunBatch.Enabled = false;
+    await Task.Run(() =>
+    {
+      Chrono.Restart();
+      CreateTable(Path.Combine(Globals.DocumentsFolderPath, FileName.ToString()) + ".txt");
+      Chrono.Stop();
+      UpdateStatusTime();
+    });
+    ActionCreateTables.Enabled = true;
+    ActionDbConnect.Enabled = true;
+    ActionRunBatch.Enabled = true;
   }
 
-  private async void ActionDbBatch_Click(object sender, EventArgs e)
+  private async void ActionRunBatch_Click(object sender, EventArgs e)
   {
-    if ( DisplayManager.QueryYesNo("Start reducing repeated adding their position?") )
-      await ProcessIterationsAsync(0);
+    if ( !DisplayManager.QueryYesNo("Start reducing repeated adding their position?") ) return;
+    ActionDbConnect.Enabled = false;
+    ActionCreateTables.Enabled = false;
+    ActionRunBatch.Enabled = false;
+    ActionStopBatch.Enabled = true;
+    await Task.Run(() =>
+    {
+      Chrono.Restart();
+      ProcessIterationsAsync(0);
+      Chrono.Stop();
+      UpdateStatusTime();
+    });
+    ActionCreateTables.Enabled = true;
+    ActionDbConnect.Enabled = true;
+    ActionRunBatch.Enabled = true;
+    ActionStopBatch.Enabled = false;
+  }
+
+  private void ActionStopBatch_Click(object sender, EventArgs e)
+  {
+    CancelRequired = true;
   }
 
 }

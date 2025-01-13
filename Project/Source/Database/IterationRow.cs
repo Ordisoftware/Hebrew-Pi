@@ -18,7 +18,7 @@ using SQLite;
 
 [Serializable]
 [Table("Iterations")]
-public class AddPositionIterationRow : AbstractRow
+public class IterationRow : AbstractRow
 {
 
   public const string TableName = "Iterations";
@@ -30,7 +30,7 @@ public class AddPositionIterationRow : AbstractRow
 
   public DateTime Timestamp { get; set; }
 
-  public AddPositionIterationRow(long repeatedCount, DateTime timestamp)
+  public IterationRow(long repeatedCount, DateTime timestamp)
   {
     RepeatedCount = repeatedCount;
     Timestamp = timestamp;
