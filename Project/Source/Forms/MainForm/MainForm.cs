@@ -142,7 +142,7 @@ public partial class MainForm : Form
     string dbPath = Path.Combine(Globals.DatabaseFolderPath, FileName.ToString()) + Globals.DatabaseFileExtension;
     DB = new SQLiteConnection(dbPath);
     if ( SQLiteTempDir.Length > 0 )
-      DB.Execute($"PRAGMA temp_store_directory = '{SQLiteTempDir.Length}'");
+      DB.Execute($"PRAGMA temp_store_directory = '{SQLiteTempDir}'");
   }
 
   private async void ActionCreateTable_Click(object sender, EventArgs e)
