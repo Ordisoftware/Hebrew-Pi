@@ -2,7 +2,7 @@
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
 [assembly: AssemblyTitle("Hebrew Pi")]
-[assembly: AssemblyDescription("Pi decimal decoder and translator with Gematria")]
+[assembly: AssemblyDescription("Pi decimal decoder and translator with Hebrew Gematria")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ordisoftware")]
 [assembly: AssemblyProduct("www.ordisoftware.com/projects/hebrew-pi")]

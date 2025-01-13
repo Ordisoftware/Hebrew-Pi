@@ -386,6 +386,14 @@
     <Compile Include="Source\Forms\MainForm\Data\MainForm.DB.LoadData.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Source\Enums\PiDecimalsExtractSize.cs" />
+    <Compile Include="Source\Entities\GroupInfo.cs" />
+    <Compile Include="Source\Forms\MainForm\MainForm.TextFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\MainForm\MainForm.SQLite.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Source\Forms\MainForm\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

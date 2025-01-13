@@ -38,6 +38,7 @@
       this.StatusStrip = new System.Windows.Forms.StatusStrip();
       this.LabelStatusProgress = new System.Windows.Forms.ToolStripStatusLabel();
       this.LabelStatusTime = new System.Windows.Forms.ToolStripStatusLabel();
+      this.ActionDbBatch = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.Grid)).BeginInit();
       this.Panel.SuspendLayout();
       this.StatusStrip.SuspendLayout();
@@ -59,6 +60,7 @@
       // Panel
       // 
       this.Panel.Controls.Add(this.SelectFileName);
+      this.Panel.Controls.Add(this.ActionDbBatch);
       this.Panel.Controls.Add(this.ActionCreateTable);
       this.Panel.Controls.Add(this.ActionLoadFile);
       this.Panel.Controls.Add(this.ActionSaveFixedDuplicatesToFile);
@@ -121,9 +123,6 @@
       // 
       // StatusStrip
       // 
-      this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.LabelStatusProgress,
-            this.LabelStatusTime});
       this.StatusStrip.Location = new System.Drawing.Point(0, 695);
       this.StatusStrip.Name = "StatusStrip";
       this.StatusStrip.Size = new System.Drawing.Size(800, 22);
@@ -139,6 +138,16 @@
       // 
       this.LabelStatusTime.Name = "LabelStatusTime";
       this.LabelStatusTime.Size = new System.Drawing.Size(0, 17);
+      // 
+      // ActionDbBatch
+      // 
+      this.ActionDbBatch.Location = new System.Drawing.Point(240, 39);
+      this.ActionDbBatch.Name = "ActionDbBatch";
+      this.ActionDbBatch.Size = new System.Drawing.Size(95, 23);
+      this.ActionDbBatch.TabIndex = 2;
+      this.ActionDbBatch.Text = "Batch";
+      this.ActionDbBatch.UseVisualStyleBackColor = true;
+      this.ActionDbBatch.Click += new System.EventHandler(this.ActionDbBatch_Click);
       // 
       // MainForm
       // 
@@ -173,5 +182,6 @@
     private StatusStrip StatusStrip;
     private ToolStripStatusLabel LabelStatusProgress;
     private ToolStripStatusLabel LabelStatusTime;
+    private Button ActionDbBatch;
   }
 }

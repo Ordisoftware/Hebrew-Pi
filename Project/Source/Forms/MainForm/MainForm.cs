@@ -27,35 +27,10 @@ public partial class MainForm : Form
   const string MsgNotOk = $"{MsgPrefix} ne fonctionne pas.";
   const string MsgSaved_Fixed = "Les groupes dupliquée ont été corrigés et le fichier reconstruit.";
 
-  public class GroupInfo
-  {
-    public int Count { get; set; }
-    public string Indices { get; set; }
-    public GroupInfo(int count, string indices)
-    {
-      Count = count;
-      Indices = indices;
-    }
-  }
-
-  public enum PiDecimalsExtractSize
-  {
-    PiDecimals_128K,
-    PiDecimals_1M,
-    PiDecimals_1B,
-    PiDecimals_10B,
-    PiDecimals_1M_Fixed,
-    PiDecimals_1B_Fixed,
-    PiDecimals_10B_Fixed
-  }
-
-  private PiDecimalsExtractSize FileName;
-
-  private Dictionary<string, GroupInfo> PiGroups;
-
-  private SQLiteConnection DB;
-
   private Stopwatch chrono;
+  private SQLiteConnection DB;
+  private PiDecimalsExtractSize FileName;
+  private Dictionary<string, GroupInfo> PiGroups;
 
   #region Singleton
 
@@ -84,28 +59,27 @@ public partial class MainForm : Form
 
   private void UpdateStatusInfo(string message)
   {
-    if ( StatusStrip.InvokeRequired )
-      StatusStrip.Invoke(process);
-    else
-      process();
-    //
     void process()
     {
       LabelStatusProgress.Text = message;
       UpdateStatusTime();
     }
-  }
-
-  private void UpdateStatusTime()
-  {
     if ( StatusStrip.InvokeRequired )
       StatusStrip.Invoke(process);
     else
       process();
+  }
+
+  private void UpdateStatusTime()
+  {
     void process()
     {
       LabelStatusTime.Text = chrono.Elapsed.ToString(@"mm\:ss");
     }
+    if ( StatusStrip.InvokeRequired )
+      StatusStrip.Invoke(process);
+    else
+      process();
   }
 
   private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -142,156 +116,27 @@ public partial class MainForm : Form
 
   private void ActionLoadFile_Click(object sender, EventArgs e)
   {
-    string piDecimals = File.ReadAllText(Path.Combine(Globals.DocumentsFolderPath, FileName.ToString()) + ".txt").Trim();
-    if ( piDecimals.StartsWith("3.") )
-      piDecimals = piDecimals.Substring(2);
-    PiGroups = Enumerable
-      .Range(0, piDecimals.Length / 10)
-      .Select(i => new { Index = i + 1, Group = piDecimals.Substring(i * 10, 10) })
-      .GroupBy(x => x.Group)
-      .ToDictionary(g => g.Key,
-                    g => new GroupInfo(g.Count(),
-                                       string.Join(", ", g.Select(x => x.Index))));
-    Grid.DataSource = PiGroups
-      .Select(kvp => new { Group = kvp.Key, kvp.Value.Count, kvp.Value.Indices })
-      .OrderByDescending(item => item.Count)
-      .ToList();
+    DoActionLoad();
   }
 
   private void ActionCheckDuplicates_Click(object sender, EventArgs e)
   {
-    var duplicates = PiGroups.Where(g => g.Value.Count > 1);
-    if ( duplicates.Count() == 0 )
-      MessageBox.Show(MsgNoDuplicates);
-    else
-    {
-      foreach ( var group in duplicates )
-      {
-        var decuplet = group.Key;
-        foreach ( var index in group.Value.Indices.Split(',').Select(int.Parse) )
-        {
-          long sum = long.Parse(decuplet) + index;
-          if ( PiGroups.ContainsKey(sum.ToString()) )
-          {
-            MessageBox.Show(MsgNotOk);
-            return;
-          }
-        }
-      }
-      MessageBox.Show(MsgOk);
-      ActionSaveFixedDuplicatesToFile.Enabled = true;
-    }
+    DoActionCheckDuplicates();
   }
 
   private void ActionSaveFixedDuplicatesToFile_Click(object sender, EventArgs e)
   {
-    var piDecimals = new Dictionary<int, string>();
-    foreach ( var group in PiGroups )
-    {
-      var decuplet = group.Key.PadLeft(10, '0');
-      var indices = group.Value.Indices.Split(',').Select(int.Parse).ToList();
-      if ( group.Value.Count > 1 )
-        foreach ( var index in indices )
-          piDecimals[index] = ( long.Parse(decuplet) + index ).ToString("D10");
-      else
-        foreach ( var index in indices )
-          piDecimals[index] = decuplet;
-    }
-    var indicesOrdered = piDecimals.Keys.OrderBy(index => index).ToList();
-    var builder = new StringBuilder();
-    foreach ( var index in indicesOrdered )
-      builder.Append(piDecimals[index]);
-    File.WriteAllText(Path.Combine(Globals.DocumentsFolderPath, FileName.ToString()) + "_Fixed.txt", builder.ToString());
-    MessageBox.Show(MsgSaved_Fixed);
+    DoActionSaveFixedDuplicatesToFile();
   }
 
   private async void ActionCreateTable_Click(object sender, EventArgs e)
   {
-    ActionCreateTable.Enabled = false;
-    await Task.Run(() =>
-    {
-      chrono = new Stopwatch();
-      chrono.Start();
-      CreateTable(Path.Combine(Globals.DocumentsFolderPath, FileName.ToString()) + ".txt");
-      chrono.Stop();
-      UpdateStatusTime();
-    });
-    ActionCreateTable.Enabled = true;
+    DoActionCreateTable();
   }
 
-  private async void CreateTable(string fileName)
+  private async void ActionDbBatch_Click(object sender, EventArgs e)
   {
-    string dbPath = Path.Combine(Globals.DatabaseFolderPath, FileName.ToString()) + Globals.DatabaseFileExtension;
-    try
-    {
-      if ( DB is not null )
-      {
-        DB.Close();
-        DB.Dispose();
-      }
-      DB = new SQLiteConnection(dbPath);
-      DB.CreateTable<DecupletRow>();
-      DB.BeginTransaction();
-      UpdateStatusInfo($"0k - Started");
-      int charsRead;
-      int blockSize = 10;
-      long totalBlocks = 0;
-      long motif = 0;
-      int bufferLength = 10_000_000;
-      char[] buffer = new char[bufferLength];
-      using var reader = new StreamReader(fileName);
-      while ( ( charsRead = reader.Read(buffer, 0, bufferLength) ) > 0 )
-      {
-        for ( int indexBuffer = 0; indexBuffer < charsRead; indexBuffer += blockSize )
-          if ( indexBuffer + blockSize <= charsRead )
-          {
-            motif = 0;
-            for ( int indexMotif = 0; indexMotif < blockSize; indexMotif++ )
-              motif = motif * 10 + ( buffer[indexBuffer + indexMotif] - '0' );
-            DB.Insert(new DecupletRow { Motif = motif });
-            totalBlocks++;
-            if ( totalBlocks % 1000000 == 0 )
-              UpdateStatusInfo($"{totalBlocks / 1000}k blocs insérés");
-          }
-      }
-      UpdateStatusInfo($"{totalBlocks / 1000}k - Committing");
-      DB.Commit();
-      UpdateStatusInfo($"{totalBlocks / 1000}k - Indexing");
-      DB.Execute($"CREATE INDEX idx_decuplets_value ON {DecupletRow.TableName} ({nameof(DecupletRow.Motif)})");
-      UpdateStatusInfo($"{totalBlocks / 1000}k - Finished");
-    }
-    catch ( Exception ex )
-    {
-      UpdateStatusInfo($"Error : {ex.Message}");
-    }
-  }
-
-  private void CreateDataTable()
-  {
-    try
-    {
-      var dataTable = new DataTable();
-      var command = DB.CreateCommand("SELECT * FROM Decuplets LIMIT 1000000 OFFSET 0");
-      var list = command.ExecuteQuery<DecupletRow>();
-      if ( list.Count > 0 )
-      {
-        foreach ( var prop in typeof(DecupletRow).GetProperties() )
-          dataTable.Columns.Add(prop.Name);
-        foreach ( var row in list )
-        {
-          var dataRow = dataTable.NewRow();
-          foreach ( var prop in typeof(DecupletRow).GetProperties() )
-            dataRow[prop.Name] = prop.GetValue(row);
-          dataTable.Rows.Add(dataRow);
-        }
-      }
-      Grid.DataSource = dataTable;
-    }
-    catch ( Exception ex )
-    {
-      UpdateStatusInfo(ex.Message);
-    }
-
+    await ProcessPiDecimalsAsync();
   }
 
 }
