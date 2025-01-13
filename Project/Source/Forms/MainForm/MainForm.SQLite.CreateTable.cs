@@ -14,12 +14,10 @@
 /// <edited> 2025-01-13 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-using SQLite;
-
 public partial class MainForm
 {
 
-  private async void DoActionCreateTable()
+  private async Task DoActionCreateTable()
   {
     ActionCreateTable.Enabled = false;
     await Task.Run(() =>
@@ -35,15 +33,14 @@ public partial class MainForm
 
   private async void CreateTable(string fileName)
   {
-    string dbPath = Path.Combine(Globals.DatabaseFolderPath, FileName.ToString()) + Globals.DatabaseFileExtension;
+    if ( !File.Exists(fileName) )
+    {
+      DisplayManager.Show(SysTranslations.FileNotFound.GetLang(fileName));
+      return;
+    }
     try
     {
-      if ( DB is not null )
-      {
-        DB.Close();
-        DB.Dispose();
-      }
-      DB = new SQLiteConnection(dbPath);
+      DB.DropTable<DecupletRow>();
       DB.CreateTable<DecupletRow>();
       DB.BeginTransaction();
       UpdateStatusInfo($"0k - Started");
@@ -71,7 +68,8 @@ public partial class MainForm
       UpdateStatusInfo($"{totalBlocks / 1000}k - Committing");
       DB.Commit();
       UpdateStatusInfo($"{totalBlocks / 1000}k - Indexing");
-      DB.Execute($"CREATE INDEX idx_decuplets_value ON {DecupletRow.TableName} ({nameof(DecupletRow.Motif)})");
+      string sql = $"CREATE INDEX idx_decuplets_value ON {DecupletRow.TableName} ({nameof(DecupletRow.Motif)})";
+      DB.Execute(sql);
       UpdateStatusInfo($"{totalBlocks / 1000}k - Finished");
     }
     catch ( Exception ex )

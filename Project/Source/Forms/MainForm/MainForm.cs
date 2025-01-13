@@ -16,6 +16,7 @@ namespace Ordisoftware.Hebrew.Pi;
 
 using System;
 using System.Diagnostics;
+using System.IO;
 using SQLite;
 
 public partial class MainForm : Form
@@ -29,6 +30,7 @@ public partial class MainForm : Form
 
   private Stopwatch chrono;
   private SQLiteConnection DB;
+  private string SQLiteTempDir;
 
   private PiDecimalsExtractSize FileName;
   private Dictionary<string, GroupInfo> PiGroups;
@@ -130,9 +132,22 @@ public partial class MainForm : Form
     DoActionSaveFixedRepeatedToFile();
   }
 
+  private void ActionDbConnect_Click(object sender, EventArgs e)
+  {
+    if ( DB is not null )
+    {
+      DB.Close();
+      DB.Dispose();
+    }
+    string dbPath = Path.Combine(Globals.DatabaseFolderPath, FileName.ToString()) + Globals.DatabaseFileExtension;
+    DB = new SQLiteConnection(dbPath);
+    if ( SQLiteTempDir.Length > 0 )
+      DB.Execute($"PRAGMA temp_store_directory = '{SQLiteTempDir.Length}'");
+  }
+
   private async void ActionCreateTable_Click(object sender, EventArgs e)
   {
-    DoActionCreateTable();
+    await DoActionCreateTable();
   }
 
   private async void ActionDbBatch_Click(object sender, EventArgs e)

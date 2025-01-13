@@ -31,6 +31,8 @@
       this.Grid = new System.Windows.Forms.DataGridView();
       this.Panel = new System.Windows.Forms.Panel();
       this.SelectFileName = new System.Windows.Forms.ComboBox();
+      this.ActionDbBatch = new System.Windows.Forms.Button();
+      this.ActionDbConnect = new System.Windows.Forms.Button();
       this.ActionCreateTable = new System.Windows.Forms.Button();
       this.ActionLoadFile = new System.Windows.Forms.Button();
       this.ActionSaveFixedDuplicatesToFile = new System.Windows.Forms.Button();
@@ -38,7 +40,6 @@
       this.StatusStrip = new System.Windows.Forms.StatusStrip();
       this.LabelStatusProgress = new System.Windows.Forms.ToolStripStatusLabel();
       this.LabelStatusTime = new System.Windows.Forms.ToolStripStatusLabel();
-      this.ActionDbBatch = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.Grid)).BeginInit();
       this.Panel.SuspendLayout();
       this.StatusStrip.SuspendLayout();
@@ -52,7 +53,7 @@
       this.Grid.Location = new System.Drawing.Point(0, 75);
       this.Grid.Name = "Grid";
       this.Grid.RowHeadersWidth = 100;
-      this.Grid.Size = new System.Drawing.Size(800, 620);
+      this.Grid.Size = new System.Drawing.Size(784, 364);
       this.Grid.TabIndex = 0;
       this.Grid.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.Grid_RowPostPaint);
       this.Grid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Grid_KeyDown);
@@ -61,6 +62,7 @@
       // 
       this.Panel.Controls.Add(this.SelectFileName);
       this.Panel.Controls.Add(this.ActionDbBatch);
+      this.Panel.Controls.Add(this.ActionDbConnect);
       this.Panel.Controls.Add(this.ActionCreateTable);
       this.Panel.Controls.Add(this.ActionLoadFile);
       this.Panel.Controls.Add(this.ActionSaveFixedDuplicatesToFile);
@@ -68,7 +70,7 @@
       this.Panel.Dock = System.Windows.Forms.DockStyle.Top;
       this.Panel.Location = new System.Drawing.Point(0, 0);
       this.Panel.Name = "Panel";
-      this.Panel.Size = new System.Drawing.Size(800, 75);
+      this.Panel.Size = new System.Drawing.Size(784, 75);
       this.Panel.TabIndex = 1;
       // 
       // SelectFileName
@@ -79,6 +81,26 @@
       this.SelectFileName.Size = new System.Drawing.Size(121, 21);
       this.SelectFileName.TabIndex = 3;
       this.SelectFileName.SelectedIndexChanged += new System.EventHandler(this.SelectFileName_SelectedIndexChanged);
+      // 
+      // ActionDbBatch
+      // 
+      this.ActionDbBatch.Location = new System.Drawing.Point(240, 39);
+      this.ActionDbBatch.Name = "ActionDbBatch";
+      this.ActionDbBatch.Size = new System.Drawing.Size(95, 23);
+      this.ActionDbBatch.TabIndex = 2;
+      this.ActionDbBatch.Text = "Batch";
+      this.ActionDbBatch.UseVisualStyleBackColor = true;
+      this.ActionDbBatch.Click += new System.EventHandler(this.ActionDbBatch_Click);
+      // 
+      // ActionDbConnect
+      // 
+      this.ActionDbConnect.Location = new System.Drawing.Point(38, 39);
+      this.ActionDbConnect.Name = "ActionDbConnect";
+      this.ActionDbConnect.Size = new System.Drawing.Size(95, 23);
+      this.ActionDbConnect.TabIndex = 2;
+      this.ActionDbConnect.Text = "Db connect";
+      this.ActionDbConnect.UseVisualStyleBackColor = true;
+      this.ActionDbConnect.Click += new System.EventHandler(this.ActionDbConnect_Click);
       // 
       // ActionCreateTable
       // 
@@ -123,44 +145,38 @@
       // 
       // StatusStrip
       // 
-      this.StatusStrip.Location = new System.Drawing.Point(0, 695);
+      this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.LabelStatusProgress,
+            this.LabelStatusTime});
+      this.StatusStrip.Location = new System.Drawing.Point(0, 439);
       this.StatusStrip.Name = "StatusStrip";
-      this.StatusStrip.Size = new System.Drawing.Size(800, 22);
+      this.StatusStrip.Size = new System.Drawing.Size(784, 22);
       this.StatusStrip.TabIndex = 2;
       this.StatusStrip.Text = "statusStrip1";
       // 
       // LabelStatusProgress
       // 
       this.LabelStatusProgress.Name = "LabelStatusProgress";
-      this.LabelStatusProgress.Size = new System.Drawing.Size(0, 17);
+      this.LabelStatusProgress.Size = new System.Drawing.Size(19, 17);
+      this.LabelStatusProgress.Text = "0k";
       // 
       // LabelStatusTime
       // 
       this.LabelStatusTime.Name = "LabelStatusTime";
-      this.LabelStatusTime.Size = new System.Drawing.Size(0, 17);
-      // 
-      // ActionDbBatch
-      // 
-      this.ActionDbBatch.Location = new System.Drawing.Point(240, 39);
-      this.ActionDbBatch.Name = "ActionDbBatch";
-      this.ActionDbBatch.Size = new System.Drawing.Size(95, 23);
-      this.ActionDbBatch.TabIndex = 2;
-      this.ActionDbBatch.Text = "Batch";
-      this.ActionDbBatch.UseVisualStyleBackColor = true;
-      this.ActionDbBatch.Click += new System.EventHandler(this.ActionDbBatch_Click);
+      this.LabelStatusTime.Size = new System.Drawing.Size(49, 17);
+      this.LabelStatusTime.Text = "00:00:00";
       // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(800, 717);
+      this.ClientSize = new System.Drawing.Size(784, 461);
       this.Controls.Add(this.Grid);
-      this.Controls.Add(this.StatusStrip);
       this.Controls.Add(this.Panel);
+      this.Controls.Add(this.StatusStrip);
       this.Name = "MainForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Hebrew Pi";
-      this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
       ((System.ComponentModel.ISupportInitialize)(this.Grid)).EndInit();
       this.Panel.ResumeLayout(false);
       this.StatusStrip.ResumeLayout(false);
@@ -180,8 +196,9 @@
     private Button ActionCreateTable;
     private Button ActionLoadFile;
     private StatusStrip StatusStrip;
+    private Button ActionDbBatch;
+    private Button ActionDbConnect;
     private ToolStripStatusLabel LabelStatusProgress;
     private ToolStripStatusLabel LabelStatusTime;
-    private Button ActionDbBatch;
   }
 }
