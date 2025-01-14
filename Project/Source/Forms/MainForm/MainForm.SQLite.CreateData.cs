@@ -23,10 +23,10 @@ public partial class MainForm
   private long MotifSize = 10;
   private int BufferSize = 10_000_000;
   private int CreateDataPaging = 100000;
-  private int CreateDataEstimatePaging = 1000000;
+  private int CreateDataEstimatePaging = 100000;
   private string CreateDataProgress = $"{{0}} inserted";
 
-  private void DoActionDbCReate(string fileName)
+  private async Task DoActionDbCreateData(string fileName)
   {
     StreamReader reader = null;
     if ( !File.Exists(fileName) )
@@ -34,14 +34,11 @@ public partial class MainForm
     else
       try
       {
-        UpdateStatusInfo(DroppingTablesText);
-        DB.DropTable<DecupletRow>();
-        DB.DropTable<IterationRow>();
-        UpdateStatusInfo(CreatingTablesText);
-        DB.CreateTable<DecupletRow>();
-        DB.CreateTable<IterationRow>();
+        UpdateStatusInfo(EmptyingTablesText);
+        DB.Connection.DeleteAll<DecupletRow>();
+        DB.Connection.DeleteAll<IterationRow>();
         UpdateStatusInfo(PopulatingText);
-        DB.BeginTransaction();
+        DB.Connection.BeginTransaction();
         UpdateStatusProgress(string.Format(CreateDataProgress, "0"));
         int charsRead;
         long totalMotifs = 0;
@@ -62,6 +59,8 @@ public partial class MainForm
           for ( long indexBuffer = 0; indexBuffer < charsRead; indexBuffer += MotifSize )
             if ( indexBuffer + MotifSize <= charsRead )
             {
+              if ( Globals.CancelRequired ) break;
+              while ( Globals.PauseRequired ) await Task.Delay(500);
               motif = 0;
               for ( long indexMotif = 0; indexMotif < MotifSize; indexMotif++ )
               {
@@ -69,7 +68,7 @@ public partial class MainForm
                 motif = ( shiftLeft << 2 ) + shiftLeft + buffer[indexBuffer + indexMotif] - 48;
                 // motif = motif * 10 + ( buffer[indexBuffer + indexMotif] - '0' );
               }
-              DB.Insert(new DecupletRow { Motif = motif });
+              DB.Connection.Insert(new DecupletRow { Motif = motif });
               totalMotifs++;
               if ( totalMotifs % CreateDataPaging == 0 )
                 UpdateStatusProgress(string.Format(CreateDataProgress, totalMotifs.ToString("N0")));
@@ -83,11 +82,13 @@ public partial class MainForm
             }
         }
         UpdateStatusInfo(CommittingText);
-        DB.Commit();
+        DB.Connection.Commit();
         UpdateStatusInfo(IndexingText);
-        string sql = $"CREATE INDEX idx_decuplets_value ON {DecupletRow.TableName} ({nameof(DecupletRow.Motif)})";
-        DB.Execute(sql);
-        UpdateStatusInfo(FinishedText);
+        DB.Connection.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
+        if ( Globals.CancelRequired )
+          UpdateStatusInfo(CanceledText);
+        else
+          UpdateStatusInfo(FinishedText);
         reader.Close();
       }
       catch ( Exception ex )
@@ -96,6 +97,8 @@ public partial class MainForm
       }
       finally
       {
+        Globals.PauseRequired = false;
+        Globals.CancelRequired = false;
         if ( reader is not null )
         {
           reader.Close();

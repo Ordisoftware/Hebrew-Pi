@@ -30,10 +30,4 @@ public class IterationRow : AbstractRow
 
   public DateTime Timestamp { get; set; }
 
-  public IterationRow(long repeatedCount, DateTime timestamp)
-  {
-    RepeatedCount = repeatedCount;
-    Timestamp = timestamp;
-  }
-
 }

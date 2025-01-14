@@ -22,16 +22,13 @@ sealed partial class ApplicationDatabase : SQLiteDatabase
 
   static public ApplicationDatabase Instance { get; }
 
-  static ApplicationDatabase()
-  {
-    Instance = new ApplicationDatabase();
-  }
-
   public List<DecupletRow> Decuplets { get; private set; }
+  public List<IterationRow> Iterations { get; private set; }
 
   public BindingListView<DecupletRow> DecupletsAsBindingList { get; private set; }
+  public BindingListView<IterationRow> IterationsAsBindingList { get; private set; }
 
-  private ApplicationDatabase() : base(Globals.ApplicationDatabaseFilePath)
+  public ApplicationDatabase(string path) : base(path)
   {
   }
 
@@ -39,30 +36,40 @@ sealed partial class ApplicationDatabase : SQLiteDatabase
   {
     if ( Decuplets is null ) return;
     if ( ClearListsOnCloseOrRelease )
+    {
       Decuplets?.Clear();
+      Iterations?.Clear();
+    }
     Decuplets = null;
+    Iterations = null;
   }
 
   protected override void CreateTables()
   {
     Connection.CreateTable<DecupletRow>();
+    Connection.CreateTable<IterationRow>();
   }
 
   protected override void DoLoadAll()
   {
-    Decuplets = [.. Connection.Table<DecupletRow>()];
+    //Decuplets = [.. Connection.Table<DecupletRow>()];
+    Iterations = [.. Connection.Table<IterationRow>()];
   }
 
   protected override void CreateBindingLists()
   {
-    DecupletsAsBindingList?.Dispose();
-    DecupletsAsBindingList = new(Decuplets);
+    //DecupletsAsBindingList?.Dispose();
+    //DecupletsAsBindingList = new(Decuplets);
+    IterationsAsBindingList?.Dispose();
+    IterationsAsBindingList = new(Iterations);
   }
 
   protected override void DoSaveAll()
   {
-    CheckAccess(Decuplets, nameof(DecupletRow));
-    Connection.UpdateAll(Decuplets);
+    //CheckAccess(Decuplets, nameof(DecupletRow));
+    //Connection.UpdateAll(Decuplets);
+    CheckAccess(Iterations, nameof(IterationRow));
+    Connection.UpdateAll(Iterations);
   }
 
   public void DeleteAll()
@@ -71,6 +78,9 @@ sealed partial class ApplicationDatabase : SQLiteDatabase
     CheckAccess(Decuplets, nameof(Decuplets));
     Connection.DeleteAll<DecupletRow>();
     Decuplets.Clear();
+    CheckAccess(Iterations, nameof(Iterations));
+    Connection.DeleteAll<IterationRow>();
+    Iterations.Clear();
   }
 
   protected override bool CreateDataIfNotExist(bool reset = false)

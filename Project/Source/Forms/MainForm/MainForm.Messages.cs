@@ -49,6 +49,7 @@ partial class MainForm : Form
 
   static private string DroppingTablesText = "Dropping tables...";
   static private string CreatingTablesText = "Creating tables...";
+  static private string EmptyingTablesText = "Emptying tables...";
   static private string PopulatingText = "Populating...";
   static private string PopulatingAndRemainingText = "Populating... ({0} remaining before indexing)";
 

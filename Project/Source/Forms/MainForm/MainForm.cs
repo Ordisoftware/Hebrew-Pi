@@ -1,4 +1,6 @@
-﻿/// <license>
+﻿using static System.Net.Mime.MediaTypeNames;
+
+/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
 /// Copyright 2025 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
@@ -14,16 +16,16 @@
 /// <edited> 2025-01-14 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-using SQLite;
-
 public partial class MainForm : Form
 {
+
+  private readonly object Locker = new();
 
   private PiDecimalsExtractSize TextFileName;
   private Dictionary<string, GroupInfo> PiDecuplets;
 
-  private SQLiteConnection DB;
   private string SQLiteTempDir = @"D:\";
+  private ApplicationDatabase DB;
 
   #region Singleton
 
@@ -52,6 +54,26 @@ public partial class MainForm : Form
     ClearStatusBar();
   }
 
+  private void UpdateButtons()
+  {
+    void process()
+    {
+      bool dbOpened = DB is not null;
+      SelectFileName.Enabled = !dbOpened;
+      ActionDbOpen.Enabled = !dbOpened && SelectFileName.SelectedIndex != -1;
+      ActionDbClose.Enabled = dbOpened;
+      ActionDbCreateData.Enabled = dbOpened && !Globals.IsInProcess;
+      ActionBatchRun.Enabled = dbOpened && !Globals.IsInProcess;
+      ActionBatchStop.Enabled = dbOpened && Globals.IsInProcess;
+      ActionBatchPause.Enabled = dbOpened && Globals.IsInProcess;
+      if ( !ActionBatchPause.Enabled ) ;
+    }
+    if ( StatusStrip.InvokeRequired )
+      StatusStrip.Invoke(process);
+    else
+      process();
+  }
+
   private void ClearStatusBar()
   {
     LabelStatusTime.Text = "-";
@@ -75,6 +97,7 @@ public partial class MainForm : Form
     {
       label.Text = text;
       UpdateStatusTime();
+      StatusStrip.Refresh();
     }
     if ( StatusStrip.InvokeRequired )
       StatusStrip.Invoke(process);
@@ -121,6 +144,7 @@ public partial class MainForm : Form
   private void SelectFileName_SelectedIndexChanged(object sender, EventArgs e)
   {
     TextFileName = (PiDecimalsExtractSize)SelectFileName.SelectedItem;
+    UpdateButtons();
   }
 
   private void ActionFileLoad_Click(object sender, EventArgs e)
@@ -138,66 +162,92 @@ public partial class MainForm : Form
     ActionFileSaveFixedRepeating();
   }
 
-  private void ActionDbConnect_Click(object sender, EventArgs e)
+  private void ActionDbOpen_Click(object sender, EventArgs e)
   {
-    if ( DB is not null )
-    {
-      DB.Close();
-      DB.Dispose();
-    }
     string dbPath = Path.Combine(Globals.DatabaseFolderPath, TextFileName.ToString()) + Globals.DatabaseFileExtension;
-    DB = new SQLiteConnection(dbPath);
+    DB = new ApplicationDatabase(dbPath);
+    DB.Open();
     if ( SQLiteTempDir.Length > 0 )
-      DB.Execute($"PRAGMA temp_store_directory = '{SQLiteTempDir}'");
-    ActionDbCreate.Enabled = true;
+      DB.Connection.Execute($"PRAGMA temp_store_directory = '{SQLiteTempDir}'");
+    ActionDbCreateData.Enabled = true;
     ActionBatchRun.Enabled = true;
+    UpdateButtons();
   }
 
-  private async void ActionDbCreate_Click(object sender, EventArgs e)
+  private void ActionDbClose_Click(object sender, EventArgs e)
+  {
+    if ( DB is null ) return;
+    DB.Close();
+    DB.Dispose();
+    DB = null;
+    UpdateButtons();
+  }
+
+  private async void ActionDbCreateData_Click(object sender, EventArgs e)
   {
     //if ( !DisplayManager.QueryYesNo("Delete and create tables?") ) return;
-    ActionDbConnect.Enabled = false;
-    ActionDbCreate.Enabled = false;
-    ActionBatchRun.Enabled = false;
     ClearStatusBar();
-    await Task.Run(() =>
+    //await Task.Run(async () =>
+    //{
+    try
     {
+      Globals.IsInProcess = true;
+      UpdateButtons();
       Globals.ChronoProcess.Restart();
-      DoActionDbCReate(Path.Combine(Globals.DocumentsFolderPath, TextFileName.ToString()) + ".txt");
+      await DoActionDbCreateData(Path.Combine(Globals.DocumentsFolderPath, TextFileName.ToString()) + ".txt");
       Globals.ChronoProcess.Stop();
       UpdateStatusTime();
-    });
-    ActionDbCreate.Enabled = true;
-    ActionDbConnect.Enabled = true;
-    ActionBatchRun.Enabled = true;
+    }
+    finally
+    {
+      Globals.IsInProcess = false;
+      UpdateButtons();
+    }
+    //    });
   }
 
   private async void ActionBatchRun_Click(object sender, EventArgs e)
   {
     //if ( !DisplayManager.QueryYesNo("Start reducing repeated adding their position?") ) return;
-    ActionDbConnect.Enabled = false;
-    ActionDbCreate.Enabled = false;
-    ActionBatchRun.Enabled = false;
-    ActionStopBatch.Enabled = true;
-    Globals.CancelRequired = false;
     ClearStatusBar();
-    await Task.Run(() =>
+    await Task.Run(async () =>
     {
-      Globals.ChronoProcess.Restart();
-      DoActionBatchRun(0);
-      Globals.ChronoProcess.Stop();
-      UpdateStatusTime();
+      try
+      {
+        Globals.IsInProcess = true;
+        UpdateButtons();
+        Globals.ChronoProcess.Restart();
+        DoActionBatchRun(0);
+        Globals.ChronoProcess.Stop();
+        UpdateStatusTime();
+      }
+      finally
+      {
+        Globals.IsInProcess = false;
+        UpdateButtons();
+      }
     });
-    ActionDbCreate.Enabled = true;
-    ActionDbConnect.Enabled = true;
-    ActionBatchRun.Enabled = true;
-    ActionStopBatch.Enabled = false;
   }
 
   private void ActionBatchStop_Click(object sender, EventArgs e)
   {
     Globals.CancelRequired = true;
-    ActionStopBatch.Enabled = false;
+    ActionBatchStop.Enabled = false;
   }
 
+  private void ActionBatchPause_Click(object sender, EventArgs e)
+  {
+    Globals.PauseRequired = !Globals.PauseRequired;
+    UpdateButtons();
+    if ( Globals.PauseRequired )
+    {
+      Globals.ChronoProcess.Stop();
+      ActionBatchPause.Text = "Continue";
+    }
+    else
+    {
+      ActionBatchPause.Text = "Pause";
+      Globals.ChronoProcess.Start();
+    }
+  }
 }

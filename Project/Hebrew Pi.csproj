@@ -392,7 +392,7 @@
     <Compile Include="Source\Forms\MainForm\MainForm.Messages.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\MainForm\MainForm.SQLite.CreateTable.cs">
+    <Compile Include="Source\Forms\MainForm\MainForm.SQLite.CreateData.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Forms\MainForm\MainForm.TextFile.cs">

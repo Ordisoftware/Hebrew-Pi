@@ -1,4 +1,6 @@
-﻿/// <license>
+﻿using static System.Windows.Forms.AxHost;
+
+/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
 /// Copyright 2025 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
@@ -23,53 +25,64 @@ public partial class MainForm
 
   private async Task DoActionBatchRun(long startingIterationNumber)
   {
-    TestCounter = 10;
-    if ( startingIterationNumber == 0 )
+    try
     {
-      DB.DropTable<IterationRow>();
-      DB.CreateTable<IterationRow>();
-    }
-    bool firstIteration = true;
-    long countPrevious = 0;
-    long countCurrent = 0;
-    long iteration = 0;
-    while ( true )
-    {
-      if ( Globals.CancelRequired ) break;
-      UpdateStatusProgress(string.Format(IterationText, iteration, "?"));
-      UpdateStatusInfo(CountingText);
-      countCurrent = GetRepeatingCount().Result;
-      UpdateStatusProgress(string.Format(IterationText, iteration, countCurrent));
-      UpdateStatusInfo(CountedText);
-      DB.Insert(new IterationRow(countCurrent, DateTime.Now));
-      if ( Globals.CancelRequired ) break;
-      if ( countCurrent == 0 )
+      TestCounter = 10;
+      if ( startingIterationNumber == 0 )
       {
-        DisplayManager.Show(string.Format(NoRepeatedText, iteration));
-        break;
+        DB.Connection.DropTable<IterationRow>();
+        DB.Connection.CreateTable<IterationRow>();
       }
-      if ( !firstIteration )
-        if ( countPrevious > countCurrent )
+      bool firstIteration = true;
+      long countPrevious = 0;
+      long countCurrent = 0;
+      long iteration = 0;
+      while ( true )
+      {
+        if ( Globals.CancelRequired ) break;
+        while ( Globals.PauseRequired ) await Task.Delay(500);
+        UpdateStatusProgress(string.Format(IterationText, iteration, "?"));
+        UpdateStatusInfo(CountingText);
+        countCurrent = GetRepeatingCount().Result;
+        UpdateStatusProgress(string.Format(IterationText, iteration, countCurrent));
+        UpdateStatusInfo(CountedText);
+        DB.Connection.Insert(new IterationRow { RepeatedCount = countCurrent, Timestamp = DateTime.Now });
+        if ( Globals.CancelRequired ) break;
+        while ( Globals.PauseRequired ) await Task.Delay(500);
+        if ( countCurrent == 0 )
         {
-          if ( !DisplayManager.QueryYesNo(string.Format(AskStartNextIfMore, iteration, countPrevious, countCurrent)) )
-            Globals.CancelRequired = true;
+          DisplayManager.Show(string.Format(NoRepeatedText, iteration));
+          break;
         }
-        else
-        {
-          if ( !DisplayManager.QueryYesNo(string.Format(AskStartNextIfLess, iteration, countPrevious, countCurrent)) )
-            Globals.CancelRequired = true;
-        }
-      countPrevious = countCurrent;
-      firstIteration = false;
-      UpdateStatusInfo(UpdatingText);
-      AddPositionToMotifs();
-      if ( Globals.CancelRequired ) break;
-      iteration++;
+        if ( !firstIteration )
+          if ( countPrevious > countCurrent )
+          {
+            if ( !DisplayManager.QueryYesNo(string.Format(AskStartNextIfMore, iteration, countPrevious, countCurrent)) )
+              Globals.CancelRequired = true;
+          }
+          else
+          {
+            if ( !DisplayManager.QueryYesNo(string.Format(AskStartNextIfLess, iteration, countPrevious, countCurrent)) )
+              Globals.CancelRequired = true;
+          }
+        countPrevious = countCurrent;
+        firstIteration = false;
+        UpdateStatusInfo(UpdatingText);
+        AddPositionToMotifs();
+        if ( Globals.CancelRequired ) break;
+        while ( Globals.PauseRequired ) await Task.Delay(500);
+        iteration++;
+      }
+      if ( Globals.CancelRequired )
+        UpdateStatusInfo(CanceledText);
+      else
+        UpdateStatusInfo(FinishedText);
     }
-    if ( Globals.CancelRequired )
-      UpdateStatusInfo(CanceledText);
-    else
-      UpdateStatusInfo(FinishedText);
+    finally
+    {
+      Globals.PauseRequired = false;
+      Globals.CancelRequired = false;
+    }
   }
 
   int TestCounter = 10;
@@ -89,7 +102,7 @@ public partial class MainForm
                     HAVING COUNT(Motif) > 1
                   );";
 
-      return DB.Query<int>(query).Single();
+      return DB.Connection.Query<int>(query).Single();
     }
     catch ( Exception ex )
     {
@@ -109,7 +122,7 @@ public partial class MainForm
                     GROUP BY Motif
                     HAVING COUNT(*) > 1
                   );";
-    DB.Execute(query);
+    DB.Connection.Execute(query);
   }
 
 }

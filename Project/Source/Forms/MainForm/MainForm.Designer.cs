@@ -32,10 +32,11 @@
       this.PanelTop = new System.Windows.Forms.Panel();
       this.SelectFileName = new System.Windows.Forms.ComboBox();
       this.ActionBatchPause = new System.Windows.Forms.Button();
-      this.ActionStopBatch = new System.Windows.Forms.Button();
+      this.ActionBatchStop = new System.Windows.Forms.Button();
       this.ActionBatchRun = new System.Windows.Forms.Button();
-      this.ActionDbConnect = new System.Windows.Forms.Button();
-      this.ActionDbCreate = new System.Windows.Forms.Button();
+      this.ActionDbClose = new System.Windows.Forms.Button();
+      this.ActionDbOpen = new System.Windows.Forms.Button();
+      this.ActionDbCreateData = new System.Windows.Forms.Button();
       this.ActionFileLoad = new System.Windows.Forms.Button();
       this.ActionFileSaveFixed = new System.Windows.Forms.Button();
       this.ActionFileCheckRepeated = new System.Windows.Forms.Button();
@@ -67,10 +68,11 @@
       // 
       this.PanelTop.Controls.Add(this.SelectFileName);
       this.PanelTop.Controls.Add(this.ActionBatchPause);
-      this.PanelTop.Controls.Add(this.ActionStopBatch);
+      this.PanelTop.Controls.Add(this.ActionBatchStop);
       this.PanelTop.Controls.Add(this.ActionBatchRun);
-      this.PanelTop.Controls.Add(this.ActionDbConnect);
-      this.PanelTop.Controls.Add(this.ActionDbCreate);
+      this.PanelTop.Controls.Add(this.ActionDbClose);
+      this.PanelTop.Controls.Add(this.ActionDbOpen);
+      this.PanelTop.Controls.Add(this.ActionDbCreateData);
       this.PanelTop.Controls.Add(this.ActionFileLoad);
       this.PanelTop.Controls.Add(this.ActionFileSaveFixed);
       this.PanelTop.Controls.Add(this.ActionFileCheckRepeated);
@@ -97,20 +99,20 @@
       this.ActionBatchPause.Name = "ActionBatchPause";
       this.ActionBatchPause.Size = new System.Drawing.Size(95, 23);
       this.ActionBatchPause.TabIndex = 2;
-      this.ActionBatchPause.Text = "Stop batch";
+      this.ActionBatchPause.Text = "Pause batch";
       this.ActionBatchPause.UseVisualStyleBackColor = true;
-      this.ActionBatchPause.Click += new System.EventHandler(this.ActionBatchStop_Click);
+      this.ActionBatchPause.Click += new System.EventHandler(this.ActionBatchPause_Click);
       // 
-      // ActionStopBatch
+      // ActionBatchStop
       // 
-      this.ActionStopBatch.Enabled = false;
-      this.ActionStopBatch.Location = new System.Drawing.Point(341, 39);
-      this.ActionStopBatch.Name = "ActionStopBatch";
-      this.ActionStopBatch.Size = new System.Drawing.Size(95, 23);
-      this.ActionStopBatch.TabIndex = 2;
-      this.ActionStopBatch.Text = "Stop batch";
-      this.ActionStopBatch.UseVisualStyleBackColor = true;
-      this.ActionStopBatch.Click += new System.EventHandler(this.ActionBatchStop_Click);
+      this.ActionBatchStop.Enabled = false;
+      this.ActionBatchStop.Location = new System.Drawing.Point(341, 39);
+      this.ActionBatchStop.Name = "ActionBatchStop";
+      this.ActionBatchStop.Size = new System.Drawing.Size(95, 23);
+      this.ActionBatchStop.TabIndex = 2;
+      this.ActionBatchStop.Text = "Stop batch";
+      this.ActionBatchStop.UseVisualStyleBackColor = true;
+      this.ActionBatchStop.Click += new System.EventHandler(this.ActionBatchStop_Click);
       // 
       // ActionBatchRun
       // 
@@ -123,26 +125,38 @@
       this.ActionBatchRun.UseVisualStyleBackColor = true;
       this.ActionBatchRun.Click += new System.EventHandler(this.ActionBatchRun_Click);
       // 
-      // ActionDbConnect
+      // ActionDbClose
       // 
-      this.ActionDbConnect.Location = new System.Drawing.Point(38, 39);
-      this.ActionDbConnect.Name = "ActionDbConnect";
-      this.ActionDbConnect.Size = new System.Drawing.Size(95, 23);
-      this.ActionDbConnect.TabIndex = 2;
-      this.ActionDbConnect.Text = "Db connect";
-      this.ActionDbConnect.UseVisualStyleBackColor = true;
-      this.ActionDbConnect.Click += new System.EventHandler(this.ActionDbConnect_Click);
+      this.ActionDbClose.Enabled = false;
+      this.ActionDbClose.Location = new System.Drawing.Point(76, 39);
+      this.ActionDbClose.Name = "ActionDbClose";
+      this.ActionDbClose.Size = new System.Drawing.Size(58, 23);
+      this.ActionDbClose.TabIndex = 2;
+      this.ActionDbClose.Text = "Close";
+      this.ActionDbClose.UseVisualStyleBackColor = true;
+      this.ActionDbClose.Click += new System.EventHandler(this.ActionDbClose_Click);
       // 
-      // ActionDbCreate
+      // ActionDbOpen
       // 
-      this.ActionDbCreate.Enabled = false;
-      this.ActionDbCreate.Location = new System.Drawing.Point(139, 39);
-      this.ActionDbCreate.Name = "ActionDbCreate";
-      this.ActionDbCreate.Size = new System.Drawing.Size(95, 23);
-      this.ActionDbCreate.TabIndex = 2;
-      this.ActionDbCreate.Text = "Create tables";
-      this.ActionDbCreate.UseVisualStyleBackColor = true;
-      this.ActionDbCreate.Click += new System.EventHandler(this.ActionDbCreate_Click);
+      this.ActionDbOpen.Enabled = false;
+      this.ActionDbOpen.Location = new System.Drawing.Point(12, 39);
+      this.ActionDbOpen.Name = "ActionDbOpen";
+      this.ActionDbOpen.Size = new System.Drawing.Size(58, 23);
+      this.ActionDbOpen.TabIndex = 2;
+      this.ActionDbOpen.Text = "Open";
+      this.ActionDbOpen.UseVisualStyleBackColor = true;
+      this.ActionDbOpen.Click += new System.EventHandler(this.ActionDbOpen_Click);
+      // 
+      // ActionDbCreateData
+      // 
+      this.ActionDbCreateData.Enabled = false;
+      this.ActionDbCreateData.Location = new System.Drawing.Point(139, 39);
+      this.ActionDbCreateData.Name = "ActionDbCreateData";
+      this.ActionDbCreateData.Size = new System.Drawing.Size(95, 23);
+      this.ActionDbCreateData.TabIndex = 2;
+      this.ActionDbCreateData.Text = "Create data";
+      this.ActionDbCreateData.UseVisualStyleBackColor = true;
+      this.ActionDbCreateData.Click += new System.EventHandler(this.ActionDbCreateData_Click);
       // 
       // ActionFileLoad
       // 
@@ -246,17 +260,18 @@
     private Button ActionFileCheckRepeated;
     private Button ActionFileSaveFixed;
     private ComboBox SelectFileName;
-    private Button ActionDbCreate;
+    private Button ActionDbCreateData;
     private Button ActionFileLoad;
     private StatusStrip StatusStrip;
     private Button ActionBatchRun;
-    private Button ActionDbConnect;
+    private Button ActionDbOpen;
     private ToolStripStatusLabel LabelStatusIteration;
     private ToolStripStatusLabel LabelStatusTime;
-    private Button ActionStopBatch;
+    private Button ActionBatchStop;
     private ToolStripStatusLabel LabelStatusInfo;
     private ToolStripStatusLabel LabelStatusSep1;
     private ToolStripStatusLabel LabelStatusSep2;
     private Button ActionBatchPause;
+    private Button ActionDbClose;
   }
 }
