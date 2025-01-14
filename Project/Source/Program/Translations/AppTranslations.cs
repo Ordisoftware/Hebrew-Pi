@@ -11,7 +11,7 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-12 </created>
-/// <edited> 2025-01-12 </edited>
+/// <edited> 2025-01-14 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 static partial class AppTranslations
@@ -50,5 +50,36 @@ static partial class AppTranslations
   static public readonly NullSafeDictionary<ViewMode, TranslationsDictionary> ViewPanelTitle = new()
   {
   };
+
+  // Text file
+  //static public string File_NoRepeatedText = "Aucun répété.";
+  //static public string File_PrefixText = "Sur l'échantillon donné, la théorie des répétés ajoutés aux positions";
+  //static public string File_OkText = $"{File_PrefixText} fonctionne.";
+  //static public string File_NotOkText = $"{File_PrefixText} ne fonctionne pas.";
+  //static public string File_SavedFixedText = "Les groupes dupliquée ont été corrigés et le fichier reconstruit.";
+
+  // Database
+  static public string CreateDataProgress = "{0} inserted";
+  static public string RepeatedAtIteration = $"repeating motifs at iteration #{{0}}{Globals.NL2}";
+  static public string PreviousAndCurrentCount = $"Previous: {{1}}{Globals.NL}Current: {{2}}{Globals.NL2}";
+  static public string LessAtIteration = $"There are less {RepeatedAtIteration}{Globals.NL2}";
+  static public string MoreAtIteration = $"There are more {RepeatedAtIteration}{Globals.NL2}";
+  static public string StartNextIteration = "Start the next iteration?";
+  static public string AskStartNextIfLess = $"{LessAtIteration}{PreviousAndCurrentCount}{StartNextIteration}";
+  static public string AskStartNextIfMore = $"{MoreAtIteration}{PreviousAndCurrentCount}{StartNextIteration}";
+
+  static public string NoRepeatedText = "There is no repeating motif at iteration {0}";
+  static public string IterationText = "Iteration {0} : {1} repeating";
+  static public string CountingText = "Counting...";
+  static public string CountedText = "Counted";
+  static public string UpdatingText = "Adding position...";
+  static public string CommittingText = "Committing...";
+  static public string IndexingText = "Indexing...";
+  static public string FinishedText = "Finished";
+  static public string CanceledText = "Canceled";
+
+  static public string EmptyingTablesText = "Emptying tables...";
+  static public string PopulatingText = "Populating...";
+  static public string PopulatingAndRemainingText = "Populating... ({0} remaining before indexing)";
 
 }

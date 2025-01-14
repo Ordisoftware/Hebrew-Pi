@@ -20,11 +20,11 @@ namespace Ordisoftware.Hebrew.Pi;
 /// <seealso cref="T:System.Windows.Forms.Form"/>
 public partial class MainForm
 {
+
   private long MotifSize = 10;
   private int BufferSize = 10_000_000;
   private int CreateDataPaging = 100000;
   private int CreateDataEstimatePaging = 100000;
-  private string CreateDataProgress = $"{{0}} inserted";
 
   private async Task DoActionDbCreateData(string fileName)
   {
@@ -34,12 +34,12 @@ public partial class MainForm
     else
       try
       {
-        UpdateStatusInfo(EmptyingTablesText);
+        UpdateStatusInfo(AppTranslations.EmptyingTablesText);
         DB.Connection.DeleteAll<DecupletRow>();
         DB.Connection.DeleteAll<IterationRow>();
-        UpdateStatusInfo(PopulatingText);
+        UpdateStatusInfo(AppTranslations.PopulatingText);
         DB.Connection.BeginTransaction();
-        UpdateStatusProgress(string.Format(CreateDataProgress, "0"));
+        UpdateStatusProgress(string.Format(AppTranslations.CreateDataProgress, "0"));
         int charsRead;
         long totalMotifs = 0;
         long motif = 0;
@@ -71,24 +71,24 @@ public partial class MainForm
               DB.Connection.Insert(new DecupletRow { Motif = motif });
               totalMotifs++;
               if ( totalMotifs % CreateDataPaging == 0 )
-                UpdateStatusProgress(string.Format(CreateDataProgress, totalMotifs.ToString("N0")));
+                UpdateStatusProgress(string.Format(AppTranslations.CreateDataProgress, totalMotifs.ToString("N0")));
               if ( totalMotifs % CreateDataEstimatePaging == 0 )
               {
                 double progress = (double)( totalMotifs * 10 ) / fileSize;
                 var elapsed = Globals.ChronoProcess.Elapsed;
                 var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
-                UpdateStatusInfo(string.Format(PopulatingAndRemainingText, remaining.AsReadable()));
+                UpdateStatusInfo(string.Format(AppTranslations.PopulatingAndRemainingText, remaining.AsReadable()));
               }
             }
         }
-        UpdateStatusInfo(CommittingText);
+        UpdateStatusInfo(AppTranslations.CommittingText);
         DB.Connection.Commit();
-        UpdateStatusInfo(IndexingText);
+        UpdateStatusInfo(AppTranslations.IndexingText);
         DB.Connection.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
         if ( Globals.CancelRequired )
-          UpdateStatusInfo(CanceledText);
+          UpdateStatusInfo(AppTranslations.CanceledText);
         else
-          UpdateStatusInfo(FinishedText);
+          UpdateStatusInfo(AppTranslations.FinishedText);
         reader.Close();
       }
       catch ( Exception ex )

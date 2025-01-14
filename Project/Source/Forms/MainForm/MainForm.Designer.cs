@@ -37,9 +37,6 @@
       this.ActionDbClose = new System.Windows.Forms.Button();
       this.ActionDbOpen = new System.Windows.Forms.Button();
       this.ActionDbCreateData = new System.Windows.Forms.Button();
-      this.ActionFileLoad = new System.Windows.Forms.Button();
-      this.ActionFileSaveFixed = new System.Windows.Forms.Button();
-      this.ActionFileCheckRepeated = new System.Windows.Forms.Button();
       this.StatusStrip = new System.Windows.Forms.StatusStrip();
       this.LabelStatusTime = new System.Windows.Forms.ToolStripStatusLabel();
       this.LabelStatusSep1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -56,10 +53,10 @@
       this.Grid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
       this.Grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.Grid.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.Grid.Location = new System.Drawing.Point(0, 75);
+      this.Grid.Location = new System.Drawing.Point(0, 50);
       this.Grid.Name = "Grid";
       this.Grid.RowHeadersWidth = 100;
-      this.Grid.Size = new System.Drawing.Size(784, 364);
+      this.Grid.Size = new System.Drawing.Size(784, 389);
       this.Grid.TabIndex = 0;
       this.Grid.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.Grid_RowPostPaint);
       this.Grid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Grid_KeyDown);
@@ -73,20 +70,17 @@
       this.PanelTop.Controls.Add(this.ActionDbClose);
       this.PanelTop.Controls.Add(this.ActionDbOpen);
       this.PanelTop.Controls.Add(this.ActionDbCreateData);
-      this.PanelTop.Controls.Add(this.ActionFileLoad);
-      this.PanelTop.Controls.Add(this.ActionFileSaveFixed);
-      this.PanelTop.Controls.Add(this.ActionFileCheckRepeated);
       this.PanelTop.Dock = System.Windows.Forms.DockStyle.Top;
       this.PanelTop.Location = new System.Drawing.Point(0, 0);
       this.PanelTop.Name = "PanelTop";
-      this.PanelTop.Size = new System.Drawing.Size(784, 75);
+      this.PanelTop.Size = new System.Drawing.Size(784, 50);
       this.PanelTop.TabIndex = 1;
       // 
       // SelectFileName
       // 
       this.SelectFileName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.SelectFileName.FormattingEnabled = true;
-      this.SelectFileName.Location = new System.Drawing.Point(12, 12);
+      this.SelectFileName.Location = new System.Drawing.Point(12, 15);
       this.SelectFileName.Name = "SelectFileName";
       this.SelectFileName.Size = new System.Drawing.Size(121, 21);
       this.SelectFileName.TabIndex = 3;
@@ -95,7 +89,7 @@
       // ActionBatchPause
       // 
       this.ActionBatchPause.Enabled = false;
-      this.ActionBatchPause.Location = new System.Drawing.Point(442, 39);
+      this.ActionBatchPause.Location = new System.Drawing.Point(569, 14);
       this.ActionBatchPause.Name = "ActionBatchPause";
       this.ActionBatchPause.Size = new System.Drawing.Size(95, 23);
       this.ActionBatchPause.TabIndex = 2;
@@ -106,7 +100,7 @@
       // ActionBatchStop
       // 
       this.ActionBatchStop.Enabled = false;
-      this.ActionBatchStop.Location = new System.Drawing.Point(341, 39);
+      this.ActionBatchStop.Location = new System.Drawing.Point(468, 14);
       this.ActionBatchStop.Name = "ActionBatchStop";
       this.ActionBatchStop.Size = new System.Drawing.Size(95, 23);
       this.ActionBatchStop.TabIndex = 2;
@@ -117,7 +111,7 @@
       // ActionBatchRun
       // 
       this.ActionBatchRun.Enabled = false;
-      this.ActionBatchRun.Location = new System.Drawing.Point(240, 39);
+      this.ActionBatchRun.Location = new System.Drawing.Point(367, 14);
       this.ActionBatchRun.Name = "ActionBatchRun";
       this.ActionBatchRun.Size = new System.Drawing.Size(95, 23);
       this.ActionBatchRun.TabIndex = 2;
@@ -128,7 +122,7 @@
       // ActionDbClose
       // 
       this.ActionDbClose.Enabled = false;
-      this.ActionDbClose.Location = new System.Drawing.Point(76, 39);
+      this.ActionDbClose.Location = new System.Drawing.Point(203, 14);
       this.ActionDbClose.Name = "ActionDbClose";
       this.ActionDbClose.Size = new System.Drawing.Size(58, 23);
       this.ActionDbClose.TabIndex = 2;
@@ -139,7 +133,7 @@
       // ActionDbOpen
       // 
       this.ActionDbOpen.Enabled = false;
-      this.ActionDbOpen.Location = new System.Drawing.Point(12, 39);
+      this.ActionDbOpen.Location = new System.Drawing.Point(139, 14);
       this.ActionDbOpen.Name = "ActionDbOpen";
       this.ActionDbOpen.Size = new System.Drawing.Size(58, 23);
       this.ActionDbOpen.TabIndex = 2;
@@ -150,44 +144,13 @@
       // ActionDbCreateData
       // 
       this.ActionDbCreateData.Enabled = false;
-      this.ActionDbCreateData.Location = new System.Drawing.Point(139, 39);
+      this.ActionDbCreateData.Location = new System.Drawing.Point(266, 14);
       this.ActionDbCreateData.Name = "ActionDbCreateData";
       this.ActionDbCreateData.Size = new System.Drawing.Size(95, 23);
       this.ActionDbCreateData.TabIndex = 2;
       this.ActionDbCreateData.Text = "Create data";
       this.ActionDbCreateData.UseVisualStyleBackColor = true;
       this.ActionDbCreateData.Click += new System.EventHandler(this.ActionDbCreateData_Click);
-      // 
-      // ActionFileLoad
-      // 
-      this.ActionFileLoad.Location = new System.Drawing.Point(139, 10);
-      this.ActionFileLoad.Name = "ActionFileLoad";
-      this.ActionFileLoad.Size = new System.Drawing.Size(95, 23);
-      this.ActionFileLoad.TabIndex = 1;
-      this.ActionFileLoad.Text = "Load File";
-      this.ActionFileLoad.UseVisualStyleBackColor = true;
-      this.ActionFileLoad.Click += new System.EventHandler(this.ActionFileLoad_Click);
-      // 
-      // ActionFileSaveFixed
-      // 
-      this.ActionFileSaveFixed.Enabled = false;
-      this.ActionFileSaveFixed.Location = new System.Drawing.Point(341, 10);
-      this.ActionFileSaveFixed.Name = "ActionFileSaveFixed";
-      this.ActionFileSaveFixed.Size = new System.Drawing.Size(95, 23);
-      this.ActionFileSaveFixed.TabIndex = 0;
-      this.ActionFileSaveFixed.Text = "Save fix dup.";
-      this.ActionFileSaveFixed.UseVisualStyleBackColor = true;
-      this.ActionFileSaveFixed.Click += new System.EventHandler(this.ActionFileSaveFixedRepeating);
-      // 
-      // ActionFileCheckRepeated
-      // 
-      this.ActionFileCheckRepeated.Location = new System.Drawing.Point(240, 10);
-      this.ActionFileCheckRepeated.Name = "ActionFileCheckRepeated";
-      this.ActionFileCheckRepeated.Size = new System.Drawing.Size(95, 23);
-      this.ActionFileCheckRepeated.TabIndex = 0;
-      this.ActionFileCheckRepeated.Text = "Check dup.";
-      this.ActionFileCheckRepeated.UseVisualStyleBackColor = true;
-      this.ActionFileCheckRepeated.Click += new System.EventHandler(this.ActionFileCheckRepeated_Click);
       // 
       // StatusStrip
       // 
@@ -257,11 +220,8 @@
 
     private DataGridView Grid;
     private Panel PanelTop;
-    private Button ActionFileCheckRepeated;
-    private Button ActionFileSaveFixed;
     private ComboBox SelectFileName;
     private Button ActionDbCreateData;
-    private Button ActionFileLoad;
     private StatusStrip StatusStrip;
     private Button ActionBatchRun;
     private Button ActionDbOpen;

@@ -24,7 +24,6 @@ partial class ApplicationDatabase
       Globals.ChronoStartingApp.Stop();
       Globals.ChronoLoadData.Stop();
       //MainForm.Instance.SetFormDisabled(true);
-      Decuplets.Clear();
       Loaded = false;
 
       // Generate code here

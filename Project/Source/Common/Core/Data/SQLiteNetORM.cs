@@ -149,6 +149,21 @@ public class SQLiteNetORM : SQLiteConnection
   }
 
   /// <summary>
+  /// Does the database set temp dir.
+  /// </summary>
+  public void SetTempDir(string path)
+  {
+    try
+    {
+      Execute($"PRAGMA temp_store_directory = '{path}'");
+    }
+    catch ( Exception ex )
+    {
+      throw new SQLiteException(SysTranslations.DatabaseSetTempDirError.GetLang(), ex);
+    }
+  }
+
+  /// <summary>
   /// Drops a table if exists.
   /// </summary>
   public void DropTableIfExists(string table)

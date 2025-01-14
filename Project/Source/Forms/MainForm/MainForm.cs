@@ -1,6 +1,4 @@
-﻿using static System.Net.Mime.MediaTypeNames;
-
-/// <license>
+﻿/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
 /// Copyright 2025 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
@@ -19,11 +17,9 @@ namespace Ordisoftware.Hebrew.Pi;
 public partial class MainForm : Form
 {
 
-  private readonly object Locker = new();
+  //private Dictionary<string, GroupInfo> PiDecuplets;
 
-  private PiDecimalsExtractSize TextFileName;
-  private Dictionary<string, GroupInfo> PiDecuplets;
-
+  private PiDecimalsExtractSize PiDecimalsExtract;
   private string SQLiteTempDir = @"D:\";
   private ApplicationDatabase DB;
 
@@ -143,32 +139,17 @@ public partial class MainForm : Form
 
   private void SelectFileName_SelectedIndexChanged(object sender, EventArgs e)
   {
-    TextFileName = (PiDecimalsExtractSize)SelectFileName.SelectedItem;
+    PiDecimalsExtract = (PiDecimalsExtractSize)SelectFileName.SelectedItem;
     UpdateButtons();
-  }
-
-  private void ActionFileLoad_Click(object sender, EventArgs e)
-  {
-    DoActionFileLoad();
-  }
-
-  private void ActionFileCheckRepeated_Click(object sender, EventArgs e)
-  {
-    DoActionFileCheckRepeated();
-  }
-
-  private void ActionFileSaveFixedRepeating(object sender, EventArgs e)
-  {
-    ActionFileSaveFixedRepeating();
   }
 
   private void ActionDbOpen_Click(object sender, EventArgs e)
   {
-    string dbPath = Path.Combine(Globals.DatabaseFolderPath, TextFileName.ToString()) + Globals.DatabaseFileExtension;
+    string dbPath = Path.Combine(Globals.DatabaseFolderPath, PiDecimalsExtract.ToString()) + Globals.DatabaseFileExtension;
     DB = new ApplicationDatabase(dbPath);
     DB.Open();
     if ( SQLiteTempDir.Length > 0 )
-      DB.Connection.Execute($"PRAGMA temp_store_directory = '{SQLiteTempDir}'");
+      DB.Connection.SetTempDir(SQLiteTempDir);
     ActionDbCreateData.Enabled = true;
     ActionBatchRun.Enabled = true;
     UpdateButtons();
@@ -187,23 +168,23 @@ public partial class MainForm : Form
   {
     //if ( !DisplayManager.QueryYesNo("Delete and create tables?") ) return;
     ClearStatusBar();
-    //await Task.Run(async () =>
-    //{
-    try
+    await Task.Run(async () =>
     {
-      Globals.IsInProcess = true;
-      UpdateButtons();
-      Globals.ChronoProcess.Restart();
-      await DoActionDbCreateData(Path.Combine(Globals.DocumentsFolderPath, TextFileName.ToString()) + ".txt");
-      Globals.ChronoProcess.Stop();
-      UpdateStatusTime();
-    }
-    finally
-    {
-      Globals.IsInProcess = false;
-      UpdateButtons();
-    }
-    //    });
+      try
+      {
+        Globals.IsInProcess = true;
+        UpdateButtons();
+        Globals.ChronoProcess.Restart();
+        await DoActionDbCreateData(Path.Combine(Globals.DocumentsFolderPath, PiDecimalsExtract.ToString()) + ".txt");
+        Globals.ChronoProcess.Stop();
+        UpdateStatusTime();
+      }
+      finally
+      {
+        Globals.IsInProcess = false;
+        UpdateButtons();
+      }
+    });
   }
 
   private async void ActionBatchRun_Click(object sender, EventArgs e)

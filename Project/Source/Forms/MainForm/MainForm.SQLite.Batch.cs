@@ -1,6 +1,4 @@
-﻿using static System.Windows.Forms.AxHost;
-
-/// <license>
+﻿/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
 /// Copyright 2025 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
@@ -41,42 +39,42 @@ public partial class MainForm
       {
         if ( Globals.CancelRequired ) break;
         while ( Globals.PauseRequired ) await Task.Delay(500);
-        UpdateStatusProgress(string.Format(IterationText, iteration, "?"));
-        UpdateStatusInfo(CountingText);
+        UpdateStatusProgress(string.Format(AppTranslations.IterationText, iteration, "?"));
+        UpdateStatusInfo(AppTranslations.CountingText);
         countCurrent = GetRepeatingCount().Result;
-        UpdateStatusProgress(string.Format(IterationText, iteration, countCurrent));
-        UpdateStatusInfo(CountedText);
+        UpdateStatusProgress(string.Format(AppTranslations.IterationText, iteration, countCurrent));
+        UpdateStatusInfo(AppTranslations.CountedText);
         DB.Connection.Insert(new IterationRow { RepeatedCount = countCurrent, Timestamp = DateTime.Now });
         if ( Globals.CancelRequired ) break;
         while ( Globals.PauseRequired ) await Task.Delay(500);
         if ( countCurrent == 0 )
         {
-          DisplayManager.Show(string.Format(NoRepeatedText, iteration));
+          DisplayManager.Show(string.Format(AppTranslations.NoRepeatedText, iteration));
           break;
         }
         if ( !firstIteration )
           if ( countPrevious > countCurrent )
           {
-            if ( !DisplayManager.QueryYesNo(string.Format(AskStartNextIfMore, iteration, countPrevious, countCurrent)) )
+            if ( !DisplayManager.QueryYesNo(string.Format(AppTranslations.AskStartNextIfMore, iteration, countPrevious, countCurrent)) )
               Globals.CancelRequired = true;
           }
           else
           {
-            if ( !DisplayManager.QueryYesNo(string.Format(AskStartNextIfLess, iteration, countPrevious, countCurrent)) )
+            if ( !DisplayManager.QueryYesNo(string.Format(AppTranslations.AskStartNextIfLess, iteration, countPrevious, countCurrent)) )
               Globals.CancelRequired = true;
           }
         countPrevious = countCurrent;
         firstIteration = false;
-        UpdateStatusInfo(UpdatingText);
+        UpdateStatusInfo(AppTranslations.UpdatingText);
         AddPositionToMotifs();
         if ( Globals.CancelRequired ) break;
         while ( Globals.PauseRequired ) await Task.Delay(500);
         iteration++;
       }
       if ( Globals.CancelRequired )
-        UpdateStatusInfo(CanceledText);
+        UpdateStatusInfo(AppTranslations.CanceledText);
       else
-        UpdateStatusInfo(FinishedText);
+        UpdateStatusInfo(AppTranslations.FinishedText);
     }
     finally
     {
