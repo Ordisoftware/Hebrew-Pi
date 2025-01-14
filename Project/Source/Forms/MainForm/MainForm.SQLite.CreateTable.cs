@@ -22,7 +22,8 @@ public partial class MainForm
 {
   private long MotifSize = 10;
   private int BufferSize = 10_000_000;
-  private const int CreateDataPaging = 100000;
+  private int CreateDataPaging = 100000;
+  private int CreateDataEstimatePaging = 1000000;
   private string CreateDataProgress = $"{{0}} inserted";
 
   private void DoActionDbCReate(string fileName)
@@ -33,19 +34,20 @@ public partial class MainForm
     else
       try
       {
-        UpdateStatusInfo("Dropping tables...");
+        UpdateStatusInfo(DroppingTablesText);
         DB.DropTable<DecupletRow>();
         DB.DropTable<IterationRow>();
-        UpdateStatusInfo("Creating tables...");
+        UpdateStatusInfo(CreatingTablesText);
         DB.CreateTable<DecupletRow>();
         DB.CreateTable<IterationRow>();
-        UpdateStatusInfo("Populating...");
+        UpdateStatusInfo(PopulatingText);
         DB.BeginTransaction();
         UpdateStatusProgress(string.Format(CreateDataProgress, "0"));
         int charsRead;
         long totalMotifs = 0;
         long motif = 0;
         char[] buffer = new char[BufferSize];
+        long fileSize = SystemManager.GetFileSize(fileName);
         reader = new StreamReader(fileName);
         charsRead = reader.Read(buffer, 0, 2);
         if ( charsRead != 2 )
@@ -71,6 +73,13 @@ public partial class MainForm
               totalMotifs++;
               if ( totalMotifs % CreateDataPaging == 0 )
                 UpdateStatusProgress(string.Format(CreateDataProgress, totalMotifs.ToString("N0")));
+              if ( totalMotifs % CreateDataEstimatePaging == 0 )
+              {
+                double progress = (double)( totalMotifs * 10 ) / fileSize;
+                var elapsed = Globals.ChronoProcess.Elapsed;
+                var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
+                UpdateStatusInfo(string.Format(PopulatingAndRemainingText, remaining.AsReadable()));
+              }
             }
         }
         UpdateStatusInfo(CommittingText);

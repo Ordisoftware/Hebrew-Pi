@@ -84,16 +84,7 @@ public partial class MainForm : Form
 
   private void UpdateStatusTime()
   {
-    void process()
-    {
-      var elapsed = Globals.ChronoProcess.Elapsed;
-      List<string> parts = new List<string>();
-      if ( elapsed.Days > 0 ) parts.Add($"{elapsed.Days}d");
-      if ( elapsed.Hours > 0 ) parts.Add($"{elapsed.Hours}h");
-      if ( elapsed.Minutes > 0 ) parts.Add($"{elapsed.Minutes}m");
-      if ( elapsed.Seconds > 0 || elapsed.TotalSeconds == 0 ) parts.Add($"{elapsed.Seconds}s");
-      LabelStatusTime.Text = parts.Count == 0 ? "0s" : string.Join(" ", parts);
-    }
+    void process() => LabelStatusTime.Text = Globals.ChronoProcess.Elapsed.AsReadable();
     if ( StatusStrip.InvokeRequired )
       StatusStrip.Invoke(process);
     else

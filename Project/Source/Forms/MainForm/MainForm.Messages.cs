@@ -37,8 +37,8 @@ partial class MainForm : Form
   static private string AskStartNextIfLess = $"{LessAtIteration}{PreviousAndCurrentCount}{StartNextIteration}";
   static private string AskStartNextIfMore = $"{MoreAtIteration}{PreviousAndCurrentCount}{StartNextIteration}";
 
-  static private string NoRepeatedText = $"There is no repeating motif at iteration {{0}}";
-  static private string IterationText = $"Iteration {{0}} : {{1}} repeating";
+  static private string NoRepeatedText = "There is no repeating motif at iteration {0}";
+  static private string IterationText = "Iteration {0} : {1} repeating";
   static private string CountingText = "Counting...";
   static private string CountedText = "Counted";
   static private string UpdatingText = "Adding position...";
@@ -46,5 +46,10 @@ partial class MainForm : Form
   static private string IndexingText = "Indexing...";
   static private string FinishedText = "Finished";
   static private string CanceledText = "Canceled";
+
+  static private string DroppingTablesText = "Dropping tables...";
+  static private string CreatingTablesText = "Creating tables...";
+  static private string PopulatingText = "Populating...";
+  static private string PopulatingAndRemainingText = "Populating... ({0} remaining before indexing)";
 
 }
