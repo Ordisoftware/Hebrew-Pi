@@ -11,29 +11,17 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-10 </created>
-/// <edited> 2025-01-13 </edited>
+/// <edited> 2025-01-14 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-using System;
-using System.Diagnostics;
-using System.IO;
 using SQLite;
 
 public partial class MainForm : Form
 {
 
-  const string MsgNoRepeated = "Aucun répété.";
-  const string MsgPrefix = "Sur l'échantillon donné, la théorie des répétés ajoutés aux positions";
-  const string MsgOk = $"{MsgPrefix} fonctionne.";
-  const string MsgNotOk = $"{MsgPrefix} ne fonctionne pas.";
-  const string MsgSaved_Fixed = "Les groupes dupliquée ont été corrigés et le fichier reconstruit.";
+  private PiDecimalsExtractSize TextFileName;
+  private Dictionary<string, GroupInfo> PiDecuplets;
 
-  private Stopwatch Chrono = new Stopwatch();
-
-  private PiDecimalsExtractSize FileName;
-  private Dictionary<string, GroupInfo> PiGroups;
-
-  private bool CancelRequired;
   private SQLiteConnection DB;
   private string SQLiteTempDir = @"D:\";
 
@@ -59,36 +47,33 @@ public partial class MainForm : Form
     InitializeComponent();
     foreach ( var value in Enums.GetValues<PiDecimalsExtractSize>() )
       SelectFileName.Items.Add(value);
-    SelectFileName.SelectedIndex = 0;
-    ClearStatusLabel();
+    SelectFileName.SelectedIndex = 3;
     DisplayManager.AdvancedFormUseSounds = false;
+    ClearStatusBar();
   }
 
-  private void ClearStatusLabel()
+  private void ClearStatusBar()
   {
     LabelStatusTime.Text = "-";
     LabelStatusIteration.Text = "-";
     LabelStatusInfo.Text = "-";
   }
 
-  private void UpdateStatusProgress(string message)
+  private void UpdateStatusProgress(string text)
   {
-    void process()
-    {
-      LabelStatusIteration.Text = message;
-      UpdateStatusTime();
-    }
-    if ( StatusStrip.InvokeRequired )
-      StatusStrip.Invoke(process);
-    else
-      process();
+    UpdateStatusLabel(LabelStatusIteration, text);
   }
 
-  private void UpdateStatusInfo(string message)
+  private void UpdateStatusInfo(string text)
+  {
+    UpdateStatusLabel(LabelStatusInfo, text);
+  }
+
+  private void UpdateStatusLabel(ToolStripStatusLabel label, string text)
   {
     void process()
     {
-      LabelStatusInfo.Text = message;
+      label.Text = text;
       UpdateStatusTime();
     }
     if ( StatusStrip.InvokeRequired )
@@ -101,9 +86,9 @@ public partial class MainForm : Form
   {
     void process()
     {
-      var elapsed = Chrono.Elapsed;
+      var elapsed = Globals.ChronoProcess.Elapsed;
       List<string> parts = new List<string>();
-      if ( elapsed.Days > 0 ) parts.Add($"{elapsed.Days}j");
+      if ( elapsed.Days > 0 ) parts.Add($"{elapsed.Days}d");
       if ( elapsed.Hours > 0 ) parts.Add($"{elapsed.Hours}h");
       if ( elapsed.Minutes > 0 ) parts.Add($"{elapsed.Minutes}m");
       if ( elapsed.Seconds > 0 || elapsed.TotalSeconds == 0 ) parts.Add($"{elapsed.Seconds}s");
@@ -144,22 +129,22 @@ public partial class MainForm : Form
 
   private void SelectFileName_SelectedIndexChanged(object sender, EventArgs e)
   {
-    FileName = (PiDecimalsExtractSize)SelectFileName.SelectedItem;
+    TextFileName = (PiDecimalsExtractSize)SelectFileName.SelectedItem;
   }
 
-  private void ActionLoadFile_Click(object sender, EventArgs e)
+  private void ActionFileLoad_Click(object sender, EventArgs e)
   {
-    DoActionLoad();
+    DoActionFileLoad();
   }
 
-  private void ActionCheckRepeated_Click(object sender, EventArgs e)
+  private void ActionFileCheckRepeated_Click(object sender, EventArgs e)
   {
-    DoActionCheckRepeated();
+    DoActionFileCheckRepeated();
   }
 
-  private void ActionSaveFixedRepeatedToFile_Click(object sender, EventArgs e)
+  private void ActionFileSaveFixedRepeating(object sender, EventArgs e)
   {
-    DoActionSaveFixedRepeatedToFile();
+    ActionFileSaveFixedRepeating();
   }
 
   private void ActionDbConnect_Click(object sender, EventArgs e)
@@ -169,58 +154,58 @@ public partial class MainForm : Form
       DB.Close();
       DB.Dispose();
     }
-    string dbPath = Path.Combine(Globals.DatabaseFolderPath, FileName.ToString()) + Globals.DatabaseFileExtension;
+    string dbPath = Path.Combine(Globals.DatabaseFolderPath, TextFileName.ToString()) + Globals.DatabaseFileExtension;
     DB = new SQLiteConnection(dbPath);
     if ( SQLiteTempDir.Length > 0 )
       DB.Execute($"PRAGMA temp_store_directory = '{SQLiteTempDir}'");
-    ActionCreateTables.Enabled = true;
-    ActionRunBatch.Enabled = true;
+    ActionDbCreate.Enabled = true;
+    ActionBatchRun.Enabled = true;
   }
 
-  private async void ActionCreateTables_Click(object sender, EventArgs e)
+  private async void ActionDbCreate_Click(object sender, EventArgs e)
   {
-    if ( !DisplayManager.QueryYesNo("Delete and create tables?") ) return;
+    //if ( !DisplayManager.QueryYesNo("Delete and create tables?") ) return;
     ActionDbConnect.Enabled = false;
-    ActionCreateTables.Enabled = false;
-    ActionRunBatch.Enabled = false;
-    ClearStatusLabel();
+    ActionDbCreate.Enabled = false;
+    ActionBatchRun.Enabled = false;
+    ClearStatusBar();
     await Task.Run(() =>
     {
-      Chrono.Restart();
-      CreateTable(Path.Combine(Globals.DocumentsFolderPath, FileName.ToString()) + ".txt");
-      Chrono.Stop();
+      Globals.ChronoProcess.Restart();
+      DoActionDbCReate(Path.Combine(Globals.DocumentsFolderPath, TextFileName.ToString()) + ".txt");
+      Globals.ChronoProcess.Stop();
       UpdateStatusTime();
     });
-    ActionCreateTables.Enabled = true;
+    ActionDbCreate.Enabled = true;
     ActionDbConnect.Enabled = true;
-    ActionRunBatch.Enabled = true;
+    ActionBatchRun.Enabled = true;
   }
 
-  private async void ActionRunBatch_Click(object sender, EventArgs e)
+  private async void ActionBatchRun_Click(object sender, EventArgs e)
   {
     //if ( !DisplayManager.QueryYesNo("Start reducing repeated adding their position?") ) return;
     ActionDbConnect.Enabled = false;
-    ActionCreateTables.Enabled = false;
-    ActionRunBatch.Enabled = false;
+    ActionDbCreate.Enabled = false;
+    ActionBatchRun.Enabled = false;
     ActionStopBatch.Enabled = true;
-    CancelRequired = false;
-    ClearStatusLabel();
+    Globals.CancelRequired = false;
+    ClearStatusBar();
     await Task.Run(() =>
-  {
-    Chrono.Restart();
-    ProcessIterationsAsync(0);
-    Chrono.Stop();
-    UpdateStatusTime();
-  });
-    ActionCreateTables.Enabled = true;
+    {
+      Globals.ChronoProcess.Restart();
+      DoActionBatchRun(0);
+      Globals.ChronoProcess.Stop();
+      UpdateStatusTime();
+    });
+    ActionDbCreate.Enabled = true;
     ActionDbConnect.Enabled = true;
-    ActionRunBatch.Enabled = true;
+    ActionBatchRun.Enabled = true;
     ActionStopBatch.Enabled = false;
   }
 
-  private void ActionStopBatch_Click(object sender, EventArgs e)
+  private void ActionBatchStop_Click(object sender, EventArgs e)
   {
-    CancelRequired = true;
+    Globals.CancelRequired = true;
     ActionStopBatch.Enabled = false;
   }
 

@@ -15,7 +15,6 @@
 namespace Ordisoftware.Hebrew.Pi;
 
 using Microsoft.Win32;
-using MoreLinq;
 
 /// <summary>
 /// Provides application's main form.

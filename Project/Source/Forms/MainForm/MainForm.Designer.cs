@@ -29,23 +29,24 @@
     private void InitializeComponent()
     {
       this.Grid = new System.Windows.Forms.DataGridView();
-      this.Panel = new System.Windows.Forms.Panel();
+      this.PanelTop = new System.Windows.Forms.Panel();
       this.SelectFileName = new System.Windows.Forms.ComboBox();
+      this.ActionBatchPause = new System.Windows.Forms.Button();
       this.ActionStopBatch = new System.Windows.Forms.Button();
-      this.ActionRunBatch = new System.Windows.Forms.Button();
+      this.ActionBatchRun = new System.Windows.Forms.Button();
       this.ActionDbConnect = new System.Windows.Forms.Button();
-      this.ActionCreateTables = new System.Windows.Forms.Button();
-      this.ActionLoadFile = new System.Windows.Forms.Button();
-      this.ActionSaveFixedDuplicatesToFile = new System.Windows.Forms.Button();
-      this.ActionCheckDuplicates = new System.Windows.Forms.Button();
+      this.ActionDbCreate = new System.Windows.Forms.Button();
+      this.ActionFileLoad = new System.Windows.Forms.Button();
+      this.ActionFileSaveFixed = new System.Windows.Forms.Button();
+      this.ActionFileCheckRepeated = new System.Windows.Forms.Button();
       this.StatusStrip = new System.Windows.Forms.StatusStrip();
       this.LabelStatusTime = new System.Windows.Forms.ToolStripStatusLabel();
-      this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+      this.LabelStatusSep1 = new System.Windows.Forms.ToolStripStatusLabel();
       this.LabelStatusIteration = new System.Windows.Forms.ToolStripStatusLabel();
-      this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+      this.LabelStatusSep2 = new System.Windows.Forms.ToolStripStatusLabel();
       this.LabelStatusInfo = new System.Windows.Forms.ToolStripStatusLabel();
       ((System.ComponentModel.ISupportInitialize)(this.Grid)).BeginInit();
-      this.Panel.SuspendLayout();
+      this.PanelTop.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -62,21 +63,22 @@
       this.Grid.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.Grid_RowPostPaint);
       this.Grid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Grid_KeyDown);
       // 
-      // Panel
+      // PanelTop
       // 
-      this.Panel.Controls.Add(this.SelectFileName);
-      this.Panel.Controls.Add(this.ActionStopBatch);
-      this.Panel.Controls.Add(this.ActionRunBatch);
-      this.Panel.Controls.Add(this.ActionDbConnect);
-      this.Panel.Controls.Add(this.ActionCreateTables);
-      this.Panel.Controls.Add(this.ActionLoadFile);
-      this.Panel.Controls.Add(this.ActionSaveFixedDuplicatesToFile);
-      this.Panel.Controls.Add(this.ActionCheckDuplicates);
-      this.Panel.Dock = System.Windows.Forms.DockStyle.Top;
-      this.Panel.Location = new System.Drawing.Point(0, 0);
-      this.Panel.Name = "Panel";
-      this.Panel.Size = new System.Drawing.Size(784, 75);
-      this.Panel.TabIndex = 1;
+      this.PanelTop.Controls.Add(this.SelectFileName);
+      this.PanelTop.Controls.Add(this.ActionBatchPause);
+      this.PanelTop.Controls.Add(this.ActionStopBatch);
+      this.PanelTop.Controls.Add(this.ActionBatchRun);
+      this.PanelTop.Controls.Add(this.ActionDbConnect);
+      this.PanelTop.Controls.Add(this.ActionDbCreate);
+      this.PanelTop.Controls.Add(this.ActionFileLoad);
+      this.PanelTop.Controls.Add(this.ActionFileSaveFixed);
+      this.PanelTop.Controls.Add(this.ActionFileCheckRepeated);
+      this.PanelTop.Dock = System.Windows.Forms.DockStyle.Top;
+      this.PanelTop.Location = new System.Drawing.Point(0, 0);
+      this.PanelTop.Name = "PanelTop";
+      this.PanelTop.Size = new System.Drawing.Size(784, 75);
+      this.PanelTop.TabIndex = 1;
       // 
       // SelectFileName
       // 
@@ -88,6 +90,17 @@
       this.SelectFileName.TabIndex = 3;
       this.SelectFileName.SelectedIndexChanged += new System.EventHandler(this.SelectFileName_SelectedIndexChanged);
       // 
+      // ActionBatchPause
+      // 
+      this.ActionBatchPause.Enabled = false;
+      this.ActionBatchPause.Location = new System.Drawing.Point(442, 39);
+      this.ActionBatchPause.Name = "ActionBatchPause";
+      this.ActionBatchPause.Size = new System.Drawing.Size(95, 23);
+      this.ActionBatchPause.TabIndex = 2;
+      this.ActionBatchPause.Text = "Stop batch";
+      this.ActionBatchPause.UseVisualStyleBackColor = true;
+      this.ActionBatchPause.Click += new System.EventHandler(this.ActionBatchStop_Click);
+      // 
       // ActionStopBatch
       // 
       this.ActionStopBatch.Enabled = false;
@@ -97,18 +110,18 @@
       this.ActionStopBatch.TabIndex = 2;
       this.ActionStopBatch.Text = "Stop batch";
       this.ActionStopBatch.UseVisualStyleBackColor = true;
-      this.ActionStopBatch.Click += new System.EventHandler(this.ActionStopBatch_Click);
+      this.ActionStopBatch.Click += new System.EventHandler(this.ActionBatchStop_Click);
       // 
-      // ActionRunBatch
+      // ActionBatchRun
       // 
-      this.ActionRunBatch.Enabled = false;
-      this.ActionRunBatch.Location = new System.Drawing.Point(240, 39);
-      this.ActionRunBatch.Name = "ActionRunBatch";
-      this.ActionRunBatch.Size = new System.Drawing.Size(95, 23);
-      this.ActionRunBatch.TabIndex = 2;
-      this.ActionRunBatch.Text = "Run batch";
-      this.ActionRunBatch.UseVisualStyleBackColor = true;
-      this.ActionRunBatch.Click += new System.EventHandler(this.ActionRunBatch_Click);
+      this.ActionBatchRun.Enabled = false;
+      this.ActionBatchRun.Location = new System.Drawing.Point(240, 39);
+      this.ActionBatchRun.Name = "ActionBatchRun";
+      this.ActionBatchRun.Size = new System.Drawing.Size(95, 23);
+      this.ActionBatchRun.TabIndex = 2;
+      this.ActionBatchRun.Text = "Run batch";
+      this.ActionBatchRun.UseVisualStyleBackColor = true;
+      this.ActionBatchRun.Click += new System.EventHandler(this.ActionBatchRun_Click);
       // 
       // ActionDbConnect
       // 
@@ -120,55 +133,55 @@
       this.ActionDbConnect.UseVisualStyleBackColor = true;
       this.ActionDbConnect.Click += new System.EventHandler(this.ActionDbConnect_Click);
       // 
-      // ActionCreateTables
+      // ActionDbCreate
       // 
-      this.ActionCreateTables.Enabled = false;
-      this.ActionCreateTables.Location = new System.Drawing.Point(139, 39);
-      this.ActionCreateTables.Name = "ActionCreateTables";
-      this.ActionCreateTables.Size = new System.Drawing.Size(95, 23);
-      this.ActionCreateTables.TabIndex = 2;
-      this.ActionCreateTables.Text = "Create tables";
-      this.ActionCreateTables.UseVisualStyleBackColor = true;
-      this.ActionCreateTables.Click += new System.EventHandler(this.ActionCreateTables_Click);
+      this.ActionDbCreate.Enabled = false;
+      this.ActionDbCreate.Location = new System.Drawing.Point(139, 39);
+      this.ActionDbCreate.Name = "ActionDbCreate";
+      this.ActionDbCreate.Size = new System.Drawing.Size(95, 23);
+      this.ActionDbCreate.TabIndex = 2;
+      this.ActionDbCreate.Text = "Create tables";
+      this.ActionDbCreate.UseVisualStyleBackColor = true;
+      this.ActionDbCreate.Click += new System.EventHandler(this.ActionDbCreate_Click);
       // 
-      // ActionLoadFile
+      // ActionFileLoad
       // 
-      this.ActionLoadFile.Location = new System.Drawing.Point(139, 10);
-      this.ActionLoadFile.Name = "ActionLoadFile";
-      this.ActionLoadFile.Size = new System.Drawing.Size(95, 23);
-      this.ActionLoadFile.TabIndex = 1;
-      this.ActionLoadFile.Text = "Load File";
-      this.ActionLoadFile.UseVisualStyleBackColor = true;
-      this.ActionLoadFile.Click += new System.EventHandler(this.ActionLoadFile_Click);
+      this.ActionFileLoad.Location = new System.Drawing.Point(139, 10);
+      this.ActionFileLoad.Name = "ActionFileLoad";
+      this.ActionFileLoad.Size = new System.Drawing.Size(95, 23);
+      this.ActionFileLoad.TabIndex = 1;
+      this.ActionFileLoad.Text = "Load File";
+      this.ActionFileLoad.UseVisualStyleBackColor = true;
+      this.ActionFileLoad.Click += new System.EventHandler(this.ActionFileLoad_Click);
       // 
-      // ActionSaveFixedDuplicatesToFile
+      // ActionFileSaveFixed
       // 
-      this.ActionSaveFixedDuplicatesToFile.Enabled = false;
-      this.ActionSaveFixedDuplicatesToFile.Location = new System.Drawing.Point(341, 10);
-      this.ActionSaveFixedDuplicatesToFile.Name = "ActionSaveFixedDuplicatesToFile";
-      this.ActionSaveFixedDuplicatesToFile.Size = new System.Drawing.Size(95, 23);
-      this.ActionSaveFixedDuplicatesToFile.TabIndex = 0;
-      this.ActionSaveFixedDuplicatesToFile.Text = "Save fix dup.";
-      this.ActionSaveFixedDuplicatesToFile.UseVisualStyleBackColor = true;
-      this.ActionSaveFixedDuplicatesToFile.Click += new System.EventHandler(this.ActionSaveFixedRepeatedToFile_Click);
+      this.ActionFileSaveFixed.Enabled = false;
+      this.ActionFileSaveFixed.Location = new System.Drawing.Point(341, 10);
+      this.ActionFileSaveFixed.Name = "ActionFileSaveFixed";
+      this.ActionFileSaveFixed.Size = new System.Drawing.Size(95, 23);
+      this.ActionFileSaveFixed.TabIndex = 0;
+      this.ActionFileSaveFixed.Text = "Save fix dup.";
+      this.ActionFileSaveFixed.UseVisualStyleBackColor = true;
+      this.ActionFileSaveFixed.Click += new System.EventHandler(this.ActionFileSaveFixedRepeating);
       // 
-      // ActionCheckDuplicates
+      // ActionFileCheckRepeated
       // 
-      this.ActionCheckDuplicates.Location = new System.Drawing.Point(240, 10);
-      this.ActionCheckDuplicates.Name = "ActionCheckDuplicates";
-      this.ActionCheckDuplicates.Size = new System.Drawing.Size(95, 23);
-      this.ActionCheckDuplicates.TabIndex = 0;
-      this.ActionCheckDuplicates.Text = "Check dup.";
-      this.ActionCheckDuplicates.UseVisualStyleBackColor = true;
-      this.ActionCheckDuplicates.Click += new System.EventHandler(this.ActionCheckRepeated_Click);
+      this.ActionFileCheckRepeated.Location = new System.Drawing.Point(240, 10);
+      this.ActionFileCheckRepeated.Name = "ActionFileCheckRepeated";
+      this.ActionFileCheckRepeated.Size = new System.Drawing.Size(95, 23);
+      this.ActionFileCheckRepeated.TabIndex = 0;
+      this.ActionFileCheckRepeated.Text = "Check dup.";
+      this.ActionFileCheckRepeated.UseVisualStyleBackColor = true;
+      this.ActionFileCheckRepeated.Click += new System.EventHandler(this.ActionFileCheckRepeated_Click);
       // 
       // StatusStrip
       // 
       this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LabelStatusTime,
-            this.toolStripStatusLabel1,
+            this.LabelStatusSep1,
             this.LabelStatusIteration,
-            this.toolStripStatusLabel2,
+            this.LabelStatusSep2,
             this.LabelStatusInfo});
       this.StatusStrip.Location = new System.Drawing.Point(0, 439);
       this.StatusStrip.Name = "StatusStrip";
@@ -182,11 +195,11 @@
       this.LabelStatusTime.Size = new System.Drawing.Size(33, 17);
       this.LabelStatusTime.Text = "Time";
       // 
-      // toolStripStatusLabel1
+      // LabelStatusSep1
       // 
-      this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-      this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
-      this.toolStripStatusLabel1.Text = "|";
+      this.LabelStatusSep1.Name = "LabelStatusSep1";
+      this.LabelStatusSep1.Size = new System.Drawing.Size(10, 17);
+      this.LabelStatusSep1.Text = "|";
       // 
       // LabelStatusIteration
       // 
@@ -194,11 +207,11 @@
       this.LabelStatusIteration.Size = new System.Drawing.Size(51, 17);
       this.LabelStatusIteration.Text = "Iteration";
       // 
-      // toolStripStatusLabel2
+      // LabelStatusSep2
       // 
-      this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-      this.toolStripStatusLabel2.Size = new System.Drawing.Size(10, 17);
-      this.toolStripStatusLabel2.Text = "|";
+      this.LabelStatusSep2.Name = "LabelStatusSep2";
+      this.LabelStatusSep2.Size = new System.Drawing.Size(10, 17);
+      this.LabelStatusSep2.Text = "|";
       // 
       // LabelStatusInfo
       // 
@@ -212,13 +225,13 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(784, 461);
       this.Controls.Add(this.Grid);
-      this.Controls.Add(this.Panel);
+      this.Controls.Add(this.PanelTop);
       this.Controls.Add(this.StatusStrip);
       this.Name = "MainForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Hebrew Pi";
       ((System.ComponentModel.ISupportInitialize)(this.Grid)).EndInit();
-      this.Panel.ResumeLayout(false);
+      this.PanelTop.ResumeLayout(false);
       this.StatusStrip.ResumeLayout(false);
       this.StatusStrip.PerformLayout();
       this.ResumeLayout(false);
@@ -229,20 +242,21 @@
     #endregion
 
     private DataGridView Grid;
-    private Panel Panel;
-    private Button ActionCheckDuplicates;
-    private Button ActionSaveFixedDuplicatesToFile;
+    private Panel PanelTop;
+    private Button ActionFileCheckRepeated;
+    private Button ActionFileSaveFixed;
     private ComboBox SelectFileName;
-    private Button ActionCreateTables;
-    private Button ActionLoadFile;
+    private Button ActionDbCreate;
+    private Button ActionFileLoad;
     private StatusStrip StatusStrip;
-    private Button ActionRunBatch;
+    private Button ActionBatchRun;
     private Button ActionDbConnect;
     private ToolStripStatusLabel LabelStatusIteration;
     private ToolStripStatusLabel LabelStatusTime;
     private Button ActionStopBatch;
     private ToolStripStatusLabel LabelStatusInfo;
-    private ToolStripStatusLabel toolStripStatusLabel1;
-    private ToolStripStatusLabel toolStripStatusLabel2;
+    private ToolStripStatusLabel LabelStatusSep1;
+    private ToolStripStatusLabel LabelStatusSep2;
+    private Button ActionBatchPause;
   }
 }

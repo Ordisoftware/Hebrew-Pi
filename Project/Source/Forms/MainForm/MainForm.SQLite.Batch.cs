@@ -11,31 +11,19 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-13 </created>
-/// <edited> 2025-01-13 </edited>
+/// <edited> 2025-01-14 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
+/// <summary>
+/// Provides application's main form.
+/// </summary>
+/// <seealso cref="T:System.Windows.Forms.Form"/>
 public partial class MainForm
 {
 
-  static private string RepeatedAtIteration = $"repeated motifs at iteration #{{0}}{Globals.NL2}";
-  static private string PreviousAndCurrentCount = $"Previous: {{1}}{Globals.NL}Current: {{2}}{Globals.NL2}";
-  static private string LessAtIteration = $"There are less {RepeatedAtIteration}{Globals.NL2}";
-  static private string MoreAtIteration = $"There are more {RepeatedAtIteration}{Globals.NL2}";
-  static private string StartNextIteration = "Start next iteration?";
-  static private string AskStartNextIfLess = $"{LessAtIteration}{PreviousAndCurrentCount}{StartNextIteration}";
-  static private string AskStartNextIfMore = $"{MoreAtIteration}{PreviousAndCurrentCount}{StartNextIteration}";
-
-  static private string NoRepeatedText = $"There is no repeated motif at iteration {{0}}";
-  static private string IterationText = $"Iteration {{0}} : {{1}} repeated";
-  static private string CountingText = "Counting...";
-  static private string UpdatingText = "Updating...";
-  static private string ReadyText = "Ready";
-  static private string FinishedText = "Finished";
-  static private string CanceledText = "Canceled";
-
-  private async Task ProcessIterationsAsync(long startingIterationNumber)
+  private async Task DoActionBatchRun(long startingIterationNumber)
   {
-    count = 10;
+    TestCounter = 10;
     if ( startingIterationNumber == 0 )
     {
       DB.DropTable<IterationRow>();
@@ -47,14 +35,14 @@ public partial class MainForm
     long iteration = 0;
     while ( true )
     {
-      if ( CancelRequired ) break;
+      if ( Globals.CancelRequired ) break;
       UpdateStatusProgress(string.Format(IterationText, iteration, "?"));
       UpdateStatusInfo(CountingText);
-      countCurrent = GetRepeatedCount().Result;
-      AddIteration(countCurrent);
+      countCurrent = GetRepeatingCount().Result;
       UpdateStatusProgress(string.Format(IterationText, iteration, countCurrent));
-      UpdateStatusInfo(ReadyText);
-      if ( CancelRequired ) break;
+      UpdateStatusInfo(CountedText);
+      DB.Insert(new IterationRow(countCurrent, DateTime.Now));
+      if ( Globals.CancelRequired ) break;
       if ( countCurrent == 0 )
       {
         DisplayManager.Show(string.Format(NoRepeatedText, iteration));
@@ -64,37 +52,32 @@ public partial class MainForm
         if ( countPrevious > countCurrent )
         {
           if ( !DisplayManager.QueryYesNo(string.Format(AskStartNextIfMore, iteration, countPrevious, countCurrent)) )
-            CancelRequired = true;
+            Globals.CancelRequired = true;
         }
         else
         {
           if ( !DisplayManager.QueryYesNo(string.Format(AskStartNextIfLess, iteration, countPrevious, countCurrent)) )
-            CancelRequired = true;
+            Globals.CancelRequired = true;
         }
       countPrevious = countCurrent;
       firstIteration = false;
       UpdateStatusInfo(UpdatingText);
-      UpdateMotifs();
-      if ( CancelRequired ) break;
+      AddPositionToMotifs();
+      if ( Globals.CancelRequired ) break;
       iteration++;
     }
-    if ( CancelRequired )
+    if ( Globals.CancelRequired )
       UpdateStatusInfo(CanceledText);
     else
       UpdateStatusInfo(FinishedText);
   }
 
-  private void AddIteration(long repeatedCount)
-  {
-    DB.Insert(new IterationRow(repeatedCount, DateTime.Now));
-  }
+  int TestCounter = 10;
 
-  int count = 10;
-
-  private async Task<int> GetRepeatedCount()
+  private async Task<int> GetRepeatingCount()
   {
     await Task.Delay(1000);
-    return count--;
+    return TestCounter--;
     try
     {
       var query = @"SELECT COUNT(DISTINCT Motif) AS UniqueRepeated
@@ -115,7 +98,7 @@ public partial class MainForm
     }
   }
 
-  private async void UpdateMotifs()
+  private async void AddPositionToMotifs()
   {
     return;
     var query = @"UPDATE Decuplets

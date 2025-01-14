@@ -11,65 +11,88 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-10 </created>
-/// <edited> 2025-01-13 </edited>
+/// <edited> 2025-01-14 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
+/// <summary>
+/// Provides application's main form.
+/// </summary>
+/// <seealso cref="T:System.Windows.Forms.Form"/>
 public partial class MainForm
 {
+  private long MotifSize = 10;
+  private int BufferSize = 10_000_000;
+  private const int CreateDataPaging = 100000;
+  private string CreateDataProgress = $"{{0}} inserted";
 
-  private async void CreateTable(string fileName)
+  private void DoActionDbCReate(string fileName)
   {
+    StreamReader reader = null;
     if ( !File.Exists(fileName) )
-    {
       DisplayManager.Show(SysTranslations.FileNotFound.GetLang(fileName));
-      return;
-    }
-    try
-    {
-      DB.DropTable<DecupletRow>();
-      DB.DropTable<IterationRow>();
-      DB.CreateTable<DecupletRow>();
-      DB.CreateTable<IterationRow>();
-      DB.BeginTransaction();
-      UpdateStatusProgress("0k");
-      UpdateStatusInfo("Started");
-      int charsRead;
-      int blockSize = 10;
-      long totalBlocks = 0;
-      long motif = 0;
-      int bufferLength = 10_000_000;
-      char[] buffer = new char[bufferLength];
-      using var reader = new StreamReader(fileName);
-      charsRead = reader.Read(buffer, 0, 2);
-      if ( charsRead != 2 )
-        throw new IndexOutOfRangeException("Bad file.");
-      if ( new string(buffer) != "3," )
-        reader.BaseStream.Seek(0, SeekOrigin.Begin);
-      while ( ( charsRead = reader.Read(buffer, 0, bufferLength) ) > 0 )
+    else
+      try
       {
-        for ( int indexBuffer = 0; indexBuffer < charsRead; indexBuffer += blockSize )
-          if ( indexBuffer + blockSize <= charsRead )
-          {
-            motif = 0;
-            for ( int indexMotif = 0; indexMotif < blockSize; indexMotif++ )
-              motif = motif * 10 + ( buffer[indexBuffer + indexMotif] - '0' );
-            DB.Insert(new DecupletRow { Motif = motif });
-            totalBlocks++;
-            if ( totalBlocks % 1000000 == 0 )
-              UpdateStatusProgress($"{totalBlocks / 1000}k decuplets inserted");
-          }
+        UpdateStatusInfo("Dropping tables...");
+        DB.DropTable<DecupletRow>();
+        DB.DropTable<IterationRow>();
+        UpdateStatusInfo("Creating tables...");
+        DB.CreateTable<DecupletRow>();
+        DB.CreateTable<IterationRow>();
+        UpdateStatusInfo("Populating...");
+        DB.BeginTransaction();
+        UpdateStatusProgress(string.Format(CreateDataProgress, "0"));
+        int charsRead;
+        long totalMotifs = 0;
+        long motif = 0;
+        char[] buffer = new char[BufferSize];
+        reader = new StreamReader(fileName);
+        charsRead = reader.Read(buffer, 0, 2);
+        if ( charsRead != 2 )
+          throw new IndexOutOfRangeException(fileName);
+        reader.Close();
+        reader.Dispose();
+        reader = new StreamReader(fileName);
+        if ( new string(buffer) == "3," )
+          reader.BaseStream.Seek(2, SeekOrigin.Current);
+        while ( ( charsRead = reader.Read(buffer, 0, BufferSize) ) > 0 )
+        {
+          for ( long indexBuffer = 0; indexBuffer < charsRead; indexBuffer += MotifSize )
+            if ( indexBuffer + MotifSize <= charsRead )
+            {
+              motif = 0;
+              for ( long indexMotif = 0; indexMotif < MotifSize; indexMotif++ )
+              {
+                long shiftLeft = motif << 1;
+                motif = ( shiftLeft << 2 ) + shiftLeft + buffer[indexBuffer + indexMotif] - 48;
+                // motif = motif * 10 + ( buffer[indexBuffer + indexMotif] - '0' );
+              }
+              DB.Insert(new DecupletRow { Motif = motif });
+              totalMotifs++;
+              if ( totalMotifs % CreateDataPaging == 0 )
+                UpdateStatusProgress(string.Format(CreateDataProgress, totalMotifs.ToString("N0")));
+            }
+        }
+        UpdateStatusInfo(CommittingText);
+        DB.Commit();
+        UpdateStatusInfo(IndexingText);
+        string sql = $"CREATE INDEX idx_decuplets_value ON {DecupletRow.TableName} ({nameof(DecupletRow.Motif)})";
+        DB.Execute(sql);
+        UpdateStatusInfo(FinishedText);
+        reader.Close();
       }
-      UpdateStatusInfo("Committing...");
-      DB.Commit();
-      UpdateStatusInfo("Indexing...");
-      string sql = $"CREATE INDEX idx_decuplets_value ON {DecupletRow.TableName} ({nameof(DecupletRow.Motif)})";
-      DB.Execute(sql);
-      UpdateStatusInfo("Finished");
-    }
-    catch ( Exception ex )
-    {
-      UpdateStatusInfo($"Error : {ex.Message}");
-    }
+      catch ( Exception ex )
+      {
+        UpdateStatusInfo(ex.Message);
+      }
+      finally
+      {
+        if ( reader is not null )
+        {
+          reader.Close();
+          reader.Dispose();
+        }
+      }
   }
 
   //private void CreateDataTable()

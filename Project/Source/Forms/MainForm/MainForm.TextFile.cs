@@ -14,32 +14,36 @@
 /// <edited> 2025-01-11 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
+/// <summary>
+/// Provides application's main form.
+/// </summary>
+/// <seealso cref="T:System.Windows.Forms.Form"/>
 public partial class MainForm
 {
 
-  private void DoActionLoad()
+  private void DoActionFileLoad()
   {
-    string piDecimals = File.ReadAllText(Path.Combine(Globals.DocumentsFolderPath, FileName.ToString()) + ".txt").Trim();
+    string piDecimals = File.ReadAllText(Path.Combine(Globals.DocumentsFolderPath, TextFileName.ToString()) + ".txt").Trim();
     if ( piDecimals.StartsWith("3.") )
       piDecimals = piDecimals.Substring(2);
-    PiGroups = Enumerable
+    PiDecuplets = Enumerable
       .Range(0, piDecimals.Length / 10)
       .Select(i => new { Index = i + 1, Group = piDecimals.Substring(i * 10, 10) })
       .GroupBy(x => x.Group)
       .ToDictionary(g => g.Key,
                     g => new GroupInfo(g.Count(),
                                        string.Join(", ", g.Select(x => x.Index))));
-    Grid.DataSource = PiGroups
+    Grid.DataSource = PiDecuplets
       .Select(kvp => new { Group = kvp.Key, kvp.Value.Count, kvp.Value.Indices })
       .OrderByDescending(item => item.Count)
       .ToList();
   }
 
-  private void DoActionCheckRepeated()
+  private void DoActionFileCheckRepeated()
   {
-    var duplicates = PiGroups.Where(g => g.Value.Count > 1);
+    var duplicates = PiDecuplets.Where(g => g.Value.Count > 1);
     if ( duplicates.Count() == 0 )
-      MessageBox.Show(MsgNoRepeated);
+      MessageBox.Show(File_NoRepeatedText);
     else
     {
       foreach ( var group in duplicates )
@@ -48,22 +52,22 @@ public partial class MainForm
         foreach ( var index in group.Value.Indices.Split(',').Select(int.Parse) )
         {
           long sum = long.Parse(decuplet) + index;
-          if ( PiGroups.ContainsKey(sum.ToString()) )
+          if ( PiDecuplets.ContainsKey(sum.ToString()) )
           {
-            MessageBox.Show(MsgNotOk);
+            MessageBox.Show(File_NotOkText);
             return;
           }
         }
       }
-      MessageBox.Show(MsgOk);
-      ActionSaveFixedDuplicatesToFile.Enabled = true;
+      MessageBox.Show(File_OkText);
+      ActionFileSaveFixed.Enabled = true;
     }
   }
 
-  private void DoActionSaveFixedRepeatedToFile()
+  private void ActionFileSaveFixedRepeating()
   {
     var piDecimals = new Dictionary<int, string>();
-    foreach ( var group in PiGroups )
+    foreach ( var group in PiDecuplets )
     {
       var decuplet = group.Key.PadLeft(10, '0');
       var indices = group.Value.Indices.Split(',').Select(int.Parse).ToList();
@@ -78,8 +82,8 @@ public partial class MainForm
     var builder = new StringBuilder();
     foreach ( var index in indicesOrdered )
       builder.Append(piDecimals[index]);
-    File.WriteAllText(Path.Combine(Globals.DocumentsFolderPath, FileName.ToString()) + "_Fixed.txt", builder.ToString());
-    MessageBox.Show(MsgSaved_Fixed);
+    File.WriteAllText(Path.Combine(Globals.DocumentsFolderPath, TextFileName.ToString()) + "_Fixed.txt", builder.ToString());
+    MessageBox.Show(File_SavedFixedText);
   }
 
 }
