@@ -11,7 +11,7 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-12 </created>
-/// <edited> 2025-01-12 </edited>
+/// <edited> 2025-01-15 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 /// <summary>
@@ -20,8 +20,10 @@ namespace Ordisoftware.Hebrew.Pi;
 public enum ViewMode
 {
 
-  /// <summary>
-  /// .
-  /// </summary>
+  CreateData,
+
+  ViewData,
+
+  ReduceRepetitions,
 
 }
