@@ -37,12 +37,16 @@ partial class MainForm : Form
     //new Task(() => HistoryItems = new History(Program.HistoryFilePath)).Start();
     SystemManager.TryCatch(() => Icon = new Icon(Globals.ApplicationIconFilePath));
     Text = Globals.AssemblyTitle;
-    //ToolStrip.Renderer = new CheckedButtonsToolStripRenderer();
+    ToolStrip.Renderer = new CheckedButtonsToolStripRenderer();
     //ActionGoToBookmarkMain.Click += GoToBookmark;
     SystemEvents.SessionEnding += SessionEnding;
     NativeMethods.ClipboardViewerNext = NativeMethods.SetClipboardViewer(Handle);
     HebrewGlobals.GetHebrewLettersExecutablePath = () => Settings.HebrewLettersExe;
     InitializeTheme();
+    foreach ( var value in Enums.GetValues<PiFirstDecimalsLenght>() )
+      SelectFileName.Items.Add(value);
+    SelectFileName.SelectedIndex = 2;
+    ClearStatusBar();
     if ( !ApplicationCommandLine.Instance.IsPreviewEnabled ) // TODO remove when ready
     {
     }
@@ -74,8 +78,8 @@ partial class MainForm : Form
     //MainForm_ResizeEnd(null, null);
     //MainForm_Resize(null, null);
     //UpdateSearchButtons();
-    //BookmarkMenuIndex = ActionBookmarks.DropDownItems.Count;
-    //HistoryIndexMenu = ActionHistory.DropDownItems.Count;
+    BookmarkMenuIndex = ActionBookmarks.DropDownItems.Count;
+    HistoryIndexMenu = ActionHistory.DropDownItems.Count;
     DebugManager.TraceEnabledChanged += value => CommonMenusControl.Instance.ActionViewLog.Enabled = value;
   }
 
@@ -107,8 +111,6 @@ partial class MainForm : Form
     Settings.BenchmarkStartingApp = Globals.ChronoStartingApp.ElapsedMilliseconds;
     SystemManager.TryCatch(Settings.Save);
     SystemManager.TryCatchManage(ProcessNewsAndCommandLine);
-    //ApplicationDatabase.Instance.Modified += (_, _) => ActionSave.Enabled = true;
-    //ApplicationDatabase.Instance.Saved += _ => ActionSave.Enabled = false;
     Settings.SetFirstAndUpgradeFlagsOff();
   }
 
@@ -140,19 +142,18 @@ partial class MainForm : Form
   {
     if ( !Globals.IsReady ) return;
     if ( Globals.IsExiting ) return;
-    //ActionSave.PerformClick();
     if ( Globals.IsSessionEnding ) return;
     if ( e.CloseReason != CloseReason.None && e.CloseReason != CloseReason.UserClosing )
       Globals.IsExiting = true;
     else
     if ( !Globals.AllowClose )
       e.Cancel = true;
-    //else
-    //if ( EditConfirmClosing.Checked )
-    //  if ( !DisplayManager.QueryYesNo(SysTranslations.AskToExitApplication.GetLang()) )
-    //    e.Cancel = true;
-    //  else
-    //    Globals.IsExiting = true;
+    else
+    if ( EditConfirmClosing.Checked )
+      if ( !DisplayManager.QueryYesNo(SysTranslations.AskToExitApplication.GetLang()) )
+        e.Cancel = true;
+      else
+        Globals.IsExiting = true;
   }
 
   /// <summary>

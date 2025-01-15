@@ -56,11 +56,11 @@ partial class MainForm
           reader.BaseStream.Seek(2, SeekOrigin.Current);
         while ( ( charsRead = reader.Read(buffer, 0, BufferSize) ) > 0 )
         {
-          if ( !CheckIfProcessingCanContinue().Result ) break;
+          if ( !CheckIfBatchCanContinue().Result ) break;
           for ( long indexBuffer = 0; indexBuffer < charsRead; indexBuffer += MotifSize )
             if ( indexBuffer + MotifSize <= charsRead )
             {
-              if ( !CheckIfProcessingCanContinue().Result ) break;
+              if ( !CheckIfBatchCanContinue().Result ) break;
               motif = buffer[indexBuffer] - 48; // motif = motif * 10 + ( buffer[indexBuffer + indexMotif] - '0' );
               for ( long indexMotif = 1; indexMotif < MotifSize; indexMotif++ )
               {
@@ -74,19 +74,19 @@ partial class MainForm
               if ( totalMotifs % CreateDataEstimatePaging == 0 )
               {
                 double progress = (double)( totalMotifs * 10 ) / fileSize;
-                var elapsed = Globals.ChronoProcess.Elapsed;
+                var elapsed = Globals.ChronoBatch.Elapsed;
                 var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
                 UpdateStatusInfo(string.Format(AppTranslations.PopulatingAndRemainingText, remaining.AsReadable()));
               }
             }
         }
-        if ( CheckIfProcessingCanContinue().Result )
+        if ( CheckIfBatchCanContinue().Result )
         {
           UpdateStatusInfo(AppTranslations.CommittingText);
           DB.Commit();
         }
         else DB.Rollback();
-        if ( CheckIfProcessingCanContinue().Result )
+        if ( CheckIfBatchCanContinue().Result )
         {
           UpdateStatusInfo(AppTranslations.IndexingText);
           DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);

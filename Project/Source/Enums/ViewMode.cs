@@ -20,9 +20,9 @@ namespace Ordisoftware.Hebrew.Pi;
 public enum ViewMode
 {
 
-  CreateData,
-
   ViewData,
+
+  CreateData,
 
   ReduceRepetitions,
 

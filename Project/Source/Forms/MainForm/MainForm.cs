@@ -47,114 +47,48 @@ partial class MainForm : Form
   public MainForm()
   {
     InitializeComponent();
-    foreach ( var value in Enums.GetValues<PiFirstDecimalsLenght>() )
-      SelectFileName.Items.Add(value);
-    SelectFileName.SelectedIndex = 2;
-    DisplayManager.AdvancedFormUseSounds = false;
-    ClearStatusBar();
+    DoConstructor();
   }
 
   private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
   {
-    if ( !Globals.AllowClose ) e.Cancel = true;
+    DoFormClosing(sender, e);
   }
 
-  private void ClearStatusBar()
+  private void TimerBatch_Tick(object sender, EventArgs e)
   {
-    LabelStatusTime.Text = "-";
-    LabelStatusIteration.Text = "-";
-    LabelStatusInfo.Text = "-";
+    LabelStatusTime.Text = Globals.ChronoBatch.Elapsed.AsReadable();
   }
 
-  private void UpdateButtons()
+  private async Task DoBatch(Action action)
   {
-    void process()
+    try
     {
-      bool dbOpened = DB is not null;
-      bool dbOnenedAndNotInProcess = dbOpened && !Globals.IsInProcess;
-      bool dbOnenedAndInProcess = !dbOnenedAndNotInProcess;
-      SelectFileName.Enabled = !dbOpened;
-      ActionDbOpen.Enabled = !dbOpened && SelectFileName.SelectedIndex != -1;
-      ActionDbClose.Enabled = dbOnenedAndNotInProcess;
-      ActionDbCreateData.Enabled = dbOnenedAndNotInProcess;
-      ActionBatchRun.Enabled = dbOnenedAndNotInProcess;
-      ActionBatchStop.Enabled = dbOnenedAndInProcess;
-      ActionBatchPause.Enabled = dbOnenedAndInProcess;
-      ActionBatchPause.Text = AppTranslations.PauseContinueText[Globals.PauseRequired];
-      if ( !ActionBatchPause.Enabled ) ;
+      ClearStatusBar();
+      SetBatchState(true);
+      UpdateButtons();
+      Globals.ChronoBatch.Restart();
+      TimerBatch_Tick(null, null);
+      TimerBatch.Enabled = true;
+      await Task.Run(async () => action());
     }
-    if ( StatusStrip.InvokeRequired )
-      StatusStrip.Invoke(process);
-    else
-      process();
-  }
-
-  private void UpdateStatusProgress(string text)
-  {
-    UpdateStatusLabel(LabelStatusIteration, text);
-  }
-
-  private void UpdateStatusInfo(string text)
-  {
-    UpdateStatusLabel(LabelStatusInfo, text);
-  }
-
-  private void UpdateStatusLabel(ToolStripStatusLabel label, string text)
-  {
-    void process()
+    finally
     {
-      label.Text = text;
-      UpdateStatusTime();
-      StatusStrip.Refresh();
+      Globals.ChronoBatch.Stop();
+      TimerBatch.Enabled = false;
+      SetBatchState(false);
+      UpdateButtons();
     }
-    if ( StatusStrip.InvokeRequired )
-      StatusStrip.Invoke(process);
-    else
-      process();
   }
 
-  private void UpdateStatusTime()
+  private void SetBatchState(bool active)
   {
-    void process()
-    {
-      LabelStatusTime.Text = Globals.ChronoProcess.Elapsed.AsReadable();
-      StatusStrip.Refresh();
-    }
-    if ( StatusStrip.InvokeRequired )
-      StatusStrip.Invoke(process);
-    else
-      process();
-  }
-
-  private async Task DoProcess(Action action)
-  {
-    ClearStatusBar();
-    await Task.Run(async () =>
-    {
-      try
-      {
-        SetProcessingState(true);
-        UpdateButtons();
-        Globals.ChronoProcess.Restart();
-        action();
-        Globals.ChronoProcess.Stop();
-      }
-      finally
-      {
-        SetProcessingState(false);
-        UpdateButtons();
-      }
-    });
-  }
-
-  private void SetProcessingState(bool active)
-  {
-    Globals.IsInProcess = active;
+    Globals.IsInBatch = active;
     Globals.PauseRequired = false;
     Globals.CancelRequired = false;
   }
 
-  private async Task<bool> CheckIfProcessingCanContinue()
+  private async Task<bool> CheckIfBatchCanContinue()
   {
     if ( Globals.CancelRequired ) return false;
     while ( Globals.PauseRequired && !Globals.CancelRequired )
@@ -162,32 +96,32 @@ partial class MainForm : Form
     return true;
   }
 
-  private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-  {
-    using var brush = new SolidBrush(Grid.RowHeadersDefaultCellStyle.ForeColor);
-    e.Graphics.DrawString(( e.RowIndex + 1 ).ToString(),
-                          e.InheritedRowStyle.Font,
-                          brush,
-                          e.RowBounds.Location.X + 10,
-                          e.RowBounds.Location.Y + 4);
-  }
+  //private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+  //{
+  //  using var brush = new SolidBrush(Grid.RowHeadersDefaultCellStyle.ForeColor);
+  //  e.Graphics.DrawString(( e.RowIndex + 1 ).ToString(),
+  //                        e.InheritedRowStyle.Font,
+  //                        brush,
+  //                        e.RowBounds.Location.X + 10,
+  //                        e.RowBounds.Location.Y + 4);
+  //}
 
-  private void Grid_KeyDown(object sender, KeyEventArgs e)
-  {
-    if ( e.Control && e.KeyCode == Keys.C && Grid.SelectedCells.Count > 0 )
-    {
-      var builder = new StringBuilder();
-      foreach ( DataGridViewCell cell in Grid.SelectedCells )
-      {
-        builder.Append(cell.Value.ToString());
-        if ( cell.ColumnIndex == Grid.Columns.Count - 1 )
-          builder.AppendLine();
-        else
-          builder.Append("\t");
-      }
-      Clipboard.SetText(builder.ToString());
-    }
-  }
+  //private void Grid_KeyDown(object sender, KeyEventArgs e)
+  //{
+  //  if ( e.Control && e.KeyCode == Keys.C && Grid.SelectedCells.Count > 0 )
+  //  {
+  //    var builder = new StringBuilder();
+  //    foreach ( DataGridViewCell cell in Grid.SelectedCells )
+  //    {
+  //      builder.Append(cell.Value.ToString());
+  //      if ( cell.ColumnIndex == Grid.Columns.Count - 1 )
+  //        builder.AppendLine();
+  //      else
+  //        builder.Append("\t");
+  //    }
+  //    Clipboard.SetText(builder.ToString());
+  //  }
+  //}
 
   private void SelectFileName_SelectedIndexChanged(object sender, EventArgs e)
   {
@@ -202,7 +136,7 @@ partial class MainForm : Form
 
   private void SetDbCache()
   {
-    if ( DB is not null && int.TryParse(SelectDbCache.SelectedItem.ToString(), out var value) )
+    if ( DB is not null && int.TryParse(SelectDbCache.SelectedItem?.ToString(), out var value) )
     {
       value = value == 0 ? 8192 : value * 1024 * 1024;
       DB.Execute($"PRAGMA cache_size = -{value};");
@@ -250,22 +184,36 @@ partial class MainForm : Form
     Globals.PauseRequired = !Globals.PauseRequired;
     UpdateButtons();
     if ( Globals.PauseRequired )
-      Globals.ChronoProcess.Stop();
+      Globals.ChronoBatch.Stop();
     else
-      Globals.ChronoProcess.Start();
+      Globals.ChronoBatch.Start();
   }
 
   private async void ActionDbCreateData_Click(object sender, EventArgs e)
   {
     //if ( !DisplayManager.QueryYesNo("Empty and create data?") ) return;
     string fileName = Path.Combine(Globals.DocumentsFolderPath, PiFirstDecimalsCount.ToString()) + ".txt";
-    DoProcess(() => DoActionDbCreateData(fileName));
+    DoBatch(() => DoActionDbCreateData(fileName));
   }
 
   private async void ActionBatchRun_Click(object sender, EventArgs e)
   {
     //if ( !DisplayManager.QueryYesNo("Start reducing repeating motifs?") ) return;
-    DoProcess(() => DoActionBatchRun(0));
+    DoBatch(() => DoActionBatchRun(0));
   }
 
+  private void MainForm_Load(object sender, EventArgs e)
+  {
+    DoFormLoad(sender, e);
+  }
+
+  private void MainForm_Shown(object sender, EventArgs e)
+  {
+    DoFormShown(sender, e);
+  }
+
+  private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+  {
+    DoFormClosed(sender, e);
+  }
 }

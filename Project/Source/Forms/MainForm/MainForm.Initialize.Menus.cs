@@ -26,12 +26,13 @@ partial class MainForm : Form
   /// </summary>
   public void CreateSystemInformationMenu()
   {
-    //CommonMenusControl.CreateInstance(ToolStrip,
-    //                                  ref ActionInformation,
-    //                                  AppTranslations.NoticeNewFeatures,
-    //                                  ActionWebCheckUpdate_Click,
-    //                                  ActionViewLog_Click,
-    //                                  ActionViewStats_Click);
+    CommonMenusControl.CreateInstance(ToolStrip,
+                                      ref ActionInformation,
+                                      AppTranslations.NoticeNewFeatures,
+                                      null,//ActionWebCheckUpdate_Click,
+                                      null,//ActionViewLog_Click,
+                                      null//ActionViewStats_Click
+                                     );
     InitializeSpecialMenus();
   }
 
@@ -43,9 +44,9 @@ partial class MainForm : Form
     CreateProvidersLinks();
     CommonMenusControl.Instance.ActionViewStats.Enabled = Settings.UsageStatisticsEnabled;
     CommonMenusControl.Instance.ActionViewLog.Enabled = DebugManager.TraceEnabled;
-    //ActionWebLinks.Visible = Settings.WebLinksMenuEnabled;
-    //if ( Settings.WebLinksMenuEnabled )
-    //  ActionWebLinks.CreateWebLinks(InitializeSpecialMenus);
+    ActionWebLinks.Visible = Settings.WebLinksMenuEnabled;
+    if ( Settings.WebLinksMenuEnabled )
+      ActionWebLinks.CreateWebLinks(InitializeSpecialMenus);
   }
 
   static private readonly Image HebrewWordsIcon = CreateImage("hebrew_words16.ico");
@@ -93,30 +94,6 @@ partial class MainForm : Form
     //  var control = contextmenu?.SourceControl?.Parent as WordControl;
     //  string word = control?.Reference.Word.Hebrew ?? string.Empty;
     //  HebrewTools.OpenWordProvider((string)menuitem.Tag, word);
-    //});
-    //// Verse read online
-    //ActionVerseReadOnline.Initialize(HebrewGlobals.WebProvidersBible, (sender, e) =>
-    //{
-    //  var menuitem = sender as ToolStripMenuItem;
-    //  var contextmenu = ( menuitem?.GetCurrentParent() as ToolStripDropDownMenu )?.OwnerItem?.Owner as ContextMenuStrip;
-    //  var control = contextmenu?.SourceControl;
-    //  if ( control is LinkLabel && Settings.CurrentView == ViewMode.Search )
-    //  {
-    //    var reference = (ReferenceItem)control.Tag;
-    //    HebrewTools.OpenBibleProvider((string)menuitem.Tag,
-    //                                  reference.Book.Number,
-    //                                  reference.Chapter.Number,
-    //                                  reference.Verse.Number);
-    //  }
-    //  else
-    //  if ( control is Label label && IsVersesOrFiltered(Settings.CurrentView) )
-    //  {
-    //    var reference = ( (VerseControl)label.Parent ).Reference;
-    //    HebrewTools.OpenBibleProvider((string)menuitem.Tag,
-    //                                  reference.Book.Number,
-    //                                  reference.Chapter.Number,
-    //                                  reference.Verse.Number);
-    //  }
     //});
   }
 

@@ -11,7 +11,7 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-12 </created>
-/// <edited> 2025-01-12 </edited>
+/// <edited> 2025-01-15 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 /// <summary>
@@ -25,18 +25,18 @@ partial class MainForm
 
   private void InitializeViewConnectors()
   {
-    ViewConnectors = new ViewConnectors<ViewMode, ToolStripButton>
-    {
-      //{
-      //  ViewMode.ChapterVerses,
-      //  new ViewConnector<ToolStripButton>
-      //  {
-      //    Component = ActionViewVerses,
-      //    Panel = PanelViewVerses,
-      //    Focused = PanelViewVerses
-      //  }
-      //},
-    };
+    //ViewConnectors = new ViewConnectors<ViewMode, ToolStripButton>
+    //{
+    //  {
+    //    ViewMode.CreateData,
+    //    new ViewConnector<ToolStripButton>
+    //    {
+    //      Component = ActionViewCreateData,
+    //      Panel = PanelViewVerses,
+    //      Focused = PanelViewVerses
+    //    }
+    //  },
+    //};
   }
 
 }

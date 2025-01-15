@@ -38,7 +38,7 @@ static partial class Program
         resources.ApplyResources(form.Controls);
       }
       string lang = "en-US";
-      //if ( Settings.LanguageSelected == Language.FR ) lang = "fr-FR";
+      if ( Settings.LanguageSelected == Language.FR ) lang = "fr-FR";
       var culture = new CultureInfo(lang);
       Thread.CurrentThread.CurrentCulture = culture;
       Thread.CurrentThread.CurrentUICulture = culture;
@@ -48,35 +48,35 @@ static partial class Program
       {
         MessageBoxEx.CloseAll();
         AboutBox.Instance.Hide();
-        //StatisticsForm.Instance.Hide();
+        StatisticsForm.Instance.Hide();
       }
       else
         update(MainForm.Instance);
-      //new Infralution.Localization.CultureManager().ManagedControl = StatisticsForm.Instance;
-      //new Infralution.Localization.CultureManager().ManagedControl = AboutBox.Instance;
-      //new Infralution.Localization.CultureManager().ManagedControl = TranscriptionGuideForm;
-      //new Infralution.Localization.CultureManager().ManagedControl = GrammarGuideForm;
-      //Infralution.Localization.CultureManager.ApplicationUICulture = culture;
-      //var formsToSkip = new Form[] { DebugManager.TraceForm, AboutBox.Instance, GrammarGuideForm };
-      //foreach ( Form form in Application.OpenForms.GetAll().Except(formsToSkip) )
-      //{
-      //  update(form);
-      //  if ( form is ShowTextForm formShowText )
-      //    formShowText.Relocalize();
-      //}
+      new Infralution.Localization.CultureManager().ManagedControl = StatisticsForm.Instance;
+      new Infralution.Localization.CultureManager().ManagedControl = AboutBox.Instance;
+      new Infralution.Localization.CultureManager().ManagedControl = TranscriptionGuideForm;
+      new Infralution.Localization.CultureManager().ManagedControl = GrammarGuideForm;
+      Infralution.Localization.CultureManager.ApplicationUICulture = culture;
+      var formsToSkip = new Form[] { DebugManager.TraceForm, AboutBox.Instance, GrammarGuideForm };
+      foreach ( Form form in Application.OpenForms.GetAll().Except(formsToSkip) )
+      {
+        update(form);
+        if ( form is ShowTextForm formShowText )
+          formShowText.Relocalize();
+      }
       // Various updates
       if ( Globals.IsReady )
       {
         TextBoxEx.Relocalize();
         LoadingForm.Instance.Relocalize();
         AboutBox.Instance.AboutBox_Shown(null, null);
-        //TranscriptionGuideForm.HTMLBrowserForm_Shown(null, null);
-        //GrammarGuideForm.HTMLBrowserForm_Shown(null, null);
-        //MainForm.Instance.SetView(Settings.CurrentView, true);
+        TranscriptionGuideForm.HTMLBrowserForm_Shown(null, null);
+        GrammarGuideForm.HTMLBrowserForm_Shown(null, null);
+        MainForm.Instance.SetView(Settings.CurrentView, true);
         //MainForm.Instance.UpdateTitle();
       }
       task?.Wait();
-      //MainForm.Instance.CreateSystemInformationMenu();
+      MainForm.Instance.CreateSystemInformationMenu();
     }
     catch ( Exception ex )
     {
@@ -85,7 +85,7 @@ static partial class Program
     finally
     {
       Globals.ChronoTranslate.Stop();
-      //Settings.BenchmarkTranslate = Globals.ChronoTranslate.ElapsedMilliseconds;
+      Settings.BenchmarkTranslate = Globals.ChronoTranslate.ElapsedMilliseconds;
     }
   }
 

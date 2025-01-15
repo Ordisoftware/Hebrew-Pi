@@ -37,14 +37,14 @@ partial class MainForm
       long iteration = 0;
       while ( true )
       {
-        if ( !CheckIfProcessingCanContinue().Result ) break;
+        if ( !CheckIfBatchCanContinue().Result ) break;
         UpdateStatusProgress(string.Format(AppTranslations.IterationText, iteration, "?"));
         UpdateStatusInfo(AppTranslations.CountingText);
         countCurrent = GetRepeatingCount().Result;
         UpdateStatusProgress(string.Format(AppTranslations.IterationText, iteration, countCurrent));
         UpdateStatusInfo(AppTranslations.CountedText);
         DB.Insert(new IterationRow { Iteration = iteration, RepeatedCount = countCurrent, Date = DateTime.Now });
-        if ( !CheckIfProcessingCanContinue().Result ) break;
+        if ( !CheckIfBatchCanContinue().Result ) break;
         if ( countCurrent == 0 )
         {
           DisplayManager.Show(string.Format(AppTranslations.NoRepeatedText, iteration));
@@ -71,7 +71,7 @@ partial class MainForm
         firstIteration = false;
         UpdateStatusInfo(AppTranslations.UpdatingText);
         AddPositionToMotifs();
-        if ( !CheckIfProcessingCanContinue().Result ) break;
+        if ( !CheckIfBatchCanContinue().Result ) break;
         iteration++;
       }
     }

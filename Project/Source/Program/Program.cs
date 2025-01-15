@@ -24,7 +24,7 @@ static partial class Program
   /// Process startup method.
   /// </summary>
   [STAThread]
-  static void Main()
+  static void Main(string[] args)
   {
     try
     {
@@ -34,43 +34,46 @@ static partial class Program
       Globals.ChronoStartingApp.Start();
       Globals.SoftpediaURL = "";
       Globals.AlternativeToURL = string.Empty;
-      //CommonMenusControl.PreviewFunctions = AppTranslations.PreviewFunctions;
+      CommonMenusControl.PreviewFunctions = AppTranslations.PreviewFunctions;
       //
-      //var lang = Settings.LanguageSelected;
-      //SystemManager.CheckCommandLineArguments<ApplicationCommandLine>(args, ref lang);
-      //if ( !SystemManager.CheckApplicationOnlyOneInstance(IPCRequests) ) return;
-      //bool upgrade = Settings.UpgradeRequired;
-      //Globals.IsSettingsUpgraded = upgrade;
-      //Settings.CheckUpgradeRequired(ref upgrade);
-      //Settings.UpgradeRequired = upgrade;
-      //Globals.IsSettingsUpgraded = Globals.IsSettingsUpgraded && !Settings.FirstLaunch;
-      //CheckSettingsReset();
-      //if ( lang != Language.None ) Settings.LanguageSelected = lang;
-      //SystemManager.TryCatch(Settings.Save);
-      //Globals.Settings = Settings;
-      ////
-      //Globals.SpellCheckEnabled = Settings.SpellCheckEnabled;
-      //TextBoxEx.InstanceCreated += TextBox_UpdateSpellChecker;
-      //TextBoxEx.UpdateSpellChecker += TextBox_UpdateSpellChecker;
-      //TextBoxEx.Relocalized += TextBox_Relocalized;
-      //TextBox_Relocalized();
+      var lang = Settings.LanguageSelected;
+      SystemManager.CheckCommandLineArguments<ApplicationCommandLine>(args, ref lang);
+      if ( !SystemManager.CheckApplicationOnlyOneInstance(IPCRequests) ) return;
+      bool upgrade = Settings.UpgradeRequired;
+      Globals.IsSettingsUpgraded = upgrade;
+      Settings.CheckUpgradeRequired(ref upgrade);
+      Settings.UpgradeRequired = upgrade;
+      Globals.IsSettingsUpgraded = Globals.IsSettingsUpgraded && !Settings.FirstLaunch;
+      CheckSettingsReset();
+      if ( lang != Language.None ) Settings.LanguageSelected = lang;
+      SystemManager.TryCatch(Settings.Save);
+      Globals.Settings = Settings;
+      //
+      Globals.SpellCheckEnabled = Settings.SpellCheckEnabled;
+      TextBoxEx.InstanceCreated += TextBox_UpdateSpellChecker;
+      TextBoxEx.UpdateSpellChecker += TextBox_UpdateSpellChecker;
+      TextBoxEx.Relocalized += TextBox_Relocalized;
+      TextBox_Relocalized();
       Globals.MainForm = MainForm.Instance;
-      //DebugManager.TraceEnabled = Settings.TraceEnabled;
-      DebugManager.Enabled = true;// Settings.DebuggerEnabled;
+      DebugManager.TraceEnabled = Settings.TraceEnabled;
+      DebugManager.Enabled = Settings.DebuggerEnabled;
       //
-      //HebrewGlobals.GetHebrewCalendarExecutablePath = () => string.Empty;
-      //HebrewGlobals.GetHebrewLettersExecutablePath = () => Settings.HebrewLettersExe;
-      //HebrewGlobals.GetHebrewWordsExecutablePath = () => Globals.ApplicationExecutableFullPath;
-      //HebrewGlobals.GetCustomWebSearchPattern = () => Settings.CustomWebSearch;
+      HebrewGlobals.GetHebrewCalendarExecutablePath = () => string.Empty;
+      HebrewGlobals.GetHebrewLettersExecutablePath = () => Settings.HebrewLettersExe;
+      HebrewGlobals.GetHebrewWordsExecutablePath = () => Globals.ApplicationExecutableFullPath;
+      HebrewGlobals.GetCustomWebSearchPattern = () => Settings.CustomWebSearch;
       //
       Globals.ChronoStartingApp.Stop();
-      //ProcessCommandLineOptions();
+      ProcessCommandLineOptions();
       Globals.ChronoStartingApp.Start();
       //
-      //LoadingForm.Instance.Hidden = Settings.LoadingFormHidden;
+      LoadingForm.Instance.Hidden = Settings.LoadingFormHidden;
       AboutBox.LicenseAsRTF = Properties.Resources.MPL_2_0;
-      //AboutBox.DescriptionText = AppTranslations.ApplicationDescription;
-      //AboutBox.Instance.ActionViewStats.Enabled = Settings.UsageStatisticsEnabled;
+      AboutBox.DescriptionText = AppTranslations.ApplicationDescription;
+      AboutBox.Instance.ActionViewStats.Enabled = Settings.UsageStatisticsEnabled;
+      // TODO remove later
+      DebugManager.TraceEnabled = true;
+      DebugManager.Enabled = true;
     }
     catch ( Exception ex )
     {

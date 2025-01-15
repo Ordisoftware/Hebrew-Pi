@@ -73,6 +73,52 @@ partial class MainForm
     }
   }
 
+  private void ClearStatusBar()
+  {
+    LabelStatusTime.Text = "-";
+    LabelStatusIteration.Text = "-";
+    LabelStatusInfo.Text = "-";
+  }
+
+  private void UpdateButtons()
+  {
+    bool dbOpened = DB is not null;
+    bool dbOnenedAndNotInBatch = dbOpened && !Globals.IsInBatch;
+    bool dbOnenedAndInBatch = !dbOnenedAndNotInBatch;
+    SelectFileName.Enabled = !dbOpened;
+    ActionDbOpen.Enabled = !dbOpened && SelectFileName.SelectedIndex != -1;
+    ActionDbClose.Enabled = dbOnenedAndNotInBatch;
+    ActionDbCreateData.Enabled = dbOnenedAndNotInBatch;
+    ActionBatchRun.Enabled = dbOnenedAndNotInBatch;
+    ActionBatchStop.Enabled = dbOnenedAndInBatch;
+    ActionBatchPause.Enabled = dbOnenedAndInBatch;
+    ActionBatchPause.Text = AppTranslations.PauseContinueText[Globals.PauseRequired];
+    if ( !ActionBatchPause.Enabled ) ;
+  }
+
+  private void UpdateStatusProgress(string text)
+  {
+    UpdateStatusLabel(LabelStatusIteration, text);
+  }
+
+  private void UpdateStatusInfo(string text)
+  {
+    UpdateStatusLabel(LabelStatusInfo, text);
+  }
+
+  private void UpdateStatusLabel(ToolStripStatusLabel label, string text)
+  {
+    void update()
+    {
+      label.Text = text;
+      StatusStrip.Refresh();
+    }
+    if ( StatusStrip.InvokeRequired )
+      StatusStrip.Invoke(update);
+    else
+      update();
+  }
+
   //
   // Update history buttons
   //
