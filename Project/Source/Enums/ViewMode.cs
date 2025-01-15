@@ -26,4 +26,6 @@ public enum ViewMode
 
   ReduceRepetitions,
 
+  IterationStatistics
+
 }
