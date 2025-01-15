@@ -112,10 +112,6 @@
       this.Sep7 = new System.Windows.Forms.ToolStripSeparator();
       this.ActionShowKeyboardNotice = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-      this.EditIncludeOriginalText = new System.Windows.Forms.ToolStripMenuItem();
-      this.EditIncludeComment = new System.Windows.Forms.ToolStripMenuItem();
-      this.EditExportUseHebrewFontElseUnicodeChars = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
       this.EditShowTips = new System.Windows.Forms.ToolStripMenuItem();
       this.EditUseAdvancedDialogBoxes = new System.Windows.Forms.ToolStripMenuItem();
       this.EditSoundsEnabled = new System.Windows.Forms.ToolStripMenuItem();
@@ -870,10 +866,6 @@
             this.Sep7,
             this.ActionShowKeyboardNotice,
             this.toolStripSeparator11,
-            this.EditIncludeOriginalText,
-            this.EditIncludeComment,
-            this.EditExportUseHebrewFontElseUnicodeChars,
-            this.toolStripSeparator27,
             this.EditShowTips,
             this.EditUseAdvancedDialogBoxes,
             this.EditSoundsEnabled,
@@ -980,39 +972,6 @@
       // 
       this.toolStripSeparator11.Name = "toolStripSeparator11";
       this.toolStripSeparator11.Size = new System.Drawing.Size(320, 6);
-      // 
-      // EditIncludeOriginalText
-      // 
-      this.EditIncludeOriginalText.Checked = true;
-      this.EditIncludeOriginalText.CheckOnClick = true;
-      this.EditIncludeOriginalText.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.EditIncludeOriginalText.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.EditIncludeOriginalText.Name = "EditIncludeOriginalText";
-      this.EditIncludeOriginalText.Size = new System.Drawing.Size(323, 22);
-      this.EditIncludeOriginalText.Text = "Include original text in chapter translation";
-      // 
-      // EditIncludeComment
-      // 
-      this.EditIncludeComment.Checked = true;
-      this.EditIncludeComment.CheckOnClick = true;
-      this.EditIncludeComment.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.EditIncludeComment.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.EditIncludeComment.Name = "EditIncludeComment";
-      this.EditIncludeComment.Size = new System.Drawing.Size(323, 22);
-      this.EditIncludeComment.Text = "Include comments in chapter translation";
-      // 
-      // EditExportUseHebrewFontElseUnicodeChars
-      // 
-      this.EditExportUseHebrewFontElseUnicodeChars.CheckOnClick = true;
-      this.EditExportUseHebrewFontElseUnicodeChars.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.EditExportUseHebrewFontElseUnicodeChars.Name = "EditExportUseHebrewFontElseUnicodeChars";
-      this.EditExportUseHebrewFontElseUnicodeChars.Size = new System.Drawing.Size(323, 22);
-      this.EditExportUseHebrewFontElseUnicodeChars.Text = "Use Hebrew font else Unicode chars for exports";
-      // 
-      // toolStripSeparator27
-      // 
-      this.toolStripSeparator27.Name = "toolStripSeparator27";
-      this.toolStripSeparator27.Size = new System.Drawing.Size(320, 6);
       // 
       // EditShowTips
       // 
@@ -1779,8 +1738,9 @@
       this.Controls.Add(this.PanelTop);
       this.Controls.Add(this.StatusStrip);
       this.Controls.Add(this.ToolStrip);
+      this.MinimumSize = new System.Drawing.Size(800, 500);
       this.Name = "MainForm";
-      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+      this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "Hebrew Pi";
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
       this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
@@ -1883,10 +1843,6 @@
     private ToolStripSeparator Sep7;
     private ToolStripMenuItem ActionShowKeyboardNotice;
     private ToolStripSeparator toolStripSeparator11;
-    internal ToolStripMenuItem EditIncludeOriginalText;
-    internal ToolStripMenuItem EditIncludeComment;
-    internal ToolStripMenuItem EditExportUseHebrewFontElseUnicodeChars;
-    private ToolStripSeparator toolStripSeparator27;
     internal ToolStripMenuItem EditShowTips;
     internal ToolStripMenuItem EditUseAdvancedDialogBoxes;
     internal ToolStripMenuItem EditSoundsEnabled;

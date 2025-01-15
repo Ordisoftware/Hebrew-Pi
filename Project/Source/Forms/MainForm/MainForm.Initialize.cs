@@ -63,17 +63,18 @@ partial class MainForm : Form
     Program.UpdateLocalization();
     StatisticsForm.Run(true, Settings.UsageStatisticsEnabled);
     Globals.ChronoStartingApp.Stop();
-    var lastdone = Settings.CheckUpdateLastDone;
-    bool exit = WebCheckUpdate.Run(ref lastdone,
-                                   Settings.CheckUpdateAtStartupDaysInterval,
-                                   Settings.CheckUpdateAtStartup,
-                                   true);
-    Settings.CheckUpdateLastDone = lastdone;
-    if ( exit )
-    {
-      SystemManager.Exit();
-      return;
-    }
+    // TODO uncomment
+    //var lastdone = Settings.CheckUpdateLastDone;
+    //bool exit = WebCheckUpdate.Run(ref lastdone,
+    //                               Settings.CheckUpdateAtStartupDaysInterval,
+    //                               Settings.CheckUpdateAtStartup,
+    //                               true);
+    //Settings.CheckUpdateLastDone = lastdone;
+    //if ( exit )
+    //{
+    //  SystemManager.Exit();
+    //  return;
+    //}
     Globals.ChronoStartingApp.Start();
     //MainForm_ResizeEnd(null, null);
     //MainForm_Resize(null, null);
