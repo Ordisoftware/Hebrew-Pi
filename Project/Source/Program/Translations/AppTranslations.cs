@@ -19,8 +19,8 @@ static partial class AppTranslations
 
   static public readonly TranslationsDictionary ApplicationDescription = new()
   {
-    [Language.EN] = "Pi decimal decoder with Hebrew Gematria",
-    [Language.FR] = "Décodeur des décimales de Pi avec la Gematria hébraïque"
+    [Language.EN] = "Pi decimal decoder and translator using Hebrew Gematria",
+    [Language.FR] = "Décodeur et traducteur de décimales de Pi grâce à la Gematria hébraïque"
   };
 
   static public readonly TranslationsDictionary AskToCreateNewDatabase = new()
