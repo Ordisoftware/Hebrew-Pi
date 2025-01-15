@@ -1,0 +1,80 @@
+﻿; --------------------------------------------------------------------------------------------------
+; File format for web links
+; --------------------------------------------------------------------------------------------------
+; To create a folder else items will be at root level: Lang/[short code] = Title
+; Use the tag FOLDER-SEPARATOR to insert a separator menu item between folders.
+; --------------------------------------------------------------------------------------------------
+; Name = Title
+; URL = Web link
+; --------------------------------------------------------------------------------------------------
+; Use the "-" char at the beginning of a line to insert a separator
+; --------------------------------------------------------------------------------------------------
+
+Lang/EN = Rabbis websites
+Lang/FR = Sites Web de rabbins
+
+Name = (FR) Rav Daniel Abdelhak
+URL = https://ravabdelhak.com
+
+Name = (FR) Rav Yehia Benchetrit
+URL = http://ravbenchetrit.com
+
+Name = (FR) Rav Emmanuel Bensimon
+URL = https://nafshi.fr
+
+Name = (FR) Rav Menahem Berros 
+URL = https://www.ravmenahemberros.com
+
+Name = (FR) Rav Ron Chaya
+URL = https://myleava.fr
+
+Name = (FR) Rav Azriel Cohen-Arazi
+URL = http://www.torahacademy.fr
+
+Name = (FR) Rav Avraham Ifrah
+URL = https://breslev.fr
+
+Name = (FR) Rav Nathan Mrejen
+URL = https://www.darkeihaim.com
+
+Name = (FR) Rav Yakov Sitruk
+URL = https://www.alef-ledoroth.com
+
+Name = (FR) Rav David Touitou
+URL = https://torathaim.net
+
+-
+
+Name = (EN) Rabbi Yosef Yitzchak Jacobson
+URL = https://www.theyeshiva.net
+
+Name = (EN) Rabbi Adin Steinsaltz
+URL = https://steinsaltz.org
+
+Name = (EN) Steinsaltz Center
+URL = https://steinsaltz-center.org/portal/library
+
+Name = (IW) Steinsaltz Center
+URL = https://steinsaltz-center.org/he/portal/library
+
+-
+
+Name = (EN) Rabbi Itshak Ginsburgh
+URL = https://www.inner.org
+
+Name = (IW) Rabbi Itshak Ginsburgh students
+URL = https://www.malchuty.org
+
+-
+
+Name = (FR/EN) Hevrat Pinto (Rav David Pinto)
+URL = https://hevratpinto.org
+
+Name = (FR) Halacha Yomit (Rav Ovadia Yossef)
+URL = http://halachayomit.co.il/fr/default.aspx
+
+Name = (EN) Halacha Yomit (Rabbi Ovadia Yosef)
+URL = http://halachayomit.co.il/en/Default.aspx
+
+Name = (IW) Halacha Yomit (Rabbi Ovadia Yosef)
+URL = http://halachayomit.co.il/he/default.aspx

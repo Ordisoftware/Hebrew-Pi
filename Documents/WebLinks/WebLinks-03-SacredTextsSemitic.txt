@@ -1,0 +1,112 @@
+﻿; --------------------------------------------------------------------------------------------------
+; File format for web links
+; --------------------------------------------------------------------------------------------------
+; To create a folder else items will be at root level: Lang/[short code] = Title
+; Use the tag FOLDER-SEPARATOR to insert a separator menu item between folders.
+; --------------------------------------------------------------------------------------------------
+; Name = Title
+; URL = Web link
+; --------------------------------------------------------------------------------------------------
+; Use the "-" char at the beginning of a line to insert a separator
+; --------------------------------------------------------------------------------------------------
+
+FOLDER-SEPARATOR
+
+Lang/EN = Semitic sacred texts
+Lang/FR = Textes sacrés sémitiques
+
+Name = (EN) Tanak @ en.wikipedia.org
+URL = https://en.wikipedia.org/wiki/Hebrew_Bible
+
+Name = (FR) Tanak @ fr.wikipedia.org
+URL = https://fr.wikipedia.org/wiki/Tanakh
+
+-
+
+Name = (EN) Parashah @ en.wikipedia.org
+URL = https://en.wikipedia.org/wiki/Weekly_Torah_portion
+
+Name = (FR) Parashah @ fr.wikipedia.org
+URL = https://fr.wikipedia.org/wiki/Parasha_de_la_semaine
+
+-
+
+Name = (EN) Talmud @ en.wikipedia.org
+URL = https://en.wikipedia.org/wiki/Weekly_Torah_portion
+
+Name = (FR) Talmud @ fr.wikipedia.org
+URL = https://fr.wikipedia.org/wiki/Parasha_de_la_semaine
+
+-
+
+Name = (EN) Haggadah @ en.wikipedia.org
+URL = https://en.wikipedia.org/wiki/Talmud
+
+Name = (FR) Haggadah @ fr.wikipedia.org
+URL = https://fr.wikipedia.org/wiki/Talmud
+
+-
+
+Name = (EN) Jewish Texts @ sefaria.org
+URL = https://www.sefaria.org/texts
+
+Name = (EN) Babylonian Talmud @ halakhah.com
+URL = http://halakhah.com
+
+Name = (EN) Judaism @ sacred-texts.com
+URL = https://www.sacred-texts.com/jud/
+
+-
+
+Name = (IW) Tanak Hebrew Text @ fourmilab.ch
+URL = http://www.fourmilab.ch/etexts/www/hebrew/Bible/
+
+Name = (IW) Tanak Hebrew MP3 @ mechon-mamre.org
+URL = https://mechon-mamre.org/p/pt/ptmp3prq.htm
+
+-
+
+Name = (EN) Interlinear Tanak @ studybible.info
+URL = https://studybible.info/IHOT/
+
+Name = (EN) Interlinear Euangélion @ studybible.info
+URL = https://studybible.info/IGNT
+
+Name = (EN) Literal Torah @ mechanical-translation.org
+URL = https://www.mechanical-translation.org
+
+-
+
+Name = (EN) Interlinear Bible @ biblehub.com
+URL = https://biblehub.com/interlinear/
+
+Name = (FR/IW) Tehilim Online @ tehilim-online.com
+URL = https://tehilim-online.com
+
+-
+
+Name = (FR) Bible comparatif multi-version @ djep.hd.free.fr
+URL = http://djep.hd.free.fr/LaReferenceBiblique/
+
+Name = (FR) Bible en hébreu @ lexilogos.com
+URL = https://www.lexilogos.com/bible_hebreu.htm
+
+Name = (FR) Hébreu ancien @ lexilogos.com
+URL = https://www.lexilogos.com/hebreu_ancien_dictionnaire.htm
+
+Name = (FR) Hébreu moderne @ lexilogos.com
+URL = https://www.lexilogos.com/hebreu_moderne_dictionnaire.htm
+
+-
+
+Name = (EN) Interlinear Quran @ corpus.quran.com
+URL = http://corpus.quran.com/wordbyword.jsp
+
+Name = (FR) Quran Interlinéaire @ coran-seul.com
+URL = http://coran-seul.com/index.php/home
+
+Name = (FR) Quran en français @ coran-en-ligne.com
+URL = http://www.coran-en-ligne.com/coran-en-francais.html
+
+Name = (FR/EN) Quran arabic lecture @ notequran.com
+URL = https://www.notequran.com

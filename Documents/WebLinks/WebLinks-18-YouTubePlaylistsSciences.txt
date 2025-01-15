@@ -1,0 +1,38 @@
+﻿; --------------------------------------------------------------------------------------------------
+; File format for web links
+; --------------------------------------------------------------------------------------------------
+; To create a folder else items will be at root level: Lang/[short code] = Title
+; Use the tag FOLDER-SEPARATOR to insert a separator menu item between folders.
+; --------------------------------------------------------------------------------------------------
+; Name = Title
+; URL = Web link
+; --------------------------------------------------------------------------------------------------
+; Use the "-" char at the beginning of a line to insert a separator
+; --------------------------------------------------------------------------------------------------
+
+Lang/EN = YouTube playlists Sciences
+Lang/FR = Playlists YouTube de Sciences
+
+Name = (FR) Mathématiques et physiques
+URL = https://www.youtube.com/playlist?list=PLSn7yTHwEx-Boo3Ss5OZSYCNHEGpFXcPc
+
+Name = (FR/EN) Biologie et génétique
+URL = https://www.youtube.com/playlist?list=PLSn7yTHwEx-BEv_KNGXktzeF8oBTXGoKR
+
+Name = (FR/EN) Bodybuilding et nutrition
+URL = https://www.youtube.com/playlist?list=PLSn7yTHwEx-BEAk_k9s5tCMG5ZPwK6KVz
+
+Name = (FR/EN) Bodybuilding et nutrition selon JamCore
+URL = https://www.youtube.com/playlist?list=PLSn7yTHwEx-Dxwct2znoLCEugMfSoFVlB
+
+Name = (FR) Mentalisme et psychologie
+URL = https://www.youtube.com/playlist?list=PLSn7yTHwEx-B3m_jadFZi3rvJx9LPhHeG
+
+Name = (FR) Documentaires et sujets de société
+URL = https://www.youtube.com/playlist?list=PLSn7yTHwEx-DfPB3GAU-e6hLSzJIjVc18
+
+-
+
+Name = (FR) [France Université Numérique] Conférence IA et éducation
+URL = https://www.youtube.com/playlist?list=PLT8Nmhc5co7ob1PvPNfxQx7puDQ_ng6ji
+
