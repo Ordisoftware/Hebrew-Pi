@@ -10,22 +10,17 @@
 /// relevant directory) where a recipient would be likely to look for such a notice.
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
-/// <created> 2025-01-11 </created>
-/// <edited> 2025-01-11 </edited>
+/// <created> 2025-01-10 </created>
+/// <edited> 2025-01-10 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-[Serializable]
-public abstract class AbstractRow : INotifyPropertyChanged
+public enum PiFirstDecimalsLenght
 {
-
-  [field: NonSerialized]
-  public event PropertyChangedEventHandler PropertyChanged;
-
-  protected void NotifyPropertyChanged(string property)
-  {
-    if ( !ApplicationDatabase.Instance.Loaded || !ApplicationDatabase.Instance.BindingsEnabled ) return;
-    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-    ApplicationDatabase.Instance.AddToModified(this);
-  }
-
+  PiDecimals_128K,
+  PiDecimals_1M,
+  PiDecimals_1B,
+  PiDecimals_10B,
+  PiDecimals_1M_Fixed,
+  PiDecimals_1B_Fixed,
+  PiDecimals_10B_Fixed
 }

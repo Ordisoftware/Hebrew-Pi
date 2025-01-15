@@ -10,17 +10,33 @@
 /// relevant directory) where a recipient would be likely to look for such a notice.
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
-/// <created> 2025-01-10 </created>
-/// <edited> 2025-01-11 </edited>
+/// <created> 2025-01-15 </created>
+/// <edited> 2025-01-15 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-public class GroupInfo
+/// <summary>
+/// Provides decuplet item
+/// </summary>
+sealed public partial class DecupletItem //: IEquatable<MotifItem>, IComparable<MotifItem>
 {
-  public int Count { get; set; }
-  public string Indices { get; set; }
-  public GroupInfo(int count, string indices)
+
+  public long Position { get; set; }
+  public long Motif { get; set; }
+
+  private DecupletItem()
   {
-    Count = count;
-    Indices = indices;
   }
+
+  public DecupletItem(DecupletItem decuplet)
+  {
+    Position = decuplet.Position;
+    Motif = decuplet.Motif;
+  }
+
+  public DecupletItem(long position, long motif)
+  {
+    Position = position;
+    Motif = motif;
+  }
+
 }

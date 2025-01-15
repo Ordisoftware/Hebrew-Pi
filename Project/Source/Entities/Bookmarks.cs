@@ -14,27 +14,27 @@
 /// <edited> 2025-01-12 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-class Bookmarks //: ReferencesList
+class Bookmarks : DecupletList
 {
 
-  //public override void Add(ReferenceItem reference)
-  //{
-  //  if ( reference is null || Program.Settings.BookmarksCount < 1 || Items.Exists(item => item.Equals(reference)) )
-  //    return;
-  //  Items.Add(new ReferenceItem(reference));
-  //  while ( Items.Count > Program.Settings.BookmarksCount )
-  //    Items.RemoveAt(0);
-  //  Save();
-  //}
+  public override void Add(DecupletItem decuplet)
+  {
+    if ( decuplet is null || Program.Settings.BookmarksCount < 1 || Items.Exists(item => item.Equals(decuplet)) )
+      return;
+    Items.Add(new DecupletItem(decuplet));
+    while ( Items.Count > Program.Settings.BookmarksCount )
+      Items.RemoveAt(0);
+    Save();
+  }
 
-  //public void Remove(ReferenceItem reference)
-  //{
-  //  Items.Remove(reference);
-  //  Save();
-  //}
+  public void Remove(DecupletItem decuplet)
+  {
+    Items.Remove(decuplet);
+    Save();
+  }
 
-  //public Bookmarks(string filePath) : base(filePath)
-  //{
-  //}
+  public Bookmarks(string filePath) : base(filePath)
+  {
+  }
 
 }

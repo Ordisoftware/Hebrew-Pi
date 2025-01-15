@@ -11,14 +11,14 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-10 </created>
-/// <edited> 2025-01-14 </edited>
+/// <edited> 2025-01-15 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 /// <summary>
 /// Provides application's main form.
 /// </summary>
 /// <seealso cref="T:System.Windows.Forms.Form"/>
-public partial class MainForm
+partial class MainForm
 {
 
   private long MotifSize = 10;
@@ -35,10 +35,10 @@ public partial class MainForm
       try
       {
         UpdateStatusInfo(AppTranslations.EmptyingTablesText);
-        DB.Connection.DeleteAll<DecupletRow>();
-        DB.Connection.DeleteAll<IterationRow>();
+        DB.DeleteAll<DecupletRow>();
+        DB.DeleteAll<IterationRow>();
         UpdateStatusInfo(AppTranslations.PopulatingText);
-        DB.Connection.BeginTransaction();
+        DB.BeginTransaction();
         UpdateStatusProgress(string.Format(AppTranslations.CreateDataProgress, "0"));
         int charsRead;
         long totalMotifs = 0;
@@ -56,19 +56,18 @@ public partial class MainForm
           reader.BaseStream.Seek(2, SeekOrigin.Current);
         while ( ( charsRead = reader.Read(buffer, 0, BufferSize) ) > 0 )
         {
+          if ( !CheckIfProcessingCanContinue().Result ) break;
           for ( long indexBuffer = 0; indexBuffer < charsRead; indexBuffer += MotifSize )
             if ( indexBuffer + MotifSize <= charsRead )
             {
-              if ( Globals.CancelRequired ) break;
-              while ( Globals.PauseRequired ) await Task.Delay(500);
-              motif = 0;
-              for ( long indexMotif = 0; indexMotif < MotifSize; indexMotif++ )
+              if ( !CheckIfProcessingCanContinue().Result ) break;
+              motif = buffer[indexBuffer] - 48; // motif = motif * 10 + ( buffer[indexBuffer + indexMotif] - '0' );
+              for ( long indexMotif = 1; indexMotif < MotifSize; indexMotif++ )
               {
                 long shiftLeft = motif << 1;
                 motif = ( shiftLeft << 2 ) + shiftLeft + buffer[indexBuffer + indexMotif] - 48;
-                // motif = motif * 10 + ( buffer[indexBuffer + indexMotif] - '0' );
               }
-              DB.Connection.Insert(new DecupletRow { Motif = motif });
+              DB.Insert(new DecupletRow { Position = totalMotifs + 1, Motif = motif });
               totalMotifs++;
               if ( totalMotifs % CreateDataPaging == 0 )
                 UpdateStatusProgress(string.Format(AppTranslations.CreateDataProgress, totalMotifs.ToString("N0")));
@@ -81,15 +80,17 @@ public partial class MainForm
               }
             }
         }
-        UpdateStatusInfo(AppTranslations.CommittingText);
-        DB.Connection.Commit();
-        UpdateStatusInfo(AppTranslations.IndexingText);
-        DB.Connection.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
-        if ( Globals.CancelRequired )
-          UpdateStatusInfo(AppTranslations.CanceledText);
-        else
-          UpdateStatusInfo(AppTranslations.FinishedText);
-        reader.Close();
+        if ( CheckIfProcessingCanContinue().Result )
+        {
+          UpdateStatusInfo(AppTranslations.CommittingText);
+          DB.Commit();
+        }
+        else DB.Rollback();
+        if ( CheckIfProcessingCanContinue().Result )
+        {
+          UpdateStatusInfo(AppTranslations.IndexingText);
+          DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
+        }
       }
       catch ( Exception ex )
       {
@@ -97,13 +98,15 @@ public partial class MainForm
       }
       finally
       {
-        Globals.PauseRequired = false;
-        Globals.CancelRequired = false;
         if ( reader is not null )
         {
           reader.Close();
           reader.Dispose();
         }
+        if ( Globals.CancelRequired )
+          UpdateStatusInfo(AppTranslations.CanceledText);
+        else
+          UpdateStatusInfo(AppTranslations.FinishedText);
       }
   }
 

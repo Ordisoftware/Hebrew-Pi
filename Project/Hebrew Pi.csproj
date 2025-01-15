@@ -370,13 +370,12 @@
     <Compile Include="Source\Common\Hebrew\WinForms\CelebrationVersesBoardForm.Designer.cs">
       <DependentUpon>CelebrationVersesBoardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Source\Database\AbstractRow.cs" />
-    <Compile Include="Source\Database\ApplicationDatabase.cs" />
-    <Compile Include="Source\Database\ApplicationDatabase.Fill.cs" />
     <Compile Include="Source\Database\IterationRow.cs" />
     <Compile Include="Source\Database\DecupletRow.cs" />
     <Compile Include="Source\Entities\Bookmarks.cs" />
     <Compile Include="Source\Entities\History.cs" />
+    <Compile Include="Source\Entities\DecupletItem.cs" />
+    <Compile Include="Source\Entities\DecupletList.cs" />
     <Compile Include="Source\Enums\ViewMode.cs" />
     <Compile Include="Source\Forms\Boxes\StatisticsForm.cs">
       <SubType>Form</SubType>
@@ -384,16 +383,11 @@
     <Compile Include="Source\Forms\Boxes\StatisticsForm.designer.cs">
       <DependentUpon>StatisticsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\MainForm\Data\MainForm.DB.LoadData.cs">
+    <Compile Include="Source\Enums\PiFirstDecimalsLenght.cs" />
+    <Compile Include="Source\Forms\MainForm\Data\MainForm.CreateData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Enums\PiDecimalsExtractSize.cs" />
-    <Compile Include="Source\Entities\GroupInfo.cs" />
-    <Compile Include="Source\Forms\MainForm\MainForm.SQLite.CreateData.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\MainForm\MainForm.TextFile.cs" />
-    <Compile Include="Source\Forms\MainForm\MainForm.SQLite.Batch.cs">
+    <Compile Include="Source\Forms\MainForm\Data\MainForm.Batch.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Forms\MainForm\MainForm.cs">

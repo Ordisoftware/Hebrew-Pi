@@ -15,8 +15,9 @@
 namespace Ordisoftware.Hebrew.Pi;
 
 /// <summary>
-/// The application's main window.
+/// Provides application's main form.
 /// </summary>
+/// <seealso cref="T:System.Windows.Forms.Form"/>
 partial class MainForm
 {
 

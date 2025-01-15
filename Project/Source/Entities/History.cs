@@ -14,24 +14,24 @@
 /// <edited> 2025-01-12 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-class History //: ReferencesList
+class History : DecupletList
 {
 
-  //[SuppressMessage("Performance", "U2U1203:Use foreach efficiently", Justification = "Collection is modified")]
-  //public override void Add(ReferenceItem reference)
-  //{
-  //  if ( reference is null || Program.Settings.HistoryCount < 1 )
-  //    return;
-  //  foreach ( var item in Items.Where(item => item.Equals(reference)).ToList() )
-  //    Items.Remove(item);
-  //  Items.Insert(0, new ReferenceItem(reference));
-  //  while ( Items.Count > Program.Settings.HistoryCount )
-  //    Items.RemoveAt(Items.Count - 1);
-  //  Save();
-  //}
+  [SuppressMessage("Performance", "U2U1203:Use foreach efficiently", Justification = "Collection is modified")]
+  public override void Add(DecupletItem decuplet)
+  {
+    if ( decuplet is null || Program.Settings.HistoryCount < 1 )
+      return;
+    foreach ( var item in Items.Where(item => item.Equals(decuplet)).ToList() )
+      Items.Remove(item);
+    Items.Insert(0, new DecupletItem(decuplet));
+    while ( Items.Count > Program.Settings.HistoryCount )
+      Items.RemoveAt(Items.Count - 1);
+    Save();
+  }
 
-  //public History(string filePath) : base(filePath)
-  //{
-  //}
+  public History(string filePath) : base(filePath)
+  {
+  }
 
 }

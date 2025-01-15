@@ -11,21 +11,22 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-11 </created>
-/// <edited> 2025-01-11 </edited>
+/// <edited> 2025-01-15 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 using SQLite;
 
 [Serializable]
-[Table("Decuplets")]
-public class DecupletRow : AbstractRow
+[Table(TableName)]
+public class DecupletRow
 {
 
   public const string TableName = "Decuplets";
 
-  [PrimaryKey, AutoIncrement]
+  [PrimaryKey]
   public long Position { get; set; }
 
+  [NotNull]
   public long Motif { get; set; }
 
 }

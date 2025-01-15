@@ -11,23 +11,25 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-13 </created>
-/// <edited> 2025-01-13 </edited>
+/// <edited> 2025-01-15 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 using SQLite;
 
 [Serializable]
-[Table("Iterations")]
-public class IterationRow : AbstractRow
+[Table(TableName)]
+public class IterationRow
 {
 
   public const string TableName = "Iterations";
 
-  [PrimaryKey, AutoIncrement]
+  [PrimaryKey]
   public long Iteration { get; set; }
 
+  [NotNull]
   public long RepeatedCount { get; set; }
 
-  public DateTime Timestamp { get; set; }
+  [NotNull]
+  public DateTime Date { get; set; }
 
 }

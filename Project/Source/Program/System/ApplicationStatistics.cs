@@ -35,7 +35,7 @@ class ApplicationStatistics
     => Program.Settings.BenchmarkRendering.FormatMilliseconds();
 
   public string DBTotalRecordsCount
-    => ApplicationDatabase.Instance.Decuplets?.Count.ToString() ?? SysTranslations.NullSlot.GetLang();
+    => MainForm.Instance.DB?.CountRows(DecupletRow.TableName).ToString() ?? SysTranslations.NullSlot.GetLang();
 
   public string DBEngine
     => SQLiteNetORM.EngineNameAndVersion;
@@ -67,7 +67,7 @@ class ApplicationStatistics
         {
           LoadingForm.Instance.Initialize(SysTranslations.CalculatingDataMemorySize.GetLang(), 4, quantify: false);
           UpdateDBMemorySizeRequired = false;
-          long size1 = ApplicationDatabase.Instance.Decuplets?.SizeOf() ?? 0;
+          long size1 = 0; // ApplicationDatabase.Instance.Decuplets?.SizeOf() ?? 0;
           LoadingForm.Instance.DoProgress();
           _DBMemorySize = size1 > 0
             ? size1.FormatBytesSize()

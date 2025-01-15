@@ -89,7 +89,7 @@ partial class MainForm : Form
     this.InitDropDowns();
     Refresh();
     //DoBackupDB();
-    LoadData();
+    //LoadData();
     //TimerAutoSave.Enabled = Settings.AutoSaveDelay != 0;
     //if ( TimerAutoSave.Enabled )
     //  TimerAutoSave.Interval = Settings.AutoSaveDelay * Globals.MilliSecondsInOneMinute;

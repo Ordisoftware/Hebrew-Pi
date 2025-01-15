@@ -11,14 +11,14 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-13 </created>
-/// <edited> 2025-01-14 </edited>
+/// <edited> 2025-01-15 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 /// <summary>
 /// Provides application's main form.
 /// </summary>
 /// <seealso cref="T:System.Windows.Forms.Form"/>
-public partial class MainForm
+partial class MainForm
 {
 
   private async Task DoActionBatchRun(long startingIterationNumber)
@@ -28,8 +28,8 @@ public partial class MainForm
       TestCounter = 10;
       if ( startingIterationNumber == 0 )
       {
-        DB.Connection.DropTable<IterationRow>();
-        DB.Connection.CreateTable<IterationRow>();
+        DB.DropTable<IterationRow>();
+        DB.CreateTable<IterationRow>();
       }
       bool firstIteration = true;
       long countPrevious = 0;
@@ -37,16 +37,14 @@ public partial class MainForm
       long iteration = 0;
       while ( true )
       {
-        if ( Globals.CancelRequired ) break;
-        while ( Globals.PauseRequired ) await Task.Delay(500);
+        if ( !CheckIfProcessingCanContinue().Result ) break;
         UpdateStatusProgress(string.Format(AppTranslations.IterationText, iteration, "?"));
         UpdateStatusInfo(AppTranslations.CountingText);
         countCurrent = GetRepeatingCount().Result;
         UpdateStatusProgress(string.Format(AppTranslations.IterationText, iteration, countCurrent));
         UpdateStatusInfo(AppTranslations.CountedText);
-        DB.Connection.Insert(new IterationRow { RepeatedCount = countCurrent, Timestamp = DateTime.Now });
-        if ( Globals.CancelRequired ) break;
-        while ( Globals.PauseRequired ) await Task.Delay(500);
+        DB.Insert(new IterationRow { Iteration = iteration, RepeatedCount = countCurrent, Date = DateTime.Now });
+        if ( !CheckIfProcessingCanContinue().Result ) break;
         if ( countCurrent == 0 )
         {
           DisplayManager.Show(string.Format(AppTranslations.NoRepeatedText, iteration));
@@ -55,31 +53,34 @@ public partial class MainForm
         if ( !firstIteration )
           if ( countPrevious > countCurrent )
           {
-            if ( !DisplayManager.QueryYesNo(string.Format(AppTranslations.AskStartNextIfMore, iteration, countPrevious, countCurrent)) )
+            if ( !DisplayManager.QueryYesNo(string.Format(AppTranslations.AskStartNextIfMore,
+                                                          iteration,
+                                                          countPrevious,
+                                                          countCurrent)) )
               Globals.CancelRequired = true;
           }
           else
           {
-            if ( !DisplayManager.QueryYesNo(string.Format(AppTranslations.AskStartNextIfLess, iteration, countPrevious, countCurrent)) )
+            if ( !DisplayManager.QueryYesNo(string.Format(AppTranslations.AskStartNextIfLess,
+                                                          iteration,
+                                                          countPrevious,
+                                                          countCurrent)) )
               Globals.CancelRequired = true;
           }
         countPrevious = countCurrent;
         firstIteration = false;
         UpdateStatusInfo(AppTranslations.UpdatingText);
         AddPositionToMotifs();
-        if ( Globals.CancelRequired ) break;
-        while ( Globals.PauseRequired ) await Task.Delay(500);
+        if ( !CheckIfProcessingCanContinue().Result ) break;
         iteration++;
       }
+    }
+    finally
+    {
       if ( Globals.CancelRequired )
         UpdateStatusInfo(AppTranslations.CanceledText);
       else
         UpdateStatusInfo(AppTranslations.FinishedText);
-    }
-    finally
-    {
-      Globals.PauseRequired = false;
-      Globals.CancelRequired = false;
     }
   }
 
@@ -100,7 +101,7 @@ public partial class MainForm
                     HAVING COUNT(Motif) > 1
                   );";
 
-      return DB.Connection.Query<int>(query).Single();
+      return DB.Query<int>(query).Single();
     }
     catch ( Exception ex )
     {
@@ -120,7 +121,7 @@ public partial class MainForm
                     GROUP BY Motif
                     HAVING COUNT(*) > 1
                   );";
-    DB.Connection.Execute(query);
+    DB.Execute(query);
   }
 
 }

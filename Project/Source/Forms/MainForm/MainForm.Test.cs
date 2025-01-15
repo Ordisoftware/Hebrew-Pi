@@ -14,14 +14,36 @@
 /// <edited> 2025-01-11 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-//public partial class MainForm
+//partial class MainForm
 //{
+
+//  // Proof of concept:
+//  //   - Feasibility testing
+//  //   - Theory validation regarding the addition of positions to repeating motifs
+
+//  static public string File_NoRepeatedText = "Aucun répété.";
+//  static public string File_PrefixText = "Sur l'échantillon donné, la théorie des répétés ajoutés aux positions";
+//  static public string File_OkText = $"{File_PrefixText} fonctionne.";
+//  static public string File_NotOkText = $"{File_PrefixText} ne fonctionne pas.";
+//  static public string File_SavedFixedText = "Les groupes dupliquée ont été corrigés et le fichier reconstruit.";
+
+//  public class GroupInfo
+//  {
+//    public int Count { get; set; }
+//    public string Indices { get; set; }
+//    public GroupInfo(int count, string indices)
+//    {
+//      Count = count;
+//      Indices = indices;
+//    }
+//  }
+
+//  private Dictionary<string, GroupInfo> PiDecuplets;
 
 //  private void DoActionFileLoad()
 //  {
-//    string piDecimals = File.ReadAllText(Path.Combine(Globals.DocumentsFolderPath, TextFileName.ToString()) + ".txt").Trim();
-//    if ( piDecimals.StartsWith("3.") )
-//      piDecimals = piDecimals.Substring(2);
+//    string piDecimals = File.ReadAllText(Path.Combine(Globals.DocumentsFolderPath, PiDecimalsExtract.ToString()) + ".txt").Trim();
+//    if ( piDecimals.StartsWith("3.") ) piDecimals = piDecimals.Substring(2);
 //    PiDecuplets = Enumerable
 //      .Range(0, piDecimals.Length / 10)
 //      .Select(i => new { Index = i + 1, Group = piDecimals.Substring(i * 10, 10) })
@@ -77,7 +99,8 @@ namespace Ordisoftware.Hebrew.Pi;
 //    var builder = new StringBuilder();
 //    foreach ( var index in indicesOrdered )
 //      builder.Append(piDecimals[index]);
-//    File.WriteAllText(Path.Combine(Globals.DocumentsFolderPath, TextFileName.ToString()) + "_Fixed.txt", builder.ToString());
+//    File.WriteAllText(Path.Combine(Globals.DocumentsFolderPath, PiDecimalsExtract.ToString()) + "_Fixed.txt",
+//                      builder.ToString());
 //    MessageBox.Show(File_SavedFixedText);
 //  }
 

@@ -30,6 +30,7 @@
     {
       this.Grid = new System.Windows.Forms.DataGridView();
       this.PanelTop = new System.Windows.Forms.Panel();
+      this.SelectDbCache = new System.Windows.Forms.ComboBox();
       this.SelectFileName = new System.Windows.Forms.ComboBox();
       this.ActionBatchPause = new System.Windows.Forms.Button();
       this.ActionBatchStop = new System.Windows.Forms.Button();
@@ -63,6 +64,7 @@
       // 
       // PanelTop
       // 
+      this.PanelTop.Controls.Add(this.SelectDbCache);
       this.PanelTop.Controls.Add(this.SelectFileName);
       this.PanelTop.Controls.Add(this.ActionBatchPause);
       this.PanelTop.Controls.Add(this.ActionBatchStop);
@@ -76,11 +78,27 @@
       this.PanelTop.Size = new System.Drawing.Size(784, 50);
       this.PanelTop.TabIndex = 1;
       // 
+      // SelectDbCache
+      // 
+      this.SelectDbCache.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.SelectDbCache.FormattingEnabled = true;
+      this.SelectDbCache.Items.AddRange(new object[] {
+            "0",
+            "4",
+            "8",
+            "16",
+            "24"});
+      this.SelectDbCache.Location = new System.Drawing.Point(12, 12);
+      this.SelectDbCache.Name = "SelectDbCache";
+      this.SelectDbCache.Size = new System.Drawing.Size(50, 21);
+      this.SelectDbCache.TabIndex = 3;
+      this.SelectDbCache.SelectedIndexChanged += new System.EventHandler(this.SelectDbCache_SelectedIndexChanged);
+      // 
       // SelectFileName
       // 
       this.SelectFileName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.SelectFileName.FormattingEnabled = true;
-      this.SelectFileName.Location = new System.Drawing.Point(12, 15);
+      this.SelectFileName.Location = new System.Drawing.Point(68, 12);
       this.SelectFileName.Name = "SelectFileName";
       this.SelectFileName.Size = new System.Drawing.Size(121, 21);
       this.SelectFileName.TabIndex = 3;
@@ -89,7 +107,7 @@
       // ActionBatchPause
       // 
       this.ActionBatchPause.Enabled = false;
-      this.ActionBatchPause.Location = new System.Drawing.Point(569, 14);
+      this.ActionBatchPause.Location = new System.Drawing.Point(625, 11);
       this.ActionBatchPause.Name = "ActionBatchPause";
       this.ActionBatchPause.Size = new System.Drawing.Size(95, 23);
       this.ActionBatchPause.TabIndex = 2;
@@ -100,7 +118,7 @@
       // ActionBatchStop
       // 
       this.ActionBatchStop.Enabled = false;
-      this.ActionBatchStop.Location = new System.Drawing.Point(468, 14);
+      this.ActionBatchStop.Location = new System.Drawing.Point(524, 11);
       this.ActionBatchStop.Name = "ActionBatchStop";
       this.ActionBatchStop.Size = new System.Drawing.Size(95, 23);
       this.ActionBatchStop.TabIndex = 2;
@@ -111,7 +129,7 @@
       // ActionBatchRun
       // 
       this.ActionBatchRun.Enabled = false;
-      this.ActionBatchRun.Location = new System.Drawing.Point(367, 14);
+      this.ActionBatchRun.Location = new System.Drawing.Point(423, 11);
       this.ActionBatchRun.Name = "ActionBatchRun";
       this.ActionBatchRun.Size = new System.Drawing.Size(95, 23);
       this.ActionBatchRun.TabIndex = 2;
@@ -122,7 +140,7 @@
       // ActionDbClose
       // 
       this.ActionDbClose.Enabled = false;
-      this.ActionDbClose.Location = new System.Drawing.Point(203, 14);
+      this.ActionDbClose.Location = new System.Drawing.Point(259, 11);
       this.ActionDbClose.Name = "ActionDbClose";
       this.ActionDbClose.Size = new System.Drawing.Size(58, 23);
       this.ActionDbClose.TabIndex = 2;
@@ -133,7 +151,7 @@
       // ActionDbOpen
       // 
       this.ActionDbOpen.Enabled = false;
-      this.ActionDbOpen.Location = new System.Drawing.Point(139, 14);
+      this.ActionDbOpen.Location = new System.Drawing.Point(195, 11);
       this.ActionDbOpen.Name = "ActionDbOpen";
       this.ActionDbOpen.Size = new System.Drawing.Size(58, 23);
       this.ActionDbOpen.TabIndex = 2;
@@ -144,7 +162,7 @@
       // ActionDbCreateData
       // 
       this.ActionDbCreateData.Enabled = false;
-      this.ActionDbCreateData.Location = new System.Drawing.Point(266, 14);
+      this.ActionDbCreateData.Location = new System.Drawing.Point(322, 11);
       this.ActionDbCreateData.Name = "ActionDbCreateData";
       this.ActionDbCreateData.Size = new System.Drawing.Size(95, 23);
       this.ActionDbCreateData.TabIndex = 2;
@@ -207,6 +225,7 @@
       this.Name = "MainForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Hebrew Pi";
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
       ((System.ComponentModel.ISupportInitialize)(this.Grid)).EndInit();
       this.PanelTop.ResumeLayout(false);
       this.StatusStrip.ResumeLayout(false);
@@ -233,5 +252,6 @@
     private ToolStripStatusLabel LabelStatusSep2;
     private Button ActionBatchPause;
     private Button ActionDbClose;
+    private ComboBox SelectDbCache;
   }
 }
