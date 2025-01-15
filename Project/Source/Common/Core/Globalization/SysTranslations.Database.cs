@@ -74,16 +74,22 @@ static public partial class SysTranslations
     [Language.FR] = "Échec du vacuum de la base de données."
   };
 
+  static public readonly TranslationsDictionary DatabaseVacuumSuccess = new()
+  {
+    [Language.EN] = "Database vacuum succeeded.",
+    [Language.FR] = "Succès du vacuum de la base de données."
+  };
+
   static public readonly TranslationsDictionary DatabaseSetTempDirError = new()
   {
     [Language.EN] = "Database set temporary directory failed.",
     [Language.FR] = "Échec de définition du dossier temporaire de la base de données."
   };
 
-  static public readonly TranslationsDictionary DatabaseVacuumSuccess = new()
+  static public readonly TranslationsDictionary DatabaseSetCacheSizeError = new()
   {
-    [Language.EN] = "Database vacuum succeeded.",
-    [Language.FR] = "Succès du vacuum de la base de données."
+    [Language.EN] = "Database set cache size failed.",
+    [Language.FR] = "Échec de définition de la taille du cache de la base de données."
   };
 
   static public readonly TranslationsDictionary DatabaseNoProcessConcurrency = new()

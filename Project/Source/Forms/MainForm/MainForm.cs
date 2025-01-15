@@ -138,8 +138,7 @@ partial class MainForm : Form
   {
     if ( DB is not null && int.TryParse(SelectDbCache.SelectedItem?.ToString(), out var value) )
     {
-      value = value == 0 ? 8192 : value * 1024 * 1024;
-      DB.Execute($"PRAGMA cache_size = -{value};");
+      DB.SetCacheSize(value * 1024 * 1024);
     }
   }
 
@@ -152,14 +151,6 @@ partial class MainForm : Form
     DB.CreateTable<DecupletRow>();
     DB.CreateTable<IterationRow>();
     SetDbCache();
-    //OFF
-    //PRAGMA journal_mode = OFF;
-    //PRAGMA synchronous = OFF;
-    //PRAGMA locking_mode = EXCLUSIVE;
-    //ON
-    //PRAGMA journal_mode = DELETE;
-    //PRAGMA synchronous = FULL;
-
     ActionDbCreateData.Enabled = true;
     ActionBatchRun.Enabled = true;
     UpdateButtons();
