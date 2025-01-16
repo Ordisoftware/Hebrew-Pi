@@ -50,7 +50,11 @@
       this.ToolStripSeparatorExit = new System.Windows.Forms.ToolStripSeparator();
       this.ActionPreferences = new System.Windows.Forms.ToolStripButton();
       this.ActionSelectView = new System.Windows.Forms.ToolStripDropDownButton();
+      this.ActionViewDecode = new System.Windows.Forms.ToolStripMenuItem();
       this.ActionViewGrid = new System.Windows.Forms.ToolStripMenuItem();
+      this.ActionViewPopulate = new System.Windows.Forms.ToolStripMenuItem();
+      this.ActionViewNormalize = new System.Windows.Forms.ToolStripMenuItem();
+      this.ActionViewStatistics = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
       this.ActionBookmarks = new System.Windows.Forms.ToolStripDropDownButton();
       this.ActionAddBookmark = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,14 +127,16 @@
       this.PanelMainInner = new System.Windows.Forms.Panel();
       this.PanelMainCenter = new System.Windows.Forms.Panel();
       this.TabControl = new System.Windows.Forms.TabControl();
-      this.TabPageViewData = new System.Windows.Forms.TabPage();
-      this.PanelViewTranslations = new System.Windows.Forms.Panel();
-      this.TabPageCreateData = new System.Windows.Forms.TabPage();
-      this.PanelViewVerses = new System.Windows.Forms.Panel();
-      this.TabPageReduceRepetitions = new System.Windows.Forms.TabPage();
-      this.PanelViewOriginalText = new System.Windows.Forms.Panel();
-      this.TabPageIterationStatistics = new System.Windows.Forms.TabPage();
-      this.PanelViewELS50 = new System.Windows.Forms.Panel();
+      this.TabPageDecode = new System.Windows.Forms.TabPage();
+      this.PanelViewDecode = new System.Windows.Forms.Panel();
+      this.TabPageGrid = new System.Windows.Forms.TabPage();
+      this.PanelViewGrid = new System.Windows.Forms.Panel();
+      this.TabPagePopulate = new System.Windows.Forms.TabPage();
+      this.PanelViewPopulate = new System.Windows.Forms.Panel();
+      this.TabPageNormalize = new System.Windows.Forms.TabPage();
+      this.PanelViewNormalize = new System.Windows.Forms.Panel();
+      this.TabPageStatistics = new System.Windows.Forms.TabPage();
+      this.PanelViewStatistics = new System.Windows.Forms.Panel();
       this.PanelSepTop = new System.Windows.Forms.Panel();
       this.PanelTitle = new System.Windows.Forms.Panel();
       this.PanelTitleInner = new System.Windows.Forms.Panel();
@@ -146,7 +152,6 @@
       this.SelectSearchRequestAllUntranslated = new System.Windows.Forms.RadioButton();
       this.SelectSearchRequestAllTranslated = new System.Windows.Forms.RadioButton();
       this.SelectSearchTypeTranslation = new System.Windows.Forms.TabPage();
-      this.EditSearchTranslation = new Ordisoftware.Core.TextBoxEx();
       this.PanelSeparator = new System.Windows.Forms.Panel();
       this.panel2 = new System.Windows.Forms.Panel();
       this.SelectSearchTranslationOnlyTranslations = new System.Windows.Forms.RadioButton();
@@ -155,7 +160,6 @@
       this.LabelSearchTranslationHelp = new System.Windows.Forms.Label();
       this.SelectSearchTypeHebrew = new System.Windows.Forms.TabPage();
       this.PanelSearchTop = new System.Windows.Forms.Panel();
-      this.EditSearchWord = new Ordisoftware.Hebrew.LettersControl();
       this.PanelSearchFiltersRight = new System.Windows.Forms.Panel();
       this.ActionSearchClear = new System.Windows.Forms.Button();
       this.ActionSearchNavigateLast = new System.Windows.Forms.Button();
@@ -166,7 +170,6 @@
       this.EditSearchInTorah = new System.Windows.Forms.CheckBox();
       this.EditSearchInNeviim = new System.Windows.Forms.CheckBox();
       this.EditSearchInKetouvim = new System.Windows.Forms.CheckBox();
-      this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.SelectSearchPaging = new System.Windows.Forms.TrackBar();
       this.SelectSearchInBook = new System.Windows.Forms.ComboBox();
       this.ActionSearchInAddAll = new System.Windows.Forms.Button();
@@ -175,9 +178,12 @@
       this.PanelViewSearchSeparator = new System.Windows.Forms.Panel();
       this.PanelSearchResultsOuter = new System.Windows.Forms.Panel();
       this.PanelSearchResults = new System.Windows.Forms.Panel();
+      this.TimerBatch = new System.Windows.Forms.Timer(this.components);
+      this.EditSearchTranslation = new Ordisoftware.Core.TextBoxEx();
+      this.EditSearchWord = new Ordisoftware.Hebrew.LettersControl();
+      this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
-      this.TimerBatch = new System.Windows.Forms.Timer(this.components);
       this.PanelTop.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -186,10 +192,11 @@
       this.PanelMainInner.SuspendLayout();
       this.PanelMainCenter.SuspendLayout();
       this.TabControl.SuspendLayout();
-      this.TabPageViewData.SuspendLayout();
-      this.TabPageCreateData.SuspendLayout();
-      this.TabPageReduceRepetitions.SuspendLayout();
-      this.TabPageIterationStatistics.SuspendLayout();
+      this.TabPageDecode.SuspendLayout();
+      this.TabPageGrid.SuspendLayout();
+      this.TabPagePopulate.SuspendLayout();
+      this.TabPageNormalize.SuspendLayout();
+      this.TabPageStatistics.SuspendLayout();
       this.PanelTitle.SuspendLayout();
       this.PanelTitleInner.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).BeginInit();
@@ -414,12 +421,27 @@
       // 
       this.ActionSelectView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
       this.ActionSelectView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ActionViewGrid});
+            this.ActionViewDecode,
+            this.ActionViewGrid,
+            this.ActionViewPopulate,
+            this.ActionViewNormalize,
+            this.ActionViewStatistics});
       this.ActionSelectView.Image = ((System.Drawing.Image)(resources.GetObject("ActionSelectView.Image")));
       this.ActionSelectView.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionSelectView.Name = "ActionSelectView";
       this.ActionSelectView.Padding = new System.Windows.Forms.Padding(5);
       this.ActionSelectView.Size = new System.Drawing.Size(55, 46);
+      // 
+      // ActionViewDecode
+      // 
+      this.ActionViewDecode.CheckOnClick = true;
+      this.ActionViewDecode.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewDecode.Image")));
+      this.ActionViewDecode.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.ActionViewDecode.Name = "ActionViewDecode";
+      this.ActionViewDecode.ShortcutKeys = System.Windows.Forms.Keys.F1;
+      this.ActionViewDecode.Size = new System.Drawing.Size(196, 38);
+      this.ActionViewDecode.Text = "Decode";
+      this.ActionViewDecode.Click += new System.EventHandler(this.ActionViewDecode_Click);
       // 
       // ActionViewGrid
       // 
@@ -427,9 +449,43 @@
       this.ActionViewGrid.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewGrid.Image")));
       this.ActionViewGrid.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionViewGrid.Name = "ActionViewGrid";
-      this.ActionViewGrid.ShortcutKeys = System.Windows.Forms.Keys.F3;
-      this.ActionViewGrid.Size = new System.Drawing.Size(131, 38);
+      this.ActionViewGrid.ShortcutKeys = System.Windows.Forms.Keys.F2;
+      this.ActionViewGrid.Size = new System.Drawing.Size(196, 38);
       this.ActionViewGrid.Text = "Grid";
+      this.ActionViewGrid.Click += new System.EventHandler(this.ActionViewGrid_Click);
+      // 
+      // ActionViewPopulate
+      // 
+      this.ActionViewPopulate.CheckOnClick = true;
+      this.ActionViewPopulate.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewPopulate.Image")));
+      this.ActionViewPopulate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.ActionViewPopulate.Name = "ActionViewPopulate";
+      this.ActionViewPopulate.ShortcutKeys = System.Windows.Forms.Keys.F3;
+      this.ActionViewPopulate.Size = new System.Drawing.Size(196, 38);
+      this.ActionViewPopulate.Text = "Populate";
+      this.ActionViewPopulate.Click += new System.EventHandler(this.ActionViewPopulate_Click);
+      // 
+      // ActionViewNormalize
+      // 
+      this.ActionViewNormalize.CheckOnClick = true;
+      this.ActionViewNormalize.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewNormalize.Image")));
+      this.ActionViewNormalize.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.ActionViewNormalize.Name = "ActionViewNormalize";
+      this.ActionViewNormalize.ShortcutKeys = System.Windows.Forms.Keys.F4;
+      this.ActionViewNormalize.Size = new System.Drawing.Size(196, 38);
+      this.ActionViewNormalize.Text = "Normalize";
+      this.ActionViewNormalize.Click += new System.EventHandler(this.ActionViewNormalize_Click);
+      // 
+      // ActionViewStatistics
+      // 
+      this.ActionViewStatistics.CheckOnClick = true;
+      this.ActionViewStatistics.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewStatistics.Image")));
+      this.ActionViewStatistics.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.ActionViewStatistics.Name = "ActionViewStatistics";
+      this.ActionViewStatistics.ShortcutKeys = System.Windows.Forms.Keys.F5;
+      this.ActionViewStatistics.Size = new System.Drawing.Size(196, 38);
+      this.ActionViewStatistics.Text = "Statistics";
+      this.ActionViewStatistics.Click += new System.EventHandler(this.ActionViewStatistics_Click);
       // 
       // toolStripSeparator5
       // 
@@ -890,7 +946,7 @@
       this.ActionScreenPosition.Image = ((System.Drawing.Image)(resources.GetObject("ActionScreenPosition.Image")));
       this.ActionScreenPosition.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionScreenPosition.Name = "ActionScreenPosition";
-      this.ActionScreenPosition.Size = new System.Drawing.Size(323, 22);
+      this.ActionScreenPosition.Size = new System.Drawing.Size(252, 22);
       this.ActionScreenPosition.Text = "Screen position";
       // 
       // EditScreenNone
@@ -952,26 +1008,26 @@
       this.ActionResetWinSettings.Image = ((System.Drawing.Image)(resources.GetObject("ActionResetWinSettings.Image")));
       this.ActionResetWinSettings.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionResetWinSettings.Name = "ActionResetWinSettings";
-      this.ActionResetWinSettings.Size = new System.Drawing.Size(323, 22);
+      this.ActionResetWinSettings.Size = new System.Drawing.Size(252, 22);
       this.ActionResetWinSettings.Text = "Reset window settings";
       // 
       // Sep7
       // 
       this.Sep7.Name = "Sep7";
-      this.Sep7.Size = new System.Drawing.Size(320, 6);
+      this.Sep7.Size = new System.Drawing.Size(249, 6);
       // 
       // ActionShowKeyboardNotice
       // 
       this.ActionShowKeyboardNotice.Image = ((System.Drawing.Image)(resources.GetObject("ActionShowKeyboardNotice.Image")));
       this.ActionShowKeyboardNotice.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionShowKeyboardNotice.Name = "ActionShowKeyboardNotice";
-      this.ActionShowKeyboardNotice.Size = new System.Drawing.Size(323, 22);
+      this.ActionShowKeyboardNotice.Size = new System.Drawing.Size(252, 22);
       this.ActionShowKeyboardNotice.Text = "Keyboard shortcuts notice";
       // 
       // toolStripSeparator11
       // 
       this.toolStripSeparator11.Name = "toolStripSeparator11";
-      this.toolStripSeparator11.Size = new System.Drawing.Size(320, 6);
+      this.toolStripSeparator11.Size = new System.Drawing.Size(249, 6);
       // 
       // EditShowTips
       // 
@@ -980,7 +1036,7 @@
       this.EditShowTips.CheckState = System.Windows.Forms.CheckState.Checked;
       this.EditShowTips.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditShowTips.Name = "EditShowTips";
-      this.EditShowTips.Size = new System.Drawing.Size(323, 22);
+      this.EditShowTips.Size = new System.Drawing.Size(252, 22);
       this.EditShowTips.Text = "Show menu tips";
       // 
       // EditUseAdvancedDialogBoxes
@@ -990,7 +1046,7 @@
       this.EditUseAdvancedDialogBoxes.CheckState = System.Windows.Forms.CheckState.Checked;
       this.EditUseAdvancedDialogBoxes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditUseAdvancedDialogBoxes.Name = "EditUseAdvancedDialogBoxes";
-      this.EditUseAdvancedDialogBoxes.Size = new System.Drawing.Size(323, 22);
+      this.EditUseAdvancedDialogBoxes.Size = new System.Drawing.Size(252, 22);
       this.EditUseAdvancedDialogBoxes.Text = "Advanced dialogs";
       // 
       // EditSoundsEnabled
@@ -1000,7 +1056,7 @@
       this.EditSoundsEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
       this.EditSoundsEnabled.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditSoundsEnabled.Name = "EditSoundsEnabled";
-      this.EditSoundsEnabled.Size = new System.Drawing.Size(323, 22);
+      this.EditSoundsEnabled.Size = new System.Drawing.Size(252, 22);
       this.EditSoundsEnabled.Text = "Dialogs with sounds";
       // 
       // EditShowSuccessDialogs
@@ -1010,13 +1066,13 @@
       this.EditShowSuccessDialogs.CheckState = System.Windows.Forms.CheckState.Checked;
       this.EditShowSuccessDialogs.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditShowSuccessDialogs.Name = "EditShowSuccessDialogs";
-      this.EditShowSuccessDialogs.Size = new System.Drawing.Size(323, 22);
+      this.EditShowSuccessDialogs.Size = new System.Drawing.Size(252, 22);
       this.EditShowSuccessDialogs.Text = "Success dialogs instead of sounds";
       // 
       // toolStripSeparator15
       // 
       this.toolStripSeparator15.Name = "toolStripSeparator15";
-      this.toolStripSeparator15.Size = new System.Drawing.Size(320, 6);
+      this.toolStripSeparator15.Size = new System.Drawing.Size(249, 6);
       // 
       // EditConfirmClosing
       // 
@@ -1025,7 +1081,7 @@
       this.EditConfirmClosing.CheckState = System.Windows.Forms.CheckState.Checked;
       this.EditConfirmClosing.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditConfirmClosing.Name = "EditConfirmClosing";
-      this.EditConfirmClosing.Size = new System.Drawing.Size(323, 22);
+      this.EditConfirmClosing.Size = new System.Drawing.Size(252, 22);
       this.EditConfirmClosing.Text = "Confirm application closing";
       // 
       // PanelMain
@@ -1073,10 +1129,11 @@
       // 
       // TabControl
       // 
-      this.TabControl.Controls.Add(this.TabPageViewData);
-      this.TabControl.Controls.Add(this.TabPageCreateData);
-      this.TabControl.Controls.Add(this.TabPageReduceRepetitions);
-      this.TabControl.Controls.Add(this.TabPageIterationStatistics);
+      this.TabControl.Controls.Add(this.TabPageDecode);
+      this.TabControl.Controls.Add(this.TabPageGrid);
+      this.TabControl.Controls.Add(this.TabPagePopulate);
+      this.TabControl.Controls.Add(this.TabPageNormalize);
+      this.TabControl.Controls.Add(this.TabPageStatistics);
       this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
       this.TabControl.Location = new System.Drawing.Point(0, 0);
       this.TabControl.Name = "TabControl";
@@ -1086,91 +1143,112 @@
       this.TabControl.TabStop = false;
       this.TabControl.Visible = false;
       // 
-      // TabPageViewData
+      // TabPageDecode
       // 
-      this.TabPageViewData.Controls.Add(this.PanelViewTranslations);
-      this.TabPageViewData.Location = new System.Drawing.Point(4, 22);
-      this.TabPageViewData.Name = "TabPageViewData";
-      this.TabPageViewData.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageViewData.Size = new System.Drawing.Size(754, 258);
-      this.TabPageViewData.TabIndex = 1;
-      this.TabPageViewData.Text = "View Data";
-      this.TabPageViewData.UseVisualStyleBackColor = true;
+      this.TabPageDecode.Controls.Add(this.PanelViewDecode);
+      this.TabPageDecode.Location = new System.Drawing.Point(4, 22);
+      this.TabPageDecode.Name = "TabPageDecode";
+      this.TabPageDecode.Padding = new System.Windows.Forms.Padding(3);
+      this.TabPageDecode.Size = new System.Drawing.Size(754, 258);
+      this.TabPageDecode.TabIndex = 1;
+      this.TabPageDecode.Text = "Decode";
+      this.TabPageDecode.UseVisualStyleBackColor = true;
       // 
-      // PanelViewTranslations
+      // PanelViewDecode
       // 
-      this.PanelViewTranslations.BackColor = System.Drawing.SystemColors.Window;
-      this.PanelViewTranslations.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.PanelViewTranslations.Location = new System.Drawing.Point(3, 3);
-      this.PanelViewTranslations.Name = "PanelViewTranslations";
-      this.PanelViewTranslations.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewTranslations.Size = new System.Drawing.Size(748, 252);
-      this.PanelViewTranslations.TabIndex = 0;
+      this.PanelViewDecode.BackColor = System.Drawing.SystemColors.Control;
+      this.PanelViewDecode.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.PanelViewDecode.Location = new System.Drawing.Point(3, 3);
+      this.PanelViewDecode.Name = "PanelViewDecode";
+      this.PanelViewDecode.Padding = new System.Windows.Forms.Padding(10);
+      this.PanelViewDecode.Size = new System.Drawing.Size(748, 252);
+      this.PanelViewDecode.TabIndex = 0;
       // 
-      // TabPageCreateData
+      // TabPageGrid
       // 
-      this.TabPageCreateData.Controls.Add(this.PanelViewVerses);
-      this.TabPageCreateData.Location = new System.Drawing.Point(4, 22);
-      this.TabPageCreateData.Name = "TabPageCreateData";
-      this.TabPageCreateData.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageCreateData.Size = new System.Drawing.Size(754, 258);
-      this.TabPageCreateData.TabIndex = 0;
-      this.TabPageCreateData.Text = "Create Data";
-      this.TabPageCreateData.UseVisualStyleBackColor = true;
+      this.TabPageGrid.Controls.Add(this.PanelViewGrid);
+      this.TabPageGrid.Location = new System.Drawing.Point(4, 22);
+      this.TabPageGrid.Name = "TabPageGrid";
+      this.TabPageGrid.Padding = new System.Windows.Forms.Padding(3);
+      this.TabPageGrid.Size = new System.Drawing.Size(754, 258);
+      this.TabPageGrid.TabIndex = 0;
+      this.TabPageGrid.Text = "Grid";
+      this.TabPageGrid.UseVisualStyleBackColor = true;
       // 
-      // PanelViewVerses
+      // PanelViewGrid
       // 
-      this.PanelViewVerses.AutoScroll = true;
-      this.PanelViewVerses.AutoScrollMinSize = new System.Drawing.Size(50, 0);
-      this.PanelViewVerses.BackColor = System.Drawing.SystemColors.Control;
-      this.PanelViewVerses.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.PanelViewVerses.Location = new System.Drawing.Point(3, 3);
-      this.PanelViewVerses.Name = "PanelViewVerses";
-      this.PanelViewVerses.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewVerses.Size = new System.Drawing.Size(748, 252);
-      this.PanelViewVerses.TabIndex = 22;
+      this.PanelViewGrid.AutoScroll = true;
+      this.PanelViewGrid.AutoScrollMinSize = new System.Drawing.Size(50, 0);
+      this.PanelViewGrid.BackColor = System.Drawing.SystemColors.Control;
+      this.PanelViewGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.PanelViewGrid.Location = new System.Drawing.Point(3, 3);
+      this.PanelViewGrid.Name = "PanelViewGrid";
+      this.PanelViewGrid.Padding = new System.Windows.Forms.Padding(10);
+      this.PanelViewGrid.Size = new System.Drawing.Size(748, 252);
+      this.PanelViewGrid.TabIndex = 22;
       // 
-      // TabPageReduceRepetitions
+      // TabPagePopulate
       // 
-      this.TabPageReduceRepetitions.Controls.Add(this.PanelViewOriginalText);
-      this.TabPageReduceRepetitions.Location = new System.Drawing.Point(4, 22);
-      this.TabPageReduceRepetitions.Name = "TabPageReduceRepetitions";
-      this.TabPageReduceRepetitions.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageReduceRepetitions.Size = new System.Drawing.Size(754, 258);
-      this.TabPageReduceRepetitions.TabIndex = 3;
-      this.TabPageReduceRepetitions.Text = "Reduce Repetitions";
-      this.TabPageReduceRepetitions.UseVisualStyleBackColor = true;
+      this.TabPagePopulate.BackColor = System.Drawing.SystemColors.Control;
+      this.TabPagePopulate.Controls.Add(this.PanelViewPopulate);
+      this.TabPagePopulate.Location = new System.Drawing.Point(4, 22);
+      this.TabPagePopulate.Name = "TabPagePopulate";
+      this.TabPagePopulate.Padding = new System.Windows.Forms.Padding(3);
+      this.TabPagePopulate.Size = new System.Drawing.Size(754, 258);
+      this.TabPagePopulate.TabIndex = 4;
+      this.TabPagePopulate.Text = "Populate";
       // 
-      // PanelViewOriginalText
+      // PanelViewPopulate
       // 
-      this.PanelViewOriginalText.BackColor = System.Drawing.SystemColors.Window;
-      this.PanelViewOriginalText.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.PanelViewOriginalText.Location = new System.Drawing.Point(3, 3);
-      this.PanelViewOriginalText.Name = "PanelViewOriginalText";
-      this.PanelViewOriginalText.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewOriginalText.Size = new System.Drawing.Size(748, 252);
-      this.PanelViewOriginalText.TabIndex = 2;
+      this.PanelViewPopulate.BackColor = System.Drawing.SystemColors.Control;
+      this.PanelViewPopulate.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.PanelViewPopulate.Location = new System.Drawing.Point(3, 3);
+      this.PanelViewPopulate.Name = "PanelViewPopulate";
+      this.PanelViewPopulate.Padding = new System.Windows.Forms.Padding(10);
+      this.PanelViewPopulate.Size = new System.Drawing.Size(748, 252);
+      this.PanelViewPopulate.TabIndex = 2;
       // 
-      // TabPageIterationStatistics
+      // TabPageNormalize
       // 
-      this.TabPageIterationStatistics.Controls.Add(this.PanelViewELS50);
-      this.TabPageIterationStatistics.Location = new System.Drawing.Point(4, 22);
-      this.TabPageIterationStatistics.Name = "TabPageIterationStatistics";
-      this.TabPageIterationStatistics.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageIterationStatistics.Size = new System.Drawing.Size(754, 258);
-      this.TabPageIterationStatistics.TabIndex = 2;
-      this.TabPageIterationStatistics.Text = "Iteration Statistics";
-      this.TabPageIterationStatistics.UseVisualStyleBackColor = true;
+      this.TabPageNormalize.Controls.Add(this.PanelViewNormalize);
+      this.TabPageNormalize.Location = new System.Drawing.Point(4, 22);
+      this.TabPageNormalize.Name = "TabPageNormalize";
+      this.TabPageNormalize.Padding = new System.Windows.Forms.Padding(3);
+      this.TabPageNormalize.Size = new System.Drawing.Size(754, 258);
+      this.TabPageNormalize.TabIndex = 3;
+      this.TabPageNormalize.Text = "Normalize";
+      this.TabPageNormalize.UseVisualStyleBackColor = true;
       // 
-      // PanelViewELS50
+      // PanelViewNormalize
       // 
-      this.PanelViewELS50.BackColor = System.Drawing.SystemColors.Window;
-      this.PanelViewELS50.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.PanelViewELS50.Location = new System.Drawing.Point(3, 3);
-      this.PanelViewELS50.Name = "PanelViewELS50";
-      this.PanelViewELS50.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewELS50.Size = new System.Drawing.Size(748, 252);
-      this.PanelViewELS50.TabIndex = 1;
+      this.PanelViewNormalize.BackColor = System.Drawing.SystemColors.Control;
+      this.PanelViewNormalize.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.PanelViewNormalize.Location = new System.Drawing.Point(3, 3);
+      this.PanelViewNormalize.Name = "PanelViewNormalize";
+      this.PanelViewNormalize.Padding = new System.Windows.Forms.Padding(10);
+      this.PanelViewNormalize.Size = new System.Drawing.Size(748, 252);
+      this.PanelViewNormalize.TabIndex = 2;
+      // 
+      // TabPageStatistics
+      // 
+      this.TabPageStatistics.Controls.Add(this.PanelViewStatistics);
+      this.TabPageStatistics.Location = new System.Drawing.Point(4, 22);
+      this.TabPageStatistics.Name = "TabPageStatistics";
+      this.TabPageStatistics.Padding = new System.Windows.Forms.Padding(3);
+      this.TabPageStatistics.Size = new System.Drawing.Size(754, 258);
+      this.TabPageStatistics.TabIndex = 2;
+      this.TabPageStatistics.Text = "Statistics";
+      this.TabPageStatistics.UseVisualStyleBackColor = true;
+      // 
+      // PanelViewStatistics
+      // 
+      this.PanelViewStatistics.BackColor = System.Drawing.SystemColors.Control;
+      this.PanelViewStatistics.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.PanelViewStatistics.Location = new System.Drawing.Point(3, 3);
+      this.PanelViewStatistics.Name = "PanelViewStatistics";
+      this.PanelViewStatistics.Padding = new System.Windows.Forms.Padding(10);
+      this.PanelViewStatistics.Size = new System.Drawing.Size(748, 252);
+      this.PanelViewStatistics.TabIndex = 1;
       // 
       // PanelSepTop
       // 
@@ -1209,12 +1287,11 @@
       this.LabelTitleCenter.Dock = System.Windows.Forms.DockStyle.Fill;
       this.LabelTitleCenter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
       this.LabelTitleCenter.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-      this.LabelTitleCenter.Location = new System.Drawing.Point(300, 0);
+      this.LabelTitleCenter.Location = new System.Drawing.Point(150, 0);
       this.LabelTitleCenter.Name = "LabelTitleCenter";
-      this.LabelTitleCenter.Size = new System.Drawing.Size(162, 22);
+      this.LabelTitleCenter.Size = new System.Drawing.Size(462, 22);
       this.LabelTitleCenter.TabIndex = 2;
       this.LabelTitleCenter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.LabelTitleCenter.Visible = false;
       // 
       // LabelTitleLeft
       // 
@@ -1224,24 +1301,22 @@
       this.LabelTitleLeft.ImeMode = System.Windows.Forms.ImeMode.NoControl;
       this.LabelTitleLeft.Location = new System.Drawing.Point(0, 0);
       this.LabelTitleLeft.Name = "LabelTitleLeft";
-      this.LabelTitleLeft.Size = new System.Drawing.Size(300, 22);
+      this.LabelTitleLeft.Size = new System.Drawing.Size(150, 22);
       this.LabelTitleLeft.TabIndex = 0;
       this.LabelTitleLeft.Text = "PI DECIMALS";
       this.LabelTitleLeft.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.LabelTitleLeft.Visible = false;
       // 
       // LabelTitleRight
       // 
       this.LabelTitleRight.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
       this.LabelTitleRight.Dock = System.Windows.Forms.DockStyle.Right;
-      this.LabelTitleRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F);
+      this.LabelTitleRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
       this.LabelTitleRight.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-      this.LabelTitleRight.Location = new System.Drawing.Point(462, 0);
+      this.LabelTitleRight.Location = new System.Drawing.Point(612, 0);
       this.LabelTitleRight.Name = "LabelTitleRight";
-      this.LabelTitleRight.Size = new System.Drawing.Size(300, 22);
+      this.LabelTitleRight.Size = new System.Drawing.Size(150, 22);
       this.LabelTitleRight.TabIndex = 1;
       this.LabelTitleRight.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      this.LabelTitleRight.Visible = false;
       // 
       // PanelSearchFilters
       // 
@@ -1335,19 +1410,6 @@
       this.SelectSearchTypeTranslation.TabIndex = 1;
       this.SelectSearchTypeTranslation.Text = "Translation";
       // 
-      // EditSearchTranslation
-      // 
-      this.EditSearchTranslation.BackColor = System.Drawing.Color.AliceBlue;
-      this.EditSearchTranslation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.EditSearchTranslation.CaretAfterPaste = Ordisoftware.Core.CaretPositionAfterPaste.Ending;
-      this.EditSearchTranslation.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.EditSearchTranslation.Font = new System.Drawing.Font("Microsoft Sans Serif", 23.25F);
-      this.EditSearchTranslation.Location = new System.Drawing.Point(0, 239);
-      this.EditSearchTranslation.Name = "EditSearchTranslation";
-      this.EditSearchTranslation.Size = new System.Drawing.Size(510, 43);
-      this.EditSearchTranslation.SpellCheckAllowed = true;
-      this.EditSearchTranslation.TabIndex = 3;
-      // 
       // PanelSeparator
       // 
       this.PanelSeparator.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -1425,21 +1487,6 @@
       this.PanelSearchTop.Name = "PanelSearchTop";
       this.PanelSearchTop.Size = new System.Drawing.Size(510, 282);
       this.PanelSearchTop.TabIndex = 0;
-      // 
-      // EditSearchWord
-      // 
-      this.EditSearchWord.BackColor = System.Drawing.Color.Transparent;
-      this.EditSearchWord.ContextMenuDetailsVisible = false;
-      this.EditSearchWord.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.EditSearchWord.InitialWord = null;
-      this.EditSearchWord.Location = new System.Drawing.Point(0, 0);
-      this.EditSearchWord.MarginX = -5;
-      this.EditSearchWord.Name = "EditSearchWord";
-      this.EditSearchWord.ShowBottomPanel = false;
-      this.EditSearchWord.ShowGematria = false;
-      this.EditSearchWord.ShowValues = false;
-      this.EditSearchWord.Size = new System.Drawing.Size(510, 282);
-      this.EditSearchWord.TabIndex = 0;
       // 
       // PanelSearchFiltersRight
       // 
@@ -1580,21 +1627,6 @@
       this.EditSearchInKetouvim.Text = "Ketouvim";
       this.EditSearchInKetouvim.UseVisualStyleBackColor = true;
       // 
-      // EditSearchPaging
-      // 
-      this.EditSearchPaging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.EditSearchPaging.CaretAfterPaste = Ordisoftware.Core.CaretPositionAfterPaste.Ending;
-      this.EditSearchPaging.Enabled = false;
-      this.EditSearchPaging.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-      this.EditSearchPaging.Location = new System.Drawing.Point(-499, 278);
-      this.EditSearchPaging.Name = "EditSearchPaging";
-      this.EditSearchPaging.ReadOnly = true;
-      this.EditSearchPaging.Size = new System.Drawing.Size(120, 21);
-      this.EditSearchPaging.SpellCheckAllowed = false;
-      this.EditSearchPaging.TabIndex = 14;
-      this.EditSearchPaging.TabStop = false;
-      this.EditSearchPaging.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-      // 
       // SelectSearchPaging
       // 
       this.SelectSearchPaging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -1695,8 +1727,56 @@
       this.PanelSearchResults.Location = new System.Drawing.Point(10, 10);
       this.PanelSearchResults.Name = "PanelSearchResults";
       this.PanelSearchResults.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelSearchResults.Size = new System.Drawing.Size(706, -20);
+      this.PanelSearchResults.Size = new System.Drawing.Size(706, 0);
       this.PanelSearchResults.TabIndex = 0;
+      // 
+      // TimerBatch
+      // 
+      this.TimerBatch.Interval = 1000;
+      this.TimerBatch.Tick += new System.EventHandler(this.TimerBatch_Tick);
+      // 
+      // EditSearchTranslation
+      // 
+      this.EditSearchTranslation.BackColor = System.Drawing.Color.AliceBlue;
+      this.EditSearchTranslation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.EditSearchTranslation.CaretAfterPaste = Ordisoftware.Core.CaretPositionAfterPaste.Ending;
+      this.EditSearchTranslation.Dock = System.Windows.Forms.DockStyle.Bottom;
+      this.EditSearchTranslation.Font = new System.Drawing.Font("Microsoft Sans Serif", 23.25F);
+      this.EditSearchTranslation.Location = new System.Drawing.Point(0, 239);
+      this.EditSearchTranslation.Name = "EditSearchTranslation";
+      this.EditSearchTranslation.Size = new System.Drawing.Size(510, 43);
+      this.EditSearchTranslation.SpellCheckAllowed = true;
+      this.EditSearchTranslation.TabIndex = 3;
+      // 
+      // EditSearchWord
+      // 
+      this.EditSearchWord.BackColor = System.Drawing.Color.Transparent;
+      this.EditSearchWord.ContextMenuDetailsVisible = false;
+      this.EditSearchWord.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.EditSearchWord.InitialWord = null;
+      this.EditSearchWord.Location = new System.Drawing.Point(0, 0);
+      this.EditSearchWord.MarginX = -5;
+      this.EditSearchWord.Name = "EditSearchWord";
+      this.EditSearchWord.ShowBottomPanel = false;
+      this.EditSearchWord.ShowGematria = false;
+      this.EditSearchWord.ShowValues = false;
+      this.EditSearchWord.Size = new System.Drawing.Size(510, 282);
+      this.EditSearchWord.TabIndex = 0;
+      // 
+      // EditSearchPaging
+      // 
+      this.EditSearchPaging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.EditSearchPaging.CaretAfterPaste = Ordisoftware.Core.CaretPositionAfterPaste.Ending;
+      this.EditSearchPaging.Enabled = false;
+      this.EditSearchPaging.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+      this.EditSearchPaging.Location = new System.Drawing.Point(-499, 278);
+      this.EditSearchPaging.Name = "EditSearchPaging";
+      this.EditSearchPaging.ReadOnly = true;
+      this.EditSearchPaging.Size = new System.Drawing.Size(120, 21);
+      this.EditSearchPaging.SpellCheckAllowed = false;
+      this.EditSearchPaging.TabIndex = 14;
+      this.EditSearchPaging.TabStop = false;
+      this.EditSearchPaging.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
       // 
       // EditChapterOriginal
       // 
@@ -1723,11 +1803,6 @@
       this.EditChapterELS50.Size = new System.Drawing.Size(728, 234);
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
-      // 
-      // TimerBatch
-      // 
-      this.TimerBatch.Interval = 1000;
-      this.TimerBatch.Tick += new System.EventHandler(this.TimerBatch_Tick);
       // 
       // MainForm
       // 
@@ -1756,10 +1831,11 @@
       this.PanelMainInner.ResumeLayout(false);
       this.PanelMainCenter.ResumeLayout(false);
       this.TabControl.ResumeLayout(false);
-      this.TabPageViewData.ResumeLayout(false);
-      this.TabPageCreateData.ResumeLayout(false);
-      this.TabPageReduceRepetitions.ResumeLayout(false);
-      this.TabPageIterationStatistics.ResumeLayout(false);
+      this.TabPageDecode.ResumeLayout(false);
+      this.TabPageGrid.ResumeLayout(false);
+      this.TabPagePopulate.ResumeLayout(false);
+      this.TabPageNormalize.ResumeLayout(false);
+      this.TabPageStatistics.ResumeLayout(false);
       this.PanelTitle.ResumeLayout(false);
       this.PanelTitleInner.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).EndInit();
@@ -1860,14 +1936,14 @@
     internal Label LabelTitleLeft;
     internal Label LabelTitleRight;
     private TabControl TabControl;
-    private TabPage TabPageCreateData;
-    internal Panel PanelViewVerses;
-    private TabPage TabPageViewData;
-    private Panel PanelViewTranslations;
-    private TabPage TabPageReduceRepetitions;
-    private Panel PanelViewOriginalText;
-    private TabPage TabPageIterationStatistics;
-    private Panel PanelViewELS50;
+    private TabPage TabPageGrid;
+    internal Panel PanelViewGrid;
+    private TabPage TabPageDecode;
+    private Panel PanelViewDecode;
+    private TabPage TabPageNormalize;
+    private Panel PanelViewNormalize;
+    private TabPage TabPageStatistics;
+    private Panel PanelViewStatistics;
     private Panel PanelSearchFilters;
     internal TabControl SelectSearchType;
     private TabPage SelectSearchTypeVerses;
@@ -1909,7 +1985,7 @@
     private RichTextBoxEx EditChapterOriginal;
     private RichTextBoxEx EditChapterELS50;
     private ToolStripDropDownButton ActionSelectView;
-    private ToolStripMenuItem ActionViewGrid;
+    private ToolStripMenuItem ActionViewStatistics;
     private ToolStripSeparator toolStripSeparator5;
     private System.Windows.Forms.Timer TimerBatch;
     private ToolStripSeparator toolStripSeparator6;
@@ -1917,5 +1993,11 @@
     private ToolStripButton ActionContinue;
     private ToolStripButton ActionRun;
     private ToolStripSeparator toolStripSeparator8;
+    private ToolStripMenuItem ActionViewGrid;
+    private ToolStripMenuItem ActionViewPopulate;
+    private ToolStripMenuItem ActionViewNormalize;
+    private ToolStripMenuItem ActionViewDecode;
+    private TabPage TabPagePopulate;
+    private Panel PanelViewPopulate;
   }
 }

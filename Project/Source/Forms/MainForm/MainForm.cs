@@ -207,4 +207,30 @@ partial class MainForm : Form
   {
     DoFormClosed(sender, e);
   }
+
+  private void ActionViewDecode_Click(object sender, EventArgs e)
+  {
+    SetView(ViewMode.Decode);
+  }
+
+  private void ActionViewGrid_Click(object sender, EventArgs e)
+  {
+    SetView(ViewMode.Grid);
+  }
+
+  private void ActionViewPopulate_Click(object sender, EventArgs e)
+  {
+    SetView(ViewMode.Populate);
+  }
+
+  private void ActionViewNormalize_Click(object sender, EventArgs e)
+  {
+    SetView(ViewMode.Normalize);
+  }
+
+  private void ActionViewStatistics_Click(object sender, EventArgs e)
+  {
+    SetView(ViewMode.Statistics);
+  }
+
 }

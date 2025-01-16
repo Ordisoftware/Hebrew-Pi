@@ -11,7 +11,7 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-12 </created>
-/// <edited> 2025-01-15 </edited>
+/// <edited> 2025-01-16 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 /// <summary>
@@ -21,22 +21,58 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm
 {
 
-  private ViewConnectors<ViewMode, ToolStripButton> ViewConnectors;
+  private ViewConnectors<ViewMode, ToolStripMenuItem> ViewConnectors;
 
   private void InitializeViewConnectors()
   {
-    //ViewConnectors = new ViewConnectors<ViewMode, ToolStripButton>
-    //{
-    //  {
-    //    ViewMode.CreateData,
-    //    new ViewConnector<ToolStripButton>
-    //    {
-    //      Component = ActionViewCreateData,
-    //      Panel = PanelViewVerses,
-    //      Focused = PanelViewVerses
-    //    }
-    //  },
-    //};
+    ViewConnectors = new ViewConnectors<ViewMode, ToolStripMenuItem>
+    {
+      {
+        ViewMode.Decode,
+        new ViewConnector<ToolStripMenuItem>
+        {
+          Component = ActionViewDecode,
+          Panel = PanelViewDecode,
+          Focused = PanelViewDecode
+        }
+      },
+      {
+        ViewMode.Grid,
+        new ViewConnector<ToolStripMenuItem>
+        {
+          Component = ActionViewGrid,
+          Panel = PanelViewGrid,
+          Focused = PanelViewGrid
+        }
+      },
+      {
+        ViewMode.Populate,
+        new ViewConnector<ToolStripMenuItem>
+        {
+          Component = ActionViewPopulate,
+          Panel = PanelViewPopulate,
+          Focused = PanelViewPopulate
+        }
+      },
+      {
+        ViewMode.Normalize,
+        new ViewConnector<ToolStripMenuItem>
+        {
+          Component = ActionViewNormalize,
+          Panel = PanelViewNormalize,
+          Focused = PanelViewNormalize
+        }
+      },
+      {
+        ViewMode.Statistics,
+        new ViewConnector<ToolStripMenuItem>
+        {
+          Component = ActionViewStatistics,
+          Panel = PanelViewStatistics,
+          Focused = PanelViewStatistics
+        }
+      },
+    };
   }
 
 }

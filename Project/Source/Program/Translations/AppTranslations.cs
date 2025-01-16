@@ -11,7 +11,7 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-12 </created>
-/// <edited> 2025-01-15 </edited>
+/// <edited> 2025-01-16 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 static partial class AppTranslations
@@ -49,7 +49,31 @@ static partial class AppTranslations
 
   static public readonly NullSafeDictionary<ViewMode, TranslationsDictionary> ViewPanelTitle = new()
   {
-
+    [ViewMode.Decode] = new TranslationsDictionary
+    {
+      [Language.EN] = "DECODE",
+      [Language.FR] = "DÉCODAGE"
+    },
+    [ViewMode.Grid] = new TranslationsDictionary
+    {
+      [Language.EN] = "GRID",
+      [Language.FR] = "GRILLE"
+    },
+    [ViewMode.Populate] = new TranslationsDictionary
+    {
+      [Language.EN] = "POPULATE",
+      [Language.FR] = "PEUPLER"
+    },
+    [ViewMode.Normalize] = new TranslationsDictionary
+    {
+      [Language.EN] = "NORMALIZE",
+      [Language.FR] = "NORMALISER"
+    },
+    [ViewMode.Statistics] = new TranslationsDictionary
+    {
+      [Language.EN] = "STATISTICS",
+      [Language.FR] = "STATISTIQUES"
+    },
   };
 
   static public readonly Dictionary<bool, string> PauseContinueText = new()

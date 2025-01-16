@@ -78,7 +78,6 @@ partial class MainForm : Form
     Globals.ChronoStartingApp.Start();
     //MainForm_ResizeEnd(null, null);
     //MainForm_Resize(null, null);
-    //UpdateSearchButtons();
     BookmarkMenuIndex = ActionBookmarks.DropDownItems.Count;
     HistoryIndexMenu = ActionHistory.DropDownItems.Count;
     DebugManager.TraceEnabledChanged += value => CommonMenusControl.Instance.ActionViewLog.Enabled = value;
@@ -95,9 +94,7 @@ partial class MainForm : Form
     Refresh();
     //DoBackupDB();
     //LoadData();
-    //TimerAutoSave.Enabled = Settings.AutoSaveDelay != 0;
-    //if ( TimerAutoSave.Enabled )
-    //  TimerAutoSave.Interval = Settings.AutoSaveDelay * Globals.MilliSecondsInOneMinute;
+    SetView(Settings.CurrentView, true);
     Globals.IsReady = true;
     Globals.KeyboardShortcutsNotice = new ShowTextForm(AppTranslations.NoticeKeyboardShortcutsTitle,
                                                            AppTranslations.NoticeKeyboardShortcuts,
@@ -163,8 +160,6 @@ partial class MainForm : Form
   private void DoFormClosed(object sender, FormClosedEventArgs e)
   {
     DebugManager.Trace(LogTraceEvent.Data, e.CloseReason.ToStringFull());
-    if ( !Settings.RenderAllChapterVersesKeep && Settings.RenderAllChapterVerses )
-      Settings.RenderAllChapterVerses = false;
     SystemManager.TryCatch(Settings.Store);
     Globals.AllowClose = true;
     Globals.IsExiting = true;

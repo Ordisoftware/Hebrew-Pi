@@ -11,7 +11,7 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-12 </created>
-/// <edited> 2025-01-15 </edited>
+/// <edited> 2025-01-16 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 /// <summary>
@@ -20,12 +20,29 @@ namespace Ordisoftware.Hebrew.Pi;
 public enum ViewMode
 {
 
-  ViewData,
+  /// <summary>
+  /// Decode and translate view.
+  /// </summary>
+  Decode,
 
-  CreateData,
+  /// <summary>
+  /// Data view.
+  /// </summary>
+  Grid,
 
-  ReduceRepetitions,
+  /// <summary>
+  /// Create data in tables view.
+  /// </summary>
+  Populate,
 
-  IterationStatistics
+  /// <summary>
+  /// Reduce repetitions.
+  /// </summary>
+  Normalize,
+
+  /// <summary>
+  /// Iteration reducing statistics view.
+  /// </summary>
+  Statistics
 
 }
