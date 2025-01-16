@@ -377,10 +377,10 @@
     <Compile Include="Source\Entities\DecupletItem.cs" />
     <Compile Include="Source\Entities\DecupletList.cs" />
     <Compile Include="Source\Enums\ViewMode.cs" />
-    <Compile Include="Source\Forms\Boxes\StatisticsForm.cs">
+    <Compile Include="Source\Forms\Config\StatisticsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\Boxes\StatisticsForm.designer.cs">
+    <Compile Include="Source\Forms\Config\StatisticsForm.designer.cs">
       <DependentUpon>StatisticsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Source\Enums\PiFirstDecimalsLenght.cs" />
@@ -533,10 +533,10 @@
     <EmbeddedResource Include="Source\Common\Hebrew\WinForms\CelebrationVersesBoardForm.resx">
       <DependentUpon>CelebrationVersesBoardForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Boxes\StatisticsForm.fr.resx">
+    <EmbeddedResource Include="Source\Forms\Config\StatisticsForm.fr.resx">
       <DependentUpon>StatisticsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Boxes\StatisticsForm.resx">
+    <EmbeddedResource Include="Source\Forms\Config\StatisticsForm.resx">
       <DependentUpon>StatisticsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\MainForm\MainForm.resx">
@@ -702,7 +702,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Source\Forms\Config\" />
+    <Folder Include="Source\Forms\Boxes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
