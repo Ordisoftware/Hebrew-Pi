@@ -11,7 +11,7 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-12 </created>
-/// <edited> 2025-01-12 </edited>
+/// <edited> 2025-01-16 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 /// <summary>
@@ -84,16 +84,17 @@ partial class MainForm
   {
     bool dbOpened = DB is not null;
     bool dbOnenedAndNotInBatch = dbOpened && !Globals.IsInBatch;
-    bool dbOnenedAndInBatch = !dbOnenedAndNotInBatch;
+    bool dbOnenedAndInBatch = dbOpened && Globals.IsInBatch;
     SelectFileName.Enabled = !dbOpened;
     ActionDbOpen.Enabled = !dbOpened && SelectFileName.SelectedIndex != -1;
     ActionDbClose.Enabled = dbOnenedAndNotInBatch;
-    ActionDbCreateData.Enabled = dbOnenedAndNotInBatch;
-    ActionBatchRun.Enabled = dbOnenedAndNotInBatch;
-    ActionBatchStop.Enabled = dbOnenedAndInBatch;
-    ActionBatchPause.Enabled = dbOnenedAndInBatch;
-    ActionBatchPause.Text = AppTranslations.PauseContinueText[Globals.PauseRequired];
-    if ( !ActionBatchPause.Enabled ) ;
+    ActionRun.Enabled = dbOnenedAndNotInBatch;
+    ActionStop.Enabled = dbOnenedAndInBatch;
+    ActionContinue.Enabled = dbOnenedAndInBatch && Globals.PauseRequired;
+    ActionPause.Enabled = dbOnenedAndInBatch && !Globals.PauseRequired;
+    ActionContinue.Visible = Globals.PauseRequired;
+    ActionPause.Visible = !ActionContinue.Visible;
+    Globals.AllowClose = !Globals.IsInBatch;
   }
 
   private void UpdateStatusProgress(string text)

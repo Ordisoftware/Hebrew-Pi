@@ -11,7 +11,7 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-12 </created>
-/// <edited> 2025-01-12 </edited>
+/// <edited> 2025-01-16 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 using Microsoft.Win32;
@@ -145,7 +145,11 @@ partial class MainForm : Form
       Globals.IsExiting = true;
     else
     if ( !Globals.AllowClose )
+    {
+      DisplayManager.ShowWarning(SysTranslations.CantExitWhileProcessing.GetLang());
       e.Cancel = true;
+      return;
+    }
     else
     if ( EditConfirmClosing.Checked )
       if ( !DisplayManager.QueryYesNo(SysTranslations.AskToExitApplication.GetLang()) )

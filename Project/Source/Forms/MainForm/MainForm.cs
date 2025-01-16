@@ -170,6 +170,39 @@ partial class MainForm : Form
     LabelStatusTime.Text = Globals.ChronoBatch.Elapsed.AsReadable();
   }
 
+  private void ActionStop_Click(object sender, EventArgs e)
+  {
+    Globals.CancelRequired = true;
+  }
+
+  private void ActionPauseContinue_Click(object sender, EventArgs e)
+  {
+    Globals.PauseRequired = !Globals.PauseRequired;
+    UpdateButtons();
+    if ( Globals.PauseRequired )
+      Globals.ChronoBatch.Stop();
+    else
+      Globals.ChronoBatch.Start();
+  }
+
+  private void ActionRun_Click(object sender, EventArgs e)
+  {
+    switch ( Settings.CurrentView )
+    {
+      case ViewMode.Populate:
+        //if ( !DisplayManager.QueryYesNo("Empty and create data?") ) return;
+        string fileName = Path.Combine(Globals.DocumentsFolderPath, PiFirstDecimalsCount.ToString()) + ".txt";
+        DoBatch(() => DoActionPopulate(fileName));
+        break;
+      case ViewMode.Normalize:
+        //if ( !DisplayManager.QueryYesNo("Start reducing repeating motifs?") ) return;
+        DoBatch(() => DoActionNormalize(0));
+        break;
+      default:
+        throw new AdvNotImplementedException(Settings.CurrentView);
+    }
+  }
+
   private async Task DoBatch(Action action)
   {
     try
@@ -261,8 +294,6 @@ partial class MainForm : Form
     DB.CreateTable<DecupletRow>();
     DB.CreateTable<IterationRow>();
     SetDbCache();
-    ActionDbCreateData.Enabled = true;
-    ActionBatchRun.Enabled = true;
     UpdateButtons();
   }
 
@@ -273,34 +304,6 @@ partial class MainForm : Form
     DB.Dispose();
     DB = null;
     UpdateButtons();
-  }
-
-  private void ActionBatchStop_Click(object sender, EventArgs e)
-  {
-    Globals.CancelRequired = true;
-  }
-
-  private void ActionBatchPause_Click(object sender, EventArgs e)
-  {
-    Globals.PauseRequired = !Globals.PauseRequired;
-    UpdateButtons();
-    if ( Globals.PauseRequired )
-      Globals.ChronoBatch.Stop();
-    else
-      Globals.ChronoBatch.Start();
-  }
-
-  private async void ActionDbCreateData_Click(object sender, EventArgs e)
-  {
-    //if ( !DisplayManager.QueryYesNo("Empty and create data?") ) return;
-    string fileName = Path.Combine(Globals.DocumentsFolderPath, PiFirstDecimalsCount.ToString()) + ".txt";
-    DoBatch(() => DoActionPopulate(fileName));
-  }
-
-  private async void ActionBatchRun_Click(object sender, EventArgs e)
-  {
-    //if ( !DisplayManager.QueryYesNo("Start reducing repeating motifs?") ) return;
-    DoBatch(() => DoActionBatchRun(0));
   }
 
 }

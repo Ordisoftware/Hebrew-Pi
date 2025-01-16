@@ -21,7 +21,7 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm
 {
 
-  private async Task DoActionBatchRun(long startingIterationNumber)
+  private async Task DoActionNormalize(long startingIterationNumber)
   {
     try
     {

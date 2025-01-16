@@ -33,12 +33,8 @@
       this.PanelTop = new System.Windows.Forms.Panel();
       this.SelectDbCache = new System.Windows.Forms.ComboBox();
       this.SelectFileName = new System.Windows.Forms.ComboBox();
-      this.ActionBatchPause = new System.Windows.Forms.Button();
-      this.ActionBatchStop = new System.Windows.Forms.Button();
-      this.ActionBatchRun = new System.Windows.Forms.Button();
       this.ActionDbClose = new System.Windows.Forms.Button();
       this.ActionDbOpen = new System.Windows.Forms.Button();
-      this.ActionDbCreateData = new System.Windows.Forms.Button();
       this.StatusStrip = new System.Windows.Forms.StatusStrip();
       this.LabelStatusTime = new System.Windows.Forms.ToolStripStatusLabel();
       this.LabelStatusSep1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -73,6 +69,7 @@
       this.ActionHistoryNext = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
       this.ActionRun = new System.Windows.Forms.ToolStripButton();
+      this.ActionStop = new System.Windows.Forms.ToolStripButton();
       this.ActionPause = new System.Windows.Forms.ToolStripButton();
       this.ActionContinue = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
@@ -115,6 +112,8 @@
       this.ActionResetWinSettings = new System.Windows.Forms.ToolStripMenuItem();
       this.Sep7 = new System.Windows.Forms.ToolStripSeparator();
       this.ActionShowKeyboardNotice = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
+      this.EditExportUseHebrewFontElseUnicodeChars = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
       this.EditShowTips = new System.Windows.Forms.ToolStripMenuItem();
       this.EditUseAdvancedDialogBoxes = new System.Windows.Forms.ToolStripMenuItem();
@@ -184,8 +183,6 @@
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
-      this.EditExportUseHebrewFontElseUnicodeChars = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
       this.PanelTop.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -209,12 +206,8 @@
       // 
       this.PanelTop.Controls.Add(this.SelectDbCache);
       this.PanelTop.Controls.Add(this.SelectFileName);
-      this.PanelTop.Controls.Add(this.ActionBatchPause);
-      this.PanelTop.Controls.Add(this.ActionBatchStop);
-      this.PanelTop.Controls.Add(this.ActionBatchRun);
       this.PanelTop.Controls.Add(this.ActionDbClose);
       this.PanelTop.Controls.Add(this.ActionDbOpen);
-      this.PanelTop.Controls.Add(this.ActionDbCreateData);
       this.PanelTop.Dock = System.Windows.Forms.DockStyle.Top;
       this.PanelTop.Location = new System.Drawing.Point(10, 10);
       this.PanelTop.Name = "PanelTop";
@@ -247,39 +240,6 @@
       this.SelectFileName.TabIndex = 3;
       this.SelectFileName.SelectedIndexChanged += new System.EventHandler(this.SelectFileName_SelectedIndexChanged);
       // 
-      // ActionBatchPause
-      // 
-      this.ActionBatchPause.Enabled = false;
-      this.ActionBatchPause.Location = new System.Drawing.Point(625, 11);
-      this.ActionBatchPause.Name = "ActionBatchPause";
-      this.ActionBatchPause.Size = new System.Drawing.Size(95, 23);
-      this.ActionBatchPause.TabIndex = 2;
-      this.ActionBatchPause.Text = "Pause batch";
-      this.ActionBatchPause.UseVisualStyleBackColor = true;
-      this.ActionBatchPause.Click += new System.EventHandler(this.ActionBatchPause_Click);
-      // 
-      // ActionBatchStop
-      // 
-      this.ActionBatchStop.Enabled = false;
-      this.ActionBatchStop.Location = new System.Drawing.Point(524, 11);
-      this.ActionBatchStop.Name = "ActionBatchStop";
-      this.ActionBatchStop.Size = new System.Drawing.Size(95, 23);
-      this.ActionBatchStop.TabIndex = 2;
-      this.ActionBatchStop.Text = "Stop batch";
-      this.ActionBatchStop.UseVisualStyleBackColor = true;
-      this.ActionBatchStop.Click += new System.EventHandler(this.ActionBatchStop_Click);
-      // 
-      // ActionBatchRun
-      // 
-      this.ActionBatchRun.Enabled = false;
-      this.ActionBatchRun.Location = new System.Drawing.Point(423, 11);
-      this.ActionBatchRun.Name = "ActionBatchRun";
-      this.ActionBatchRun.Size = new System.Drawing.Size(95, 23);
-      this.ActionBatchRun.TabIndex = 2;
-      this.ActionBatchRun.Text = "Run batch";
-      this.ActionBatchRun.UseVisualStyleBackColor = true;
-      this.ActionBatchRun.Click += new System.EventHandler(this.ActionBatchRun_Click);
-      // 
       // ActionDbClose
       // 
       this.ActionDbClose.Enabled = false;
@@ -301,17 +261,6 @@
       this.ActionDbOpen.Text = "Open";
       this.ActionDbOpen.UseVisualStyleBackColor = true;
       this.ActionDbOpen.Click += new System.EventHandler(this.ActionDbOpen_Click);
-      // 
-      // ActionDbCreateData
-      // 
-      this.ActionDbCreateData.Enabled = false;
-      this.ActionDbCreateData.Location = new System.Drawing.Point(322, 11);
-      this.ActionDbCreateData.Name = "ActionDbCreateData";
-      this.ActionDbCreateData.Size = new System.Drawing.Size(95, 23);
-      this.ActionDbCreateData.TabIndex = 2;
-      this.ActionDbCreateData.Text = "Create data";
-      this.ActionDbCreateData.UseVisualStyleBackColor = true;
-      this.ActionDbCreateData.Click += new System.EventHandler(this.ActionDbCreateData_Click);
       // 
       // StatusStrip
       // 
@@ -374,6 +323,7 @@
             this.ActionHistoryNext,
             this.toolStripSeparator13,
             this.ActionRun,
+            this.ActionStop,
             this.ActionPause,
             this.ActionContinue,
             this.toolStripSeparator8,
@@ -639,6 +589,20 @@
       this.ActionRun.Size = new System.Drawing.Size(44, 46);
       this.ActionRun.Text = "Run";
       this.ActionRun.ToolTipText = "Run (F5)";
+      this.ActionRun.Click += new System.EventHandler(this.ActionRun_Click);
+      // 
+      // ActionStop
+      // 
+      this.ActionStop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.ActionStop.Enabled = false;
+      this.ActionStop.Image = ((System.Drawing.Image)(resources.GetObject("ActionStop.Image")));
+      this.ActionStop.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.ActionStop.Name = "ActionStop";
+      this.ActionStop.Padding = new System.Windows.Forms.Padding(5);
+      this.ActionStop.Size = new System.Drawing.Size(46, 46);
+      this.ActionStop.Text = "Pause";
+      this.ActionStop.ToolTipText = "Pause";
+      this.ActionStop.Click += new System.EventHandler(this.ActionStop_Click);
       // 
       // ActionPause
       // 
@@ -651,6 +615,7 @@
       this.ActionPause.Size = new System.Drawing.Size(46, 46);
       this.ActionPause.Text = "Pause";
       this.ActionPause.ToolTipText = "Pause";
+      this.ActionPause.Click += new System.EventHandler(this.ActionPauseContinue_Click);
       // 
       // ActionContinue
       // 
@@ -664,6 +629,7 @@
       this.ActionContinue.Text = "Continue";
       this.ActionContinue.ToolTipText = "Continue";
       this.ActionContinue.Visible = false;
+      this.ActionContinue.Click += new System.EventHandler(this.ActionPauseContinue_Click);
       // 
       // toolStripSeparator8
       // 
@@ -1034,6 +1000,19 @@
       this.ActionShowKeyboardNotice.Size = new System.Drawing.Size(323, 22);
       this.ActionShowKeyboardNotice.Text = "Keyboard shortcuts notice";
       this.ActionShowKeyboardNotice.Click += new System.EventHandler(this.ActionShowKeyboardNotice_Click);
+      // 
+      // toolStripSeparator27
+      // 
+      this.toolStripSeparator27.Name = "toolStripSeparator27";
+      this.toolStripSeparator27.Size = new System.Drawing.Size(320, 6);
+      // 
+      // EditExportUseHebrewFontElseUnicodeChars
+      // 
+      this.EditExportUseHebrewFontElseUnicodeChars.CheckOnClick = true;
+      this.EditExportUseHebrewFontElseUnicodeChars.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.EditExportUseHebrewFontElseUnicodeChars.Name = "EditExportUseHebrewFontElseUnicodeChars";
+      this.EditExportUseHebrewFontElseUnicodeChars.Size = new System.Drawing.Size(323, 22);
+      this.EditExportUseHebrewFontElseUnicodeChars.Text = "Use Hebrew font else Unicode chars for exports";
       // 
       // toolStripSeparator11
       // 
@@ -1819,19 +1798,6 @@
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
       // 
-      // EditExportUseHebrewFontElseUnicodeChars
-      // 
-      this.EditExportUseHebrewFontElseUnicodeChars.CheckOnClick = true;
-      this.EditExportUseHebrewFontElseUnicodeChars.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.EditExportUseHebrewFontElseUnicodeChars.Name = "EditExportUseHebrewFontElseUnicodeChars";
-      this.EditExportUseHebrewFontElseUnicodeChars.Size = new System.Drawing.Size(323, 22);
-      this.EditExportUseHebrewFontElseUnicodeChars.Text = "Use Hebrew font else Unicode chars for exports";
-      // 
-      // toolStripSeparator27
-      // 
-      this.toolStripSeparator27.Name = "toolStripSeparator27";
-      this.toolStripSeparator27.Size = new System.Drawing.Size(320, 6);
-      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1875,17 +1841,13 @@
     #endregion
     private Panel PanelTop;
     private ComboBox SelectFileName;
-    private Button ActionDbCreateData;
     private StatusStrip StatusStrip;
-    private Button ActionBatchRun;
     private Button ActionDbOpen;
     private ToolStripStatusLabel LabelStatusIteration;
     private ToolStripStatusLabel LabelStatusTime;
-    private Button ActionBatchStop;
     private ToolStripStatusLabel LabelStatusInfo;
     private ToolStripStatusLabel LabelStatusSep1;
     private ToolStripStatusLabel LabelStatusSep2;
-    private Button ActionBatchPause;
     private Button ActionDbClose;
     private ComboBox SelectDbCache;
     internal ToolStrip ToolStrip;
@@ -2017,7 +1979,7 @@
     private ToolStripSeparator toolStripSeparator5;
     private System.Windows.Forms.Timer TimerBatch;
     private ToolStripSeparator toolStripSeparator6;
-    private ToolStripButton ActionPause;
+    private ToolStripButton ActionStop;
     private ToolStripButton ActionContinue;
     private ToolStripButton ActionRun;
     private ToolStripSeparator toolStripSeparator8;
@@ -2029,5 +1991,6 @@
     private Panel PanelViewPopulate;
     private ToolStripSeparator toolStripSeparator27;
     internal ToolStripMenuItem EditExportUseHebrewFontElseUnicodeChars;
+    private ToolStripButton ActionPause;
   }
 }

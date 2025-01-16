@@ -76,12 +76,6 @@ static partial class AppTranslations
     },
   };
 
-  static public readonly Dictionary<bool, string> PauseContinueText = new()
-  {
-    [false] = "Pause",
-    [true] = "Continue"
-  };
-
   static public string CreateDataProgress = "{0} inserted";
   static public string RepeatedAtIteration = $"repeating motifs at iteration #{{0}}{Globals.NL2}";
   static public string PreviousAndCurrentCount = $"Previous: {{1}}{Globals.NL}Current: {{2}}{Globals.NL2}";
