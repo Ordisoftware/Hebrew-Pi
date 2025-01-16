@@ -273,7 +273,7 @@
             this.LabelStatusInfo});
       this.StatusStrip.Location = new System.Drawing.Point(0, 439);
       this.StatusStrip.Name = "StatusStrip";
-      this.StatusStrip.Size = new System.Drawing.Size(784, 22);
+      this.StatusStrip.Size = new System.Drawing.Size(834, 22);
       this.StatusStrip.TabIndex = 2;
       this.StatusStrip.Text = "statusStrip1";
       // 
@@ -338,7 +338,7 @@
       this.ToolStrip.Location = new System.Drawing.Point(0, 0);
       this.ToolStrip.Name = "ToolStrip";
       this.ToolStrip.ShowItemToolTips = false;
-      this.ToolStrip.Size = new System.Drawing.Size(784, 49);
+      this.ToolStrip.Size = new System.Drawing.Size(834, 49);
       this.ToolStrip.TabIndex = 4;
       // 
       // ActionExit
@@ -941,7 +941,7 @@
       this.EditScreenNone.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenNone.Name = "EditScreenNone";
       this.EditScreenNone.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D0)));
-      this.EditScreenNone.Size = new System.Drawing.Size(178, 22);
+      this.EditScreenNone.Size = new System.Drawing.Size(180, 22);
       this.EditScreenNone.Text = "Loose";
       this.EditScreenNone.Click += new System.EventHandler(this.EditScreenPosition_Click);
       // 
@@ -951,8 +951,9 @@
       this.EditScreenTopLeft.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenTopLeft.Name = "EditScreenTopLeft";
       this.EditScreenTopLeft.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D1)));
-      this.EditScreenTopLeft.Size = new System.Drawing.Size(178, 22);
+      this.EditScreenTopLeft.Size = new System.Drawing.Size(180, 22);
       this.EditScreenTopLeft.Text = "Top left";
+      this.EditScreenTopLeft.Click += new System.EventHandler(this.EditScreenPosition_Click);
       // 
       // EditScreenTopRight
       // 
@@ -960,8 +961,9 @@
       this.EditScreenTopRight.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenTopRight.Name = "EditScreenTopRight";
       this.EditScreenTopRight.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D2)));
-      this.EditScreenTopRight.Size = new System.Drawing.Size(178, 22);
+      this.EditScreenTopRight.Size = new System.Drawing.Size(180, 22);
       this.EditScreenTopRight.Text = "Top right";
+      this.EditScreenTopRight.Click += new System.EventHandler(this.EditScreenPosition_Click);
       // 
       // EditScreenBottomLeft
       // 
@@ -969,8 +971,9 @@
       this.EditScreenBottomLeft.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenBottomLeft.Name = "EditScreenBottomLeft";
       this.EditScreenBottomLeft.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D3)));
-      this.EditScreenBottomLeft.Size = new System.Drawing.Size(178, 22);
+      this.EditScreenBottomLeft.Size = new System.Drawing.Size(180, 22);
       this.EditScreenBottomLeft.Text = "Bottom left";
+      this.EditScreenBottomLeft.Click += new System.EventHandler(this.EditScreenPosition_Click);
       // 
       // EditScreenBottomRight
       // 
@@ -978,8 +981,9 @@
       this.EditScreenBottomRight.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenBottomRight.Name = "EditScreenBottomRight";
       this.EditScreenBottomRight.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D4)));
-      this.EditScreenBottomRight.Size = new System.Drawing.Size(178, 22);
+      this.EditScreenBottomRight.Size = new System.Drawing.Size(180, 22);
       this.EditScreenBottomRight.Text = "Bottom right";
+      this.EditScreenBottomRight.Click += new System.EventHandler(this.EditScreenPosition_Click);
       // 
       // EditScreenCenter
       // 
@@ -987,8 +991,9 @@
       this.EditScreenCenter.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenCenter.Name = "EditScreenCenter";
       this.EditScreenCenter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D5)));
-      this.EditScreenCenter.Size = new System.Drawing.Size(178, 22);
+      this.EditScreenCenter.Size = new System.Drawing.Size(180, 22);
       this.EditScreenCenter.Text = "Center";
+      this.EditScreenCenter.Click += new System.EventHandler(this.EditScreenPosition_Click);
       // 
       // ActionResetWinSettings
       // 
@@ -1098,7 +1103,7 @@
       this.PanelMain.Location = new System.Drawing.Point(0, 49);
       this.PanelMain.Name = "PanelMain";
       this.PanelMain.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelMain.Size = new System.Drawing.Size(784, 390);
+      this.PanelMain.Size = new System.Drawing.Size(834, 390);
       this.PanelMain.TabIndex = 10;
       // 
       // PanelMainOuter
@@ -1109,7 +1114,7 @@
       this.PanelMainOuter.Location = new System.Drawing.Point(10, 44);
       this.PanelMainOuter.Name = "PanelMainOuter";
       this.PanelMainOuter.Padding = new System.Windows.Forms.Padding(1);
-      this.PanelMainOuter.Size = new System.Drawing.Size(764, 336);
+      this.PanelMainOuter.Size = new System.Drawing.Size(814, 336);
       this.PanelMainOuter.TabIndex = 18;
       // 
       // PanelMainInner
@@ -1119,7 +1124,7 @@
       this.PanelMainInner.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMainInner.Location = new System.Drawing.Point(1, 1);
       this.PanelMainInner.Name = "PanelMainInner";
-      this.PanelMainInner.Size = new System.Drawing.Size(762, 334);
+      this.PanelMainInner.Size = new System.Drawing.Size(812, 334);
       this.PanelMainInner.TabIndex = 0;
       // 
       // PanelMainCenter
@@ -1129,7 +1134,7 @@
       this.PanelMainCenter.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMainCenter.Location = new System.Drawing.Point(0, 0);
       this.PanelMainCenter.Name = "PanelMainCenter";
-      this.PanelMainCenter.Size = new System.Drawing.Size(762, 334);
+      this.PanelMainCenter.Size = new System.Drawing.Size(812, 334);
       this.PanelMainCenter.TabIndex = 0;
       // 
       // TabControl
@@ -1143,7 +1148,7 @@
       this.TabControl.Location = new System.Drawing.Point(0, 0);
       this.TabControl.Name = "TabControl";
       this.TabControl.SelectedIndex = 0;
-      this.TabControl.Size = new System.Drawing.Size(762, 334);
+      this.TabControl.Size = new System.Drawing.Size(812, 334);
       this.TabControl.TabIndex = 8;
       this.TabControl.TabStop = false;
       this.TabControl.Visible = false;
@@ -1154,7 +1159,7 @@
       this.TabPageDecode.Location = new System.Drawing.Point(4, 22);
       this.TabPageDecode.Name = "TabPageDecode";
       this.TabPageDecode.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageDecode.Size = new System.Drawing.Size(754, 308);
+      this.TabPageDecode.Size = new System.Drawing.Size(804, 308);
       this.TabPageDecode.TabIndex = 1;
       this.TabPageDecode.Text = "Decode";
       this.TabPageDecode.UseVisualStyleBackColor = true;
@@ -1166,7 +1171,7 @@
       this.PanelViewDecode.Location = new System.Drawing.Point(3, 3);
       this.PanelViewDecode.Name = "PanelViewDecode";
       this.PanelViewDecode.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewDecode.Size = new System.Drawing.Size(748, 302);
+      this.PanelViewDecode.Size = new System.Drawing.Size(798, 302);
       this.PanelViewDecode.TabIndex = 0;
       // 
       // TabPageGrid
@@ -1261,7 +1266,7 @@
       this.PanelSepTop.Dock = System.Windows.Forms.DockStyle.Top;
       this.PanelSepTop.Location = new System.Drawing.Point(10, 34);
       this.PanelSepTop.Name = "PanelSepTop";
-      this.PanelSepTop.Size = new System.Drawing.Size(764, 10);
+      this.PanelSepTop.Size = new System.Drawing.Size(814, 10);
       this.PanelSepTop.TabIndex = 16;
       // 
       // PanelTitle
@@ -1272,7 +1277,7 @@
       this.PanelTitle.Location = new System.Drawing.Point(10, 10);
       this.PanelTitle.Name = "PanelTitle";
       this.PanelTitle.Padding = new System.Windows.Forms.Padding(1);
-      this.PanelTitle.Size = new System.Drawing.Size(764, 24);
+      this.PanelTitle.Size = new System.Drawing.Size(814, 24);
       this.PanelTitle.TabIndex = 3;
       // 
       // PanelTitleInner
@@ -1284,7 +1289,7 @@
       this.PanelTitleInner.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelTitleInner.Location = new System.Drawing.Point(1, 1);
       this.PanelTitleInner.Name = "PanelTitleInner";
-      this.PanelTitleInner.Size = new System.Drawing.Size(762, 22);
+      this.PanelTitleInner.Size = new System.Drawing.Size(812, 22);
       this.PanelTitleInner.TabIndex = 4;
       // 
       // LabelTitleCenter
@@ -1295,7 +1300,7 @@
       this.LabelTitleCenter.ImeMode = System.Windows.Forms.ImeMode.NoControl;
       this.LabelTitleCenter.Location = new System.Drawing.Point(150, 0);
       this.LabelTitleCenter.Name = "LabelTitleCenter";
-      this.LabelTitleCenter.Size = new System.Drawing.Size(462, 22);
+      this.LabelTitleCenter.Size = new System.Drawing.Size(512, 22);
       this.LabelTitleCenter.TabIndex = 2;
       this.LabelTitleCenter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
@@ -1318,7 +1323,7 @@
       this.LabelTitleRight.Dock = System.Windows.Forms.DockStyle.Right;
       this.LabelTitleRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
       this.LabelTitleRight.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-      this.LabelTitleRight.Location = new System.Drawing.Point(612, 0);
+      this.LabelTitleRight.Location = new System.Drawing.Point(662, 0);
       this.LabelTitleRight.Name = "LabelTitleRight";
       this.LabelTitleRight.Size = new System.Drawing.Size(150, 22);
       this.LabelTitleRight.TabIndex = 1;
@@ -1814,11 +1819,11 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(784, 461);
+      this.ClientSize = new System.Drawing.Size(834, 461);
       this.Controls.Add(this.PanelMain);
       this.Controls.Add(this.StatusStrip);
       this.Controls.Add(this.ToolStrip);
-      this.MinimumSize = new System.Drawing.Size(800, 500);
+      this.MinimumSize = new System.Drawing.Size(850, 500);
       this.Name = "MainForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "Hebrew Pi";
