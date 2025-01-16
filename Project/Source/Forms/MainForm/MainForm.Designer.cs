@@ -79,6 +79,7 @@
       this.ActionDatabaseBackup = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
       this.ActionVacuum = new System.Windows.Forms.ToolStripMenuItem();
+      this.ActionDatabaseSetCacheSize = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.ActionOpenFolderExport = new System.Windows.Forms.ToolStripMenuItem();
       this.ActionOpenFolderBackup = new System.Windows.Forms.ToolStripMenuItem();
@@ -645,6 +646,7 @@
             this.ActionDatabaseBackup,
             this.toolStripSeparator22,
             this.ActionVacuum,
+            this.ActionDatabaseSetCacheSize,
             this.toolStripSeparator2,
             this.ActionOpenFolderExport,
             this.ActionOpenFolderBackup,
@@ -695,6 +697,16 @@
       this.ActionVacuum.Name = "ActionVacuum";
       this.ActionVacuum.Size = new System.Drawing.Size(210, 22);
       this.ActionVacuum.Text = "Optimize database";
+      // 
+      // ActionDatabaseSetCacheSize
+      // 
+      this.ActionDatabaseSetCacheSize.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabaseSetCacheSize.Image")));
+      this.ActionDatabaseSetCacheSize.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.ActionDatabaseSetCacheSize.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.ActionDatabaseSetCacheSize.Name = "ActionDatabaseSetCacheSize";
+      this.ActionDatabaseSetCacheSize.Size = new System.Drawing.Size(210, 22);
+      this.ActionDatabaseSetCacheSize.Text = "Set SQLite cache size";
+      this.ActionDatabaseSetCacheSize.Click += new System.EventHandler(this.ActionDatabaseSetCacheSize_Click);
       // 
       // toolStripSeparator2
       // 
@@ -1992,5 +2004,6 @@
     private ToolStripSeparator toolStripSeparator27;
     internal ToolStripMenuItem EditExportUseHebrewFontElseUnicodeChars;
     private ToolStripButton ActionPause;
+    private ToolStripMenuItem ActionDatabaseSetCacheSize;
   }
 }

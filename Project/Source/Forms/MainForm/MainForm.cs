@@ -165,6 +165,11 @@ partial class MainForm : Form
     SetView(ViewMode.Statistics);
   }
 
+  private void ActionDatabaseSetCacheSize_Click(object sender, EventArgs e)
+  {
+    // TODO
+  }
+
   private void TimerBatch_Tick(object sender, EventArgs e)
   {
     LabelStatusTime.Text = Globals.ChronoBatch.Elapsed.AsReadable();
@@ -288,6 +293,7 @@ partial class MainForm : Form
   private void ActionDbOpen_Click(object sender, EventArgs e)
   {
     string dbPath = Path.Combine(Globals.DatabaseFolderPath, PiFirstDecimalsCount.ToString()) + Globals.DatabaseFileExtension;
+    LabelTitleCenter.Text = Path.GetFileName(dbPath);
     DB = new SQLiteNetORM(dbPath);
     if ( SQLiteTempDir.Length > 0 )
       DB.SetTempDir(SQLiteTempDir);
