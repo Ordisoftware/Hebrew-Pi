@@ -50,9 +50,119 @@ partial class MainForm : Form
     DoConstructor();
   }
 
+  private void MainForm_Load(object sender, EventArgs e)
+  {
+    DoFormLoad(sender, e);
+  }
+
+  private void MainForm_Shown(object sender, EventArgs e)
+  {
+    DoFormShown(sender, e);
+  }
+
   private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
   {
     DoFormClosing(sender, e);
+  }
+
+  private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+  {
+    DoFormClosed(sender, e);
+  }
+
+  private void ActionExit_Click(object sender, EventArgs e)
+  {
+    Close();
+  }
+
+  private void ActionExit_MouseUp(object sender, MouseEventArgs e)
+  {
+    if ( e.Button == MouseButtons.Right )
+      ActionExit_Click(ActionExit, null);
+  }
+
+  internal void EditScreenPosition_Click(object sender, EventArgs e)
+  {
+    DoScreenPosition(sender, e);
+  }
+
+  private void ActionResetWinSettings_Click(object sender, EventArgs e)
+  {
+    if ( DisplayManager.QueryYesNo(SysTranslations.AskToRestoreWindowPosition.GetLang()) )
+      Settings.RestoreMainForm();
+  }
+
+  private void ActionShowKeyboardNotice_Click(object sender, EventArgs e)
+  {
+    Globals.KeyboardShortcutsNotice?.Popup();
+  }
+
+  internal void EditDialogBoxesSettings_CheckedChanged(object sender, EventArgs e)
+  {
+    Settings.SoundsEnabled = EditSoundsEnabled.Checked;
+    DisplayManager.AdvancedFormUseSounds = EditSoundsEnabled.Checked;
+    DisplayManager.FormStyle = EditUseAdvancedDialogBoxes.Checked
+      ? MessageBoxFormStyle.Advanced
+      : MessageBoxFormStyle.System;
+    DisplayManager.IconStyle = DisplayManager.FormStyle switch
+    {
+      MessageBoxFormStyle.System => EditSoundsEnabled.Checked
+                                    ? MessageBoxIconStyle.ForceInformation
+                                    : MessageBoxIconStyle.ForceNone,
+      MessageBoxFormStyle.Advanced => MessageBoxIconStyle.ForceInformation,
+      _ => throw new AdvNotImplementedException(DisplayManager.FormStyle),
+    };
+  }
+
+  private void EditShowSuccessDialogs_CheckStateChanged(object sender, EventArgs e)
+  {
+    Settings.ShowSuccessDialogs = EditShowSuccessDialogs.Checked;
+    DisplayManager.ShowSuccessDialogs = EditShowSuccessDialogs.Checked;
+  }
+
+  private void ActionPreferences_Click(object sender, EventArgs e)
+  {
+    bool temp = Globals.IsReadOnly;
+    try
+    {
+      Globals.IsReadOnly = true;
+      //PreferencesForm.Run();
+      InitializeSpecialMenus();
+      InitializeDialogsDirectory();
+    }
+    catch ( Exception ex )
+    {
+      ex.Manage();
+    }
+    finally
+    {
+      Globals.IsReadOnly = temp;
+    }
+  }
+
+  private void ActionViewDecode_Click(object sender, EventArgs e)
+  {
+    SetView(ViewMode.Decode);
+  }
+
+  private void ActionViewGrid_Click(object sender, EventArgs e)
+  {
+    SetView(ViewMode.Grid);
+  }
+
+  private void ActionViewPopulate_Click(object sender, EventArgs e)
+  {
+    SetView(ViewMode.Populate);
+  }
+
+  private void ActionViewNormalize_Click(object sender, EventArgs e)
+  {
+    SetView(ViewMode.Normalize);
+  }
+
+  private void ActionViewStatistics_Click(object sender, EventArgs e)
+  {
+    SetView(ViewMode.Statistics);
   }
 
   private void TimerBatch_Tick(object sender, EventArgs e)
@@ -184,53 +294,13 @@ partial class MainForm : Form
   {
     //if ( !DisplayManager.QueryYesNo("Empty and create data?") ) return;
     string fileName = Path.Combine(Globals.DocumentsFolderPath, PiFirstDecimalsCount.ToString()) + ".txt";
-    DoBatch(() => DoActionDbCreateData(fileName));
+    DoBatch(() => DoActionPopulate(fileName));
   }
 
   private async void ActionBatchRun_Click(object sender, EventArgs e)
   {
     //if ( !DisplayManager.QueryYesNo("Start reducing repeating motifs?") ) return;
     DoBatch(() => DoActionBatchRun(0));
-  }
-
-  private void MainForm_Load(object sender, EventArgs e)
-  {
-    DoFormLoad(sender, e);
-  }
-
-  private void MainForm_Shown(object sender, EventArgs e)
-  {
-    DoFormShown(sender, e);
-  }
-
-  private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-  {
-    DoFormClosed(sender, e);
-  }
-
-  private void ActionViewDecode_Click(object sender, EventArgs e)
-  {
-    SetView(ViewMode.Decode);
-  }
-
-  private void ActionViewGrid_Click(object sender, EventArgs e)
-  {
-    SetView(ViewMode.Grid);
-  }
-
-  private void ActionViewPopulate_Click(object sender, EventArgs e)
-  {
-    SetView(ViewMode.Populate);
-  }
-
-  private void ActionViewNormalize_Click(object sender, EventArgs e)
-  {
-    SetView(ViewMode.Normalize);
-  }
-
-  private void ActionViewStatistics_Click(object sender, EventArgs e)
-  {
-    SetView(ViewMode.Statistics);
   }
 
 }

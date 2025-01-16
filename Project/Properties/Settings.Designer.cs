@@ -223,6 +223,51 @@ namespace Ordisoftware.Hebrew.Pi.Properties
 
     [global::System.Configuration.UserScopedSettingAttribute()]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("ContextMenu")]
+    public global::Ordisoftware.Hebrew.Pi.HebrewWordClickAction HebrewWordClickAction
+    {
+      get
+      {
+        return ( (global::Ordisoftware.Hebrew.Pi.HebrewWordClickAction)( this["HebrewWordClickAction"] ) );
+      }
+      set
+      {
+        this["HebrewWordClickAction"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("https://studybible.info/IHOT/%BOOKSB% %CHAPTERNUM%:%VERSENUM%")]
+    public string OpenVerseOnlineURL
+    {
+      get
+      {
+        return ( (string)( this["OpenVerseOnlineURL"] ) );
+      }
+      set
+      {
+        this["OpenVerseOnlineURL"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("5")]
+    public int VerseCommentaryLinesCount
+    {
+      get
+      {
+        return ( (int)( this["VerseCommentaryLinesCount"] ) );
+      }
+      set
+      {
+        this["VerseCommentaryLinesCount"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Configuration.DefaultSettingValueAttribute("20")]
     public int BookmarksCount
     {
@@ -608,6 +653,51 @@ namespace Ordisoftware.Hebrew.Pi.Properties
       set
       {
         this["FoundReferencesColumnRefWidth"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("ReachReference")]
+    public global::Ordisoftware.Hebrew.Pi.TranslatedItemDoubleClickAction TranslatedItemDoubleClickAction
+    {
+      get
+      {
+        return ( (global::Ordisoftware.Hebrew.Pi.TranslatedItemDoubleClickAction)( this["TranslatedItemDoubleClickAction"] ) );
+      }
+      set
+      {
+        this["TranslatedItemDoubleClickAction"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("492, 266")]
+    public global::System.Drawing.Size EditMemoFormClientSize
+    {
+      get
+      {
+        return ( (global::System.Drawing.Size)( this["EditMemoFormClientSize"] ) );
+      }
+      set
+      {
+        this["EditMemoFormClientSize"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("884, 661")]
+    public global::System.Drawing.Size EditBooksFormClientSize
+    {
+      get
+      {
+        return ( (global::System.Drawing.Size)( this["EditBooksFormClientSize"] ) );
+      }
+      set
+      {
+        this["EditBooksFormClientSize"] = value;
       }
     }
 
@@ -1272,7 +1362,142 @@ namespace Ordisoftware.Hebrew.Pi.Properties
 
     [global::System.Configuration.UserScopedSettingAttribute()]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    [global::System.Configuration.DefaultSettingValueAttribute("Populate")]
+    [global::System.Configuration.DefaultSettingValueAttribute("False")]
+    public bool RenderAllChapterVerses
+    {
+      get
+      {
+        return ( (bool)( this["RenderAllChapterVerses"] ) );
+      }
+      set
+      {
+        this["RenderAllChapterVerses"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("OnlineSearch")]
+    public global::Ordisoftware.Hebrew.Pi.HebrewWordClickAction HebrewWordShiftClickAction
+    {
+      get
+      {
+        return ( (global::Ordisoftware.Hebrew.Pi.HebrewWordClickAction)( this["HebrewWordShiftClickAction"] ) );
+      }
+      set
+      {
+        this["HebrewWordShiftClickAction"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("SearchTranslated")]
+    public global::Ordisoftware.Hebrew.Pi.HebrewWordClickAction HebrewWordCtrlClickAction
+    {
+      get
+      {
+        return ( (global::Ordisoftware.Hebrew.Pi.HebrewWordClickAction)( this["HebrewWordCtrlClickAction"] ) );
+      }
+      set
+      {
+        this["HebrewWordCtrlClickAction"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("HebrewLetters")]
+    public global::Ordisoftware.Hebrew.Pi.HebrewWordClickAction HebrewWordShiftCtrlClickAction
+    {
+      get
+      {
+        return ( (global::Ordisoftware.Hebrew.Pi.HebrewWordClickAction)( this["HebrewWordShiftCtrlClickAction"] ) );
+      }
+      set
+      {
+        this["HebrewWordShiftCtrlClickAction"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("ContextMenu")]
+    public global::Ordisoftware.Hebrew.Pi.VerseLabelClickAction VerseLabelClickAction
+    {
+      get
+      {
+        return ( (global::Ordisoftware.Hebrew.Pi.VerseLabelClickAction)( this["VerseLabelClickAction"] ) );
+      }
+      set
+      {
+        this["VerseLabelClickAction"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("0")]
+    public int SearchVerseRadioButtonIndex
+    {
+      get
+      {
+        return ( (int)( this["SearchVerseRadioButtonIndex"] ) );
+      }
+      set
+      {
+        this["SearchVerseRadioButtonIndex"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("0")]
+    public int SearchTranslationRadioButtonIndex
+    {
+      get
+      {
+        return ( (int)( this["SearchTranslationRadioButtonIndex"] ) );
+      }
+      set
+      {
+        this["SearchTranslationRadioButtonIndex"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("2")]
+    public int VerseWordTranslationLinesCount
+    {
+      get
+      {
+        return ( (int)( this["VerseWordTranslationLinesCount"] ) );
+      }
+      set
+      {
+        this["VerseWordTranslationLinesCount"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("False")]
+    public bool RenderAllChapterVersesKeep
+    {
+      get
+      {
+        return ( (bool)( this["RenderAllChapterVersesKeep"] ) );
+      }
+      set
+      {
+        this["RenderAllChapterVersesKeep"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("Populating")]
     public global::Ordisoftware.Hebrew.Pi.ViewMode CurrentView
     {
       get
@@ -1898,6 +2123,261 @@ namespace Ordisoftware.Hebrew.Pi.Properties
       set
       {
         this["MethodNoticeFormSize"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("Medium")]
+    public global::Ordisoftware.Hebrew.Pi.ExportDocumentTheme ExportDocumentTheme
+    {
+      get
+      {
+        return ( (global::Ordisoftware.Hebrew.Pi.ExportDocumentTheme)( this["ExportDocumentTheme"] ) );
+      }
+      set
+      {
+        this["ExportDocumentTheme"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("True")]
+    public bool ExportDocumentDifferentOddAndEvenPages
+    {
+      get
+      {
+        return ( (bool)( this["ExportDocumentDifferentOddAndEvenPages"] ) );
+      }
+      set
+      {
+        this["ExportDocumentDifferentOddAndEvenPages"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("200")]
+    public int ExportDocumentMarginTop
+    {
+      get
+      {
+        return ( (int)( this["ExportDocumentMarginTop"] ) );
+      }
+      set
+      {
+        this["ExportDocumentMarginTop"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("200")]
+    public int ExportDocumentMarginLeft
+    {
+      get
+      {
+        return ( (int)( this["ExportDocumentMarginLeft"] ) );
+      }
+      set
+      {
+        this["ExportDocumentMarginLeft"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("200")]
+    public int ExportDocumentMarginRight
+    {
+      get
+      {
+        return ( (int)( this["ExportDocumentMarginRight"] ) );
+      }
+      set
+      {
+        this["ExportDocumentMarginRight"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("200")]
+    public int ExportDocumentMarginBottom
+    {
+      get
+      {
+        return ( (int)( this["ExportDocumentMarginBottom"] ) );
+      }
+      set
+      {
+        this["ExportDocumentMarginBottom"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("5")]
+    public int ExportDocumentWordColumnsCount
+    {
+      get
+      {
+        return ( (int)( this["ExportDocumentWordColumnsCount"] ) );
+      }
+      set
+      {
+        this["ExportDocumentWordColumnsCount"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("False")]
+    public bool ExportDocumentOverrideWordColumnsCount
+    {
+      get
+      {
+        return ( (bool)( this["ExportDocumentOverrideWordColumnsCount"] ) );
+      }
+      set
+      {
+        this["ExportDocumentOverrideWordColumnsCount"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("False")]
+    public bool ExportDocumentLandscape
+    {
+      get
+      {
+        return ( (bool)( this["ExportDocumentLandscape"] ) );
+      }
+      set
+      {
+        this["ExportDocumentLandscape"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("2100")]
+    public int ExportDocumentPageWidth
+    {
+      get
+      {
+        return ( (int)( this["ExportDocumentPageWidth"] ) );
+      }
+      set
+      {
+        this["ExportDocumentPageWidth"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("2970")]
+    public int ExportDocumentPageHeight
+    {
+      get
+      {
+        return ( (int)( this["ExportDocumentPageHeight"] ) );
+      }
+      set
+      {
+        this["ExportDocumentPageHeight"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("130")]
+    public int ExportDocumentMarginHeader
+    {
+      get
+      {
+        return ( (int)( this["ExportDocumentMarginHeader"] ) );
+      }
+      set
+      {
+        this["ExportDocumentMarginHeader"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("130")]
+    public int ExportDocumentMarginFooter
+    {
+      get
+      {
+        return ( (int)( this["ExportDocumentMarginFooter"] ) );
+      }
+      set
+      {
+        this["ExportDocumentMarginFooter"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("True")]
+    public bool ExportDocumentDifferentFirstPage
+    {
+      get
+      {
+        return ( (bool)( this["ExportDocumentDifferentFirstPage"] ) );
+      }
+      set
+      {
+        this["ExportDocumentDifferentFirstPage"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("HebrewTabularWithWordForWordAndComment")]
+    public global::Ordisoftware.Hebrew.Pi.ExportDocumentModel ExportDocumentModel
+    {
+      get
+      {
+        return ( (global::Ordisoftware.Hebrew.Pi.ExportDocumentModel)( this["ExportDocumentModel"] ) );
+      }
+      set
+      {
+        this["ExportDocumentModel"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("False")]
+    public bool ExportDocumentVerseRefInBold
+    {
+      get
+      {
+        return ( (bool)( this["ExportDocumentVerseRefInBold"] ) );
+      }
+      set
+      {
+        this["ExportDocumentVerseRefInBold"] = value;
+      }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("True")]
+    public bool WordControlTabInverted
+    {
+      get
+      {
+        return ( (bool)( this["WordControlTabInverted"] ) );
+      }
+      set
+      {
+        this["WordControlTabInverted"] = value;
       }
     }
 

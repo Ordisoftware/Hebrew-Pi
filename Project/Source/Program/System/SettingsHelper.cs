@@ -11,7 +11,7 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01-11 </created>
-/// <edited> 2025-01-11 </edited>
+/// <edited> 2025-01-16 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 using Ordisoftware.Hebrew.Pi.Properties;
@@ -39,23 +39,23 @@ static class SettingsHelper
     MainForm.Height = MainForm.MinimumSize.Height;
     MainForm.WindowState = FormWindowState.Normal;
     MainForm.CenterToScreen();
-    //MainForm.EditScreenNone.Checked = false;
-    //MainForm.EditScreenTopLeft.Checked = false;
-    //MainForm.EditScreenTopRight.Checked = false;
-    //MainForm.EditScreenBottomLeft.Checked = false;
-    //MainForm.EditScreenBottomRight.Checked = false;
-    //MainForm.EditScreenCenter.Checked = true;
-    //MainForm.EditConfirmClosing.Checked = true;
-    //MainForm.EditShowTips.Checked = true;
-    //MainForm.EditSoundsEnabled.Checked = true;
-    //DisplayManager.AdvancedFormUseSounds = true;
-    //MainForm.EditUseAdvancedDialogBoxes.Checked = true;
+    MainForm.EditScreenNone.Checked = false;
+    MainForm.EditScreenTopLeft.Checked = false;
+    MainForm.EditScreenTopRight.Checked = false;
+    MainForm.EditScreenBottomLeft.Checked = false;
+    MainForm.EditScreenBottomRight.Checked = false;
+    MainForm.EditScreenCenter.Checked = true;
+    MainForm.EditConfirmClosing.Checked = true;
+    MainForm.EditShowTips.Checked = true;
+    MainForm.EditSoundsEnabled.Checked = true;
+    DisplayManager.AdvancedFormUseSounds = true;
+    MainForm.EditUseAdvancedDialogBoxes.Checked = true;
     DisplayManager.FormStyle = MessageBoxFormStyle.Advanced;
-    //MainForm.EditShowSuccessDialogs.Checked = false;
+    MainForm.EditShowSuccessDialogs.Checked = false;
     DisplayManager.ShowSuccessDialogs = false;
     settings.ApplicationVolume = 100;
     MediaMixer.SetApplicationVolume(Globals.ProcessId, settings.ApplicationVolume);
-    //MainForm.SetView(ViewMode.ChapterVerses);
+    MainForm.SetView(ViewMode.Populate);
     settings.Store();
   }
 
@@ -83,25 +83,23 @@ static class SettingsHelper
                      && settings.MainFormHeight <= area.Height
         ? settings.MainFormHeight
         : MainForm.MinimumSize.Height;
-      //MainForm.EditScreenNone.Checked = settings.MainFormPosition == ControlLocation.Loose;
-      //MainForm.EditScreenTopLeft.Checked = settings.MainFormPosition == ControlLocation.TopLeft;
-      //MainForm.EditScreenTopRight.Checked = settings.MainFormPosition == ControlLocation.TopRight;
-      //MainForm.EditScreenBottomLeft.Checked = settings.MainFormPosition == ControlLocation.BottomLeft;
-      //MainForm.EditScreenBottomRight.Checked = settings.MainFormPosition == ControlLocation.BottomRight;
-      //MainForm.EditScreenCenter.Checked = settings.MainFormPosition == ControlLocation.Center;
-      //MainForm.EditScreenPosition_Click(null, null);
-      //MainForm.WindowState = settings.MainFormState;
+      MainForm.EditScreenNone.Checked = settings.MainFormPosition == ControlLocation.Loose;
+      MainForm.EditScreenTopLeft.Checked = settings.MainFormPosition == ControlLocation.TopLeft;
+      MainForm.EditScreenTopRight.Checked = settings.MainFormPosition == ControlLocation.TopRight;
+      MainForm.EditScreenBottomLeft.Checked = settings.MainFormPosition == ControlLocation.BottomLeft;
+      MainForm.EditScreenBottomRight.Checked = settings.MainFormPosition == ControlLocation.BottomRight;
+      MainForm.EditScreenCenter.Checked = settings.MainFormPosition == ControlLocation.Center;
+      MainForm.EditScreenPosition_Click(null, null);
+      MainForm.WindowState = settings.MainFormState;
       //
-      //MainForm.EditConfirmClosing.Checked = settings.ConfirmClosing;
-      //MainForm.EditShowTips.Checked = settings.ShowTips;
-      //MainForm.EditSoundsEnabled.Checked = settings.SoundsEnabled;
-      //MainForm.EditUseAdvancedDialogBoxes.Checked = settings.AdvancedDialogBoxes;
-      //MainForm.EditShowSuccessDialogs.Checked = settings.ShowSuccessDialogs;
+      MainForm.EditConfirmClosing.Checked = settings.ConfirmClosing;
+      MainForm.EditShowTips.Checked = settings.ShowTips;
+      MainForm.EditSoundsEnabled.Checked = settings.SoundsEnabled;
+      MainForm.EditUseAdvancedDialogBoxes.Checked = settings.AdvancedDialogBoxes;
+      MainForm.EditShowSuccessDialogs.Checked = settings.ShowSuccessDialogs;
       DisplayManager.ShowSuccessDialogs = settings.ShowSuccessDialogs;
-      //MainForm.EditDialogBoxesSettings_CheckedChanged(null, null);
-      //MainForm.EditExportUseHebrewFontElseUnicodeChars.Checked = settings.ExportUseHebrewFontElseUnicodeChars;
-      //MainForm.EditIncludeOriginalText.Checked = settings.IncludeOriginalTextInChapterTranslation;
-      //MainForm.EditIncludeComment.Checked = settings.IncludeCommentInChapterTranslation;
+      MainForm.EditDialogBoxesSettings_CheckedChanged(null, null);
+      MainForm.EditExportUseHebrewFontElseUnicodeChars.Checked = settings.ExportUseHebrewFontElseUnicodeChars;
       //
       if ( settings.AutoOpenExportedFile && settings.AutoOpenExportFolder )
         settings.AutoOpenExportFolder = false;
@@ -144,21 +142,19 @@ static class SettingsHelper
         settings.MainFormWidth = MainForm.Width;
         settings.MainFormHeight = MainForm.Height;
       }
-      //if ( MainForm.EditScreenNone.Checked ) settings.MainFormPosition = ControlLocation.Loose;
-      //if ( MainForm.EditScreenTopLeft.Checked ) settings.MainFormPosition = ControlLocation.TopLeft;
-      //if ( MainForm.EditScreenTopRight.Checked ) settings.MainFormPosition = ControlLocation.TopRight;
-      //if ( MainForm.EditScreenBottomLeft.Checked ) settings.MainFormPosition = ControlLocation.BottomLeft;
-      //if ( MainForm.EditScreenBottomRight.Checked ) settings.MainFormPosition = ControlLocation.BottomRight;
-      //if ( MainForm.EditScreenCenter.Checked ) settings.MainFormPosition = ControlLocation.Center;
+      if ( MainForm.EditScreenNone.Checked ) settings.MainFormPosition = ControlLocation.Loose;
+      if ( MainForm.EditScreenTopLeft.Checked ) settings.MainFormPosition = ControlLocation.TopLeft;
+      if ( MainForm.EditScreenTopRight.Checked ) settings.MainFormPosition = ControlLocation.TopRight;
+      if ( MainForm.EditScreenBottomLeft.Checked ) settings.MainFormPosition = ControlLocation.BottomLeft;
+      if ( MainForm.EditScreenBottomRight.Checked ) settings.MainFormPosition = ControlLocation.BottomRight;
+      if ( MainForm.EditScreenCenter.Checked ) settings.MainFormPosition = ControlLocation.Center;
       //
-      //settings.ConfirmClosing = MainForm.EditConfirmClosing.Checked;
-      //settings.ShowTips = MainForm.EditShowTips.Checked;
-      //settings.SoundsEnabled = MainForm.EditSoundsEnabled.Checked;
-      //settings.AdvancedDialogBoxes = MainForm.EditUseAdvancedDialogBoxes.Checked;
-      //settings.ShowSuccessDialogs = MainForm.EditShowSuccessDialogs.Checked;
-      //settings.ExportUseHebrewFontElseUnicodeChars = MainForm.EditExportUseHebrewFontElseUnicodeChars.Checked;
-      //settings.IncludeOriginalTextInChapterTranslation = MainForm.EditIncludeOriginalText.Checked;
-      //settings.IncludeCommentInChapterTranslation = MainForm.EditIncludeComment.Checked;
+      settings.ConfirmClosing = MainForm.EditConfirmClosing.Checked;
+      settings.ShowTips = MainForm.EditShowTips.Checked;
+      settings.SoundsEnabled = MainForm.EditSoundsEnabled.Checked;
+      settings.AdvancedDialogBoxes = MainForm.EditUseAdvancedDialogBoxes.Checked;
+      settings.ShowSuccessDialogs = MainForm.EditShowSuccessDialogs.Checked;
+      settings.ExportUseHebrewFontElseUnicodeChars = MainForm.EditExportUseHebrewFontElseUnicodeChars.Checked;
       //
       settings.EditMemoFormLastLocation = EditMemoForm.LastLocation;
       settings.EditMemoFormLastSize = EditMemoForm.LastSize;

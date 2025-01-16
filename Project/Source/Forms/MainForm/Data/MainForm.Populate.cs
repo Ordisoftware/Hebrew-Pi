@@ -23,10 +23,8 @@ partial class MainForm
 
   private long MotifSize = 10;
   private int BufferSize = 10_000_000;
-  private int CreateDataPaging = 100000;
-  private int CreateDataEstimatePaging = 100000;
 
-  private async Task DoActionDbCreateData(string fileName)
+  private async Task DoActionPopulate(string fileName)
   {
     StreamReader reader = null;
     if ( !File.Exists(fileName) )
@@ -45,6 +43,13 @@ partial class MainForm
         long motif = 0;
         char[] buffer = new char[BufferSize];
         long fileSize = SystemManager.GetFileSize(fileName);
+        long paging = fileSize < 100_000
+          ? 100
+          : fileSize < 1_000_000
+            ? 1_000
+            : fileSize < 10_000_000
+              ? 10_000
+              : 100_000;
         reader = new StreamReader(fileName);
         charsRead = reader.Read(buffer, 0, 2);
         if ( charsRead != 2 )
@@ -69,10 +74,9 @@ partial class MainForm
               }
               DB.Insert(new DecupletRow { Position = totalMotifs + 1, Motif = motif });
               totalMotifs++;
-              if ( totalMotifs % CreateDataPaging == 0 )
-                UpdateStatusProgress(string.Format(AppTranslations.CreateDataProgress, totalMotifs.ToString("N0")));
-              if ( totalMotifs % CreateDataEstimatePaging == 0 )
+              if ( totalMotifs % paging == 0 )
               {
+                UpdateStatusProgress(string.Format(AppTranslations.CreateDataProgress, totalMotifs.ToString("N0")));
                 double progress = (double)( totalMotifs * 10 ) / fileSize;
                 var elapsed = Globals.ChronoBatch.Elapsed;
                 var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
@@ -80,6 +84,7 @@ partial class MainForm
               }
             }
         }
+        UpdateStatusProgress(string.Format(AppTranslations.CreateDataProgress, totalMotifs.ToString("N0")));
         if ( CheckIfBatchCanContinue().Result )
         {
           UpdateStatusInfo(AppTranslations.CommittingText);
