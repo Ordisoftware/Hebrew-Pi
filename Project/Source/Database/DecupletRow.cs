@@ -26,7 +26,7 @@ public class DecupletRow
   [PrimaryKey]
   public long Position { get; set; }
 
-  [NotNull]
+  [NotNull, Indexed]
   public long Motif { get; set; }
 
   [NotNull]

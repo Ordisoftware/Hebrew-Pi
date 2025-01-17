@@ -1,4 +1,6 @@
-﻿/// <license>
+﻿using Microsoft.WindowsAPICodePack.Taskbar;
+
+/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
 /// Copyright 2025 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
@@ -13,6 +15,9 @@
 /// <created> 2025-01 </created>
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
+
+using Microsoft.WindowsAPICodePack;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 /// <summary>
 /// Provides application's main form.
@@ -33,11 +38,12 @@ partial class MainForm
     }
     long fileSize = SystemManager.GetFileSize(filePathText);
     long pagingProgress = fileSize <= 1_100_000 ? 1_000 : fileSize <= 10_100_000 ? 10_000 : 100_000;
-    long pagingCommit = fileSize <= 1_100_000_000 ? 10_100_000 : 100_000_000;
+    long pagingCommit = fileSize <= 1_100_000_000 ? 1_000_000 : 10_000_000;
     long countRows = 0;
     long countMotifs = 0;
     bool isAppend = false;
     bool hasError = false;
+    var taskbar = TaskbarManager.Instance;
     StreamReader reader = null;
     try
     {
@@ -65,6 +71,7 @@ partial class MainForm
         fileSize -= 2;
       }
       Globals.ChronoBatch.Restart();
+      taskbar.SetProgressState(TaskbarProgressBarState.Normal);
       while ( ( charsRead = reader.Read(buffer, 0, FileReadBufferSize) ) >= 10 )
       {
         if ( !CheckIfBatchCanContinue().Result ) break;
@@ -87,11 +94,13 @@ partial class MainForm
         }
       }
       doCommit();
-      if ( CheckIfBatchCanContinue().Result )
-      {
-        UpdateStatusInfo(AppTranslations.IndexingText);
-        DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
-      }
+      //if ( CheckIfBatchCanContinue().Result )
+      //{
+      //  Globals.CanCancel = false;
+      //  Globals.CanPause = false;
+      //  UpdateStatusInfo(AppTranslations.IndexingText);
+      //  DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
+      //}
     }
     catch ( Exception ex )
     {
@@ -108,6 +117,7 @@ partial class MainForm
     }
     finally
     {
+      taskbar.SetProgressState(TaskbarProgressBarState.NoProgress);
       if ( reader is not null )
       {
         reader.Close();
@@ -143,6 +153,7 @@ partial class MainForm
       var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
       UpdateStatusInfo(string.Format(AppTranslations.PopulatingAndRemainingText, remaining.AsReadable()));
       UpdateStatusProgress(string.Format(AppTranslations.CreateDataProgress, countMotifs.ToString("N0")));
+      taskbar.SetProgressValue((int)( progress * 100 ), 100);
     }
     //
     void checkRows()
@@ -178,6 +189,7 @@ partial class MainForm
             UpdateStatusInfo(AppTranslations.EmptyingTablesText);
             DB.DeleteAll<DecupletRow>();
             DB.DeleteAll<IterationRow>();
+            countRows = 0;
             break;
           case DialogResult.Cancel:
             Globals.CancelRequired = true;

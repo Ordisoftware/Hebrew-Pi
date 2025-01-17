@@ -95,6 +95,8 @@ partial class MainForm
     Globals.IsInBatch = active;
     Globals.PauseRequired = false;
     Globals.CancelRequired = false;
+    Globals.CanCancel = active && true;
+    Globals.CanPause = active && true;
   }
 
   private void DoActionStop()

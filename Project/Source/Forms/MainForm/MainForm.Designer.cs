@@ -138,6 +138,7 @@
       this.TabPageNormalize = new System.Windows.Forms.TabPage();
       this.PanelViewNormalize = new System.Windows.Forms.Panel();
       this.GridIterations = new System.Windows.Forms.DataGridView();
+      this.MaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.TabPageStatistics = new System.Windows.Forms.TabPage();
       this.PanelViewStatistics = new System.Windows.Forms.Panel();
       this.PanelSepTop = new System.Windows.Forms.Panel();
@@ -184,7 +185,6 @@
       this.TimerBatch = new System.Windows.Forms.Timer(this.components);
       this.TimerMemory = new System.Windows.Forms.Timer(this.components);
       this.TimerTooltip = new System.Windows.Forms.Timer(this.components);
-      this.MaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.iterationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.repeatedCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
@@ -230,7 +230,7 @@
       // 
       this.SelectDbCache.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.SelectDbCache.FormattingEnabled = true;
-      this.SelectDbCache.Location = new System.Drawing.Point(5, 10);
+      this.SelectDbCache.Location = new System.Drawing.Point(5, 3);
       this.SelectDbCache.Name = "SelectDbCache";
       this.SelectDbCache.Size = new System.Drawing.Size(50, 21);
       this.SelectDbCache.TabIndex = 3;
@@ -240,7 +240,7 @@
       // 
       this.SelectFileName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.SelectFileName.FormattingEnabled = true;
-      this.SelectFileName.Location = new System.Drawing.Point(61, 10);
+      this.SelectFileName.Location = new System.Drawing.Point(61, 3);
       this.SelectFileName.Name = "SelectFileName";
       this.SelectFileName.Size = new System.Drawing.Size(121, 21);
       this.SelectFileName.TabIndex = 3;
@@ -249,7 +249,7 @@
       // ActionDbClose
       // 
       this.ActionDbClose.Enabled = false;
-      this.ActionDbClose.Location = new System.Drawing.Point(252, 9);
+      this.ActionDbClose.Location = new System.Drawing.Point(252, 2);
       this.ActionDbClose.Name = "ActionDbClose";
       this.ActionDbClose.Size = new System.Drawing.Size(58, 23);
       this.ActionDbClose.TabIndex = 2;
@@ -260,7 +260,7 @@
       // ActionDbOpen
       // 
       this.ActionDbOpen.Enabled = false;
-      this.ActionDbOpen.Location = new System.Drawing.Point(188, 9);
+      this.ActionDbOpen.Location = new System.Drawing.Point(188, 2);
       this.ActionDbOpen.Name = "ActionDbOpen";
       this.ActionDbOpen.Size = new System.Drawing.Size(58, 23);
       this.ActionDbOpen.TabIndex = 2;
@@ -1202,7 +1202,7 @@
       this.TabPageGrid.Location = new System.Drawing.Point(4, 22);
       this.TabPageGrid.Name = "TabPageGrid";
       this.TabPageGrid.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageGrid.Size = new System.Drawing.Size(929, 353);
+      this.TabPageGrid.Size = new System.Drawing.Size(929, 363);
       this.TabPageGrid.TabIndex = 0;
       this.TabPageGrid.Text = "Grid";
       this.TabPageGrid.UseVisualStyleBackColor = true;
@@ -1216,7 +1216,7 @@
       this.PanelViewGrid.Location = new System.Drawing.Point(3, 3);
       this.PanelViewGrid.Name = "PanelViewGrid";
       this.PanelViewGrid.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewGrid.Size = new System.Drawing.Size(923, 347);
+      this.PanelViewGrid.Size = new System.Drawing.Size(923, 357);
       this.PanelViewGrid.TabIndex = 22;
       // 
       // TabPagePopulate
@@ -1226,7 +1226,7 @@
       this.TabPagePopulate.Location = new System.Drawing.Point(4, 22);
       this.TabPagePopulate.Name = "TabPagePopulate";
       this.TabPagePopulate.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPagePopulate.Size = new System.Drawing.Size(929, 353);
+      this.TabPagePopulate.Size = new System.Drawing.Size(929, 363);
       this.TabPagePopulate.TabIndex = 4;
       this.TabPagePopulate.Text = "Populate";
       // 
@@ -1237,7 +1237,7 @@
       this.PanelViewPopulate.Location = new System.Drawing.Point(3, 3);
       this.PanelViewPopulate.Name = "PanelViewPopulate";
       this.PanelViewPopulate.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewPopulate.Size = new System.Drawing.Size(923, 347);
+      this.PanelViewPopulate.Size = new System.Drawing.Size(923, 357);
       this.PanelViewPopulate.TabIndex = 2;
       // 
       // TabPageNormalize
@@ -1246,7 +1246,7 @@
       this.TabPageNormalize.Location = new System.Drawing.Point(4, 22);
       this.TabPageNormalize.Name = "TabPageNormalize";
       this.TabPageNormalize.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageNormalize.Size = new System.Drawing.Size(929, 353);
+      this.TabPageNormalize.Size = new System.Drawing.Size(929, 363);
       this.TabPageNormalize.TabIndex = 3;
       this.TabPageNormalize.Text = "Normalize";
       this.TabPageNormalize.UseVisualStyleBackColor = true;
@@ -1259,7 +1259,7 @@
       this.PanelViewNormalize.Location = new System.Drawing.Point(3, 3);
       this.PanelViewNormalize.Name = "PanelViewNormalize";
       this.PanelViewNormalize.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewNormalize.Size = new System.Drawing.Size(923, 347);
+      this.PanelViewNormalize.Size = new System.Drawing.Size(923, 357);
       this.PanelViewNormalize.TabIndex = 2;
       // 
       // GridIterations
@@ -1275,8 +1275,14 @@
       this.GridIterations.DataSource = this.BindingSourceIterationRow;
       this.GridIterations.Location = new System.Drawing.Point(13, 13);
       this.GridIterations.Name = "GridIterations";
-      this.GridIterations.Size = new System.Drawing.Size(362, 321);
+      this.GridIterations.Size = new System.Drawing.Size(362, 331);
       this.GridIterations.TabIndex = 0;
+      // 
+      // MaxOccurences
+      // 
+      this.MaxOccurences.DataPropertyName = "MaxOccurences";
+      this.MaxOccurences.HeaderText = "MaxOccurences";
+      this.MaxOccurences.Name = "MaxOccurences";
       // 
       // TabPageStatistics
       // 
@@ -1284,7 +1290,7 @@
       this.TabPageStatistics.Location = new System.Drawing.Point(4, 22);
       this.TabPageStatistics.Name = "TabPageStatistics";
       this.TabPageStatistics.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageStatistics.Size = new System.Drawing.Size(929, 353);
+      this.TabPageStatistics.Size = new System.Drawing.Size(929, 363);
       this.TabPageStatistics.TabIndex = 2;
       this.TabPageStatistics.Text = "Statistics";
       this.TabPageStatistics.UseVisualStyleBackColor = true;
@@ -1296,7 +1302,7 @@
       this.PanelViewStatistics.Location = new System.Drawing.Point(3, 3);
       this.PanelViewStatistics.Name = "PanelViewStatistics";
       this.PanelViewStatistics.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewStatistics.Size = new System.Drawing.Size(923, 347);
+      this.PanelViewStatistics.Size = new System.Drawing.Size(923, 357);
       this.PanelViewStatistics.TabIndex = 1;
       // 
       // PanelSepTop
@@ -1793,12 +1799,6 @@
       // TimerTooltip
       // 
       this.TimerTooltip.Interval = 500;
-      // 
-      // MaxOccurences
-      // 
-      this.MaxOccurences.DataPropertyName = "MaxOccurences";
-      this.MaxOccurences.HeaderText = "MaxOccurences";
-      this.MaxOccurences.Name = "MaxOccurences";
       // 
       // iterationDataGridViewTextBoxColumn
       // 
