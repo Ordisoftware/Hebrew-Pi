@@ -21,15 +21,15 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm
 {
 
-  private ViewConnectors<ViewMode, ToolStripMenuItem> ViewConnectors;
+  private ViewConnectors<ViewMode, ToolStripButton> ViewConnectors;
 
   private void InitializeViewConnectors()
   {
-    ViewConnectors = new ViewConnectors<ViewMode, ToolStripMenuItem>
+    ViewConnectors = new ViewConnectors<ViewMode, ToolStripButton>
     {
       {
         ViewMode.Decode,
-        new ViewConnector<ToolStripMenuItem>
+        new ViewConnector<ToolStripButton>
         {
           Component = ActionViewDecode,
           Panel = PanelViewDecode,
@@ -38,7 +38,7 @@ partial class MainForm
       },
       {
         ViewMode.Grid,
-        new ViewConnector<ToolStripMenuItem>
+        new ViewConnector<ToolStripButton>
         {
           Component = ActionViewGrid,
           Panel = PanelViewGrid,
@@ -47,7 +47,7 @@ partial class MainForm
       },
       {
         ViewMode.Populate,
-        new ViewConnector<ToolStripMenuItem>
+        new ViewConnector<ToolStripButton>
         {
           Component = ActionViewPopulate,
           Panel = PanelViewPopulate,
@@ -56,7 +56,7 @@ partial class MainForm
       },
       {
         ViewMode.Normalize,
-        new ViewConnector<ToolStripMenuItem>
+        new ViewConnector<ToolStripButton>
         {
           Component = ActionViewNormalize,
           Panel = PanelViewNormalize,
@@ -65,7 +65,7 @@ partial class MainForm
       },
       {
         ViewMode.Statistics,
-        new ViewConnector<ToolStripMenuItem>
+        new ViewConnector<ToolStripButton>
         {
           Component = ActionViewStatistics,
           Panel = PanelViewStatistics,

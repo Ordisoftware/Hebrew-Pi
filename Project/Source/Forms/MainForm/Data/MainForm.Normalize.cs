@@ -25,7 +25,7 @@ partial class MainForm
   {
     try
     {
-      TestCounter = 10;
+      //TestCounter = 10;
       if ( startingIterationNumber == 0 )
       {
         DB.DropTable<IterationRow>();
@@ -84,12 +84,12 @@ partial class MainForm
     }
   }
 
-  int TestCounter = 10;
+  //int TestCounter = 10;
 
   private async Task<int> GetRepeatingCount()
   {
-    await Task.Delay(1000);
-    return TestCounter--;
+    //await Task.Delay(1000);
+    //return TestCounter--;
     try
     {
       var query = @"SELECT COUNT(DISTINCT Motif) AS UniqueRepeated

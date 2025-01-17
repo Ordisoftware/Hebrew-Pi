@@ -191,84 +191,53 @@ partial class MainForm : Form
 
   private void TimerMemory_Tick(object sender, EventArgs e)
   {
-    LabelStatusFreeMem.Text = "Free memory: " + SystemManager.PhysicalMemoryFreeValue.FormatBytesSize();
-    LabelTitleRight.Text = DB is null
-      ? "CLOSED"
-      : $"OPENED ({SystemManager.GetFileSize(DbFilePath).FormatBytesSize()})";
+    DoTimerMemory();
   }
 
   private void TimerBatch_Tick(object sender, EventArgs e)
   {
-    LabelStatusTime.Text = Globals.ChronoBatch.Elapsed.AsReadable();
+    DoTimerBatch();
   }
 
-  private void ActionStop_Click(object sender, EventArgs e)
+  private void SetDbCache()
   {
-    Globals.CancelRequired = true;
+    if ( DB is not null ) DB.SetCacheSize((int)SelectDbCache.SelectedItem * 1024 * 1024);
   }
 
-  private void ActionPauseContinue_Click(object sender, EventArgs e)
+  private void ActionDbOpen_Click(object sender, EventArgs e)
   {
-    Globals.PauseRequired = !Globals.PauseRequired;
-    UpdateButtons();
-    if ( Globals.PauseRequired )
-      Globals.ChronoBatch.Stop();
-    else
-      Globals.ChronoBatch.Start();
+    DoActionDbOpen(Path.Combine(Globals.DatabaseFolderPath, PiFirstDecimalsCount.ToString()) + Globals.DatabaseFileExtension);
+  }
+
+  private void ActionDbClose_Click(object sender, EventArgs e)
+  {
+    DoActionDbClose();
   }
 
   private void ActionRun_Click(object sender, EventArgs e)
   {
-    switch ( Settings.CurrentView )
-    {
-      case ViewMode.Populate:
-        //if ( !DisplayManager.QueryYesNo("Empty and create data?") ) return;
-        string fileName = Path.Combine(Globals.DocumentsFolderPath, PiFirstDecimalsCount.ToString()) + ".txt";
-        DoBatch(() => DoActionPopulate(fileName));
-        break;
-      case ViewMode.Normalize:
-        //if ( !DisplayManager.QueryYesNo("Start reducing repeating motifs?") ) return;
-        DoBatch(() => DoActionNormalize(0));
-        break;
-      default:
-        throw new AdvNotImplementedException(Settings.CurrentView);
-    }
+    DoActionRun();
   }
 
-  private async Task DoBatch(Action action)
+  private void ActionStop_Click(object sender, EventArgs e)
   {
-    try
-    {
-      ClearStatusBar();
-      SetBatchState(true);
-      UpdateButtons();
-      Globals.ChronoBatch.Restart();
-      TimerBatch_Tick(null, null);
-      TimerBatch.Enabled = true;
-      await Task.Run(async () => action());
-    }
-    finally
-    {
-      Globals.ChronoBatch.Stop();
-      TimerBatch.Enabled = false;
-      SetBatchState(false);
-      UpdateButtons();
-    }
+    DoActionStop();
   }
 
-  private void SetBatchState(bool active)
+  private void ActionPauseContinue_Click(object sender, EventArgs e)
   {
-    Globals.IsInBatch = active;
-    Globals.PauseRequired = false;
-    Globals.CancelRequired = false;
+    DoActionPauseContinue();
   }
 
-  private async Task<bool> CheckIfBatchCanContinue()
+  private void SelectFileName_SelectedIndexChanged(object sender, EventArgs e)
   {
-    if ( Globals.CancelRequired ) return false;
-    while ( Globals.PauseRequired && !Globals.CancelRequired )
-      await Task.Delay(500);
-    return true;
+    PiFirstDecimalsCount = (PiFirstDecimalsLenght)SelectFileName.SelectedItem;
+    UpdateButtons();
+  }
+
+  private void SelectDbCache_SelectedIndexChanged(object sender, EventArgs e)
+  {
+    SetDbCache();
   }
 
   //private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -297,45 +266,5 @@ partial class MainForm : Form
   //    Clipboard.SetText(builder.ToString());
   //  }
   //}
-
-  private void SelectFileName_SelectedIndexChanged(object sender, EventArgs e)
-  {
-    PiFirstDecimalsCount = (PiFirstDecimalsLenght)SelectFileName.SelectedItem;
-    UpdateButtons();
-  }
-
-  private void SelectDbCache_SelectedIndexChanged(object sender, EventArgs e)
-  {
-    SetDbCache();
-  }
-
-  private void SetDbCache()
-  {
-    if ( DB is not null ) DB.SetCacheSize((int)SelectDbCache.SelectedItem * 1024 * 1024);
-  }
-
-  private void ActionDbOpen_Click(object sender, EventArgs e)
-  {
-    DbFilePath = Path.Combine(Globals.DatabaseFolderPath, PiFirstDecimalsCount.ToString()) + Globals.DatabaseFileExtension;
-    LabelTitleCenter.Text = Path.GetFileName(DbFilePath);
-    DB = new SQLiteNetORM(DbFilePath);
-    if ( SQLiteTempDir.Length > 0 )
-      DB.SetTempDir(SQLiteTempDir);
-    DB.CreateTable<DecupletRow>();
-    DB.CreateTable<IterationRow>();
-    SetDbCache();
-    UpdateButtons();
-    TimerMemory_Tick(null, null);
-  }
-
-  private void ActionDbClose_Click(object sender, EventArgs e)
-  {
-    if ( DB is null ) return;
-    DB.Close();
-    DB.Dispose();
-    DB = null;
-    UpdateButtons();
-    TimerMemory_Tick(null, null);
-  }
 
 }

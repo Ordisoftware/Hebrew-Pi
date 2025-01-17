@@ -389,6 +389,9 @@
       <DependentUpon>StatisticsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Source\Enums\PiFirstDecimalsLenght.cs" />
+    <Compile Include="Source\Forms\MainForm\Data\MainForm.Batch.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Source\Forms\MainForm\Data\MainForm.Populate.cs">
       <SubType>Form</SubType>
     </Compile>

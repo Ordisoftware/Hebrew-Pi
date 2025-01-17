@@ -21,7 +21,7 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm
 {
 
-  private long MotifSize = 10;
+  private const long MotifSize = 10;
   private int BufferSize = 10_000_000;
 
   private async Task DoActionPopulate(string fileName)
@@ -43,13 +43,7 @@ partial class MainForm
         long motif = 0;
         char[] buffer = new char[BufferSize];
         long fileSize = SystemManager.GetFileSize(fileName);
-        long paging = fileSize < 100_000
-          ? 100
-          : fileSize < 1_000_000
-            ? 1_000
-            : fileSize < 10_000_000
-              ? 10_000
-              : 100_000;
+        long paging = fileSize < 100000 ? 100 : fileSize < 1000000 ? 1000 : fileSize < 10000000 ? 10000 : 100000;
         reader = new StreamReader(fileName);
         charsRead = reader.Read(buffer, 0, 2);
         if ( charsRead != 2 )

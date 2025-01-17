@@ -73,13 +73,6 @@ partial class MainForm
     }
   }
 
-  private void ClearStatusBar()
-  {
-    LabelStatusTime.Text = "-";
-    LabelStatusIteration.Text = "-";
-    LabelStatusInfo.Text = "-";
-  }
-
   private void UpdateButtons()
   {
     bool dbOpened = DB is not null;
@@ -95,6 +88,13 @@ partial class MainForm
     ActionContinue.Visible = Globals.PauseRequired;
     ActionPause.Visible = !ActionContinue.Visible;
     Globals.AllowClose = !Globals.IsInBatch;
+  }
+
+  private void ClearStatusBar()
+  {
+    LabelStatusTime.Text = "-";
+    LabelStatusIteration.Text = "-";
+    LabelStatusInfo.Text = "-";
   }
 
   private void UpdateStatusProgress(string text)
@@ -118,6 +118,19 @@ partial class MainForm
       StatusStrip.Invoke(update);
     else
       update();
+  }
+
+  private void DoTimerMemory()
+  {
+    LabelStatusFreeMem.Text = "Free memory: " + SystemManager.PhysicalMemoryFreeValue.FormatBytesSize();
+    LabelTitleRight.Text = DB is null
+      ? "CLOSED"
+      : $"OPENED ({SystemManager.GetFileSize(DbFilePath).FormatBytesSize()})";
+  }
+
+  private void DoTimerBatch()
+  {
+    LabelStatusTime.Text = Globals.ChronoBatch.Elapsed.AsReadable();
   }
 
   //
