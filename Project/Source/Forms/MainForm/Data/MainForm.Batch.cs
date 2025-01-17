@@ -63,7 +63,7 @@ partial class MainForm
         break;
       case ViewMode.Normalize:
         //if ( !DisplayManager.QueryYesNo("Start reducing repeating motifs?") ) return;
-        DoBatch(() => DoActionNormalize(0));
+        DoBatch(() => DoActionNormalize());
         break;
       default:
         throw new AdvNotImplementedException(Settings.CurrentView);

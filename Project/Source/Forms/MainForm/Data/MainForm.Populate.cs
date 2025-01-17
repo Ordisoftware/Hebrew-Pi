@@ -55,11 +55,15 @@ partial class MainForm
         DisplayManager.Show(SysTranslations.LoadFileError.GetLang(filePathText, fileSize.FormatBytesSize()));
         return;
       }
+      string str = new string(buffer, 0, 2);
       reader.Close();
       reader.Dispose();
       reader = new StreamReader(filePathText);
-      if ( new string(buffer) == "3," )
-        reader.BaseStream.Seek(2, SeekOrigin.Current);
+      if ( str == "3." || str == "3," )
+      {
+        reader.BaseStream.Seek(2, SeekOrigin.Begin);
+        fileSize -= 2;
+      }
       while ( ( charsRead = reader.Read(buffer, 0, FileReadBufferSize) ) >= 10 )
       {
         if ( !CheckIfBatchCanContinue().Result ) break;
@@ -81,13 +85,12 @@ partial class MainForm
               DB.BeginTransaction();
             }
           }
-          countMotifs++;
           if ( countMotifs % pagingProgress == 0 )
             showProgress();
+          countMotifs++;
         }
       }
       doCommit();
-      if ( countMotifs > 0 ) countMotifs--;
       if ( CheckIfBatchCanContinue().Result )
       {
         UpdateStatusInfo(AppTranslations.IndexingText);
@@ -139,7 +142,7 @@ partial class MainForm
       var elapsed = Globals.ChronoBatch.Elapsed;
       double size1 = ( countMotifs - countRows ) * PiDecimalMotifSize;
       double size2 = fileSize - countRows * PiDecimalMotifSize;
-      double progress = size1 / size2;
+      double progress = size1 == 0 || size2 == 0 ? 1 : size1 / size2;
       var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
       UpdateStatusInfo(string.Format(AppTranslations.PopulatingAndRemainingText, remaining.AsReadable()));
       UpdateStatusProgress(string.Format(AppTranslations.CreateDataProgress, countMotifs.ToString("N0")));

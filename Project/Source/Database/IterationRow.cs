@@ -30,6 +30,6 @@ public class IterationRow
   public long RepeatedCount { get; set; }
 
   [NotNull]
-  public DateTime Date { get; set; }
+  public long MaxOccurences { get; set; }
 
 }

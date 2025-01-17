@@ -43,7 +43,7 @@ partial class MainForm : Form
     NativeMethods.ClipboardViewerNext = NativeMethods.SetClipboardViewer(Handle);
     HebrewGlobals.GetHebrewLettersExecutablePath = () => Settings.HebrewLettersExe;
     InitializeTheme();
-    foreach ( var value in Enums.GetValues<PiDecimals>() )
+    foreach ( var value in Enums.GetValues<PiDecimalsSize>() )
       SelectFileName.Items.Add(value);
     SelectFileName.SelectedIndex = 2;
     ClearStatusBar();

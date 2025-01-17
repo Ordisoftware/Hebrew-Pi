@@ -14,7 +14,7 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-public enum PiDecimals
+public enum PiDecimalsSize
 {
   KB_128,
   MB_1,

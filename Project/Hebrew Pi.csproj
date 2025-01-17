@@ -388,7 +388,7 @@
     <Compile Include="Source\Forms\Config\StatisticsForm.designer.cs">
       <DependentUpon>StatisticsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Source\Enums\PiDecimals.cs" />
+    <Compile Include="Source\Enums\PiDecimalsSize.cs" />
     <Compile Include="Source\Forms\MainForm\Data\MainForm.Batch.cs">
       <SubType>Form</SubType>
     </Compile>

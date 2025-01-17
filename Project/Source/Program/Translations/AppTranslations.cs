@@ -98,6 +98,6 @@ static partial class AppTranslations
 
   static public string EmptyingTablesText = "Emptying tables...";
   static public string PopulatingText = "Populating...";
-  static public string PopulatingAndRemainingText = "Populating... ({0} remaining before indexing)";
+  static public string PopulatingAndRemainingText = "Populating... {0} remaining before indexing";
 
 }

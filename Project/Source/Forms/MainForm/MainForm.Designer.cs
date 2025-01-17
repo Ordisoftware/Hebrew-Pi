@@ -137,6 +137,7 @@
       this.PanelViewPopulate = new System.Windows.Forms.Panel();
       this.TabPageNormalize = new System.Windows.Forms.TabPage();
       this.PanelViewNormalize = new System.Windows.Forms.Panel();
+      this.GridIterations = new System.Windows.Forms.DataGridView();
       this.TabPageStatistics = new System.Windows.Forms.TabPage();
       this.PanelViewStatistics = new System.Windows.Forms.Panel();
       this.PanelSepTop = new System.Windows.Forms.Panel();
@@ -183,16 +184,15 @@
       this.TimerBatch = new System.Windows.Forms.Timer(this.components);
       this.TimerMemory = new System.Windows.Forms.Timer(this.components);
       this.TimerTooltip = new System.Windows.Forms.Timer(this.components);
-      this.GridIterations = new System.Windows.Forms.DataGridView();
-      this.iterationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.repeatedCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
       this.EditSearchTranslation = new Ordisoftware.Core.TextBoxEx();
       this.EditSearchWord = new Ordisoftware.Hebrew.LettersControl();
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
+      this.iterationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.repeatedCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.MaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -206,11 +206,11 @@
       this.TabPagePopulate.SuspendLayout();
       this.TabPageNormalize.SuspendLayout();
       this.PanelViewNormalize.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).BeginInit();
       this.TabPageStatistics.SuspendLayout();
       this.PanelTitle.SuspendLayout();
       this.PanelTitleInner.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).BeginInit();
       this.SuspendLayout();
       // 
@@ -1262,6 +1262,22 @@
       this.PanelViewNormalize.Size = new System.Drawing.Size(923, 347);
       this.PanelViewNormalize.TabIndex = 2;
       // 
+      // GridIterations
+      // 
+      this.GridIterations.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+      this.GridIterations.AutoGenerateColumns = false;
+      this.GridIterations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.GridIterations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.iterationDataGridViewTextBoxColumn,
+            this.repeatedCountDataGridViewTextBoxColumn,
+            this.MaxOccurences});
+      this.GridIterations.DataSource = this.BindingSourceIterationRow;
+      this.GridIterations.Location = new System.Drawing.Point(13, 13);
+      this.GridIterations.Name = "GridIterations";
+      this.GridIterations.Size = new System.Drawing.Size(362, 321);
+      this.GridIterations.TabIndex = 0;
+      // 
       // TabPageStatistics
       // 
       this.TabPageStatistics.Controls.Add(this.PanelViewStatistics);
@@ -1778,40 +1794,6 @@
       // 
       this.TimerTooltip.Interval = 500;
       // 
-      // GridIterations
-      // 
-      this.GridIterations.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-      this.GridIterations.AutoGenerateColumns = false;
-      this.GridIterations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.GridIterations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iterationDataGridViewTextBoxColumn,
-            this.repeatedCountDataGridViewTextBoxColumn,
-            this.dateDataGridViewTextBoxColumn});
-      this.GridIterations.DataSource = this.BindingSourceIterationRow;
-      this.GridIterations.Location = new System.Drawing.Point(13, 13);
-      this.GridIterations.Name = "GridIterations";
-      this.GridIterations.Size = new System.Drawing.Size(362, 321);
-      this.GridIterations.TabIndex = 0;
-      // 
-      // iterationDataGridViewTextBoxColumn
-      // 
-      this.iterationDataGridViewTextBoxColumn.DataPropertyName = "Iteration";
-      this.iterationDataGridViewTextBoxColumn.HeaderText = "Iteration";
-      this.iterationDataGridViewTextBoxColumn.Name = "iterationDataGridViewTextBoxColumn";
-      // 
-      // repeatedCountDataGridViewTextBoxColumn
-      // 
-      this.repeatedCountDataGridViewTextBoxColumn.DataPropertyName = "RepeatedCount";
-      this.repeatedCountDataGridViewTextBoxColumn.HeaderText = "RepeatedCount";
-      this.repeatedCountDataGridViewTextBoxColumn.Name = "repeatedCountDataGridViewTextBoxColumn";
-      // 
-      // dateDataGridViewTextBoxColumn
-      // 
-      this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
-      this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
-      this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-      // 
       // BindingSourceIterationRow
       // 
       this.BindingSourceIterationRow.DataSource = typeof(Ordisoftware.Hebrew.Pi.IterationRow);
@@ -1885,6 +1867,24 @@
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
       // 
+      // iterationDataGridViewTextBoxColumn
+      // 
+      this.iterationDataGridViewTextBoxColumn.DataPropertyName = "Iteration";
+      this.iterationDataGridViewTextBoxColumn.HeaderText = "Iteration";
+      this.iterationDataGridViewTextBoxColumn.Name = "iterationDataGridViewTextBoxColumn";
+      // 
+      // repeatedCountDataGridViewTextBoxColumn
+      // 
+      this.repeatedCountDataGridViewTextBoxColumn.DataPropertyName = "RepeatedCount";
+      this.repeatedCountDataGridViewTextBoxColumn.HeaderText = "RepeatedCount";
+      this.repeatedCountDataGridViewTextBoxColumn.Name = "repeatedCountDataGridViewTextBoxColumn";
+      // 
+      // MaxOccurences
+      // 
+      this.MaxOccurences.DataPropertyName = "MaxOccurences";
+      this.MaxOccurences.HeaderText = "MaxOccurences";
+      this.MaxOccurences.Name = "MaxOccurences";
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1916,11 +1916,11 @@
       this.TabPagePopulate.ResumeLayout(false);
       this.TabPageNormalize.ResumeLayout(false);
       this.PanelViewNormalize.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).EndInit();
       this.TabPageStatistics.ResumeLayout(false);
       this.PanelTitle.ResumeLayout(false);
       this.PanelTitleInner.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
@@ -2087,9 +2087,9 @@
     private ToolStripSeparator toolStripSeparator10;
     private System.Windows.Forms.Timer TimerTooltip;
     private DataGridView GridIterations;
+    private BindingSource BindingSourceIterationRow;
     private DataGridViewTextBoxColumn iterationDataGridViewTextBoxColumn;
     private DataGridViewTextBoxColumn repeatedCountDataGridViewTextBoxColumn;
-    private DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
-    private BindingSource BindingSourceIterationRow;
+    private DataGridViewTextBoxColumn MaxOccurences;
   }
 }

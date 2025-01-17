@@ -21,7 +21,7 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm : Form
 {
 
-  private PiDecimals PiDecimalsFileType;
+  private PiDecimalsSize PiDecimalsSize;
 
   private string DatabaseFilePath;
 
@@ -32,7 +32,7 @@ partial class MainForm : Form
   internal SQLiteNetORM DB { get; private set; }
 
   private string GetSelectedFileName(string extension)
-    => $"{nameof(PiDecimals)} {PiDecimalsFileType.ToString().Replace("_", "-")}{extension}";
+    => $"{nameof(Pi.PiDecimalsSize)} {PiDecimalsSize.ToString().Replace("_", "-")}{extension}";
 
   #region Singleton
 
@@ -233,7 +233,7 @@ partial class MainForm : Form
 
   private void SelectFileName_SelectedIndexChanged(object sender, EventArgs e)
   {
-    PiDecimalsFileType = (PiDecimals)SelectFileName.SelectedItem;
+    PiDecimalsSize = (PiDecimalsSize)SelectFileName.SelectedItem;
     UpdateButtons();
   }
 
