@@ -79,14 +79,9 @@ partial class MainForm
               motif = ( shiftLeft << 2 ) + shiftLeft + buffer[indexBuffer + indexMotif] - 48;
             }
             DB.Insert(new DecupletRow { Position = countMotifs + 1, Motif = motif });
-            if ( countMotifs % pagingCommit == 0 )
-            {
-              doCommit();
-              DB.BeginTransaction();
-            }
+            if ( countMotifs % pagingCommit == 0 ) doCommit(true);
           }
-          if ( countMotifs % pagingProgress == 0 )
-            showProgress();
+          if ( countMotifs % pagingProgress == 0 ) showProgress();
           countMotifs++;
         }
       }
@@ -124,11 +119,12 @@ partial class MainForm
           UpdateStatusInfo(AppTranslations.FinishedText);
     }
     //
-    void doCommit()
+    void doCommit(bool partial = false)
     {
       UpdateStatusProgress(string.Format(AppTranslations.CreateDataProgress, countMotifs.ToString("N0")));
       UpdateStatusInfo(AppTranslations.CommittingText);
       DB.Commit();
+      if ( partial ) DB.BeginTransaction();
     }
     void doRollback()
     {
