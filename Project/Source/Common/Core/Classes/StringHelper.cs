@@ -59,7 +59,7 @@ static public partial class StringHelper
     => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(str);
 
   /// <summary>
-  /// Gets a TimeSpan as 1d 1h 1m 1s (only 0s if none available).
+  /// Gets a TimeSpan as 01d 01h 01m 01s.
   /// </summary>
   /// <param name="elapsed">The TimeSpan</param>
   static public string AsReadable(this TimeSpan elapsed)
