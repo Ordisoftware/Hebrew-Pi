@@ -27,10 +27,7 @@ partial class MainForm
     {
       //TestCounter = 10;
       if ( startingIterationNumber == 0 )
-      {
-        DB.DropTable<IterationRow>();
-        DB.CreateTable<IterationRow>();
-      }
+        DB.DeleteAll<IterationRow>();
       bool firstIteration = true;
       long countPrevious = 0;
       long countCurrent = 0;
@@ -77,6 +74,7 @@ partial class MainForm
     }
     finally
     {
+      GridIterations.Invoke(LoadIterationGrid);
       if ( Globals.CancelRequired )
         UpdateStatusInfo(AppTranslations.CanceledText);
       else
@@ -88,40 +86,28 @@ partial class MainForm
 
   private async Task<int> GetRepeatingCount()
   {
-    //await Task.Delay(1000);
-    //return TestCounter--;
-    try
-    {
-      var query = @"SELECT COUNT(DISTINCT Motif) AS UniqueRepeated
+    var sql = @"SELECT COUNT(DISTINCT Motif) AS UniqueRepeated
+                FROM Decuplets
+                WHERE Motif IN (
+                  SELECT Motif
                   FROM Decuplets
-                  WHERE Motif IN (
-                    SELECT Motif
-                    FROM Decuplets
-                    GROUP BY Motif
-                    HAVING COUNT(Motif) > 1
-                  );";
-
-      return DB.Query<int>(query).Single();
-    }
-    catch ( Exception ex )
-    {
-      // TODO manage
-      throw;
-    }
+                  GROUP BY Motif
+                  HAVING COUNT(Motif) > 1
+                );";
+    return DB.QueryScalars<int>(sql).Single();
   }
 
   private async void AddPositionToMotifs()
   {
-    return;
-    var query = @"UPDATE Decuplets
-                  SET Motif = Motif + Position
-                  WHERE Motif IN (
-                    SELECT Motif
-                    FROM Decuplets
-                    GROUP BY Motif
-                    HAVING COUNT(*) > 1
-                  );";
-    DB.Execute(query);
+    var sql = @"UPDATE Decuplets
+                SET Motif = Motif + Position
+                WHERE Motif IN (
+                  SELECT Motif
+                  FROM Decuplets
+                  GROUP BY Motif
+                  HAVING COUNT(*) > 1
+                );";
+    DB.Execute(sql);
   }
 
 }

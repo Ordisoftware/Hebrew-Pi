@@ -65,7 +65,7 @@ partial class MainForm
         if ( !CheckIfBatchCanContinue().Result ) break;
         for ( long indexBuffer = 0; indexBuffer < charsRead; indexBuffer += PiDecimalMotifSize )
         {
-          if ( ( !isAppend || countMotifs > countRows ) && indexBuffer + PiDecimalMotifSize <= charsRead )
+          if ( ( !isAppend || countMotifs >= countRows ) && indexBuffer + PiDecimalMotifSize <= charsRead )
           {
             if ( !CheckIfBatchCanContinue().Result ) break;
             motif = buffer[indexBuffer] - 48; // motif = motif * 10 + ( buffer[indexBuffer + indexMotif] - '0' );
@@ -87,6 +87,7 @@ partial class MainForm
         }
       }
       doCommit();
+      if ( countMotifs > 0 ) countMotifs--;
       if ( CheckIfBatchCanContinue().Result )
       {
         UpdateStatusInfo(AppTranslations.IndexingText);

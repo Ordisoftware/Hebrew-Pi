@@ -205,8 +205,8 @@
       this.TabPageGrid.SuspendLayout();
       this.TabPagePopulate.SuspendLayout();
       this.TabPageNormalize.SuspendLayout();
+      this.PanelViewNormalize.SuspendLayout();
       this.TabPageStatistics.SuspendLayout();
-      this.PanelViewStatistics.SuspendLayout();
       this.PanelTitle.SuspendLayout();
       this.PanelTitleInner.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).BeginInit();
@@ -221,9 +221,9 @@
       this.PanelDatabase.Controls.Add(this.ActionDbClose);
       this.PanelDatabase.Controls.Add(this.ActionDbOpen);
       this.PanelDatabase.Dock = System.Windows.Forms.DockStyle.Top;
-      this.PanelDatabase.Location = new System.Drawing.Point(0, 0);
+      this.PanelDatabase.Location = new System.Drawing.Point(10, 34);
       this.PanelDatabase.Name = "PanelDatabase";
-      this.PanelDatabase.Size = new System.Drawing.Size(937, 50);
+      this.PanelDatabase.Size = new System.Drawing.Size(939, 50);
       this.PanelDatabase.TabIndex = 1;
       // 
       // SelectDbCache
@@ -1119,6 +1119,7 @@
       // 
       this.PanelMain.Controls.Add(this.PanelMainOuter);
       this.PanelMain.Controls.Add(this.PanelSepTop);
+      this.PanelMain.Controls.Add(this.PanelDatabase);
       this.PanelMain.Controls.Add(this.PanelTitle);
       this.PanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMain.Location = new System.Drawing.Point(0, 54);
@@ -1132,10 +1133,10 @@
       this.PanelMainOuter.BackColor = System.Drawing.SystemColors.ControlDarkDark;
       this.PanelMainOuter.Controls.Add(this.PanelMainInner);
       this.PanelMainOuter.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.PanelMainOuter.Location = new System.Drawing.Point(10, 44);
+      this.PanelMainOuter.Location = new System.Drawing.Point(10, 94);
       this.PanelMainOuter.Name = "PanelMainOuter";
       this.PanelMainOuter.Padding = new System.Windows.Forms.Padding(1);
-      this.PanelMainOuter.Size = new System.Drawing.Size(939, 431);
+      this.PanelMainOuter.Size = new System.Drawing.Size(939, 381);
       this.PanelMainOuter.TabIndex = 18;
       // 
       // PanelMainInner
@@ -1145,18 +1146,17 @@
       this.PanelMainInner.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMainInner.Location = new System.Drawing.Point(1, 1);
       this.PanelMainInner.Name = "PanelMainInner";
-      this.PanelMainInner.Size = new System.Drawing.Size(937, 429);
+      this.PanelMainInner.Size = new System.Drawing.Size(937, 379);
       this.PanelMainInner.TabIndex = 0;
       // 
       // PanelMainCenter
       // 
       this.PanelMainCenter.BackColor = System.Drawing.SystemColors.Control;
       this.PanelMainCenter.Controls.Add(this.TabControl);
-      this.PanelMainCenter.Controls.Add(this.PanelDatabase);
       this.PanelMainCenter.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMainCenter.Location = new System.Drawing.Point(0, 0);
       this.PanelMainCenter.Name = "PanelMainCenter";
-      this.PanelMainCenter.Size = new System.Drawing.Size(937, 429);
+      this.PanelMainCenter.Size = new System.Drawing.Size(937, 379);
       this.PanelMainCenter.TabIndex = 0;
       // 
       // TabControl
@@ -1167,7 +1167,7 @@
       this.TabControl.Controls.Add(this.TabPageNormalize);
       this.TabControl.Controls.Add(this.TabPageStatistics);
       this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.TabControl.Location = new System.Drawing.Point(0, 50);
+      this.TabControl.Location = new System.Drawing.Point(0, 0);
       this.TabControl.Name = "TabControl";
       this.TabControl.SelectedIndex = 0;
       this.TabControl.Size = new System.Drawing.Size(937, 379);
@@ -1254,6 +1254,7 @@
       // PanelViewNormalize
       // 
       this.PanelViewNormalize.BackColor = System.Drawing.SystemColors.Control;
+      this.PanelViewNormalize.Controls.Add(this.GridIterations);
       this.PanelViewNormalize.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelViewNormalize.Location = new System.Drawing.Point(3, 3);
       this.PanelViewNormalize.Name = "PanelViewNormalize";
@@ -1275,7 +1276,6 @@
       // PanelViewStatistics
       // 
       this.PanelViewStatistics.BackColor = System.Drawing.SystemColors.Control;
-      this.PanelViewStatistics.Controls.Add(this.GridIterations);
       this.PanelViewStatistics.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelViewStatistics.Location = new System.Drawing.Point(3, 3);
       this.PanelViewStatistics.Name = "PanelViewStatistics";
@@ -1286,7 +1286,7 @@
       // PanelSepTop
       // 
       this.PanelSepTop.Dock = System.Windows.Forms.DockStyle.Top;
-      this.PanelSepTop.Location = new System.Drawing.Point(10, 34);
+      this.PanelSepTop.Location = new System.Drawing.Point(10, 84);
       this.PanelSepTop.Name = "PanelSepTop";
       this.PanelSepTop.Size = new System.Drawing.Size(939, 10);
       this.PanelSepTop.TabIndex = 16;
@@ -1780,6 +1780,8 @@
       // 
       // GridIterations
       // 
+      this.GridIterations.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
       this.GridIterations.AutoGenerateColumns = false;
       this.GridIterations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.GridIterations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1787,9 +1789,9 @@
             this.repeatedCountDataGridViewTextBoxColumn,
             this.dateDataGridViewTextBoxColumn});
       this.GridIterations.DataSource = this.BindingSourceIterationRow;
-      this.GridIterations.Location = new System.Drawing.Point(66, 121);
+      this.GridIterations.Location = new System.Drawing.Point(13, 13);
       this.GridIterations.Name = "GridIterations";
-      this.GridIterations.Size = new System.Drawing.Size(349, 195);
+      this.GridIterations.Size = new System.Drawing.Size(362, 321);
       this.GridIterations.TabIndex = 0;
       // 
       // iterationDataGridViewTextBoxColumn
@@ -1913,8 +1915,8 @@
       this.TabPageGrid.ResumeLayout(false);
       this.TabPagePopulate.ResumeLayout(false);
       this.TabPageNormalize.ResumeLayout(false);
+      this.PanelViewNormalize.ResumeLayout(false);
       this.TabPageStatistics.ResumeLayout(false);
-      this.PanelViewStatistics.ResumeLayout(false);
       this.PanelTitle.ResumeLayout(false);
       this.PanelTitleInner.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).EndInit();

@@ -23,6 +23,11 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm
 {
 
+  private void LoadIterationGrid()
+  {
+    GridIterations.DataSource = new BindingListView<IterationRow>(DB.Table<IterationRow>().ToList());
+  }
+
   private void DoActionDbOpen(string path)
   {
     DatabaseFilePath = path;
@@ -33,7 +38,7 @@ partial class MainForm
     DB.CreateTable<DecupletRow>();
     DB.CreateTable<IterationRow>();
     SetDbCache();
-    GridIterations.DataSource = new BindingListView<IterationRow>(DB.Table<IterationRow>().ToList());
+    LoadIterationGrid();
     UpdateButtons();
     TimerMemory_Tick(null, null);
   }

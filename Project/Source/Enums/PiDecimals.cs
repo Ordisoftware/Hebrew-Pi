@@ -21,6 +21,7 @@ public enum PiDecimals
   GB_1,
   GB_10,
   GB_100,
+  MB_1_Normalized,
   GB_1_Normalized,
   GB_10_Normalized,
   GB_100_Normalized
