@@ -38,7 +38,7 @@ static partial class Program
       //
       var lang = Settings.LanguageSelected;
       SystemManager.CheckCommandLineArguments<ApplicationCommandLine>(args, ref lang);
-      if ( !SystemManager.CheckApplicationOnlyOneInstance(IPCRequests) ) return;
+      //if ( !SystemManager.CheckApplicationOnlyOneInstance(IPCRequests) ) return;
       bool upgrade = Settings.UpgradeRequired;
       Globals.IsSettingsUpgraded = upgrade;
       Settings.CheckUpgradeRequired(ref upgrade);

@@ -184,15 +184,15 @@
       this.TimerBatch = new System.Windows.Forms.Timer(this.components);
       this.TimerMemory = new System.Windows.Forms.Timer(this.components);
       this.TimerTooltip = new System.Windows.Forms.Timer(this.components);
+      this.MaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.iterationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.repeatedCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
       this.EditSearchTranslation = new Ordisoftware.Core.TextBoxEx();
       this.EditSearchWord = new Ordisoftware.Hebrew.LettersControl();
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
-      this.iterationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.repeatedCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.MaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -221,16 +221,16 @@
       this.PanelDatabase.Controls.Add(this.ActionDbClose);
       this.PanelDatabase.Controls.Add(this.ActionDbOpen);
       this.PanelDatabase.Dock = System.Windows.Forms.DockStyle.Top;
-      this.PanelDatabase.Location = new System.Drawing.Point(10, 34);
+      this.PanelDatabase.Location = new System.Drawing.Point(10, 10);
       this.PanelDatabase.Name = "PanelDatabase";
-      this.PanelDatabase.Size = new System.Drawing.Size(939, 50);
+      this.PanelDatabase.Size = new System.Drawing.Size(939, 40);
       this.PanelDatabase.TabIndex = 1;
       // 
       // SelectDbCache
       // 
       this.SelectDbCache.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.SelectDbCache.FormattingEnabled = true;
-      this.SelectDbCache.Location = new System.Drawing.Point(7, 14);
+      this.SelectDbCache.Location = new System.Drawing.Point(5, 10);
       this.SelectDbCache.Name = "SelectDbCache";
       this.SelectDbCache.Size = new System.Drawing.Size(50, 21);
       this.SelectDbCache.TabIndex = 3;
@@ -240,7 +240,7 @@
       // 
       this.SelectFileName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.SelectFileName.FormattingEnabled = true;
-      this.SelectFileName.Location = new System.Drawing.Point(63, 14);
+      this.SelectFileName.Location = new System.Drawing.Point(61, 10);
       this.SelectFileName.Name = "SelectFileName";
       this.SelectFileName.Size = new System.Drawing.Size(121, 21);
       this.SelectFileName.TabIndex = 3;
@@ -249,7 +249,7 @@
       // ActionDbClose
       // 
       this.ActionDbClose.Enabled = false;
-      this.ActionDbClose.Location = new System.Drawing.Point(254, 14);
+      this.ActionDbClose.Location = new System.Drawing.Point(252, 9);
       this.ActionDbClose.Name = "ActionDbClose";
       this.ActionDbClose.Size = new System.Drawing.Size(58, 23);
       this.ActionDbClose.TabIndex = 2;
@@ -260,7 +260,7 @@
       // ActionDbOpen
       // 
       this.ActionDbOpen.Enabled = false;
-      this.ActionDbOpen.Location = new System.Drawing.Point(190, 14);
+      this.ActionDbOpen.Location = new System.Drawing.Point(188, 9);
       this.ActionDbOpen.Name = "ActionDbOpen";
       this.ActionDbOpen.Size = new System.Drawing.Size(58, 23);
       this.ActionDbOpen.TabIndex = 2;
@@ -1119,8 +1119,8 @@
       // 
       this.PanelMain.Controls.Add(this.PanelMainOuter);
       this.PanelMain.Controls.Add(this.PanelSepTop);
-      this.PanelMain.Controls.Add(this.PanelDatabase);
       this.PanelMain.Controls.Add(this.PanelTitle);
+      this.PanelMain.Controls.Add(this.PanelDatabase);
       this.PanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMain.Location = new System.Drawing.Point(0, 54);
       this.PanelMain.Name = "PanelMain";
@@ -1133,10 +1133,10 @@
       this.PanelMainOuter.BackColor = System.Drawing.SystemColors.ControlDarkDark;
       this.PanelMainOuter.Controls.Add(this.PanelMainInner);
       this.PanelMainOuter.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.PanelMainOuter.Location = new System.Drawing.Point(10, 94);
+      this.PanelMainOuter.Location = new System.Drawing.Point(10, 84);
       this.PanelMainOuter.Name = "PanelMainOuter";
       this.PanelMainOuter.Padding = new System.Windows.Forms.Padding(1);
-      this.PanelMainOuter.Size = new System.Drawing.Size(939, 381);
+      this.PanelMainOuter.Size = new System.Drawing.Size(939, 391);
       this.PanelMainOuter.TabIndex = 18;
       // 
       // PanelMainInner
@@ -1146,7 +1146,7 @@
       this.PanelMainInner.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMainInner.Location = new System.Drawing.Point(1, 1);
       this.PanelMainInner.Name = "PanelMainInner";
-      this.PanelMainInner.Size = new System.Drawing.Size(937, 379);
+      this.PanelMainInner.Size = new System.Drawing.Size(937, 389);
       this.PanelMainInner.TabIndex = 0;
       // 
       // PanelMainCenter
@@ -1156,7 +1156,7 @@
       this.PanelMainCenter.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMainCenter.Location = new System.Drawing.Point(0, 0);
       this.PanelMainCenter.Name = "PanelMainCenter";
-      this.PanelMainCenter.Size = new System.Drawing.Size(937, 379);
+      this.PanelMainCenter.Size = new System.Drawing.Size(937, 389);
       this.PanelMainCenter.TabIndex = 0;
       // 
       // TabControl
@@ -1170,7 +1170,7 @@
       this.TabControl.Location = new System.Drawing.Point(0, 0);
       this.TabControl.Name = "TabControl";
       this.TabControl.SelectedIndex = 0;
-      this.TabControl.Size = new System.Drawing.Size(937, 379);
+      this.TabControl.Size = new System.Drawing.Size(937, 389);
       this.TabControl.TabIndex = 8;
       this.TabControl.TabStop = false;
       this.TabControl.Visible = false;
@@ -1181,7 +1181,7 @@
       this.TabPageDecode.Location = new System.Drawing.Point(4, 22);
       this.TabPageDecode.Name = "TabPageDecode";
       this.TabPageDecode.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageDecode.Size = new System.Drawing.Size(929, 353);
+      this.TabPageDecode.Size = new System.Drawing.Size(929, 363);
       this.TabPageDecode.TabIndex = 1;
       this.TabPageDecode.Text = "Decode";
       this.TabPageDecode.UseVisualStyleBackColor = true;
@@ -1193,7 +1193,7 @@
       this.PanelViewDecode.Location = new System.Drawing.Point(3, 3);
       this.PanelViewDecode.Name = "PanelViewDecode";
       this.PanelViewDecode.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewDecode.Size = new System.Drawing.Size(923, 347);
+      this.PanelViewDecode.Size = new System.Drawing.Size(923, 357);
       this.PanelViewDecode.TabIndex = 0;
       // 
       // TabPageGrid
@@ -1302,7 +1302,7 @@
       // PanelSepTop
       // 
       this.PanelSepTop.Dock = System.Windows.Forms.DockStyle.Top;
-      this.PanelSepTop.Location = new System.Drawing.Point(10, 84);
+      this.PanelSepTop.Location = new System.Drawing.Point(10, 74);
       this.PanelSepTop.Name = "PanelSepTop";
       this.PanelSepTop.Size = new System.Drawing.Size(939, 10);
       this.PanelSepTop.TabIndex = 16;
@@ -1312,7 +1312,7 @@
       this.PanelTitle.BackColor = System.Drawing.SystemColors.ControlDarkDark;
       this.PanelTitle.Controls.Add(this.PanelTitleInner);
       this.PanelTitle.Dock = System.Windows.Forms.DockStyle.Top;
-      this.PanelTitle.Location = new System.Drawing.Point(10, 10);
+      this.PanelTitle.Location = new System.Drawing.Point(10, 50);
       this.PanelTitle.Name = "PanelTitle";
       this.PanelTitle.Padding = new System.Windows.Forms.Padding(1);
       this.PanelTitle.Size = new System.Drawing.Size(939, 24);
@@ -1794,6 +1794,24 @@
       // 
       this.TimerTooltip.Interval = 500;
       // 
+      // MaxOccurences
+      // 
+      this.MaxOccurences.DataPropertyName = "MaxOccurences";
+      this.MaxOccurences.HeaderText = "MaxOccurences";
+      this.MaxOccurences.Name = "MaxOccurences";
+      // 
+      // iterationDataGridViewTextBoxColumn
+      // 
+      this.iterationDataGridViewTextBoxColumn.DataPropertyName = "Iteration";
+      this.iterationDataGridViewTextBoxColumn.HeaderText = "Iteration";
+      this.iterationDataGridViewTextBoxColumn.Name = "iterationDataGridViewTextBoxColumn";
+      // 
+      // repeatedCountDataGridViewTextBoxColumn
+      // 
+      this.repeatedCountDataGridViewTextBoxColumn.DataPropertyName = "RepeatedCount";
+      this.repeatedCountDataGridViewTextBoxColumn.HeaderText = "RepeatedCount";
+      this.repeatedCountDataGridViewTextBoxColumn.Name = "repeatedCountDataGridViewTextBoxColumn";
+      // 
       // BindingSourceIterationRow
       // 
       this.BindingSourceIterationRow.DataSource = typeof(Ordisoftware.Hebrew.Pi.IterationRow);
@@ -1866,24 +1884,6 @@
       this.EditChapterELS50.Size = new System.Drawing.Size(728, 234);
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
-      // 
-      // iterationDataGridViewTextBoxColumn
-      // 
-      this.iterationDataGridViewTextBoxColumn.DataPropertyName = "Iteration";
-      this.iterationDataGridViewTextBoxColumn.HeaderText = "Iteration";
-      this.iterationDataGridViewTextBoxColumn.Name = "iterationDataGridViewTextBoxColumn";
-      // 
-      // repeatedCountDataGridViewTextBoxColumn
-      // 
-      this.repeatedCountDataGridViewTextBoxColumn.DataPropertyName = "RepeatedCount";
-      this.repeatedCountDataGridViewTextBoxColumn.HeaderText = "RepeatedCount";
-      this.repeatedCountDataGridViewTextBoxColumn.Name = "repeatedCountDataGridViewTextBoxColumn";
-      // 
-      // MaxOccurences
-      // 
-      this.MaxOccurences.DataPropertyName = "MaxOccurences";
-      this.MaxOccurences.HeaderText = "MaxOccurences";
-      this.MaxOccurences.Name = "MaxOccurences";
       // 
       // MainForm
       // 
