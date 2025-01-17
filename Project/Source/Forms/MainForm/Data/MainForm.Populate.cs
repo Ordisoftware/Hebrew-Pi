@@ -64,6 +64,7 @@ partial class MainForm
         reader.BaseStream.Seek(2, SeekOrigin.Begin);
         fileSize -= 2;
       }
+      Globals.ChronoBatch.Restart();
       while ( ( charsRead = reader.Read(buffer, 0, FileReadBufferSize) ) >= 10 )
       {
         if ( !CheckIfBatchCanContinue().Result ) break;

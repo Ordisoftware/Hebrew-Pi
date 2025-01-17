@@ -1,6 +1,4 @@
-﻿using Equin.ApplicationFramework;
-
-/// <license>
+﻿/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
 /// Copyright 2025 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
@@ -15,6 +13,8 @@
 /// <created> 2025-01 </created>
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
+
+using Equin.ApplicationFramework;
 
 /// <summary>
 /// Provides application's main form.
@@ -77,7 +77,6 @@ partial class MainForm
       ClearStatusBar();
       SetBatchState(true);
       UpdateButtons();
-      Globals.ChronoBatch.Restart();
       TimerBatch_Tick(null, null);
       TimerBatch.Enabled = true;
       await Task.Run(async () => action());
