@@ -48,6 +48,7 @@ partial class MainForm
     Settings.CurrentView = view;
     LabelTitleLeft.Text = AppTranslations.ViewPanelTitle.GetLang(view).ToUpper();
     UpdateHistoryButtons();
+    UpdateButtons();
   }
 
 }

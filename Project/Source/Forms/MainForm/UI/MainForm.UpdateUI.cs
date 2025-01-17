@@ -125,7 +125,7 @@ partial class MainForm
     LabelStatusFreeMem.Text = "Free memory: " + SystemManager.PhysicalMemoryFreeValue.FormatBytesSize();
     LabelTitleRight.Text = DB is null
       ? "CLOSED"
-      : $"OPENED ({SystemManager.GetFileSize(DbFilePath).FormatBytesSize()})";
+      : $"OPENED ({SystemManager.GetFileSize(DatabaseFilePath).FormatBytesSize()})";
   }
 
   private void DoTimerBatch()

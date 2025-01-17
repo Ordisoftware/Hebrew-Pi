@@ -46,7 +46,6 @@
       this.ActionExit = new System.Windows.Forms.ToolStripButton();
       this.ToolStripSeparatorExit = new System.Windows.Forms.ToolStripSeparator();
       this.ActionPreferences = new System.Windows.Forms.ToolStripButton();
-      this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
       this.ActionBookmarks = new System.Windows.Forms.ToolStripDropDownButton();
       this.ActionAddBookmark = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -56,13 +55,21 @@
       this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.ActionGoToBookmarkMain = new System.Windows.Forms.ToolStripMenuItem();
       this.SeparatorBookmarks = new System.Windows.Forms.ToolStripSeparator();
-      this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
+      this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
       this.ActionHistory = new System.Windows.Forms.ToolStripDropDownButton();
       this.ActionClearHistory = new System.Windows.Forms.ToolStripMenuItem();
       this.SeparatorHistory = new System.Windows.Forms.ToolStripSeparator();
       this.ActionHistoryBack = new System.Windows.Forms.ToolStripButton();
       this.ActionHistoryNext = new System.Windows.Forms.ToolStripButton();
-      this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+      this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
+      this.ActionViewDecode = new System.Windows.Forms.ToolStripButton();
+      this.ActionViewGrid = new System.Windows.Forms.ToolStripButton();
+      this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+      this.ActionViewPopulate = new System.Windows.Forms.ToolStripButton();
+      this.ActionViewNormalize = new System.Windows.Forms.ToolStripButton();
+      this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+      this.ActionViewStatistics = new System.Windows.Forms.ToolStripButton();
+      this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
       this.ActionRun = new System.Windows.Forms.ToolStripButton();
       this.ActionStop = new System.Windows.Forms.ToolStripButton();
       this.ActionPause = new System.Windows.Forms.ToolStripButton();
@@ -175,19 +182,17 @@
       this.PanelSearchResults = new System.Windows.Forms.Panel();
       this.TimerBatch = new System.Windows.Forms.Timer(this.components);
       this.TimerMemory = new System.Windows.Forms.Timer(this.components);
+      this.TimerTooltip = new System.Windows.Forms.Timer(this.components);
+      this.GridIterations = new System.Windows.Forms.DataGridView();
+      this.iterationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.repeatedCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
       this.EditSearchTranslation = new Ordisoftware.Core.TextBoxEx();
       this.EditSearchWord = new Ordisoftware.Hebrew.LettersControl();
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
-      this.ActionViewPopulate = new System.Windows.Forms.ToolStripButton();
-      this.ActionViewStatistics = new System.Windows.Forms.ToolStripButton();
-      this.ActionViewNormalize = new System.Windows.Forms.ToolStripButton();
-      this.ActionViewGrid = new System.Windows.Forms.ToolStripButton();
-      this.ActionViewDecode = new System.Windows.Forms.ToolStripButton();
-      this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-      this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-      this.TimerTooltip = new System.Windows.Forms.Timer(this.components);
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -201,9 +206,12 @@
       this.TabPagePopulate.SuspendLayout();
       this.TabPageNormalize.SuspendLayout();
       this.TabPageStatistics.SuspendLayout();
+      this.PanelViewStatistics.SuspendLayout();
       this.PanelTitle.SuspendLayout();
       this.PanelTitleInner.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).BeginInit();
       this.SuspendLayout();
       // 
       // PanelDatabase
@@ -387,11 +395,6 @@
       this.ActionPreferences.ToolTipText = "Preferences (F9)";
       this.ActionPreferences.Click += new System.EventHandler(this.ActionPreferences_Click);
       // 
-      // toolStripSeparator5
-      // 
-      this.toolStripSeparator5.Name = "toolStripSeparator5";
-      this.toolStripSeparator5.Size = new System.Drawing.Size(6, 49);
-      // 
       // ActionBookmarks
       // 
       this.ActionBookmarks.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -417,57 +420,57 @@
       this.ActionAddBookmark.Image = ((System.Drawing.Image)(resources.GetObject("ActionAddBookmark.Image")));
       this.ActionAddBookmark.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionAddBookmark.Name = "ActionAddBookmark";
-      this.ActionAddBookmark.Size = new System.Drawing.Size(180, 22);
+      this.ActionAddBookmark.Size = new System.Drawing.Size(108, 22);
       this.ActionAddBookmark.Text = "Add";
       // 
       // toolStripSeparator3
       // 
       this.toolStripSeparator3.Name = "toolStripSeparator3";
-      this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+      this.toolStripSeparator3.Size = new System.Drawing.Size(105, 6);
       // 
       // ActionSortBookmarks
       // 
       this.ActionSortBookmarks.Image = ((System.Drawing.Image)(resources.GetObject("ActionSortBookmarks.Image")));
       this.ActionSortBookmarks.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionSortBookmarks.Name = "ActionSortBookmarks";
-      this.ActionSortBookmarks.Size = new System.Drawing.Size(180, 22);
+      this.ActionSortBookmarks.Size = new System.Drawing.Size(108, 22);
       this.ActionSortBookmarks.Text = "Sort";
       // 
       // toolStripSeparator7
       // 
       this.toolStripSeparator7.Name = "toolStripSeparator7";
-      this.toolStripSeparator7.Size = new System.Drawing.Size(177, 6);
+      this.toolStripSeparator7.Size = new System.Drawing.Size(105, 6);
       // 
       // ActionClearBookmarks
       // 
       this.ActionClearBookmarks.Image = ((System.Drawing.Image)(resources.GetObject("ActionClearBookmarks.Image")));
       this.ActionClearBookmarks.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionClearBookmarks.Name = "ActionClearBookmarks";
-      this.ActionClearBookmarks.Size = new System.Drawing.Size(180, 22);
+      this.ActionClearBookmarks.Size = new System.Drawing.Size(108, 22);
       this.ActionClearBookmarks.Text = "Empty";
       // 
       // toolStripSeparator4
       // 
       this.toolStripSeparator4.Name = "toolStripSeparator4";
-      this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+      this.toolStripSeparator4.Size = new System.Drawing.Size(105, 6);
       // 
       // ActionGoToBookmarkMain
       // 
       this.ActionGoToBookmarkMain.Image = ((System.Drawing.Image)(resources.GetObject("ActionGoToBookmarkMain.Image")));
       this.ActionGoToBookmarkMain.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionGoToBookmarkMain.Name = "ActionGoToBookmarkMain";
-      this.ActionGoToBookmarkMain.Size = new System.Drawing.Size(180, 22);
+      this.ActionGoToBookmarkMain.Size = new System.Drawing.Size(108, 22);
       this.ActionGoToBookmarkMain.Text = "Main";
       // 
       // SeparatorBookmarks
       // 
       this.SeparatorBookmarks.Name = "SeparatorBookmarks";
-      this.SeparatorBookmarks.Size = new System.Drawing.Size(177, 6);
+      this.SeparatorBookmarks.Size = new System.Drawing.Size(105, 6);
       // 
-      // toolStripSeparator19
+      // toolStripSeparator13
       // 
-      this.toolStripSeparator19.Name = "toolStripSeparator19";
-      this.toolStripSeparator19.Size = new System.Drawing.Size(6, 49);
+      this.toolStripSeparator13.Name = "toolStripSeparator13";
+      this.toolStripSeparator13.Size = new System.Drawing.Size(6, 49);
       // 
       // ActionHistory
       // 
@@ -488,13 +491,13 @@
       this.ActionClearHistory.Image = ((System.Drawing.Image)(resources.GetObject("ActionClearHistory.Image")));
       this.ActionClearHistory.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionClearHistory.Name = "ActionClearHistory";
-      this.ActionClearHistory.Size = new System.Drawing.Size(180, 22);
+      this.ActionClearHistory.Size = new System.Drawing.Size(108, 22);
       this.ActionClearHistory.Text = "Empty";
       // 
       // SeparatorHistory
       // 
       this.SeparatorHistory.Name = "SeparatorHistory";
-      this.SeparatorHistory.Size = new System.Drawing.Size(177, 6);
+      this.SeparatorHistory.Size = new System.Drawing.Size(105, 6);
       // 
       // ActionHistoryBack
       // 
@@ -518,10 +521,85 @@
       this.ActionHistoryNext.Text = "Next";
       this.ActionHistoryNext.ToolTipText = "Next (Shift+Ctrl+N)";
       // 
-      // toolStripSeparator13
+      // toolStripSeparator19
       // 
-      this.toolStripSeparator13.Name = "toolStripSeparator13";
-      this.toolStripSeparator13.Size = new System.Drawing.Size(6, 49);
+      this.toolStripSeparator19.Name = "toolStripSeparator19";
+      this.toolStripSeparator19.Size = new System.Drawing.Size(6, 49);
+      // 
+      // ActionViewDecode
+      // 
+      this.ActionViewDecode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.ActionViewDecode.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewDecode.Image")));
+      this.ActionViewDecode.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.ActionViewDecode.Name = "ActionViewDecode";
+      this.ActionViewDecode.Padding = new System.Windows.Forms.Padding(4);
+      this.ActionViewDecode.Size = new System.Drawing.Size(44, 46);
+      this.ActionViewDecode.Text = "Decode and translate";
+      this.ActionViewDecode.ToolTipText = "Decode and translate (F1)";
+      this.ActionViewDecode.Click += new System.EventHandler(this.ActionViewDecode_Click);
+      // 
+      // ActionViewGrid
+      // 
+      this.ActionViewGrid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.ActionViewGrid.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewGrid.Image")));
+      this.ActionViewGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.ActionViewGrid.Name = "ActionViewGrid";
+      this.ActionViewGrid.Padding = new System.Windows.Forms.Padding(4);
+      this.ActionViewGrid.Size = new System.Drawing.Size(44, 46);
+      this.ActionViewGrid.Text = "View data grid";
+      this.ActionViewGrid.ToolTipText = "View data grid (F2)";
+      this.ActionViewGrid.Click += new System.EventHandler(this.ActionViewGrid_Click);
+      // 
+      // toolStripSeparator9
+      // 
+      this.toolStripSeparator9.Name = "toolStripSeparator9";
+      this.toolStripSeparator9.Size = new System.Drawing.Size(6, 49);
+      // 
+      // ActionViewPopulate
+      // 
+      this.ActionViewPopulate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.ActionViewPopulate.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewPopulate.Image")));
+      this.ActionViewPopulate.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.ActionViewPopulate.Name = "ActionViewPopulate";
+      this.ActionViewPopulate.Padding = new System.Windows.Forms.Padding(5);
+      this.ActionViewPopulate.Size = new System.Drawing.Size(46, 46);
+      this.ActionViewPopulate.Text = "Create data from file ";
+      this.ActionViewPopulate.ToolTipText = "Create data from file (F3)";
+      this.ActionViewPopulate.Click += new System.EventHandler(this.ActionViewPopulate_Click);
+      // 
+      // ActionViewNormalize
+      // 
+      this.ActionViewNormalize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.ActionViewNormalize.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewNormalize.Image")));
+      this.ActionViewNormalize.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.ActionViewNormalize.Name = "ActionViewNormalize";
+      this.ActionViewNormalize.Padding = new System.Windows.Forms.Padding(5);
+      this.ActionViewNormalize.Size = new System.Drawing.Size(46, 46);
+      this.ActionViewNormalize.Text = "Reduce repeating motifs";
+      this.ActionViewNormalize.ToolTipText = "Reduce repeating motifs (F4)";
+      this.ActionViewNormalize.Click += new System.EventHandler(this.ActionViewNormalize_Click);
+      // 
+      // toolStripSeparator10
+      // 
+      this.toolStripSeparator10.Name = "toolStripSeparator10";
+      this.toolStripSeparator10.Size = new System.Drawing.Size(6, 49);
+      // 
+      // ActionViewStatistics
+      // 
+      this.ActionViewStatistics.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.ActionViewStatistics.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewStatistics.Image")));
+      this.ActionViewStatistics.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.ActionViewStatistics.Name = "ActionViewStatistics";
+      this.ActionViewStatistics.Padding = new System.Windows.Forms.Padding(5);
+      this.ActionViewStatistics.Size = new System.Drawing.Size(46, 46);
+      this.ActionViewStatistics.Text = "Statistics";
+      this.ActionViewStatistics.ToolTipText = "Statistics (F5)";
+      this.ActionViewStatistics.Click += new System.EventHandler(this.ActionViewStatistics_Click);
+      // 
+      // toolStripSeparator5
+      // 
+      this.toolStripSeparator5.Name = "toolStripSeparator5";
+      this.toolStripSeparator5.Size = new System.Drawing.Size(6, 49);
       // 
       // ActionRun
       // 
@@ -861,7 +939,7 @@
       this.ActionSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionSettings.Name = "ActionSettings";
       this.ActionSettings.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
-      this.ActionSettings.Size = new System.Drawing.Size(49, 44);
+      this.ActionSettings.Size = new System.Drawing.Size(49, 46);
       // 
       // ActionScreenPosition
       // 
@@ -1124,7 +1202,7 @@
       this.TabPageGrid.Location = new System.Drawing.Point(4, 22);
       this.TabPageGrid.Name = "TabPageGrid";
       this.TabPageGrid.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageGrid.Size = new System.Drawing.Size(804, 258);
+      this.TabPageGrid.Size = new System.Drawing.Size(929, 353);
       this.TabPageGrid.TabIndex = 0;
       this.TabPageGrid.Text = "Grid";
       this.TabPageGrid.UseVisualStyleBackColor = true;
@@ -1138,7 +1216,7 @@
       this.PanelViewGrid.Location = new System.Drawing.Point(3, 3);
       this.PanelViewGrid.Name = "PanelViewGrid";
       this.PanelViewGrid.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewGrid.Size = new System.Drawing.Size(798, 252);
+      this.PanelViewGrid.Size = new System.Drawing.Size(923, 347);
       this.PanelViewGrid.TabIndex = 22;
       // 
       // TabPagePopulate
@@ -1148,7 +1226,7 @@
       this.TabPagePopulate.Location = new System.Drawing.Point(4, 22);
       this.TabPagePopulate.Name = "TabPagePopulate";
       this.TabPagePopulate.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPagePopulate.Size = new System.Drawing.Size(804, 258);
+      this.TabPagePopulate.Size = new System.Drawing.Size(929, 353);
       this.TabPagePopulate.TabIndex = 4;
       this.TabPagePopulate.Text = "Populate";
       // 
@@ -1159,7 +1237,7 @@
       this.PanelViewPopulate.Location = new System.Drawing.Point(3, 3);
       this.PanelViewPopulate.Name = "PanelViewPopulate";
       this.PanelViewPopulate.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewPopulate.Size = new System.Drawing.Size(798, 252);
+      this.PanelViewPopulate.Size = new System.Drawing.Size(923, 347);
       this.PanelViewPopulate.TabIndex = 2;
       // 
       // TabPageNormalize
@@ -1168,7 +1246,7 @@
       this.TabPageNormalize.Location = new System.Drawing.Point(4, 22);
       this.TabPageNormalize.Name = "TabPageNormalize";
       this.TabPageNormalize.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageNormalize.Size = new System.Drawing.Size(804, 258);
+      this.TabPageNormalize.Size = new System.Drawing.Size(929, 353);
       this.TabPageNormalize.TabIndex = 3;
       this.TabPageNormalize.Text = "Normalize";
       this.TabPageNormalize.UseVisualStyleBackColor = true;
@@ -1180,7 +1258,7 @@
       this.PanelViewNormalize.Location = new System.Drawing.Point(3, 3);
       this.PanelViewNormalize.Name = "PanelViewNormalize";
       this.PanelViewNormalize.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewNormalize.Size = new System.Drawing.Size(798, 252);
+      this.PanelViewNormalize.Size = new System.Drawing.Size(923, 347);
       this.PanelViewNormalize.TabIndex = 2;
       // 
       // TabPageStatistics
@@ -1189,7 +1267,7 @@
       this.TabPageStatistics.Location = new System.Drawing.Point(4, 22);
       this.TabPageStatistics.Name = "TabPageStatistics";
       this.TabPageStatistics.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageStatistics.Size = new System.Drawing.Size(804, 258);
+      this.TabPageStatistics.Size = new System.Drawing.Size(929, 353);
       this.TabPageStatistics.TabIndex = 2;
       this.TabPageStatistics.Text = "Statistics";
       this.TabPageStatistics.UseVisualStyleBackColor = true;
@@ -1197,11 +1275,12 @@
       // PanelViewStatistics
       // 
       this.PanelViewStatistics.BackColor = System.Drawing.SystemColors.Control;
+      this.PanelViewStatistics.Controls.Add(this.GridIterations);
       this.PanelViewStatistics.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelViewStatistics.Location = new System.Drawing.Point(3, 3);
       this.PanelViewStatistics.Name = "PanelViewStatistics";
       this.PanelViewStatistics.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewStatistics.Size = new System.Drawing.Size(798, 252);
+      this.PanelViewStatistics.Size = new System.Drawing.Size(923, 347);
       this.PanelViewStatistics.TabIndex = 1;
       // 
       // PanelSepTop
@@ -1695,6 +1774,46 @@
       this.TimerMemory.Interval = 5000;
       this.TimerMemory.Tick += new System.EventHandler(this.TimerMemory_Tick);
       // 
+      // TimerTooltip
+      // 
+      this.TimerTooltip.Interval = 500;
+      // 
+      // GridIterations
+      // 
+      this.GridIterations.AutoGenerateColumns = false;
+      this.GridIterations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.GridIterations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.iterationDataGridViewTextBoxColumn,
+            this.repeatedCountDataGridViewTextBoxColumn,
+            this.dateDataGridViewTextBoxColumn});
+      this.GridIterations.DataSource = this.BindingSourceIterationRow;
+      this.GridIterations.Location = new System.Drawing.Point(66, 121);
+      this.GridIterations.Name = "GridIterations";
+      this.GridIterations.Size = new System.Drawing.Size(349, 195);
+      this.GridIterations.TabIndex = 0;
+      // 
+      // iterationDataGridViewTextBoxColumn
+      // 
+      this.iterationDataGridViewTextBoxColumn.DataPropertyName = "Iteration";
+      this.iterationDataGridViewTextBoxColumn.HeaderText = "Iteration";
+      this.iterationDataGridViewTextBoxColumn.Name = "iterationDataGridViewTextBoxColumn";
+      // 
+      // repeatedCountDataGridViewTextBoxColumn
+      // 
+      this.repeatedCountDataGridViewTextBoxColumn.DataPropertyName = "RepeatedCount";
+      this.repeatedCountDataGridViewTextBoxColumn.HeaderText = "RepeatedCount";
+      this.repeatedCountDataGridViewTextBoxColumn.Name = "repeatedCountDataGridViewTextBoxColumn";
+      // 
+      // dateDataGridViewTextBoxColumn
+      // 
+      this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
+      this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
+      this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+      // 
+      // BindingSourceIterationRow
+      // 
+      this.BindingSourceIterationRow.DataSource = typeof(Ordisoftware.Hebrew.Pi.IterationRow);
+      // 
       // EditSearchTranslation
       // 
       this.EditSearchTranslation.BackColor = System.Drawing.Color.AliceBlue;
@@ -1764,80 +1883,6 @@
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
       // 
-      // ActionViewPopulate
-      // 
-      this.ActionViewPopulate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionViewPopulate.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewPopulate.Image")));
-      this.ActionViewPopulate.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionViewPopulate.Name = "ActionViewPopulate";
-      this.ActionViewPopulate.Padding = new System.Windows.Forms.Padding(5);
-      this.ActionViewPopulate.Size = new System.Drawing.Size(46, 46);
-      this.ActionViewPopulate.Text = "Create data from file ";
-      this.ActionViewPopulate.ToolTipText = "Create data from file (F3)";
-      this.ActionViewPopulate.Click += new System.EventHandler(this.ActionViewPopulate_Click);
-      // 
-      // ActionViewStatistics
-      // 
-      this.ActionViewStatistics.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionViewStatistics.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewStatistics.Image")));
-      this.ActionViewStatistics.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionViewStatistics.Name = "ActionViewStatistics";
-      this.ActionViewStatistics.Padding = new System.Windows.Forms.Padding(5);
-      this.ActionViewStatistics.Size = new System.Drawing.Size(46, 46);
-      this.ActionViewStatistics.Text = "Statistics";
-      this.ActionViewStatistics.ToolTipText = "Statistics (F5)";
-      this.ActionViewStatistics.Click += new System.EventHandler(this.ActionViewStatistics_Click);
-      // 
-      // ActionViewNormalize
-      // 
-      this.ActionViewNormalize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionViewNormalize.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewNormalize.Image")));
-      this.ActionViewNormalize.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionViewNormalize.Name = "ActionViewNormalize";
-      this.ActionViewNormalize.Padding = new System.Windows.Forms.Padding(5);
-      this.ActionViewNormalize.Size = new System.Drawing.Size(46, 46);
-      this.ActionViewNormalize.Text = "Reduce repeating motifs";
-      this.ActionViewNormalize.ToolTipText = "Reduce repeating motifs (F4)";
-      this.ActionViewNormalize.Click += new System.EventHandler(this.ActionViewNormalize_Click);
-      // 
-      // ActionViewGrid
-      // 
-      this.ActionViewGrid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionViewGrid.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewGrid.Image")));
-      this.ActionViewGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionViewGrid.Name = "ActionViewGrid";
-      this.ActionViewGrid.Padding = new System.Windows.Forms.Padding(4);
-      this.ActionViewGrid.Size = new System.Drawing.Size(44, 46);
-      this.ActionViewGrid.Text = "View data grid";
-      this.ActionViewGrid.ToolTipText = "View data grid (F2)";
-      this.ActionViewGrid.Click += new System.EventHandler(this.ActionViewGrid_Click);
-      // 
-      // ActionViewDecode
-      // 
-      this.ActionViewDecode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionViewDecode.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewDecode.Image")));
-      this.ActionViewDecode.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionViewDecode.Name = "ActionViewDecode";
-      this.ActionViewDecode.Padding = new System.Windows.Forms.Padding(4);
-      this.ActionViewDecode.Size = new System.Drawing.Size(44, 46);
-      this.ActionViewDecode.Text = "Decode and translate";
-      this.ActionViewDecode.ToolTipText = "Decode and translate (F1)";
-      this.ActionViewDecode.Click += new System.EventHandler(this.ActionViewDecode_Click);
-      // 
-      // toolStripSeparator9
-      // 
-      this.toolStripSeparator9.Name = "toolStripSeparator9";
-      this.toolStripSeparator9.Size = new System.Drawing.Size(6, 49);
-      // 
-      // toolStripSeparator10
-      // 
-      this.toolStripSeparator10.Name = "toolStripSeparator10";
-      this.toolStripSeparator10.Size = new System.Drawing.Size(6, 49);
-      // 
-      // TimerTooltip
-      // 
-      this.TimerTooltip.Interval = 500;
-      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1869,9 +1914,12 @@
       this.TabPagePopulate.ResumeLayout(false);
       this.TabPageNormalize.ResumeLayout(false);
       this.TabPageStatistics.ResumeLayout(false);
+      this.PanelViewStatistics.ResumeLayout(false);
       this.PanelTitle.ResumeLayout(false);
       this.PanelTitleInner.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -2036,5 +2084,10 @@
     private ToolStripSeparator toolStripSeparator9;
     private ToolStripSeparator toolStripSeparator10;
     private System.Windows.Forms.Timer TimerTooltip;
+    private DataGridView GridIterations;
+    private DataGridViewTextBoxColumn iterationDataGridViewTextBoxColumn;
+    private DataGridViewTextBoxColumn repeatedCountDataGridViewTextBoxColumn;
+    private DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
+    private BindingSource BindingSourceIterationRow;
   }
 }

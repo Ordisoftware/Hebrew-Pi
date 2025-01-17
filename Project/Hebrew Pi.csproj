@@ -388,7 +388,7 @@
     <Compile Include="Source\Forms\Config\StatisticsForm.designer.cs">
       <DependentUpon>StatisticsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Source\Enums\PiFirstDecimalsLenght.cs" />
+    <Compile Include="Source\Enums\PiDecimals.cs" />
     <Compile Include="Source\Forms\MainForm\Data\MainForm.Batch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -606,6 +606,8 @@
     <None Include="Dependencies\Windows Global Hotkey\Windows-Global-Hotkey-master.zip" />
     <None Include="Licenses\MPL 2.0.rtf" />
     <None Include="Properties\DataSources\ApplicationStatistics.datasource" />
+    <None Include="Properties\DataSources\DecupletRow.datasource" />
+    <None Include="Properties\DataSources\IterationRow.datasource" />
     <None Include="Properties\DataSources\Ordisoftware.Core.SystemStatistics.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

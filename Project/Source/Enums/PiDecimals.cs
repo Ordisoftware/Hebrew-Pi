@@ -14,13 +14,14 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-public enum PiFirstDecimalsLenght
+public enum PiDecimals
 {
-  PiDecimals_128K,
-  PiDecimals_1M,
-  PiDecimals_1B,
-  PiDecimals_10B,
-  PiDecimals_1M_Fixed,
-  PiDecimals_1B_Fixed,
-  PiDecimals_10B_Fixed
+  KB_128,
+  MB_1,
+  GB_1,
+  GB_10,
+  GB_100,
+  GB_1_Normalized,
+  GB_10_Normalized,
+  GB_100_Normalized
 }

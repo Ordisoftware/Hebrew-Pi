@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-/// <license>
+﻿/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
 /// Copyright 2025 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
@@ -23,13 +21,18 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm : Form
 {
 
-  internal SQLiteNetORM DB { get; private set; }
+  private PiDecimals PiDecimalsFileType;
+
+  private string DatabaseFilePath;
 
   private string SQLiteTempDir = @"D:\";
 
-  private PiFirstDecimalsLenght PiFirstDecimalsCount;
+  private int SQLiteCacheSize;
 
-  private string DbFilePath = string.Empty;
+  internal SQLiteNetORM DB { get; private set; }
+
+  private string GetSelectedFileName(string extension)
+    => $"{nameof(PiDecimals)} {PiDecimalsFileType.ToString().Replace("_", "-")}{extension}";
 
   #region Singleton
 
@@ -61,17 +64,21 @@ partial class MainForm : Form
     TimerMemory_Tick(null, null);
   }
 
+  const ulong MemorySizeInKiB = 1024;
+  const ulong MemorySizeInMiB = MemorySizeInKiB * 1024;
+  const ulong MemorySizeInGiB = MemorySizeInMiB * 1024;
+
   private void InitializeListBoxCacheSize()
   {
-    int memTotal = (int)( SystemManager.TotalVisibleMemoryValue / 1024 / 1024 / 1024 );
-    int memFree = (int)( SystemManager.PhysicalMemoryFreeValue / 1024 / 1024 / 1024 );
+    int memTotal = (int)( SystemManager.TotalVisibleMemoryValue / MemorySizeInGiB );
+    int memFree = (int)( SystemManager.PhysicalMemoryFreeValue / MemorySizeInGiB );
     int indexList = 0;
     for ( int indexStep = 0; indexStep < memTotal * 70 / 100; indexStep += 4 )
     {
       SelectDbCache.Items.Add(indexStep);
       if ( indexStep <= memFree ) indexList++;
     }
-    SelectDbCache.SelectedIndex = indexList / 2 - 1;
+    SelectDbCache.SelectedIndex = indexList / 2;
   }
 
   private void MainForm_Shown(object sender, EventArgs e)
@@ -199,14 +206,9 @@ partial class MainForm : Form
     DoTimerBatch();
   }
 
-  private void SetDbCache()
-  {
-    if ( DB is not null ) DB.SetCacheSize((int)SelectDbCache.SelectedItem * 1024 * 1024);
-  }
-
   private void ActionDbOpen_Click(object sender, EventArgs e)
   {
-    DoActionDbOpen(Path.Combine(Globals.DatabaseFolderPath, PiFirstDecimalsCount.ToString()) + Globals.DatabaseFileExtension);
+    DoActionDbOpen(Path.Combine(Globals.DatabaseFolderPath, GetSelectedFileName(Globals.DatabaseFileExtension)));
   }
 
   private void ActionDbClose_Click(object sender, EventArgs e)
@@ -231,13 +233,19 @@ partial class MainForm : Form
 
   private void SelectFileName_SelectedIndexChanged(object sender, EventArgs e)
   {
-    PiFirstDecimalsCount = (PiFirstDecimalsLenght)SelectFileName.SelectedItem;
+    PiDecimalsFileType = (PiDecimals)SelectFileName.SelectedItem;
     UpdateButtons();
   }
 
   private void SelectDbCache_SelectedIndexChanged(object sender, EventArgs e)
   {
+    SQLiteCacheSize = (int)SelectDbCache.SelectedItem * (int)MemorySizeInMiB;
     SetDbCache();
+  }
+
+  private void SetDbCache()
+  {
+    if ( DB is not null ) DB.SetCacheSize(SQLiteCacheSize);
   }
 
   //private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)

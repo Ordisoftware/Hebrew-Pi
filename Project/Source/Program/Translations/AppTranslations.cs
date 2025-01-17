@@ -91,6 +91,7 @@ static partial class AppTranslations
   static public string CountedText = "Counted";
   static public string UpdatingText = "Adding position...";
   static public string CommittingText = "Committing...";
+  static public string RollbackText = "Rollbacking...";
   static public string IndexingText = "Indexing...";
   static public string FinishedText = "Finished";
   static public string CanceledText = "Canceled";

@@ -1,4 +1,6 @@
-﻿/// <license>
+﻿using Equin.ApplicationFramework;
+
+/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
 /// Copyright 2025 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
@@ -21,16 +23,17 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm
 {
 
-  private void DoActionDbOpen(string filePath)
+  private void DoActionDbOpen(string path)
   {
-    DbFilePath = filePath;
-    LabelTitleCenter.Text = Path.GetFileName(DbFilePath);
-    DB = new SQLiteNetORM(DbFilePath);
+    DatabaseFilePath = path;
+    LabelTitleCenter.Text = Path.GetFileName(path);
+    DB = new SQLiteNetORM(path);
     if ( SQLiteTempDir.Length > 0 )
       DB.SetTempDir(SQLiteTempDir);
     DB.CreateTable<DecupletRow>();
     DB.CreateTable<IterationRow>();
     SetDbCache();
+    GridIterations.DataSource = new BindingListView<IterationRow>(DB.Table<IterationRow>().ToList());
     UpdateButtons();
     TimerMemory_Tick(null, null);
   }
@@ -51,8 +54,7 @@ partial class MainForm
     {
       case ViewMode.Populate:
         //if ( !DisplayManager.QueryYesNo("Empty and create data?") ) return;
-        string fileName = Path.Combine(Globals.DocumentsFolderPath, PiFirstDecimalsCount.ToString()) + ".txt";
-        DoBatch(() => DoActionPopulate(fileName));
+        DoBatch(() => DoActionPopulate(Path.Combine(Globals.DocumentsFolderPath, GetSelectedFileName(".txt"))));
         break;
       case ViewMode.Normalize:
         //if ( !DisplayManager.QueryYesNo("Start reducing repeating motifs?") ) return;
