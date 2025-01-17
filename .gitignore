@@ -1,6 +1,5 @@
-﻿/Documents/PiDecimals_1B.txt
-/Documents/PiDecimals_10B.txt
-/Documents/*_Fixed.txt
+﻿/Documents/PiDecimals GB*.txt
+/Documents/*-Normilized.txt
 
 /Setup/**/*.exe
 *.sha512
