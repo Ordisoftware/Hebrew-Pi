@@ -38,6 +38,7 @@ partial class MainForm
     }
     long fileSize = SystemManager.GetFileSize(filePathText);
     long pagingProgress = fileSize <= 1_100_000 ? 1_000 : fileSize <= 10_100_000 ? 10_000 : 100_000;
+    long pagingRemaining = pagingProgress * 10;
     long pagingCommit = fileSize <= 1_100_000_000 ? 1_000_000 : 10_000_000;
     long countRows = 0;
     long countMotifs = 0;
@@ -90,17 +91,11 @@ partial class MainForm
             if ( countMotifs % pagingCommit == 0 ) doCommit(true);
           }
           if ( countMotifs % pagingProgress == 0 ) showProgress();
+          if ( countMotifs % pagingRemaining == 0 ) showRemaining();
           countMotifs++;
         }
       }
       doCommit();
-      //if ( CheckIfBatchCanContinue().Result )
-      //{
-      //  Globals.CanCancel = false;
-      //  Globals.CanPause = false;
-      //  UpdateStatusInfo(AppTranslations.IndexingText);
-      //  DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
-      //}
     }
     catch ( Exception ex )
     {
@@ -132,27 +127,35 @@ partial class MainForm
     //
     void doCommit(bool partial = false)
     {
-      UpdateStatusProgress(string.Format(AppTranslations.CreateDataProgress, countMotifs.ToString("N0")));
+      showProgress();
       UpdateStatusInfo(AppTranslations.CommittingText);
       DB.Commit();
-      if ( partial ) DB.BeginTransaction();
+      if ( partial )
+      {
+        DB.BeginTransaction();
+        UpdateStatusInfo(AppTranslations.PopulatingText);
+      }
     }
     void doRollback()
     {
-      UpdateStatusProgress(string.Format(AppTranslations.CreateDataProgress, countMotifs.ToString("N0")));
-      UpdateStatusInfo(AppTranslations.RollbackText);
+      showProgress();
+      UpdateStatusInfo(AppTranslations.RollbackingText);
       DB.Rollback();
     }
     //
     void showProgress()
+    {
+      UpdateStatusProgress(string.Format(AppTranslations.CreateDataProgress, countMotifs.ToString("N0")));
+    }
+    //
+    void showRemaining()
     {
       var elapsed = Globals.ChronoBatch.Elapsed;
       double size1 = ( countMotifs - countRows ) * PiDecimalMotifSize;
       double size2 = fileSize - countRows * PiDecimalMotifSize;
       double progress = size1 == 0 || size2 == 0 ? 1 : size1 / size2;
       var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
-      UpdateStatusInfo(string.Format(AppTranslations.PopulatingAndRemainingText, remaining.AsReadable()));
-      UpdateStatusProgress(string.Format(AppTranslations.CreateDataProgress, countMotifs.ToString("N0")));
+      UpdateStatusRemaining(string.Format(AppTranslations.RemainingText, remaining.AsReadable()));
       taskbar.SetProgressValue((int)( progress * 100 ), 100);
     }
     //

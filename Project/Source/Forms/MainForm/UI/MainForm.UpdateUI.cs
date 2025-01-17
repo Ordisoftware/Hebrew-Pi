@@ -95,6 +95,7 @@ partial class MainForm
     LabelStatusTime.Text = "-";
     LabelStatusIteration.Text = "-";
     LabelStatusInfo.Text = "-";
+    LabelStatusRemaining.Text = "";
   }
 
   private void UpdateStatusProgress(string text)
@@ -105,6 +106,11 @@ partial class MainForm
   private void UpdateStatusInfo(string text)
   {
     UpdateStatusLabel(LabelStatusInfo, text);
+  }
+
+  private void UpdateStatusRemaining(string text)
+  {
+    UpdateStatusLabel(LabelStatusRemaining, text);
   }
 
   private void UpdateStatusLabel(ToolStripStatusLabel label, string text)
@@ -130,7 +136,8 @@ partial class MainForm
 
   private void DoTimerBatch()
   {
-    LabelStatusTime.Text = Globals.ChronoBatch.Elapsed.AsReadable();
+    LabelStatusTime.Text = string.Format(AppTranslations.ElapsedText, Globals.ChronoBatch.Elapsed.AsReadable());
+
   }
 
   //

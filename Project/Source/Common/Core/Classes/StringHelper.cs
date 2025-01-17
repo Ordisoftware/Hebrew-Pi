@@ -68,7 +68,7 @@ static public partial class StringHelper
     if ( elapsed.Days > 0 ) parts.Add($"{elapsed.Days.ToString("00")}d");
     if ( elapsed.Hours > 0 ) parts.Add($"{elapsed.Hours.ToString("00")}h");
     if ( elapsed.Minutes > 0 ) parts.Add($"{elapsed.Minutes.ToString("00")}m");
-    if ( elapsed.Seconds > 0 || elapsed.TotalSeconds == 0 ) parts.Add($"{elapsed.Seconds.ToString("00")}s");
+    parts.Add($"{elapsed.Seconds.ToString("00")}s");
     return parts.Count == 0 ? "00s" : string.Join(" ", parts);
   }
 

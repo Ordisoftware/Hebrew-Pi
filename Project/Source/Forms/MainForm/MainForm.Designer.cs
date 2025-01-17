@@ -185,6 +185,8 @@
       this.TimerBatch = new System.Windows.Forms.Timer(this.components);
       this.TimerMemory = new System.Windows.Forms.Timer(this.components);
       this.TimerTooltip = new System.Windows.Forms.Timer(this.components);
+      this.LabelStatusRemaining = new System.Windows.Forms.ToolStripStatusLabel();
+      this.LabelStatusSep3 = new System.Windows.Forms.ToolStripStatusLabel();
       this.iterationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.repeatedCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
@@ -273,8 +275,10 @@
       this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LabelStatusTime,
             this.LabelStatusSep1,
-            this.LabelStatusIteration,
+            this.LabelStatusRemaining,
             this.LabelStatusSep2,
+            this.LabelStatusIteration,
+            this.LabelStatusSep3,
             this.LabelStatusInfo,
             this.LabelStatusFreeMem});
       this.StatusStrip.Location = new System.Drawing.Point(0, 539);
@@ -316,7 +320,7 @@
       // LabelStatusFreeMem
       // 
       this.LabelStatusFreeMem.Name = "LabelStatusFreeMem";
-      this.LabelStatusFreeMem.Size = new System.Drawing.Size(812, 17);
+      this.LabelStatusFreeMem.Size = new System.Drawing.Size(738, 17);
       this.LabelStatusFreeMem.Spring = true;
       this.LabelStatusFreeMem.Text = "Free mem";
       this.LabelStatusFreeMem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1800,6 +1804,18 @@
       // 
       this.TimerTooltip.Interval = 500;
       // 
+      // LabelStatusRemaining
+      // 
+      this.LabelStatusRemaining.Name = "LabelStatusRemaining";
+      this.LabelStatusRemaining.Size = new System.Drawing.Size(64, 17);
+      this.LabelStatusRemaining.Text = "Remaining";
+      // 
+      // LabelStatusSep3
+      // 
+      this.LabelStatusSep3.Name = "LabelStatusSep3";
+      this.LabelStatusSep3.Size = new System.Drawing.Size(10, 17);
+      this.LabelStatusSep3.Text = "|";
+      // 
       // iterationDataGridViewTextBoxColumn
       // 
       this.iterationDataGridViewTextBoxColumn.DataPropertyName = "Iteration";
@@ -2091,5 +2107,7 @@
     private DataGridViewTextBoxColumn iterationDataGridViewTextBoxColumn;
     private DataGridViewTextBoxColumn repeatedCountDataGridViewTextBoxColumn;
     private DataGridViewTextBoxColumn MaxOccurences;
+    private ToolStripStatusLabel LabelStatusSep3;
+    private ToolStripStatusLabel LabelStatusRemaining;
   }
 }
