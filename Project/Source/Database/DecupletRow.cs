@@ -10,8 +10,8 @@
 /// relevant directory) where a recipient would be likely to look for such a notice.
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
-/// <created> 2025-01-11 </created>
-/// <edited> 2025-01-15 </edited>
+/// <created> 2025-01 </created>
+/// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 using SQLite;
@@ -28,5 +28,11 @@ public class DecupletRow
 
   [NotNull]
   public long Motif { get; set; }
+
+  [NotNull]
+  public string Hebrew { get; set; } = string.Empty;
+
+  [NotNull]
+  public string Translation { get; set; } = string.Empty;
 
 }

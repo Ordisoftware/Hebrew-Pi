@@ -30,7 +30,7 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-      this.PanelTop = new System.Windows.Forms.Panel();
+      this.PanelDatabase = new System.Windows.Forms.Panel();
       this.SelectDbCache = new System.Windows.Forms.ComboBox();
       this.SelectFileName = new System.Windows.Forms.ComboBox();
       this.ActionDbClose = new System.Windows.Forms.Button();
@@ -41,6 +41,7 @@
       this.LabelStatusIteration = new System.Windows.Forms.ToolStripStatusLabel();
       this.LabelStatusSep2 = new System.Windows.Forms.ToolStripStatusLabel();
       this.LabelStatusInfo = new System.Windows.Forms.ToolStripStatusLabel();
+      this.LabelStatusFreeMem = new System.Windows.Forms.ToolStripStatusLabel();
       this.ToolStrip = new System.Windows.Forms.ToolStrip();
       this.ActionExit = new System.Windows.Forms.ToolStripButton();
       this.ToolStripSeparatorExit = new System.Windows.Forms.ToolStripSeparator();
@@ -184,7 +185,8 @@
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
-      this.PanelTop.SuspendLayout();
+      this.TimerMemory = new System.Windows.Forms.Timer(this.components);
+      this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
       this.PanelMain.SuspendLayout();
@@ -195,7 +197,6 @@
       this.TabPageDecode.SuspendLayout();
       this.TabPageGrid.SuspendLayout();
       this.TabPagePopulate.SuspendLayout();
-      this.PanelViewPopulate.SuspendLayout();
       this.TabPageNormalize.SuspendLayout();
       this.TabPageStatistics.SuspendLayout();
       this.PanelTitle.SuspendLayout();
@@ -203,29 +204,23 @@
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).BeginInit();
       this.SuspendLayout();
       // 
-      // PanelTop
+      // PanelDatabase
       // 
-      this.PanelTop.Controls.Add(this.SelectDbCache);
-      this.PanelTop.Controls.Add(this.SelectFileName);
-      this.PanelTop.Controls.Add(this.ActionDbClose);
-      this.PanelTop.Controls.Add(this.ActionDbOpen);
-      this.PanelTop.Dock = System.Windows.Forms.DockStyle.Top;
-      this.PanelTop.Location = new System.Drawing.Point(10, 10);
-      this.PanelTop.Name = "PanelTop";
-      this.PanelTop.Size = new System.Drawing.Size(728, 50);
-      this.PanelTop.TabIndex = 1;
+      this.PanelDatabase.Controls.Add(this.SelectDbCache);
+      this.PanelDatabase.Controls.Add(this.SelectFileName);
+      this.PanelDatabase.Controls.Add(this.ActionDbClose);
+      this.PanelDatabase.Controls.Add(this.ActionDbOpen);
+      this.PanelDatabase.Dock = System.Windows.Forms.DockStyle.Top;
+      this.PanelDatabase.Location = new System.Drawing.Point(0, 0);
+      this.PanelDatabase.Name = "PanelDatabase";
+      this.PanelDatabase.Size = new System.Drawing.Size(812, 50);
+      this.PanelDatabase.TabIndex = 1;
       // 
       // SelectDbCache
       // 
       this.SelectDbCache.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.SelectDbCache.FormattingEnabled = true;
-      this.SelectDbCache.Items.AddRange(new object[] {
-            "0",
-            "4",
-            "8",
-            "16",
-            "24"});
-      this.SelectDbCache.Location = new System.Drawing.Point(12, 12);
+      this.SelectDbCache.Location = new System.Drawing.Point(7, 14);
       this.SelectDbCache.Name = "SelectDbCache";
       this.SelectDbCache.Size = new System.Drawing.Size(50, 21);
       this.SelectDbCache.TabIndex = 3;
@@ -235,7 +230,7 @@
       // 
       this.SelectFileName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.SelectFileName.FormattingEnabled = true;
-      this.SelectFileName.Location = new System.Drawing.Point(68, 12);
+      this.SelectFileName.Location = new System.Drawing.Point(63, 14);
       this.SelectFileName.Name = "SelectFileName";
       this.SelectFileName.Size = new System.Drawing.Size(121, 21);
       this.SelectFileName.TabIndex = 3;
@@ -244,7 +239,7 @@
       // ActionDbClose
       // 
       this.ActionDbClose.Enabled = false;
-      this.ActionDbClose.Location = new System.Drawing.Point(259, 11);
+      this.ActionDbClose.Location = new System.Drawing.Point(254, 14);
       this.ActionDbClose.Name = "ActionDbClose";
       this.ActionDbClose.Size = new System.Drawing.Size(58, 23);
       this.ActionDbClose.TabIndex = 2;
@@ -255,7 +250,7 @@
       // ActionDbOpen
       // 
       this.ActionDbOpen.Enabled = false;
-      this.ActionDbOpen.Location = new System.Drawing.Point(195, 11);
+      this.ActionDbOpen.Location = new System.Drawing.Point(190, 14);
       this.ActionDbOpen.Name = "ActionDbOpen";
       this.ActionDbOpen.Size = new System.Drawing.Size(58, 23);
       this.ActionDbOpen.TabIndex = 2;
@@ -270,7 +265,8 @@
             this.LabelStatusSep1,
             this.LabelStatusIteration,
             this.LabelStatusSep2,
-            this.LabelStatusInfo});
+            this.LabelStatusInfo,
+            this.LabelStatusFreeMem});
       this.StatusStrip.Location = new System.Drawing.Point(0, 439);
       this.StatusStrip.Name = "StatusStrip";
       this.StatusStrip.Size = new System.Drawing.Size(834, 22);
@@ -306,6 +302,14 @@
       this.LabelStatusInfo.Name = "LabelStatusInfo";
       this.LabelStatusInfo.Size = new System.Drawing.Size(28, 17);
       this.LabelStatusInfo.Text = "Info";
+      // 
+      // LabelStatusFreeMem
+      // 
+      this.LabelStatusFreeMem.Name = "LabelStatusFreeMem";
+      this.LabelStatusFreeMem.Size = new System.Drawing.Size(687, 17);
+      this.LabelStatusFreeMem.Spring = true;
+      this.LabelStatusFreeMem.Text = "Free mem";
+      this.LabelStatusFreeMem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       // 
       // ToolStrip
       // 
@@ -396,7 +400,7 @@
       this.ActionViewDecode.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionViewDecode.Name = "ActionViewDecode";
       this.ActionViewDecode.ShortcutKeys = System.Windows.Forms.Keys.F1;
-      this.ActionViewDecode.Size = new System.Drawing.Size(163, 38);
+      this.ActionViewDecode.Size = new System.Drawing.Size(196, 38);
       this.ActionViewDecode.Text = "Decode";
       this.ActionViewDecode.Click += new System.EventHandler(this.ActionViewDecode_Click);
       // 
@@ -407,7 +411,7 @@
       this.ActionViewGrid.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionViewGrid.Name = "ActionViewGrid";
       this.ActionViewGrid.ShortcutKeys = System.Windows.Forms.Keys.F2;
-      this.ActionViewGrid.Size = new System.Drawing.Size(163, 38);
+      this.ActionViewGrid.Size = new System.Drawing.Size(196, 38);
       this.ActionViewGrid.Text = "Grid";
       this.ActionViewGrid.Click += new System.EventHandler(this.ActionViewGrid_Click);
       // 
@@ -418,7 +422,7 @@
       this.ActionViewPopulate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionViewPopulate.Name = "ActionViewPopulate";
       this.ActionViewPopulate.ShortcutKeys = System.Windows.Forms.Keys.F3;
-      this.ActionViewPopulate.Size = new System.Drawing.Size(163, 38);
+      this.ActionViewPopulate.Size = new System.Drawing.Size(196, 38);
       this.ActionViewPopulate.Text = "Populate";
       this.ActionViewPopulate.Click += new System.EventHandler(this.ActionViewPopulate_Click);
       // 
@@ -429,7 +433,7 @@
       this.ActionViewNormalize.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionViewNormalize.Name = "ActionViewNormalize";
       this.ActionViewNormalize.ShortcutKeys = System.Windows.Forms.Keys.F4;
-      this.ActionViewNormalize.Size = new System.Drawing.Size(163, 38);
+      this.ActionViewNormalize.Size = new System.Drawing.Size(196, 38);
       this.ActionViewNormalize.Text = "Normalize";
       this.ActionViewNormalize.Click += new System.EventHandler(this.ActionViewNormalize_Click);
       // 
@@ -440,7 +444,7 @@
       this.ActionViewStatistics.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionViewStatistics.Name = "ActionViewStatistics";
       this.ActionViewStatistics.ShortcutKeys = System.Windows.Forms.Keys.F5;
-      this.ActionViewStatistics.Size = new System.Drawing.Size(163, 38);
+      this.ActionViewStatistics.Size = new System.Drawing.Size(196, 38);
       this.ActionViewStatistics.Text = "Statistics";
       this.ActionViewStatistics.Click += new System.EventHandler(this.ActionViewStatistics_Click);
       // 
@@ -941,7 +945,7 @@
       this.EditScreenNone.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenNone.Name = "EditScreenNone";
       this.EditScreenNone.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D0)));
-      this.EditScreenNone.Size = new System.Drawing.Size(180, 22);
+      this.EditScreenNone.Size = new System.Drawing.Size(178, 22);
       this.EditScreenNone.Text = "Loose";
       this.EditScreenNone.Click += new System.EventHandler(this.EditScreenPosition_Click);
       // 
@@ -951,7 +955,7 @@
       this.EditScreenTopLeft.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenTopLeft.Name = "EditScreenTopLeft";
       this.EditScreenTopLeft.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D1)));
-      this.EditScreenTopLeft.Size = new System.Drawing.Size(180, 22);
+      this.EditScreenTopLeft.Size = new System.Drawing.Size(178, 22);
       this.EditScreenTopLeft.Text = "Top left";
       this.EditScreenTopLeft.Click += new System.EventHandler(this.EditScreenPosition_Click);
       // 
@@ -961,7 +965,7 @@
       this.EditScreenTopRight.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenTopRight.Name = "EditScreenTopRight";
       this.EditScreenTopRight.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D2)));
-      this.EditScreenTopRight.Size = new System.Drawing.Size(180, 22);
+      this.EditScreenTopRight.Size = new System.Drawing.Size(178, 22);
       this.EditScreenTopRight.Text = "Top right";
       this.EditScreenTopRight.Click += new System.EventHandler(this.EditScreenPosition_Click);
       // 
@@ -971,7 +975,7 @@
       this.EditScreenBottomLeft.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenBottomLeft.Name = "EditScreenBottomLeft";
       this.EditScreenBottomLeft.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D3)));
-      this.EditScreenBottomLeft.Size = new System.Drawing.Size(180, 22);
+      this.EditScreenBottomLeft.Size = new System.Drawing.Size(178, 22);
       this.EditScreenBottomLeft.Text = "Bottom left";
       this.EditScreenBottomLeft.Click += new System.EventHandler(this.EditScreenPosition_Click);
       // 
@@ -981,7 +985,7 @@
       this.EditScreenBottomRight.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenBottomRight.Name = "EditScreenBottomRight";
       this.EditScreenBottomRight.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D4)));
-      this.EditScreenBottomRight.Size = new System.Drawing.Size(180, 22);
+      this.EditScreenBottomRight.Size = new System.Drawing.Size(178, 22);
       this.EditScreenBottomRight.Text = "Bottom right";
       this.EditScreenBottomRight.Click += new System.EventHandler(this.EditScreenPosition_Click);
       // 
@@ -991,7 +995,7 @@
       this.EditScreenCenter.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenCenter.Name = "EditScreenCenter";
       this.EditScreenCenter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D5)));
-      this.EditScreenCenter.Size = new System.Drawing.Size(180, 22);
+      this.EditScreenCenter.Size = new System.Drawing.Size(178, 22);
       this.EditScreenCenter.Text = "Center";
       this.EditScreenCenter.Click += new System.EventHandler(this.EditScreenPosition_Click);
       // 
@@ -1131,6 +1135,7 @@
       // 
       this.PanelMainCenter.BackColor = System.Drawing.SystemColors.Control;
       this.PanelMainCenter.Controls.Add(this.TabControl);
+      this.PanelMainCenter.Controls.Add(this.PanelDatabase);
       this.PanelMainCenter.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMainCenter.Location = new System.Drawing.Point(0, 0);
       this.PanelMainCenter.Name = "PanelMainCenter";
@@ -1145,10 +1150,10 @@
       this.TabControl.Controls.Add(this.TabPageNormalize);
       this.TabControl.Controls.Add(this.TabPageStatistics);
       this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.TabControl.Location = new System.Drawing.Point(0, 0);
+      this.TabControl.Location = new System.Drawing.Point(0, 50);
       this.TabControl.Name = "TabControl";
       this.TabControl.SelectedIndex = 0;
-      this.TabControl.Size = new System.Drawing.Size(812, 334);
+      this.TabControl.Size = new System.Drawing.Size(812, 284);
       this.TabControl.TabIndex = 8;
       this.TabControl.TabStop = false;
       this.TabControl.Visible = false;
@@ -1159,7 +1164,7 @@
       this.TabPageDecode.Location = new System.Drawing.Point(4, 22);
       this.TabPageDecode.Name = "TabPageDecode";
       this.TabPageDecode.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageDecode.Size = new System.Drawing.Size(804, 308);
+      this.TabPageDecode.Size = new System.Drawing.Size(804, 258);
       this.TabPageDecode.TabIndex = 1;
       this.TabPageDecode.Text = "Decode";
       this.TabPageDecode.UseVisualStyleBackColor = true;
@@ -1171,7 +1176,7 @@
       this.PanelViewDecode.Location = new System.Drawing.Point(3, 3);
       this.PanelViewDecode.Name = "PanelViewDecode";
       this.PanelViewDecode.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewDecode.Size = new System.Drawing.Size(798, 302);
+      this.PanelViewDecode.Size = new System.Drawing.Size(798, 252);
       this.PanelViewDecode.TabIndex = 0;
       // 
       // TabPageGrid
@@ -1180,7 +1185,7 @@
       this.TabPageGrid.Location = new System.Drawing.Point(4, 22);
       this.TabPageGrid.Name = "TabPageGrid";
       this.TabPageGrid.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageGrid.Size = new System.Drawing.Size(754, 308);
+      this.TabPageGrid.Size = new System.Drawing.Size(804, 258);
       this.TabPageGrid.TabIndex = 0;
       this.TabPageGrid.Text = "Grid";
       this.TabPageGrid.UseVisualStyleBackColor = true;
@@ -1194,7 +1199,7 @@
       this.PanelViewGrid.Location = new System.Drawing.Point(3, 3);
       this.PanelViewGrid.Name = "PanelViewGrid";
       this.PanelViewGrid.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewGrid.Size = new System.Drawing.Size(748, 302);
+      this.PanelViewGrid.Size = new System.Drawing.Size(798, 252);
       this.PanelViewGrid.TabIndex = 22;
       // 
       // TabPagePopulate
@@ -1204,19 +1209,18 @@
       this.TabPagePopulate.Location = new System.Drawing.Point(4, 22);
       this.TabPagePopulate.Name = "TabPagePopulate";
       this.TabPagePopulate.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPagePopulate.Size = new System.Drawing.Size(754, 308);
+      this.TabPagePopulate.Size = new System.Drawing.Size(804, 258);
       this.TabPagePopulate.TabIndex = 4;
       this.TabPagePopulate.Text = "Populate";
       // 
       // PanelViewPopulate
       // 
       this.PanelViewPopulate.BackColor = System.Drawing.SystemColors.Control;
-      this.PanelViewPopulate.Controls.Add(this.PanelTop);
       this.PanelViewPopulate.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelViewPopulate.Location = new System.Drawing.Point(3, 3);
       this.PanelViewPopulate.Name = "PanelViewPopulate";
       this.PanelViewPopulate.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewPopulate.Size = new System.Drawing.Size(748, 302);
+      this.PanelViewPopulate.Size = new System.Drawing.Size(798, 252);
       this.PanelViewPopulate.TabIndex = 2;
       // 
       // TabPageNormalize
@@ -1225,7 +1229,7 @@
       this.TabPageNormalize.Location = new System.Drawing.Point(4, 22);
       this.TabPageNormalize.Name = "TabPageNormalize";
       this.TabPageNormalize.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageNormalize.Size = new System.Drawing.Size(754, 308);
+      this.TabPageNormalize.Size = new System.Drawing.Size(804, 258);
       this.TabPageNormalize.TabIndex = 3;
       this.TabPageNormalize.Text = "Normalize";
       this.TabPageNormalize.UseVisualStyleBackColor = true;
@@ -1237,7 +1241,7 @@
       this.PanelViewNormalize.Location = new System.Drawing.Point(3, 3);
       this.PanelViewNormalize.Name = "PanelViewNormalize";
       this.PanelViewNormalize.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewNormalize.Size = new System.Drawing.Size(748, 302);
+      this.PanelViewNormalize.Size = new System.Drawing.Size(798, 252);
       this.PanelViewNormalize.TabIndex = 2;
       // 
       // TabPageStatistics
@@ -1246,7 +1250,7 @@
       this.TabPageStatistics.Location = new System.Drawing.Point(4, 22);
       this.TabPageStatistics.Name = "TabPageStatistics";
       this.TabPageStatistics.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageStatistics.Size = new System.Drawing.Size(754, 308);
+      this.TabPageStatistics.Size = new System.Drawing.Size(804, 258);
       this.TabPageStatistics.TabIndex = 2;
       this.TabPageStatistics.Text = "Statistics";
       this.TabPageStatistics.UseVisualStyleBackColor = true;
@@ -1258,7 +1262,7 @@
       this.PanelViewStatistics.Location = new System.Drawing.Point(3, 3);
       this.PanelViewStatistics.Name = "PanelViewStatistics";
       this.PanelViewStatistics.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewStatistics.Size = new System.Drawing.Size(748, 302);
+      this.PanelViewStatistics.Size = new System.Drawing.Size(798, 252);
       this.PanelViewStatistics.TabIndex = 1;
       // 
       // PanelSepTop
@@ -1815,6 +1819,12 @@
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
       // 
+      // TimerMemory
+      // 
+      this.TimerMemory.Enabled = true;
+      this.TimerMemory.Interval = 10000;
+      this.TimerMemory.Tick += new System.EventHandler(this.TimerMemory_Tick);
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1831,7 +1841,7 @@
       this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
       this.Load += new System.EventHandler(this.MainForm_Load);
       this.Shown += new System.EventHandler(this.MainForm_Shown);
-      this.PanelTop.ResumeLayout(false);
+      this.PanelDatabase.ResumeLayout(false);
       this.StatusStrip.ResumeLayout(false);
       this.StatusStrip.PerformLayout();
       this.ToolStrip.ResumeLayout(false);
@@ -1844,7 +1854,6 @@
       this.TabPageDecode.ResumeLayout(false);
       this.TabPageGrid.ResumeLayout(false);
       this.TabPagePopulate.ResumeLayout(false);
-      this.PanelViewPopulate.ResumeLayout(false);
       this.TabPageNormalize.ResumeLayout(false);
       this.TabPageStatistics.ResumeLayout(false);
       this.PanelTitle.ResumeLayout(false);
@@ -1856,7 +1865,7 @@
     }
 
     #endregion
-    private Panel PanelTop;
+    private Panel PanelDatabase;
     private ComboBox SelectFileName;
     private StatusStrip StatusStrip;
     private Button ActionDbOpen;
@@ -2010,5 +2019,7 @@
     internal ToolStripMenuItem EditExportUseHebrewFontElseUnicodeChars;
     private ToolStripButton ActionPause;
     private ToolStripMenuItem ActionDatabaseSetCacheSize;
+    private System.Windows.Forms.Timer TimerMemory;
+    private ToolStripStatusLabel LabelStatusFreeMem;
   }
 }

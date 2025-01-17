@@ -540,9 +540,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\Config\StatisticsForm.fr.resx">
       <DependentUpon>StatisticsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\Config\StatisticsForm.resx">
       <DependentUpon>StatisticsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\MainForm\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -600,6 +602,8 @@
     <None Include="Dependencies\Windows Global Hotkey\Windows Global Hotkey %28Public Domain%29.url" />
     <None Include="Dependencies\Windows Global Hotkey\Windows-Global-Hotkey-master.zip" />
     <None Include="Licenses\MPL 2.0.rtf" />
+    <None Include="Properties\DataSources\ApplicationStatistics.datasource" />
+    <None Include="Properties\DataSources\Ordisoftware.Core.SystemStatistics.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

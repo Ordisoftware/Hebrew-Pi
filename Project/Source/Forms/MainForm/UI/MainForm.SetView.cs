@@ -10,12 +10,12 @@
 /// relevant directory) where a recipient would be likely to look for such a notice.
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
-/// <created> 2025-01-12 </created>
-/// <edited> 2025-01-12 </edited>
+/// <created> 2025-01 </created>
+/// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 /// <summary>
-/// The application's main form.
+/// Provides application's main form.
 /// </summary>
 /// <seealso cref="T:System.Windows.Forms.Form"/>
 partial class MainForm
@@ -46,10 +46,8 @@ partial class MainForm
     ViewConnectors[view].Panel.Parent = PanelMainCenter;
     ViewConnectors[view].Focused?.Focus();
     Settings.CurrentView = view;
-    LabelTitleRight.Text = AppTranslations.ViewPanelTitle.GetLang(view).ToUpper();
-    LabelTitleLeft.Refresh();
+    LabelTitleLeft.Text = AppTranslations.ViewPanelTitle.GetLang(view).ToUpper();
     UpdateHistoryButtons();
-
   }
 
 }

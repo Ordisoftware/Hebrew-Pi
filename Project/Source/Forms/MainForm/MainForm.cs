@@ -1,4 +1,6 @@
-﻿/// <license>
+﻿using System.IO;
+
+/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
 /// Copyright 2025 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
@@ -10,8 +12,8 @@
 /// relevant directory) where a recipient would be likely to look for such a notice.
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
-/// <created> 2025-01-10 </created>
-/// <edited> 2025-01-15 </edited>
+/// <created> 2025-01 </created>
+/// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 /// <summary>
@@ -26,6 +28,8 @@ partial class MainForm : Form
   private string SQLiteTempDir = @"D:\";
 
   private PiFirstDecimalsLenght PiFirstDecimalsCount;
+
+  private string DbFilePath = string.Empty;
 
   #region Singleton
 
@@ -53,6 +57,21 @@ partial class MainForm : Form
   private void MainForm_Load(object sender, EventArgs e)
   {
     DoFormLoad(sender, e);
+    InitializeListBoxCacheSize();
+    TimerMemory_Tick(null, null);
+  }
+
+  private void InitializeListBoxCacheSize()
+  {
+    int memTotal = (int)( SystemManager.TotalVisibleMemoryValue / 1024 / 1024 / 1024 );
+    int memFree = (int)( SystemManager.PhysicalMemoryFreeValue / 1024 / 1024 / 1024 );
+    int indexList = 0;
+    for ( int indexStep = 0; indexStep < memTotal * 70 / 100; indexStep += 4 )
+    {
+      SelectDbCache.Items.Add(indexStep);
+      if ( indexStep <= memFree ) indexList++;
+    }
+    SelectDbCache.SelectedIndex = indexList / 2 - 1;
   }
 
   private void MainForm_Shown(object sender, EventArgs e)
@@ -170,6 +189,14 @@ partial class MainForm : Form
     // TODO
   }
 
+  private void TimerMemory_Tick(object sender, EventArgs e)
+  {
+    LabelStatusFreeMem.Text = "Free memory: " + SystemManager.PhysicalMemoryFreeValue.FormatBytesSize();
+    LabelTitleRight.Text = DB is null
+      ? "CLOSED"
+      : $"OPENED ({SystemManager.GetFileSize(DbFilePath).FormatBytesSize()})";
+  }
+
   private void TimerBatch_Tick(object sender, EventArgs e)
   {
     LabelStatusTime.Text = Globals.ChronoBatch.Elapsed.AsReadable();
@@ -284,23 +311,21 @@ partial class MainForm : Form
 
   private void SetDbCache()
   {
-    if ( DB is not null && int.TryParse(SelectDbCache.SelectedItem?.ToString(), out var value) )
-    {
-      DB.SetCacheSize(value * 1024 * 1024);
-    }
+    if ( DB is not null ) DB.SetCacheSize((int)SelectDbCache.SelectedItem * 1024 * 1024);
   }
 
   private void ActionDbOpen_Click(object sender, EventArgs e)
   {
-    string dbPath = Path.Combine(Globals.DatabaseFolderPath, PiFirstDecimalsCount.ToString()) + Globals.DatabaseFileExtension;
-    LabelTitleCenter.Text = Path.GetFileName(dbPath);
-    DB = new SQLiteNetORM(dbPath);
+    DbFilePath = Path.Combine(Globals.DatabaseFolderPath, PiFirstDecimalsCount.ToString()) + Globals.DatabaseFileExtension;
+    LabelTitleCenter.Text = Path.GetFileName(DbFilePath);
+    DB = new SQLiteNetORM(DbFilePath);
     if ( SQLiteTempDir.Length > 0 )
       DB.SetTempDir(SQLiteTempDir);
     DB.CreateTable<DecupletRow>();
     DB.CreateTable<IterationRow>();
     SetDbCache();
     UpdateButtons();
+    TimerMemory_Tick(null, null);
   }
 
   private void ActionDbClose_Click(object sender, EventArgs e)
@@ -310,6 +335,7 @@ partial class MainForm : Form
     DB.Dispose();
     DB = null;
     UpdateButtons();
+    TimerMemory_Tick(null, null);
   }
 
 }

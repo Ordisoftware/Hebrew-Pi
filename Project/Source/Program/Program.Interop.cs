@@ -10,8 +10,8 @@
 /// relevant directory) where a recipient would be likely to look for such a notice.
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
-/// <created> 2025-01-11 </created>
-/// <edited> 2025-01-11 </edited>
+/// <created> 2025-01 </created>
+/// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 using System.IO.Pipes;

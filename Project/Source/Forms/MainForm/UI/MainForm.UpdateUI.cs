@@ -10,8 +10,8 @@
 /// relevant directory) where a recipient would be likely to look for such a notice.
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
-/// <created> 2025-01-12 </created>
-/// <edited> 2025-01-16 </edited>
+/// <created> 2025-01 </created>
+/// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 /// <summary>
@@ -88,7 +88,7 @@ partial class MainForm
     SelectFileName.Enabled = !dbOpened;
     ActionDbOpen.Enabled = !dbOpened && SelectFileName.SelectedIndex != -1;
     ActionDbClose.Enabled = dbOnenedAndNotInBatch;
-    ActionRun.Enabled = dbOnenedAndNotInBatch;
+    ActionRun.Enabled = dbOnenedAndNotInBatch && ( Settings.CurrentView == ViewMode.Populate || Settings.CurrentView == ViewMode.Normalize );
     ActionStop.Enabled = dbOnenedAndInBatch;
     ActionContinue.Enabled = dbOnenedAndInBatch && Globals.PauseRequired;
     ActionPause.Enabled = dbOnenedAndInBatch && !Globals.PauseRequired;
