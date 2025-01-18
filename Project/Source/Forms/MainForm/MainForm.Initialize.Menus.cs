@@ -29,9 +29,9 @@ partial class MainForm : Form
     CommonMenusControl.CreateInstance(ToolStrip,
                                       ref ActionInformation,
                                       AppTranslations.NoticeNewFeatures,
-                                      null,//ActionWebCheckUpdate_Click,
-                                      null,//ActionViewLog_Click,
-                                      null//ActionViewStats_Click
+                                      ActionWebCheckUpdate_Click,
+                                      ActionViewLog_Click,
+                                      ActionViewStats_Click
                                      );
     InitializeSpecialMenus();
   }

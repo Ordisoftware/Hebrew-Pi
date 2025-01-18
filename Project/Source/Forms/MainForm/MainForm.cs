@@ -191,6 +191,27 @@ partial class MainForm : Form
     SetView(ViewMode.Statistics);
   }
 
+  public void ActionWebCheckUpdate_Click(object sender, EventArgs e)
+  {
+    var lastdone = Settings.CheckUpdateLastDone;
+    bool exit = WebCheckUpdate.Run(ref lastdone,
+                                   Settings.CheckUpdateAtStartupDaysInterval,
+                                   e is null,
+                                   Settings.CheckUpdateAtStartup);
+    Settings.CheckUpdateLastDone = lastdone;
+    if ( exit ) Close();
+  }
+
+  public void ActionViewLog_Click(object sender, EventArgs e)
+  {
+    DebugManager.TraceForm.Popup();
+  }
+
+  public void ActionViewStats_Click(object sender, EventArgs e)
+  {
+    StatisticsForm.Run();
+  }
+
   private void ActionDatabaseSetCacheSize_Click(object sender, EventArgs e)
   {
     // TODO

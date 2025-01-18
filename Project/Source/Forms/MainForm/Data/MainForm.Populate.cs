@@ -96,15 +96,15 @@ partial class MainForm
         }
       }
       doCommit();
-      if ( CheckIfBatchCanContinue().Result )
-        if ( DisplayManager.QueryYesNo("Create index on Motif column now?") )
-        {
-          Globals.CanPause = false;
-          CanForceTerminateBatch = true;
-          UpdateStatusAction(AppTranslations.IndexingText);
-          UpdateStatusRemaining(AppTranslations.RemainingNAText);
-          DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
-        }
+      UpdateStatusRemaining(AppTranslations.RemainingNAText);
+      if ( CheckIfBatchCanContinue().Result
+        && DisplayManager.QueryYesNo("Create index on Motif column now?") )
+      {
+        Globals.CanPause = false;
+        CanForceTerminateBatch = true;
+        UpdateStatusAction(AppTranslations.IndexingText);
+        DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
+      }
     }
     catch ( Exception ex )
     {

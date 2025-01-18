@@ -51,11 +51,11 @@ partial class MainForm
           Iteration = indexIteration,
           RepeatedCount = countCurrent,
           MaxOccurences = list.Any() ? list[0].Occurences : 0,
-          RemainingRate = (double?)( !list.Any()
-          ? 0
-          : indexIteration == 0
-            ? 100
-            : Math.Round((double)countCurrent * 100 / countPrevious, 2) ),
+          RemainingRate = !list.Any()
+            ? 0
+            : indexIteration == 0
+              ? 100
+              : Math.Round((double)countCurrent * 100 / countPrevious, 2),
           ElapsedCount = Globals.ChronoSubBatch.Elapsed
         };
         DB.Insert(row);
