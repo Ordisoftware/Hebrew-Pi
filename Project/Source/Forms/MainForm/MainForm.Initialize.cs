@@ -146,7 +146,7 @@ partial class MainForm : Form
     else
     if ( !Globals.AllowClose )
     {
-      if ( !DisplayManager.QueryYesNo(SysTranslations.AskToTerminateWhileProcessing.GetLang()) )
+      if ( DisplayManager.QueryYesNo(SysTranslations.AskToTerminateWhileProcessing.GetLang()) )
       {
         CanForceTerminateBatch = true;
         ActionStop.PerformClick();
