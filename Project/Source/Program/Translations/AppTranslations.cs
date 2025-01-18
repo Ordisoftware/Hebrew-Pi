@@ -89,13 +89,15 @@ static partial class AppTranslations
   static public string ElapsedText = "{0} elapsed";
   static public string RemainingText = "{0} remaining";
   static public string IterationText = "Iteration {0} : {1} repeating";
-  static public string CountingText = "Counting...";
+  static public string CountingText = "Counting repeating...";
+  static public string MaxoccurrencesText = "Count max occurrences...";
   static public string CountedText = "Counted";
   static public string UpdatingText = "Adding position...";
   static public string CommittingText = "Committing...";
   static public string RollbackingText = "Rollbacking...";
-  static public string EmptyingTablesText = "Emptying tables...";
+  static public string EmptyingTablesText = "Emptying...";
   static public string PopulatingText = "Populating...";
+  static public string IndexingText = "Indexing...";
   static public string FinishedText = "Finished";
   static public string CanceledText = "Canceled";
 }

@@ -35,9 +35,9 @@ partial class MainForm
     DB = new SQLiteNetORM(path);
     if ( SQLiteTempDir.Length > 0 )
       DB.SetTempDir(SQLiteTempDir);
+    SetDbCache();
     DB.CreateTable<DecupletRow>();
     DB.CreateTable<IterationRow>();
-    SetDbCache();
     LoadIterationGrid();
     UpdateButtons();
     TimerMemory_Tick(null, null);

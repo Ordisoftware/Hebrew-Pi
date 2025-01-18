@@ -95,7 +95,7 @@ partial class MainForm
     LabelStatusTime.Text = "-";
     LabelStatusIteration.Text = "-";
     LabelStatusInfo.Text = "-";
-    LabelStatusRemaining.Text = "";
+    LabelStatusRemaining.Text = "-";
   }
 
   private void UpdateStatusProgress(string text)
@@ -137,7 +137,6 @@ partial class MainForm
   private void DoTimerBatch()
   {
     LabelStatusTime.Text = string.Format(AppTranslations.ElapsedText, Globals.ChronoBatch.Elapsed.AsReadable());
-
   }
 
   //

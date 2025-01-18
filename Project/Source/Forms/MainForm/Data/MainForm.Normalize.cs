@@ -36,6 +36,7 @@ partial class MainForm
         iteration = startingIterationNumber + 1;
         countPrevious = last.RepeatedCount;
       }
+      Globals.ChronoBatch.Restart();
       while ( true )
       {
         if ( !CheckIfBatchCanContinue().Result ) break;
@@ -86,6 +87,18 @@ partial class MainForm
                   FROM Decuplets
                   GROUP BY Motif
                   HAVING COUNT(Motif) > 1
+                );";
+    return DB.QueryScalars<int>(sql).Single();
+  }
+
+  private async Task<int> GetRepeatingMotifsMaxOccurences()
+  {
+    var sql = @"SELECT MAX(Occurrences) AS MaxDuplicates
+                FROM (
+                  SELECT COUNT(*) AS Occurrences
+                  FROM Decuplets
+                  GROUP BY Motif
+                  HAVING COUNT(*) > 1
                 );";
     return DB.QueryScalars<int>(sql).Single();
   }

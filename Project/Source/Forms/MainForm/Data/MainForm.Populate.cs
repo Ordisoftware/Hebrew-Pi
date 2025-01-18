@@ -1,6 +1,4 @@
-﻿using Microsoft.WindowsAPICodePack.Taskbar;
-
-/// <license>
+﻿/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
 /// Copyright 2025 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
@@ -16,8 +14,7 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-using Microsoft.WindowsAPICodePack;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Microsoft.WindowsAPICodePack.Taskbar;
 
 /// <summary>
 /// Provides application's main form.
@@ -71,8 +68,8 @@ partial class MainForm
         reader.BaseStream.Seek(2, SeekOrigin.Begin);
         fileSize -= 2;
       }
-      Globals.ChronoBatch.Restart();
       taskbar.SetProgressState(TaskbarProgressBarState.Normal);
+      Globals.ChronoBatch.Restart();
       while ( ( charsRead = reader.Read(buffer, 0, FileReadBufferSize) ) >= 10 )
       {
         if ( !CheckIfBatchCanContinue().Result ) break;
@@ -96,6 +93,13 @@ partial class MainForm
         }
       }
       doCommit();
+      if ( CheckIfBatchCanContinue().Result )
+      {
+        Globals.CanCancel = false;
+        Globals.CanPause = false;
+        UpdateStatusInfo(AppTranslations.IndexingText);
+        DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
+      }
     }
     catch ( Exception ex )
     {
