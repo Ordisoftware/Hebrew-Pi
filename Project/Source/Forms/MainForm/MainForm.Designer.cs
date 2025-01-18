@@ -1381,7 +1381,7 @@
       // 
       this.ColumnElapsedAddition.DataPropertyName = "ElapsedAddition";
       this.ColumnElapsedAddition.FillWeight = 93.27411F;
-      this.ColumnElapsedAddition.HeaderText = "Adding";
+      this.ColumnElapsedAddition.HeaderText = "Additionning";
       this.ColumnElapsedAddition.Name = "ColumnElapsedAddition";
       this.ColumnElapsedAddition.ReadOnly = true;
       this.ColumnElapsedAddition.Width = 75;

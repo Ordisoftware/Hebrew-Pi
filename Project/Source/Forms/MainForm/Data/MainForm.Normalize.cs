@@ -74,7 +74,7 @@ partial class MainForm
         // Add position to repeating motifs
         if ( countCurrent > 0 )
         {
-          UpdateStatusAction(AppTranslations.AddingText);
+          UpdateStatusAction(AppTranslations.AdditionningText);
           Globals.ChronoSubBatch.Restart();
           AddPositionToRepeatingMotifs();
           UpdateStatusAction(AppTranslations.AddedText);

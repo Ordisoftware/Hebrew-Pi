@@ -96,7 +96,7 @@ static partial class AppTranslations
   static public string CountingText = "Action: counting...";
   static public string CountedText = "Action: counted";
   static public string MaxoccurrencesText = "Action: counting max occurrences...";
-  static public string AddingText = "Action: adding...";
+  static public string AdditionningText = "Action: additionning...";
   static public string AddedText = "Action: added";
   static public string CommittingText = "Action: committing...";
   static public string RollbackingText = "Action: rollbacking...";
