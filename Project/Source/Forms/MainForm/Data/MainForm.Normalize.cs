@@ -14,6 +14,8 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
+using Equin.ApplicationFramework;
+
 /// <summary>
 /// Provides application's main form.
 /// </summary>
@@ -23,7 +25,6 @@ partial class MainForm
 
   private async Task DoActionNormalize()
   {
-    var chrono = new Stopwatch();
     bool hasError = false;
     try
     {
@@ -37,46 +38,52 @@ partial class MainForm
       UpdateStatusRemaining(AppTranslations.RemainingNAText);
       for ( ; countCurrent > 0; indexIteration++ )
       {
-        // Count repeating motifs
         if ( !CheckIfBatchCanContinue().Result ) break;
+        // Count repeating motifs
         UpdateStatusInfo(string.Format(AppTranslations.IterationText, indexIteration, "?"));
         UpdateStatusAction(AppTranslations.CountingText);
         Globals.ChronoSubBatch.Restart();
         var list = GetRepeatingMotifsAndMaxOccurences().Result;
         countCurrent = list.Count;
+        Globals.ChronoSubBatch.Stop();
         var row = new IterationRow
         {
           Iteration = indexIteration,
           RepeatedCount = countCurrent,
-          MaxOccurences = list.Any() ? list[0].Occurences : 0
+          MaxOccurences = list.Any() ? list[0].Occurences : 0,
+          RemainingRate = (double?)( !list.Any()
+          ? 0
+          : indexIteration == 0
+            ? 100
+            : Math.Round((double)countCurrent * 100 / countPrevious, 2) ),
+          ElapsedCount = Globals.ChronoSubBatch.Elapsed
         };
-        Globals.ChronoSubBatch.Stop();
-        row.ElapsedCount = Globals.ChronoSubBatch.Elapsed;
+        DB.Insert(row);
+        LoadIterationGrid();
         UpdateStatusInfo(string.Format(AppTranslations.IterationText, indexIteration, countCurrent));
         UpdateStatusAction(AppTranslations.CountedText);
-        if ( indexIteration > 0 && countCurrent > countPrevious )
-          if ( !DisplayManager.QueryYesNo(string.Format(AppTranslations.AskStartNextIfMore,
-                                                        indexIteration,
-                                                        countPrevious,
-                                                        countCurrent)) )
-          {
-            Globals.CancelRequired = true;
-            break;
-          }
+        if ( indexIteration > 0 && countCurrent > countPrevious
+          && !DisplayManager.QueryYesNo(string.Format(AppTranslations.AskStartNextIfMore,
+                                                      indexIteration,
+                                                      countPrevious,
+                                                      countCurrent)) )
+        {
+          Globals.CancelRequired = true;
+          break;
+        }
         countPrevious = countCurrent;
         // Add position to repeating motifs
-        if ( !CheckIfBatchCanContinue().Result ) break;
         if ( countCurrent > 0 )
         {
-          UpdateStatusAction(AppTranslations.UpdatingText);
+          UpdateStatusAction(AppTranslations.AddingText);
           Globals.ChronoSubBatch.Restart();
           AddPositionToRepeatingMotifs();
+          UpdateStatusAction(AppTranslations.AddedText);
           Globals.ChronoSubBatch.Stop();
           row.ElapsedAddition = Globals.ChronoSubBatch.Elapsed;
+          DB.Update(row);
+          LoadIterationGrid();
         }
-        // Insert row and reload grid
-        DB.Insert(row);
-        GridIterations.Invoke(LoadIterationGrid);
       }
     }
     catch ( Exception ex )

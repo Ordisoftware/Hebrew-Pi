@@ -93,15 +93,16 @@ static partial class AppTranslations
   static public string RemainingText = "Remaining: {0}";
   static public string RemainingNAText = "Remaining: N/A";
 
-  static public string CountingText = "Action: Counting...";
-  static public string MaxoccurrencesText = "Action: getting max occurrences...";
-  static public string CountedText = "Action: Counted";
-  static public string UpdatingText = "Action: Adding position...";
-  static public string CommittingText = "Action: Committing...";
-  static public string RollbackingText = "Action: Rollbacking...";
-  static public string EmptyingTablesText = "Action: Emptying...";
-  static public string PopulatingText = "Action: Populating...";
-  static public string IndexingText = "Action: Indexing...";
-  static public string FinishedText = "Action: Finished";
-  static public string CanceledText = "Action: Canceled";
+  static public string CountingText = "Action: counting...";
+  static public string CountedText = "Action: counted";
+  static public string MaxoccurrencesText = "Action: counting max occurrences...";
+  static public string AddingText = "Action: adding...";
+  static public string AddedText = "Action: added";
+  static public string CommittingText = "Action: committing...";
+  static public string RollbackingText = "Action: rollbacking...";
+  static public string EmptyingTablesText = "Action: emptying...";
+  static public string PopulatingText = "Action: populating...";
+  static public string IndexingText = "Action: indexing...";
+  static public string FinishedText = "Action: finished";
+  static public string CanceledText = "Action: canceled";
 }

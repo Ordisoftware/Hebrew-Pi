@@ -28,7 +28,11 @@ partial class MainForm
 
   private void LoadIterationGrid()
   {
-    GridIterations.DataSource = new BindingListView<IterationRow>(DB.Table<IterationRow>().ToList());
+    void update() => GridIterations.DataSource = new BindingListView<IterationRow>(DB.Table<IterationRow>().ToList());
+    if ( GridIterations.InvokeRequired )
+      GridIterations.Invoke(update);
+    else
+      update();
   }
 
   private void DoActionDbOpen(string path)
@@ -54,6 +58,7 @@ partial class MainForm
     DB.Close();
     DB.Dispose();
     DB = null;
+    BindingSourceIterationRow.DataSource = null;
     UpdateButtons();
     TimerMemory_Tick(null, null);
   }
