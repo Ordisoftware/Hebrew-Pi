@@ -59,7 +59,7 @@ partial class MainForm
     DB.Close();
     DB.Dispose();
     DB = null;
-    BindingSourceIterationRow.DataSource = null;
+    GridIterations.DataSource = null;
     UpdateButtons();
     TimerMemory_Tick(null, null);
   }
