@@ -97,13 +97,6 @@ partial class MainForm
       }
       doCommit();
       UpdateStatusRemaining(AppTranslations.RemainingNAText);
-      if ( CheckIfBatchCanContinue().Result
-        && DisplayManager.QueryYesNo("Create index on Motif column now?") )
-      {
-        Globals.CanPause = false;
-        UpdateStatusAction(AppTranslations.IndexingText);
-        DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
-      }
     }
     catch ( Exception ex )
     {

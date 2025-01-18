@@ -102,7 +102,6 @@ static partial class AppTranslations
   static public string RollbackingText = "Action: rollbacking...";
   static public string EmptyingTablesText = "Action: emptying...";
   static public string PopulatingText = "Action: populating...";
-  static public string IndexingText = "Action: indexing...";
   static public string FinishedText = "Action: finished";
   static public string CanceledText = "Action: canceled";
 }

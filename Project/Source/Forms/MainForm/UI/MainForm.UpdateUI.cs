@@ -138,8 +138,12 @@ partial class MainForm
 
   private void DoTimerBatch()
   {
-    LabelStatusTimeBatch.Text = string.Format(AppTranslations.BatchElapsedText, Globals.ChronoBatch.Elapsed.AsReadable());
-    LabelStatusTimeSubBatch.Text = string.Format(AppTranslations.SubBatchElapsedText, Globals.ChronoSubBatch.Elapsed.AsReadable());
+    LabelStatusTimeBatch.Text = Globals.ChronoBatch.Elapsed.TotalSeconds == 0
+      ? "Batch: N/A"
+      : string.Format(AppTranslations.BatchElapsedText, Globals.ChronoBatch.Elapsed.AsReadable());
+    LabelStatusTimeSubBatch.Text = Globals.ChronoSubBatch.Elapsed.TotalSeconds == 0
+      ? "SubBatch: N/A"
+      : string.Format(AppTranslations.SubBatchElapsedText, Globals.ChronoSubBatch.Elapsed.AsReadable());
   }
 
   //

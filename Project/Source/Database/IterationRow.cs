@@ -32,10 +32,11 @@ public class IterationRow
   [NotNull]
   public long MaxOccurences { get; set; }
 
-  public double? RemainingRate { get; set; }
+  [NotNull]
+  public double RemainingRate { get; set; }
 
-  public TimeSpan? ElapsedCount { get; set; }
+  public TimeSpan? ElapsedCounting { get; set; }
 
-  public TimeSpan? ElapsedAddition { get; set; }
+  public TimeSpan? ElapsedAdditionning { get; set; }
 
 }

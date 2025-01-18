@@ -55,7 +55,7 @@ partial class MainForm
             : indexIteration == 0
               ? 100
               : Math.Round((double)countCurrent * 100 / countPrevious, 2),
-          ElapsedCount = Globals.ChronoSubBatch.Elapsed
+          ElapsedCounting = Globals.ChronoSubBatch.Elapsed
         };
         DB.Insert(row);
         LoadIterationGrid();
@@ -79,7 +79,7 @@ partial class MainForm
           AddPositionToRepeatingMotifs();
           UpdateStatusAction(AppTranslations.AddedText);
           Globals.ChronoSubBatch.Stop();
-          row.ElapsedAddition = Globals.ChronoSubBatch.Elapsed;
+          row.ElapsedAdditionning = Globals.ChronoSubBatch.Elapsed;
           DB.Update(row);
           LoadIterationGrid();
         }
