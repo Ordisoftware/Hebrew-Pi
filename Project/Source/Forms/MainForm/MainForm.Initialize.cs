@@ -150,7 +150,6 @@ partial class MainForm : Form
       {
         CanForceTerminateBatch = true;
         ActionStop.PerformClick();
-        CanForceTerminateBatch = true;
       }
       else
       {
