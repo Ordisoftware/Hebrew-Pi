@@ -45,6 +45,7 @@ partial class MainForm
     SetDbCache();
     DB.SetSynchronous(false);
     DB.SetTempStoreInMemory(true);
+    DB.SetJournal(false);
     DB.CreateTable<DecupletRow>();
     DB.CreateTable<IterationRow>();
     LoadIterationGrid();
