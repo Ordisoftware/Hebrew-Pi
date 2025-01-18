@@ -73,7 +73,7 @@ partial class MainForm : Form
     int memTotal = (int)( SystemManager.TotalVisibleMemoryValue / MemorySizeInGiB );
     int memFree = (int)( SystemManager.PhysicalMemoryFreeValue / MemorySizeInGiB );
     int indexList = 0;
-    for ( int indexStep = 0; indexStep < memTotal * 70 / 100; indexStep += 4 )
+    for ( int indexStep = 0; indexStep < memTotal * 70 / 100; indexStep += 2 )
     {
       SelectDbCache.Items.Add(indexStep);
       if ( indexStep <= memFree ) indexList++;

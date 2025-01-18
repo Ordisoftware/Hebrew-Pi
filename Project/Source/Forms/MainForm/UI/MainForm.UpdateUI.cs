@@ -87,6 +87,7 @@ partial class MainForm
     ActionContinue.Enabled = dbOnenedAndInBatch && Globals.PauseRequired;
     ActionContinue.Visible = Globals.PauseRequired;
     ActionPause.Visible = !ActionContinue.Visible;
+    SelectDbCache.Enabled = !Globals.IsInBatch;
     Globals.AllowClose = !Globals.IsInBatch;
   }
 

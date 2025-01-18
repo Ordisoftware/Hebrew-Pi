@@ -40,14 +40,12 @@ partial class MainForm
     DatabaseFilePath = path;
     LabelTitleCenter.Text = Path.GetFileName(path);
     DB = new SQLiteNetORM(path);
-    if ( SQLiteTempDir.Length > 0 )
-      DB.SetTempDir(SQLiteTempDir);
-    SetDbCache();
-    DB.SetSynchronous(false);
-    DB.SetTempStoreInMemory(true);
+    DB.SetTempDir(SQLiteTempDir);
     DB.SetJournal(false);
+    DB.SetSynchronous(false);
     DB.CreateTable<DecupletRow>();
     DB.CreateTable<IterationRow>();
+    SetDbCache();
     LoadIterationGrid();
     UpdateButtons();
     TimerMemory_Tick(null, null);
