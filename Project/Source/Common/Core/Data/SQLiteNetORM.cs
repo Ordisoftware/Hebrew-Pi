@@ -14,6 +14,8 @@
 /// <edited> 2024-01 </edited>
 namespace Ordisoftware.Core;
 
+using System.Windows;
+using System;
 using MoreLinq;
 using SQLite;
 
@@ -175,6 +177,36 @@ public class SQLiteNetORM : SQLiteConnection
     catch ( Exception ex )
     {
       throw new SQLiteException(SysTranslations.DatabaseSetTempDirError.GetLang(), ex);
+    }
+  }
+
+  public void SetTempStoreInMemory(bool enabled)
+  {
+    try
+    {
+      if ( enabled )
+        Execute("PRAGMA temp_store = MEMORY;");
+      else
+        Execute("PRAGMA temp_store = DEFAULT;");
+    }
+    catch ( Exception ex )
+    {
+      throw; // TODO new SQLiteException(SysTranslations.DatabaseSetTempStoreError.GetLang(), ex);
+    }
+  }
+
+  public void SetSynchronous(bool enabled)
+  {
+    try
+    {
+      if ( enabled )
+        Execute("PRAGMA synchronous = FULL;");
+      else
+        Execute("PRAGMA synchronous = OFF;");
+    }
+    catch ( Exception ex )
+    {
+      throw; // TODO new SQLiteException(SysTranslations.DatabaseSetSynchronousError.GetLang(), ex);
     }
   }
 

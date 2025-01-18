@@ -45,9 +45,11 @@ partial class MainForm
     StreamReader reader = null;
     try
     {
+      Globals.ChronoSubBatch.Restart();
       checkRows();
-      UpdateStatusInfo(AppTranslations.PopulatingText);
-      UpdateStatusProgress(string.Format(AppTranslations.CreateDataProgress, "0"));
+      Globals.ChronoSubBatch.Stop();
+      UpdateStatusAction(AppTranslations.PopulatingText);
+      UpdateStatusInfo(string.Format(AppTranslations.CreateDataProgress, "0"));
       DB.BeginTransaction();
       long motif = 0;
       int charsRead;
@@ -69,6 +71,7 @@ partial class MainForm
         fileSize -= 2;
       }
       taskbar.SetProgressState(TaskbarProgressBarState.Normal);
+      Globals.ChronoSubBatch.Reset();
       Globals.ChronoBatch.Restart();
       while ( ( charsRead = reader.Read(buffer, 0, FileReadBufferSize) ) >= 10 )
       {
@@ -94,12 +97,14 @@ partial class MainForm
       }
       doCommit();
       if ( CheckIfBatchCanContinue().Result )
-      {
-        Globals.CanCancel = false;
-        Globals.CanPause = false;
-        UpdateStatusInfo(AppTranslations.IndexingText);
-        DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
-      }
+        if ( DisplayManager.QueryYesNo("Create index on Motif column now?") )
+        {
+          Globals.CanPause = false;
+          CanForceTerminateBatch = true;
+          UpdateStatusAction(AppTranslations.IndexingText);
+          UpdateStatusRemaining(AppTranslations.RemainingNAText);
+          DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
+        }
     }
     catch ( Exception ex )
     {
@@ -112,10 +117,11 @@ partial class MainForm
       {
         doRollback();
       }
-      UpdateStatusInfo(ex.Message);
+      UpdateStatusAction(ex.Message);
     }
     finally
     {
+      CanForceTerminateBatch = false;
       taskbar.SetProgressState(TaskbarProgressBarState.NoProgress);
       if ( reader is not null )
       {
@@ -124,32 +130,32 @@ partial class MainForm
       }
       if ( !hasError )
         if ( Globals.CancelRequired )
-          UpdateStatusInfo(AppTranslations.CanceledText);
+          UpdateStatusAction(AppTranslations.CanceledText);
         else
-          UpdateStatusInfo(AppTranslations.FinishedText);
+          UpdateStatusAction(AppTranslations.FinishedText);
     }
     //
     void doCommit(bool partial = false)
     {
       showProgress();
-      UpdateStatusInfo(AppTranslations.CommittingText);
+      UpdateStatusAction(AppTranslations.CommittingText);
       DB.Commit();
       if ( partial )
       {
         DB.BeginTransaction();
-        UpdateStatusInfo(AppTranslations.PopulatingText);
+        UpdateStatusAction(AppTranslations.PopulatingText);
       }
     }
     void doRollback()
     {
       showProgress();
-      UpdateStatusInfo(AppTranslations.RollbackingText);
+      UpdateStatusAction(AppTranslations.RollbackingText);
       DB.Rollback();
     }
     //
     void showProgress()
     {
-      UpdateStatusProgress(string.Format(AppTranslations.CreateDataProgress, countMotifs.ToString("N0")));
+      UpdateStatusInfo(string.Format(AppTranslations.CreateDataProgress, countMotifs.ToString("N0")));
     }
     //
     void showRemaining()
@@ -165,7 +171,12 @@ partial class MainForm
     //
     void checkRows()
     {
+      UpdateStatusRemaining(AppTranslations.RemainingNAText);
+      UpdateStatusAction(AppTranslations.CountingText);
+      CanForceTerminateBatch = true;
       countRows = DB.CountRows(DecupletRow.TableName);
+      CanForceTerminateBatch = false;
+      UpdateStatusAction(AppTranslations.CountedText);
       if ( countRows > 0 )
       {
         string title = "Table is not empty";
@@ -193,7 +204,7 @@ partial class MainForm
             isAppend = true;
             break;
           case DialogResult.No:
-            UpdateStatusInfo(AppTranslations.EmptyingTablesText);
+            UpdateStatusAction(AppTranslations.EmptyingTablesText);
             DB.DeleteAll<DecupletRow>();
             DB.DeleteAll<IterationRow>();
             countRows = 0;

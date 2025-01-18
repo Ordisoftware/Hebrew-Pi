@@ -36,11 +36,15 @@
       this.ActionDbClose = new System.Windows.Forms.Button();
       this.ActionDbOpen = new System.Windows.Forms.Button();
       this.StatusStrip = new System.Windows.Forms.StatusStrip();
-      this.LabelStatusTime = new System.Windows.Forms.ToolStripStatusLabel();
+      this.LabelStatusTimeBatch = new System.Windows.Forms.ToolStripStatusLabel();
       this.LabelStatusSep1 = new System.Windows.Forms.ToolStripStatusLabel();
-      this.LabelStatusIteration = new System.Windows.Forms.ToolStripStatusLabel();
+      this.LabelStatusTimeSubBatch = new System.Windows.Forms.ToolStripStatusLabel();
       this.LabelStatusSep2 = new System.Windows.Forms.ToolStripStatusLabel();
+      this.LabelStatusRemaining = new System.Windows.Forms.ToolStripStatusLabel();
+      this.LabelStatusSep3 = new System.Windows.Forms.ToolStripStatusLabel();
       this.LabelStatusInfo = new System.Windows.Forms.ToolStripStatusLabel();
+      this.LabelStatusSep4 = new System.Windows.Forms.ToolStripStatusLabel();
+      this.LabelStatusAction = new System.Windows.Forms.ToolStripStatusLabel();
       this.LabelStatusFreeMem = new System.Windows.Forms.ToolStripStatusLabel();
       this.ToolStrip = new System.Windows.Forms.ToolStrip();
       this.ActionExit = new System.Windows.Forms.ToolStripButton();
@@ -138,7 +142,7 @@
       this.TabPageNormalize = new System.Windows.Forms.TabPage();
       this.PanelViewNormalize = new System.Windows.Forms.Panel();
       this.GridIterations = new System.Windows.Forms.DataGridView();
-      this.MaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
       this.TabPageStatistics = new System.Windows.Forms.TabPage();
       this.PanelViewStatistics = new System.Windows.Forms.Panel();
       this.PanelSepTop = new System.Windows.Forms.Panel();
@@ -185,16 +189,16 @@
       this.TimerBatch = new System.Windows.Forms.Timer(this.components);
       this.TimerMemory = new System.Windows.Forms.Timer(this.components);
       this.TimerTooltip = new System.Windows.Forms.Timer(this.components);
-      this.LabelStatusRemaining = new System.Windows.Forms.ToolStripStatusLabel();
-      this.LabelStatusSep3 = new System.Windows.Forms.ToolStripStatusLabel();
-      this.iterationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.repeatedCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
       this.EditSearchTranslation = new Ordisoftware.Core.TextBoxEx();
       this.EditSearchWord = new Ordisoftware.Hebrew.LettersControl();
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
+      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnRepeatedCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnElapsedCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnElapsedAddition = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -209,11 +213,11 @@
       this.TabPageNormalize.SuspendLayout();
       this.PanelViewNormalize.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).BeginInit();
       this.TabPageStatistics.SuspendLayout();
       this.PanelTitle.SuspendLayout();
       this.PanelTitleInner.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).BeginInit();
       this.SuspendLayout();
       // 
       // PanelDatabase
@@ -273,13 +277,15 @@
       // StatusStrip
       // 
       this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.LabelStatusTime,
+            this.LabelStatusTimeBatch,
             this.LabelStatusSep1,
-            this.LabelStatusRemaining,
+            this.LabelStatusTimeSubBatch,
             this.LabelStatusSep2,
-            this.LabelStatusIteration,
+            this.LabelStatusRemaining,
             this.LabelStatusSep3,
             this.LabelStatusInfo,
+            this.LabelStatusSep4,
+            this.LabelStatusAction,
             this.LabelStatusFreeMem});
       this.StatusStrip.Location = new System.Drawing.Point(0, 539);
       this.StatusStrip.Name = "StatusStrip";
@@ -287,11 +293,11 @@
       this.StatusStrip.TabIndex = 2;
       this.StatusStrip.Text = "statusStrip1";
       // 
-      // LabelStatusTime
+      // LabelStatusTimeBatch
       // 
-      this.LabelStatusTime.Name = "LabelStatusTime";
-      this.LabelStatusTime.Size = new System.Drawing.Size(33, 17);
-      this.LabelStatusTime.Text = "Time";
+      this.LabelStatusTimeBatch.Name = "LabelStatusTimeBatch";
+      this.LabelStatusTimeBatch.Size = new System.Drawing.Size(60, 17);
+      this.LabelStatusTimeBatch.Text = "Batch: 00s";
       // 
       // LabelStatusSep1
       // 
@@ -299,11 +305,11 @@
       this.LabelStatusSep1.Size = new System.Drawing.Size(10, 17);
       this.LabelStatusSep1.Text = "|";
       // 
-      // LabelStatusIteration
+      // LabelStatusTimeSubBatch
       // 
-      this.LabelStatusIteration.Name = "LabelStatusIteration";
-      this.LabelStatusIteration.Size = new System.Drawing.Size(51, 17);
-      this.LabelStatusIteration.Text = "Iteration";
+      this.LabelStatusTimeSubBatch.Name = "LabelStatusTimeSubBatch";
+      this.LabelStatusTimeSubBatch.Size = new System.Drawing.Size(80, 17);
+      this.LabelStatusTimeSubBatch.Text = "SubBatch: 00s";
       // 
       // LabelStatusSep2
       // 
@@ -311,16 +317,40 @@
       this.LabelStatusSep2.Size = new System.Drawing.Size(10, 17);
       this.LabelStatusSep2.Text = "|";
       // 
+      // LabelStatusRemaining
+      // 
+      this.LabelStatusRemaining.Name = "LabelStatusRemaining";
+      this.LabelStatusRemaining.Size = new System.Drawing.Size(90, 17);
+      this.LabelStatusRemaining.Text = "Remaining:  00s";
+      // 
+      // LabelStatusSep3
+      // 
+      this.LabelStatusSep3.Name = "LabelStatusSep3";
+      this.LabelStatusSep3.Size = new System.Drawing.Size(10, 17);
+      this.LabelStatusSep3.Text = "|";
+      // 
       // LabelStatusInfo
       // 
       this.LabelStatusInfo.Name = "LabelStatusInfo";
       this.LabelStatusInfo.Size = new System.Drawing.Size(28, 17);
       this.LabelStatusInfo.Text = "Info";
       // 
+      // LabelStatusSep4
+      // 
+      this.LabelStatusSep4.Name = "LabelStatusSep4";
+      this.LabelStatusSep4.Size = new System.Drawing.Size(10, 17);
+      this.LabelStatusSep4.Text = "|";
+      // 
+      // LabelStatusAction
+      // 
+      this.LabelStatusAction.Name = "LabelStatusAction";
+      this.LabelStatusAction.Size = new System.Drawing.Size(42, 17);
+      this.LabelStatusAction.Text = "Action";
+      // 
       // LabelStatusFreeMem
       // 
       this.LabelStatusFreeMem.Name = "LabelStatusFreeMem";
-      this.LabelStatusFreeMem.Size = new System.Drawing.Size(738, 17);
+      this.LabelStatusFreeMem.Size = new System.Drawing.Size(604, 17);
       this.LabelStatusFreeMem.Spring = true;
       this.LabelStatusFreeMem.Text = "Free mem";
       this.LabelStatusFreeMem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1268,25 +1298,29 @@
       // 
       // GridIterations
       // 
+      this.GridIterations.AllowUserToAddRows = false;
       this.GridIterations.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
       this.GridIterations.AutoGenerateColumns = false;
       this.GridIterations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.GridIterations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iterationDataGridViewTextBoxColumn,
-            this.repeatedCountDataGridViewTextBoxColumn,
-            this.MaxOccurences});
+            this.ColumnIteration,
+            this.ColumnRepeatedCount,
+            this.ColumnMaxOccurences,
+            this.ColumnElapsedCount,
+            this.ColumnElapsedAddition});
       this.GridIterations.DataSource = this.BindingSourceIterationRow;
       this.GridIterations.Location = new System.Drawing.Point(13, 13);
       this.GridIterations.Name = "GridIterations";
-      this.GridIterations.Size = new System.Drawing.Size(362, 331);
+      this.GridIterations.ReadOnly = true;
+      this.GridIterations.RowHeadersVisible = false;
+      this.GridIterations.Size = new System.Drawing.Size(465, 331);
       this.GridIterations.TabIndex = 0;
+      this.GridIterations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridIterations_CellFormatting);
       // 
-      // MaxOccurences
+      // BindingSourceIterationRow
       // 
-      this.MaxOccurences.DataPropertyName = "MaxOccurences";
-      this.MaxOccurences.HeaderText = "MaxOccurences";
-      this.MaxOccurences.Name = "MaxOccurences";
+      this.BindingSourceIterationRow.DataSource = typeof(Ordisoftware.Hebrew.Pi.IterationRow);
       // 
       // TabPageStatistics
       // 
@@ -1804,34 +1838,6 @@
       // 
       this.TimerTooltip.Interval = 500;
       // 
-      // LabelStatusRemaining
-      // 
-      this.LabelStatusRemaining.Name = "LabelStatusRemaining";
-      this.LabelStatusRemaining.Size = new System.Drawing.Size(64, 17);
-      this.LabelStatusRemaining.Text = "Remaining";
-      // 
-      // LabelStatusSep3
-      // 
-      this.LabelStatusSep3.Name = "LabelStatusSep3";
-      this.LabelStatusSep3.Size = new System.Drawing.Size(10, 17);
-      this.LabelStatusSep3.Text = "|";
-      // 
-      // iterationDataGridViewTextBoxColumn
-      // 
-      this.iterationDataGridViewTextBoxColumn.DataPropertyName = "Iteration";
-      this.iterationDataGridViewTextBoxColumn.HeaderText = "Iteration";
-      this.iterationDataGridViewTextBoxColumn.Name = "iterationDataGridViewTextBoxColumn";
-      // 
-      // repeatedCountDataGridViewTextBoxColumn
-      // 
-      this.repeatedCountDataGridViewTextBoxColumn.DataPropertyName = "RepeatedCount";
-      this.repeatedCountDataGridViewTextBoxColumn.HeaderText = "RepeatedCount";
-      this.repeatedCountDataGridViewTextBoxColumn.Name = "repeatedCountDataGridViewTextBoxColumn";
-      // 
-      // BindingSourceIterationRow
-      // 
-      this.BindingSourceIterationRow.DataSource = typeof(Ordisoftware.Hebrew.Pi.IterationRow);
-      // 
       // EditSearchTranslation
       // 
       this.EditSearchTranslation.BackColor = System.Drawing.Color.AliceBlue;
@@ -1901,6 +1907,51 @@
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
       // 
+      // ColumnIteration
+      // 
+      this.ColumnIteration.DataPropertyName = "Iteration";
+      this.ColumnIteration.FillWeight = 126.9036F;
+      this.ColumnIteration.HeaderText = "Iteration";
+      this.ColumnIteration.Name = "ColumnIteration";
+      this.ColumnIteration.ReadOnly = true;
+      this.ColumnIteration.Width = 75;
+      // 
+      // ColumnRepeatedCount
+      // 
+      this.ColumnRepeatedCount.DataPropertyName = "RepeatedCount";
+      this.ColumnRepeatedCount.FillWeight = 93.27411F;
+      this.ColumnRepeatedCount.HeaderText = "Repeated count";
+      this.ColumnRepeatedCount.Name = "ColumnRepeatedCount";
+      this.ColumnRepeatedCount.ReadOnly = true;
+      this.ColumnRepeatedCount.Width = 110;
+      // 
+      // ColumnMaxOccurences
+      // 
+      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
+      this.ColumnMaxOccurences.FillWeight = 93.27411F;
+      this.ColumnMaxOccurences.HeaderText = "Max occurences";
+      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
+      this.ColumnMaxOccurences.ReadOnly = true;
+      this.ColumnMaxOccurences.Width = 110;
+      // 
+      // ColumnElapsedCount
+      // 
+      this.ColumnElapsedCount.DataPropertyName = "ElapsedCount";
+      this.ColumnElapsedCount.FillWeight = 93.27411F;
+      this.ColumnElapsedCount.HeaderText = "Counting";
+      this.ColumnElapsedCount.Name = "ColumnElapsedCount";
+      this.ColumnElapsedCount.ReadOnly = true;
+      this.ColumnElapsedCount.Width = 75;
+      // 
+      // ColumnElapsedAddition
+      // 
+      this.ColumnElapsedAddition.DataPropertyName = "ElapsedAddition";
+      this.ColumnElapsedAddition.FillWeight = 93.27411F;
+      this.ColumnElapsedAddition.HeaderText = "Adding";
+      this.ColumnElapsedAddition.Name = "ColumnElapsedAddition";
+      this.ColumnElapsedAddition.ReadOnly = true;
+      this.ColumnElapsedAddition.Width = 75;
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1933,11 +1984,11 @@
       this.TabPageNormalize.ResumeLayout(false);
       this.PanelViewNormalize.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).EndInit();
       this.TabPageStatistics.ResumeLayout(false);
       this.PanelTitle.ResumeLayout(false);
       this.PanelTitleInner.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -1948,9 +1999,9 @@
     private ComboBox SelectFileName;
     private StatusStrip StatusStrip;
     private Button ActionDbOpen;
-    private ToolStripStatusLabel LabelStatusIteration;
-    private ToolStripStatusLabel LabelStatusTime;
     private ToolStripStatusLabel LabelStatusInfo;
+    private ToolStripStatusLabel LabelStatusTimeBatch;
+    private ToolStripStatusLabel LabelStatusAction;
     private ToolStripStatusLabel LabelStatusSep1;
     private ToolStripStatusLabel LabelStatusSep2;
     private Button ActionDbClose;
@@ -2104,10 +2155,14 @@
     private System.Windows.Forms.Timer TimerTooltip;
     private DataGridView GridIterations;
     private BindingSource BindingSourceIterationRow;
-    private DataGridViewTextBoxColumn iterationDataGridViewTextBoxColumn;
-    private DataGridViewTextBoxColumn repeatedCountDataGridViewTextBoxColumn;
-    private DataGridViewTextBoxColumn MaxOccurences;
     private ToolStripStatusLabel LabelStatusSep3;
     private ToolStripStatusLabel LabelStatusRemaining;
+    private ToolStripStatusLabel LabelStatusTimeSubBatch;
+    private ToolStripStatusLabel LabelStatusSep4;
+    private DataGridViewTextBoxColumn ColumnIteration;
+    private DataGridViewTextBoxColumn ColumnRepeatedCount;
+    private DataGridViewTextBoxColumn ColumnMaxOccurences;
+    private DataGridViewTextBoxColumn ColumnElapsedCount;
+    private DataGridViewTextBoxColumn ColumnElapsedAddition;
   }
 }

@@ -248,6 +248,13 @@ partial class MainForm : Form
     if ( DB is not null ) DB.SetCacheSize(SQLiteCacheSize);
   }
 
+  private void GridIterations_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+  {
+    if ( e.ColumnIndex == ColumnElapsedCount.Index || e.ColumnIndex == ColumnElapsedAddition.Index )
+      if ( e.Value is not null )
+        e.Value = ( (TimeSpan)e.Value ).AsReadable();
+  }
+
   //private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
   //{
   //  using var brush = new SolidBrush(Grid.RowHeadersDefaultCellStyle.ForeColor);

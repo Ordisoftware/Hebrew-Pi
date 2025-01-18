@@ -146,9 +146,15 @@ partial class MainForm : Form
     else
     if ( !Globals.AllowClose )
     {
-      DisplayManager.ShowWarning(SysTranslations.CantExitWhileProcessing.GetLang());
-      e.Cancel = true;
-      return;
+      if ( !DisplayManager.QueryYesNo(SysTranslations.AskToTerminateWhileProcessing.GetLang()) )
+      {
+        // TODO terminate task
+      }
+      else
+      {
+        e.Cancel = true;
+        return;
+      }
     }
     else
     if ( EditConfirmClosing.Checked )

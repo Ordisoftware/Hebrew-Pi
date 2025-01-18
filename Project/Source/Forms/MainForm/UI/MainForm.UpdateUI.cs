@@ -92,15 +92,16 @@ partial class MainForm
 
   private void ClearStatusBar()
   {
-    LabelStatusTime.Text = "-";
-    LabelStatusIteration.Text = "-";
-    LabelStatusInfo.Text = "-";
-    LabelStatusRemaining.Text = "-";
+    LabelStatusTimeBatch.Text = "Batch: N/A";
+    LabelStatusTimeSubBatch.Text = "SubBatch: N/A";
+    LabelStatusRemaining.Text = AppTranslations.RemainingNAText;
+    LabelStatusInfo.Text = "Info: N/A";
+    LabelStatusAction.Text = "Action: N/A";
   }
 
-  private void UpdateStatusProgress(string text)
+  private void UpdateStatusAction(string text)
   {
-    UpdateStatusLabel(LabelStatusIteration, text);
+    UpdateStatusLabel(LabelStatusAction, text);
   }
 
   private void UpdateStatusInfo(string text)
@@ -136,7 +137,8 @@ partial class MainForm
 
   private void DoTimerBatch()
   {
-    LabelStatusTime.Text = string.Format(AppTranslations.ElapsedText, Globals.ChronoBatch.Elapsed.AsReadable());
+    LabelStatusTimeBatch.Text = string.Format(AppTranslations.BatchElapsedText, Globals.ChronoBatch.Elapsed.AsReadable());
+    LabelStatusTimeSubBatch.Text = string.Format(AppTranslations.SubBatchElapsedText, Globals.ChronoSubBatch.Elapsed.AsReadable());
   }
 
   //

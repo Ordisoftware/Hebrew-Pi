@@ -23,107 +23,76 @@ partial class MainForm
 
   private async Task DoActionNormalize()
   {
+    var chrono = new Stopwatch();
+    bool hasError = false;
     try
     {
-      var last = DB.Table<IterationRow>().ToList().LastOrDefault();
-      bool first = true;
-      long iteration = 0;
-      long countPrevious = 0;
-      long countCurrent = 0;
-      long startingIterationNumber = last?.Iteration ?? 0;
-      if ( startingIterationNumber != 0 )
-      {
-        iteration = startingIterationNumber + 1;
-        countPrevious = last.RepeatedCount;
-      }
+      CanForceTerminateBatch = true;
+      var lastRow = DB.Table<IterationRow>().ToList().LastOrDefault();
+      long indexIteration = lastRow?.Iteration + 1 ?? 0;
+      long countPrevious = lastRow?.RepeatedCount ?? 0;
+      long countCurrent = 1;
+      if ( lastRow is not null && countPrevious == 0 ) return;
       Globals.ChronoBatch.Restart();
-      while ( true )
+      UpdateStatusRemaining(AppTranslations.RemainingNAText);
+      for ( ; countCurrent > 0; indexIteration++ )
       {
+        // Count repeating motifs
         if ( !CheckIfBatchCanContinue().Result ) break;
-        UpdateStatusProgress(string.Format(AppTranslations.IterationText, iteration, "?"));
-        UpdateStatusInfo(AppTranslations.CountingText);
+        UpdateStatusInfo(string.Format(AppTranslations.IterationText, indexIteration, "?"));
+        UpdateStatusAction(AppTranslations.CountingText);
+        Globals.ChronoSubBatch.Restart();
         var list = GetRepeatingMotifsAndMaxOccurences().Result;
         countCurrent = list.Count;
-        long max = list.Any() ? list[0].Occurences : 0;
-        UpdateStatusProgress(string.Format(AppTranslations.IterationText, iteration, countCurrent));
-        UpdateStatusInfo(AppTranslations.CountedText);
-        DB.Insert(new IterationRow { Iteration = iteration, RepeatedCount = countCurrent, MaxOccurences = max });
-        GridIterations.Invoke(LoadIterationGrid);
-        if ( !CheckIfBatchCanContinue().Result ) break;
-        if ( countCurrent == 0 )
+        var row = new IterationRow
         {
-          DisplayManager.Show(string.Format(AppTranslations.NoRepeatedText, iteration));
-          break;
-        }
-        if ( !first && countPrevious < countCurrent )
+          Iteration = indexIteration,
+          RepeatedCount = countCurrent,
+          MaxOccurences = list.Any() ? list[0].Occurences : 0
+        };
+        Globals.ChronoSubBatch.Stop();
+        row.ElapsedCount = Globals.ChronoSubBatch.Elapsed;
+        UpdateStatusInfo(string.Format(AppTranslations.IterationText, indexIteration, countCurrent));
+        UpdateStatusAction(AppTranslations.CountedText);
+        if ( indexIteration > 0 && countCurrent > countPrevious )
           if ( !DisplayManager.QueryYesNo(string.Format(AppTranslations.AskStartNextIfMore,
-                                                        iteration,
+                                                        indexIteration,
                                                         countPrevious,
                                                         countCurrent)) )
+          {
             Globals.CancelRequired = true;
+            break;
+          }
         countPrevious = countCurrent;
-        UpdateStatusInfo(AppTranslations.UpdatingText);
-        AddPositionToRepeatingMotifs();
+        // Add position to repeating motifs
         if ( !CheckIfBatchCanContinue().Result ) break;
-        iteration++;
-        first = false;
+        if ( countCurrent > 0 )
+        {
+          UpdateStatusAction(AppTranslations.UpdatingText);
+          Globals.ChronoSubBatch.Restart();
+          AddPositionToRepeatingMotifs();
+          Globals.ChronoSubBatch.Stop();
+          row.ElapsedAddition = Globals.ChronoSubBatch.Elapsed;
+        }
+        // Insert row and reload grid
+        DB.Insert(row);
+        GridIterations.Invoke(LoadIterationGrid);
       }
+    }
+    catch ( Exception ex )
+    {
+      hasError = true;
+      UpdateStatusAction(ex.Message);
     }
     finally
     {
-      if ( Globals.CancelRequired )
-        UpdateStatusInfo(AppTranslations.CanceledText);
-      else
-        UpdateStatusInfo(AppTranslations.FinishedText);
+      CanForceTerminateBatch = false;
+      if ( !hasError )
+        if ( Globals.CancelRequired )
+          UpdateStatusAction(AppTranslations.CanceledText);
+        else
+          UpdateStatusAction(AppTranslations.FinishedText);
     }
-  }
-
-  private async Task<int> GetRepeatingMotifsCount()
-  {
-    var sql = @"SELECT COUNT(DISTINCT Motif) AS UniqueRepeated
-                FROM Decuplets
-                WHERE Motif IN (
-                  SELECT Motif
-                  FROM Decuplets
-                  GROUP BY Motif
-                  HAVING COUNT(Motif) > 1
-                );";
-    return DB.QueryScalars<int>(sql).Single();
-  }
-
-  private async Task<int> GetRepeatingMotifsMaxOccurences()
-  {
-    var sql = @"SELECT MAX(Occurrences) AS MaxDuplicates
-                FROM (
-                  SELECT COUNT(*) AS Occurrences
-                  FROM Decuplets
-                  GROUP BY Motif
-                  HAVING COUNT(*) > 1
-                );";
-    return DB.QueryScalars<int>(sql).Single();
-  }
-
-  private async Task<List<(long Motif, long Occurences)>> GetRepeatingMotifsAndMaxOccurences()
-  {
-    var sql = @"SELECT Motif, COUNT(*) AS Occurrences
-                FROM Decuplets
-                GROUP BY Motif
-                HAVING COUNT(*) > 1
-                ORDER BY Occurrences DESC;";
-    return DB.Query<(long Motif, long Occurences)>(sql).ToList();
-  }
-
-  private async void AddPositionToRepeatingMotifs()
-  {
-    var sql = @"UPDATE Decuplets
-                SET Motif = Motif + Position
-                WHERE Motif IN (
-                  SELECT Motif
-                  FROM Decuplets
-                  GROUP BY Motif
-                  HAVING COUNT(*) > 1
-                );";
-    DB.Execute(sql);
   }
 
 }

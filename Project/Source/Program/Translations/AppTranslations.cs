@@ -76,28 +76,32 @@ static partial class AppTranslations
     },
   };
 
-  static public string CreateDataProgress = "{0} inserted";
-  static public string RepeatedAtIteration = $"repeating motifs at iteration #{{0}}{Globals.NL2}";
   static public string PreviousAndCurrentCount = $"Previous: {{1}}{Globals.NL}Current: {{2}}{Globals.NL2}";
+  static public string RepeatedAtIteration = $"repeating motifs at iteration #{{0}}{Globals.NL2}";
   static public string LessAtIteration = $"There are less {RepeatedAtIteration}{Globals.NL2}";
   static public string MoreAtIteration = $"There are more {RepeatedAtIteration}{Globals.NL2}";
   static public string StartNextIteration = "Start the next iteration?";
   static public string AskStartNextIfLess = $"{LessAtIteration}{PreviousAndCurrentCount}{StartNextIteration}";
   static public string AskStartNextIfMore = $"{MoreAtIteration}{PreviousAndCurrentCount}{StartNextIteration}";
+  //static public string NoRepeatedText = "There is no repeating motif at iteration {0}";
 
-  static public string NoRepeatedText = "There is no repeating motif at iteration {0}";
-  static public string ElapsedText = "{0} elapsed";
-  static public string RemainingText = "{0} remaining";
-  static public string IterationText = "Iteration {0} : {1} repeating";
-  static public string CountingText = "Counting repeating...";
-  static public string MaxoccurrencesText = "Count max occurrences...";
-  static public string CountedText = "Counted";
-  static public string UpdatingText = "Adding position...";
-  static public string CommittingText = "Committing...";
-  static public string RollbackingText = "Rollbacking...";
-  static public string EmptyingTablesText = "Emptying...";
-  static public string PopulatingText = "Populating...";
-  static public string IndexingText = "Indexing...";
-  static public string FinishedText = "Finished";
-  static public string CanceledText = "Canceled";
+  static public string CreateDataProgress = "Info: {0} inserted";
+  static public string IterationText = "Info: Iteration #{0}, {1} repeating";
+
+  static public string BatchElapsedText = "Batch: {0}";
+  static public string SubBatchElapsedText = "Sub-batch: {0}";
+  static public string RemainingText = "Remaining: {0}";
+  static public string RemainingNAText = "Remaining: N/A";
+
+  static public string CountingText = "Action: Counting...";
+  static public string MaxoccurrencesText = "Action: getting max occurrences...";
+  static public string CountedText = "Action: Counted";
+  static public string UpdatingText = "Action: Adding position...";
+  static public string CommittingText = "Action: Committing...";
+  static public string RollbackingText = "Action: Rollbacking...";
+  static public string EmptyingTablesText = "Action: Emptying...";
+  static public string PopulatingText = "Action: Populating...";
+  static public string IndexingText = "Action: Indexing...";
+  static public string FinishedText = "Action: Finished";
+  static public string CanceledText = "Action: Canceled";
 }

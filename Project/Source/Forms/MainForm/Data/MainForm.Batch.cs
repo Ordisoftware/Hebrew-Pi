@@ -23,6 +23,9 @@ using Equin.ApplicationFramework;
 partial class MainForm
 {
 
+  private Task BatchTask;
+  private bool CanForceTerminateBatch;
+
   private void LoadIterationGrid()
   {
     GridIterations.DataSource = new BindingListView<IterationRow>(DB.Table<IterationRow>().ToList());
@@ -36,6 +39,8 @@ partial class MainForm
     if ( SQLiteTempDir.Length > 0 )
       DB.SetTempDir(SQLiteTempDir);
     SetDbCache();
+    DB.SetSynchronous(false);
+    DB.SetTempStoreInMemory(true);
     DB.CreateTable<DecupletRow>();
     DB.CreateTable<IterationRow>();
     LoadIterationGrid();
@@ -79,7 +84,8 @@ partial class MainForm
       UpdateButtons();
       TimerBatch_Tick(null, null);
       TimerBatch.Enabled = true;
-      await Task.Run(async () => action());
+      BatchTask = Task.Run(async () => action());
+      await BatchTask;
     }
     finally
     {
@@ -99,9 +105,14 @@ partial class MainForm
     Globals.CanPause = active && true;
   }
 
+  [DllImport("e_sqlite3", CallingConvention = CallingConvention.Cdecl)]
+  public static extern void sqlite3_interrupt(IntPtr db);
+
   private void DoActionStop()
   {
     Globals.CancelRequired = true;
+    if ( CanForceTerminateBatch )
+      sqlite3_interrupt(DB.Handle.DangerousGetHandle());
   }
 
   private void DoActionPauseContinue()
