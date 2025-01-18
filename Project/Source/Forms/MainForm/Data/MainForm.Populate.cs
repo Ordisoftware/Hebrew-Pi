@@ -101,7 +101,6 @@ partial class MainForm
         && DisplayManager.QueryYesNo("Create index on Motif column now?") )
       {
         Globals.CanPause = false;
-        CanForceTerminateBatch = true;
         UpdateStatusAction(AppTranslations.IndexingText);
         DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
       }
@@ -121,7 +120,6 @@ partial class MainForm
     }
     finally
     {
-      CanForceTerminateBatch = false;
       taskbar.SetProgressState(TaskbarProgressBarState.NoProgress);
       if ( reader is not null )
       {
@@ -173,9 +171,7 @@ partial class MainForm
     {
       UpdateStatusRemaining(AppTranslations.RemainingNAText);
       UpdateStatusAction(AppTranslations.CountingText);
-      CanForceTerminateBatch = true;
       countRows = DB.CountRows(DecupletRow.TableName);
-      CanForceTerminateBatch = false;
       UpdateStatusAction(AppTranslations.CountedText);
       if ( countRows > 0 )
       {

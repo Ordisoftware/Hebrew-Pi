@@ -148,7 +148,9 @@ partial class MainForm : Form
     {
       if ( !DisplayManager.QueryYesNo(SysTranslations.AskToTerminateWhileProcessing.GetLang()) )
       {
-        // TODO terminate task
+        CanForceTerminateBatch = true;
+        ActionStop.PerformClick();
+        CanForceTerminateBatch = true;
       }
       else
       {

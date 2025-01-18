@@ -28,7 +28,6 @@ partial class MainForm
     bool hasError = false;
     try
     {
-      CanForceTerminateBatch = true;
       var lastRow = DB.Table<IterationRow>().ToList().LastOrDefault();
       long indexIteration = lastRow?.Iteration + 1 ?? 0;
       long countPrevious = lastRow?.RepeatedCount ?? 0;
@@ -93,7 +92,6 @@ partial class MainForm
     }
     finally
     {
-      CanForceTerminateBatch = false;
       if ( !hasError )
         if ( Globals.CancelRequired )
           UpdateStatusAction(AppTranslations.CanceledText);
