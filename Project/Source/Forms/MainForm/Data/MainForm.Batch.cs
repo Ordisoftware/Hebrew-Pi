@@ -28,7 +28,11 @@ partial class MainForm
 
   private void LoadIterationGrid()
   {
-    void update() => GridIterations.DataSource = new BindingListView<IterationRow>(DB.Table<IterationRow>().ToList());
+    void update()
+    {
+      GridIterations.DataSource = new BindingListView<IterationRow>(DB.Table<IterationRow>().ToList());
+      GridIterations.ClearSelection();
+    }
     if ( GridIterations.InvokeRequired )
       GridIterations.Invoke(update);
     else

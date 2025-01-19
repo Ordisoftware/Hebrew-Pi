@@ -285,6 +285,11 @@ partial class MainForm : Form
       DoBatch(() => DoCreateIndexAsync(), false);
   }
 
+  private void GridIterations_Leave(object sender, EventArgs e)
+  {
+    GridIterations.ClearSelection();
+  }
+
   //private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
   //{
   //  using var brush = new SolidBrush(Grid.RowHeadersDefaultCellStyle.ForeColor);

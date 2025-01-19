@@ -1224,9 +1224,8 @@
       // 
       // ListBoxLog
       // 
-      this.ListBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+      this.ListBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
       this.ListBoxLog.FormattingEnabled = true;
       this.ListBoxLog.IntegralHeight = false;
       this.ListBoxLog.Location = new System.Drawing.Point(13, 52);
@@ -1271,11 +1270,14 @@
       // 
       this.GridIterations.AllowUserToAddRows = false;
       this.GridIterations.AllowUserToDeleteRows = false;
+      this.GridIterations.AllowUserToResizeRows = false;
       this.GridIterations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.GridIterations.AutoGenerateColumns = false;
       this.GridIterations.BackgroundColor = System.Drawing.SystemColors.Window;
+      this.GridIterations.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+      this.GridIterations.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
       dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
       dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
       dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1293,6 +1295,7 @@
             this.ColumnElapsedCounting,
             this.ColumnElapsedAdditionning});
       this.GridIterations.DataSource = this.BindingSourceIterationRow;
+      this.GridIterations.GridColor = System.Drawing.SystemColors.Window;
       this.GridIterations.Location = new System.Drawing.Point(266, 13);
       this.GridIterations.MultiSelect = false;
       this.GridIterations.Name = "GridIterations";
@@ -1300,9 +1303,11 @@
       this.GridIterations.RowHeadersVisible = false;
       dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
       this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle2;
+      this.GridIterations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.GridIterations.Size = new System.Drawing.Size(644, 331);
       this.GridIterations.TabIndex = 0;
       this.GridIterations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridIterations_CellFormatting);
+      this.GridIterations.Leave += new System.EventHandler(this.GridIterations_Leave);
       // 
       // ColumnIteration
       // 
@@ -1311,6 +1316,7 @@
       this.ColumnIteration.HeaderText = "Iteration";
       this.ColumnIteration.Name = "ColumnIteration";
       this.ColumnIteration.ReadOnly = true;
+      this.ColumnIteration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
       this.ColumnIteration.Width = 65;
       // 
       // ColumnRepeatedCount
@@ -1321,6 +1327,7 @@
       this.ColumnRepeatedCount.HeaderText = "Repeated count";
       this.ColumnRepeatedCount.Name = "ColumnRepeatedCount";
       this.ColumnRepeatedCount.ReadOnly = true;
+      this.ColumnRepeatedCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
       // 
       // ColumnMaxOccurences
       // 
@@ -1329,6 +1336,7 @@
       this.ColumnMaxOccurences.HeaderText = "Max occurences";
       this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
       this.ColumnMaxOccurences.ReadOnly = true;
+      this.ColumnMaxOccurences.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
       this.ColumnMaxOccurences.Width = 110;
       // 
       // ColumnRemainingRate
@@ -1337,6 +1345,7 @@
       this.ColumnRemainingRate.HeaderText = "Remaining rate";
       this.ColumnRemainingRate.Name = "ColumnRemainingRate";
       this.ColumnRemainingRate.ReadOnly = true;
+      this.ColumnRemainingRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
       this.ColumnRemainingRate.Width = 110;
       // 
       // ColumnElapsedCounting
@@ -1345,6 +1354,7 @@
       this.ColumnElapsedCounting.HeaderText = "Counting";
       this.ColumnElapsedCounting.Name = "ColumnElapsedCounting";
       this.ColumnElapsedCounting.ReadOnly = true;
+      this.ColumnElapsedCounting.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
       this.ColumnElapsedCounting.Width = 115;
       // 
       // ColumnElapsedAdditionning
@@ -1353,6 +1363,7 @@
       this.ColumnElapsedAdditionning.HeaderText = "Additionning";
       this.ColumnElapsedAdditionning.Name = "ColumnElapsedAdditionning";
       this.ColumnElapsedAdditionning.ReadOnly = true;
+      this.ColumnElapsedAdditionning.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
       this.ColumnElapsedAdditionning.Width = 115;
       // 
       // BindingSourceIterationRow
