@@ -33,16 +33,6 @@ public enum ViewMode
   /// <summary>
   /// Create data in tables view.
   /// </summary>
-  Populate,
-
-  /// <summary>
-  /// Reduce repetitions.
-  /// </summary>
-  Normalize,
-
-  /// <summary>
-  /// Iteration reducing statistics view.
-  /// </summary>
-  Statistics
+  Manage
 
 }

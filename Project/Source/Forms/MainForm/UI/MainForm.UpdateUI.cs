@@ -84,7 +84,6 @@ partial class MainForm
       SelectDbCache.Enabled = !Globals.IsInBatch;
       ActionDbOpen.Enabled = !dbOpened && SelectFileName.SelectedIndex != -1;
       ActionDbClose.Enabled = dbOnenedAndNotInBatch;
-      ActionRun.Enabled = dbOnenedAndNotInBatch && ( Settings.CurrentView == ViewMode.Populate || Settings.CurrentView == ViewMode.Normalize );
       ActionStop.Enabled = dbOnenedAndInBatch && Globals.CanCancel;
       ActionPause.Enabled = dbOnenedAndInBatch && Globals.CanPause && !Globals.PauseRequired;
       ActionContinue.Enabled = dbOnenedAndInBatch && Globals.PauseRequired;
@@ -92,6 +91,9 @@ partial class MainForm
       ActionPause.Visible = !ActionContinue.Visible;
       Globals.AllowClose = !Globals.IsInBatch;
       ActionCreateIndex.Enabled = dbOnenedAndNotInBatch;
+      ActionCreateData.Enabled = dbOnenedAndNotInBatch;
+      ActionCreateIndex.Enabled = dbOnenedAndNotInBatch;
+      ActionNormalize.Enabled = dbOnenedAndNotInBatch;
     }
     if ( StatusStrip.InvokeRequired )
       StatusStrip.Invoke(update);

@@ -392,6 +392,9 @@
     <Compile Include="Source\Forms\MainForm\Data\MainForm.Batch.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Source\Forms\MainForm\Data\MainForm.CreateIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Source\Forms\MainForm\Data\MainForm.SQL.cs" />
     <Compile Include="Source\Forms\MainForm\Data\MainForm.Populate.cs">
       <SubType>Form</SubType>

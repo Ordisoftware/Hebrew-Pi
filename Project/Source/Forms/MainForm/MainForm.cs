@@ -176,19 +176,9 @@ partial class MainForm : Form
     SetView(ViewMode.Grid);
   }
 
-  private void ActionViewPopulate_Click(object sender, EventArgs e)
+  private void ActionViewManage_Click(object sender, EventArgs e)
   {
-    SetView(ViewMode.Populate);
-  }
-
-  private void ActionViewNormalize_Click(object sender, EventArgs e)
-  {
-    SetView(ViewMode.Normalize);
-  }
-
-  private void ActionViewStatistics_Click(object sender, EventArgs e)
-  {
-    SetView(ViewMode.Statistics);
+    SetView(ViewMode.Manage);
   }
 
   public void ActionWebCheckUpdate_Click(object sender, EventArgs e)
@@ -237,11 +227,6 @@ partial class MainForm : Form
     DoActionDbClose();
   }
 
-  private void ActionRun_Click(object sender, EventArgs e)
-  {
-    DoActionRun();
-  }
-
   private void ActionStop_Click(object sender, EventArgs e)
   {
     DoActionStop();
@@ -279,21 +264,21 @@ partial class MainForm : Form
         e.Value = ( (double)e.Value ).ToString("0.00") + " %";
   }
 
-  private async void ActionCreateIndex_Click(object sender, EventArgs e)
+  private void ActionCreateData_Click(object sender, EventArgs e)
   {
-    if ( DB.CheckIndex("Decuplets_Motif") )
-      DisplayManager.Show("Already created.");
-    else
-    if ( DisplayManager.QueryYesNo(AppTranslations.AskToCreateIndexOnMotif) )
-    {
-      SetBatchState(true, false);
-      UpdateStatusAction(AppTranslations.IndexingText);
-      Globals.ChronoSubBatch.Restart();
-      await Task.Run(() => DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false));
-      Globals.ChronoSubBatch.Stop();
-      UpdateStatusAction(AppTranslations.IndexedText);
-      SetBatchState(false);
-    }
+    //if ( !DisplayManager.QueryYesNo("Empty and create data?") ) return;
+    DoBatch(() => DoActionPopulateAsync(Path.Combine(Globals.DocumentsFolderPath, GetSelectedFileName(".txt"))));
+  }
+
+  private void ActionNormalize_Click(object sender, EventArgs e)
+  {
+    //if ( !DisplayManager.QueryYesNo("Start reducing repeating motifs?") ) return;
+    DoBatch(() => DoActionNormalizeAsync());
+  }
+
+  private void ActionCreateIndex_Click(object sender, EventArgs e)
+  {
+    DoCreateIndex();
   }
 
   //private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -320,6 +305,33 @@ partial class MainForm : Form
   //        builder.Append("\t");
   //    }
   //    Clipboard.SetText(builder.ToString());
+  //  }
+  //}
+
+  //private void CreateDataTable()
+  //{
+  //  try
+  //  {
+  //    var dataTable = new DataTable();
+  //    var command = DB.CreateCommand("SELECT * FROM Decuplets LIMIT 1000000 OFFSET 0");
+  //    var list = command.ExecuteQuery<DecupletRow>();
+  //    if ( list.Count > 0 )
+  //    {
+  //      foreach ( var prop in typeof(DecupletRow).GetProperties() )
+  //        dataTable.Columns.Add(prop.Name);
+  //      foreach ( var row in list )
+  //      {
+  //        var dataRow = dataTable.NewRow();
+  //        foreach ( var prop in typeof(DecupletRow).GetProperties() )
+  //          dataRow[prop.Name] = prop.GetValue(row);
+  //        dataTable.Rows.Add(dataRow);
+  //      }
+  //    }
+  //    Grid.DataSource = dataTable;
+  //  }
+  //  catch ( Exception ex )
+  //  {
+  //    UpdateStatusInfo(ex.Message);
   //  }
   //}
 

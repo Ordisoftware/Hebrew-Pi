@@ -73,13 +73,7 @@ partial class MainForm
           ActionViewGrid.PerformClick();
           return true;
         case Keys.F3:
-          ActionViewPopulate.PerformClick();
-          return true;
-        case Keys.F4:
-          ActionViewNormalize.PerformClick();
-          return true;
-        case Keys.F5:
-          ActionViewStatistics.PerformClick();
+          ActionViewManage.PerformClick();
           return true;
       }
     return base.ProcessCmdKey(ref msg, keyData);

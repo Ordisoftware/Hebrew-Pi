@@ -30,8 +30,8 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.PanelDatabase = new System.Windows.Forms.Panel();
       this.SelectDbCache = new System.Windows.Forms.ComboBox();
       this.SelectFileName = new System.Windows.Forms.ComboBox();
@@ -70,13 +70,8 @@
       this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
       this.ActionViewDecode = new System.Windows.Forms.ToolStripButton();
       this.ActionViewGrid = new System.Windows.Forms.ToolStripButton();
-      this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-      this.ActionViewPopulate = new System.Windows.Forms.ToolStripButton();
-      this.ActionViewNormalize = new System.Windows.Forms.ToolStripButton();
-      this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-      this.ActionViewStatistics = new System.Windows.Forms.ToolStripButton();
+      this.ActionViewManage = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-      this.ActionRun = new System.Windows.Forms.ToolStripButton();
       this.ActionStop = new System.Windows.Forms.ToolStripButton();
       this.ActionPause = new System.Windows.Forms.ToolStripButton();
       this.ActionContinue = new System.Windows.Forms.ToolStripButton();
@@ -139,20 +134,15 @@
       this.PanelViewDecode = new System.Windows.Forms.Panel();
       this.TabPageGrid = new System.Windows.Forms.TabPage();
       this.PanelViewGrid = new System.Windows.Forms.Panel();
-      this.TabPagePopulate = new System.Windows.Forms.TabPage();
-      this.PanelViewPopulate = new System.Windows.Forms.Panel();
-      this.TabPageNormalize = new System.Windows.Forms.TabPage();
-      this.PanelViewNormalize = new System.Windows.Forms.Panel();
+      this.TabPageManage = new System.Windows.Forms.TabPage();
+      this.PanelViewManage = new System.Windows.Forms.Panel();
+      this.ActionCreateData = new System.Windows.Forms.Button();
+      this.ActionNormalize = new System.Windows.Forms.Button();
+      this.ActionCreateIndex = new System.Windows.Forms.Button();
       this.GridIterations = new System.Windows.Forms.DataGridView();
-      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnRepeatedCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnRemainingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnElapsedCounting = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnElapsedAdditionning = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
-      this.TabPageStatistics = new System.Windows.Forms.TabPage();
-      this.PanelViewStatistics = new System.Windows.Forms.Panel();
       this.PanelSepTop = new System.Windows.Forms.Panel();
       this.PanelTitle = new System.Windows.Forms.Panel();
       this.PanelTitleInner = new System.Windows.Forms.Panel();
@@ -197,12 +187,15 @@
       this.TimerBatch = new System.Windows.Forms.Timer(this.components);
       this.TimerMemory = new System.Windows.Forms.Timer(this.components);
       this.TimerTooltip = new System.Windows.Forms.Timer(this.components);
+      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnRepeatedCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
       this.EditSearchTranslation = new Ordisoftware.Core.TextBoxEx();
       this.EditSearchWord = new Ordisoftware.Hebrew.LettersControl();
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
-      this.ActionCreateIndex = new System.Windows.Forms.Button();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -213,16 +206,13 @@
       this.TabControl.SuspendLayout();
       this.TabPageDecode.SuspendLayout();
       this.TabPageGrid.SuspendLayout();
-      this.TabPagePopulate.SuspendLayout();
-      this.PanelViewPopulate.SuspendLayout();
-      this.TabPageNormalize.SuspendLayout();
-      this.PanelViewNormalize.SuspendLayout();
+      this.TabPageManage.SuspendLayout();
+      this.PanelViewManage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).BeginInit();
-      this.TabPageStatistics.SuspendLayout();
       this.PanelTitle.SuspendLayout();
       this.PanelTitleInner.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).BeginInit();
       this.SuspendLayout();
       // 
       // PanelDatabase
@@ -376,13 +366,8 @@
             this.toolStripSeparator19,
             this.ActionViewDecode,
             this.ActionViewGrid,
-            this.toolStripSeparator9,
-            this.ActionViewPopulate,
-            this.ActionViewNormalize,
-            this.toolStripSeparator10,
-            this.ActionViewStatistics,
+            this.ActionViewManage,
             this.toolStripSeparator5,
-            this.ActionRun,
             this.ActionStop,
             this.ActionPause,
             this.ActionContinue,
@@ -585,72 +570,26 @@
       this.ActionViewGrid.Name = "ActionViewGrid";
       this.ActionViewGrid.Padding = new System.Windows.Forms.Padding(4);
       this.ActionViewGrid.Size = new System.Drawing.Size(44, 46);
-      this.ActionViewGrid.Text = "View data grid";
-      this.ActionViewGrid.ToolTipText = "View data grid (F2)";
+      this.ActionViewGrid.Text = "Data grid";
+      this.ActionViewGrid.ToolTipText = "Data grid (F2)";
       this.ActionViewGrid.Click += new System.EventHandler(this.ActionViewGrid_Click);
       // 
-      // toolStripSeparator9
+      // ActionViewManage
       // 
-      this.toolStripSeparator9.Name = "toolStripSeparator9";
-      this.toolStripSeparator9.Size = new System.Drawing.Size(6, 49);
-      // 
-      // ActionViewPopulate
-      // 
-      this.ActionViewPopulate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionViewPopulate.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewPopulate.Image")));
-      this.ActionViewPopulate.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionViewPopulate.Name = "ActionViewPopulate";
-      this.ActionViewPopulate.Padding = new System.Windows.Forms.Padding(5);
-      this.ActionViewPopulate.Size = new System.Drawing.Size(46, 46);
-      this.ActionViewPopulate.Text = "Create data from file ";
-      this.ActionViewPopulate.ToolTipText = "Create data from file (F3)";
-      this.ActionViewPopulate.Click += new System.EventHandler(this.ActionViewPopulate_Click);
-      // 
-      // ActionViewNormalize
-      // 
-      this.ActionViewNormalize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionViewNormalize.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewNormalize.Image")));
-      this.ActionViewNormalize.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionViewNormalize.Name = "ActionViewNormalize";
-      this.ActionViewNormalize.Padding = new System.Windows.Forms.Padding(5);
-      this.ActionViewNormalize.Size = new System.Drawing.Size(46, 46);
-      this.ActionViewNormalize.Text = "Reduce repeating motifs";
-      this.ActionViewNormalize.ToolTipText = "Reduce repeating motifs (F4)";
-      this.ActionViewNormalize.Click += new System.EventHandler(this.ActionViewNormalize_Click);
-      // 
-      // toolStripSeparator10
-      // 
-      this.toolStripSeparator10.Name = "toolStripSeparator10";
-      this.toolStripSeparator10.Size = new System.Drawing.Size(6, 49);
-      // 
-      // ActionViewStatistics
-      // 
-      this.ActionViewStatistics.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionViewStatistics.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewStatistics.Image")));
-      this.ActionViewStatistics.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionViewStatistics.Name = "ActionViewStatistics";
-      this.ActionViewStatistics.Padding = new System.Windows.Forms.Padding(5);
-      this.ActionViewStatistics.Size = new System.Drawing.Size(46, 46);
-      this.ActionViewStatistics.Text = "Statistics";
-      this.ActionViewStatistics.ToolTipText = "Statistics (F5)";
-      this.ActionViewStatistics.Click += new System.EventHandler(this.ActionViewStatistics_Click);
+      this.ActionViewManage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.ActionViewManage.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewManage.Image")));
+      this.ActionViewManage.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.ActionViewManage.Name = "ActionViewManage";
+      this.ActionViewManage.Padding = new System.Windows.Forms.Padding(5);
+      this.ActionViewManage.Size = new System.Drawing.Size(46, 46);
+      this.ActionViewManage.Text = "Manage data";
+      this.ActionViewManage.ToolTipText = "Manage data (F3)";
+      this.ActionViewManage.Click += new System.EventHandler(this.ActionViewManage_Click);
       // 
       // toolStripSeparator5
       // 
       this.toolStripSeparator5.Name = "toolStripSeparator5";
       this.toolStripSeparator5.Size = new System.Drawing.Size(6, 49);
-      // 
-      // ActionRun
-      // 
-      this.ActionRun.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionRun.Image = ((System.Drawing.Image)(resources.GetObject("ActionRun.Image")));
-      this.ActionRun.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionRun.Name = "ActionRun";
-      this.ActionRun.Padding = new System.Windows.Forms.Padding(4);
-      this.ActionRun.Size = new System.Drawing.Size(44, 46);
-      this.ActionRun.Text = "Run";
-      this.ActionRun.ToolTipText = "Run (F5)";
-      this.ActionRun.Click += new System.EventHandler(this.ActionRun_Click);
       // 
       // ActionStop
       // 
@@ -1202,9 +1141,7 @@
       // 
       this.TabControl.Controls.Add(this.TabPageDecode);
       this.TabControl.Controls.Add(this.TabPageGrid);
-      this.TabControl.Controls.Add(this.TabPagePopulate);
-      this.TabControl.Controls.Add(this.TabPageNormalize);
-      this.TabControl.Controls.Add(this.TabPageStatistics);
+      this.TabControl.Controls.Add(this.TabPageManage);
       this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
       this.TabControl.Location = new System.Drawing.Point(0, 0);
       this.TabControl.Name = "TabControl";
@@ -1258,65 +1195,80 @@
       this.PanelViewGrid.Size = new System.Drawing.Size(923, 357);
       this.PanelViewGrid.TabIndex = 22;
       // 
-      // TabPagePopulate
+      // TabPageManage
       // 
-      this.TabPagePopulate.BackColor = System.Drawing.SystemColors.Control;
-      this.TabPagePopulate.Controls.Add(this.PanelViewPopulate);
-      this.TabPagePopulate.Location = new System.Drawing.Point(4, 22);
-      this.TabPagePopulate.Name = "TabPagePopulate";
-      this.TabPagePopulate.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPagePopulate.Size = new System.Drawing.Size(929, 363);
-      this.TabPagePopulate.TabIndex = 4;
-      this.TabPagePopulate.Text = "Populate";
+      this.TabPageManage.Controls.Add(this.PanelViewManage);
+      this.TabPageManage.Location = new System.Drawing.Point(4, 22);
+      this.TabPageManage.Name = "TabPageManage";
+      this.TabPageManage.Padding = new System.Windows.Forms.Padding(3);
+      this.TabPageManage.Size = new System.Drawing.Size(929, 363);
+      this.TabPageManage.TabIndex = 3;
+      this.TabPageManage.Text = "Manage";
+      this.TabPageManage.UseVisualStyleBackColor = true;
       // 
-      // PanelViewPopulate
+      // PanelViewManage
       // 
-      this.PanelViewPopulate.BackColor = System.Drawing.SystemColors.Control;
-      this.PanelViewPopulate.Controls.Add(this.ActionCreateIndex);
-      this.PanelViewPopulate.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.PanelViewPopulate.Location = new System.Drawing.Point(3, 3);
-      this.PanelViewPopulate.Name = "PanelViewPopulate";
-      this.PanelViewPopulate.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewPopulate.Size = new System.Drawing.Size(923, 357);
-      this.PanelViewPopulate.TabIndex = 2;
+      this.PanelViewManage.BackColor = System.Drawing.SystemColors.Control;
+      this.PanelViewManage.Controls.Add(this.ActionCreateData);
+      this.PanelViewManage.Controls.Add(this.ActionNormalize);
+      this.PanelViewManage.Controls.Add(this.ActionCreateIndex);
+      this.PanelViewManage.Controls.Add(this.GridIterations);
+      this.PanelViewManage.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.PanelViewManage.Location = new System.Drawing.Point(3, 3);
+      this.PanelViewManage.Name = "PanelViewManage";
+      this.PanelViewManage.Padding = new System.Windows.Forms.Padding(10);
+      this.PanelViewManage.Size = new System.Drawing.Size(923, 357);
+      this.PanelViewManage.TabIndex = 2;
       // 
-      // TabPageNormalize
+      // ActionCreateData
       // 
-      this.TabPageNormalize.Controls.Add(this.PanelViewNormalize);
-      this.TabPageNormalize.Location = new System.Drawing.Point(4, 22);
-      this.TabPageNormalize.Name = "TabPageNormalize";
-      this.TabPageNormalize.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageNormalize.Size = new System.Drawing.Size(929, 363);
-      this.TabPageNormalize.TabIndex = 3;
-      this.TabPageNormalize.Text = "Normalize";
-      this.TabPageNormalize.UseVisualStyleBackColor = true;
+      this.ActionCreateData.Enabled = false;
+      this.ActionCreateData.Location = new System.Drawing.Point(13, 13);
+      this.ActionCreateData.Name = "ActionCreateData";
+      this.ActionCreateData.Size = new System.Drawing.Size(85, 23);
+      this.ActionCreateData.TabIndex = 2;
+      this.ActionCreateData.Text = "Create data";
+      this.ActionCreateData.UseVisualStyleBackColor = true;
+      this.ActionCreateData.Click += new System.EventHandler(this.ActionCreateData_Click);
       // 
-      // PanelViewNormalize
+      // ActionNormalize
       // 
-      this.PanelViewNormalize.BackColor = System.Drawing.SystemColors.Control;
-      this.PanelViewNormalize.Controls.Add(this.GridIterations);
-      this.PanelViewNormalize.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.PanelViewNormalize.Location = new System.Drawing.Point(3, 3);
-      this.PanelViewNormalize.Name = "PanelViewNormalize";
-      this.PanelViewNormalize.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewNormalize.Size = new System.Drawing.Size(923, 357);
-      this.PanelViewNormalize.TabIndex = 2;
+      this.ActionNormalize.Enabled = false;
+      this.ActionNormalize.Location = new System.Drawing.Point(115, 13);
+      this.ActionNormalize.Name = "ActionNormalize";
+      this.ActionNormalize.Size = new System.Drawing.Size(85, 23);
+      this.ActionNormalize.TabIndex = 2;
+      this.ActionNormalize.Text = "Normalize";
+      this.ActionNormalize.UseVisualStyleBackColor = true;
+      this.ActionNormalize.Click += new System.EventHandler(this.ActionNormalize_Click);
+      // 
+      // ActionCreateIndex
+      // 
+      this.ActionCreateIndex.Enabled = false;
+      this.ActionCreateIndex.Location = new System.Drawing.Point(13, 42);
+      this.ActionCreateIndex.Name = "ActionCreateIndex";
+      this.ActionCreateIndex.Size = new System.Drawing.Size(85, 23);
+      this.ActionCreateIndex.TabIndex = 2;
+      this.ActionCreateIndex.Text = "Create index";
+      this.ActionCreateIndex.UseVisualStyleBackColor = true;
+      this.ActionCreateIndex.Click += new System.EventHandler(this.ActionCreateIndex_Click);
       // 
       // GridIterations
       // 
       this.GridIterations.AllowUserToAddRows = false;
       this.GridIterations.AllowUserToDeleteRows = false;
-      this.GridIterations.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+      this.GridIterations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.GridIterations.AutoGenerateColumns = false;
-      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.GridIterations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.GridIterations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
       this.GridIterations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.GridIterations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnIteration,
@@ -1326,42 +1278,15 @@
             this.ColumnElapsedCounting,
             this.ColumnElapsedAdditionning});
       this.GridIterations.DataSource = this.BindingSourceIterationRow;
-      this.GridIterations.Location = new System.Drawing.Point(13, 13);
+      this.GridIterations.Location = new System.Drawing.Point(216, 13);
       this.GridIterations.Name = "GridIterations";
       this.GridIterations.ReadOnly = true;
       this.GridIterations.RowHeadersVisible = false;
-      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-      this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle4;
-      this.GridIterations.Size = new System.Drawing.Size(630, 331);
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+      this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle2;
+      this.GridIterations.Size = new System.Drawing.Size(694, 331);
       this.GridIterations.TabIndex = 0;
       this.GridIterations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridIterations_CellFormatting);
-      // 
-      // ColumnIteration
-      // 
-      this.ColumnIteration.DataPropertyName = "Iteration";
-      this.ColumnIteration.FillWeight = 126.9036F;
-      this.ColumnIteration.HeaderText = "Iteration";
-      this.ColumnIteration.Name = "ColumnIteration";
-      this.ColumnIteration.ReadOnly = true;
-      this.ColumnIteration.Width = 75;
-      // 
-      // ColumnRepeatedCount
-      // 
-      this.ColumnRepeatedCount.DataPropertyName = "RepeatedCount";
-      this.ColumnRepeatedCount.FillWeight = 93.27411F;
-      this.ColumnRepeatedCount.HeaderText = "Repeated count";
-      this.ColumnRepeatedCount.Name = "ColumnRepeatedCount";
-      this.ColumnRepeatedCount.ReadOnly = true;
-      this.ColumnRepeatedCount.Width = 110;
-      // 
-      // ColumnMaxOccurences
-      // 
-      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
-      this.ColumnMaxOccurences.FillWeight = 93.27411F;
-      this.ColumnMaxOccurences.HeaderText = "Max occurences";
-      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
-      this.ColumnMaxOccurences.ReadOnly = true;
-      this.ColumnMaxOccurences.Width = 110;
       // 
       // ColumnRemainingRate
       // 
@@ -1384,32 +1309,6 @@
       this.ColumnElapsedAdditionning.HeaderText = "Additionning";
       this.ColumnElapsedAdditionning.Name = "ColumnElapsedAdditionning";
       this.ColumnElapsedAdditionning.ReadOnly = true;
-      // 
-      // BindingSourceIterationRow
-      // 
-      this.BindingSourceIterationRow.AllowNew = true;
-      this.BindingSourceIterationRow.DataSource = typeof(Ordisoftware.Hebrew.Pi.IterationRow);
-      // 
-      // TabPageStatistics
-      // 
-      this.TabPageStatistics.Controls.Add(this.PanelViewStatistics);
-      this.TabPageStatistics.Location = new System.Drawing.Point(4, 22);
-      this.TabPageStatistics.Name = "TabPageStatistics";
-      this.TabPageStatistics.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageStatistics.Size = new System.Drawing.Size(929, 363);
-      this.TabPageStatistics.TabIndex = 2;
-      this.TabPageStatistics.Text = "Statistics";
-      this.TabPageStatistics.UseVisualStyleBackColor = true;
-      // 
-      // PanelViewStatistics
-      // 
-      this.PanelViewStatistics.BackColor = System.Drawing.SystemColors.Control;
-      this.PanelViewStatistics.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.PanelViewStatistics.Location = new System.Drawing.Point(3, 3);
-      this.PanelViewStatistics.Name = "PanelViewStatistics";
-      this.PanelViewStatistics.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewStatistics.Size = new System.Drawing.Size(923, 357);
-      this.PanelViewStatistics.TabIndex = 1;
       // 
       // PanelSepTop
       // 
@@ -1906,6 +1805,38 @@
       // 
       this.TimerTooltip.Interval = 500;
       // 
+      // ColumnIteration
+      // 
+      this.ColumnIteration.DataPropertyName = "Iteration";
+      this.ColumnIteration.FillWeight = 126.9036F;
+      this.ColumnIteration.HeaderText = "Iteration";
+      this.ColumnIteration.Name = "ColumnIteration";
+      this.ColumnIteration.ReadOnly = true;
+      this.ColumnIteration.Width = 75;
+      // 
+      // ColumnRepeatedCount
+      // 
+      this.ColumnRepeatedCount.DataPropertyName = "RepeatedCount";
+      this.ColumnRepeatedCount.FillWeight = 93.27411F;
+      this.ColumnRepeatedCount.HeaderText = "Repeated count";
+      this.ColumnRepeatedCount.Name = "ColumnRepeatedCount";
+      this.ColumnRepeatedCount.ReadOnly = true;
+      this.ColumnRepeatedCount.Width = 110;
+      // 
+      // ColumnMaxOccurences
+      // 
+      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
+      this.ColumnMaxOccurences.FillWeight = 93.27411F;
+      this.ColumnMaxOccurences.HeaderText = "Max occurences";
+      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
+      this.ColumnMaxOccurences.ReadOnly = true;
+      this.ColumnMaxOccurences.Width = 110;
+      // 
+      // BindingSourceIterationRow
+      // 
+      this.BindingSourceIterationRow.AllowNew = true;
+      this.BindingSourceIterationRow.DataSource = typeof(Ordisoftware.Hebrew.Pi.IterationRow);
+      // 
       // EditSearchTranslation
       // 
       this.EditSearchTranslation.BackColor = System.Drawing.Color.AliceBlue;
@@ -1975,17 +1906,6 @@
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
       // 
-      // ActionCreateIndex
-      // 
-      this.ActionCreateIndex.Enabled = false;
-      this.ActionCreateIndex.Location = new System.Drawing.Point(13, 13);
-      this.ActionCreateIndex.Name = "ActionCreateIndex";
-      this.ActionCreateIndex.Size = new System.Drawing.Size(85, 23);
-      this.ActionCreateIndex.TabIndex = 2;
-      this.ActionCreateIndex.Text = "Create index";
-      this.ActionCreateIndex.UseVisualStyleBackColor = true;
-      this.ActionCreateIndex.Click += new System.EventHandler(this.ActionCreateIndex_Click);
-      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2014,16 +1934,13 @@
       this.TabControl.ResumeLayout(false);
       this.TabPageDecode.ResumeLayout(false);
       this.TabPageGrid.ResumeLayout(false);
-      this.TabPagePopulate.ResumeLayout(false);
-      this.PanelViewPopulate.ResumeLayout(false);
-      this.TabPageNormalize.ResumeLayout(false);
-      this.PanelViewNormalize.ResumeLayout(false);
+      this.TabPageManage.ResumeLayout(false);
+      this.PanelViewManage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).EndInit();
-      this.TabPageStatistics.ResumeLayout(false);
       this.PanelTitle.ResumeLayout(false);
       this.PanelTitleInner.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -2121,10 +2038,8 @@
     internal Panel PanelViewGrid;
     private TabPage TabPageDecode;
     private Panel PanelViewDecode;
-    private TabPage TabPageNormalize;
-    private Panel PanelViewNormalize;
-    private TabPage TabPageStatistics;
-    private Panel PanelViewStatistics;
+    private TabPage TabPageManage;
+    private Panel PanelViewManage;
     private Panel PanelSearchFilters;
     internal TabControl SelectSearchType;
     private TabPage SelectSearchTypeVerses;
@@ -2170,23 +2085,16 @@
     private ToolStripSeparator toolStripSeparator6;
     private ToolStripButton ActionStop;
     private ToolStripButton ActionContinue;
-    private ToolStripButton ActionRun;
     private ToolStripSeparator toolStripSeparator8;
-    private TabPage TabPagePopulate;
-    private Panel PanelViewPopulate;
     private ToolStripSeparator toolStripSeparator27;
     internal ToolStripMenuItem EditExportUseHebrewFontElseUnicodeChars;
     private ToolStripButton ActionPause;
     private ToolStripMenuItem ActionDatabaseSetCacheSize;
     private System.Windows.Forms.Timer TimerMemory;
     private ToolStripStatusLabel LabelStatusFreeMem;
-    private ToolStripButton ActionViewPopulate;
-    private ToolStripButton ActionViewNormalize;
-    private ToolStripButton ActionViewStatistics;
+    private ToolStripButton ActionViewManage;
     private ToolStripButton ActionViewGrid;
     private ToolStripButton ActionViewDecode;
-    private ToolStripSeparator toolStripSeparator9;
-    private ToolStripSeparator toolStripSeparator10;
     private System.Windows.Forms.Timer TimerTooltip;
     private DataGridView GridIterations;
     private BindingSource BindingSourceIterationRow;
@@ -2201,5 +2109,7 @@
     private DataGridViewTextBoxColumn ColumnElapsedCounting;
     private DataGridViewTextBoxColumn ColumnElapsedAdditionning;
     private Button ActionCreateIndex;
+    private Button ActionCreateData;
+    private Button ActionNormalize;
   }
 }

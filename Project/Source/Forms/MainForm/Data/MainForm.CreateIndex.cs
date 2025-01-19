@@ -14,48 +14,30 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
+using Microsoft.WindowsAPICodePack.Taskbar;
+
 /// <summary>
-/// The application's main form.
+/// Provides application's main form.
 /// </summary>
 /// <seealso cref="T:System.Windows.Forms.Form"/>
 partial class MainForm
 {
 
-  private ViewConnectors<ViewMode, ToolStripButton> ViewConnectors;
-
-  private void InitializeViewConnectors()
+  private async Task DoCreateIndex()
   {
-    ViewConnectors = new ViewConnectors<ViewMode, ToolStripButton>
+    if ( DB.CheckIndex("Decuplets_Motif") )
+      DisplayManager.Show("Already created.");
+    else
+    if ( DisplayManager.QueryYesNo(AppTranslations.AskToCreateIndexOnMotif) )
     {
-      {
-        ViewMode.Decode,
-        new ViewConnector<ToolStripButton>
-        {
-          Component = ActionViewDecode,
-          Panel = PanelViewDecode,
-          Focused = PanelViewDecode
-        }
-      },
-      {
-        ViewMode.Grid,
-        new ViewConnector<ToolStripButton>
-        {
-          Component = ActionViewGrid,
-          Panel = PanelViewGrid,
-          Focused = PanelViewGrid
-        }
-      },
-      {
-        ViewMode.Manage,
-        new ViewConnector<ToolStripButton>
-        {
-          Component = ActionViewManage,
-          Panel = PanelViewManage,
-          Focused = PanelViewManage
-        }
-      }
-    };
-
+      SetBatchState(true, false);
+      UpdateStatusAction(AppTranslations.IndexingText);
+      Globals.ChronoSubBatch.Restart();
+      await Task.Run(() => DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false));
+      Globals.ChronoSubBatch.Stop();
+      UpdateStatusAction(AppTranslations.IndexedText);
+      SetBatchState(false);
+    }
   }
 
 }

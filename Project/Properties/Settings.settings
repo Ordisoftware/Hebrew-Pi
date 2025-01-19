@@ -296,9 +296,6 @@
     <Setting Name="RenderAllChapterVersesKeep" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="CurrentView" Type="Ordisoftware.Hebrew.Pi.ViewMode" Scope="User">
-      <Value Profile="(Default)">ChapterVerses</Value>
-    </Setting>
     <Setting Name="FontSizeHebrew" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">16</Value>
     </Setting>
@@ -571,6 +568,9 @@
     </Setting>
     <Setting Name="CommentLineAddPrefixIgnoreChars" Type="System.String" Scope="User">
       <Value Profile="(Default)">*-</Value>
+    </Setting>
+    <Setting Name="CurrentView" Type="Ordisoftware.Hebrew.Pi.ViewMode" Scope="User">
+      <Value Profile="(Default)">Manage</Value>
     </Setting>
   </Settings>
 </SettingsFile>

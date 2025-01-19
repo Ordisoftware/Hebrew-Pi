@@ -62,23 +62,6 @@ partial class MainForm
     TimerMemory_Tick(null, null);
   }
 
-  private void DoActionRun()
-  {
-    switch ( Settings.CurrentView )
-    {
-      case ViewMode.Populate:
-        //if ( !DisplayManager.QueryYesNo("Empty and create data?") ) return;
-        DoBatch(() => DoActionPopulateAsync(Path.Combine(Globals.DocumentsFolderPath, GetSelectedFileName(".txt"))));
-        break;
-      case ViewMode.Normalize:
-        //if ( !DisplayManager.QueryYesNo("Start reducing repeating motifs?") ) return;
-        DoBatch(() => DoActionNormalizeAsync());
-        break;
-      default:
-        throw new AdvNotImplementedException(Settings.CurrentView);
-    }
-  }
-
   private async Task DoBatch(Action action)
   {
     try

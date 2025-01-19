@@ -96,7 +96,7 @@ partial class MainForm
       }
       doCommit();
       UpdateStatusRemaining(AppTranslations.RemainingNAText);
-      ActionCreateIndex.PerformClick();
+      ActionCreateIndex.Invoke(ActionCreateIndex.PerformClick);
     }
     catch ( Exception ex )
     {
@@ -206,34 +206,6 @@ partial class MainForm
         }
       }
     }
-
   }
-
-  //private void CreateDataTable()
-  //{
-  //  try
-  //  {
-  //    var dataTable = new DataTable();
-  //    var command = DB.CreateCommand("SELECT * FROM Decuplets LIMIT 1000000 OFFSET 0");
-  //    var list = command.ExecuteQuery<DecupletRow>();
-  //    if ( list.Count > 0 )
-  //    {
-  //      foreach ( var prop in typeof(DecupletRow).GetProperties() )
-  //        dataTable.Columns.Add(prop.Name);
-  //      foreach ( var row in list )
-  //      {
-  //        var dataRow = dataTable.NewRow();
-  //        foreach ( var prop in typeof(DecupletRow).GetProperties() )
-  //          dataRow[prop.Name] = prop.GetValue(row);
-  //        dataTable.Rows.Add(dataRow);
-  //      }
-  //    }
-  //    Grid.DataSource = dataTable;
-  //  }
-  //  catch ( Exception ex )
-  //  {
-  //    UpdateStatusInfo(ex.Message);
-  //  }
-  //}
 
 }

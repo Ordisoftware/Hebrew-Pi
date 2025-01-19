@@ -51,29 +51,19 @@ static partial class AppTranslations
   {
     [ViewMode.Decode] = new TranslationsDictionary
     {
-      [Language.EN] = "DECODE",
-      [Language.FR] = "DÉCODAGE"
+      [Language.EN] = "DECODE AND TRANSLATE",
+      [Language.FR] = "DÉCODAGE ET TRADUCTION"
     },
     [ViewMode.Grid] = new TranslationsDictionary
     {
-      [Language.EN] = "GRID",
-      [Language.FR] = "GRILLE"
+      [Language.EN] = "DATA GRID",
+      [Language.FR] = "GRILLE DE DONNÉES"
     },
-    [ViewMode.Populate] = new TranslationsDictionary
+    [ViewMode.Manage] = new TranslationsDictionary
     {
-      [Language.EN] = "POPULATE",
+      [Language.EN] = "MANAGE DATA",
       [Language.FR] = "PEUPLER"
-    },
-    [ViewMode.Normalize] = new TranslationsDictionary
-    {
-      [Language.EN] = "NORMALIZE",
-      [Language.FR] = "NORMALISER"
-    },
-    [ViewMode.Statistics] = new TranslationsDictionary
-    {
-      [Language.EN] = "STATISTICS",
-      [Language.FR] = "STATISTIQUES"
-    },
+    }
   };
 
   static public string PreviousAndCurrentCount = $"Previous: {{1}}{Globals.NL}Current: {{2}}{Globals.NL2}";
