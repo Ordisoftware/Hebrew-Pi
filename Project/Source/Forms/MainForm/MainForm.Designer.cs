@@ -1893,7 +1893,7 @@
       this.ColumnRepeatedCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
       this.ColumnRepeatedCount.DataPropertyName = "RepeatedCount";
       this.ColumnRepeatedCount.FillWeight = 93.27411F;
-      this.ColumnRepeatedCount.HeaderText = "Repeated count";
+      this.ColumnRepeatedCount.HeaderText = "Unique repeating count";
       this.ColumnRepeatedCount.Name = "ColumnRepeatedCount";
       this.ColumnRepeatedCount.ReadOnly = true;
       this.ColumnRepeatedCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -1906,7 +1906,7 @@
       this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
       this.ColumnMaxOccurences.ReadOnly = true;
       this.ColumnMaxOccurences.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnMaxOccurences.Width = 110;
+      this.ColumnMaxOccurences.Width = 105;
       // 
       // ColumnRemainingRate
       // 
@@ -1915,7 +1915,6 @@
       this.ColumnRemainingRate.Name = "ColumnRemainingRate";
       this.ColumnRemainingRate.ReadOnly = true;
       this.ColumnRemainingRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnRemainingRate.Width = 110;
       // 
       // ColumnElapsedCounting
       // 
