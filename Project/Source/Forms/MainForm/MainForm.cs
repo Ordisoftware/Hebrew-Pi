@@ -262,15 +262,23 @@ partial class MainForm : Form
 
   private void GridIterations_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
   {
-    if ( e.Value is not null )
+    if ( e.Value is null )
+      e.Value = "?";
+    else
+    {
       if ( e.ColumnIndex == ColumnRepeatedCount.Index )
         e.Value = ( (long)e.Value ).ToString("N0");
       else
-      if ( e.ColumnIndex == ColumnElapsedCounting.Index || e.ColumnIndex == ColumnElapsedAdditionning.Index )
-        e.Value = ( (TimeSpan)e.Value ).AsReadable();
-      else
       if ( e.ColumnIndex == ColumnRemainingRate.Index )
         e.Value = ( (double)e.Value ).ToString("0.00") + " %";
+      else
+      if ( e.ColumnIndex == ColumnElapsedCounting.Index || e.ColumnIndex == ColumnElapsedAdditionning.Index )
+      {
+        var value = (TimeSpan)e.Value;
+        if ( value != TimeSpan.Zero )
+          e.Value = ( value ).AsReadable();
+      }
+    }
   }
 
   private void ActionCreateData_Click(object sender, EventArgs e)
