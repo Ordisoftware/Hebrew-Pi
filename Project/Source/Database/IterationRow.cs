@@ -26,13 +26,10 @@ public class IterationRow
   [PrimaryKey]
   public long Iteration { get; set; }
 
-  [NotNull]
   public long RepeatedCount { get; set; }
 
-  [NotNull]
   public long MaxOccurences { get; set; }
 
-  [NotNull]
   public double RemainingRate { get; set; }
 
   public TimeSpan? ElapsedCounting { get; set; }

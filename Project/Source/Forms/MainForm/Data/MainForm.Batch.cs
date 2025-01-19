@@ -69,7 +69,7 @@ partial class MainForm
     //TimerMemory_Tick(null, null);
   }
 
-  private async Task DoBatch(Action action, bool interruptible = true)
+  private async Task DoBatchAsync(Action action, bool interruptible = true)
   {
     try
     {

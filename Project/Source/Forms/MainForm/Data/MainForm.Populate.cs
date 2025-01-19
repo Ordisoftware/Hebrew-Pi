@@ -175,14 +175,14 @@ partial class MainForm
       {
         string title = "Table is not empty";
         string msg = $"""
-                        Table has {countRows.ToString("N0")} rows already inserted.
+                        Table has {countRows:N0} rows already inserted.
 
                         Do you want to continue inserting the decuplets, clear everything and start over, or cancel?
                         """;
         using var form = new MessageBoxEx(title, msg,
-                                          width: MessageBoxEx.DefaultWidthMedium,
                                           buttons: MessageBoxButtons.YesNo,
                                           icon: MessageBoxIcon.Question,
+                                          width: MessageBoxEx.DefaultWidthMedium,
                                           justify: false,
                                           showInTaskBar: true);
         if ( !Globals.MainForm.Visible || Globals.MainForm.WindowState == FormWindowState.Minimized )

@@ -34,7 +34,7 @@ abstract class DecupletList : IEnumerable<DecupletItem>
 
   IEnumerator IEnumerable.GetEnumerator() => Items.GetEnumerator();
 
-  public abstract void Add(DecupletItem reference);
+  public abstract void Add(DecupletItem decuplet);
 
   public void Clear()
   {

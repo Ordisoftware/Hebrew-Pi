@@ -40,22 +40,24 @@ partial class MainForm
         UpdateStatusInfo(string.Format(AppTranslations.IterationText, indexIteration, "?"));
         UpdateStatusAction(AppTranslations.CountingText);
         Globals.ChronoSubBatch.Restart();
-        var list = DB.GetRepeatingMotifsAndMaxOccurencesAsync().Result;
-        countCurrent = list.Count;
-        Globals.ChronoSubBatch.Stop();
         var row = new IterationRow
         {
           Iteration = indexIteration,
-          RepeatedCount = countCurrent,
-          MaxOccurences = list.Count != 0 ? list[0].Occurences : 0,
-          RemainingRate = list.Count == 0
+        };
+        DB.Insert(row);
+        LoadIterationGrid();
+        var list = DB.GetRepeatingMotifsAndMaxOccurencesAsync().Result;
+        countCurrent = list.Count;
+        Globals.ChronoSubBatch.Stop();
+        row.RepeatedCount = countCurrent;
+        row.MaxOccurences = list.Count != 0 ? list[0].Occurences : 0;
+        row.RemainingRate = list.Count == 0
             ? 0
             : indexIteration == 0
               ? 100
-              : Math.Round((double)countCurrent * 100 / countPrevious, 2),
-          ElapsedCounting = Globals.ChronoSubBatch.Elapsed
-        };
-        DB.Insert(row);
+              : Math.Round((double)countCurrent * 100 / countPrevious, 2);
+        row.ElapsedCounting = Globals.ChronoSubBatch.Elapsed;
+        DB.Update(row);
         LoadIterationGrid();
         UpdateStatusInfo(string.Format(AppTranslations.IterationText, indexIteration, countCurrent));
         UpdateStatusAction(AppTranslations.CountedText);

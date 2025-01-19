@@ -54,7 +54,7 @@ partial class MainForm
   /// <summary>
   /// Indicates the search results.
   /// </summary>
-  //private IEnumerable<ReferenceItem> SearchResults;
+  private IEnumerable<DecupletItem> SearchResults;
 
   /// <summary>
   /// Indicates the number of search results.

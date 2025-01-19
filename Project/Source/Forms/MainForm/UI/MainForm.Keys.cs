@@ -34,12 +34,6 @@ partial class MainForm
   [SuppressMessage("Correctness", "SS019:Switch should have default label.", Justification = "N/A")]
   protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
   {
-    static bool scroll(Panel panel, int ypos, bool abs)
-    {
-      int dy = abs ? Math.Abs(panel.AutoScrollPosition.Y) : 0;
-      panel.AutoScrollPosition = new Point(panel.AutoScrollPosition.X, ypos + dy);
-      return true;
-    }
     if ( Globals.IsReady )
       switch ( keyData )
       {

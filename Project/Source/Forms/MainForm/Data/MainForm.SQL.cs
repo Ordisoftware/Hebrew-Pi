@@ -49,7 +49,7 @@ static class SQLHelper
                 GROUP BY Motif
                 HAVING COUNT(*) > 1
                 ORDER BY Occurrences DESC;";
-    return DB.Query<(long Motif, long Occurences)>(sql).ToList();
+    return [.. DB.Query<(long Motif, long Occurences)>(sql)];
   }
 
   static internal async Task AddPositionToRepeatingMotifsAsync(this SQLiteNetORM DB)

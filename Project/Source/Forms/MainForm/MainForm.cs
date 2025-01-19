@@ -270,19 +270,19 @@ partial class MainForm : Form
   private void ActionCreateData_Click(object sender, EventArgs e)
   {
     //if ( !DisplayManager.QueryYesNo("Empty and create data?") ) return;
-    DoBatch(() => DoActionPopulateAsync(Path.Combine(Globals.DocumentsFolderPath, GetSelectedFileName(".txt"))));
+    DoBatchAsync(() => DoActionPopulateAsync(Path.Combine(Globals.DocumentsFolderPath, GetSelectedFileName(".txt"))));
   }
 
   private void ActionNormalize_Click(object sender, EventArgs e)
   {
     //if ( !DisplayManager.QueryYesNo("Start reducing repeating motifs?") ) return;
-    DoBatch(() => DoActionNormalizeAsync());
+    DoBatchAsync(() => DoActionNormalizeAsync());
   }
 
   private void ActionCreateIndex_Click(object sender, EventArgs e)
   {
     //if ( DisplayManager.QueryYesNo(AppTranslations.AskToCreateIndexOnMotif) )
-    DoBatch(() => DoCreateIndexAsync(), false);
+    DoBatchAsync(() => DoCreateIndexAsync(), false);
   }
 
   private void GridIterations_Leave(object sender, EventArgs e)
