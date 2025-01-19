@@ -79,6 +79,7 @@ partial class MainForm
     bool dbOnenedAndNotInBatch = dbOpened && !Globals.IsInBatch;
     bool dbOnenedAndInBatch = dbOpened && Globals.IsInBatch;
     SelectFileName.Enabled = !dbOpened;
+    SelectDbCache.Enabled = !Globals.IsInBatch;
     ActionDbOpen.Enabled = !dbOpened && SelectFileName.SelectedIndex != -1;
     ActionDbClose.Enabled = dbOnenedAndNotInBatch;
     ActionRun.Enabled = dbOnenedAndNotInBatch && ( Settings.CurrentView == ViewMode.Populate || Settings.CurrentView == ViewMode.Normalize );
@@ -87,8 +88,8 @@ partial class MainForm
     ActionContinue.Enabled = dbOnenedAndInBatch && Globals.PauseRequired;
     ActionContinue.Visible = Globals.PauseRequired;
     ActionPause.Visible = !ActionContinue.Visible;
-    SelectDbCache.Enabled = !Globals.IsInBatch;
     Globals.AllowClose = !Globals.IsInBatch;
+    ActionCreateIndex.Enabled = dbOnenedAndNotInBatch;
   }
 
   private void ClearStatusBar()

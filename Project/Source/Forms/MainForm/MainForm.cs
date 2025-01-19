@@ -279,6 +279,19 @@ partial class MainForm : Form
         e.Value = ( (double)e.Value ).ToString("0.00") + " %";
   }
 
+  private void ActionCreateIndex_Click(object sender, EventArgs e)
+  {
+    if ( CheckIfBatchCanContinue().Result && DisplayManager.QueryYesNo(AppTranslations.AskToCreateIndexOnMotif) )
+    {
+      Globals.CanPause = false;
+      Globals.CanCancel = false;
+      UpdateStatusAction(AppTranslations.IndexingText);
+      Globals.ChronoSubBatch.Restart();
+      DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
+      Globals.ChronoSubBatch.Stop();
+    }
+  }
+
   //private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
   //{
   //  using var brush = new SolidBrush(Grid.RowHeadersDefaultCellStyle.ForeColor);

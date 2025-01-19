@@ -14,8 +14,6 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-using Equin.ApplicationFramework;
-
 /// <summary>
 /// Provides application's main form.
 /// </summary>

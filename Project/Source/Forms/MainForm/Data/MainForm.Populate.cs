@@ -71,7 +71,6 @@ partial class MainForm
         fileSize -= 2;
       }
       taskbar.SetProgressState(TaskbarProgressBarState.Normal);
-      Globals.ChronoSubBatch.Reset();
       Globals.ChronoBatch.Restart();
       while ( ( charsRead = reader.Read(buffer, 0, FileReadBufferSize) ) >= 10 )
       {
@@ -97,6 +96,7 @@ partial class MainForm
       }
       doCommit();
       UpdateStatusRemaining(AppTranslations.RemainingNAText);
+      ActionCreateIndex.PerformClick();
     }
     catch ( Exception ex )
     {
@@ -130,7 +130,9 @@ partial class MainForm
     {
       showProgress();
       UpdateStatusAction(AppTranslations.CommittingText);
+      Globals.ChronoSubBatch.Restart();
       DB.Commit();
+      Globals.ChronoSubBatch.Stop();
       if ( partial )
       {
         DB.BeginTransaction();
