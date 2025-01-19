@@ -257,6 +257,9 @@ partial class MainForm : Form
   private void GridIterations_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
   {
     if ( e.Value is not null )
+      if ( e.ColumnIndex == ColumnRepeatedCount.Index )
+        e.Value = ( (double)e.Value ).ToString("N0");
+      else
       if ( e.ColumnIndex == ColumnElapsedCounting.Index || e.ColumnIndex == ColumnElapsedAdditionning.Index )
         e.Value = ( (TimeSpan)e.Value ).AsReadable();
       else
