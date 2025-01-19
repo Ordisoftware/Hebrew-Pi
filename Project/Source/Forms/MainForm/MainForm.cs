@@ -278,7 +278,8 @@ partial class MainForm : Form
 
   private void ActionCreateIndex_Click(object sender, EventArgs e)
   {
-    DoCreateIndex();
+    if ( DisplayManager.QueryYesNo(AppTranslations.AskToCreateIndexOnMotif) )
+      DoBatch(() => DoCreateIndexAsync(), false);
   }
 
   //private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)

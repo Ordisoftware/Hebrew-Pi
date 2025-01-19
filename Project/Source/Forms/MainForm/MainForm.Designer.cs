@@ -140,9 +140,13 @@
       this.ActionNormalize = new System.Windows.Forms.Button();
       this.ActionCreateIndex = new System.Windows.Forms.Button();
       this.GridIterations = new System.Windows.Forms.DataGridView();
+      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnRepeatedCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnRemainingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnElapsedCounting = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnElapsedAdditionning = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
       this.PanelSepTop = new System.Windows.Forms.Panel();
       this.PanelTitle = new System.Windows.Forms.Panel();
       this.PanelTitleInner = new System.Windows.Forms.Panel();
@@ -187,10 +191,6 @@
       this.TimerBatch = new System.Windows.Forms.Timer(this.components);
       this.TimerMemory = new System.Windows.Forms.Timer(this.components);
       this.TimerTooltip = new System.Windows.Forms.Timer(this.components);
-      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnRepeatedCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
       this.EditSearchTranslation = new Ordisoftware.Core.TextBoxEx();
       this.EditSearchWord = new Ordisoftware.Hebrew.LettersControl();
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
@@ -209,10 +209,10 @@
       this.TabPageManage.SuspendLayout();
       this.PanelViewManage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).BeginInit();
       this.PanelTitle.SuspendLayout();
       this.PanelTitleInner.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).BeginInit();
       this.SuspendLayout();
       // 
       // PanelDatabase
@@ -1288,6 +1288,33 @@
       this.GridIterations.TabIndex = 0;
       this.GridIterations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridIterations_CellFormatting);
       // 
+      // ColumnIteration
+      // 
+      this.ColumnIteration.DataPropertyName = "Iteration";
+      this.ColumnIteration.FillWeight = 126.9036F;
+      this.ColumnIteration.HeaderText = "Iteration";
+      this.ColumnIteration.Name = "ColumnIteration";
+      this.ColumnIteration.ReadOnly = true;
+      this.ColumnIteration.Width = 75;
+      // 
+      // ColumnRepeatedCount
+      // 
+      this.ColumnRepeatedCount.DataPropertyName = "RepeatedCount";
+      this.ColumnRepeatedCount.FillWeight = 93.27411F;
+      this.ColumnRepeatedCount.HeaderText = "Repeated count";
+      this.ColumnRepeatedCount.Name = "ColumnRepeatedCount";
+      this.ColumnRepeatedCount.ReadOnly = true;
+      this.ColumnRepeatedCount.Width = 110;
+      // 
+      // ColumnMaxOccurences
+      // 
+      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
+      this.ColumnMaxOccurences.FillWeight = 93.27411F;
+      this.ColumnMaxOccurences.HeaderText = "Max occurences";
+      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
+      this.ColumnMaxOccurences.ReadOnly = true;
+      this.ColumnMaxOccurences.Width = 110;
+      // 
       // ColumnRemainingRate
       // 
       this.ColumnRemainingRate.DataPropertyName = "RemainingRate";
@@ -1309,6 +1336,11 @@
       this.ColumnElapsedAdditionning.HeaderText = "Additionning";
       this.ColumnElapsedAdditionning.Name = "ColumnElapsedAdditionning";
       this.ColumnElapsedAdditionning.ReadOnly = true;
+      // 
+      // BindingSourceIterationRow
+      // 
+      this.BindingSourceIterationRow.AllowNew = true;
+      this.BindingSourceIterationRow.DataSource = typeof(Ordisoftware.Hebrew.Pi.IterationRow);
       // 
       // PanelSepTop
       // 
@@ -1363,7 +1395,7 @@
       this.LabelTitleLeft.Name = "LabelTitleLeft";
       this.LabelTitleLeft.Size = new System.Drawing.Size(150, 22);
       this.LabelTitleLeft.TabIndex = 0;
-      this.LabelTitleLeft.Text = "PI DECIMALS";
+      this.LabelTitleLeft.Text = "DECODE";
       this.LabelTitleLeft.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
       // 
       // LabelTitleRight
@@ -1805,38 +1837,6 @@
       // 
       this.TimerTooltip.Interval = 500;
       // 
-      // ColumnIteration
-      // 
-      this.ColumnIteration.DataPropertyName = "Iteration";
-      this.ColumnIteration.FillWeight = 126.9036F;
-      this.ColumnIteration.HeaderText = "Iteration";
-      this.ColumnIteration.Name = "ColumnIteration";
-      this.ColumnIteration.ReadOnly = true;
-      this.ColumnIteration.Width = 75;
-      // 
-      // ColumnRepeatedCount
-      // 
-      this.ColumnRepeatedCount.DataPropertyName = "RepeatedCount";
-      this.ColumnRepeatedCount.FillWeight = 93.27411F;
-      this.ColumnRepeatedCount.HeaderText = "Repeated count";
-      this.ColumnRepeatedCount.Name = "ColumnRepeatedCount";
-      this.ColumnRepeatedCount.ReadOnly = true;
-      this.ColumnRepeatedCount.Width = 110;
-      // 
-      // ColumnMaxOccurences
-      // 
-      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
-      this.ColumnMaxOccurences.FillWeight = 93.27411F;
-      this.ColumnMaxOccurences.HeaderText = "Max occurences";
-      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
-      this.ColumnMaxOccurences.ReadOnly = true;
-      this.ColumnMaxOccurences.Width = 110;
-      // 
-      // BindingSourceIterationRow
-      // 
-      this.BindingSourceIterationRow.AllowNew = true;
-      this.BindingSourceIterationRow.DataSource = typeof(Ordisoftware.Hebrew.Pi.IterationRow);
-      // 
       // EditSearchTranslation
       // 
       this.EditSearchTranslation.BackColor = System.Drawing.Color.AliceBlue;
@@ -1937,10 +1937,10 @@
       this.TabPageManage.ResumeLayout(false);
       this.PanelViewManage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).EndInit();
       this.PanelTitle.ResumeLayout(false);
       this.PanelTitleInner.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 

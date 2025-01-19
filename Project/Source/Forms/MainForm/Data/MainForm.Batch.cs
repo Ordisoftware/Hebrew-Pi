@@ -45,11 +45,14 @@ partial class MainForm
     DB.SetSynchronous(false);
     DB.CreateTable<DecupletRow>();
     DB.CreateTable<IterationRow>();
+    IsMotifIndexed = DB.CheckIndex("Decuplets_Motif");
     SetDbCache();
     LoadIterationGrid();
     UpdateButtons();
-    TimerMemory_Tick(null, null);
+    //TimerMemory_Tick(null, null);
   }
+
+  private bool IsMotifIndexed;
 
   private void DoActionDbClose()
   {
@@ -59,15 +62,15 @@ partial class MainForm
     DB = null;
     GridIterations.DataSource = null;
     UpdateButtons();
-    TimerMemory_Tick(null, null);
+    //TimerMemory_Tick(null, null);
   }
 
-  private async Task DoBatch(Action action)
+  private async Task DoBatch(Action action, bool interruptible = true)
   {
     try
     {
+      SetBatchState(true, interruptible);
       ClearStatusBar();
-      SetBatchState(true);
       UpdateButtons();
       TimerBatch_Tick(null, null);
       TimerBatch.Enabled = true;

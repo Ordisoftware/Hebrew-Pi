@@ -51,18 +51,18 @@ static partial class AppTranslations
   {
     [ViewMode.Decode] = new TranslationsDictionary
     {
-      [Language.EN] = "DECODE AND TRANSLATE",
-      [Language.FR] = "DÉCODAGE ET TRADUCTION"
+      [Language.EN] = "DECODE",
+      [Language.FR] = "DÉCODAGE"
     },
     [ViewMode.Grid] = new TranslationsDictionary
     {
-      [Language.EN] = "DATA GRID",
-      [Language.FR] = "GRILLE DE DONNÉES"
+      [Language.EN] = "DATA",
+      [Language.FR] = "DONNÉES"
     },
     [ViewMode.Manage] = new TranslationsDictionary
     {
-      [Language.EN] = "MANAGE DATA",
-      [Language.FR] = "PEUPLER"
+      [Language.EN] = "MANAGE",
+      [Language.FR] = "GÉRER"
     }
   };
 
@@ -89,6 +89,7 @@ static partial class AppTranslations
   static public string AdditionningText = "Action: additionning...";
   static public string AddedText = "Action: added";
   static public string CommittingText = "Action: committing...";
+  static public string CommittedText = "Action: committed...";
   static public string RollbackingText = "Action: rollbacking...";
   static public string EmptyingTablesText = "Action: emptying...";
   static public string PopulatingText = "Action: populating...";

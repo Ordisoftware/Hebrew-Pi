@@ -90,10 +90,9 @@ partial class MainForm
       ActionContinue.Visible = Globals.PauseRequired;
       ActionPause.Visible = !ActionContinue.Visible;
       Globals.AllowClose = !Globals.IsInBatch;
-      ActionCreateIndex.Enabled = dbOnenedAndNotInBatch;
       ActionCreateData.Enabled = dbOnenedAndNotInBatch;
-      ActionCreateIndex.Enabled = dbOnenedAndNotInBatch;
       ActionNormalize.Enabled = dbOnenedAndNotInBatch;
+      ActionCreateIndex.Enabled = dbOnenedAndNotInBatch && !IsMotifIndexed;
     }
     if ( StatusStrip.InvokeRequired )
       StatusStrip.Invoke(update);

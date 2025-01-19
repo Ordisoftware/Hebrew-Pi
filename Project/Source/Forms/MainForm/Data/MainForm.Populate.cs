@@ -88,15 +88,16 @@ partial class MainForm
             }
             DB.Insert(new DecupletRow { Position = countMotifs + 1, Motif = motif });
             if ( countMotifs % pagingCommit == 0 ) doCommit(true);
+            if ( countMotifs % pagingProgress == 0 ) showProgress();
+            if ( countMotifs % pagingRemaining == 0 ) showRemaining();
           }
-          if ( countMotifs % pagingProgress == 0 ) showProgress();
-          if ( countMotifs % pagingRemaining == 0 ) showRemaining();
           countMotifs++;
         }
       }
       doCommit();
       UpdateStatusRemaining(AppTranslations.RemainingNAText);
-      ActionCreateIndex.Invoke(ActionCreateIndex.PerformClick);
+      if ( CheckIfBatchCanContinueAsync().Result )
+        ActionCreateIndex_Click(ActionCreateIndex, EventArgs.Empty);
     }
     catch ( Exception ex )
     {
@@ -110,6 +111,7 @@ partial class MainForm
         doRollback();
       }
       UpdateStatusAction(ex.Message);
+      ex.Manage();
     }
     finally
     {
@@ -133,6 +135,7 @@ partial class MainForm
       Globals.ChronoSubBatch.Restart();
       DB.Commit();
       Globals.ChronoSubBatch.Stop();
+      UpdateStatusAction(AppTranslations.CommittedText);
       if ( partial )
       {
         DB.BeginTransaction();

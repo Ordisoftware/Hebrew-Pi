@@ -14,8 +14,6 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-using Microsoft.WindowsAPICodePack.Taskbar;
-
 /// <summary>
 /// Provides application's main form.
 /// </summary>
@@ -23,21 +21,14 @@ using Microsoft.WindowsAPICodePack.Taskbar;
 partial class MainForm
 {
 
-  private async Task DoCreateIndex()
+  private async Task DoCreateIndexAsync()
   {
-    if ( DB.CheckIndex("Decuplets_Motif") )
-      DisplayManager.Show("Already created.");
-    else
-    if ( DisplayManager.QueryYesNo(AppTranslations.AskToCreateIndexOnMotif) )
-    {
-      SetBatchState(true, false);
-      UpdateStatusAction(AppTranslations.IndexingText);
-      Globals.ChronoSubBatch.Restart();
-      await Task.Run(() => DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false));
-      Globals.ChronoSubBatch.Stop();
-      UpdateStatusAction(AppTranslations.IndexedText);
-      SetBatchState(false);
-    }
+    UpdateStatusAction(AppTranslations.IndexingText);
+    Globals.ChronoSubBatch.Restart();
+    await Task.Run(() => DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false));
+    Globals.ChronoSubBatch.Stop();
+    UpdateStatusAction(AppTranslations.IndexedText);
+    IsMotifIndexed = DB.CheckIndex("Decuplets_Motif");
   }
 
 }
