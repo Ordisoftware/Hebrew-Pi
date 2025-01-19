@@ -75,30 +75,44 @@ partial class MainForm
 
   private void UpdateButtons()
   {
-    bool dbOpened = DB is not null;
-    bool dbOnenedAndNotInBatch = dbOpened && !Globals.IsInBatch;
-    bool dbOnenedAndInBatch = dbOpened && Globals.IsInBatch;
-    SelectFileName.Enabled = !dbOpened;
-    SelectDbCache.Enabled = !Globals.IsInBatch;
-    ActionDbOpen.Enabled = !dbOpened && SelectFileName.SelectedIndex != -1;
-    ActionDbClose.Enabled = dbOnenedAndNotInBatch;
-    ActionRun.Enabled = dbOnenedAndNotInBatch && ( Settings.CurrentView == ViewMode.Populate || Settings.CurrentView == ViewMode.Normalize );
-    ActionStop.Enabled = dbOnenedAndInBatch && Globals.CanCancel;
-    ActionPause.Enabled = dbOnenedAndInBatch && Globals.CanPause && !Globals.PauseRequired;
-    ActionContinue.Enabled = dbOnenedAndInBatch && Globals.PauseRequired;
-    ActionContinue.Visible = Globals.PauseRequired;
-    ActionPause.Visible = !ActionContinue.Visible;
-    Globals.AllowClose = !Globals.IsInBatch;
-    ActionCreateIndex.Enabled = dbOnenedAndNotInBatch;
+    void update()
+    {
+      bool dbOpened = DB is not null;
+      bool dbOnenedAndNotInBatch = dbOpened && !Globals.IsInBatch;
+      bool dbOnenedAndInBatch = dbOpened && Globals.IsInBatch;
+      SelectFileName.Enabled = !dbOpened;
+      SelectDbCache.Enabled = !Globals.IsInBatch;
+      ActionDbOpen.Enabled = !dbOpened && SelectFileName.SelectedIndex != -1;
+      ActionDbClose.Enabled = dbOnenedAndNotInBatch;
+      ActionRun.Enabled = dbOnenedAndNotInBatch && ( Settings.CurrentView == ViewMode.Populate || Settings.CurrentView == ViewMode.Normalize );
+      ActionStop.Enabled = dbOnenedAndInBatch && Globals.CanCancel;
+      ActionPause.Enabled = dbOnenedAndInBatch && Globals.CanPause && !Globals.PauseRequired;
+      ActionContinue.Enabled = dbOnenedAndInBatch && Globals.PauseRequired;
+      ActionContinue.Visible = Globals.PauseRequired;
+      ActionPause.Visible = !ActionContinue.Visible;
+      Globals.AllowClose = !Globals.IsInBatch;
+      ActionCreateIndex.Enabled = dbOnenedAndNotInBatch;
+    }
+    if ( StatusStrip.InvokeRequired )
+      StatusStrip.Invoke(update);
+    else
+      update();
   }
 
   private void ClearStatusBar()
   {
-    LabelStatusTimeBatch.Text = "Batch: N/A";
-    LabelStatusTimeSubBatch.Text = "SubBatch: N/A";
-    LabelStatusRemaining.Text = AppTranslations.RemainingNAText;
-    LabelStatusInfo.Text = "Info: N/A";
-    LabelStatusAction.Text = "Action: N/A";
+    void update()
+    {
+      LabelStatusTimeBatch.Text = "Batch: N/A";
+      LabelStatusTimeSubBatch.Text = "SubBatch: N/A";
+      LabelStatusRemaining.Text = AppTranslations.RemainingNAText;
+      LabelStatusInfo.Text = "Info: N/A";
+      LabelStatusAction.Text = "Action: N/A";
+    }
+    if ( StatusStrip.InvokeRequired )
+      StatusStrip.Invoke(update);
+    else
+      update();
   }
 
   private void UpdateStatusAction(string text)

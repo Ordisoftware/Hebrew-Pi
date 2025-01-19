@@ -21,7 +21,7 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm
 {
 
-  private ViewMode[] NagigableViews => ViewConnectors.Keys.ToArray();
+  private ViewMode[] NagigableViews => [.. ViewConnectors.Keys];
 
   /// <summary>
   /// Process the command key.

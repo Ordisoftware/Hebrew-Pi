@@ -266,7 +266,7 @@ partial class MainForm : Form
 
   private void SetDbCache()
   {
-    if ( DB is not null ) DB.SetCacheSize(SQLiteCacheSize);
+    DB?.SetCacheSize(SQLiteCacheSize);
   }
 
   private void GridIterations_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -279,16 +279,20 @@ partial class MainForm : Form
         e.Value = ( (double)e.Value ).ToString("0.00") + " %";
   }
 
-  private void ActionCreateIndex_Click(object sender, EventArgs e)
+  private async void ActionCreateIndex_Click(object sender, EventArgs e)
   {
-    if ( CheckIfBatchCanContinue().Result && DisplayManager.QueryYesNo(AppTranslations.AskToCreateIndexOnMotif) )
+    if ( DB.CheckIndex("Decuplets_Motif") )
+      DisplayManager.Show("Already created.");
+    else
+    if ( DisplayManager.QueryYesNo(AppTranslations.AskToCreateIndexOnMotif) )
     {
-      Globals.CanPause = false;
-      Globals.CanCancel = false;
+      SetBatchState(true, false);
       UpdateStatusAction(AppTranslations.IndexingText);
       Globals.ChronoSubBatch.Restart();
-      DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
+      await Task.Run(() => DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false));
       Globals.ChronoSubBatch.Stop();
+      UpdateStatusAction(AppTranslations.IndexedText);
+      SetBatchState(false);
     }
   }
 

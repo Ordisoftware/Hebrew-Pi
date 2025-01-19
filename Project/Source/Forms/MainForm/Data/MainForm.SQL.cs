@@ -14,14 +14,10 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-/// <summary>
-/// Provides application's main form.
-/// </summary>
-/// <seealso cref="T:System.Windows.Forms.Form"/>
-partial class MainForm
+static class SQLHelper
 {
 
-  private async Task<int> GetRepeatingMotifsCount()
+  static internal async Task<int> GetRepeatingMotifsCountAsync(this SQLiteNetORM DB)
   {
     var sql = @"SELECT COUNT(DISTINCT Motif) AS UniqueRepeated
                 FROM Decuplets
@@ -34,7 +30,7 @@ partial class MainForm
     return DB.QueryScalars<int>(sql).Single();
   }
 
-  private async Task<int> GetRepeatingMotifsMaxOccurences()
+  static internal async Task<int> GetRepeatingMotifsMaxOccurencesAsync(this SQLiteNetORM DB)
   {
     var sql = @"SELECT MAX(Occurrences) AS MaxDuplicates
                 FROM (
@@ -46,7 +42,7 @@ partial class MainForm
     return DB.QueryScalars<int>(sql).Single();
   }
 
-  private async Task<List<(long Motif, long Occurences)>> GetRepeatingMotifsAndMaxOccurences()
+  static internal async Task<List<(long Motif, long Occurences)>> GetRepeatingMotifsAndMaxOccurencesAsync(this SQLiteNetORM DB)
   {
     var sql = @"SELECT Motif, COUNT(*) AS Occurrences
                 FROM Decuplets
@@ -56,7 +52,7 @@ partial class MainForm
     return DB.Query<(long Motif, long Occurences)>(sql).ToList();
   }
 
-  private async void AddPositionToRepeatingMotifs()
+  static internal async Task AddPositionToRepeatingMotifsAsync(this SQLiteNetORM DB)
   {
     var sql = @"UPDATE Decuplets
                 SET Motif = Motif + Position

@@ -21,7 +21,7 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm
 {
 
-  private async Task DoActionNormalize()
+  private async Task DoActionNormalizeAsync()
   {
     bool hasError = false;
     try
@@ -35,20 +35,20 @@ partial class MainForm
       UpdateStatusRemaining(AppTranslations.RemainingNAText);
       for ( ; countCurrent > 0; indexIteration++ )
       {
-        if ( !CheckIfBatchCanContinue().Result ) break;
+        if ( !CheckIfBatchCanContinueAsync().Result ) break;
         // Count repeating motifs
         UpdateStatusInfo(string.Format(AppTranslations.IterationText, indexIteration, "?"));
         UpdateStatusAction(AppTranslations.CountingText);
         Globals.ChronoSubBatch.Restart();
-        var list = GetRepeatingMotifsAndMaxOccurences().Result;
+        var list = DB.GetRepeatingMotifsAndMaxOccurencesAsync().Result;
         countCurrent = list.Count;
         Globals.ChronoSubBatch.Stop();
         var row = new IterationRow
         {
           Iteration = indexIteration,
           RepeatedCount = countCurrent,
-          MaxOccurences = list.Any() ? list[0].Occurences : 0,
-          RemainingRate = !list.Any()
+          MaxOccurences = list.Count != 0 ? list[0].Occurences : 0,
+          RemainingRate = list.Count == 0
             ? 0
             : indexIteration == 0
               ? 100
@@ -74,7 +74,7 @@ partial class MainForm
         {
           UpdateStatusAction(AppTranslations.AdditionningText);
           Globals.ChronoSubBatch.Restart();
-          AddPositionToRepeatingMotifs();
+          DB.AddPositionToRepeatingMotifsAsync();
           UpdateStatusAction(AppTranslations.AddedText);
           Globals.ChronoSubBatch.Stop();
           row.ElapsedAdditionning = Globals.ChronoSubBatch.Elapsed;

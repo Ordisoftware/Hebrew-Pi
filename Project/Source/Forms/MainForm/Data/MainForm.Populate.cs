@@ -26,7 +26,7 @@ partial class MainForm
   private const long PiDecimalMotifSize = 10;
   private int FileReadBufferSize = 10_000_000;
 
-  private async Task DoActionPopulate(string filePathText)
+  private async Task DoActionPopulateAsync(string filePathText)
   {
     if ( !File.Exists(filePathText) )
     {
@@ -61,7 +61,7 @@ partial class MainForm
         DisplayManager.Show(SysTranslations.LoadFileError.GetLang(filePathText, fileSize.FormatBytesSize()));
         return;
       }
-      string str = new string(buffer, 0, 2);
+      string str = new(buffer, 0, 2);
       reader.Close();
       reader.Dispose();
       reader = new StreamReader(filePathText);
@@ -74,12 +74,12 @@ partial class MainForm
       Globals.ChronoBatch.Restart();
       while ( ( charsRead = reader.Read(buffer, 0, FileReadBufferSize) ) >= 10 )
       {
-        if ( !CheckIfBatchCanContinue().Result ) break;
+        if ( !CheckIfBatchCanContinueAsync().Result ) break;
         for ( long indexBuffer = 0; indexBuffer < charsRead; indexBuffer += PiDecimalMotifSize )
         {
           if ( ( !isAppend || countMotifs >= countRows ) && indexBuffer + PiDecimalMotifSize <= charsRead )
           {
-            if ( !CheckIfBatchCanContinue().Result ) break;
+            if ( !CheckIfBatchCanContinueAsync().Result ) break;
             motif = buffer[indexBuffer] - 48; // motif = motif * 10 + ( buffer[indexBuffer + indexMotif] - '0' );
             for ( long indexMotif = 1; indexMotif < PiDecimalMotifSize; indexMotif++ )
             {

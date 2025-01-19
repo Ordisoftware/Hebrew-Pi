@@ -68,11 +68,11 @@ partial class MainForm
     {
       case ViewMode.Populate:
         //if ( !DisplayManager.QueryYesNo("Empty and create data?") ) return;
-        DoBatch(() => DoActionPopulate(Path.Combine(Globals.DocumentsFolderPath, GetSelectedFileName(".txt"))));
+        DoBatch(() => DoActionPopulateAsync(Path.Combine(Globals.DocumentsFolderPath, GetSelectedFileName(".txt"))));
         break;
       case ViewMode.Normalize:
         //if ( !DisplayManager.QueryYesNo("Start reducing repeating motifs?") ) return;
-        DoBatch(() => DoActionNormalize());
+        DoBatch(() => DoActionNormalizeAsync());
         break;
       default:
         throw new AdvNotImplementedException(Settings.CurrentView);
@@ -88,25 +88,25 @@ partial class MainForm
       UpdateButtons();
       TimerBatch_Tick(null, null);
       TimerBatch.Enabled = true;
-      BatchTask = Task.Run(async () => action());
-      await BatchTask;
+      await Task.Run(async () => action());
     }
     finally
     {
-      Globals.ChronoBatch.Stop();
       TimerBatch.Enabled = false;
+      Globals.ChronoBatch.Stop();
+      Globals.ChronoSubBatch.Stop();
       SetBatchState(false);
       UpdateButtons();
     }
   }
 
-  private void SetBatchState(bool active)
+  private void SetBatchState(bool active, bool interruptible = true)
   {
     Globals.IsInBatch = active;
     Globals.PauseRequired = false;
     Globals.CancelRequired = false;
-    Globals.CanCancel = active && true;
-    Globals.CanPause = active && true;
+    Globals.CanCancel = interruptible;
+    Globals.CanPause = interruptible;
   }
 
   [DllImport("e_sqlite3", CallingConvention = CallingConvention.Cdecl)]
@@ -129,7 +129,7 @@ partial class MainForm
       Globals.ChronoBatch.Start();
   }
 
-  private async Task<bool> CheckIfBatchCanContinue()
+  private async Task<bool> CheckIfBatchCanContinueAsync()
   {
     if ( Globals.CancelRequired ) return false;
     while ( Globals.PauseRequired && !Globals.CancelRequired )
