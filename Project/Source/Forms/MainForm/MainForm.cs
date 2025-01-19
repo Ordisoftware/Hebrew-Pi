@@ -258,7 +258,7 @@ partial class MainForm : Form
   {
     if ( e.Value is not null )
       if ( e.ColumnIndex == ColumnRepeatedCount.Index )
-        e.Value = ( (double)e.Value ).ToString("N0");
+        e.Value = ( (long)e.Value ).ToString("N0");
       else
       if ( e.ColumnIndex == ColumnElapsedCounting.Index || e.ColumnIndex == ColumnElapsedAdditionning.Index )
         e.Value = ( (TimeSpan)e.Value ).AsReadable();

@@ -136,6 +136,7 @@
       this.PanelViewGrid = new System.Windows.Forms.Panel();
       this.TabPageManage = new System.Windows.Forms.TabPage();
       this.PanelViewManage = new System.Windows.Forms.Panel();
+      this.ListBoxLog = new System.Windows.Forms.ListBox();
       this.ActionCreateData = new System.Windows.Forms.Button();
       this.ActionNormalize = new System.Windows.Forms.Button();
       this.ActionCreateIndex = new System.Windows.Forms.Button();
@@ -1209,6 +1210,7 @@
       // PanelViewManage
       // 
       this.PanelViewManage.BackColor = System.Drawing.SystemColors.Control;
+      this.PanelViewManage.Controls.Add(this.ListBoxLog);
       this.PanelViewManage.Controls.Add(this.ActionCreateData);
       this.PanelViewManage.Controls.Add(this.ActionNormalize);
       this.PanelViewManage.Controls.Add(this.ActionCreateIndex);
@@ -1220,12 +1222,24 @@
       this.PanelViewManage.Size = new System.Drawing.Size(923, 357);
       this.PanelViewManage.TabIndex = 2;
       // 
+      // ListBoxLog
+      // 
+      this.ListBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.ListBoxLog.FormattingEnabled = true;
+      this.ListBoxLog.IntegralHeight = false;
+      this.ListBoxLog.Location = new System.Drawing.Point(13, 52);
+      this.ListBoxLog.Name = "ListBoxLog";
+      this.ListBoxLog.Size = new System.Drawing.Size(237, 292);
+      this.ListBoxLog.TabIndex = 3;
+      // 
       // ActionCreateData
       // 
       this.ActionCreateData.Enabled = false;
       this.ActionCreateData.Location = new System.Drawing.Point(13, 13);
       this.ActionCreateData.Name = "ActionCreateData";
-      this.ActionCreateData.Size = new System.Drawing.Size(85, 23);
+      this.ActionCreateData.Size = new System.Drawing.Size(75, 23);
       this.ActionCreateData.TabIndex = 2;
       this.ActionCreateData.Text = "Create data";
       this.ActionCreateData.UseVisualStyleBackColor = true;
@@ -1234,9 +1248,9 @@
       // ActionNormalize
       // 
       this.ActionNormalize.Enabled = false;
-      this.ActionNormalize.Location = new System.Drawing.Point(115, 13);
+      this.ActionNormalize.Location = new System.Drawing.Point(175, 13);
       this.ActionNormalize.Name = "ActionNormalize";
-      this.ActionNormalize.Size = new System.Drawing.Size(85, 23);
+      this.ActionNormalize.Size = new System.Drawing.Size(75, 23);
       this.ActionNormalize.TabIndex = 2;
       this.ActionNormalize.Text = "Normalize";
       this.ActionNormalize.UseVisualStyleBackColor = true;
@@ -1245,9 +1259,9 @@
       // ActionCreateIndex
       // 
       this.ActionCreateIndex.Enabled = false;
-      this.ActionCreateIndex.Location = new System.Drawing.Point(13, 42);
+      this.ActionCreateIndex.Location = new System.Drawing.Point(94, 13);
       this.ActionCreateIndex.Name = "ActionCreateIndex";
-      this.ActionCreateIndex.Size = new System.Drawing.Size(85, 23);
+      this.ActionCreateIndex.Size = new System.Drawing.Size(75, 23);
       this.ActionCreateIndex.TabIndex = 2;
       this.ActionCreateIndex.Text = "Create index";
       this.ActionCreateIndex.UseVisualStyleBackColor = true;
@@ -1261,7 +1275,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.GridIterations.AutoGenerateColumns = false;
-      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+      this.GridIterations.BackgroundColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
       dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
       dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -1278,13 +1293,14 @@
             this.ColumnElapsedCounting,
             this.ColumnElapsedAdditionning});
       this.GridIterations.DataSource = this.BindingSourceIterationRow;
-      this.GridIterations.Location = new System.Drawing.Point(216, 13);
+      this.GridIterations.Location = new System.Drawing.Point(266, 13);
+      this.GridIterations.MultiSelect = false;
       this.GridIterations.Name = "GridIterations";
       this.GridIterations.ReadOnly = true;
       this.GridIterations.RowHeadersVisible = false;
       dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
       this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle2;
-      this.GridIterations.Size = new System.Drawing.Size(694, 331);
+      this.GridIterations.Size = new System.Drawing.Size(644, 331);
       this.GridIterations.TabIndex = 0;
       this.GridIterations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridIterations_CellFormatting);
       // 
@@ -1295,16 +1311,16 @@
       this.ColumnIteration.HeaderText = "Iteration";
       this.ColumnIteration.Name = "ColumnIteration";
       this.ColumnIteration.ReadOnly = true;
-      this.ColumnIteration.Width = 75;
+      this.ColumnIteration.Width = 65;
       // 
       // ColumnRepeatedCount
       // 
+      this.ColumnRepeatedCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
       this.ColumnRepeatedCount.DataPropertyName = "RepeatedCount";
       this.ColumnRepeatedCount.FillWeight = 93.27411F;
       this.ColumnRepeatedCount.HeaderText = "Repeated count";
       this.ColumnRepeatedCount.Name = "ColumnRepeatedCount";
       this.ColumnRepeatedCount.ReadOnly = true;
-      this.ColumnRepeatedCount.Width = 110;
       // 
       // ColumnMaxOccurences
       // 
@@ -1329,6 +1345,7 @@
       this.ColumnElapsedCounting.HeaderText = "Counting";
       this.ColumnElapsedCounting.Name = "ColumnElapsedCounting";
       this.ColumnElapsedCounting.ReadOnly = true;
+      this.ColumnElapsedCounting.Width = 115;
       // 
       // ColumnElapsedAdditionning
       // 
@@ -1336,6 +1353,7 @@
       this.ColumnElapsedAdditionning.HeaderText = "Additionning";
       this.ColumnElapsedAdditionning.Name = "ColumnElapsedAdditionning";
       this.ColumnElapsedAdditionning.ReadOnly = true;
+      this.ColumnElapsedAdditionning.Width = 115;
       // 
       // BindingSourceIterationRow
       // 
@@ -2102,14 +2120,15 @@
     private ToolStripStatusLabel LabelStatusRemaining;
     private ToolStripStatusLabel LabelStatusTimeSubBatch;
     private ToolStripStatusLabel LabelStatusSep4;
+    private Button ActionCreateIndex;
+    private Button ActionCreateData;
+    private Button ActionNormalize;
+    private ListBox ListBoxLog;
     private DataGridViewTextBoxColumn ColumnIteration;
     private DataGridViewTextBoxColumn ColumnRepeatedCount;
     private DataGridViewTextBoxColumn ColumnMaxOccurences;
     private DataGridViewTextBoxColumn ColumnRemainingRate;
     private DataGridViewTextBoxColumn ColumnElapsedCounting;
     private DataGridViewTextBoxColumn ColumnElapsedAdditionning;
-    private Button ActionCreateIndex;
-    private Button ActionCreateData;
-    private Button ActionNormalize;
   }
 }
