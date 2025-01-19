@@ -281,8 +281,8 @@ partial class MainForm : Form
 
   private void ActionCreateIndex_Click(object sender, EventArgs e)
   {
-    if ( DisplayManager.QueryYesNo(AppTranslations.AskToCreateIndexOnMotif) )
-      DoBatch(() => DoCreateIndexAsync(), false);
+    //if ( DisplayManager.QueryYesNo(AppTranslations.AskToCreateIndexOnMotif) )
+    DoBatch(() => DoCreateIndexAsync(), false);
   }
 
   private void GridIterations_Leave(object sender, EventArgs e)
