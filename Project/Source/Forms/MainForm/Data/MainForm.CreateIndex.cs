@@ -25,7 +25,7 @@ partial class MainForm
   {
     UpdateStatusAction(AppTranslations.IndexingText);
     Globals.ChronoSubBatch.Restart();
-    await Task.Run(() => DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false));
+    DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
     Globals.ChronoSubBatch.Stop();
     UpdateStatusAction(AppTranslations.IndexedText);
     IsMotifIndexed = DB.CheckIndex("Decuplets_Motif");
