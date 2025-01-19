@@ -141,12 +141,6 @@
       this.ActionNormalize = new System.Windows.Forms.Button();
       this.ActionCreateIndex = new System.Windows.Forms.Button();
       this.GridIterations = new System.Windows.Forms.DataGridView();
-      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnRepeatedCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnRemainingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnElapsedCounting = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnElapsedAdditionning = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
       this.PanelSepTop = new System.Windows.Forms.Panel();
       this.PanelTitle = new System.Windows.Forms.Panel();
@@ -197,6 +191,12 @@
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
+      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnRepeatedCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnRemainingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnElapsedCounting = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnElapsedAdditionning = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -1309,63 +1309,6 @@
       this.GridIterations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridIterations_CellFormatting);
       this.GridIterations.Leave += new System.EventHandler(this.GridIterations_Leave);
       // 
-      // ColumnIteration
-      // 
-      this.ColumnIteration.DataPropertyName = "Iteration";
-      this.ColumnIteration.FillWeight = 126.9036F;
-      this.ColumnIteration.HeaderText = "Iteration";
-      this.ColumnIteration.Name = "ColumnIteration";
-      this.ColumnIteration.ReadOnly = true;
-      this.ColumnIteration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnIteration.Width = 65;
-      // 
-      // ColumnRepeatedCount
-      // 
-      this.ColumnRepeatedCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.ColumnRepeatedCount.DataPropertyName = "RepeatedCount";
-      this.ColumnRepeatedCount.FillWeight = 93.27411F;
-      this.ColumnRepeatedCount.HeaderText = "Repeated count";
-      this.ColumnRepeatedCount.Name = "ColumnRepeatedCount";
-      this.ColumnRepeatedCount.ReadOnly = true;
-      this.ColumnRepeatedCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      // 
-      // ColumnMaxOccurences
-      // 
-      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
-      this.ColumnMaxOccurences.FillWeight = 93.27411F;
-      this.ColumnMaxOccurences.HeaderText = "Max occurences";
-      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
-      this.ColumnMaxOccurences.ReadOnly = true;
-      this.ColumnMaxOccurences.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnMaxOccurences.Width = 110;
-      // 
-      // ColumnRemainingRate
-      // 
-      this.ColumnRemainingRate.DataPropertyName = "RemainingRate";
-      this.ColumnRemainingRate.HeaderText = "Remaining rate";
-      this.ColumnRemainingRate.Name = "ColumnRemainingRate";
-      this.ColumnRemainingRate.ReadOnly = true;
-      this.ColumnRemainingRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnRemainingRate.Width = 110;
-      // 
-      // ColumnElapsedCounting
-      // 
-      this.ColumnElapsedCounting.DataPropertyName = "ElapsedCounting";
-      this.ColumnElapsedCounting.HeaderText = "Counting";
-      this.ColumnElapsedCounting.Name = "ColumnElapsedCounting";
-      this.ColumnElapsedCounting.ReadOnly = true;
-      this.ColumnElapsedCounting.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnElapsedCounting.Width = 115;
-      // 
-      // ColumnElapsedAdditionning
-      // 
-      this.ColumnElapsedAdditionning.DataPropertyName = "ElapsedAdditionning";
-      this.ColumnElapsedAdditionning.HeaderText = "Additionning";
-      this.ColumnElapsedAdditionning.Name = "ColumnElapsedAdditionning";
-      this.ColumnElapsedAdditionning.ReadOnly = true;
-      this.ColumnElapsedAdditionning.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnElapsedAdditionning.Width = 115;
-      // 
       // BindingSourceIterationRow
       // 
       this.BindingSourceIterationRow.AllowNew = true;
@@ -1934,6 +1877,63 @@
       this.EditChapterELS50.Size = new System.Drawing.Size(728, 234);
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
+      // 
+      // ColumnIteration
+      // 
+      this.ColumnIteration.DataPropertyName = "Iteration";
+      this.ColumnIteration.FillWeight = 126.9036F;
+      this.ColumnIteration.HeaderText = "Iteration";
+      this.ColumnIteration.Name = "ColumnIteration";
+      this.ColumnIteration.ReadOnly = true;
+      this.ColumnIteration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnIteration.Width = 65;
+      // 
+      // ColumnRepeatedCount
+      // 
+      this.ColumnRepeatedCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.ColumnRepeatedCount.DataPropertyName = "RepeatedCount";
+      this.ColumnRepeatedCount.FillWeight = 93.27411F;
+      this.ColumnRepeatedCount.HeaderText = "Repeated count";
+      this.ColumnRepeatedCount.Name = "ColumnRepeatedCount";
+      this.ColumnRepeatedCount.ReadOnly = true;
+      this.ColumnRepeatedCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      // 
+      // ColumnMaxOccurences
+      // 
+      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
+      this.ColumnMaxOccurences.FillWeight = 93.27411F;
+      this.ColumnMaxOccurences.HeaderText = "Max occurences";
+      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
+      this.ColumnMaxOccurences.ReadOnly = true;
+      this.ColumnMaxOccurences.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnMaxOccurences.Width = 110;
+      // 
+      // ColumnRemainingRate
+      // 
+      this.ColumnRemainingRate.DataPropertyName = "RemainingRate";
+      this.ColumnRemainingRate.HeaderText = "Remaining rate";
+      this.ColumnRemainingRate.Name = "ColumnRemainingRate";
+      this.ColumnRemainingRate.ReadOnly = true;
+      this.ColumnRemainingRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnRemainingRate.Width = 110;
+      // 
+      // ColumnElapsedCounting
+      // 
+      this.ColumnElapsedCounting.DataPropertyName = "ElapsedCounting";
+      this.ColumnElapsedCounting.HeaderText = "Counting duration";
+      this.ColumnElapsedCounting.Name = "ColumnElapsedCounting";
+      this.ColumnElapsedCounting.ReadOnly = true;
+      this.ColumnElapsedCounting.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnElapsedCounting.Width = 115;
+      // 
+      // ColumnElapsedAdditionning
+      // 
+      this.ColumnElapsedAdditionning.DataPropertyName = "ElapsedAdditionning";
+      this.ColumnElapsedAdditionning.HeaderText = "Additionning duration";
+      this.ColumnElapsedAdditionning.Name = "ColumnElapsedAdditionning";
+      this.ColumnElapsedAdditionning.ReadOnly = true;
+      this.ColumnElapsedAdditionning.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnElapsedAdditionning.Width = 115;
       // 
       // MainForm
       // 

@@ -17,31 +17,6 @@ namespace Ordisoftware.Hebrew.Pi;
 static class SQLHelper
 {
 
-  static internal async Task<int> GetRepeatingMotifsCountAsync(this SQLiteNetORM DB)
-  {
-    var sql = @"SELECT COUNT(DISTINCT Motif) AS UniqueRepeated
-                FROM Decuplets
-                WHERE Motif IN (
-                  SELECT Motif
-                  FROM Decuplets
-                  GROUP BY Motif
-                  HAVING COUNT(Motif) > 1
-                );";
-    return DB.QueryScalars<int>(sql).Single();
-  }
-
-  static internal async Task<int> GetRepeatingMotifsMaxOccurencesAsync(this SQLiteNetORM DB)
-  {
-    var sql = @"SELECT MAX(Occurrences) AS MaxDuplicates
-                FROM (
-                  SELECT COUNT(*) AS Occurrences
-                  FROM Decuplets
-                  GROUP BY Motif
-                  HAVING COUNT(*) > 1
-                );";
-    return DB.QueryScalars<int>(sql).Single();
-  }
-
   static internal async Task<List<(long Motif, long Occurences)>> GetRepeatingMotifsAndMaxOccurencesAsync(this SQLiteNetORM DB)
   {
     var sql = @"SELECT Motif, COUNT(*) AS Occurrences
@@ -64,5 +39,30 @@ static class SQLHelper
                 );";
     DB.Execute(sql);
   }
+
+  //static internal async Task<int> GetRepeatingMotifsCountAsync(this SQLiteNetORM DB)
+  //{
+  //  var sql = @"SELECT COUNT(DISTINCT Motif) AS UniqueRepeated
+  //              FROM Decuplets
+  //              WHERE Motif IN (
+  //                SELECT Motif
+  //                FROM Decuplets
+  //                GROUP BY Motif
+  //                HAVING COUNT(Motif) > 1
+  //              );";
+  //  return DB.QueryScalars<int>(sql).Single();
+  //}
+
+  //static internal async Task<int> GetRepeatingMotifsMaxOccurencesAsync(this SQLiteNetORM DB)
+  //{
+  //  var sql = @"SELECT MAX(Occurrences) AS MaxDuplicates
+  //              FROM (
+  //                SELECT COUNT(*) AS Occurrences
+  //                FROM Decuplets
+  //                GROUP BY Motif
+  //                HAVING COUNT(*) > 1
+  //              );";
+  //  return DB.QueryScalars<int>(sql).Single();
+  //}
 
 }

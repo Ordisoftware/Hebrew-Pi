@@ -26,7 +26,8 @@ partial class MainForm
     bool hasError = false;
     try
     {
-      var lastRow = DB.Table<IterationRow>().ToList().LastOrDefault();
+      IterationRow row;
+      IterationRow lastRow = DB.Table<IterationRow>().ToList().LastOrDefault();
       long indexIteration = lastRow?.Iteration + 1 ?? 0;
       long countPrevious = lastRow?.RepeatedCount ?? 0;
       long countCurrent = 1;
@@ -40,11 +41,16 @@ partial class MainForm
         UpdateStatusInfo(string.Format(AppTranslations.IterationText, indexIteration, "?"));
         UpdateStatusAction(AppTranslations.CountingText);
         Globals.ChronoSubBatch.Restart();
-        var row = new IterationRow
+        //if ( lastRow is not null )
+        //{
+        //  // check step
+        //  row = lastRow;
+        //}
+        //else
         {
-          Iteration = indexIteration,
-        };
-        DB.Insert(row);
+          row = new IterationRow { Iteration = indexIteration };
+          DB.Insert(row);
+        }
         LoadIterationGrid();
         var list = DB.GetRepeatingMotifsAndMaxOccurencesAsync().Result;
         countCurrent = list.Count;

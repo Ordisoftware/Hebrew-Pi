@@ -55,6 +55,12 @@ partial class MainForm : Form
   {
     InitializeComponent();
     DoConstructor();
+    ColumnIteration.HeaderText = "Itération";
+    ColumnRepeatedCount.HeaderText = "Nb de répétés";
+    ColumnMaxOccurences.HeaderText = "Max occurrences";
+    ColumnRemainingRate.HeaderText = "Taux de restants";
+    ColumnElapsedCounting.HeaderText = "Durée comptage";
+    ColumnElapsedAdditionning.HeaderText = "Durée addition";
   }
 
   private void MainForm_Load(object sender, EventArgs e)
