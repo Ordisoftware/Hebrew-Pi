@@ -30,16 +30,17 @@ partial class MainForm
 
   private async Task DoActionNormalizeAsync()
   {
+    IteratingStep iteratingStep = IteratingStep.Next;
+    var table = DB.Table<IterationRow>().ToList();
+    IterationRow lastRow = table.LastOrDefault();
+    IterationRow row;
+    long countCurrent = 1;
+    long countPrevious = 0;
+    long indexIteration = 0;
     bool hasError = false;
     try
     {
-      var table = DB.Table<IterationRow>().ToList();
-      IteratingStep iteratingStep = IteratingStep.Next;
-      long indexIteration = 0;
-      long countPrevious = 0;
-      long countCurrent = 1;
-      IterationRow row;
-      IterationRow lastRow = table.LastOrDefault();
+      // Prepare
       if ( lastRow is not null )
       {
         indexIteration = lastRow.Iteration;
@@ -49,6 +50,9 @@ partial class MainForm
         if ( lastRow.ElapsedAdditionning is null )
           iteratingStep = IteratingStep.Additionning;
         else
+        if ( lastRow.RepeatedCount == 0 && lastRow.RemainingRate == 0 )
+          return;
+        else
         {
           countPrevious = (long)lastRow.RepeatedCount;
           indexIteration++;
@@ -56,13 +60,11 @@ partial class MainForm
       }
       Globals.ChronoBatch.Restart();
       UpdateStatusRemaining(AppTranslations.RemainingNAText);
+      // Loop
       for ( ; countCurrent > 0; indexIteration++ )
       {
-        // Count repeating motifs
+        // Init current row
         if ( !CheckIfBatchCanContinueAsync().Result ) break;
-        UpdateStatusInfo(string.Format(AppTranslations.IterationText, indexIteration, "?"));
-        UpdateStatusAction(AppTranslations.CountingText);
-        Globals.ChronoSubBatch.Restart();
         if ( iteratingStep == IteratingStep.Next )
         {
           row = new IterationRow { Iteration = indexIteration };
@@ -80,12 +82,16 @@ partial class MainForm
             countCurrent = (long)row.RepeatedCount;
         }
         LoadIterationGrid();
+        UpdateStatusInfo(string.Format(AppTranslations.IterationText, indexIteration, "?"));
+        // Count repeating motifs
         if ( iteratingStep == IteratingStep.Next || iteratingStep == IteratingStep.Counting )
         {
+          UpdateStatusAction(AppTranslations.CountingText);
+          Globals.ChronoSubBatch.Restart();
           var list = DB.GetRepeatingMotifCountAndMaxOccurencesAsync().Result;
+          Globals.ChronoSubBatch.Stop();
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           countCurrent = list[0].MotifCount;
-          Globals.ChronoSubBatch.Stop();
           row.RepeatedCount = countCurrent;
           row.MaxOccurences = list[0].MaxOccurences;
           row.RemainingRate = countCurrent == 0
@@ -120,9 +126,9 @@ partial class MainForm
             UpdateStatusAction(AppTranslations.AdditionningText);
             Globals.ChronoSubBatch.Restart();
             DB.AddPositionToRepeatingMotifsAsync();
+            Globals.ChronoSubBatch.Stop();
             if ( !CheckIfBatchCanContinueAsync().Result ) break;
             UpdateStatusAction(AppTranslations.AddedText);
-            Globals.ChronoSubBatch.Stop();
             row.ElapsedAdditionning = Globals.ChronoSubBatch.Elapsed;
             DB.Update(row);
             LoadIterationGrid();
