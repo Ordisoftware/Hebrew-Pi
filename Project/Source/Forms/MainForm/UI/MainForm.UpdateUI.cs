@@ -81,9 +81,9 @@ partial class MainForm
       bool dbOnenedAndNotInBatch = dbOpened && !Globals.IsInBatch;
       bool dbOnenedAndInBatch = dbOpened && Globals.IsInBatch;
       Globals.AllowClose = !Globals.IsInBatch;
-      SelectFileName.Enabled = !dbOpened;
       SelectDbCache.Enabled = !Globals.IsInBatch;
-      ActionDbOpen.Enabled = !dbOpened && SelectFileName.SelectedIndex != -1;
+      ActionDbOpen.Enabled = !dbOpened;
+      ActionDbNew.Enabled = ActionDbOpen.Enabled;
       ActionDbClose.Enabled = dbOnenedAndNotInBatch;
       ActionCreateData.Enabled = dbOnenedAndNotInBatch;
       ActionNormalize.Enabled = dbOnenedAndNotInBatch;

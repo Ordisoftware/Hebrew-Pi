@@ -66,14 +66,16 @@ static partial class Program
       Globals.ChronoStartingApp.Stop();
       ProcessCommandLineOptions();
       Globals.ChronoStartingApp.Start();
+      // TODO remove later
+      DebugManager.TraceEnabled = true;
+      DebugManager.Enabled = true;
+      Settings.UsageStatisticsEnabled = true;
+      Settings.DebuggerEnabled = true;
       //
       LoadingForm.Instance.Hidden = Settings.LoadingFormHidden;
       AboutBox.LicenseAsRTF = Properties.Resources.MPL_2_0;
       AboutBox.DescriptionText = AppTranslations.ApplicationDescription;
       AboutBox.Instance.ActionViewStats.Enabled = Settings.UsageStatisticsEnabled;
-      // TODO remove later
-      DebugManager.TraceEnabled = true;
-      DebugManager.Enabled = true;
     }
     catch ( Exception ex )
     {

@@ -34,8 +34,8 @@
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.PanelDatabase = new System.Windows.Forms.Panel();
       this.SelectDbCache = new System.Windows.Forms.ComboBox();
-      this.SelectFileName = new System.Windows.Forms.ComboBox();
       this.ActionDbClose = new System.Windows.Forms.Button();
+      this.ActionDbNew = new System.Windows.Forms.Button();
       this.ActionDbOpen = new System.Windows.Forms.Button();
       this.StatusStrip = new System.Windows.Forms.StatusStrip();
       this.LabelStatusTimeBatch = new System.Windows.Forms.ToolStripStatusLabel();
@@ -137,8 +137,10 @@
       this.TabPageManage = new System.Windows.Forms.TabPage();
       this.PanelViewManage = new System.Windows.Forms.Panel();
       this.ListBoxLog = new System.Windows.Forms.ListBox();
+      this.ActionStop2 = new System.Windows.Forms.Button();
       this.ActionCreateData = new System.Windows.Forms.Button();
       this.ActionNormalize = new System.Windows.Forms.Button();
+      this.ActionPause2 = new System.Windows.Forms.Button();
       this.ActionCreateIndex = new System.Windows.Forms.Button();
       this.GridIterations = new System.Windows.Forms.DataGridView();
       this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -197,8 +199,9 @@
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
-      this.ActionPause2 = new System.Windows.Forms.Button();
-      this.ActionStop2 = new System.Windows.Forms.Button();
+      this.OpenFileDialogDB = new System.Windows.Forms.OpenFileDialog();
+      this.SaveFileDialogDB = new System.Windows.Forms.SaveFileDialog();
+      this.OpenFileDialogTXT = new System.Windows.Forms.OpenFileDialog();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -221,8 +224,8 @@
       // PanelDatabase
       // 
       this.PanelDatabase.Controls.Add(this.SelectDbCache);
-      this.PanelDatabase.Controls.Add(this.SelectFileName);
       this.PanelDatabase.Controls.Add(this.ActionDbClose);
+      this.PanelDatabase.Controls.Add(this.ActionDbNew);
       this.PanelDatabase.Controls.Add(this.ActionDbOpen);
       this.PanelDatabase.Dock = System.Windows.Forms.DockStyle.Top;
       this.PanelDatabase.Location = new System.Drawing.Point(10, 10);
@@ -240,20 +243,10 @@
       this.SelectDbCache.TabIndex = 3;
       this.SelectDbCache.SelectedIndexChanged += new System.EventHandler(this.SelectDbCache_SelectedIndexChanged);
       // 
-      // SelectFileName
-      // 
-      this.SelectFileName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-      this.SelectFileName.FormattingEnabled = true;
-      this.SelectFileName.Location = new System.Drawing.Point(61, 3);
-      this.SelectFileName.Name = "SelectFileName";
-      this.SelectFileName.Size = new System.Drawing.Size(121, 21);
-      this.SelectFileName.TabIndex = 3;
-      this.SelectFileName.SelectedIndexChanged += new System.EventHandler(this.SelectFileName_SelectedIndexChanged);
-      // 
       // ActionDbClose
       // 
       this.ActionDbClose.Enabled = false;
-      this.ActionDbClose.Location = new System.Drawing.Point(252, 2);
+      this.ActionDbClose.Location = new System.Drawing.Point(189, 3);
       this.ActionDbClose.Name = "ActionDbClose";
       this.ActionDbClose.Size = new System.Drawing.Size(58, 23);
       this.ActionDbClose.TabIndex = 2;
@@ -261,10 +254,21 @@
       this.ActionDbClose.UseVisualStyleBackColor = true;
       this.ActionDbClose.Click += new System.EventHandler(this.ActionDbClose_Click);
       // 
+      // ActionDbNew
+      // 
+      this.ActionDbNew.Enabled = false;
+      this.ActionDbNew.Location = new System.Drawing.Point(61, 3);
+      this.ActionDbNew.Name = "ActionDbNew";
+      this.ActionDbNew.Size = new System.Drawing.Size(58, 23);
+      this.ActionDbNew.TabIndex = 2;
+      this.ActionDbNew.Text = "New";
+      this.ActionDbNew.UseVisualStyleBackColor = true;
+      this.ActionDbNew.Click += new System.EventHandler(this.ActionDbNew_Click);
+      // 
       // ActionDbOpen
       // 
       this.ActionDbOpen.Enabled = false;
-      this.ActionDbOpen.Location = new System.Drawing.Point(188, 2);
+      this.ActionDbOpen.Location = new System.Drawing.Point(125, 3);
       this.ActionDbOpen.Name = "ActionDbOpen";
       this.ActionDbOpen.Size = new System.Drawing.Size(58, 23);
       this.ActionDbOpen.TabIndex = 2;
@@ -448,52 +452,52 @@
       this.ActionAddBookmark.Image = ((System.Drawing.Image)(resources.GetObject("ActionAddBookmark.Image")));
       this.ActionAddBookmark.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionAddBookmark.Name = "ActionAddBookmark";
-      this.ActionAddBookmark.Size = new System.Drawing.Size(180, 22);
+      this.ActionAddBookmark.Size = new System.Drawing.Size(108, 22);
       this.ActionAddBookmark.Text = "Add";
       // 
       // toolStripSeparator3
       // 
       this.toolStripSeparator3.Name = "toolStripSeparator3";
-      this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+      this.toolStripSeparator3.Size = new System.Drawing.Size(105, 6);
       // 
       // ActionSortBookmarks
       // 
       this.ActionSortBookmarks.Image = ((System.Drawing.Image)(resources.GetObject("ActionSortBookmarks.Image")));
       this.ActionSortBookmarks.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionSortBookmarks.Name = "ActionSortBookmarks";
-      this.ActionSortBookmarks.Size = new System.Drawing.Size(180, 22);
+      this.ActionSortBookmarks.Size = new System.Drawing.Size(108, 22);
       this.ActionSortBookmarks.Text = "Sort";
       // 
       // toolStripSeparator7
       // 
       this.toolStripSeparator7.Name = "toolStripSeparator7";
-      this.toolStripSeparator7.Size = new System.Drawing.Size(177, 6);
+      this.toolStripSeparator7.Size = new System.Drawing.Size(105, 6);
       // 
       // ActionClearBookmarks
       // 
       this.ActionClearBookmarks.Image = ((System.Drawing.Image)(resources.GetObject("ActionClearBookmarks.Image")));
       this.ActionClearBookmarks.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionClearBookmarks.Name = "ActionClearBookmarks";
-      this.ActionClearBookmarks.Size = new System.Drawing.Size(180, 22);
+      this.ActionClearBookmarks.Size = new System.Drawing.Size(108, 22);
       this.ActionClearBookmarks.Text = "Empty";
       // 
       // toolStripSeparator4
       // 
       this.toolStripSeparator4.Name = "toolStripSeparator4";
-      this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+      this.toolStripSeparator4.Size = new System.Drawing.Size(105, 6);
       // 
       // ActionGoToBookmarkMain
       // 
       this.ActionGoToBookmarkMain.Image = ((System.Drawing.Image)(resources.GetObject("ActionGoToBookmarkMain.Image")));
       this.ActionGoToBookmarkMain.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionGoToBookmarkMain.Name = "ActionGoToBookmarkMain";
-      this.ActionGoToBookmarkMain.Size = new System.Drawing.Size(180, 22);
+      this.ActionGoToBookmarkMain.Size = new System.Drawing.Size(108, 22);
       this.ActionGoToBookmarkMain.Text = "Main";
       // 
       // SeparatorBookmarks
       // 
       this.SeparatorBookmarks.Name = "SeparatorBookmarks";
-      this.SeparatorBookmarks.Size = new System.Drawing.Size(177, 6);
+      this.SeparatorBookmarks.Size = new System.Drawing.Size(105, 6);
       // 
       // toolStripSeparator13
       // 
@@ -1246,6 +1250,17 @@
       this.ListBoxLog.Size = new System.Drawing.Size(237, 163);
       this.ListBoxLog.TabIndex = 3;
       // 
+      // ActionStop2
+      // 
+      this.ActionStop2.Enabled = false;
+      this.ActionStop2.Location = new System.Drawing.Point(13, 42);
+      this.ActionStop2.Name = "ActionStop2";
+      this.ActionStop2.Size = new System.Drawing.Size(75, 23);
+      this.ActionStop2.TabIndex = 2;
+      this.ActionStop2.Text = "Stop";
+      this.ActionStop2.UseVisualStyleBackColor = true;
+      this.ActionStop2.Click += new System.EventHandler(this.ActionStop_Click);
+      // 
       // ActionCreateData
       // 
       this.ActionCreateData.Enabled = false;
@@ -1267,6 +1282,17 @@
       this.ActionNormalize.Text = "Normalize";
       this.ActionNormalize.UseVisualStyleBackColor = true;
       this.ActionNormalize.Click += new System.EventHandler(this.ActionNormalize_Click);
+      // 
+      // ActionPause2
+      // 
+      this.ActionPause2.Enabled = false;
+      this.ActionPause2.Location = new System.Drawing.Point(94, 42);
+      this.ActionPause2.Name = "ActionPause2";
+      this.ActionPause2.Size = new System.Drawing.Size(75, 23);
+      this.ActionPause2.TabIndex = 2;
+      this.ActionPause2.Text = "Pause";
+      this.ActionPause2.UseVisualStyleBackColor = true;
+      this.ActionPause2.Click += new System.EventHandler(this.ActionPauseContinue_Click);
       // 
       // ActionCreateIndex
       // 
@@ -1947,27 +1973,17 @@
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
       // 
-      // ActionPause2
+      // OpenFileDialogDB
       // 
-      this.ActionPause2.Enabled = false;
-      this.ActionPause2.Location = new System.Drawing.Point(94, 42);
-      this.ActionPause2.Name = "ActionPause2";
-      this.ActionPause2.Size = new System.Drawing.Size(75, 23);
-      this.ActionPause2.TabIndex = 2;
-      this.ActionPause2.Text = "Pause";
-      this.ActionPause2.UseVisualStyleBackColor = true;
-      this.ActionPause2.Click += new System.EventHandler(this.ActionPauseContinue_Click);
+      this.OpenFileDialogDB.Filter = "SQLite files (*.sqlite)|*.sqlite";
       // 
-      // ActionStop2
+      // SaveFileDialogDB
       // 
-      this.ActionStop2.Enabled = false;
-      this.ActionStop2.Location = new System.Drawing.Point(13, 42);
-      this.ActionStop2.Name = "ActionStop2";
-      this.ActionStop2.Size = new System.Drawing.Size(75, 23);
-      this.ActionStop2.TabIndex = 2;
-      this.ActionStop2.Text = "Stop";
-      this.ActionStop2.UseVisualStyleBackColor = true;
-      this.ActionStop2.Click += new System.EventHandler(this.ActionStop_Click);
+      this.SaveFileDialogDB.Filter = "SQLite files (*.sqlite)|*.sqlite";
+      // 
+      // OpenFileDialogTXT
+      // 
+      this.OpenFileDialogTXT.Filter = "Text files (*.txt)|*.txt";
       // 
       // MainForm
       // 
@@ -2011,7 +2027,6 @@
 
     #endregion
     private Panel PanelDatabase;
-    private ComboBox SelectFileName;
     private StatusStrip StatusStrip;
     private Button ActionDbOpen;
     private ToolStripStatusLabel LabelStatusInfo;
@@ -2177,5 +2192,9 @@
     private DataGridViewTextBoxColumn ColumnElapsedAdditionning;
     private Button ActionStop2;
     private Button ActionPause2;
+    private OpenFileDialog OpenFileDialogDB;
+    private SaveFileDialog SaveFileDialogDB;
+    private Button ActionDbNew;
+    private OpenFileDialog OpenFileDialogTXT;
   }
 }

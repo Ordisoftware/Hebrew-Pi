@@ -43,9 +43,6 @@ partial class MainForm : Form
     NativeMethods.ClipboardViewerNext = NativeMethods.SetClipboardViewer(Handle);
     HebrewGlobals.GetHebrewLettersExecutablePath = () => Settings.HebrewLettersExe;
     InitializeTheme();
-    foreach ( var value in Enums.GetValues<PiDecimalsSize>() )
-      SelectFileName.Items.Add(value);
-    SelectFileName.SelectedIndex = 2;
     ClearStatusBar();
     if ( !ApplicationCommandLine.Instance.IsPreviewEnabled ) // TODO remove when ready
     {
@@ -214,12 +211,9 @@ partial class MainForm : Form
   /// </summary>
   public void InitializeDialogsDirectory()
   {
-    //OpenFileDialogDB.InitialDirectory = Settings.GetBackupDirectory();
-    //SaveFileDialogDB.InitialDirectory = Settings.GetBackupDirectory();
-    //SaveDataBoardDialog.InitialDirectory = Settings.GetExportBoardsDirectory();
-    //SaveFileDialogMSWord.InitialDirectory = Settings.GetExportVersesDirectory();
-    //SaveFileDialogRTF.InitialDirectory = Settings.GetExportVersesDirectory();
-    //SaveDataBoardDialog.Filter = Program.BoardExportTargets.CreateFilters();
+    OpenFileDialogTXT.InitialDirectory = Globals.DocumentsFolderPath;
+    OpenFileDialogDB.InitialDirectory = Globals.DatabaseFolderPath;
+    SaveFileDialogDB.InitialDirectory = Globals.DatabaseFolderPath;
   }
 
   /// <summary>

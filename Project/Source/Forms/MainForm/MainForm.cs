@@ -21,8 +21,6 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm : Form
 {
 
-  private PiDecimalsSize PiDecimalsSize;
-
   private string DatabaseFilePath;
 
   private string SQLiteTempDir = @"D:\";
@@ -30,9 +28,6 @@ partial class MainForm : Form
   private int SQLiteCacheSize;
 
   internal SQLiteNetORM DB { get; private set; }
-
-  private string GetSelectedFileName(string extension)
-    => $"{nameof(Pi.PiDecimalsSize)} {PiDecimalsSize.ToString().Replace("_", "-")}{extension}";
 
   #region Singleton
 
@@ -223,14 +218,49 @@ partial class MainForm : Form
     DoTimerBatch();
   }
 
+  private void SelectDbCache_SelectedIndexChanged(object sender, EventArgs e)
+  {
+    SQLiteCacheSize = (int)SelectDbCache.SelectedItem * (int)MemorySizeInMiB;
+    SetDbCache();
+  }
+
+  private void SetDbCache()
+  {
+    DB?.SetCacheSize(SQLiteCacheSize);
+  }
+
+  private void ActionDbNew_Click(object sender, EventArgs e)
+  {
+    // TODO
+  }
+
   private void ActionDbOpen_Click(object sender, EventArgs e)
   {
-    DoActionDbOpen(Path.Combine(Globals.DatabaseFolderPath, GetSelectedFileName(Globals.DatabaseFileExtension)));
+    if ( OpenFileDialogDB.ShowDialog() == DialogResult.OK ) ;
+    DoActionDbOpen(OpenFileDialogDB.FileName);
   }
 
   private void ActionDbClose_Click(object sender, EventArgs e)
   {
     DoActionDbClose();
+  }
+
+  private void ActionCreateData_Click(object sender, EventArgs e)
+  {
+    if ( OpenFileDialogTXT.ShowDialog() == DialogResult.OK )
+      DoBatchAsync(() => DoActionPopulateAsync(OpenFileDialogTXT.FileName));
+  }
+
+  private void ActionCreateIndex_Click(object sender, EventArgs e)
+  {
+    //if ( DisplayManager.QueryYesNo(AppTranslations.AskToCreateIndexOnMotif) )
+    DoBatchAsync(() => DoCreateIndexAsync(), false);
+  }
+
+  private void ActionNormalize_Click(object sender, EventArgs e)
+  {
+    //if ( !DisplayManager.QueryYesNo("Start reducing repeating motifs?") ) return;
+    DoBatchAsync(() => DoActionNormalizeAsync());
   }
 
   private void ActionStop_Click(object sender, EventArgs e)
@@ -243,21 +273,9 @@ partial class MainForm : Form
     DoActionPauseContinue();
   }
 
-  private void SelectFileName_SelectedIndexChanged(object sender, EventArgs e)
+  private void GridIterations_Leave(object sender, EventArgs e)
   {
-    PiDecimalsSize = (PiDecimalsSize)SelectFileName.SelectedItem;
-    UpdateButtons();
-  }
-
-  private void SelectDbCache_SelectedIndexChanged(object sender, EventArgs e)
-  {
-    SQLiteCacheSize = (int)SelectDbCache.SelectedItem * (int)MemorySizeInMiB;
-    SetDbCache();
-  }
-
-  private void SetDbCache()
-  {
-    DB?.SetCacheSize(SQLiteCacheSize);
+    GridIterations.ClearSelection();
   }
 
   private void GridIterations_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -281,29 +299,6 @@ partial class MainForm : Form
           e.Value = string.Empty;
       }
     }
-  }
-
-  private void ActionCreateData_Click(object sender, EventArgs e)
-  {
-    //if ( !DisplayManager.QueryYesNo("Empty and create data?") ) return;
-    DoBatchAsync(() => DoActionPopulateAsync(Path.Combine(Globals.DocumentsFolderPath, GetSelectedFileName(".txt"))));
-  }
-
-  private void ActionNormalize_Click(object sender, EventArgs e)
-  {
-    //if ( !DisplayManager.QueryYesNo("Start reducing repeating motifs?") ) return;
-    DoBatchAsync(() => DoActionNormalizeAsync());
-  }
-
-  private void ActionCreateIndex_Click(object sender, EventArgs e)
-  {
-    //if ( DisplayManager.QueryYesNo(AppTranslations.AskToCreateIndexOnMotif) )
-    DoBatchAsync(() => DoCreateIndexAsync(), false);
-  }
-
-  private void GridIterations_Leave(object sender, EventArgs e)
-  {
-    GridIterations.ClearSelection();
   }
 
   //private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
