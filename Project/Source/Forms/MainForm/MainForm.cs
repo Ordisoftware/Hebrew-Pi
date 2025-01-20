@@ -218,6 +218,11 @@ partial class MainForm : Form
     DoTimerBatch();
   }
 
+  private void EditAllowInterruption_CheckedChanged(object sender, EventArgs e)
+  {
+    CanForceTerminateBatch = EditAllowInterruption.Checked;
+  }
+
   private void SelectDbCache_SelectedIndexChanged(object sender, EventArgs e)
   {
     SQLiteCacheSize = (int)SelectDbCache.SelectedItem * (int)MemorySizeInMiB;

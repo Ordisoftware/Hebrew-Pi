@@ -65,6 +65,7 @@ partial class MainForm
     DB.Dispose();
     DB = null;
     GridIterations.DataSource = null;
+    LabelTitleCenter.Text = string.Empty;
     UpdateButtons();
     //TimerMemory_Tick(null, null);
   }
