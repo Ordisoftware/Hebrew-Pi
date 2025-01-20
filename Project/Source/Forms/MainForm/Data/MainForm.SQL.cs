@@ -17,14 +17,15 @@ namespace Ordisoftware.Hebrew.Pi;
 static class SQLHelper
 {
 
-  static internal async Task<List<(long Motif, long Occurences)>> GetRepeatingMotifsAndMaxOccurencesAsync(this SQLiteNetORM DB)
+  static internal async Task<List<(long MotifCount, long MaxOccurences)>> GetRepeatingMotifCountAndMaxOccurencesAsync(this SQLiteNetORM DB)
   {
-    var sql = @"SELECT Motif, COUNT(*) AS Occurrences
-                FROM Decuplets
-                GROUP BY Motif
-                HAVING COUNT(*) > 1
-                ORDER BY Occurrences DESC;";
-    return [.. DB.Query<(long Motif, long Occurences)>(sql)];
+    var sql = @"SELECT COUNT(*) AS Nombre_Motifs_Uniques, MAX(Occurrences) AS Occurrence_Max
+                FROM (
+                  SELECT Motif, COUNT(*) AS Occurrences
+                  FROM Decuplets
+                  GROUP BY Motif
+                  HAVING COUNT(*) > 1);";
+    return [.. DB.Query<(long MotifCount, long MaxOccurences)>(sql)];
   }
 
   static internal async Task AddPositionToRepeatingMotifsAsync(this SQLiteNetORM DB)
@@ -63,6 +64,16 @@ static class SQLHelper
   //                HAVING COUNT(*) > 1
   //              );";
   //  return DB.QueryScalars<int>(sql).Single();
+  //}
+
+  //static internal async Task<List<(long Motif, long Occurences)>> GetRepeatingMotifsAndMaxOccurencesAsync(this SQLiteNetORM DB)
+  //{
+  //  var sql = @"SELECT Motif, COUNT(*) AS Occurrences
+  //              FROM Decuplets
+  //              GROUP BY Motif
+  //              HAVING COUNT(*) > 1
+  //              ORDER BY Occurrences DESC;";
+  //  return [.. DB.Query<(long Motif, long Occurences)>(sql)];
   //}
 
 }

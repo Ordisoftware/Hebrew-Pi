@@ -141,6 +141,12 @@
       this.ActionNormalize = new System.Windows.Forms.Button();
       this.ActionCreateIndex = new System.Windows.Forms.Button();
       this.GridIterations = new System.Windows.Forms.DataGridView();
+      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnRepeatedCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnRemainingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnElapsedCounting = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnElapsedAdditionning = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
       this.PanelSepTop = new System.Windows.Forms.Panel();
       this.PanelTitle = new System.Windows.Forms.Panel();
@@ -191,12 +197,8 @@
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
-      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnRepeatedCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnRemainingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnElapsedCounting = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnElapsedAdditionning = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ActionPause2 = new System.Windows.Forms.Button();
+      this.ActionStop2 = new System.Windows.Forms.Button();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -283,7 +285,7 @@
             this.LabelStatusSep4,
             this.LabelStatusAction,
             this.LabelStatusFreeMem});
-      this.StatusStrip.Location = new System.Drawing.Point(0, 539);
+      this.StatusStrip.Location = new System.Drawing.Point(0, 439);
       this.StatusStrip.Name = "StatusStrip";
       this.StatusStrip.Size = new System.Drawing.Size(959, 22);
       this.StatusStrip.TabIndex = 2;
@@ -439,63 +441,65 @@
       this.ActionBookmarks.Size = new System.Drawing.Size(49, 46);
       this.ActionBookmarks.Text = "Bookmarks";
       this.ActionBookmarks.ToolTipText = "Bookmarks (Alt+B)";
+      this.ActionBookmarks.Visible = false;
       // 
       // ActionAddBookmark
       // 
       this.ActionAddBookmark.Image = ((System.Drawing.Image)(resources.GetObject("ActionAddBookmark.Image")));
       this.ActionAddBookmark.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionAddBookmark.Name = "ActionAddBookmark";
-      this.ActionAddBookmark.Size = new System.Drawing.Size(108, 22);
+      this.ActionAddBookmark.Size = new System.Drawing.Size(180, 22);
       this.ActionAddBookmark.Text = "Add";
       // 
       // toolStripSeparator3
       // 
       this.toolStripSeparator3.Name = "toolStripSeparator3";
-      this.toolStripSeparator3.Size = new System.Drawing.Size(105, 6);
+      this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
       // 
       // ActionSortBookmarks
       // 
       this.ActionSortBookmarks.Image = ((System.Drawing.Image)(resources.GetObject("ActionSortBookmarks.Image")));
       this.ActionSortBookmarks.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionSortBookmarks.Name = "ActionSortBookmarks";
-      this.ActionSortBookmarks.Size = new System.Drawing.Size(108, 22);
+      this.ActionSortBookmarks.Size = new System.Drawing.Size(180, 22);
       this.ActionSortBookmarks.Text = "Sort";
       // 
       // toolStripSeparator7
       // 
       this.toolStripSeparator7.Name = "toolStripSeparator7";
-      this.toolStripSeparator7.Size = new System.Drawing.Size(105, 6);
+      this.toolStripSeparator7.Size = new System.Drawing.Size(177, 6);
       // 
       // ActionClearBookmarks
       // 
       this.ActionClearBookmarks.Image = ((System.Drawing.Image)(resources.GetObject("ActionClearBookmarks.Image")));
       this.ActionClearBookmarks.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionClearBookmarks.Name = "ActionClearBookmarks";
-      this.ActionClearBookmarks.Size = new System.Drawing.Size(108, 22);
+      this.ActionClearBookmarks.Size = new System.Drawing.Size(180, 22);
       this.ActionClearBookmarks.Text = "Empty";
       // 
       // toolStripSeparator4
       // 
       this.toolStripSeparator4.Name = "toolStripSeparator4";
-      this.toolStripSeparator4.Size = new System.Drawing.Size(105, 6);
+      this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
       // 
       // ActionGoToBookmarkMain
       // 
       this.ActionGoToBookmarkMain.Image = ((System.Drawing.Image)(resources.GetObject("ActionGoToBookmarkMain.Image")));
       this.ActionGoToBookmarkMain.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionGoToBookmarkMain.Name = "ActionGoToBookmarkMain";
-      this.ActionGoToBookmarkMain.Size = new System.Drawing.Size(108, 22);
+      this.ActionGoToBookmarkMain.Size = new System.Drawing.Size(180, 22);
       this.ActionGoToBookmarkMain.Text = "Main";
       // 
       // SeparatorBookmarks
       // 
       this.SeparatorBookmarks.Name = "SeparatorBookmarks";
-      this.SeparatorBookmarks.Size = new System.Drawing.Size(105, 6);
+      this.SeparatorBookmarks.Size = new System.Drawing.Size(177, 6);
       // 
       // toolStripSeparator13
       // 
       this.toolStripSeparator13.Name = "toolStripSeparator13";
       this.toolStripSeparator13.Size = new System.Drawing.Size(6, 49);
+      this.toolStripSeparator13.Visible = false;
       // 
       // ActionHistory
       // 
@@ -510,6 +514,7 @@
       this.ActionHistory.Size = new System.Drawing.Size(49, 46);
       this.ActionHistory.Text = "History";
       this.ActionHistory.ToolTipText = "History (Alt+H)";
+      this.ActionHistory.Visible = false;
       // 
       // ActionClearHistory
       // 
@@ -534,6 +539,7 @@
       this.ActionHistoryBack.Size = new System.Drawing.Size(44, 46);
       this.ActionHistoryBack.Text = "Previous";
       this.ActionHistoryBack.ToolTipText = "Previous (Shift+Ctrl+P)";
+      this.ActionHistoryBack.Visible = false;
       // 
       // ActionHistoryNext
       // 
@@ -545,11 +551,13 @@
       this.ActionHistoryNext.Size = new System.Drawing.Size(44, 46);
       this.ActionHistoryNext.Text = "Next";
       this.ActionHistoryNext.ToolTipText = "Next (Shift+Ctrl+N)";
+      this.ActionHistoryNext.Visible = false;
       // 
       // toolStripSeparator19
       // 
       this.toolStripSeparator19.Name = "toolStripSeparator19";
       this.toolStripSeparator19.Size = new System.Drawing.Size(6, 49);
+      this.toolStripSeparator19.Visible = false;
       // 
       // ActionViewDecode
       // 
@@ -591,6 +599,7 @@
       // 
       this.toolStripSeparator5.Name = "toolStripSeparator5";
       this.toolStripSeparator5.Size = new System.Drawing.Size(6, 49);
+      this.toolStripSeparator5.Visible = false;
       // 
       // ActionStop
       // 
@@ -603,6 +612,7 @@
       this.ActionStop.Size = new System.Drawing.Size(46, 46);
       this.ActionStop.Text = "Pause";
       this.ActionStop.ToolTipText = "Pause";
+      this.ActionStop.Visible = false;
       this.ActionStop.Click += new System.EventHandler(this.ActionStop_Click);
       // 
       // ActionPause
@@ -616,6 +626,7 @@
       this.ActionPause.Size = new System.Drawing.Size(46, 46);
       this.ActionPause.Text = "Pause";
       this.ActionPause.ToolTipText = "Pause";
+      this.ActionPause.Visible = false;
       this.ActionPause.Click += new System.EventHandler(this.ActionPauseContinue_Click);
       // 
       // ActionContinue
@@ -1104,7 +1115,7 @@
       this.PanelMain.Location = new System.Drawing.Point(0, 54);
       this.PanelMain.Name = "PanelMain";
       this.PanelMain.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelMain.Size = new System.Drawing.Size(959, 485);
+      this.PanelMain.Size = new System.Drawing.Size(959, 385);
       this.PanelMain.TabIndex = 10;
       // 
       // PanelMainOuter
@@ -1115,7 +1126,7 @@
       this.PanelMainOuter.Location = new System.Drawing.Point(10, 84);
       this.PanelMainOuter.Name = "PanelMainOuter";
       this.PanelMainOuter.Padding = new System.Windows.Forms.Padding(1);
-      this.PanelMainOuter.Size = new System.Drawing.Size(939, 391);
+      this.PanelMainOuter.Size = new System.Drawing.Size(939, 291);
       this.PanelMainOuter.TabIndex = 18;
       // 
       // PanelMainInner
@@ -1125,7 +1136,7 @@
       this.PanelMainInner.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMainInner.Location = new System.Drawing.Point(1, 1);
       this.PanelMainInner.Name = "PanelMainInner";
-      this.PanelMainInner.Size = new System.Drawing.Size(937, 389);
+      this.PanelMainInner.Size = new System.Drawing.Size(937, 289);
       this.PanelMainInner.TabIndex = 0;
       // 
       // PanelMainCenter
@@ -1135,7 +1146,7 @@
       this.PanelMainCenter.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMainCenter.Location = new System.Drawing.Point(0, 0);
       this.PanelMainCenter.Name = "PanelMainCenter";
-      this.PanelMainCenter.Size = new System.Drawing.Size(937, 389);
+      this.PanelMainCenter.Size = new System.Drawing.Size(937, 289);
       this.PanelMainCenter.TabIndex = 0;
       // 
       // TabControl
@@ -1147,7 +1158,7 @@
       this.TabControl.Location = new System.Drawing.Point(0, 0);
       this.TabControl.Name = "TabControl";
       this.TabControl.SelectedIndex = 0;
-      this.TabControl.Size = new System.Drawing.Size(937, 389);
+      this.TabControl.Size = new System.Drawing.Size(937, 289);
       this.TabControl.TabIndex = 8;
       this.TabControl.TabStop = false;
       this.TabControl.Visible = false;
@@ -1158,7 +1169,7 @@
       this.TabPageDecode.Location = new System.Drawing.Point(4, 22);
       this.TabPageDecode.Name = "TabPageDecode";
       this.TabPageDecode.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageDecode.Size = new System.Drawing.Size(929, 363);
+      this.TabPageDecode.Size = new System.Drawing.Size(929, 263);
       this.TabPageDecode.TabIndex = 1;
       this.TabPageDecode.Text = "Decode";
       this.TabPageDecode.UseVisualStyleBackColor = true;
@@ -1170,7 +1181,7 @@
       this.PanelViewDecode.Location = new System.Drawing.Point(3, 3);
       this.PanelViewDecode.Name = "PanelViewDecode";
       this.PanelViewDecode.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewDecode.Size = new System.Drawing.Size(923, 357);
+      this.PanelViewDecode.Size = new System.Drawing.Size(923, 257);
       this.PanelViewDecode.TabIndex = 0;
       // 
       // TabPageGrid
@@ -1179,7 +1190,7 @@
       this.TabPageGrid.Location = new System.Drawing.Point(4, 22);
       this.TabPageGrid.Name = "TabPageGrid";
       this.TabPageGrid.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageGrid.Size = new System.Drawing.Size(929, 363);
+      this.TabPageGrid.Size = new System.Drawing.Size(929, 263);
       this.TabPageGrid.TabIndex = 0;
       this.TabPageGrid.Text = "Grid";
       this.TabPageGrid.UseVisualStyleBackColor = true;
@@ -1193,7 +1204,7 @@
       this.PanelViewGrid.Location = new System.Drawing.Point(3, 3);
       this.PanelViewGrid.Name = "PanelViewGrid";
       this.PanelViewGrid.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewGrid.Size = new System.Drawing.Size(923, 357);
+      this.PanelViewGrid.Size = new System.Drawing.Size(923, 257);
       this.PanelViewGrid.TabIndex = 22;
       // 
       // TabPageManage
@@ -1202,7 +1213,7 @@
       this.TabPageManage.Location = new System.Drawing.Point(4, 22);
       this.TabPageManage.Name = "TabPageManage";
       this.TabPageManage.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageManage.Size = new System.Drawing.Size(929, 363);
+      this.TabPageManage.Size = new System.Drawing.Size(929, 263);
       this.TabPageManage.TabIndex = 3;
       this.TabPageManage.Text = "Manage";
       this.TabPageManage.UseVisualStyleBackColor = true;
@@ -1211,15 +1222,17 @@
       // 
       this.PanelViewManage.BackColor = System.Drawing.SystemColors.Control;
       this.PanelViewManage.Controls.Add(this.ListBoxLog);
+      this.PanelViewManage.Controls.Add(this.ActionStop2);
       this.PanelViewManage.Controls.Add(this.ActionCreateData);
       this.PanelViewManage.Controls.Add(this.ActionNormalize);
+      this.PanelViewManage.Controls.Add(this.ActionPause2);
       this.PanelViewManage.Controls.Add(this.ActionCreateIndex);
       this.PanelViewManage.Controls.Add(this.GridIterations);
       this.PanelViewManage.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelViewManage.Location = new System.Drawing.Point(3, 3);
       this.PanelViewManage.Name = "PanelViewManage";
       this.PanelViewManage.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewManage.Size = new System.Drawing.Size(923, 357);
+      this.PanelViewManage.Size = new System.Drawing.Size(923, 257);
       this.PanelViewManage.TabIndex = 2;
       // 
       // ListBoxLog
@@ -1228,9 +1241,9 @@
             | System.Windows.Forms.AnchorStyles.Left)));
       this.ListBoxLog.FormattingEnabled = true;
       this.ListBoxLog.IntegralHeight = false;
-      this.ListBoxLog.Location = new System.Drawing.Point(13, 52);
+      this.ListBoxLog.Location = new System.Drawing.Point(13, 81);
       this.ListBoxLog.Name = "ListBoxLog";
-      this.ListBoxLog.Size = new System.Drawing.Size(237, 292);
+      this.ListBoxLog.Size = new System.Drawing.Size(237, 163);
       this.ListBoxLog.TabIndex = 3;
       // 
       // ActionCreateData
@@ -1304,10 +1317,66 @@
       dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
       this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle2;
       this.GridIterations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.GridIterations.Size = new System.Drawing.Size(644, 331);
+      this.GridIterations.Size = new System.Drawing.Size(644, 231);
       this.GridIterations.TabIndex = 0;
       this.GridIterations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridIterations_CellFormatting);
       this.GridIterations.Leave += new System.EventHandler(this.GridIterations_Leave);
+      // 
+      // ColumnIteration
+      // 
+      this.ColumnIteration.DataPropertyName = "Iteration";
+      this.ColumnIteration.FillWeight = 126.9036F;
+      this.ColumnIteration.HeaderText = "Iteration";
+      this.ColumnIteration.Name = "ColumnIteration";
+      this.ColumnIteration.ReadOnly = true;
+      this.ColumnIteration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnIteration.Width = 65;
+      // 
+      // ColumnRepeatedCount
+      // 
+      this.ColumnRepeatedCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.ColumnRepeatedCount.DataPropertyName = "RepeatedCount";
+      this.ColumnRepeatedCount.FillWeight = 93.27411F;
+      this.ColumnRepeatedCount.HeaderText = "Unique repeating count";
+      this.ColumnRepeatedCount.Name = "ColumnRepeatedCount";
+      this.ColumnRepeatedCount.ReadOnly = true;
+      this.ColumnRepeatedCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      // 
+      // ColumnMaxOccurences
+      // 
+      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
+      this.ColumnMaxOccurences.FillWeight = 93.27411F;
+      this.ColumnMaxOccurences.HeaderText = "Max occurences";
+      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
+      this.ColumnMaxOccurences.ReadOnly = true;
+      this.ColumnMaxOccurences.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnMaxOccurences.Width = 105;
+      // 
+      // ColumnRemainingRate
+      // 
+      this.ColumnRemainingRate.DataPropertyName = "RemainingRate";
+      this.ColumnRemainingRate.HeaderText = "Remaining rate";
+      this.ColumnRemainingRate.Name = "ColumnRemainingRate";
+      this.ColumnRemainingRate.ReadOnly = true;
+      this.ColumnRemainingRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      // 
+      // ColumnElapsedCounting
+      // 
+      this.ColumnElapsedCounting.DataPropertyName = "ElapsedCounting";
+      this.ColumnElapsedCounting.HeaderText = "Counting duration";
+      this.ColumnElapsedCounting.Name = "ColumnElapsedCounting";
+      this.ColumnElapsedCounting.ReadOnly = true;
+      this.ColumnElapsedCounting.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnElapsedCounting.Width = 115;
+      // 
+      // ColumnElapsedAdditionning
+      // 
+      this.ColumnElapsedAdditionning.DataPropertyName = "ElapsedAdditionning";
+      this.ColumnElapsedAdditionning.HeaderText = "Additionning duration";
+      this.ColumnElapsedAdditionning.Name = "ColumnElapsedAdditionning";
+      this.ColumnElapsedAdditionning.ReadOnly = true;
+      this.ColumnElapsedAdditionning.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnElapsedAdditionning.Width = 115;
       // 
       // BindingSourceIterationRow
       // 
@@ -1878,71 +1947,37 @@
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
       // 
-      // ColumnIteration
+      // ActionPause2
       // 
-      this.ColumnIteration.DataPropertyName = "Iteration";
-      this.ColumnIteration.FillWeight = 126.9036F;
-      this.ColumnIteration.HeaderText = "Iteration";
-      this.ColumnIteration.Name = "ColumnIteration";
-      this.ColumnIteration.ReadOnly = true;
-      this.ColumnIteration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnIteration.Width = 65;
+      this.ActionPause2.Enabled = false;
+      this.ActionPause2.Location = new System.Drawing.Point(94, 42);
+      this.ActionPause2.Name = "ActionPause2";
+      this.ActionPause2.Size = new System.Drawing.Size(75, 23);
+      this.ActionPause2.TabIndex = 2;
+      this.ActionPause2.Text = "Pause";
+      this.ActionPause2.UseVisualStyleBackColor = true;
+      this.ActionPause2.Click += new System.EventHandler(this.ActionPauseContinue_Click);
       // 
-      // ColumnRepeatedCount
+      // ActionStop2
       // 
-      this.ColumnRepeatedCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.ColumnRepeatedCount.DataPropertyName = "RepeatedCount";
-      this.ColumnRepeatedCount.FillWeight = 93.27411F;
-      this.ColumnRepeatedCount.HeaderText = "Unique repeating count";
-      this.ColumnRepeatedCount.Name = "ColumnRepeatedCount";
-      this.ColumnRepeatedCount.ReadOnly = true;
-      this.ColumnRepeatedCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      // 
-      // ColumnMaxOccurences
-      // 
-      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
-      this.ColumnMaxOccurences.FillWeight = 93.27411F;
-      this.ColumnMaxOccurences.HeaderText = "Max occurences";
-      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
-      this.ColumnMaxOccurences.ReadOnly = true;
-      this.ColumnMaxOccurences.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnMaxOccurences.Width = 105;
-      // 
-      // ColumnRemainingRate
-      // 
-      this.ColumnRemainingRate.DataPropertyName = "RemainingRate";
-      this.ColumnRemainingRate.HeaderText = "Remaining rate";
-      this.ColumnRemainingRate.Name = "ColumnRemainingRate";
-      this.ColumnRemainingRate.ReadOnly = true;
-      this.ColumnRemainingRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      // 
-      // ColumnElapsedCounting
-      // 
-      this.ColumnElapsedCounting.DataPropertyName = "ElapsedCounting";
-      this.ColumnElapsedCounting.HeaderText = "Counting duration";
-      this.ColumnElapsedCounting.Name = "ColumnElapsedCounting";
-      this.ColumnElapsedCounting.ReadOnly = true;
-      this.ColumnElapsedCounting.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnElapsedCounting.Width = 115;
-      // 
-      // ColumnElapsedAdditionning
-      // 
-      this.ColumnElapsedAdditionning.DataPropertyName = "ElapsedAdditionning";
-      this.ColumnElapsedAdditionning.HeaderText = "Additionning duration";
-      this.ColumnElapsedAdditionning.Name = "ColumnElapsedAdditionning";
-      this.ColumnElapsedAdditionning.ReadOnly = true;
-      this.ColumnElapsedAdditionning.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnElapsedAdditionning.Width = 115;
+      this.ActionStop2.Enabled = false;
+      this.ActionStop2.Location = new System.Drawing.Point(13, 42);
+      this.ActionStop2.Name = "ActionStop2";
+      this.ActionStop2.Size = new System.Drawing.Size(75, 23);
+      this.ActionStop2.TabIndex = 2;
+      this.ActionStop2.Text = "Stop";
+      this.ActionStop2.UseVisualStyleBackColor = true;
+      this.ActionStop2.Click += new System.EventHandler(this.ActionStop_Click);
       // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(959, 561);
+      this.ClientSize = new System.Drawing.Size(959, 461);
       this.Controls.Add(this.PanelMain);
       this.Controls.Add(this.StatusStrip);
       this.Controls.Add(this.ToolStrip);
-      this.MinimumSize = new System.Drawing.Size(975, 600);
+      this.MinimumSize = new System.Drawing.Size(975, 500);
       this.Name = "MainForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "Hebrew Pi";
@@ -2140,5 +2175,7 @@
     private DataGridViewTextBoxColumn ColumnRemainingRate;
     private DataGridViewTextBoxColumn ColumnElapsedCounting;
     private DataGridViewTextBoxColumn ColumnElapsedAdditionning;
+    private Button ActionStop2;
+    private Button ActionPause2;
   }
 }

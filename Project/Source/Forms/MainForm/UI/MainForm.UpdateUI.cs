@@ -80,19 +80,23 @@ partial class MainForm
       bool dbOpened = DB is not null;
       bool dbOnenedAndNotInBatch = dbOpened && !Globals.IsInBatch;
       bool dbOnenedAndInBatch = dbOpened && Globals.IsInBatch;
+      Globals.AllowClose = !Globals.IsInBatch;
       SelectFileName.Enabled = !dbOpened;
       SelectDbCache.Enabled = !Globals.IsInBatch;
       ActionDbOpen.Enabled = !dbOpened && SelectFileName.SelectedIndex != -1;
       ActionDbClose.Enabled = dbOnenedAndNotInBatch;
-      ActionStop.Enabled = dbOnenedAndInBatch && Globals.CanCancel;
-      ActionPause.Enabled = dbOnenedAndInBatch && Globals.CanPause && !Globals.PauseRequired;
-      ActionContinue.Enabled = dbOnenedAndInBatch && Globals.PauseRequired;
-      ActionContinue.Visible = Globals.PauseRequired;
-      ActionPause.Visible = !ActionContinue.Visible;
-      Globals.AllowClose = !Globals.IsInBatch;
       ActionCreateData.Enabled = dbOnenedAndNotInBatch;
       ActionNormalize.Enabled = dbOnenedAndNotInBatch;
       ActionCreateIndex.Enabled = dbOnenedAndNotInBatch && !IsMotifIndexed;
+      ActionStop.Enabled = dbOnenedAndInBatch && Globals.CanCancel;
+      ActionPause.Enabled = dbOnenedAndInBatch && Globals.CanPause && !Globals.PauseRequired;
+      ActionContinue.Enabled = dbOnenedAndInBatch && Globals.PauseRequired;
+      //ActionContinue.Visible = Globals.PauseRequired;
+      //ActionPause.Visible = !ActionContinue.Visible;
+      ActionStop2.Enabled = ActionStop.Enabled;
+      ActionPause2.Enabled = ActionPause.Enabled || ActionContinue.Enabled;
+      ActionPause2.Text = Globals.PauseRequired ? "Continue" : "Pause";
+
     }
     if ( StatusStrip.InvokeRequired )
       StatusStrip.Invoke(update);
