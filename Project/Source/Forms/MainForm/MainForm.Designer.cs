@@ -30,8 +30,8 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.PanelDatabase = new System.Windows.Forms.Panel();
       this.SelectDbCache = new System.Windows.Forms.ComboBox();
       this.ActionDbClose = new System.Windows.Forms.Button();
@@ -136,6 +136,10 @@
       this.PanelViewGrid = new System.Windows.Forms.Panel();
       this.TabPageManage = new System.Windows.Forms.TabPage();
       this.PanelViewManage = new System.Windows.Forms.Panel();
+      this.EditMaxMotifs = new System.Windows.Forms.NumericUpDown();
+      this.LabelMaxMotifs = new System.Windows.Forms.Label();
+      this.EditAllowInterruption = new System.Windows.Forms.CheckBox();
+      this.EditNormalizeAutoLoop = new System.Windows.Forms.CheckBox();
       this.ListBoxLog = new System.Windows.Forms.ListBox();
       this.ActionStop2 = new System.Windows.Forms.Button();
       this.ActionCreateData = new System.Windows.Forms.Button();
@@ -193,7 +197,6 @@
       this.OpenFileDialogDB = new System.Windows.Forms.OpenFileDialog();
       this.SaveFileDialogDB = new System.Windows.Forms.SaveFileDialog();
       this.OpenFileDialogTXT = new System.Windows.Forms.OpenFileDialog();
-      this.EditNormalizeAutoLoop = new System.Windows.Forms.CheckBox();
       this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnRepeatedCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -203,7 +206,6 @@
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
-      this.EditAllowInterruption = new System.Windows.Forms.CheckBox();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -216,6 +218,7 @@
       this.TabPageGrid.SuspendLayout();
       this.TabPageManage.SuspendLayout();
       this.PanelViewManage.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.EditMaxMotifs)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).BeginInit();
       this.PanelTitle.SuspendLayout();
       this.PanelTitleInner.SuspendLayout();
@@ -239,7 +242,7 @@
       // 
       this.SelectDbCache.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.SelectDbCache.FormattingEnabled = true;
-      this.SelectDbCache.Location = new System.Drawing.Point(5, 3);
+      this.SelectDbCache.Location = new System.Drawing.Point(5, 5);
       this.SelectDbCache.Name = "SelectDbCache";
       this.SelectDbCache.Size = new System.Drawing.Size(50, 21);
       this.SelectDbCache.TabIndex = 3;
@@ -248,7 +251,7 @@
       // ActionDbClose
       // 
       this.ActionDbClose.Enabled = false;
-      this.ActionDbClose.Location = new System.Drawing.Point(189, 3);
+      this.ActionDbClose.Location = new System.Drawing.Point(189, 4);
       this.ActionDbClose.Name = "ActionDbClose";
       this.ActionDbClose.Size = new System.Drawing.Size(58, 23);
       this.ActionDbClose.TabIndex = 2;
@@ -259,7 +262,7 @@
       // ActionDbNew
       // 
       this.ActionDbNew.Enabled = false;
-      this.ActionDbNew.Location = new System.Drawing.Point(61, 3);
+      this.ActionDbNew.Location = new System.Drawing.Point(61, 4);
       this.ActionDbNew.Name = "ActionDbNew";
       this.ActionDbNew.Size = new System.Drawing.Size(58, 23);
       this.ActionDbNew.TabIndex = 2;
@@ -270,7 +273,7 @@
       // ActionDbOpen
       // 
       this.ActionDbOpen.Enabled = false;
-      this.ActionDbOpen.Location = new System.Drawing.Point(125, 3);
+      this.ActionDbOpen.Location = new System.Drawing.Point(125, 4);
       this.ActionDbOpen.Name = "ActionDbOpen";
       this.ActionDbOpen.Size = new System.Drawing.Size(58, 23);
       this.ActionDbOpen.TabIndex = 2;
@@ -291,7 +294,7 @@
             this.LabelStatusSep4,
             this.LabelStatusAction,
             this.LabelStatusFreeMem});
-      this.StatusStrip.Location = new System.Drawing.Point(0, 439);
+      this.StatusStrip.Location = new System.Drawing.Point(0, 539);
       this.StatusStrip.Name = "StatusStrip";
       this.StatusStrip.Size = new System.Drawing.Size(959, 22);
       this.StatusStrip.TabIndex = 2;
@@ -1121,7 +1124,7 @@
       this.PanelMain.Location = new System.Drawing.Point(0, 54);
       this.PanelMain.Name = "PanelMain";
       this.PanelMain.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelMain.Size = new System.Drawing.Size(959, 385);
+      this.PanelMain.Size = new System.Drawing.Size(959, 485);
       this.PanelMain.TabIndex = 10;
       // 
       // PanelMainOuter
@@ -1132,7 +1135,7 @@
       this.PanelMainOuter.Location = new System.Drawing.Point(10, 84);
       this.PanelMainOuter.Name = "PanelMainOuter";
       this.PanelMainOuter.Padding = new System.Windows.Forms.Padding(1);
-      this.PanelMainOuter.Size = new System.Drawing.Size(939, 291);
+      this.PanelMainOuter.Size = new System.Drawing.Size(939, 391);
       this.PanelMainOuter.TabIndex = 18;
       // 
       // PanelMainInner
@@ -1142,7 +1145,7 @@
       this.PanelMainInner.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMainInner.Location = new System.Drawing.Point(1, 1);
       this.PanelMainInner.Name = "PanelMainInner";
-      this.PanelMainInner.Size = new System.Drawing.Size(937, 289);
+      this.PanelMainInner.Size = new System.Drawing.Size(937, 389);
       this.PanelMainInner.TabIndex = 0;
       // 
       // PanelMainCenter
@@ -1152,7 +1155,7 @@
       this.PanelMainCenter.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMainCenter.Location = new System.Drawing.Point(0, 0);
       this.PanelMainCenter.Name = "PanelMainCenter";
-      this.PanelMainCenter.Size = new System.Drawing.Size(937, 289);
+      this.PanelMainCenter.Size = new System.Drawing.Size(937, 389);
       this.PanelMainCenter.TabIndex = 0;
       // 
       // TabControl
@@ -1164,7 +1167,7 @@
       this.TabControl.Location = new System.Drawing.Point(0, 0);
       this.TabControl.Name = "TabControl";
       this.TabControl.SelectedIndex = 0;
-      this.TabControl.Size = new System.Drawing.Size(937, 289);
+      this.TabControl.Size = new System.Drawing.Size(937, 389);
       this.TabControl.TabIndex = 8;
       this.TabControl.TabStop = false;
       this.TabControl.Visible = false;
@@ -1219,7 +1222,7 @@
       this.TabPageManage.Location = new System.Drawing.Point(4, 22);
       this.TabPageManage.Name = "TabPageManage";
       this.TabPageManage.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageManage.Size = new System.Drawing.Size(929, 263);
+      this.TabPageManage.Size = new System.Drawing.Size(929, 363);
       this.TabPageManage.TabIndex = 3;
       this.TabPageManage.Text = "Manage";
       this.TabPageManage.UseVisualStyleBackColor = true;
@@ -1227,6 +1230,8 @@
       // PanelViewManage
       // 
       this.PanelViewManage.BackColor = System.Drawing.SystemColors.Control;
+      this.PanelViewManage.Controls.Add(this.EditMaxMotifs);
+      this.PanelViewManage.Controls.Add(this.LabelMaxMotifs);
       this.PanelViewManage.Controls.Add(this.EditAllowInterruption);
       this.PanelViewManage.Controls.Add(this.EditNormalizeAutoLoop);
       this.PanelViewManage.Controls.Add(this.ListBoxLog);
@@ -1240,8 +1245,62 @@
       this.PanelViewManage.Location = new System.Drawing.Point(3, 3);
       this.PanelViewManage.Name = "PanelViewManage";
       this.PanelViewManage.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewManage.Size = new System.Drawing.Size(923, 257);
+      this.PanelViewManage.Size = new System.Drawing.Size(923, 357);
       this.PanelViewManage.TabIndex = 2;
+      // 
+      // EditMaxMotifs
+      // 
+      this.EditMaxMotifs.Location = new System.Drawing.Point(13, 13);
+      this.EditMaxMotifs.Maximum = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
+      this.EditMaxMotifs.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+      this.EditMaxMotifs.Name = "EditMaxMotifs";
+      this.EditMaxMotifs.Size = new System.Drawing.Size(89, 20);
+      this.EditMaxMotifs.TabIndex = 6;
+      this.EditMaxMotifs.Value = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
+      // 
+      // LabelMaxMotifs
+      // 
+      this.LabelMaxMotifs.AutoSize = true;
+      this.LabelMaxMotifs.Location = new System.Drawing.Point(108, 15);
+      this.LabelMaxMotifs.Name = "LabelMaxMotifs";
+      this.LabelMaxMotifs.Size = new System.Drawing.Size(57, 13);
+      this.LabelMaxMotifs.TabIndex = 5;
+      this.LabelMaxMotifs.Text = "Max motifs";
+      // 
+      // EditAllowInterruption
+      // 
+      this.EditAllowInterruption.AutoSize = true;
+      this.EditAllowInterruption.Location = new System.Drawing.Point(13, 97);
+      this.EditAllowInterruption.Name = "EditAllowInterruption";
+      this.EditAllowInterruption.Size = new System.Drawing.Size(106, 17);
+      this.EditAllowInterruption.TabIndex = 4;
+      this.EditAllowInterruption.Text = "Allow interruption";
+      this.EditAllowInterruption.UseVisualStyleBackColor = true;
+      this.EditAllowInterruption.CheckedChanged += new System.EventHandler(this.EditAllowInterruption_CheckedChanged);
+      // 
+      // EditNormalizeAutoLoop
+      // 
+      this.EditNormalizeAutoLoop.AutoSize = true;
+      this.EditNormalizeAutoLoop.Checked = true;
+      this.EditNormalizeAutoLoop.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.EditNormalizeAutoLoop.Location = new System.Drawing.Point(191, 72);
+      this.EditNormalizeAutoLoop.Name = "EditNormalizeAutoLoop";
+      this.EditNormalizeAutoLoop.Size = new System.Drawing.Size(71, 17);
+      this.EditNormalizeAutoLoop.TabIndex = 4;
+      this.EditNormalizeAutoLoop.Text = "Auto loop";
+      this.EditNormalizeAutoLoop.UseVisualStyleBackColor = true;
       // 
       // ListBoxLog
       // 
@@ -1249,17 +1308,17 @@
             | System.Windows.Forms.AnchorStyles.Left)));
       this.ListBoxLog.FormattingEnabled = true;
       this.ListBoxLog.IntegralHeight = false;
-      this.ListBoxLog.Location = new System.Drawing.Point(13, 104);
+      this.ListBoxLog.Location = new System.Drawing.Point(13, 130);
       this.ListBoxLog.Name = "ListBoxLog";
-      this.ListBoxLog.Size = new System.Drawing.Size(237, 140);
+      this.ListBoxLog.Size = new System.Drawing.Size(265, 214);
       this.ListBoxLog.TabIndex = 3;
       // 
       // ActionStop2
       // 
       this.ActionStop2.Enabled = false;
-      this.ActionStop2.Location = new System.Drawing.Point(13, 42);
+      this.ActionStop2.Location = new System.Drawing.Point(13, 68);
       this.ActionStop2.Name = "ActionStop2";
-      this.ActionStop2.Size = new System.Drawing.Size(75, 23);
+      this.ActionStop2.Size = new System.Drawing.Size(89, 23);
       this.ActionStop2.TabIndex = 2;
       this.ActionStop2.Text = "Stop";
       this.ActionStop2.UseVisualStyleBackColor = true;
@@ -1268,9 +1327,9 @@
       // ActionCreateData
       // 
       this.ActionCreateData.Enabled = false;
-      this.ActionCreateData.Location = new System.Drawing.Point(13, 13);
+      this.ActionCreateData.Location = new System.Drawing.Point(13, 39);
       this.ActionCreateData.Name = "ActionCreateData";
-      this.ActionCreateData.Size = new System.Drawing.Size(75, 23);
+      this.ActionCreateData.Size = new System.Drawing.Size(89, 23);
       this.ActionCreateData.TabIndex = 2;
       this.ActionCreateData.Text = "Create data";
       this.ActionCreateData.UseVisualStyleBackColor = true;
@@ -1279,9 +1338,9 @@
       // ActionNormalize
       // 
       this.ActionNormalize.Enabled = false;
-      this.ActionNormalize.Location = new System.Drawing.Point(175, 13);
+      this.ActionNormalize.Location = new System.Drawing.Point(189, 39);
       this.ActionNormalize.Name = "ActionNormalize";
-      this.ActionNormalize.Size = new System.Drawing.Size(75, 23);
+      this.ActionNormalize.Size = new System.Drawing.Size(89, 23);
       this.ActionNormalize.TabIndex = 2;
       this.ActionNormalize.Text = "Normalize";
       this.ActionNormalize.UseVisualStyleBackColor = true;
@@ -1290,7 +1349,7 @@
       // ActionPause2
       // 
       this.ActionPause2.Enabled = false;
-      this.ActionPause2.Location = new System.Drawing.Point(94, 42);
+      this.ActionPause2.Location = new System.Drawing.Point(108, 68);
       this.ActionPause2.Name = "ActionPause2";
       this.ActionPause2.Size = new System.Drawing.Size(75, 23);
       this.ActionPause2.TabIndex = 2;
@@ -1301,7 +1360,7 @@
       // ActionCreateIndex
       // 
       this.ActionCreateIndex.Enabled = false;
-      this.ActionCreateIndex.Location = new System.Drawing.Point(94, 13);
+      this.ActionCreateIndex.Location = new System.Drawing.Point(108, 39);
       this.ActionCreateIndex.Name = "ActionCreateIndex";
       this.ActionCreateIndex.Size = new System.Drawing.Size(75, 23);
       this.ActionCreateIndex.TabIndex = 2;
@@ -1321,14 +1380,14 @@
       this.GridIterations.BackgroundColor = System.Drawing.SystemColors.Window;
       this.GridIterations.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.GridIterations.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-      dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-      dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.GridIterations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.GridIterations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
       this.GridIterations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.GridIterations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnIteration,
@@ -1339,15 +1398,14 @@
             this.ColumnElapsedAdditionning});
       this.GridIterations.DataSource = this.BindingSourceIterationRow;
       this.GridIterations.GridColor = System.Drawing.SystemColors.Window;
-      this.GridIterations.Location = new System.Drawing.Point(266, 13);
-      this.GridIterations.MultiSelect = false;
+      this.GridIterations.Location = new System.Drawing.Point(294, 13);
       this.GridIterations.Name = "GridIterations";
       this.GridIterations.ReadOnly = true;
       this.GridIterations.RowHeadersVisible = false;
-      dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-      this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle6;
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+      this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle2;
       this.GridIterations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.GridIterations.Size = new System.Drawing.Size(644, 231);
+      this.GridIterations.Size = new System.Drawing.Size(616, 331);
       this.GridIterations.TabIndex = 0;
       this.GridIterations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridIterations_CellFormatting);
       this.GridIterations.Leave += new System.EventHandler(this.GridIterations_Leave);
@@ -1885,16 +1943,6 @@
       // 
       this.OpenFileDialogTXT.Filter = "Text files (*.txt)|*.txt";
       // 
-      // EditNormalizeAutoLoop
-      // 
-      this.EditNormalizeAutoLoop.AutoSize = true;
-      this.EditNormalizeAutoLoop.Location = new System.Drawing.Point(177, 46);
-      this.EditNormalizeAutoLoop.Name = "EditNormalizeAutoLoop";
-      this.EditNormalizeAutoLoop.Size = new System.Drawing.Size(71, 17);
-      this.EditNormalizeAutoLoop.TabIndex = 4;
-      this.EditNormalizeAutoLoop.Text = "Auto loop";
-      this.EditNormalizeAutoLoop.UseVisualStyleBackColor = true;
-      // 
       // ColumnIteration
       // 
       this.ColumnIteration.DataPropertyName = "Iteration";
@@ -1910,7 +1958,7 @@
       this.ColumnRepeatedCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
       this.ColumnRepeatedCount.DataPropertyName = "RepeatedCount";
       this.ColumnRepeatedCount.FillWeight = 93.27411F;
-      this.ColumnRepeatedCount.HeaderText = "Unique repeating count";
+      this.ColumnRepeatedCount.HeaderText = "Unique repeating";
       this.ColumnRepeatedCount.Name = "ColumnRepeatedCount";
       this.ColumnRepeatedCount.ReadOnly = true;
       this.ColumnRepeatedCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -1999,22 +2047,11 @@
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
       // 
-      // EditAllowInterruption
-      // 
-      this.EditAllowInterruption.AutoSize = true;
-      this.EditAllowInterruption.Location = new System.Drawing.Point(13, 71);
-      this.EditAllowInterruption.Name = "EditAllowInterruption";
-      this.EditAllowInterruption.Size = new System.Drawing.Size(106, 17);
-      this.EditAllowInterruption.TabIndex = 4;
-      this.EditAllowInterruption.Text = "Allow interruption";
-      this.EditAllowInterruption.UseVisualStyleBackColor = true;
-      this.EditAllowInterruption.CheckedChanged += new System.EventHandler(this.EditAllowInterruption_CheckedChanged);
-      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(959, 461);
+      this.ClientSize = new System.Drawing.Size(959, 561);
       this.Controls.Add(this.PanelMain);
       this.Controls.Add(this.StatusStrip);
       this.Controls.Add(this.ToolStrip);
@@ -2041,6 +2078,7 @@
       this.TabPageManage.ResumeLayout(false);
       this.PanelViewManage.ResumeLayout(false);
       this.PanelViewManage.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.EditMaxMotifs)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).EndInit();
       this.PanelTitle.ResumeLayout(false);
       this.PanelTitleInner.ResumeLayout(false);
@@ -2210,12 +2248,6 @@
     private Button ActionCreateData;
     private Button ActionNormalize;
     private ListBox ListBoxLog;
-    private DataGridViewTextBoxColumn ColumnIteration;
-    private DataGridViewTextBoxColumn ColumnRepeatedCount;
-    private DataGridViewTextBoxColumn ColumnMaxOccurences;
-    private DataGridViewTextBoxColumn ColumnRemainingRate;
-    private DataGridViewTextBoxColumn ColumnElapsedCounting;
-    private DataGridViewTextBoxColumn ColumnElapsedAdditionning;
     private Button ActionStop2;
     private Button ActionPause2;
     private OpenFileDialog OpenFileDialogDB;
@@ -2224,5 +2256,13 @@
     private OpenFileDialog OpenFileDialogTXT;
     private CheckBox EditNormalizeAutoLoop;
     private CheckBox EditAllowInterruption;
+    private NumericUpDown EditMaxMotifs;
+    private Label LabelMaxMotifs;
+    private DataGridViewTextBoxColumn ColumnIteration;
+    private DataGridViewTextBoxColumn ColumnRepeatedCount;
+    private DataGridViewTextBoxColumn ColumnMaxOccurences;
+    private DataGridViewTextBoxColumn ColumnRemainingRate;
+    private DataGridViewTextBoxColumn ColumnElapsedCounting;
+    private DataGridViewTextBoxColumn ColumnElapsedAdditionning;
   }
 }

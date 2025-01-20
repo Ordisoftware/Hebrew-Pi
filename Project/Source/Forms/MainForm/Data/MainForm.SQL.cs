@@ -19,7 +19,7 @@ static class SQLHelper
 
   static internal async Task<List<(long MotifCount, long MaxOccurences)>> GetRepeatingMotifCountAndMaxOccurencesAsync(this SQLiteNetORM DB)
   {
-    var sql = @"SELECT COUNT(*) AS Nombre_Motifs_Uniques, MAX(Occurrences) AS Occurrence_Max
+    var sql = @"SELECT COUNT(*) AS UniqueRepeating, MAX(Occurrences) AS MaxOccurrences
                 FROM (
                   SELECT Motif, COUNT(*) AS Occurrences
                   FROM Decuplets

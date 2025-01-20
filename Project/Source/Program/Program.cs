@@ -67,6 +67,7 @@ static partial class Program
       ProcessCommandLineOptions();
       Globals.ChronoStartingApp.Start();
       // TODO remove later
+      Settings.LanguageSelected = Language.FR;
       DebugManager.TraceEnabled = true;
       DebugManager.Enabled = true;
       Settings.UsageStatisticsEnabled = true;

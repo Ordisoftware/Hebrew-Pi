@@ -72,7 +72,8 @@ partial class MainForm
       }
       taskbar.SetProgressState(TaskbarProgressBarState.Normal);
       Globals.ChronoBatch.Restart();
-      while ( ( charsRead = reader.Read(buffer, 0, FileReadBufferSize) ) >= 10 )
+      bool maxReached = false;
+      while ( ( charsRead = reader.Read(buffer, 0, FileReadBufferSize) ) >= 10 && !maxReached )
       {
         if ( !CheckIfBatchCanContinueAsync().Result ) break;
         for ( long indexBuffer = 0; indexBuffer < charsRead; indexBuffer += PiDecimalMotifSize )
@@ -92,6 +93,11 @@ partial class MainForm
             if ( countMotifs % pagingRemaining == 0 ) showRemaining();
           }
           countMotifs++;
+          if ( countMotifs == EditMaxMotifs.Value )
+          {
+            maxReached = true;
+            break;
+          }
         }
       }
       doCommit();

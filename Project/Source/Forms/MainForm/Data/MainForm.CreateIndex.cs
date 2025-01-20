@@ -27,8 +27,9 @@ partial class MainForm
     Globals.ChronoSubBatch.Restart();
     DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
     Globals.ChronoSubBatch.Stop();
+    if ( !CheckIfBatchCanContinueAsync().Result ) return;
     UpdateStatusAction(AppTranslations.IndexedText);
-    IsMotifIndexed = DB.CheckIndex("Decuplets_Motif");
+    IsMotifIndexed = DB?.CheckIndex("Decuplets_Motif") ?? false;
   }
 
 }

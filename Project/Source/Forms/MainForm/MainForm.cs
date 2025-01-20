@@ -51,7 +51,7 @@ partial class MainForm : Form
     InitializeComponent();
     DoConstructor();
     ColumnIteration.HeaderText = "Itération";
-    ColumnRepeatedCount.HeaderText = "Nb de répétés uniques";
+    ColumnRepeatedCount.HeaderText = "Répétés uniques";
     ColumnMaxOccurences.HeaderText = "Max occurrences";
     ColumnRemainingRate.HeaderText = "Taux de restants";
     ColumnElapsedCounting.HeaderText = "Durée comptage";
@@ -236,7 +236,12 @@ partial class MainForm : Form
 
   private void ActionDbNew_Click(object sender, EventArgs e)
   {
-    // TODO
+    if ( SaveFileDialogDB.ShowDialog() == DialogResult.OK )
+    {
+      if ( File.Exists(SaveFileDialogDB.FileName) )
+        File.Delete(SaveFileDialogDB.FileName);
+      DoActionDbOpen(SaveFileDialogDB.FileName);
+    }
   }
 
   private void ActionDbOpen_Click(object sender, EventArgs e)
