@@ -246,8 +246,11 @@ partial class MainForm : Form
 
   private void ActionDbOpen_Click(object sender, EventArgs e)
   {
-    if ( OpenFileDialogDB.ShowDialog() == DialogResult.OK ) ;
-    DoActionDbOpen(OpenFileDialogDB.FileName);
+    if ( OpenFileDialogDB.ShowDialog() == DialogResult.OK )
+    {
+      DoActionDbOpen(OpenFileDialogDB.FileName);
+      DatabaseFilePath = OpenFileDialogDB.FileName;
+    }
   }
 
   private void ActionDbClose_Click(object sender, EventArgs e)
@@ -258,7 +261,10 @@ partial class MainForm : Form
   private void ActionCreateData_Click(object sender, EventArgs e)
   {
     if ( OpenFileDialogTXT.ShowDialog() == DialogResult.OK )
+    {
       DoBatchAsync(() => DoActionPopulateAsync(OpenFileDialogTXT.FileName));
+      //LabelTitleCenter.Text = $"{Path.GetFileName(DatabaseFilePath)} ({DB.Table<DecupletRow>().Count()})";
+    }
   }
 
   private void ActionCreateIndex_Click(object sender, EventArgs e)

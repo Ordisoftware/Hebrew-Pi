@@ -42,7 +42,6 @@ partial class MainForm
   private void DoActionDbOpen(string path)
   {
     DatabaseFilePath = path;
-    LabelTitleCenter.Text = Path.GetFileName(path);
     DB = new SQLiteNetORM(path);
     DB.SetTempDir(SQLiteTempDir);
     DB.SetJournal(false);
@@ -50,10 +49,11 @@ partial class MainForm
     DB.CreateTable<DecupletRow>();
     DB.CreateTable<IterationRow>();
     IsMotifIndexed = DB.CheckIndex("Decuplets_Motif");
+    //LabelTitleCenter.Text = $"{Path.GetFileName(path)} ({DB.Table<DecupletRow>().Count()})";
+    LabelTitleCenter.Text = Path.GetFileName(path);
     SetDbCache();
     LoadIterationGrid();
     UpdateButtons();
-    //TimerMemory_Tick(null, null);
   }
 
   private bool IsMotifIndexed;
@@ -67,7 +67,6 @@ partial class MainForm
     GridIterations.DataSource = null;
     LabelTitleCenter.Text = string.Empty;
     UpdateButtons();
-    //TimerMemory_Tick(null, null);
   }
 
   private async Task DoBatchAsync(Action action, bool interruptible = true)

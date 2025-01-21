@@ -89,13 +89,9 @@ partial class MainForm
       ActionNormalize.Enabled = dbOnenedAndNotInBatch;
       ActionCreateIndex.Enabled = dbOnenedAndNotInBatch && !IsMotifIndexed;
       ActionStop.Enabled = dbOnenedAndInBatch && Globals.CanCancel;
-      ActionPause.Enabled = dbOnenedAndInBatch && Globals.CanPause && !Globals.PauseRequired;
-      ActionContinue.Enabled = dbOnenedAndInBatch && Globals.PauseRequired;
-      //ActionContinue.Visible = Globals.PauseRequired;
-      //ActionPause.Visible = !ActionContinue.Visible;
-      ActionStop2.Enabled = ActionStop.Enabled;
-      ActionPause2.Enabled = ActionPause.Enabled || ActionContinue.Enabled;
-      ActionPause2.Text = Globals.PauseRequired ? "Continue" : "Pause";
+      ActionPause.Enabled = ( dbOnenedAndInBatch && Globals.CanPause && !Globals.PauseRequired )
+                         || ( dbOnenedAndInBatch && Globals.PauseRequired );
+      ActionPause.Text = Globals.PauseRequired ? "Continue" : "Pause";
 
     }
     if ( StatusStrip.InvokeRequired )

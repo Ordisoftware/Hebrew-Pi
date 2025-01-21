@@ -30,8 +30,8 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
       this.PanelDatabase = new System.Windows.Forms.Panel();
       this.SelectDbCache = new System.Windows.Forms.ComboBox();
       this.ActionDbClose = new System.Windows.Forms.Button();
@@ -72,12 +72,8 @@
       this.ActionViewGrid = new System.Windows.Forms.ToolStripButton();
       this.ActionViewManage = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-      this.ActionStop = new System.Windows.Forms.ToolStripButton();
-      this.ActionPause = new System.Windows.Forms.ToolStripButton();
-      this.ActionContinue = new System.Windows.Forms.ToolStripButton();
-      this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
       this.ActionDatabase = new System.Windows.Forms.ToolStripDropDownButton();
-      this.ActionDatabaseNew = new System.Windows.Forms.ToolStripMenuItem();
+      this.ActionDatabaseClose = new System.Windows.Forms.ToolStripMenuItem();
       this.ActionDatabaseRestore = new System.Windows.Forms.ToolStripMenuItem();
       this.ActionDatabaseBackup = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
@@ -141,15 +137,19 @@
       this.EditAllowInterruption = new System.Windows.Forms.CheckBox();
       this.EditNormalizeAutoLoop = new System.Windows.Forms.CheckBox();
       this.ListBoxLog = new System.Windows.Forms.ListBox();
-      this.ActionStop2 = new System.Windows.Forms.Button();
+      this.ActionStop = new System.Windows.Forms.Button();
       this.ActionCreateData = new System.Windows.Forms.Button();
       this.ActionNormalize = new System.Windows.Forms.Button();
-      this.ActionPause2 = new System.Windows.Forms.Button();
+      this.ActionPause = new System.Windows.Forms.Button();
       this.ActionCreateIndex = new System.Windows.Forms.Button();
       this.GridIterations = new System.Windows.Forms.DataGridView();
+      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnRepeatedCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnRemainingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnElapsedCounting = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnElapsedAdditionning = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
       this.PanelSepTop = new System.Windows.Forms.Panel();
       this.PanelTitle = new System.Windows.Forms.Panel();
       this.PanelTitleInner = new System.Windows.Forms.Panel();
@@ -197,15 +197,15 @@
       this.OpenFileDialogDB = new System.Windows.Forms.OpenFileDialog();
       this.SaveFileDialogDB = new System.Windows.Forms.SaveFileDialog();
       this.OpenFileDialogTXT = new System.Windows.Forms.OpenFileDialog();
-      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnRepeatedCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
       this.EditSearchTranslation = new Ordisoftware.Core.TextBoxEx();
       this.EditSearchWord = new Ordisoftware.Hebrew.LettersControl();
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
+      this.ActionDatabaseNew = new System.Windows.Forms.ToolStripMenuItem();
+      this.ActionDatabaseOpen = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+      this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -220,10 +220,10 @@
       this.PanelViewManage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.EditMaxMotifs)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).BeginInit();
       this.PanelTitle.SuspendLayout();
       this.PanelTitleInner.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).BeginInit();
       this.SuspendLayout();
       // 
       // PanelDatabase
@@ -380,10 +380,6 @@
             this.ActionViewGrid,
             this.ActionViewManage,
             this.toolStripSeparator5,
-            this.ActionStop,
-            this.ActionPause,
-            this.ActionContinue,
-            this.toolStripSeparator8,
             this.ActionDatabase,
             this.toolStripSeparator20,
             this.ActionTools,
@@ -610,58 +606,15 @@
       this.toolStripSeparator5.Size = new System.Drawing.Size(6, 49);
       this.toolStripSeparator5.Visible = false;
       // 
-      // ActionStop
-      // 
-      this.ActionStop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionStop.Enabled = false;
-      this.ActionStop.Image = ((System.Drawing.Image)(resources.GetObject("ActionStop.Image")));
-      this.ActionStop.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionStop.Name = "ActionStop";
-      this.ActionStop.Padding = new System.Windows.Forms.Padding(5);
-      this.ActionStop.Size = new System.Drawing.Size(46, 46);
-      this.ActionStop.Text = "Pause";
-      this.ActionStop.ToolTipText = "Pause";
-      this.ActionStop.Visible = false;
-      this.ActionStop.Click += new System.EventHandler(this.ActionStop_Click);
-      // 
-      // ActionPause
-      // 
-      this.ActionPause.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionPause.Enabled = false;
-      this.ActionPause.Image = ((System.Drawing.Image)(resources.GetObject("ActionPause.Image")));
-      this.ActionPause.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionPause.Name = "ActionPause";
-      this.ActionPause.Padding = new System.Windows.Forms.Padding(5);
-      this.ActionPause.Size = new System.Drawing.Size(46, 46);
-      this.ActionPause.Text = "Pause";
-      this.ActionPause.ToolTipText = "Pause";
-      this.ActionPause.Visible = false;
-      this.ActionPause.Click += new System.EventHandler(this.ActionPauseContinue_Click);
-      // 
-      // ActionContinue
-      // 
-      this.ActionContinue.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionContinue.Enabled = false;
-      this.ActionContinue.Image = ((System.Drawing.Image)(resources.GetObject("ActionContinue.Image")));
-      this.ActionContinue.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionContinue.Name = "ActionContinue";
-      this.ActionContinue.Padding = new System.Windows.Forms.Padding(5);
-      this.ActionContinue.Size = new System.Drawing.Size(46, 46);
-      this.ActionContinue.Text = "Continue";
-      this.ActionContinue.ToolTipText = "Continue";
-      this.ActionContinue.Visible = false;
-      this.ActionContinue.Click += new System.EventHandler(this.ActionPauseContinue_Click);
-      // 
-      // toolStripSeparator8
-      // 
-      this.toolStripSeparator8.Name = "toolStripSeparator8";
-      this.toolStripSeparator8.Size = new System.Drawing.Size(6, 49);
-      // 
       // ActionDatabase
       // 
       this.ActionDatabase.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
       this.ActionDatabase.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ActionDatabaseNew,
+            this.toolStripSeparator8,
+            this.ActionDatabaseOpen,
+            this.ActionDatabaseClose,
+            this.toolStripSeparator9,
             this.ActionDatabaseRestore,
             this.ActionDatabaseBackup,
             this.toolStripSeparator22,
@@ -677,14 +630,15 @@
       this.ActionDatabase.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
       this.ActionDatabase.Size = new System.Drawing.Size(49, 46);
       // 
-      // ActionDatabaseNew
+      // ActionDatabaseClose
       // 
-      this.ActionDatabaseNew.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabaseNew.Image")));
-      this.ActionDatabaseNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.ActionDatabaseNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionDatabaseNew.Name = "ActionDatabaseNew";
-      this.ActionDatabaseNew.Size = new System.Drawing.Size(210, 22);
-      this.ActionDatabaseNew.Text = "New database";
+      this.ActionDatabaseClose.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabaseClose.Image")));
+      this.ActionDatabaseClose.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.ActionDatabaseClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.ActionDatabaseClose.Name = "ActionDatabaseClose";
+      this.ActionDatabaseClose.Size = new System.Drawing.Size(210, 22);
+      this.ActionDatabaseClose.Text = "Close database";
+      this.ActionDatabaseClose.Click += new System.EventHandler(this.ActionDbClose_Click);
       // 
       // ActionDatabaseRestore
       // 
@@ -1178,7 +1132,7 @@
       this.TabPageDecode.Location = new System.Drawing.Point(4, 22);
       this.TabPageDecode.Name = "TabPageDecode";
       this.TabPageDecode.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageDecode.Size = new System.Drawing.Size(929, 263);
+      this.TabPageDecode.Size = new System.Drawing.Size(929, 363);
       this.TabPageDecode.TabIndex = 1;
       this.TabPageDecode.Text = "Decode";
       this.TabPageDecode.UseVisualStyleBackColor = true;
@@ -1190,7 +1144,7 @@
       this.PanelViewDecode.Location = new System.Drawing.Point(3, 3);
       this.PanelViewDecode.Name = "PanelViewDecode";
       this.PanelViewDecode.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewDecode.Size = new System.Drawing.Size(923, 257);
+      this.PanelViewDecode.Size = new System.Drawing.Size(923, 357);
       this.PanelViewDecode.TabIndex = 0;
       // 
       // TabPageGrid
@@ -1199,7 +1153,7 @@
       this.TabPageGrid.Location = new System.Drawing.Point(4, 22);
       this.TabPageGrid.Name = "TabPageGrid";
       this.TabPageGrid.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageGrid.Size = new System.Drawing.Size(929, 263);
+      this.TabPageGrid.Size = new System.Drawing.Size(929, 363);
       this.TabPageGrid.TabIndex = 0;
       this.TabPageGrid.Text = "Grid";
       this.TabPageGrid.UseVisualStyleBackColor = true;
@@ -1213,7 +1167,7 @@
       this.PanelViewGrid.Location = new System.Drawing.Point(3, 3);
       this.PanelViewGrid.Name = "PanelViewGrid";
       this.PanelViewGrid.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewGrid.Size = new System.Drawing.Size(923, 257);
+      this.PanelViewGrid.Size = new System.Drawing.Size(923, 357);
       this.PanelViewGrid.TabIndex = 22;
       // 
       // TabPageManage
@@ -1235,10 +1189,10 @@
       this.PanelViewManage.Controls.Add(this.EditAllowInterruption);
       this.PanelViewManage.Controls.Add(this.EditNormalizeAutoLoop);
       this.PanelViewManage.Controls.Add(this.ListBoxLog);
-      this.PanelViewManage.Controls.Add(this.ActionStop2);
+      this.PanelViewManage.Controls.Add(this.ActionStop);
       this.PanelViewManage.Controls.Add(this.ActionCreateData);
       this.PanelViewManage.Controls.Add(this.ActionNormalize);
-      this.PanelViewManage.Controls.Add(this.ActionPause2);
+      this.PanelViewManage.Controls.Add(this.ActionPause);
       this.PanelViewManage.Controls.Add(this.ActionCreateIndex);
       this.PanelViewManage.Controls.Add(this.GridIterations);
       this.PanelViewManage.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1315,14 +1269,14 @@
       // 
       // ActionStop2
       // 
-      this.ActionStop2.Enabled = false;
-      this.ActionStop2.Location = new System.Drawing.Point(13, 68);
-      this.ActionStop2.Name = "ActionStop2";
-      this.ActionStop2.Size = new System.Drawing.Size(89, 23);
-      this.ActionStop2.TabIndex = 2;
-      this.ActionStop2.Text = "Stop";
-      this.ActionStop2.UseVisualStyleBackColor = true;
-      this.ActionStop2.Click += new System.EventHandler(this.ActionStop_Click);
+      this.ActionStop.Enabled = false;
+      this.ActionStop.Location = new System.Drawing.Point(13, 68);
+      this.ActionStop.Name = "ActionStop2";
+      this.ActionStop.Size = new System.Drawing.Size(89, 23);
+      this.ActionStop.TabIndex = 2;
+      this.ActionStop.Text = "Stop";
+      this.ActionStop.UseVisualStyleBackColor = true;
+      this.ActionStop.Click += new System.EventHandler(this.ActionStop_Click);
       // 
       // ActionCreateData
       // 
@@ -1348,14 +1302,14 @@
       // 
       // ActionPause2
       // 
-      this.ActionPause2.Enabled = false;
-      this.ActionPause2.Location = new System.Drawing.Point(108, 68);
-      this.ActionPause2.Name = "ActionPause2";
-      this.ActionPause2.Size = new System.Drawing.Size(75, 23);
-      this.ActionPause2.TabIndex = 2;
-      this.ActionPause2.Text = "Pause";
-      this.ActionPause2.UseVisualStyleBackColor = true;
-      this.ActionPause2.Click += new System.EventHandler(this.ActionPauseContinue_Click);
+      this.ActionPause.Enabled = false;
+      this.ActionPause.Location = new System.Drawing.Point(108, 68);
+      this.ActionPause.Name = "ActionPause2";
+      this.ActionPause.Size = new System.Drawing.Size(75, 23);
+      this.ActionPause.TabIndex = 2;
+      this.ActionPause.Text = "Pause";
+      this.ActionPause.UseVisualStyleBackColor = true;
+      this.ActionPause.Click += new System.EventHandler(this.ActionPauseContinue_Click);
       // 
       // ActionCreateIndex
       // 
@@ -1380,14 +1334,14 @@
       this.GridIterations.BackgroundColor = System.Drawing.SystemColors.Window;
       this.GridIterations.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.GridIterations.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.GridIterations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+      dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+      dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.GridIterations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
       this.GridIterations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.GridIterations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnIteration,
@@ -1402,13 +1356,43 @@
       this.GridIterations.Name = "GridIterations";
       this.GridIterations.ReadOnly = true;
       this.GridIterations.RowHeadersVisible = false;
-      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-      this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+      this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle8;
       this.GridIterations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.GridIterations.Size = new System.Drawing.Size(616, 331);
       this.GridIterations.TabIndex = 0;
       this.GridIterations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridIterations_CellFormatting);
       this.GridIterations.Leave += new System.EventHandler(this.GridIterations_Leave);
+      // 
+      // ColumnIteration
+      // 
+      this.ColumnIteration.DataPropertyName = "Iteration";
+      this.ColumnIteration.FillWeight = 126.9036F;
+      this.ColumnIteration.HeaderText = "Iteration";
+      this.ColumnIteration.Name = "ColumnIteration";
+      this.ColumnIteration.ReadOnly = true;
+      this.ColumnIteration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnIteration.Width = 65;
+      // 
+      // ColumnRepeatedCount
+      // 
+      this.ColumnRepeatedCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.ColumnRepeatedCount.DataPropertyName = "RepeatedCount";
+      this.ColumnRepeatedCount.FillWeight = 93.27411F;
+      this.ColumnRepeatedCount.HeaderText = "Unique repeating";
+      this.ColumnRepeatedCount.Name = "ColumnRepeatedCount";
+      this.ColumnRepeatedCount.ReadOnly = true;
+      this.ColumnRepeatedCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      // 
+      // ColumnMaxOccurences
+      // 
+      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
+      this.ColumnMaxOccurences.FillWeight = 93.27411F;
+      this.ColumnMaxOccurences.HeaderText = "Max occurences";
+      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
+      this.ColumnMaxOccurences.ReadOnly = true;
+      this.ColumnMaxOccurences.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnMaxOccurences.Width = 105;
       // 
       // ColumnRemainingRate
       // 
@@ -1435,6 +1419,11 @@
       this.ColumnElapsedAdditionning.ReadOnly = true;
       this.ColumnElapsedAdditionning.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
       this.ColumnElapsedAdditionning.Width = 115;
+      // 
+      // BindingSourceIterationRow
+      // 
+      this.BindingSourceIterationRow.AllowNew = true;
+      this.BindingSourceIterationRow.DataSource = typeof(Ordisoftware.Hebrew.Pi.IterationRow);
       // 
       // PanelSepTop
       // 
@@ -1943,41 +1932,6 @@
       // 
       this.OpenFileDialogTXT.Filter = "Text files (*.txt)|*.txt";
       // 
-      // ColumnIteration
-      // 
-      this.ColumnIteration.DataPropertyName = "Iteration";
-      this.ColumnIteration.FillWeight = 126.9036F;
-      this.ColumnIteration.HeaderText = "Iteration";
-      this.ColumnIteration.Name = "ColumnIteration";
-      this.ColumnIteration.ReadOnly = true;
-      this.ColumnIteration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnIteration.Width = 65;
-      // 
-      // ColumnRepeatedCount
-      // 
-      this.ColumnRepeatedCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.ColumnRepeatedCount.DataPropertyName = "RepeatedCount";
-      this.ColumnRepeatedCount.FillWeight = 93.27411F;
-      this.ColumnRepeatedCount.HeaderText = "Unique repeating";
-      this.ColumnRepeatedCount.Name = "ColumnRepeatedCount";
-      this.ColumnRepeatedCount.ReadOnly = true;
-      this.ColumnRepeatedCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      // 
-      // ColumnMaxOccurences
-      // 
-      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
-      this.ColumnMaxOccurences.FillWeight = 93.27411F;
-      this.ColumnMaxOccurences.HeaderText = "Max occurences";
-      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
-      this.ColumnMaxOccurences.ReadOnly = true;
-      this.ColumnMaxOccurences.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnMaxOccurences.Width = 105;
-      // 
-      // BindingSourceIterationRow
-      // 
-      this.BindingSourceIterationRow.AllowNew = true;
-      this.BindingSourceIterationRow.DataSource = typeof(Ordisoftware.Hebrew.Pi.IterationRow);
-      // 
       // EditSearchTranslation
       // 
       this.EditSearchTranslation.BackColor = System.Drawing.Color.AliceBlue;
@@ -2047,6 +2001,36 @@
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
       // 
+      // ActionDatabaseNew
+      // 
+      this.ActionDatabaseNew.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabaseNew.Image")));
+      this.ActionDatabaseNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.ActionDatabaseNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.ActionDatabaseNew.Name = "ActionDatabaseNew";
+      this.ActionDatabaseNew.Size = new System.Drawing.Size(210, 22);
+      this.ActionDatabaseNew.Text = "New database";
+      this.ActionDatabaseNew.Click += new System.EventHandler(this.ActionDbNew_Click);
+      // 
+      // ActionDatabaseOpen
+      // 
+      this.ActionDatabaseOpen.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabaseOpen.Image")));
+      this.ActionDatabaseOpen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.ActionDatabaseOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.ActionDatabaseOpen.Name = "ActionDatabaseOpen";
+      this.ActionDatabaseOpen.Size = new System.Drawing.Size(210, 22);
+      this.ActionDatabaseOpen.Text = "Open database";
+      this.ActionDatabaseOpen.Click += new System.EventHandler(this.ActionDbOpen_Click);
+      // 
+      // toolStripSeparator8
+      // 
+      this.toolStripSeparator8.Name = "toolStripSeparator8";
+      this.toolStripSeparator8.Size = new System.Drawing.Size(207, 6);
+      // 
+      // toolStripSeparator9
+      // 
+      this.toolStripSeparator9.Name = "toolStripSeparator9";
+      this.toolStripSeparator9.Size = new System.Drawing.Size(207, 6);
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2080,10 +2064,10 @@
       this.PanelViewManage.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.EditMaxMotifs)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).EndInit();
       this.PanelTitle.ResumeLayout(false);
       this.PanelTitleInner.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -2121,7 +2105,7 @@
     private ToolStripButton ActionHistoryNext;
     private ToolStripSeparator toolStripSeparator13;
     private ToolStripDropDownButton ActionDatabase;
-    private ToolStripMenuItem ActionDatabaseNew;
+    private ToolStripMenuItem ActionDatabaseClose;
     private ToolStripMenuItem ActionDatabaseRestore;
     private ToolStripMenuItem ActionDatabaseBackup;
     private ToolStripSeparator toolStripSeparator22;
@@ -2225,12 +2209,8 @@
     private ToolStripSeparator toolStripSeparator5;
     private System.Windows.Forms.Timer TimerBatch;
     private ToolStripSeparator toolStripSeparator6;
-    private ToolStripButton ActionStop;
-    private ToolStripButton ActionContinue;
-    private ToolStripSeparator toolStripSeparator8;
     private ToolStripSeparator toolStripSeparator27;
     internal ToolStripMenuItem EditExportUseHebrewFontElseUnicodeChars;
-    private ToolStripButton ActionPause;
     private ToolStripMenuItem ActionDatabaseSetCacheSize;
     private System.Windows.Forms.Timer TimerMemory;
     private ToolStripStatusLabel LabelStatusFreeMem;
@@ -2248,8 +2228,8 @@
     private Button ActionCreateData;
     private Button ActionNormalize;
     private ListBox ListBoxLog;
-    private Button ActionStop2;
-    private Button ActionPause2;
+    private Button ActionStop;
+    private Button ActionPause;
     private OpenFileDialog OpenFileDialogDB;
     private SaveFileDialog SaveFileDialogDB;
     private Button ActionDbNew;
@@ -2264,5 +2244,9 @@
     private DataGridViewTextBoxColumn ColumnRemainingRate;
     private DataGridViewTextBoxColumn ColumnElapsedCounting;
     private DataGridViewTextBoxColumn ColumnElapsedAdditionning;
+    private ToolStripMenuItem ActionDatabaseNew;
+    private ToolStripMenuItem ActionDatabaseOpen;
+    private ToolStripSeparator toolStripSeparator8;
+    private ToolStripSeparator toolStripSeparator9;
   }
 }
