@@ -30,8 +30,8 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.PanelDatabase = new System.Windows.Forms.Panel();
       this.SelectDbCache = new System.Windows.Forms.ComboBox();
       this.ActionDbClose = new System.Windows.Forms.Button();
@@ -73,7 +73,11 @@
       this.ActionViewManage = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
       this.ActionDatabase = new System.Windows.Forms.ToolStripDropDownButton();
+      this.ActionDatabaseNew = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+      this.ActionDatabaseOpen = new System.Windows.Forms.ToolStripMenuItem();
       this.ActionDatabaseClose = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
       this.ActionDatabaseRestore = new System.Windows.Forms.ToolStripMenuItem();
       this.ActionDatabaseBackup = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
@@ -132,7 +136,9 @@
       this.PanelViewGrid = new System.Windows.Forms.Panel();
       this.TabPageManage = new System.Windows.Forms.TabPage();
       this.PanelViewManage = new System.Windows.Forms.Panel();
+      this.textBox1 = new System.Windows.Forms.TextBox();
       this.EditMaxMotifs = new System.Windows.Forms.NumericUpDown();
+      this.ActionSquare = new System.Windows.Forms.Button();
       this.LabelMaxMotifs = new System.Windows.Forms.Label();
       this.EditAllowInterruption = new System.Windows.Forms.CheckBox();
       this.EditNormalizeAutoLoop = new System.Windows.Forms.CheckBox();
@@ -202,10 +208,6 @@
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
-      this.ActionDatabaseNew = new System.Windows.Forms.ToolStripMenuItem();
-      this.ActionDatabaseOpen = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-      this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -215,6 +217,7 @@
       this.PanelMainCenter.SuspendLayout();
       this.TabControl.SuspendLayout();
       this.TabPageDecode.SuspendLayout();
+      this.PanelViewDecode.SuspendLayout();
       this.TabPageGrid.SuspendLayout();
       this.TabPageManage.SuspendLayout();
       this.PanelViewManage.SuspendLayout();
@@ -630,6 +633,31 @@
       this.ActionDatabase.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
       this.ActionDatabase.Size = new System.Drawing.Size(49, 46);
       // 
+      // ActionDatabaseNew
+      // 
+      this.ActionDatabaseNew.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabaseNew.Image")));
+      this.ActionDatabaseNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.ActionDatabaseNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.ActionDatabaseNew.Name = "ActionDatabaseNew";
+      this.ActionDatabaseNew.Size = new System.Drawing.Size(210, 22);
+      this.ActionDatabaseNew.Text = "New database";
+      this.ActionDatabaseNew.Click += new System.EventHandler(this.ActionDbNew_Click);
+      // 
+      // toolStripSeparator8
+      // 
+      this.toolStripSeparator8.Name = "toolStripSeparator8";
+      this.toolStripSeparator8.Size = new System.Drawing.Size(207, 6);
+      // 
+      // ActionDatabaseOpen
+      // 
+      this.ActionDatabaseOpen.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabaseOpen.Image")));
+      this.ActionDatabaseOpen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.ActionDatabaseOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.ActionDatabaseOpen.Name = "ActionDatabaseOpen";
+      this.ActionDatabaseOpen.Size = new System.Drawing.Size(210, 22);
+      this.ActionDatabaseOpen.Text = "Open database";
+      this.ActionDatabaseOpen.Click += new System.EventHandler(this.ActionDbOpen_Click);
+      // 
       // ActionDatabaseClose
       // 
       this.ActionDatabaseClose.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabaseClose.Image")));
@@ -639,6 +667,11 @@
       this.ActionDatabaseClose.Size = new System.Drawing.Size(210, 22);
       this.ActionDatabaseClose.Text = "Close database";
       this.ActionDatabaseClose.Click += new System.EventHandler(this.ActionDbClose_Click);
+      // 
+      // toolStripSeparator9
+      // 
+      this.toolStripSeparator9.Name = "toolStripSeparator9";
+      this.toolStripSeparator9.Size = new System.Drawing.Size(207, 6);
       // 
       // ActionDatabaseRestore
       // 
@@ -1140,6 +1173,8 @@
       // PanelViewDecode
       // 
       this.PanelViewDecode.BackColor = System.Drawing.SystemColors.Control;
+      this.PanelViewDecode.Controls.Add(this.textBox1);
+      this.PanelViewDecode.Controls.Add(this.ActionSquare);
       this.PanelViewDecode.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelViewDecode.Location = new System.Drawing.Point(3, 3);
       this.PanelViewDecode.Name = "PanelViewDecode";
@@ -1202,6 +1237,14 @@
       this.PanelViewManage.Size = new System.Drawing.Size(923, 357);
       this.PanelViewManage.TabIndex = 2;
       // 
+      // textBox1
+      // 
+      this.textBox1.Location = new System.Drawing.Point(146, 102);
+      this.textBox1.Multiline = true;
+      this.textBox1.Name = "textBox1";
+      this.textBox1.Size = new System.Drawing.Size(467, 167);
+      this.textBox1.TabIndex = 7;
+      // 
       // EditMaxMotifs
       // 
       this.EditMaxMotifs.Location = new System.Drawing.Point(13, 13);
@@ -1223,6 +1266,16 @@
             2,
             0,
             0});
+      // 
+      // ActionSquare
+      // 
+      this.ActionSquare.Location = new System.Drawing.Point(146, 44);
+      this.ActionSquare.Name = "ActionSquare";
+      this.ActionSquare.Size = new System.Drawing.Size(58, 23);
+      this.ActionSquare.TabIndex = 2;
+      this.ActionSquare.Text = "Square";
+      this.ActionSquare.UseVisualStyleBackColor = true;
+      this.ActionSquare.Click += new System.EventHandler(this.ActionSquare_Click);
       // 
       // LabelMaxMotifs
       // 
@@ -1267,11 +1320,11 @@
       this.ListBoxLog.Size = new System.Drawing.Size(265, 214);
       this.ListBoxLog.TabIndex = 3;
       // 
-      // ActionStop2
+      // ActionStop
       // 
       this.ActionStop.Enabled = false;
       this.ActionStop.Location = new System.Drawing.Point(13, 68);
-      this.ActionStop.Name = "ActionStop2";
+      this.ActionStop.Name = "ActionStop";
       this.ActionStop.Size = new System.Drawing.Size(89, 23);
       this.ActionStop.TabIndex = 2;
       this.ActionStop.Text = "Stop";
@@ -1300,11 +1353,11 @@
       this.ActionNormalize.UseVisualStyleBackColor = true;
       this.ActionNormalize.Click += new System.EventHandler(this.ActionNormalize_Click);
       // 
-      // ActionPause2
+      // ActionPause
       // 
       this.ActionPause.Enabled = false;
       this.ActionPause.Location = new System.Drawing.Point(108, 68);
-      this.ActionPause.Name = "ActionPause2";
+      this.ActionPause.Name = "ActionPause";
       this.ActionPause.Size = new System.Drawing.Size(75, 23);
       this.ActionPause.TabIndex = 2;
       this.ActionPause.Text = "Pause";
@@ -1334,14 +1387,14 @@
       this.GridIterations.BackgroundColor = System.Drawing.SystemColors.Window;
       this.GridIterations.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.GridIterations.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-      dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-      dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.GridIterations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.GridIterations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
       this.GridIterations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.GridIterations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnIteration,
@@ -1356,8 +1409,8 @@
       this.GridIterations.Name = "GridIterations";
       this.GridIterations.ReadOnly = true;
       this.GridIterations.RowHeadersVisible = false;
-      dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-      this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle8;
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+      this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle2;
       this.GridIterations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.GridIterations.Size = new System.Drawing.Size(616, 331);
       this.GridIterations.TabIndex = 0;
@@ -2001,36 +2054,6 @@
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
       // 
-      // ActionDatabaseNew
-      // 
-      this.ActionDatabaseNew.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabaseNew.Image")));
-      this.ActionDatabaseNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.ActionDatabaseNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionDatabaseNew.Name = "ActionDatabaseNew";
-      this.ActionDatabaseNew.Size = new System.Drawing.Size(210, 22);
-      this.ActionDatabaseNew.Text = "New database";
-      this.ActionDatabaseNew.Click += new System.EventHandler(this.ActionDbNew_Click);
-      // 
-      // ActionDatabaseOpen
-      // 
-      this.ActionDatabaseOpen.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabaseOpen.Image")));
-      this.ActionDatabaseOpen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.ActionDatabaseOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionDatabaseOpen.Name = "ActionDatabaseOpen";
-      this.ActionDatabaseOpen.Size = new System.Drawing.Size(210, 22);
-      this.ActionDatabaseOpen.Text = "Open database";
-      this.ActionDatabaseOpen.Click += new System.EventHandler(this.ActionDbOpen_Click);
-      // 
-      // toolStripSeparator8
-      // 
-      this.toolStripSeparator8.Name = "toolStripSeparator8";
-      this.toolStripSeparator8.Size = new System.Drawing.Size(207, 6);
-      // 
-      // toolStripSeparator9
-      // 
-      this.toolStripSeparator9.Name = "toolStripSeparator9";
-      this.toolStripSeparator9.Size = new System.Drawing.Size(207, 6);
-      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2058,6 +2081,8 @@
       this.PanelMainCenter.ResumeLayout(false);
       this.TabControl.ResumeLayout(false);
       this.TabPageDecode.ResumeLayout(false);
+      this.PanelViewDecode.ResumeLayout(false);
+      this.PanelViewDecode.PerformLayout();
       this.TabPageGrid.ResumeLayout(false);
       this.TabPageManage.ResumeLayout(false);
       this.PanelViewManage.ResumeLayout(false);
@@ -2248,5 +2273,7 @@
     private ToolStripMenuItem ActionDatabaseOpen;
     private ToolStripSeparator toolStripSeparator8;
     private ToolStripSeparator toolStripSeparator9;
+    private TextBox textBox1;
+    private Button ActionSquare;
   }
 }

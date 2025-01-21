@@ -34,9 +34,6 @@ class ApplicationStatistics
   public string RenderingTime
     => Program.Settings.BenchmarkRendering.FormatMilliseconds();
 
-  public string DBTotalRecordsCount
-    => MainForm.Instance.DB?.CountRows(DecupletRow.TableName).ToString() ?? SysTranslations.NullSlot.GetLang();
-
   public string DBEngine
     => SQLiteNetORM.EngineNameAndVersion;
 
@@ -57,33 +54,6 @@ class ApplicationStatistics
   }
   static private string _DBFileSize;
   static internal bool UpdateDBFileSizeRequired { get; set; } = true;
-
-  public string DBMemorySize
-  {
-    get
-    {
-      if ( Program.Settings.SystemStatisticsCalculateDbSize && UpdateDBMemorySizeRequired )
-        try
-        {
-          LoadingForm.Instance.Initialize(SysTranslations.CalculatingDataMemorySize.GetLang(), 4, quantify: false);
-          UpdateDBMemorySizeRequired = false;
-          long size1 = 0; // ApplicationDatabase.Instance.Decuplets?.SizeOf() ?? 0;
-          LoadingForm.Instance.DoProgress();
-          _DBMemorySize = size1 > 0
-            ? size1.FormatBytesSize()
-            : size1 == 0
-              ? SysTranslations.DatabaseTableClosed.GetLang()
-              : "-";
-        }
-        finally
-        {
-          LoadingForm.Instance.Hide();
-        }
-      return _DBMemorySize;
-    }
-  }
-  static private string _DBMemorySize = "-";
-  static internal bool UpdateDBMemorySizeRequired { get; set; } = true;
 
   public string DBCommonFileSize
   {

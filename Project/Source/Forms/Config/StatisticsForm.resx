@@ -372,42 +372,6 @@
   <data name="&gt;&gt;totalVisibleMemoryLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="dBMemorySizeLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="dBMemorySizeLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="dBMemorySizeLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="dBMemorySizeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="dBMemorySizeLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 78</value>
-  </data>
-  <data name="dBMemorySizeLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 13</value>
-  </data>
-  <data name="dBMemorySizeLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>65</value>
-  </data>
-  <data name="dBMemorySizeLabel.Text" xml:space="preserve">
-    <value>Memory size:</value>
-  </data>
-  <data name="&gt;&gt;dBMemorySizeLabel.Name" xml:space="preserve">
-    <value>dBMemorySizeLabel</value>
-  </data>
-  <data name="&gt;&gt;dBMemorySizeLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dBMemorySizeLabel.Parent" xml:space="preserve">
-    <value>GroupBoxDatabase</value>
-  </data>
-  <data name="&gt;&gt;dBMemorySizeLabel.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
   <metadata name="memoryPeakWorkingLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
@@ -1185,42 +1149,6 @@
   <data name="&gt;&gt;cPUProcessLoadLabel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <metadata name="dBTotalRecordsCountLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="dBTotalRecordsCountLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="dBTotalRecordsCountLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="dBTotalRecordsCountLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="dBTotalRecordsCountLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 95</value>
-  </data>
-  <data name="dBTotalRecordsCountLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 13</value>
-  </data>
-  <data name="dBTotalRecordsCountLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
-  </data>
-  <data name="dBTotalRecordsCountLabel.Text" xml:space="preserve">
-    <value>Number of records</value>
-  </data>
-  <data name="&gt;&gt;dBTotalRecordsCountLabel.Name" xml:space="preserve">
-    <value>dBTotalRecordsCountLabel</value>
-  </data>
-  <data name="&gt;&gt;dBTotalRecordsCountLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dBTotalRecordsCountLabel.Parent" xml:space="preserve">
-    <value>GroupBoxDatabase</value>
-  </data>
-  <data name="&gt;&gt;dBTotalRecordsCountLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
   <metadata name="cPUProcessLoadAvgLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
@@ -1292,42 +1220,6 @@
   </data>
   <data name="&gt;&gt;LabelCompiled.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <metadata name="dBCommonFileSizeLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="dBCommonFileSizeLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="dBCommonFileSizeLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="dBCommonFileSizeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="dBCommonFileSizeLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 116</value>
-  </data>
-  <data name="dBCommonFileSizeLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
-  </data>
-  <data name="dBCommonFileSizeLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>68</value>
-  </data>
-  <data name="dBCommonFileSizeLabel.Text" xml:space="preserve">
-    <value>Common file size:</value>
-  </data>
-  <data name="&gt;&gt;dBCommonFileSizeLabel.Name" xml:space="preserve">
-    <value>dBCommonFileSizeLabel</value>
-  </data>
-  <data name="&gt;&gt;dBCommonFileSizeLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dBCommonFileSizeLabel.Parent" xml:space="preserve">
-    <value>GroupBoxDatabase</value>
-  </data>
-  <data name="&gt;&gt;dBCommonFileSizeLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <metadata name="translateTimeLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
@@ -1410,7 +1302,7 @@
   <data name="ActionViewLog.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAAAbdJREFUOE+Vk0tSwkAQhnMFSz2BR/AgLlx4FjcuvIMFpbgRlUUIicVKqiDAUo9g
+        vQAADr0BR/uQrQAAAbdJREFUOE+Vk0tSwkAQhnMFSz2BR/AgLlx4FjcuvIMFpbgRlUUIicVKqiDAUo9g
         4RMwGQiEPAjv357J4Avw8VV19dSk+69/ejIK5yqf72qGgaxuQM3pFDkZmsiariNnGEwUL4M3/4Zt28hq
         2qVs+UpWCtTWFTyyDp4bTTw9v+D+4Unspy8uRLYsi1zqGdn2gSoFHvd30HRDnKROcV0ooF5viP3zTAaM
         tcSaOyHHWdkao9LZObVNBa9eBLvdgWUzNJqW2L+5vRUicyd8JrI1RqUNjj2YgnkhmOOAtVqwGYMfBOLb
@@ -1453,7 +1345,7 @@
   <data name="ActionScreenshot.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAAArNJREFUOE+dk9lPE1EUxkffQKPEiOCb8cX4pImP/hEm/gMuCI2IJmpJo5SmZevG
+        vQAADr0BR/uQrQAAArNJREFUOE+dk9lPE1EUxkffQKPEiOCb8cX4pImP/hEm/gMuCI2IJmpJo5SmZevG
         0pZCWQoFgtDiA9NSuiCUTUzUsElZuoBsMQhTwlIjWODz3tuC8c14kl++OXfO983JZIajdbnQs55W4MYl
         iiJOqsKVgF7/4SLVAg/SCr3rCbP7bY4zAPNEBOZxAfWE2jEBNaMbMJ0goJpQRTCMbUI/uQORM4z0Ak8H
         RxPtwV1w4hGcUnxCqnYS143TuN0Ywh3bIrKcazgtscM6vQVO4kDzbBTCjStoD/3EBYUH3HlZNwaW9nDX
@@ -1613,7 +1505,7 @@
     <value>GroupBoxDatabase</value>
   </data>
   <data name="&gt;&gt;dBFileSizeLabel1.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="loadDataTimeLabel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1779,39 +1671,6 @@
   </data>
   <data name="&gt;&gt;totalVisibleMemoryLabel1.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="dBMemorySizeLabel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="dBMemorySizeLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="dBMemorySizeLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 78</value>
-  </data>
-  <data name="dBMemorySizeLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 13</value>
-  </data>
-  <data name="dBMemorySizeLabel1.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
-  </data>
-  <data name="dBMemorySizeLabel1.Text" xml:space="preserve">
-    <value>-</value>
-  </data>
-  <data name="dBMemorySizeLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopRight</value>
-  </data>
-  <data name="&gt;&gt;dBMemorySizeLabel1.Name" xml:space="preserve">
-    <value>dBMemorySizeLabel1</value>
-  </data>
-  <data name="&gt;&gt;dBMemorySizeLabel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dBMemorySizeLabel1.Parent" xml:space="preserve">
-    <value>GroupBoxDatabase</value>
-  </data>
-  <data name="&gt;&gt;dBMemorySizeLabel1.ZOrder" xml:space="preserve">
-    <value>10</value>
   </data>
   <data name="memoryPeakWorkingLabel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2263,38 +2122,41 @@
   <data name="&gt;&gt;dBCommonFileSizeLabel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="dBTotalRecordsCountLabel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <metadata name="dBCommonFileSizeLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <data name="dBCommonFileSizeLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="dBTotalRecordsCountLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="dBCommonFileSizeLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="dBCommonFileSizeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="dBTotalRecordsCountLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 95</value>
+  <data name="dBCommonFileSizeLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 116</value>
   </data>
-  <data name="dBTotalRecordsCountLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 13</value>
+  <data name="dBCommonFileSizeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
   </data>
-  <data name="dBTotalRecordsCountLabel1.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
+  <data name="dBCommonFileSizeLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>68</value>
   </data>
-  <data name="dBTotalRecordsCountLabel1.Text" xml:space="preserve">
-    <value>-</value>
+  <data name="dBCommonFileSizeLabel.Text" xml:space="preserve">
+    <value>Common file size:</value>
   </data>
-  <data name="dBTotalRecordsCountLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopRight</value>
+  <data name="&gt;&gt;dBCommonFileSizeLabel.Name" xml:space="preserve">
+    <value>dBCommonFileSizeLabel</value>
   </data>
-  <data name="&gt;&gt;dBTotalRecordsCountLabel1.Name" xml:space="preserve">
-    <value>dBTotalRecordsCountLabel1</value>
-  </data>
-  <data name="&gt;&gt;dBTotalRecordsCountLabel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;dBCommonFileSizeLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dBTotalRecordsCountLabel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dBCommonFileSizeLabel.Parent" xml:space="preserve">
     <value>GroupBoxDatabase</value>
   </data>
-  <data name="&gt;&gt;dBTotalRecordsCountLabel1.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;dBCommonFileSizeLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="dBADONETAccessLabel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2327,7 +2189,7 @@
     <value>GroupBoxDatabase</value>
   </data>
   <data name="&gt;&gt;dBADONETAccessLabel1.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="dBEngineversionLabel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2360,7 +2222,7 @@
     <value>GroupBoxDatabase</value>
   </data>
   <data name="&gt;&gt;dBEngineversionLabel1.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>6</value>
   </data>
   <data name="GroupBoxDatabase.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 340</value>
@@ -2830,7 +2692,7 @@
   <data name="ActionOpenFolderUserLocalData.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAAAgxJREFUOE/F0t9LU2EYB/DzF/ivNCh1/drWHHUV3XVVlheWOsVKrSCDkHlTy8rp
+        vQAADr0BR/uQrQAAAgxJREFUOE/F0t9LU2EYB/DzF/ivNCh1/drWHHUV3XVVlheWOsVKrSCDkHlTy8rp
         Vqxd2IUXSdCFF5pl3Rk159lpv2drIA1rILq1uZ2z9e37njNaBBJB0Asf9nLG8zzv87yv9P+X8tD+XJ46
         irXJQzqxl73HlMbff14iALV1YDdhUNNYnWhF6MHBn0mbDusFwj57vBEuSeIjdqOohs+jInehnp8Hykmg
         kjJU00zKAoJGyEKetkDxH9/fTFB+h2q0l/rJqe9V0uJ9UCM92FnpREF4exaVjXn9FCv3rL2NBEeA4hto
@@ -2875,7 +2737,7 @@
   <data name="ActionOpenFolderUserData.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAAAgxJREFUOE/F0t9LU2EYB/DzF/ivNCh1/drWHHUV3XVVlheWOsVKrSCDkHlTy8rp
+        vQAADr0BR/uQrQAAAgxJREFUOE/F0t9LU2EYB/DzF/ivNCh1/drWHHUV3XVVlheWOsVKrSCDkHlTy8rp
         Vqxd2IUXSdCFF5pl3Rk159lpv2drIA1rILq1uZ2z9e37njNaBBJB0Asf9nLG8zzv87yv9P+X8tD+XJ46
         irXJQzqxl73HlMbff14iALV1YDdhUNNYnWhF6MHBn0mbDusFwj57vBEuSeIjdqOohs+jInehnp8Hykmg
         kjJU00zKAoJGyEKetkDxH9/fTFB+h2q0l/rJqe9V0uJ9UCM92FnpREF4exaVjXn9FCv3rL2NBEeA4hto
@@ -2920,7 +2782,7 @@
   <data name="ActionOpenFolderApplication.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAAAgxJREFUOE/F0t9LU2EYB/DzF/ivNCh1/drWHHUV3XVVlheWOsVKrSCDkHlTy8rp
+        vQAADr0BR/uQrQAAAgxJREFUOE/F0t9LU2EYB/DzF/ivNCh1/drWHHUV3XVVlheWOsVKrSCDkHlTy8rp
         Vqxd2IUXSdCFF5pl3Rk159lpv2drIA1rILq1uZ2z9e37njNaBBJB0Asf9nLG8zzv87yv9P+X8tD+XJ46
         irXJQzqxl73HlMbff14iALV1YDdhUNNYnWhF6MHBn0mbDusFwj57vBEuSeIjdqOohs+jInehnp8Hykmg
         kjJU00zKAoJGyEKetkDxH9/fTFB+h2q0l/rJqe9V0uJ9UCM92FnpREF4exaVjXn9FCv3rL2NBEeA4hto

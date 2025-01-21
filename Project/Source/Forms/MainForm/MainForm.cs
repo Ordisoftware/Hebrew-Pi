@@ -317,6 +317,12 @@ partial class MainForm : Form
     }
   }
 
+  private void ActionSquare_Click(object sender, EventArgs e)
+  {
+    foreach ( var row in DB.Query<DecupletRow>("select * from Decuplets limit 0, 10") )
+      textBox1.AppendText(row.Motif.ToString() + Environment.NewLine);
+  }
+
   //private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
   //{
   //  using var brush = new SolidBrush(Grid.RowHeadersDefaultCellStyle.ForeColor);

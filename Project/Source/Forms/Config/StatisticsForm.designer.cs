@@ -37,7 +37,6 @@
       System.Windows.Forms.Label runningTimeLabel;
       System.Windows.Forms.Label startingTimeLabel;
       System.Windows.Forms.Label totalVisibleMemoryLabel;
-      System.Windows.Forms.Label dBMemorySizeLabel;
       System.Windows.Forms.Label memoryPeakWorkingLabel;
       System.Windows.Forms.Label memoryPrivateLabel;
       System.Windows.Forms.Label memoryWorkingLabel;
@@ -60,12 +59,11 @@
       System.Windows.Forms.Label EditFolderUserLocalData;
       System.Windows.Forms.Label cPUProcessLoadMaxLabel;
       System.Windows.Forms.Label cPUProcessLoadLabel;
-      System.Windows.Forms.Label dBTotalRecordsCountLabel;
       System.Windows.Forms.Label cPUProcessLoadAvgLabel;
       System.Windows.Forms.Label LabelCompiled;
-      System.Windows.Forms.Label dBCommonFileSizeLabel;
       System.Windows.Forms.Label translateTimeLabel;
       System.Windows.Forms.Label renderingLabel;
+      System.Windows.Forms.Label dBCommonFileSizeLabel;
       this.PanelBottom = new System.Windows.Forms.Panel();
       this.ActionViewLog = new System.Windows.Forms.Button();
       this.ActionScreenshot = new System.Windows.Forms.Button();
@@ -80,7 +78,6 @@
       this.runningTimeLabel1 = new System.Windows.Forms.Label();
       this.startingTimeLabel1 = new System.Windows.Forms.Label();
       this.totalVisibleMemoryLabel1 = new System.Windows.Forms.Label();
-      this.dBMemorySizeLabel1 = new System.Windows.Forms.Label();
       this.memoryPeakWorkingLabel1 = new System.Windows.Forms.Label();
       this.memoryPrivateLabel1 = new System.Windows.Forms.Label();
       this.memoryWorkingLabel1 = new System.Windows.Forms.Label();
@@ -95,8 +92,6 @@
       this.renderingLabel1 = new System.Windows.Forms.Label();
       this.translateTimeLabel1 = new System.Windows.Forms.Label();
       this.GroupBoxDatabase = new System.Windows.Forms.GroupBox();
-      this.dBCommonFileSizeLabel1 = new System.Windows.Forms.Label();
-      this.dBTotalRecordsCountLabel1 = new System.Windows.Forms.Label();
       this.dBADONETAccessLabel1 = new System.Windows.Forms.Label();
       this.dBEngineversionLabel1 = new System.Windows.Forms.Label();
       this.GroupBoxMemory = new System.Windows.Forms.GroupBox();
@@ -123,6 +118,7 @@
       this.EditFolderApplication = new Ordisoftware.Core.TextBoxEx();
       this.PanelBottomOuter = new System.Windows.Forms.Panel();
       this.PanelFolders = new System.Windows.Forms.Panel();
+      this.dBCommonFileSizeLabel1 = new System.Windows.Forms.Label();
       dBFileSizeLabel = new System.Windows.Forms.Label();
       loadDataTimeLabel = new System.Windows.Forms.Label();
       operatingSystemLabel = new System.Windows.Forms.Label();
@@ -130,7 +126,6 @@
       runningTimeLabel = new System.Windows.Forms.Label();
       startingTimeLabel = new System.Windows.Forms.Label();
       totalVisibleMemoryLabel = new System.Windows.Forms.Label();
-      dBMemorySizeLabel = new System.Windows.Forms.Label();
       memoryPeakWorkingLabel = new System.Windows.Forms.Label();
       memoryPrivateLabel = new System.Windows.Forms.Label();
       memoryWorkingLabel = new System.Windows.Forms.Label();
@@ -153,12 +148,11 @@
       EditFolderUserLocalData = new System.Windows.Forms.Label();
       cPUProcessLoadMaxLabel = new System.Windows.Forms.Label();
       cPUProcessLoadLabel = new System.Windows.Forms.Label();
-      dBTotalRecordsCountLabel = new System.Windows.Forms.Label();
       cPUProcessLoadAvgLabel = new System.Windows.Forms.Label();
       LabelCompiled = new System.Windows.Forms.Label();
-      dBCommonFileSizeLabel = new System.Windows.Forms.Label();
       translateTimeLabel = new System.Windows.Forms.Label();
       renderingLabel = new System.Windows.Forms.Label();
+      dBCommonFileSizeLabel = new System.Windows.Forms.Label();
       this.PanelBottom.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ApplicationStatisticsDataBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.SystemStatisticsDataBindingSource)).BeginInit();
@@ -208,11 +202,6 @@
       // 
       resources.ApplyResources(totalVisibleMemoryLabel, "totalVisibleMemoryLabel");
       totalVisibleMemoryLabel.Name = "totalVisibleMemoryLabel";
-      // 
-      // dBMemorySizeLabel
-      // 
-      resources.ApplyResources(dBMemorySizeLabel, "dBMemorySizeLabel");
-      dBMemorySizeLabel.Name = "dBMemorySizeLabel";
       // 
       // memoryPeakWorkingLabel
       // 
@@ -324,11 +313,6 @@
       resources.ApplyResources(cPUProcessLoadLabel, "cPUProcessLoadLabel");
       cPUProcessLoadLabel.Name = "cPUProcessLoadLabel";
       // 
-      // dBTotalRecordsCountLabel
-      // 
-      resources.ApplyResources(dBTotalRecordsCountLabel, "dBTotalRecordsCountLabel");
-      dBTotalRecordsCountLabel.Name = "dBTotalRecordsCountLabel";
-      // 
       // cPUProcessLoadAvgLabel
       // 
       resources.ApplyResources(cPUProcessLoadAvgLabel, "cPUProcessLoadAvgLabel");
@@ -338,11 +322,6 @@
       // 
       resources.ApplyResources(LabelCompiled, "LabelCompiled");
       LabelCompiled.Name = "LabelCompiled";
-      // 
-      // dBCommonFileSizeLabel
-      // 
-      resources.ApplyResources(dBCommonFileSizeLabel, "dBCommonFileSizeLabel");
-      dBCommonFileSizeLabel.Name = "dBCommonFileSizeLabel";
       // 
       // translateTimeLabel
       // 
@@ -447,12 +426,6 @@
       this.totalVisibleMemoryLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SystemStatisticsDataBindingSource, "TotalVisibleMemory", true));
       this.totalVisibleMemoryLabel1.Name = "totalVisibleMemoryLabel1";
       // 
-      // dBMemorySizeLabel1
-      // 
-      resources.ApplyResources(this.dBMemorySizeLabel1, "dBMemorySizeLabel1");
-      this.dBMemorySizeLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.ApplicationStatisticsDataBindingSource, "DBMemorySize", true));
-      this.dBMemorySizeLabel1.Name = "dBMemorySizeLabel1";
-      // 
       // memoryPeakWorkingLabel1
       // 
       resources.ApplyResources(this.memoryPeakWorkingLabel1, "memoryPeakWorkingLabel1");
@@ -546,28 +519,12 @@
       this.GroupBoxDatabase.Controls.Add(dBADONETAccessLabel);
       this.GroupBoxDatabase.Controls.Add(dBEngineversionLabel);
       this.GroupBoxDatabase.Controls.Add(dBFileSizeLabel);
-      this.GroupBoxDatabase.Controls.Add(this.dBTotalRecordsCountLabel1);
-      this.GroupBoxDatabase.Controls.Add(dBTotalRecordsCountLabel);
       this.GroupBoxDatabase.Controls.Add(this.dBADONETAccessLabel1);
       this.GroupBoxDatabase.Controls.Add(this.dBEngineversionLabel1);
       this.GroupBoxDatabase.Controls.Add(this.dBFileSizeLabel1);
-      this.GroupBoxDatabase.Controls.Add(this.dBMemorySizeLabel1);
-      this.GroupBoxDatabase.Controls.Add(dBMemorySizeLabel);
       resources.ApplyResources(this.GroupBoxDatabase, "GroupBoxDatabase");
       this.GroupBoxDatabase.Name = "GroupBoxDatabase";
       this.GroupBoxDatabase.TabStop = false;
-      // 
-      // dBCommonFileSizeLabel1
-      // 
-      resources.ApplyResources(this.dBCommonFileSizeLabel1, "dBCommonFileSizeLabel1");
-      this.dBCommonFileSizeLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.ApplicationStatisticsDataBindingSource, "DBCommonFileSize", true));
-      this.dBCommonFileSizeLabel1.Name = "dBCommonFileSizeLabel1";
-      // 
-      // dBTotalRecordsCountLabel1
-      // 
-      resources.ApplyResources(this.dBTotalRecordsCountLabel1, "dBTotalRecordsCountLabel1");
-      this.dBTotalRecordsCountLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.ApplicationStatisticsDataBindingSource, "DBTotalRecordsCount", true));
-      this.dBTotalRecordsCountLabel1.Name = "dBTotalRecordsCountLabel1";
       // 
       // dBADONETAccessLabel1
       // 
@@ -810,6 +767,17 @@
       resources.ApplyResources(this.PanelFolders, "PanelFolders");
       this.PanelFolders.Name = "PanelFolders";
       // 
+      // dBCommonFileSizeLabel1
+      // 
+      resources.ApplyResources(this.dBCommonFileSizeLabel1, "dBCommonFileSizeLabel1");
+      this.dBCommonFileSizeLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.ApplicationStatisticsDataBindingSource, "DBCommonFileSize", true));
+      this.dBCommonFileSizeLabel1.Name = "dBCommonFileSizeLabel1";
+      // 
+      // dBCommonFileSizeLabel
+      // 
+      resources.ApplyResources(dBCommonFileSizeLabel, "dBCommonFileSizeLabel");
+      dBCommonFileSizeLabel.Name = "dBCommonFileSizeLabel";
+      // 
       // StatisticsForm
       // 
       resources.ApplyResources(this, "$this");
@@ -863,7 +831,6 @@
     private System.Windows.Forms.Label runningTimeLabel1;
     private System.Windows.Forms.Label startingTimeLabel1;
     private System.Windows.Forms.Label totalVisibleMemoryLabel1;
-    private System.Windows.Forms.Label dBMemorySizeLabel1;
     private System.Windows.Forms.Label memoryPeakWorkingLabel1;
     private System.Windows.Forms.Label memoryPrivateLabel1;
     private System.Windows.Forms.Label memoryWorkingLabel1;
@@ -902,12 +869,11 @@
     private System.Windows.Forms.Panel PanelFolders;
     private System.Windows.Forms.Label cPUProcessLoadMaxLabel1;
     private System.Windows.Forms.Label cPUProcessLoadLabel1;
-    private System.Windows.Forms.Label dBTotalRecordsCountLabel1;
     private System.Windows.Forms.Label cPUProcessLoadAvgLabel1;
     public System.Windows.Forms.Button ActionViewLog;
     private System.Windows.Forms.Label LabelCompiled1;
-    private System.Windows.Forms.Label dBCommonFileSizeLabel1;
     private System.Windows.Forms.Label translateTimeLabel1;
     private Label renderingLabel1;
+    private Label dBCommonFileSizeLabel1;
   }
 }
