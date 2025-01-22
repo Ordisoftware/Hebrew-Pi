@@ -46,7 +46,7 @@ partial class MainForm
     DB.SetJournal(SQLiteJournalMode.OFF);
     DB.SetSynchronous(SQLiteSynchronousMode.OFF);
     DB.SetLocking(SQLiteLockingMode.EXCLUSIVE);
-    DB.SetPageSize(SQLitePageSize.);
+    DB.SetPageSize(SQLitePageSize._32768);
     DB.CreateTable<DecupletRow>();
     DB.CreateTable<IterationRow>();
     IsMotifIndexed = DB.CheckIndex("Decuplets_Motif");
