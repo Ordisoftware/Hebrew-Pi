@@ -47,12 +47,11 @@ partial class MainForm
     DB.SetSynchronous(SQLiteSynchronousMode.OFF);
     DB.SetLocking(SQLiteLockingMode.EXCLUSIVE);
     DB.SetPageSize(SQLitePageSize._32768);
+    SetDbCache();
     DB.CreateTable<DecupletRow>();
     DB.CreateTable<IterationRow>();
     IsMotifIndexed = DB.CheckIndex("Decuplets_Motif");
-    //LabelTitleCenter.Text = $"{Path.GetFileName(path)} ({DB.Table<DecupletRow>().Count()})";
     LabelTitleCenter.Text = Path.GetFileName(path);
-    SetDbCache();
     LoadIterationGrid();
     UpdateButtons();
   }
