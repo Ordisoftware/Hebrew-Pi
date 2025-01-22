@@ -23,7 +23,6 @@ using Equin.ApplicationFramework;
 partial class MainForm
 {
 
-  private Task BatchTask;
   private bool CanForceTerminateBatch;
 
   private void LoadIterationGrid()
@@ -44,8 +43,10 @@ partial class MainForm
     DatabaseFilePath = path;
     DB = new SQLiteNetORM(path);
     DB.SetTempDir(SQLiteTempDir);
-    DB.SetJournal(false);
-    DB.SetSynchronous(false);
+    DB.SetJournal(SQLiteJournalMode.OFF);
+    DB.SetSynchronous(SQLiteSynchronousMode.OFF);
+    DB.SetLocking(SQLiteLockingMode.EXCLUSIVE);
+    DB.SetPageSize(SQLitePageSize.);
     DB.CreateTable<DecupletRow>();
     DB.CreateTable<IterationRow>();
     IsMotifIndexed = DB.CheckIndex("Decuplets_Motif");

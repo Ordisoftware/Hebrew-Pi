@@ -139,6 +139,7 @@
     <Compile Include="Source\Common\Core\Display\DisplayManager.QueryValue.cs" />
     <Compile Include="Source\Common\Core\Display\DisplayManager.Show.cs" />
     <Compile Include="Source\Common\Core\Display\ShellIcons.cs" />
+    <Compile Include="Source\Common\Core\Enums\SQLiteModes.cs" />
     <Compile Include="Source\Common\Core\Enums\ControlLocation.cs" />
     <Compile Include="Source\Common\Core\Enums\DataFileFolder.cs" />
     <Compile Include="Source\Common\Core\Enums\ExportAction.cs" />
