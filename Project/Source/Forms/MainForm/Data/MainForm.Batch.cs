@@ -81,7 +81,7 @@ partial class MainForm
       SetBatchState(true, interruptible);
       UpdateButtons();
       ClearStatusBar();
-      await Task.Delay(500);
+      await Task.Delay(1000);
       await Task.Run(async () => action());
     }
     finally
@@ -98,7 +98,7 @@ partial class MainForm
           Processing = ProcessingType.None;
           break;
         case ProcessingType.Error:
-          UpdateStatusAction(Processing.ToString() + ": " + Except.ToString());
+          UpdateStatusAction(Processing.ToString() + ": " + Except.Message.Replace(Environment.NewLine, " "));
           Processing = ProcessingType.None;
           break;
       }

@@ -1166,8 +1166,6 @@
       // EditNormalizeAutoLoop
       // 
       this.EditNormalizeAutoLoop.AutoSize = true;
-      this.EditNormalizeAutoLoop.Checked = true;
-      this.EditNormalizeAutoLoop.CheckState = System.Windows.Forms.CheckState.Checked;
       this.EditNormalizeAutoLoop.Location = new System.Drawing.Point(191, 99);
       this.EditNormalizeAutoLoop.Name = "EditNormalizeAutoLoop";
       this.EditNormalizeAutoLoop.Size = new System.Drawing.Size(71, 17);
