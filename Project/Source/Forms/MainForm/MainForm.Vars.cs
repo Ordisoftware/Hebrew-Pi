@@ -37,7 +37,7 @@ partial class MainForm
 
   private int SQLiteCacheSize;
 
-  private string SQLiteTempDir = @"D:\";
+  //private string SQLiteTempDir = @"E:\";
 
   private bool CanForceTerminateBatch;
 

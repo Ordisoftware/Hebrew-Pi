@@ -46,9 +46,8 @@ partial class MainForm
   private void DoActionDbOpen(string path)
   {
     DatabaseFilePath = path;
-    PiDecimalsFileSize = SystemManager.GetFileSize(path);
     DB = new SQLiteNetORM(path);
-    DB.SetTempDir(SQLiteTempDir);
+    DB.SetTempDir(EditTempDir.Text);
     DB.SetTempStoreMode(SQLiteTempStoreMode.FILE);
     DB.SetJournal(SQLiteJournalMode.OFF);
     DB.SetSynchronous(SQLiteSynchronousMode.OFF);

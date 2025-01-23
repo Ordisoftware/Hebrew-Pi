@@ -25,6 +25,7 @@ partial class MainForm
 
   private async Task DoActionPopulateAsync(string filePathText)
   {
+    PiDecimalsFileSize = SystemManager.GetFileSize(filePathText);
     if ( !File.Exists(filePathText) )
     {
       DisplayManager.Show(SysTranslations.FileNotFound.GetLang(filePathText));
@@ -100,6 +101,9 @@ partial class MainForm
       }
       doCommit();
       UpdateStatusInfo(string.Format(AppTranslations.CreateDataProgress, MotifsProcessedCount.ToString("N0")));
+      if ( !CheckIfBatchCanContinueAsync().Result ) return;
+      if ( EditAutoCreateIndex.Checked )
+        ActionCreateIndex_Click(ActionCreateIndex, EventArgs.Empty);
     }
     catch ( Exception ex )
     {
