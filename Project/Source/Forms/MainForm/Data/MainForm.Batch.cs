@@ -23,7 +23,10 @@ using Equin.ApplicationFramework;
 partial class MainForm
 {
 
-  private bool CanForceTerminateBatch;
+  private bool IsMotifIndexed;
+
+  [DllImport("e_sqlite3", CallingConvention = CallingConvention.Cdecl)]
+  public static extern void sqlite3_interrupt(IntPtr db);
 
   private void LoadIterationGrid()
   {
@@ -55,8 +58,6 @@ partial class MainForm
     LoadIterationGrid();
     UpdateButtons();
   }
-
-  private bool IsMotifIndexed;
 
   private void DoActionDbClose()
   {
@@ -98,9 +99,6 @@ partial class MainForm
     Globals.CanCancel = interruptible;
     Globals.CanPause = interruptible;
   }
-
-  [DllImport("e_sqlite3", CallingConvention = CallingConvention.Cdecl)]
-  public static extern void sqlite3_interrupt(IntPtr db);
 
   private void DoActionStop()
   {

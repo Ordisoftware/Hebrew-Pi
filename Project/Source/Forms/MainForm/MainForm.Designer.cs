@@ -52,22 +52,6 @@
       this.ActionExit = new System.Windows.Forms.ToolStripButton();
       this.ToolStripSeparatorExit = new System.Windows.Forms.ToolStripSeparator();
       this.ActionPreferences = new System.Windows.Forms.ToolStripButton();
-      this.ActionBookmarks = new System.Windows.Forms.ToolStripDropDownButton();
-      this.ActionAddBookmark = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-      this.ActionSortBookmarks = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-      this.ActionClearBookmarks = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-      this.ActionGoToBookmarkMain = new System.Windows.Forms.ToolStripMenuItem();
-      this.SeparatorBookmarks = new System.Windows.Forms.ToolStripSeparator();
-      this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-      this.ActionHistory = new System.Windows.Forms.ToolStripDropDownButton();
-      this.ActionClearHistory = new System.Windows.Forms.ToolStripMenuItem();
-      this.SeparatorHistory = new System.Windows.Forms.ToolStripSeparator();
-      this.ActionHistoryBack = new System.Windows.Forms.ToolStripButton();
-      this.ActionHistoryNext = new System.Windows.Forms.ToolStripButton();
-      this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
       this.ActionViewDecode = new System.Windows.Forms.ToolStripButton();
       this.ActionViewGrid = new System.Windows.Forms.ToolStripButton();
       this.ActionViewManage = new System.Windows.Forms.ToolStripButton();
@@ -132,13 +116,15 @@
       this.TabControl = new System.Windows.Forms.TabControl();
       this.TabPageDecode = new System.Windows.Forms.TabPage();
       this.PanelViewDecode = new System.Windows.Forms.Panel();
+      this.textBox1 = new System.Windows.Forms.TextBox();
+      this.ActionSquare = new System.Windows.Forms.Button();
       this.TabPageGrid = new System.Windows.Forms.TabPage();
       this.PanelViewGrid = new System.Windows.Forms.Panel();
       this.TabPageManage = new System.Windows.Forms.TabPage();
       this.PanelViewManage = new System.Windows.Forms.Panel();
-      this.textBox1 = new System.Windows.Forms.TextBox();
+      this.SelectPiDecimalsFile = new System.Windows.Forms.ComboBox();
       this.EditMaxMotifs = new System.Windows.Forms.NumericUpDown();
-      this.ActionSquare = new System.Windows.Forms.Button();
+      this.LabelPiDecimalsFile = new System.Windows.Forms.Label();
       this.LabelMaxMotifs = new System.Windows.Forms.Label();
       this.EditAllowInterruption = new System.Windows.Forms.CheckBox();
       this.EditNormalizeAutoLoop = new System.Windows.Forms.CheckBox();
@@ -202,7 +188,6 @@
       this.TimerTooltip = new System.Windows.Forms.Timer(this.components);
       this.OpenFileDialogDB = new System.Windows.Forms.OpenFileDialog();
       this.SaveFileDialogDB = new System.Windows.Forms.SaveFileDialog();
-      this.OpenFileDialogTXT = new System.Windows.Forms.OpenFileDialog();
       this.EditSearchTranslation = new Ordisoftware.Core.TextBoxEx();
       this.EditSearchWord = new Ordisoftware.Hebrew.LettersControl();
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
@@ -373,12 +358,6 @@
             this.ActionExit,
             this.ToolStripSeparatorExit,
             this.ActionPreferences,
-            this.ActionBookmarks,
-            this.toolStripSeparator13,
-            this.ActionHistory,
-            this.ActionHistoryBack,
-            this.ActionHistoryNext,
-            this.toolStripSeparator19,
             this.ActionViewDecode,
             this.ActionViewGrid,
             this.ActionViewManage,
@@ -429,143 +408,6 @@
       this.ActionPreferences.Text = "Preferences";
       this.ActionPreferences.ToolTipText = "Preferences (F9)";
       this.ActionPreferences.Click += new System.EventHandler(this.ActionPreferences_Click);
-      // 
-      // ActionBookmarks
-      // 
-      this.ActionBookmarks.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionBookmarks.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ActionAddBookmark,
-            this.toolStripSeparator3,
-            this.ActionSortBookmarks,
-            this.toolStripSeparator7,
-            this.ActionClearBookmarks,
-            this.toolStripSeparator4,
-            this.ActionGoToBookmarkMain,
-            this.SeparatorBookmarks});
-      this.ActionBookmarks.Image = ((System.Drawing.Image)(resources.GetObject("ActionBookmarks.Image")));
-      this.ActionBookmarks.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionBookmarks.Name = "ActionBookmarks";
-      this.ActionBookmarks.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
-      this.ActionBookmarks.Size = new System.Drawing.Size(49, 46);
-      this.ActionBookmarks.Text = "Bookmarks";
-      this.ActionBookmarks.ToolTipText = "Bookmarks (Alt+B)";
-      this.ActionBookmarks.Visible = false;
-      // 
-      // ActionAddBookmark
-      // 
-      this.ActionAddBookmark.Image = ((System.Drawing.Image)(resources.GetObject("ActionAddBookmark.Image")));
-      this.ActionAddBookmark.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.ActionAddBookmark.Name = "ActionAddBookmark";
-      this.ActionAddBookmark.Size = new System.Drawing.Size(108, 22);
-      this.ActionAddBookmark.Text = "Add";
-      // 
-      // toolStripSeparator3
-      // 
-      this.toolStripSeparator3.Name = "toolStripSeparator3";
-      this.toolStripSeparator3.Size = new System.Drawing.Size(105, 6);
-      // 
-      // ActionSortBookmarks
-      // 
-      this.ActionSortBookmarks.Image = ((System.Drawing.Image)(resources.GetObject("ActionSortBookmarks.Image")));
-      this.ActionSortBookmarks.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.ActionSortBookmarks.Name = "ActionSortBookmarks";
-      this.ActionSortBookmarks.Size = new System.Drawing.Size(108, 22);
-      this.ActionSortBookmarks.Text = "Sort";
-      // 
-      // toolStripSeparator7
-      // 
-      this.toolStripSeparator7.Name = "toolStripSeparator7";
-      this.toolStripSeparator7.Size = new System.Drawing.Size(105, 6);
-      // 
-      // ActionClearBookmarks
-      // 
-      this.ActionClearBookmarks.Image = ((System.Drawing.Image)(resources.GetObject("ActionClearBookmarks.Image")));
-      this.ActionClearBookmarks.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.ActionClearBookmarks.Name = "ActionClearBookmarks";
-      this.ActionClearBookmarks.Size = new System.Drawing.Size(108, 22);
-      this.ActionClearBookmarks.Text = "Empty";
-      // 
-      // toolStripSeparator4
-      // 
-      this.toolStripSeparator4.Name = "toolStripSeparator4";
-      this.toolStripSeparator4.Size = new System.Drawing.Size(105, 6);
-      // 
-      // ActionGoToBookmarkMain
-      // 
-      this.ActionGoToBookmarkMain.Image = ((System.Drawing.Image)(resources.GetObject("ActionGoToBookmarkMain.Image")));
-      this.ActionGoToBookmarkMain.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.ActionGoToBookmarkMain.Name = "ActionGoToBookmarkMain";
-      this.ActionGoToBookmarkMain.Size = new System.Drawing.Size(108, 22);
-      this.ActionGoToBookmarkMain.Text = "Main";
-      // 
-      // SeparatorBookmarks
-      // 
-      this.SeparatorBookmarks.Name = "SeparatorBookmarks";
-      this.SeparatorBookmarks.Size = new System.Drawing.Size(105, 6);
-      // 
-      // toolStripSeparator13
-      // 
-      this.toolStripSeparator13.Name = "toolStripSeparator13";
-      this.toolStripSeparator13.Size = new System.Drawing.Size(6, 49);
-      this.toolStripSeparator13.Visible = false;
-      // 
-      // ActionHistory
-      // 
-      this.ActionHistory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionHistory.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ActionClearHistory,
-            this.SeparatorHistory});
-      this.ActionHistory.Image = ((System.Drawing.Image)(resources.GetObject("ActionHistory.Image")));
-      this.ActionHistory.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionHistory.Name = "ActionHistory";
-      this.ActionHistory.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
-      this.ActionHistory.Size = new System.Drawing.Size(49, 46);
-      this.ActionHistory.Text = "History";
-      this.ActionHistory.ToolTipText = "History (Alt+H)";
-      this.ActionHistory.Visible = false;
-      // 
-      // ActionClearHistory
-      // 
-      this.ActionClearHistory.Image = ((System.Drawing.Image)(resources.GetObject("ActionClearHistory.Image")));
-      this.ActionClearHistory.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.ActionClearHistory.Name = "ActionClearHistory";
-      this.ActionClearHistory.Size = new System.Drawing.Size(108, 22);
-      this.ActionClearHistory.Text = "Empty";
-      // 
-      // SeparatorHistory
-      // 
-      this.SeparatorHistory.Name = "SeparatorHistory";
-      this.SeparatorHistory.Size = new System.Drawing.Size(105, 6);
-      // 
-      // ActionHistoryBack
-      // 
-      this.ActionHistoryBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionHistoryBack.Image = ((System.Drawing.Image)(resources.GetObject("ActionHistoryBack.Image")));
-      this.ActionHistoryBack.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionHistoryBack.Name = "ActionHistoryBack";
-      this.ActionHistoryBack.Padding = new System.Windows.Forms.Padding(4);
-      this.ActionHistoryBack.Size = new System.Drawing.Size(44, 46);
-      this.ActionHistoryBack.Text = "Previous";
-      this.ActionHistoryBack.ToolTipText = "Previous (Shift+Ctrl+P)";
-      this.ActionHistoryBack.Visible = false;
-      // 
-      // ActionHistoryNext
-      // 
-      this.ActionHistoryNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionHistoryNext.Image = ((System.Drawing.Image)(resources.GetObject("ActionHistoryNext.Image")));
-      this.ActionHistoryNext.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ActionHistoryNext.Name = "ActionHistoryNext";
-      this.ActionHistoryNext.Padding = new System.Windows.Forms.Padding(4);
-      this.ActionHistoryNext.Size = new System.Drawing.Size(44, 46);
-      this.ActionHistoryNext.Text = "Next";
-      this.ActionHistoryNext.ToolTipText = "Next (Shift+Ctrl+N)";
-      this.ActionHistoryNext.Visible = false;
-      // 
-      // toolStripSeparator19
-      // 
-      this.toolStripSeparator19.Name = "toolStripSeparator19";
-      this.toolStripSeparator19.Size = new System.Drawing.Size(6, 49);
-      this.toolStripSeparator19.Visible = false;
       // 
       // ActionViewDecode
       // 
@@ -1182,6 +1024,24 @@
       this.PanelViewDecode.Size = new System.Drawing.Size(923, 357);
       this.PanelViewDecode.TabIndex = 0;
       // 
+      // textBox1
+      // 
+      this.textBox1.Location = new System.Drawing.Point(146, 102);
+      this.textBox1.Multiline = true;
+      this.textBox1.Name = "textBox1";
+      this.textBox1.Size = new System.Drawing.Size(467, 167);
+      this.textBox1.TabIndex = 7;
+      // 
+      // ActionSquare
+      // 
+      this.ActionSquare.Location = new System.Drawing.Point(146, 44);
+      this.ActionSquare.Name = "ActionSquare";
+      this.ActionSquare.Size = new System.Drawing.Size(58, 23);
+      this.ActionSquare.TabIndex = 2;
+      this.ActionSquare.Text = "Square";
+      this.ActionSquare.UseVisualStyleBackColor = true;
+      this.ActionSquare.Click += new System.EventHandler(this.ActionSquare_Click);
+      // 
       // TabPageGrid
       // 
       this.TabPageGrid.Controls.Add(this.PanelViewGrid);
@@ -1219,7 +1079,9 @@
       // PanelViewManage
       // 
       this.PanelViewManage.BackColor = System.Drawing.SystemColors.Control;
+      this.PanelViewManage.Controls.Add(this.SelectPiDecimalsFile);
       this.PanelViewManage.Controls.Add(this.EditMaxMotifs);
+      this.PanelViewManage.Controls.Add(this.LabelPiDecimalsFile);
       this.PanelViewManage.Controls.Add(this.LabelMaxMotifs);
       this.PanelViewManage.Controls.Add(this.EditAllowInterruption);
       this.PanelViewManage.Controls.Add(this.EditNormalizeAutoLoop);
@@ -1237,13 +1099,16 @@
       this.PanelViewManage.Size = new System.Drawing.Size(923, 357);
       this.PanelViewManage.TabIndex = 2;
       // 
-      // textBox1
+      // SelectPiDecimalsFile
       // 
-      this.textBox1.Location = new System.Drawing.Point(146, 102);
-      this.textBox1.Multiline = true;
-      this.textBox1.Name = "textBox1";
-      this.textBox1.Size = new System.Drawing.Size(467, 167);
-      this.textBox1.TabIndex = 7;
+      this.SelectPiDecimalsFile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.SelectPiDecimalsFile.FormattingEnabled = true;
+      this.SelectPiDecimalsFile.Location = new System.Drawing.Point(13, 39);
+      this.SelectPiDecimalsFile.Name = "SelectPiDecimalsFile";
+      this.SelectPiDecimalsFile.Size = new System.Drawing.Size(169, 21);
+      this.SelectPiDecimalsFile.TabIndex = 3;
+      this.SelectPiDecimalsFile.SelectedIndexChanged += new System.EventHandler(this.SelectDbCache_SelectedIndexChanged);
+      this.SelectPiDecimalsFile.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.SelectPiDecimalsFile_Format);
       // 
       // EditMaxMotifs
       // 
@@ -1267,20 +1132,19 @@
             0,
             0});
       // 
-      // ActionSquare
+      // LabelPiDecimalsFile
       // 
-      this.ActionSquare.Location = new System.Drawing.Point(146, 44);
-      this.ActionSquare.Name = "ActionSquare";
-      this.ActionSquare.Size = new System.Drawing.Size(58, 23);
-      this.ActionSquare.TabIndex = 2;
-      this.ActionSquare.Text = "Square";
-      this.ActionSquare.UseVisualStyleBackColor = true;
-      this.ActionSquare.Click += new System.EventHandler(this.ActionSquare_Click);
+      this.LabelPiDecimalsFile.AutoSize = true;
+      this.LabelPiDecimalsFile.Location = new System.Drawing.Point(188, 42);
+      this.LabelPiDecimalsFile.Name = "LabelPiDecimalsFile";
+      this.LabelPiDecimalsFile.Size = new System.Drawing.Size(76, 13);
+      this.LabelPiDecimalsFile.TabIndex = 5;
+      this.LabelPiDecimalsFile.Text = "Pi decimals file";
       // 
       // LabelMaxMotifs
       // 
       this.LabelMaxMotifs.AutoSize = true;
-      this.LabelMaxMotifs.Location = new System.Drawing.Point(108, 15);
+      this.LabelMaxMotifs.Location = new System.Drawing.Point(108, 17);
       this.LabelMaxMotifs.Name = "LabelMaxMotifs";
       this.LabelMaxMotifs.Size = new System.Drawing.Size(57, 13);
       this.LabelMaxMotifs.TabIndex = 5;
@@ -1289,7 +1153,7 @@
       // EditAllowInterruption
       // 
       this.EditAllowInterruption.AutoSize = true;
-      this.EditAllowInterruption.Location = new System.Drawing.Point(13, 97);
+      this.EditAllowInterruption.Location = new System.Drawing.Point(13, 124);
       this.EditAllowInterruption.Name = "EditAllowInterruption";
       this.EditAllowInterruption.Size = new System.Drawing.Size(106, 17);
       this.EditAllowInterruption.TabIndex = 4;
@@ -1302,7 +1166,7 @@
       this.EditNormalizeAutoLoop.AutoSize = true;
       this.EditNormalizeAutoLoop.Checked = true;
       this.EditNormalizeAutoLoop.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.EditNormalizeAutoLoop.Location = new System.Drawing.Point(191, 72);
+      this.EditNormalizeAutoLoop.Location = new System.Drawing.Point(191, 99);
       this.EditNormalizeAutoLoop.Name = "EditNormalizeAutoLoop";
       this.EditNormalizeAutoLoop.Size = new System.Drawing.Size(71, 17);
       this.EditNormalizeAutoLoop.TabIndex = 4;
@@ -1315,15 +1179,15 @@
             | System.Windows.Forms.AnchorStyles.Left)));
       this.ListBoxLog.FormattingEnabled = true;
       this.ListBoxLog.IntegralHeight = false;
-      this.ListBoxLog.Location = new System.Drawing.Point(13, 130);
+      this.ListBoxLog.Location = new System.Drawing.Point(13, 157);
       this.ListBoxLog.Name = "ListBoxLog";
-      this.ListBoxLog.Size = new System.Drawing.Size(265, 214);
+      this.ListBoxLog.Size = new System.Drawing.Size(265, 187);
       this.ListBoxLog.TabIndex = 3;
       // 
       // ActionStop
       // 
       this.ActionStop.Enabled = false;
-      this.ActionStop.Location = new System.Drawing.Point(13, 68);
+      this.ActionStop.Location = new System.Drawing.Point(13, 95);
       this.ActionStop.Name = "ActionStop";
       this.ActionStop.Size = new System.Drawing.Size(89, 23);
       this.ActionStop.TabIndex = 2;
@@ -1334,7 +1198,7 @@
       // ActionCreateData
       // 
       this.ActionCreateData.Enabled = false;
-      this.ActionCreateData.Location = new System.Drawing.Point(13, 39);
+      this.ActionCreateData.Location = new System.Drawing.Point(13, 66);
       this.ActionCreateData.Name = "ActionCreateData";
       this.ActionCreateData.Size = new System.Drawing.Size(89, 23);
       this.ActionCreateData.TabIndex = 2;
@@ -1345,7 +1209,7 @@
       // ActionNormalize
       // 
       this.ActionNormalize.Enabled = false;
-      this.ActionNormalize.Location = new System.Drawing.Point(189, 39);
+      this.ActionNormalize.Location = new System.Drawing.Point(189, 66);
       this.ActionNormalize.Name = "ActionNormalize";
       this.ActionNormalize.Size = new System.Drawing.Size(89, 23);
       this.ActionNormalize.TabIndex = 2;
@@ -1356,7 +1220,7 @@
       // ActionPause
       // 
       this.ActionPause.Enabled = false;
-      this.ActionPause.Location = new System.Drawing.Point(108, 68);
+      this.ActionPause.Location = new System.Drawing.Point(108, 95);
       this.ActionPause.Name = "ActionPause";
       this.ActionPause.Size = new System.Drawing.Size(75, 23);
       this.ActionPause.TabIndex = 2;
@@ -1367,7 +1231,7 @@
       // ActionCreateIndex
       // 
       this.ActionCreateIndex.Enabled = false;
-      this.ActionCreateIndex.Location = new System.Drawing.Point(108, 39);
+      this.ActionCreateIndex.Location = new System.Drawing.Point(108, 66);
       this.ActionCreateIndex.Name = "ActionCreateIndex";
       this.ActionCreateIndex.Size = new System.Drawing.Size(75, 23);
       this.ActionCreateIndex.TabIndex = 2;
@@ -1981,10 +1845,6 @@
       // 
       this.SaveFileDialogDB.Filter = "SQLite files (*.sqlite)|*.sqlite";
       // 
-      // OpenFileDialogTXT
-      // 
-      this.OpenFileDialogTXT.Filter = "Text files (*.txt)|*.txt";
-      // 
       // EditSearchTranslation
       // 
       this.EditSearchTranslation.BackColor = System.Drawing.Color.AliceBlue;
@@ -2113,22 +1973,6 @@
     private ToolStripButton ActionExit;
     private ToolStripSeparator ToolStripSeparatorExit;
     internal ToolStripButton ActionPreferences;
-    private ToolStripDropDownButton ActionBookmarks;
-    private ToolStripMenuItem ActionAddBookmark;
-    private ToolStripSeparator toolStripSeparator3;
-    private ToolStripMenuItem ActionSortBookmarks;
-    private ToolStripSeparator toolStripSeparator7;
-    private ToolStripMenuItem ActionClearBookmarks;
-    private ToolStripSeparator toolStripSeparator4;
-    private ToolStripMenuItem ActionGoToBookmarkMain;
-    private ToolStripSeparator SeparatorBookmarks;
-    private ToolStripSeparator toolStripSeparator19;
-    private ToolStripDropDownButton ActionHistory;
-    private ToolStripMenuItem ActionClearHistory;
-    private ToolStripSeparator SeparatorHistory;
-    private ToolStripButton ActionHistoryBack;
-    private ToolStripButton ActionHistoryNext;
-    private ToolStripSeparator toolStripSeparator13;
     private ToolStripDropDownButton ActionDatabase;
     private ToolStripMenuItem ActionDatabaseClose;
     private ToolStripMenuItem ActionDatabaseRestore;
@@ -2258,7 +2102,6 @@
     private OpenFileDialog OpenFileDialogDB;
     private SaveFileDialog SaveFileDialogDB;
     private Button ActionDbNew;
-    private OpenFileDialog OpenFileDialogTXT;
     private CheckBox EditNormalizeAutoLoop;
     private CheckBox EditAllowInterruption;
     private NumericUpDown EditMaxMotifs;
@@ -2275,5 +2118,7 @@
     private ToolStripSeparator toolStripSeparator9;
     private TextBox textBox1;
     private Button ActionSquare;
+    private ComboBox SelectPiDecimalsFile;
+    private Label LabelPiDecimalsFile;
   }
 }

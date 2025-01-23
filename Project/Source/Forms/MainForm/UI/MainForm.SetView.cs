@@ -47,7 +47,6 @@ partial class MainForm
     ViewConnectors[view].Focused?.Focus();
     Settings.CurrentView = view;
     LabelTitleLeft.Text = AppTranslations.ViewPanelTitle.GetLang(view).ToUpper();
-    UpdateHistoryButtons();
     UpdateButtons();
   }
 

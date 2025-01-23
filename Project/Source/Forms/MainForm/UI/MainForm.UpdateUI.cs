@@ -160,44 +160,24 @@ partial class MainForm
     LabelStatusTimeSubBatch.Text = Globals.ChronoSubBatch.Elapsed.TotalSeconds == 0
       ? "SubBatch: N/A"
       : string.Format(AppTranslations.SubBatchElapsedText, Globals.ChronoSubBatch.Elapsed.AsReadable());
-  }
-
-  //
-  // Update history buttons
-  //
-  private void UpdateHistoryButtons()
-  {
-    //  if ( CurrentReference is null )
-    //  {
-    //    ActionHistoryVerseNext.Enabled = false;
-    //    ActionHistoryVerseBack.Enabled = false;
-    //    return;
-    //  }
-    //  var list = HistoryItems.ToList();
-    //  int index = list.FindIndex(r => r.CompareTo(CurrentReference) == 0);
-    //  if ( index == -1 )
-    //  {
-    //    ActionHistoryVerseNext.Enabled = false;
-    //    ActionHistoryVerseBack.Enabled = false;
-    //    return;
-    //  }
-    //  var view = Settings.CurrentView;
-    //  bool canHistoryMove = IsVersesOrTranslationOrOriginal(view);
-    //  ActionHistoryVerseNext.Enabled = canHistoryMove && index != 0;
-    //  ActionHistoryVerseBack.Enabled = canHistoryMove && index != list.Count - 1;
-    //}
-
-    //[SuppressMessage("Major Bug", "S2583:Conditionally executed code should be reachable", Justification = "Analysis error")]
-    //internal void UpdateTitle(bool forceView = false)
-    //{
-    //  if ( !Globals.IsReady ) return;
-    //  LabelTitleReferenceName.Text = " " + CurrentReference?.ToStringBasedOnPreferences().ToUpper() ?? string.Empty;
-    //  LabelTitleReferenceName.Refresh();
-    //  if ( forceView )
-    //  {
-    //    LabelTitle.Text = AppTranslations.ViewPanelTitle.GetLang(Settings.CurrentView).ToUpper();
-    //    LabelTitle.Refresh();
-    //  }
+    if ( IsMotifsProcessing )
+    {
+      UpdateStatusInfo(string.Format(AppTranslations.CreateDataProgress, MotifsProcessedCount.ToString("N0")));
+      try
+      {
+        var elapsed = Globals.ChronoBatch.Elapsed;
+        double size1 = ( MotifsProcessedCount - DecupletsRowCount ) * PiDecimalMotifSize;
+        double size2 = PiDecimalsFileSize - DecupletsRowCount * PiDecimalMotifSize;
+        double progress = size1 <= 0 || size2 <= 0 ? 1 : size1 / size2;
+        var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
+        UpdateStatusRemaining(string.Format(AppTranslations.RemainingText, remaining.AsReadable()));
+        TaskBar.SetProgressValue((int)( progress * 100 ), 100);
+      }
+      catch ( Exception ex )
+      {
+        UpdateStatusRemaining(ex.Message);
+      }
+    }
   }
 
 }

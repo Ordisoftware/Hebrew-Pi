@@ -33,20 +33,13 @@ partial class MainForm : Form
     InitializeViewConnectors();
     new Task(InitializeIconsAndSound).Start();
     new Task(InitializeDialogsDirectory).Start();
-    //new Task(() => BookmarkItems = new Bookmarks(Program.BookmarksFilePath)).Start();
-    //new Task(() => HistoryItems = new History(Program.HistoryFilePath)).Start();
     SystemManager.TryCatch(() => Icon = new Icon(Globals.ApplicationIconFilePath));
     Text = Globals.AssemblyTitle;
     ToolStrip.Renderer = new CheckedButtonsToolStripRenderer();
-    //ActionGoToBookmarkMain.Click += GoToBookmark;
     SystemEvents.SessionEnding += SessionEnding;
     NativeMethods.ClipboardViewerNext = NativeMethods.SetClipboardViewer(Handle);
     HebrewGlobals.GetHebrewLettersExecutablePath = () => Settings.HebrewLettersExe;
-    InitializeTheme();
     ClearStatusBar();
-    if ( !ApplicationCommandLine.Instance.IsPreviewEnabled ) // TODO remove when ready
-    {
-    }
   }
 
   /// <summary>
@@ -75,8 +68,6 @@ partial class MainForm : Form
     Globals.ChronoStartingApp.Start();
     //MainForm_ResizeEnd(null, null);
     //MainForm_Resize(null, null);
-    BookmarkMenuIndex = ActionBookmarks.DropDownItems.Count;
-    HistoryIndexMenu = ActionHistory.DropDownItems.Count;
     DebugManager.TraceEnabledChanged += value => CommonMenusControl.Instance.ActionViewLog.Enabled = value;
   }
 
@@ -89,8 +80,6 @@ partial class MainForm : Form
     if ( Globals.IsExiting ) return;
     this.InitDropDowns();
     Refresh();
-    //DoBackupDB();
-    //LoadData();
     SetView(Settings.CurrentView, true);
     Globals.IsReady = true;
     Globals.KeyboardShortcutsNotice = new ShowTextForm(AppTranslations.NoticeKeyboardShortcutsTitle,
@@ -211,7 +200,6 @@ partial class MainForm : Form
   /// </summary>
   public void InitializeDialogsDirectory()
   {
-    OpenFileDialogTXT.InitialDirectory = Globals.DocumentsFolderPath;
     OpenFileDialogDB.InitialDirectory = Globals.DatabaseFolderPath;
     SaveFileDialogDB.InitialDirectory = Globals.DatabaseFolderPath;
   }
@@ -224,26 +212,6 @@ partial class MainForm : Form
     SoundItem.Initialize();
     SystemManager.TryCatch(() => DisplayManager.DoSound(Globals.EmptySoundFilePath));
     SystemManager.TryCatch(() => MediaMixer.SetApplicationVolume(Globals.ProcessId, Settings.ApplicationVolume));
-  }
-
-  /// <summary>
-  /// Sets colors.
-  /// </summary>
-  internal void InitializeTheme()
-  {
-    //// Navigator items
-    //EditBookTranslation.BackColor = Settings.ThemeNavigatorItems;
-    //EditChapterTitle.BackColor = Settings.ThemeNavigatorItems;
-    //EditELS50Single.BackColor = Settings.ThemeNavigatorItems;
-    //EditChapterMemo.BackColor = Settings.ThemeNavigatorItems;
-    //EditVerseConcept.BackColor = Settings.ThemeNavigatorItems;
-    //EditVerseTitle.BackColor = Settings.ThemeNavigatorItems;
-    //// Letters control
-    //EditSearchWord.LettersBackColor = Settings.ThemeSearchLettersBack;
-    //EditSearchWord.InputBackColor = Settings.ThemeSearchWordBack;
-    //EditSearchTranslation.BackColor = Settings.ThemeSearchWordBack;
-    ////
-    //ActionRefresh.PerformClick();
   }
 
 }

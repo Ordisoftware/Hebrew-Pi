@@ -21,14 +21,6 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm : Form
 {
 
-  private string DatabaseFilePath;
-
-  private string SQLiteTempDir = @"D:\";
-
-  private int SQLiteCacheSize;
-
-  internal SQLiteNetORM DB { get; private set; }
-
   #region Singleton
 
   /// <summary>
@@ -61,8 +53,11 @@ partial class MainForm : Form
   private void MainForm_Load(object sender, EventArgs e)
   {
     DoFormLoad(sender, e);
-    InitializeListBoxCacheSize();
     TimerMemory_Tick(null, null);
+    InitializeListBoxCacheSize();
+    foreach ( string file in Directory.GetFiles(Path.Combine(Globals.DocumentsFolderPath, "PiDecimals"), "*.txt") )
+      SelectPiDecimalsFile.Items.Add(file);
+    SelectPiDecimalsFile.SelectedIndex = 0;
   }
 
   const ulong MemorySizeInKiB = 1024;
@@ -260,22 +255,16 @@ partial class MainForm : Form
 
   private void ActionCreateData_Click(object sender, EventArgs e)
   {
-    if ( OpenFileDialogTXT.ShowDialog() == DialogResult.OK )
-    {
-      DoBatchAsync(() => DoActionPopulateAsync(OpenFileDialogTXT.FileName));
-      //LabelTitleCenter.Text = $"{Path.GetFileName(DatabaseFilePath)} ({DB.Table<DecupletRow>().Count()})";
-    }
+    DoBatchAsync(() => DoActionPopulateAsync(SelectPiDecimalsFile.SelectedItem.ToString()));
   }
 
   private void ActionCreateIndex_Click(object sender, EventArgs e)
   {
-    //if ( DisplayManager.QueryYesNo(AppTranslations.AskToCreateIndexOnMotif) )
     DoBatchAsync(() => DoCreateIndexAsync(), false);
   }
 
   private void ActionNormalize_Click(object sender, EventArgs e)
   {
-    //if ( !DisplayManager.QueryYesNo("Start reducing repeating motifs?") ) return;
     DoBatchAsync(() => DoActionNormalizeAsync());
   }
 
@@ -287,6 +276,11 @@ partial class MainForm : Form
   private void ActionPauseContinue_Click(object sender, EventArgs e)
   {
     DoActionPauseContinue();
+  }
+
+  private void SelectPiDecimalsFile_Format(object sender, ListControlConvertEventArgs e)
+  {
+    e.Value = Path.GetFileNameWithoutExtension(e.Value.ToString());
   }
 
   private void GridIterations_Leave(object sender, EventArgs e)

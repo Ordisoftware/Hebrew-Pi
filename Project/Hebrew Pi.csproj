@@ -373,10 +373,6 @@
     </Compile>
     <Compile Include="Source\Database\IterationRow.cs" />
     <Compile Include="Source\Database\DecupletRow.cs" />
-    <Compile Include="Source\Entities\Bookmarks.cs" />
-    <Compile Include="Source\Entities\History.cs" />
-    <Compile Include="Source\Entities\DecupletItem.cs" />
-    <Compile Include="Source\Entities\DecupletList.cs" />
     <Compile Include="Source\Enums\ExportDocumentModel.cs" />
     <Compile Include="Source\Enums\ExportDocumentTheme.cs" />
     <Compile Include="Source\Enums\HebrewWordClickAction.cs" />

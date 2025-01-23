@@ -14,6 +14,8 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
+using Microsoft.WindowsAPICodePack.Taskbar;
+
 /// <summary>
 /// Provides application's main form.
 /// </summary>
@@ -21,78 +23,30 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm
 {
 
-  /// <summary>
-  /// Indicates the default Settings instance.
-  /// </summary>
   private readonly Properties.Settings Settings = Program.Settings;
 
-  /// <summary>
-  /// Indicates previous each paging position.
-  /// </summary>
-  private int PreviousSeachPagingPosition = -1;
+  private TaskbarManager TaskBar = TaskbarManager.Instance;
 
-  /// <summary>
-  /// Indicates bookmark menu item first index.
-  /// </summary>
-  private int BookmarkMenuIndex;
+  private const long PiDecimalMotifSize = 10;
 
-  /// <summary>
-  /// Indicates history menu item first index.
-  /// </summary>
-  private int HistoryIndexMenu;
+  private int FileReadBufferSize = 10_000_000;
 
-  /// <summary>
-  /// Indicates the bookmarks.
-  /// </summary>
-  private Bookmarks BookmarkItems;
+  private bool CanForceTerminateBatch;
 
-  /// <summary>
-  /// Indicates the history.
-  /// </summary>
-  private History HistoryItems;
+  private volatile bool IsMotifsProcessing;
 
-  /// <summary>
-  /// Indicates the search results.
-  /// </summary>
-  private IEnumerable<DecupletItem> SearchResults;
+  private long MotifsProcessedCount;
 
-  /// <summary>
-  /// Indicates the number of search results.
-  /// </summary>
-  public int SearchResultsCount { get; private set; }
+  private long DecupletsRowCount;
 
-  /// <summary>
-  /// Indicates the paging count disable form.
-  /// </summary>
-  private readonly int PagingCountDisableForm = 50;
+  private long PiDecimalsFileSize;
 
-  /// <summary>
-  /// Indicates the current paging.
-  /// </summary>
-  private int PagingCurrent;
+  private string DatabaseFilePath;
 
-  /// <summary>
-  /// Indicates the paging count.
-  /// </summary>
-  private int PagingCount;
+  private string SQLiteTempDir = @"D:\";
 
-  static public readonly string SearchSeparatorString = ",";
+  private int SQLiteCacheSize;
 
-  static public readonly char SearchSeparatorChar = ',';
-
-  /// <summary>
-  /// Indicates the hebrew font 12.
-  /// </summary>
-  private readonly Font HebrewFont12 = new("Hebrew", 12f);
-
-  /// <summary>
-  /// Indicates the latin font 10.
-  /// </summary>
-  private readonly Font LatinFont10 = new("Verdana", 10f);
-
-  /// <summary>
-  /// The latin font 8.
-  /// </summary>
-  private readonly Font LatinFont8 = new("Verdana", 8f);
+  private SQLiteNetORM DB;
 
 }
