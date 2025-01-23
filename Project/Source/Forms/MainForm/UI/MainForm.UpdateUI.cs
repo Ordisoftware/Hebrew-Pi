@@ -190,6 +190,9 @@ partial class MainForm
         UpdateStatusAction(Operation.ToString());
         UpdateStatusInfo(string.Format(AppTranslations.IterationText, ReduceRepeatingIteration, MotifsProcessedCount));
         break;
+      case ProcessingType.CreateIndex:
+        UpdateStatusAction(Operation.ToString());
+        break;
       default:
         LabelStatusRemaining.Text = AppTranslations.RemainingNAText;
         break;

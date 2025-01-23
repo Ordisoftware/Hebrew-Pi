@@ -99,9 +99,6 @@ partial class MainForm
         }
       }
       doCommit();
-      UpdateStatusRemaining(AppTranslations.RemainingNAText);
-      if ( CheckIfBatchCanContinueAsync().Result )
-        ActionCreateIndex_Click(ActionCreateIndex, EventArgs.Empty);
     }
     catch ( Exception ex )
     {
@@ -119,7 +116,6 @@ partial class MainForm
     }
     finally
     {
-      IsMotifsProcessing = false;
       TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
       if ( reader is not null )
       {
