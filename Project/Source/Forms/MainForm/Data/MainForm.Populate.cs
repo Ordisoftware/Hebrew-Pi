@@ -99,6 +99,7 @@ partial class MainForm
         }
       }
       doCommit();
+      UpdateStatusInfo(string.Format(AppTranslations.CreateDataProgress, MotifsProcessedCount.ToString("N0")));
     }
     catch ( Exception ex )
     {

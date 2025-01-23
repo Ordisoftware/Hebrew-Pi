@@ -86,11 +86,7 @@ partial class MainForm
         if ( !CheckIfBatchCanContinueAsync().Result ) break;
         if ( iteratingStep == IteratingStep.Next || iteratingStep == IteratingStep.Counting )
         {
-          Operation = OperationType.Grouping;
           Globals.ChronoSubBatch.Restart();
-          DB.CreateRepeatingMotifsTableAsync();
-          Operation = OperationType.Grouped;
-          if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.Counting;
           var list = DB.GetRepeatingMotifCountAndMaxOccurencesAsync().Result;
           Globals.ChronoSubBatch.Stop();
