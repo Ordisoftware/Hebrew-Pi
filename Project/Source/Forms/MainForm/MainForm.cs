@@ -208,9 +208,9 @@ partial class MainForm : Form
     DoTimerMemory();
   }
 
-  private void TimerBatch_Tick(object sender, EventArgs e)
+  private void TimerStatus_Tick(object sender, EventArgs e)
   {
-    DoTimerBatch();
+    DoTimerStatus();
   }
 
   private void EditAllowInterruption_CheckedChanged(object sender, EventArgs e)
@@ -242,10 +242,7 @@ partial class MainForm : Form
   private void ActionDbOpen_Click(object sender, EventArgs e)
   {
     if ( OpenFileDialogDB.ShowDialog() == DialogResult.OK )
-    {
       DoActionDbOpen(OpenFileDialogDB.FileName);
-      DatabaseFilePath = OpenFileDialogDB.FileName;
-    }
   }
 
   private void ActionDbClose_Click(object sender, EventArgs e)
@@ -255,7 +252,8 @@ partial class MainForm : Form
 
   private void ActionCreateData_Click(object sender, EventArgs e)
   {
-    DoBatchAsync(() => DoActionPopulateAsync(SelectPiDecimalsFile.SelectedItem.ToString()));
+    string path = SelectPiDecimalsFile.SelectedItem.ToString();
+    DoBatchAsync(() => DoActionPopulateAsync(path));
   }
 
   private void ActionCreateIndex_Click(object sender, EventArgs e)
@@ -276,6 +274,20 @@ partial class MainForm : Form
   private void ActionPauseContinue_Click(object sender, EventArgs e)
   {
     DoActionPauseContinue();
+  }
+
+  private void SelectPiDecimalsFile_SelectedIndexChanged(object sender, EventArgs e)
+  {
+    string path = SelectPiDecimalsFile.SelectedItem.ToString();
+    long size = SystemManager.GetFileSize(path);
+    char[] buffer = new char[FileReadBufferSize];
+    using var reader = new StreamReader(path);
+    if ( reader.Read(buffer, 0, 2) == 2 )
+    {
+      string str = new(buffer, 0, 2);
+      if ( str == "3." || str == "3," ) size -= 2;
+    }
+    EditMaxMotifs.Value = size / 10;
   }
 
   private void SelectPiDecimalsFile_Format(object sender, ListControlConvertEventArgs e)

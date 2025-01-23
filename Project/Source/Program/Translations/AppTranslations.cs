@@ -75,28 +75,16 @@ static partial class AppTranslations
   static public string AskStartNextIfMore = $"{MoreAtIteration}{PreviousAndCurrentCount}{StartNextIteration}";
   //static public string NoRepeatedText = "There is no repeating motif at iteration {0}";
 
-  static public string CreateDataProgress = "Info: {0} inserted";
-  static public string IterationText = "Info: Iteration #{0}, {1} repeating";
+  static public string CreateDataProgress = "{0} inserted";
+  static public string IterationText = "Iteration #{0}, {1} repeating";
 
   static public string BatchElapsedText = "Batch: {0}";
   static public string SubBatchElapsedText = "Sub-batch: {0}";
   static public string RemainingText = "Remaining: {0}";
   static public string RemainingNAText = "Remaining: N/A";
 
-  static public string CountingText = "Action: counting...";
-  static public string CountedText = "Action: counted";
-  static public string MaxoccurrencesText = "Action: counting max occurrences...";
-  static public string AdditionningText = "Action: additionning...";
-  static public string AddedText = "Action: added";
-  static public string CommittingText = "Action: committing...";
-  static public string CommittedText = "Action: committed...";
-  static public string RollbackingText = "Action: rollbacking...";
-  static public string EmptyingTablesText = "Action: emptying...";
-  static public string PopulatingText = "Action: populating...";
-  static public string IndexingText = "Action: indexing...";
-  static public string IndexedText = "Action: indexed";
-  static public string FinishedText = "Action: finished";
-  static public string CanceledText = "Action: canceled";
+  static public string ActionText = "Action: ";
+  static public string InfoText = "Info: ";
 
   static public string AskToCreateIndexOnMotif = "Create index on Motif column now?";
 

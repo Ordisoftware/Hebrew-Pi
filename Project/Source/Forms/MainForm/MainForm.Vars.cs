@@ -14,8 +14,6 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-using Microsoft.WindowsAPICodePack.Taskbar;
-
 /// <summary>
 /// Provides application's main form.
 /// </summary>
@@ -24,8 +22,6 @@ partial class MainForm
 {
 
   private readonly Properties.Settings Settings = Program.Settings;
-
-  private TaskbarManager TaskBar = TaskbarManager.Instance;
 
   private const long PiDecimalMotifSize = 10;
 
@@ -36,6 +32,8 @@ partial class MainForm
   private volatile bool IsMotifsProcessing;
 
   private long MotifsProcessedCount;
+
+  private long ReduceRepeatingIteration = 0;
 
   private long DecupletsRowCount;
 
@@ -48,5 +46,11 @@ partial class MainForm
   private int SQLiteCacheSize;
 
   private SQLiteNetORM DB;
+
+  private ProcessingType Processing;
+
+  private OperationType Operation;
+
+  private Exception Except;
 
 }

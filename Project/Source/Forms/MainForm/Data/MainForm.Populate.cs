@@ -30,23 +30,22 @@ partial class MainForm
       DisplayManager.Show(SysTranslations.FileNotFound.GetLang(filePathText));
       return;
     }
-    PiDecimalsFileSize = SystemManager.GetFileSize(filePathText);
     long pagingCommit = PiDecimalsFileSize <= 1_100_000_000 ? 1_000_000 : 10_000_000;
     bool hasError = false;
     bool maxReached = false;
     StreamReader reader = null;
     try
     {
-      Globals.ChronoSubBatch.Restart();
-      checkRows();
-      Globals.ChronoSubBatch.Stop();
-      UpdateStatusAction(AppTranslations.PopulatingText);
-      UpdateStatusInfo(string.Format(AppTranslations.CreateDataProgress, "0"));
+      long maxMotifsCount = (long)EditMaxMotifs.Value;
       long motif;
       long shiftLeft;
       int charsRead;
       char[] buffer = new char[FileReadBufferSize];
       reader = new StreamReader(filePathText);
+      Processing = ProcessingType.CreateData;
+      Globals.ChronoSubBatch.Restart();
+      checkRows();
+      Globals.ChronoSubBatch.Stop();
       charsRead = reader.Read(buffer, 0, 2);
       if ( charsRead != 2 )
       {
@@ -69,7 +68,8 @@ partial class MainForm
       }
       else
         MotifsProcessedCount = 0;
-      TaskBar.SetProgressState(TaskbarProgressBarState.Normal);
+      TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
+      Operation = OperationType.Populating;
       DB.BeginTransaction();
       Globals.ChronoBatch.Restart();
       IsMotifsProcessing = true;
@@ -79,6 +79,11 @@ partial class MainForm
         for ( long indexBuffer = 0; indexBuffer < charsRead; indexBuffer += PiDecimalMotifSize )
         {
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
+          if ( MotifsProcessedCount >= maxMotifsCount )
+          {
+            maxReached = true;
+            break;
+          }
           if ( indexBuffer + PiDecimalMotifSize <= charsRead )
           {
             motif = buffer[indexBuffer] - 48; // motif = motif * 10 + ( buffer[indexBuffer + indexMotif] - '0' );
@@ -92,11 +97,6 @@ partial class MainForm
               doCommit(true);
           }
           MotifsProcessedCount++;
-          if ( MotifsProcessedCount == EditMaxMotifs.Value )
-          {
-            maxReached = true;
-            break;
-          }
         }
       }
       doCommit();
@@ -115,13 +115,12 @@ partial class MainForm
       {
         doRollback();
       }
-      UpdateStatusAction(ex.Message);
-      ex.Manage();
+      Except = ex;
     }
     finally
     {
       IsMotifsProcessing = false;
-      TaskBar.SetProgressState(TaskbarProgressBarState.NoProgress);
+      TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
       if ( reader is not null )
       {
         reader.Close();
@@ -129,36 +128,40 @@ partial class MainForm
       }
       if ( !hasError )
         if ( Globals.CancelRequired )
-          UpdateStatusAction(AppTranslations.CanceledText);
+          Processing = ProcessingType.Canceled;
         else
-          UpdateStatusAction(AppTranslations.FinishedText);
+          Processing = ProcessingType.Finished;
     }
     //
     void doCommit(bool partial = false)
     {
-      UpdateStatusAction(AppTranslations.CommittingText);
+      Operation = OperationType.Committing;
       Globals.ChronoSubBatch.Restart();
       DB.Commit();
       Globals.ChronoSubBatch.Stop();
-      UpdateStatusAction(AppTranslations.CommittedText);
+      Operation = OperationType.Committed;
       if ( partial )
       {
         DB.BeginTransaction();
-        UpdateStatusAction(AppTranslations.PopulatingText);
+        Operation = OperationType.Populating;
       }
     }
     void doRollback()
     {
-      UpdateStatusAction(AppTranslations.RollbackingText);
+      Operation = OperationType.Rollbacking;
+      Globals.ChronoSubBatch.Restart();
       DB.Rollback();
+      Globals.ChronoSubBatch.Stop();
+      Operation = OperationType.Rollbacked;
     }
     //
     void checkRows()
     {
-      UpdateStatusRemaining(AppTranslations.RemainingNAText);
-      UpdateStatusAction(AppTranslations.CountingText);
+      Operation = OperationType.Counting;
+      Globals.ChronoSubBatch.Restart();
       DecupletsRowCount = DB.CountRows(DecupletRow.TableName);
-      UpdateStatusAction(AppTranslations.CountedText);
+      Globals.ChronoSubBatch.Stop();
+      Operation = OperationType.Counted;
       if ( DecupletsRowCount > 0 )
       {
         string title = "Table is not empty";
@@ -185,10 +188,15 @@ partial class MainForm
           case DialogResult.Yes:
             break;
           case DialogResult.No:
-            UpdateStatusAction(AppTranslations.EmptyingTablesText);
-            DB.DeleteAll<DecupletRow>();
-            DB.DeleteAll<IterationRow>();
+            Operation = OperationType.Emptying;
+            Globals.ChronoSubBatch.Restart();
+            DB.DropTable<DecupletRow>();
+            DB.DropTable<IterationRow>();
+            DB.CreateTable<DecupletRow>();
+            DB.CreateTable<IterationRow>();
+            Globals.ChronoSubBatch.Stop();
             DecupletsRowCount = 0;
+            Operation = OperationType.Emptied;
             break;
           case DialogResult.Cancel:
             Globals.CancelRequired = true;

@@ -376,8 +376,10 @@
     <Compile Include="Source\Enums\ExportDocumentModel.cs" />
     <Compile Include="Source\Enums\ExportDocumentTheme.cs" />
     <Compile Include="Source\Enums\HebrewWordClickAction.cs" />
+    <Compile Include="Source\Enums\OperationTypes.cs" />
     <Compile Include="Source\Enums\TranslatedItemDoubleClickAction.cs" />
     <Compile Include="Source\Enums\VerseLabelClickAction.cs" />
+    <Compile Include="Source\Enums\ProcessingType.cs" />
     <Compile Include="Source\Enums\ViewMode.cs" />
     <Compile Include="Source\Forms\Config\StatisticsForm.cs">
       <SubType>Form</SubType>

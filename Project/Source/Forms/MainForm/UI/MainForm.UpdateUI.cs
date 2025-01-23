@@ -1,4 +1,6 @@
-﻿/// <license>
+﻿using Microsoft.WindowsAPICodePack.Taskbar;
+
+/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
 /// Copyright 2025 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
@@ -82,6 +84,8 @@ partial class MainForm
       bool dbOnenedAndInBatch = dbOpened && Globals.IsInBatch;
       Globals.AllowClose = !Globals.IsInBatch;
       SelectDbCache.Enabled = !Globals.IsInBatch;
+      SelectPiDecimalsFile.Enabled = !Globals.IsInBatch;
+      EditMaxMotifs.Enabled = !Globals.IsInBatch;
       ActionDbOpen.Enabled = !dbOpened;
       ActionDbNew.Enabled = ActionDbOpen.Enabled;
       ActionDbClose.Enabled = dbOnenedAndNotInBatch;
@@ -105,7 +109,7 @@ partial class MainForm
     void update()
     {
       LabelStatusTimeBatch.Text = "Batch: N/A";
-      LabelStatusTimeSubBatch.Text = "SubBatch: N/A";
+      LabelStatusTimeSubBatch.Text = "Sub-batch: N/A";
       LabelStatusRemaining.Text = AppTranslations.RemainingNAText;
       LabelStatusInfo.Text = "Info: N/A";
       LabelStatusAction.Text = "Action: N/A";
@@ -114,21 +118,6 @@ partial class MainForm
       StatusStrip.Invoke(update);
     else
       update();
-  }
-
-  private void UpdateStatusAction(string text)
-  {
-    UpdateStatusLabel(LabelStatusAction, text);
-  }
-
-  private void UpdateStatusInfo(string text)
-  {
-    UpdateStatusLabel(LabelStatusInfo, text);
-  }
-
-  private void UpdateStatusRemaining(string text)
-  {
-    UpdateStatusLabel(LabelStatusRemaining, text);
   }
 
   private void UpdateStatusLabel(ToolStripStatusLabel label, string text)
@@ -144,6 +133,21 @@ partial class MainForm
       update();
   }
 
+  private void UpdateStatusAction(string text)
+  {
+    UpdateStatusLabel(LabelStatusAction, AppTranslations.ActionText + text);
+  }
+
+  private void UpdateStatusInfo(string text)
+  {
+    UpdateStatusLabel(LabelStatusInfo, AppTranslations.InfoText + text);
+  }
+
+  private void UpdateStatusRemaining(string text)
+  {
+    UpdateStatusLabel(LabelStatusRemaining, text);
+  }
+
   private void DoTimerMemory()
   {
     LabelStatusFreeMem.Text = "Free memory: " + SystemManager.PhysicalMemoryFreeValue.FormatBytesSize();
@@ -152,31 +156,43 @@ partial class MainForm
       : $"OPENED ({SystemManager.GetFileSize(DatabaseFilePath).FormatBytesSize()})";
   }
 
-  private void DoTimerBatch()
+  private void DoTimerStatus()
   {
     LabelStatusTimeBatch.Text = Globals.ChronoBatch.Elapsed.TotalSeconds == 0
       ? "Batch: N/A"
       : string.Format(AppTranslations.BatchElapsedText, Globals.ChronoBatch.Elapsed.AsReadable());
     LabelStatusTimeSubBatch.Text = Globals.ChronoSubBatch.Elapsed.TotalSeconds == 0
-      ? "SubBatch: N/A"
+      ? "Sub-batch: N/A"
       : string.Format(AppTranslations.SubBatchElapsedText, Globals.ChronoSubBatch.Elapsed.AsReadable());
-    if ( IsMotifsProcessing )
+    switch ( Processing )
     {
-      UpdateStatusInfo(string.Format(AppTranslations.CreateDataProgress, MotifsProcessedCount.ToString("N0")));
-      try
-      {
-        var elapsed = Globals.ChronoBatch.Elapsed;
-        double size1 = ( MotifsProcessedCount - DecupletsRowCount ) * PiDecimalMotifSize;
-        double size2 = PiDecimalsFileSize - DecupletsRowCount * PiDecimalMotifSize;
-        double progress = size1 <= 0 || size2 <= 0 ? 1 : size1 / size2;
-        var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
-        UpdateStatusRemaining(string.Format(AppTranslations.RemainingText, remaining.AsReadable()));
-        TaskBar.SetProgressValue((int)( progress * 100 ), 100);
-      }
-      catch ( Exception ex )
-      {
-        UpdateStatusRemaining(ex.Message);
-      }
+      case ProcessingType.CreateData:
+        UpdateStatusAction(Operation.ToString());
+        UpdateStatusInfo(string.Format(AppTranslations.CreateDataProgress, MotifsProcessedCount.ToString("N0")));
+        try
+        {
+          var elapsed = Globals.ChronoBatch.Elapsed;
+          long max = PiDecimalsFileSize / PiDecimalMotifSize;
+          max = Math.Min(PiDecimalsFileSize, (long)EditMaxMotifs.Value);
+          double countDone = MotifsProcessedCount - DecupletsRowCount;
+          double countToDo = max - DecupletsRowCount;
+          double progress = countDone <= 0 || countToDo <= 0 ? 1 : countDone / countToDo;
+          var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
+          UpdateStatusRemaining(string.Format(AppTranslations.RemainingText, remaining.AsReadable()));
+          TaskbarManager.Instance.SetProgressValue((int)( progress * 100 ), 100);
+        }
+        catch ( Exception ex )
+        {
+          UpdateStatusRemaining(ex.Message);
+        }
+        break;
+      case ProcessingType.ReduceRepeating:
+        UpdateStatusAction(Operation.ToString());
+        UpdateStatusInfo(string.Format(AppTranslations.IterationText, ReduceRepeatingIteration, MotifsProcessedCount));
+        break;
+      default:
+        LabelStatusRemaining.Text = AppTranslations.RemainingNAText;
+        break;
     }
   }
 

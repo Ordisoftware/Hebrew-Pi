@@ -14,7 +14,9 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
+using System;
 using Equin.ApplicationFramework;
+using Microsoft.WindowsAPICodePack.Taskbar;
 
 /// <summary>
 /// Provides application's main form.
@@ -44,6 +46,7 @@ partial class MainForm
   private void DoActionDbOpen(string path)
   {
     DatabaseFilePath = path;
+    PiDecimalsFileSize = SystemManager.GetFileSize(path);
     DB = new SQLiteNetORM(path);
     DB.SetTempDir(SQLiteTempDir);
     DB.SetJournal(SQLiteJournalMode.OFF);
@@ -75,19 +78,29 @@ partial class MainForm
     try
     {
       SetBatchState(true, interruptible);
-      ClearStatusBar();
       UpdateButtons();
-      TimerBatch_Tick(null, null);
-      TimerBatch.Enabled = true;
+      ClearStatusBar();
+      await Task.Delay(500);
       await Task.Run(async () => action());
     }
     finally
     {
-      TimerBatch.Enabled = false;
       Globals.ChronoBatch.Stop();
       Globals.ChronoSubBatch.Stop();
       SetBatchState(false);
       UpdateButtons();
+      switch ( Processing )
+      {
+        case ProcessingType.Finished:
+        case ProcessingType.Canceled:
+          UpdateStatusAction(Processing.ToString());
+          Processing = ProcessingType.None;
+          break;
+        case ProcessingType.Error:
+          UpdateStatusAction(Processing.ToString() + ": " + Except.ToString());
+          Processing = ProcessingType.None;
+          break;
+      }
     }
   }
 
@@ -110,6 +123,7 @@ partial class MainForm
   private void DoActionPauseContinue()
   {
     Globals.PauseRequired = !Globals.PauseRequired;
+    TaskbarManager.Instance.SetProgressState(Globals.PauseRequired ? TaskbarProgressBarState.Paused : TaskbarProgressBarState.Normal);
     UpdateButtons();
     if ( Globals.PauseRequired )
       Globals.ChronoBatch.Stop();

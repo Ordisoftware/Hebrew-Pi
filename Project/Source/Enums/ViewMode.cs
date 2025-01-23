@@ -17,7 +17,7 @@ namespace Ordisoftware.Hebrew.Pi;
 /// <summary>
 /// Provides view mode.
 /// </summary>
-public enum ViewMode
+enum ViewMode
 {
 
   /// <summary>

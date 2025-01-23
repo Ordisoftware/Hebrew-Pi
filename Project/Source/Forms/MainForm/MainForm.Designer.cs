@@ -183,7 +183,7 @@
       this.PanelViewSearchSeparator = new System.Windows.Forms.Panel();
       this.PanelSearchResultsOuter = new System.Windows.Forms.Panel();
       this.PanelSearchResults = new System.Windows.Forms.Panel();
-      this.TimerBatch = new System.Windows.Forms.Timer(this.components);
+      this.TimerStatus = new System.Windows.Forms.Timer(this.components);
       this.TimerMemory = new System.Windows.Forms.Timer(this.components);
       this.TimerTooltip = new System.Windows.Forms.Timer(this.components);
       this.OpenFileDialogDB = new System.Windows.Forms.OpenFileDialog();
@@ -1107,7 +1107,7 @@
       this.SelectPiDecimalsFile.Name = "SelectPiDecimalsFile";
       this.SelectPiDecimalsFile.Size = new System.Drawing.Size(169, 21);
       this.SelectPiDecimalsFile.TabIndex = 3;
-      this.SelectPiDecimalsFile.SelectedIndexChanged += new System.EventHandler(this.SelectDbCache_SelectedIndexChanged);
+      this.SelectPiDecimalsFile.SelectedIndexChanged += new System.EventHandler(this.SelectPiDecimalsFile_SelectedIndexChanged);
       this.SelectPiDecimalsFile.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.SelectPiDecimalsFile_Format);
       // 
       // EditMaxMotifs
@@ -1124,8 +1124,10 @@
             0,
             0});
       this.EditMaxMotifs.Name = "EditMaxMotifs";
-      this.EditMaxMotifs.Size = new System.Drawing.Size(89, 20);
+      this.EditMaxMotifs.Size = new System.Drawing.Size(170, 20);
       this.EditMaxMotifs.TabIndex = 6;
+      this.EditMaxMotifs.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      this.EditMaxMotifs.ThousandsSeparator = true;
       this.EditMaxMotifs.Value = new decimal(new int[] {
             1410065408,
             2,
@@ -1144,7 +1146,7 @@
       // LabelMaxMotifs
       // 
       this.LabelMaxMotifs.AutoSize = true;
-      this.LabelMaxMotifs.Location = new System.Drawing.Point(108, 17);
+      this.LabelMaxMotifs.Location = new System.Drawing.Point(188, 15);
       this.LabelMaxMotifs.Name = "LabelMaxMotifs";
       this.LabelMaxMotifs.Size = new System.Drawing.Size(57, 13);
       this.LabelMaxMotifs.TabIndex = 5;
@@ -1822,10 +1824,11 @@
       this.PanelSearchResults.Size = new System.Drawing.Size(706, 0);
       this.PanelSearchResults.TabIndex = 0;
       // 
-      // TimerBatch
+      // TimerStatus
       // 
-      this.TimerBatch.Interval = 1000;
-      this.TimerBatch.Tick += new System.EventHandler(this.TimerBatch_Tick);
+      this.TimerStatus.Enabled = true;
+      this.TimerStatus.Interval = 1000;
+      this.TimerStatus.Tick += new System.EventHandler(this.TimerStatus_Tick);
       // 
       // TimerMemory
       // 
@@ -2076,7 +2079,7 @@
     private RichTextBoxEx EditChapterOriginal;
     private RichTextBoxEx EditChapterELS50;
     private ToolStripSeparator toolStripSeparator5;
-    private System.Windows.Forms.Timer TimerBatch;
+    private System.Windows.Forms.Timer TimerStatus;
     private ToolStripSeparator toolStripSeparator6;
     private ToolStripSeparator toolStripSeparator27;
     internal ToolStripMenuItem EditExportUseHebrewFontElseUnicodeChars;
