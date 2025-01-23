@@ -30,6 +30,9 @@ public class DecupletRow
   public long Motif { get; set; }
 
   [NotNull]
+  public string Fragments { get; set; } = string.Empty;
+
+  [NotNull]
   public string Hebrew { get; set; } = string.Empty;
 
   [NotNull]
@@ -37,5 +40,7 @@ public class DecupletRow
 
   [NotNull]
   public string Comment { get; set; } = string.Empty;
+
+  public DateTime DateModified { get; set; }
 
 }

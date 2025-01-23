@@ -78,9 +78,9 @@ partial class MainForm
         if ( !CheckIfBatchCanContinueAsync().Result ) break;
         for ( long indexBuffer = 0; indexBuffer < charsRead; indexBuffer += PiDecimalMotifSize )
         {
+          if ( !CheckIfBatchCanContinueAsync().Result ) break;
           if ( ( !isAppend || countMotifs >= countRows ) && indexBuffer + PiDecimalMotifSize <= charsRead )
           {
-            if ( !CheckIfBatchCanContinueAsync().Result ) break;
             motif = buffer[indexBuffer] - 48; // motif = motif * 10 + ( buffer[indexBuffer + indexMotif] - '0' );
             for ( long indexMotif = 1; indexMotif < PiDecimalMotifSize; indexMotif++ )
             {
@@ -88,10 +88,10 @@ partial class MainForm
               motif = ( shiftLeft << 2 ) + shiftLeft + buffer[indexBuffer + indexMotif] - 48;
             }
             DB.Insert(new DecupletRow { Position = countMotifs + 1, Motif = motif });
-            if ( countMotifs % pagingCommit == 0 ) doCommit(true);
-            if ( countMotifs % pagingProgress == 0 ) showProgress();
-            if ( countMotifs % pagingRemaining == 0 ) showRemaining();
           }
+          if ( countMotifs % pagingCommit == 0 ) doCommit(true);
+          if ( countMotifs % pagingProgress == 0 ) showProgress();
+          if ( countMotifs % pagingRemaining == 0 ) showRemaining();
           countMotifs++;
           if ( countMotifs == EditMaxMotifs.Value )
           {
@@ -165,7 +165,7 @@ partial class MainForm
       var elapsed = Globals.ChronoBatch.Elapsed;
       double size1 = ( countMotifs - countRows ) * PiDecimalMotifSize;
       double size2 = fileSize - countRows * PiDecimalMotifSize;
-      double progress = size1 == 0 || size2 == 0 ? 1 : size1 / size2;
+      double progress = size1 <= 0 || size2 <= 0 ? 1 : size1 / size2;
       var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
       UpdateStatusRemaining(string.Format(AppTranslations.RemainingText, remaining.AsReadable()));
       taskbar.SetProgressValue((int)( progress * 100 ), 100);
