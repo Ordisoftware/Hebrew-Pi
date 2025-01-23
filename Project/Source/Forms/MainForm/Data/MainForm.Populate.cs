@@ -72,7 +72,6 @@ partial class MainForm
       Operation = OperationType.Populating;
       DB.BeginTransaction();
       Globals.ChronoBatch.Restart();
-      IsMotifsProcessing = true;
       while ( ( charsRead = reader.Read(buffer, 0, FileReadBufferSize) ) >= PiDecimalMotifSize && !maxReached )
       {
         if ( !CheckIfBatchCanContinueAsync().Result ) break;
@@ -106,6 +105,7 @@ partial class MainForm
     }
     catch ( Exception ex )
     {
+      Processing = ProcessingType.Error;
       hasError = true;
       try
       {
@@ -163,46 +163,49 @@ partial class MainForm
       Globals.ChronoSubBatch.Stop();
       Operation = OperationType.Counted;
       if ( DecupletsRowCount > 0 )
-      {
-        string title = "Table is not empty";
-        string msg = $"""
+        AskWhatToDoOnNonEmptyTable();
+    }
+  }
+
+  private void AskWhatToDoOnNonEmptyTable()
+  {
+    string title = "Table is not empty";
+    string msg = $"""
                         Table has {DecupletsRowCount:N0} rows already inserted.
 
                         Do you want to continue inserting the decuplets, clear everything and start over, or cancel?
                         """;
-        using var form = new MessageBoxEx(title, msg,
-                                          buttons: MessageBoxButtons.YesNo,
-                                          icon: MessageBoxIcon.Question,
-                                          width: MessageBoxEx.DefaultWidthMedium,
-                                          justify: false,
-                                          showInTaskBar: true);
-        if ( !Globals.MainForm.Visible || Globals.MainForm.WindowState == FormWindowState.Minimized )
-          form.StartPosition = FormStartPosition.CenterScreen;
-        form.ActionCancel.Visible = true;
-        form.ActionYes.Text = "Continue";
-        form.ActionNo.Text = "Empty";
-        form.ActionCancel.Text = "Cancel";
-        form.ActiveControl = form.ActionYes;
-        switch ( form.ShowDialog() )
-        {
-          case DialogResult.Yes:
-            break;
-          case DialogResult.No:
-            Operation = OperationType.Emptying;
-            Globals.ChronoSubBatch.Restart();
-            DB.DropTable<DecupletRow>();
-            DB.DropTable<IterationRow>();
-            DB.CreateTable<DecupletRow>();
-            DB.CreateTable<IterationRow>();
-            Globals.ChronoSubBatch.Stop();
-            DecupletsRowCount = 0;
-            Operation = OperationType.Emptied;
-            break;
-          case DialogResult.Cancel:
-            Globals.CancelRequired = true;
-            return;
-        }
-      }
+    using var form = new MessageBoxEx(title, msg,
+                                      buttons: MessageBoxButtons.YesNo,
+                                      icon: MessageBoxIcon.Question,
+                                      width: MessageBoxEx.DefaultWidthMedium,
+                                      justify: false,
+                                      showInTaskBar: true);
+    if ( !Globals.MainForm.Visible || Globals.MainForm.WindowState == FormWindowState.Minimized )
+      form.StartPosition = FormStartPosition.CenterScreen;
+    form.ActionCancel.Visible = true;
+    form.ActionYes.Text = "Continue";
+    form.ActionNo.Text = "Empty";
+    form.ActionCancel.Text = "Cancel";
+    form.ActiveControl = form.ActionYes;
+    switch ( form.ShowDialog() )
+    {
+      case DialogResult.Yes:
+        break;
+      case DialogResult.No:
+        Operation = OperationType.Emptying;
+        Globals.ChronoSubBatch.Restart();
+        DB.DropTable<DecupletRow>();
+        DB.DropTable<IterationRow>();
+        DB.CreateTable<DecupletRow>();
+        DB.CreateTable<IterationRow>();
+        Globals.ChronoSubBatch.Stop();
+        DecupletsRowCount = 0;
+        Operation = OperationType.Emptied;
+        break;
+      case DialogResult.Cancel:
+        Globals.CancelRequired = true;
+        return;
     }
   }
 

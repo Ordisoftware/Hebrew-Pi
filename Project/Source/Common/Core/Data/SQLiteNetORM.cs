@@ -90,17 +90,6 @@ public class SQLiteNetORM : SQLiteConnection
   }
 
   /// <summary>
-  /// Creates a SQL command.
-  /// </summary>
-  public SQLiteCommand CreateCommand() => new(this);
-
-  /// <summary>
-  /// Creates a SQL command.
-  /// </summary>
-  /// <param name="sql">The query.</param>
-  public SQLiteCommand CreateCommand(string sql) => new(this) { CommandText = sql };
-
-  /// <summary>
   /// Optimizes the database.
   /// </summary>
   /// <param name="lastDone">The last done date.</param>
@@ -175,11 +164,11 @@ public class SQLiteNetORM : SQLiteConnection
     }
     catch ( Exception ex )
     {
-      throw new AdvSQLiteException(SysTranslations.DatabaseSetTempDirError.GetLang(), ex);
+      throw; // TODO new AdvSQLiteException(SysTranslations.DatabaseSetTempDirError.GetLang(), ex);
     }
   }
 
-  public void SetTempStoreInMemory(SQLiteTempStoreMode mode)
+  public void SetTempStoreMode(SQLiteTempStoreMode mode)
   {
     try
     {

@@ -17,29 +17,58 @@ namespace Ordisoftware.Hebrew.Pi;
 static class SQLHelper
 {
 
-  static internal async Task<List<(long MotifCount, long MaxOccurences)>> GetRepeatingMotifCountAndMaxOccurencesAsync(this SQLiteNetORM DB)
+  static internal async Task CreateRepeatingMotifsTableAsync(this SQLiteNetORM DB)
   {
-    var sql = @"SELECT COUNT(*) AS UniqueRepeating, MAX(Occurrences) AS MaxOccurrences
-                FROM (
-                  SELECT Motif, COUNT(*) AS Occurrences
-                  FROM Decuplets
-                  GROUP BY Motif
-                  HAVING COUNT(*) > 1);";
-    return [.. DB.Query<(long MotifCount, long MaxOccurences)>(sql)];
+    DB.Execute("DROP TABLE IF EXISTS RepeatingMotifs");
+    var sql = @"CREATE TEMPORARY TABLE RepeatingMotifs AS
+                SELECT Position, Motif
+                FROM Decuplets
+                WHERE Motif IN ( SELECT Motif
+                                 FROM Decuplets
+                                 GROUP BY Motif
+                                 HAVING COUNT(*) > 1)";
+    DB.Execute(sql);
+  }
+
+  static internal async Task<List<(long MotifCount, long MaxOccurrences)>> GetRepeatingMotifCountAndMaxOccurencesAsync(this SQLiteNetORM DB)
+  {
+    var sql = @"SELECT COUNT(*) AS MotifCount, MAX(Occurrences) AS MaxOccurrences
+                FROM ( SELECT Motif, COUNT(*) AS Occurrences
+                       FROM RepeatingMotifs
+                       GROUP BY Motif )";
+    return [.. DB.Query<(long MotifCount, long MaxOccurrences)>(sql)];
   }
 
   static internal async Task AddPositionToRepeatingMotifsAsync(this SQLiteNetORM DB)
   {
-    var sql = @"UPDATE Decuplets
-                SET Motif = Motif + Position
-                WHERE Motif IN (
-                  SELECT Motif
-                  FROM Decuplets
-                  GROUP BY Motif
-                  HAVING COUNT(*) > 1
-                );";
+    var sql = @"UPDATE Decuplets SET Motif = Motif + Position
+                WHERE Position IN (SELECT Position FROM RepeatingMotifs)";
     DB.Execute(sql);
   }
+
+  //static internal async Task<List<(long MotifCount, long MaxOccurences)>> GetRepeatingMotifCountAndMaxOccurencesAsyncOld(this SQLiteNetORM DB)
+  //{
+  //  var sql = @"SELECT COUNT(*) AS UniqueRepeating, MAX(Occurrences) AS MaxOccurrences
+  //              FROM (
+  //                SELECT Motif, COUNT(*) AS Occurrences
+  //                FROM Decuplets
+  //                GROUP BY Motif
+  //                HAVING COUNT(*) > 1);";
+  //  return [.. DB.Query<(long MotifCount, long MaxOccurences)>(sql)];
+  //}
+
+  //static internal async Task GetAndAddPositionToRepeatingMotifsAsync(this SQLiteNetORM DB)
+  //{
+  //  var sql = @"UPDATE Decuplets
+  //              SET Motif = Motif + Position
+  //              WHERE Motif IN (
+  //                SELECT Motif
+  //                FROM Decuplets
+  //                GROUP BY Motif
+  //                HAVING COUNT(*) > 1
+  //              );";
+  //  DB.Execute(sql);
+  //}
 
   //static internal async Task<int> GetRepeatingMotifsCountAsync(this SQLiteNetORM DB)
   //{

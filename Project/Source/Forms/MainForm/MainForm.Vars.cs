@@ -1,4 +1,6 @@
-﻿/// <license>
+﻿using Newtonsoft.Json.Linq;
+
+/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
 /// Copyright 2025 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
@@ -25,27 +27,25 @@ partial class MainForm
 
   private const long PiDecimalMotifSize = 10;
 
-  private int FileReadBufferSize = 10_000_000;
+  private const int FileReadBufferSize = 10_000_000;
 
-  private bool CanForceTerminateBatch;
-
-  private volatile bool IsMotifsProcessing;
-
-  private long MotifsProcessedCount;
-
-  private long ReduceRepeatingIteration = 0;
-
-  private long DecupletsRowCount;
-
-  private long PiDecimalsFileSize;
+  private SQLiteNetORM DB;
 
   private string DatabaseFilePath;
 
-  private string SQLiteTempDir = @"D:\";
+  private long PiDecimalsFileSize;
 
   private int SQLiteCacheSize;
 
-  private SQLiteNetORM DB;
+  private string SQLiteTempDir = @"D:\";
+
+  private bool CanForceTerminateBatch;
+
+  private long MotifsProcessedCount;
+
+  private long ReduceRepeatingIteration;
+
+  private long DecupletsRowCount;
 
   private ProcessingType Processing;
 

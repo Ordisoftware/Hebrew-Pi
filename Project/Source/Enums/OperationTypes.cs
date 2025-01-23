@@ -17,6 +17,8 @@ namespace Ordisoftware.Hebrew.Pi;
 enum OperationType
 {
   None,
+  Grouping,
+  Grouped,
   Counting,
   Counted,
   Additionning,

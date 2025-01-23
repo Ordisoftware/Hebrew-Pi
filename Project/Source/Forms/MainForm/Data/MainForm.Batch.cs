@@ -49,6 +49,7 @@ partial class MainForm
     PiDecimalsFileSize = SystemManager.GetFileSize(path);
     DB = new SQLiteNetORM(path);
     DB.SetTempDir(SQLiteTempDir);
+    DB.SetTempStoreMode(SQLiteTempStoreMode.FILE);
     DB.SetJournal(SQLiteJournalMode.OFF);
     DB.SetSynchronous(SQLiteSynchronousMode.OFF);
     DB.SetLocking(SQLiteLockingMode.EXCLUSIVE);

@@ -263,7 +263,7 @@ partial class MainForm : Form
 
   private void ActionNormalize_Click(object sender, EventArgs e)
   {
-    DoBatchAsync(() => DoActionNormalizeAsync());
+    DoBatchAsync(() => DoActionReduceRepeatingAsync());
   }
 
   private void ActionStop_Click(object sender, EventArgs e)

@@ -28,7 +28,7 @@ partial class MainForm
     Additionning
   }
 
-  private async Task DoActionNormalizeAsync()
+  private async Task DoActionReduceRepeatingAsync()
   {
     IteratingStep iteratingStep = IteratingStep.Next;
     var table = DB.Table<IterationRow>().ToList();
@@ -82,18 +82,23 @@ partial class MainForm
             MotifsProcessedCount = (long)row.RepeatedCount;
         }
         LoadIterationGrid();
-        UpdateStatusInfo(string.Format(AppTranslations.IterationText, ReduceRepeatingIteration, "?"));
         // Count repeating motifs
+        if ( !CheckIfBatchCanContinueAsync().Result ) break;
         if ( iteratingStep == IteratingStep.Next || iteratingStep == IteratingStep.Counting )
         {
-          Operation = OperationType.Counting;
+          Operation = OperationType.Grouping;
           Globals.ChronoSubBatch.Restart();
+          DB.CreateRepeatingMotifsTableAsync();
+          Operation = OperationType.Grouped;
+          if ( !CheckIfBatchCanContinueAsync().Result ) break;
+          Operation = OperationType.Counting;
           var list = DB.GetRepeatingMotifCountAndMaxOccurencesAsync().Result;
           Globals.ChronoSubBatch.Stop();
+          Operation = OperationType.Counted;
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           MotifsProcessedCount = list[0].MotifCount;
           row.RepeatedCount = MotifsProcessedCount;
-          row.MaxOccurences = list[0].MaxOccurences;
+          row.MaxOccurences = list[0].MaxOccurrences;
           row.RemainingRate = MotifsProcessedCount == 0
               ? 0
               : ReduceRepeatingIteration == 0
@@ -102,7 +107,6 @@ partial class MainForm
           row.ElapsedCounting = Globals.ChronoSubBatch.Elapsed;
           DB.Update(row);
           LoadIterationGrid();
-          Operation = OperationType.Counted;
           if ( ReduceRepeatingIteration > 0 && MotifsProcessedCount > countPrevious
             && !DisplayManager.QueryYesNo(string.Format(AppTranslations.AskStartNextIfMore,
                                                         ReduceRepeatingIteration,
@@ -127,7 +131,6 @@ partial class MainForm
             DB.AddPositionToRepeatingMotifsAsync();
             Globals.ChronoSubBatch.Stop();
             Operation = OperationType.Additionned;
-            if ( !CheckIfBatchCanContinueAsync().Result ) break;
             row.ElapsedAdditionning = Globals.ChronoSubBatch.Elapsed;
             DB.Update(row);
             LoadIterationGrid();
@@ -146,6 +149,7 @@ partial class MainForm
     }
     catch ( Exception ex )
     {
+      Processing = ProcessingType.Error;
       hasError = true;
       Except = ex;
     }

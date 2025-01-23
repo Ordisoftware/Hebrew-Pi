@@ -397,7 +397,7 @@
     <Compile Include="Source\Forms\MainForm\Data\MainForm.Populate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\MainForm\Data\MainForm.Normalize.cs">
+    <Compile Include="Source\Forms\MainForm\Data\MainForm.ReduceRepeating.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Forms\MainForm\MainForm.cs">
