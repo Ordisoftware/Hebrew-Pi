@@ -23,13 +23,16 @@ A libre and open-source software written in C# that allows decoding decimal sequ
 2. [Requirements](#requirements)
 3. [Download](#download)
 4. [Screenshots](#screenshots)
-5. [Frequently asked questions](#frequently-asked-questions)
-6. [Keyboard shortcuts](#keyboard-shortcuts)
-7. [Future improvements](#future-improvements)
-8. [Changelog](#changelog)
+7. [System FAQ](#system-frequently-asked-questions)
+8. [Application FAQ](#application-frequently-asked-questions)
+9. [Command-line options](#command-line-options)
+10. [Keyboard shortcuts](#keyboard-shortcuts)
+11. [Future improvements](#future-improvements)
+12. [Changelog](#changelog)
 
 ## Functionalities
 
+- Links to various online resources.
 - English, French.
 
 ## Requirements
@@ -37,7 +40,7 @@ A libre and open-source software written in C# that allows decoding decimal sequ
 - Screen 1024x768 or higher
 - Windows 10 x32/x64 or higher
 - Framework .NET 4.8.1
-- SQLite 3.46
+- SQLite 3.46.1
 
 ## Download
 
@@ -49,7 +52,7 @@ A libre and open-source software written in C# that allows decoding decimal sequ
 
 ## Screenshots
 
-## Frequently asked questions
+## System Frequently asked questions
 
 #### What code analyzers are used in addition to Visual Studio?
 
@@ -77,21 +80,48 @@ When enabled, this will speed up rendering of the main form when it is displayed
 
 When disabled, top menu and some controls painting may cause latency, and dynamic items can be generated slowly the larger the number.
 
+#### What to do if there is a problem with the display?
+
+The refresh view button of the menu at the top redraws the entire form.
+
+## Application Frequently asked questions
+
+## Command-line options
+
+- Change interface language (does not change the database content):
+
+  `Ordisoftware.Hebrew.Words.exe --lang [en|fr]`
+
+- Enable or disable future functionalities preview:
+
+  `Ordisoftware.Hebrew.Calendar.exe --withpreview | --nopreview`
+
 ## Keyboard shortcuts
 
 | Keys | Actions |
 |-|-|
+| Ctrl + Tab | Next view |
+| Shift + Ctrl + Tab | Previous view |
+| Alt + C | Calculator |
+| Ctrl + H | Open Hebrew Letters |
+| Ctrl + L | Open transcription guide |
+| Ctrl + G | Open grammar guide |
+| Ctrl + S | Save changes |
+| Alt + D | Database menu |
 | Alt + T | Tools menu |
+| Alt + L | Web links menu |
 | Alt + S | Settings menu |
 | Alt + I | Information menu |
 | F9 | Preferences |
 | F10 | Log file window |
 | F11 | Usage statistics window |
 | F12 | About |
-| Alt + F4 | Exit application |
-
-## Future improvements
+| Ctrl + F12 | Take a window screenshot |
+| Shift + F12 | Take a view screenshot |
+| Alt + F4 (or Escape) | Close window |
 
 ## Changelog
 
-#### In progress - Version 0.1
+#### Version 0.1
+
+- Prototype #1

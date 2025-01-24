@@ -27,13 +27,16 @@
 <li><a href="#requirements">Requirements</a></li>
 <li><a href="#download">Download</a></li>
 <li><a href="#screenshots">Screenshots</a></li>
-<li><a href="#frequently-asked-questions">Frequently asked questions</a></li>
+<li><a href="#system-frequently-asked-questions">System FAQ</a></li>
+<li><a href="#application-frequently-asked-questions">Application FAQ</a></li>
+<li><a href="#command-line-options">Command-line options</a></li>
 <li><a href="#keyboard-shortcuts">Keyboard shortcuts</a></li>
 <li><a href="#future-improvements">Future improvements</a></li>
 <li><a href="#changelog">Changelog</a></li>
 </ol>
 <h2 id="functionalities">Functionalities</h2>
 <ul>
+<li>Links to various online resources.</li>
 <li>English, French.</li>
 </ul>
 <h2 id="requirements">Requirements</h2>
@@ -41,7 +44,7 @@
 <li>Screen 1024x768 or higher</li>
 <li>Windows 10 x32/x64 or higher</li>
 <li>Framework .NET 4.8.1</li>
-<li>SQLite 3.46</li>
+<li>SQLite 3.46.1</li>
 </ul>
 <h2 id="download">Download</h2>
 <p><strong>What's new in the latest version</strong></p>
@@ -50,7 +53,7 @@
 </ul>
 <p><a href="https://github.com/Ordisoftware/Hebrew-Pi/releases/latest">Last release</a></p>
 <h2 id="screenshots">Screenshots</h2>
-<h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<h2 id="system-frequently-asked-questions">System Frequently asked questions</h2>
 <h4 id="what-code-analyzers-are-used-in-addition-to-visual-studio">What code analyzers are used in addition to Visual Studio?</h4>
 <table>
 <thead>
@@ -76,6 +79,18 @@
 <h4 id="what-is-the-windows-double-buffering">What is the Windows double-buffering?</h4>
 <p>When enabled, this will speed up rendering of the main form when it is displayed, but it may cause a slight black flicker.</p>
 <p>When disabled, top menu and some controls painting may cause latency, and dynamic items can be generated slowly the larger the number.</p>
+<h4 id="what-to-do-if-there-is-a-problem-with-the-display">What to do if there is a problem with the display?</h4>
+<p>The refresh view button of the menu at the top redraws the entire form.</p>
+<h2 id="application-frequently-asked-questions">Application Frequently asked questions</h2>
+<h2 id="command-line-options">Command-line options</h2>
+<ul>
+<li><p>Change interface language (does not change the database content):</p>
+<p><code>Ordisoftware.Hebrew.Words.exe --lang [en|fr]</code></p>
+</li>
+<li><p>Enable or disable future functionalities preview:</p>
+<p><code>Ordisoftware.Hebrew.Calendar.exe --withpreview | --nopreview</code></p>
+</li>
+</ul>
 <h2 id="keyboard-shortcuts">Keyboard shortcuts</h2>
 <table>
 <thead>
@@ -86,8 +101,44 @@
 </thead>
 <tbody>
 <tr>
+<td>Ctrl + Tab</td>
+<td>Next view</td>
+</tr>
+<tr>
+<td>Shift + Ctrl + Tab</td>
+<td>Previous view</td>
+</tr>
+<tr>
+<td>Alt + C</td>
+<td>Calculator</td>
+</tr>
+<tr>
+<td>Ctrl + H</td>
+<td>Open Hebrew Letters</td>
+</tr>
+<tr>
+<td>Ctrl + L</td>
+<td>Open transcription guide</td>
+</tr>
+<tr>
+<td>Ctrl + G</td>
+<td>Open grammar guide</td>
+</tr>
+<tr>
+<td>Ctrl + S</td>
+<td>Save changes</td>
+</tr>
+<tr>
+<td>Alt + D</td>
+<td>Database menu</td>
+</tr>
+<tr>
 <td>Alt + T</td>
 <td>Tools menu</td>
+</tr>
+<tr>
+<td>Alt + L</td>
+<td>Web links menu</td>
 </tr>
 <tr>
 <td>Alt + S</td>
@@ -114,14 +165,24 @@
 <td>About</td>
 </tr>
 <tr>
-<td>Alt + F4</td>
-<td>Exit application</td>
+<td>Ctrl + F12</td>
+<td>Take a window screenshot</td>
+</tr>
+<tr>
+<td>Shift + F12</td>
+<td>Take a view screenshot</td>
+</tr>
+<tr>
+<td>Alt + F4 (or Escape)</td>
+<td>Close window</td>
 </tr>
 </tbody>
 </table>
-<h2 id="future-improvements">Future improvements</h2>
 <h2 id="changelog">Changelog</h2>
-<h4 id="in-progress-version-0.1">In progress - Version 0.1</h4>
+<h4 id="version-0.1">Version 0.1</h4>
+<ul>
+<li>Prototype #1</li>
+</ul>
 
 
 </body>
