@@ -33,4 +33,8 @@ enum OperationType
   Populated,
   Indexing,
   Indexed,
+  Opening,
+  Opened,
+  Closing,
+  Closed
 }

@@ -14,7 +14,6 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-using System;
 using Equin.ApplicationFramework;
 using Microsoft.WindowsAPICodePack.Taskbar;
 
@@ -41,36 +40,6 @@ partial class MainForm
       GridIterations.Invoke(update);
     else
       update();
-  }
-
-  private void DoActionDbOpen(string path)
-  {
-    DatabaseFilePath = path;
-    DB = new SQLiteNetORM(path);
-    DB.SetTempDir(EditTempDir.Text);
-    DB.SetTempStoreMode(SQLiteTempStoreMode.FILE);
-    DB.SetJournal(SQLiteJournalMode.OFF);
-    DB.SetSynchronous(SQLiteSynchronousMode.OFF);
-    DB.SetLocking(SQLiteLockingMode.EXCLUSIVE);
-    DB.SetPageSize(SQLitePageSize._32768);
-    SetDbCache();
-    DB.CreateTable<DecupletRow>();
-    DB.CreateTable<IterationRow>();
-    IsMotifIndexed = DB.CheckIndex("Decuplets_Motif");
-    LabelTitleCenter.Text = Path.GetFileName(path);
-    LoadIterationGrid();
-    UpdateButtons();
-  }
-
-  private void DoActionDbClose()
-  {
-    if ( DB is null ) return;
-    DB.Close();
-    DB.Dispose();
-    DB = null;
-    GridIterations.DataSource = null;
-    LabelTitleCenter.Text = string.Empty;
-    UpdateButtons();
   }
 
   private async Task DoBatchAsync(Action action, bool interruptible = true)

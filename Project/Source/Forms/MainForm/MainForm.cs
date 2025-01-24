@@ -225,9 +225,9 @@ partial class MainForm : Form
     SetDbCache();
   }
 
-  private void SetDbCache()
+  private async void SetDbCache()
   {
-    DB?.SetCacheSize((int)SelectDbCache.SelectedItem * (int)MemorySizeInMiB);
+    SelectDbCache.Invoke(() => DB?.SetCacheSize((int)SelectDbCache.SelectedItem * (int)MemorySizeInMiB));
   }
 
   private void ActionDbNew_Click(object sender, EventArgs e)
@@ -243,12 +243,12 @@ partial class MainForm : Form
   private void ActionDbOpen_Click(object sender, EventArgs e)
   {
     if ( OpenFileDialogDB.ShowDialog() == DialogResult.OK )
-      DoActionDbOpen(OpenFileDialogDB.FileName);
+      DoBatchAsync(() => DoActionDbOpen(OpenFileDialogDB.FileName));
   }
 
   private void ActionDbClose_Click(object sender, EventArgs e)
   {
-    DoActionDbClose();
+    DoBatchAsync(DoActionDbClose);
   }
 
   private void ActionCreateData_Click(object sender, EventArgs e)
