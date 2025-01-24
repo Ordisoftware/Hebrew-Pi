@@ -149,6 +149,8 @@ partial class MainForm : Form
         e.Cancel = true;
       else
         Globals.IsExiting = true;
+    if ( ActionDbClose.Enabled )
+      ActionDbClose.PerformClick();
   }
 
   /// <summary>
