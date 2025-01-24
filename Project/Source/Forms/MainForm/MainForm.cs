@@ -43,9 +43,9 @@ partial class MainForm : Form
     InitializeComponent();
     DoConstructor();
     ColumnIteration.HeaderText = "Itération";
-    ColumnAllRepeatingCount.HeaderText = "Tous Répétés";
+    ColumnAllRepeatingCount.HeaderText = "Total Reps";
     ColumnRepeatingRate.HeaderText = "Taux";
-    ColumnUniqueRepeatingCount.HeaderText = "Uniques Répété";
+    ColumnUniqueRepeatingCount.HeaderText = "Uniques Reps";
     ColumnMaxOccurences.HeaderText = "Fois";
     ColumnRemainingRate.HeaderText = "Restants";
     ColumnElapsedCounting.HeaderText = "Comptage";
