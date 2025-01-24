@@ -31,21 +31,30 @@ partial class MainForm
       DisplayManager.Show(SysTranslations.FileNotFound.GetLang(filePathText));
       return;
     }
-    long pagingCommit = PiDecimalsFileSize <= 1_100_000_000 ? 1_000_000 : 10_000_000;
+    long motif;
+    long shiftLeft;
+    int maxLoopMotifs;
+    long maxMotifsCount = (long)EditMaxMotifs.Value;
+    int readBufferSize = PiDecimalsFileSize > 1_000_000_100 ? 100_000_000 : 10_000_000;
+    int pagingCommit = PiDecimalsFileSize > 1_00_000_100 ? 100_000_000 : 10_000_000;
+    int pagingCurrent;
+    int charsRead;
+    char[] buffer = new char[readBufferSize];
     bool hasError = false;
     bool maxReached = false;
     StreamReader reader = null;
     try
     {
-      long maxMotifsCount = (long)EditMaxMotifs.Value;
-      long motif;
-      long shiftLeft;
-      int charsRead;
-      char[] buffer = new char[FileReadBufferSize];
       reader = new StreamReader(filePathText);
       Processing = ProcessingType.CreateData;
       Globals.ChronoSubBatch.Restart();
-      checkRows();
+      Operation = OperationType.Counting;
+      Globals.ChronoSubBatch.Restart();
+      DecupletsRowCount = DB.CountRows(DecupletRow.TableName);
+      Globals.ChronoSubBatch.Stop();
+      Operation = OperationType.Counted;
+      if ( DecupletsRowCount > 0 )
+        AskWhatToDoOnNonEmptyTable();
       Globals.ChronoSubBatch.Stop();
       charsRead = reader.Read(buffer, 0, 2);
       if ( charsRead != 2 )
@@ -64,7 +73,7 @@ partial class MainForm
       }
       if ( DecupletsRowCount > 0 )
       {
-        reader.BaseStream.Seek(DecupletsRowCount * PiDecimalMotifSize, SeekOrigin.Begin);
+        reader.BaseStream.Seek(DecupletsRowCount * PiDecimalMotifSize, SeekOrigin.Current);
         MotifsProcessedCount = DecupletsRowCount;
       }
       else
@@ -73,33 +82,30 @@ partial class MainForm
       Operation = OperationType.Populating;
       DB.BeginTransaction();
       Globals.ChronoBatch.Restart();
-      while ( ( charsRead = reader.Read(buffer, 0, FileReadBufferSize) ) >= PiDecimalMotifSize && !maxReached )
+      while ( ( charsRead = reader.Read(buffer, 0, readBufferSize) ) >= PiDecimalMotifSize && !maxReached )
       {
-        if ( !CheckIfBatchCanContinueAsync().Result ) break;
-        for ( long indexBuffer = 0; indexBuffer < charsRead; indexBuffer += PiDecimalMotifSize )
+        maxLoopMotifs = charsRead - PiDecimalMotifSize;
+        for ( int indexBuffer = 0; indexBuffer <= maxLoopMotifs; indexBuffer += PiDecimalMotifSize )
         {
-          if ( !CheckIfBatchCanContinueAsync().Result ) break;
-          if ( MotifsProcessedCount >= maxMotifsCount )
-          {
+          if ( MotifsProcessedCount >= maxMotifsCount || !CheckIfBatchCanContinueAsync().Result )
             maxReached = true;
-            break;
-          }
-          if ( indexBuffer + PiDecimalMotifSize <= charsRead )
+          else
           {
-            motif = buffer[indexBuffer] - 48; // motif = motif * 10 + ( buffer[indexBuffer + indexMotif] - '0' );
-            for ( long indexMotif = 1; indexMotif < PiDecimalMotifSize; indexMotif++ )
+            motif = buffer[indexBuffer] - 48;
+            for ( int indexMotif = 1; indexMotif < PiDecimalMotifSize; indexMotif++ )
             {
+              // motif = motif * 10 + ( buffer[indexBuffer + indexMotif] - '0' );
               shiftLeft = motif << 1;
               motif = ( shiftLeft << 2 ) + shiftLeft + buffer[indexBuffer + indexMotif] - 48;
             }
-            DB.Insert(new DecupletRow { Position = MotifsProcessedCount + 1, Motif = motif });
+            MotifsProcessedCount++;
+            DB.Insert(new DecupletRow { Position = MotifsProcessedCount, Motif = motif });
             if ( MotifsProcessedCount % pagingCommit == 0 )
-              doCommit(true);
+              DoCommit(true);
           }
-          MotifsProcessedCount++;
         }
       }
-      doCommit();
+      DoCommit();
       UpdateStatusInfo(string.Format(AppTranslations.CreateDataProgress, MotifsProcessedCount.ToString("N0")));
       if ( !CheckIfBatchCanContinueAsync().Result ) return;
       if ( EditAutoCreateIndex.Checked )
@@ -111,11 +117,11 @@ partial class MainForm
       hasError = true;
       try
       {
-        doCommit();
+        DoCommit();
       }
       catch
       {
-        doRollback();
+        DoRollback();
       }
       Except = ex;
     }
@@ -132,81 +138,6 @@ partial class MainForm
           Processing = ProcessingType.Canceled;
         else
           Processing = ProcessingType.Finished;
-    }
-    //
-    void doCommit(bool partial = false)
-    {
-      Operation = OperationType.Committing;
-      Globals.ChronoSubBatch.Restart();
-      DB.Commit();
-      Globals.ChronoSubBatch.Stop();
-      Operation = OperationType.Committed;
-      if ( partial )
-      {
-        DB.BeginTransaction();
-        Operation = OperationType.Populating;
-      }
-    }
-    void doRollback()
-    {
-      Operation = OperationType.Rollbacking;
-      Globals.ChronoSubBatch.Restart();
-      DB.Rollback();
-      Globals.ChronoSubBatch.Stop();
-      Operation = OperationType.Rollbacked;
-    }
-    //
-    void checkRows()
-    {
-      Operation = OperationType.Counting;
-      Globals.ChronoSubBatch.Restart();
-      DecupletsRowCount = DB.CountRows(DecupletRow.TableName);
-      Globals.ChronoSubBatch.Stop();
-      Operation = OperationType.Counted;
-      if ( DecupletsRowCount > 0 )
-        AskWhatToDoOnNonEmptyTable();
-    }
-  }
-
-  private void AskWhatToDoOnNonEmptyTable()
-  {
-    string title = "Table is not empty";
-    string msg = $"""
-                        Table has {DecupletsRowCount:N0} rows already inserted.
-
-                        Do you want to continue inserting the decuplets, clear everything and start over, or cancel?
-                        """;
-    using var form = new MessageBoxEx(title, msg,
-                                      buttons: MessageBoxButtons.YesNo,
-                                      icon: MessageBoxIcon.Question,
-                                      width: MessageBoxEx.DefaultWidthMedium,
-                                      justify: false,
-                                      showInTaskBar: true);
-    if ( !Globals.MainForm.Visible || Globals.MainForm.WindowState == FormWindowState.Minimized )
-      form.StartPosition = FormStartPosition.CenterScreen;
-    form.ActionCancel.Visible = true;
-    form.ActionYes.Text = "Continue";
-    form.ActionNo.Text = "Empty";
-    form.ActionCancel.Text = "Cancel";
-    form.ActiveControl = form.ActionYes;
-    switch ( form.ShowDialog() )
-    {
-      case DialogResult.Yes:
-        break;
-      case DialogResult.No:
-        Operation = OperationType.Emptying;
-        Globals.ChronoSubBatch.Restart();
-        DB.DropTable<DecupletRow>();
-        DB.DropTable<IterationRow>();
-        DB.CreateTable<DecupletRow>();
-        DB.CreateTable<IterationRow>();
-        Globals.ChronoSubBatch.Stop();
-        DecupletsRowCount = 0;
-        Operation = OperationType.Emptied;
-        break;
-      case DialogResult.Cancel:
-        Globals.CancelRequired = true;
-        return;
     }
   }
 

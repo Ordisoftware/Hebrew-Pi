@@ -80,18 +80,6 @@ static public partial class SysTranslations
     [Language.FR] = "Succès du vacuum de la base de données."
   };
 
-  static public readonly TranslationsDictionary DatabaseSetTempDirError = new()
-  {
-    [Language.EN] = "Database set temporary directory failed.",
-    [Language.FR] = "Échec de définition du dossier temporaire de la base de données."
-  };
-
-  static public readonly TranslationsDictionary DatabaseSetCacheSizeError = new()
-  {
-    [Language.EN] = "Database set cache size failed.",
-    [Language.FR] = "Échec de définition de la taille du cache de la base de données."
-  };
-
   static public readonly TranslationsDictionary DatabaseNoProcessConcurrency = new()
   {
     [Language.EN] = "Database can't be modified while multiple instance of the application are running.",

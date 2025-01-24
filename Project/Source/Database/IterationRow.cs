@@ -26,7 +26,9 @@ public class IterationRow
   [PrimaryKey]
   public long Iteration { get; set; }
 
-  public long? RepeatedCount { get; set; }
+  public long? AllRepeatingCount { get; set; }
+
+  public long? UniqueRepeatingCount { get; set; }
 
   public long? MaxOccurences { get; set; }
 

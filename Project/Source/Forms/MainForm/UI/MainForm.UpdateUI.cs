@@ -126,7 +126,6 @@ partial class MainForm
     void update()
     {
       label.Text = text;
-      StatusStrip.Refresh();
     }
     if ( StatusStrip.InvokeRequired )
       StatusStrip.Invoke(update);

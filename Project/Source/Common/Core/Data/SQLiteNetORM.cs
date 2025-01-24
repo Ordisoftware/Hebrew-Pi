@@ -11,10 +11,11 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2019-01 </created>
-/// <edited> 2024-01 </edited>
+/// <edited> 2025-01 </edited>
 namespace Ordisoftware.Core;
 
 using System;
+using System.Runtime.CompilerServices;
 using MoreLinq;
 using SQLite;
 
@@ -47,6 +48,9 @@ public class SQLiteNetORM : SQLiteConnection
 
   public SQLiteNetORM(string databasePath, SQLiteOpenFlags openFlags, bool storeDateTimeAsTicks = true)
     : base(databasePath, openFlags, storeDateTimeAsTicks) { }
+
+  public string GetClassAndMethodName([CallerMemberName] string methodName = "")
+    => $"{GetType().Name}.{methodName}";
 
   /// <summary>
   /// Gets a single line of a string.
@@ -118,7 +122,7 @@ public class SQLiteNetORM : SQLiteConnection
       string result = ExecuteScalar<string>("SELECT integrity_check FROM pragma_integrity_check()");
       if ( result != "ok" )
       {
-        throw new AdvSQLiteException(result);
+        throw new AdvSQLiteException(SysTranslations.ErrorInMethod.GetLang(GetClassAndMethodName, result));
       }
     });
   }
@@ -134,7 +138,7 @@ public class SQLiteNetORM : SQLiteConnection
     }
     catch ( Exception ex )
     {
-      throw new AdvSQLiteException(SysTranslations.DatabaseVacuumError.GetLang(), ex);
+      throw new AdvSQLiteException(SysTranslations.DatabaseVacuumError.GetLang(GetClassAndMethodName, ex.Message), ex);
     }
   }
 
@@ -149,7 +153,7 @@ public class SQLiteNetORM : SQLiteConnection
     }
     catch ( Exception ex )
     {
-      throw new AdvSQLiteException(SysTranslations.DatabaseSetTempDirError.GetLang(), ex);
+      throw new AdvSQLiteException(SysTranslations.DatabaseVacuumError.GetLang(GetClassAndMethodName, ex.Message), ex);
     }
   }
 
@@ -164,7 +168,7 @@ public class SQLiteNetORM : SQLiteConnection
     }
     catch ( Exception ex )
     {
-      throw; // TODO new AdvSQLiteException(SysTranslations.DatabaseSetTempDirError.GetLang(), ex);
+      throw new AdvSQLiteException(SysTranslations.DatabaseVacuumError.GetLang(GetClassAndMethodName, ex.Message), ex);
     }
   }
 
@@ -176,7 +180,7 @@ public class SQLiteNetORM : SQLiteConnection
     }
     catch ( Exception ex )
     {
-      throw; // TODO new AdvSQLiteException(SysTranslations.DatabaseSetTempStoreError.GetLang(), ex);
+      throw new AdvSQLiteException(SysTranslations.DatabaseVacuumError.GetLang(GetClassAndMethodName, ex.Message), ex);
     }
   }
 
@@ -191,7 +195,7 @@ public class SQLiteNetORM : SQLiteConnection
     }
     catch ( Exception ex )
     {
-      throw; // TODO new AdvSQLiteException(SysTranslations.DatabaseSetSynchronousError.GetLang(), ex);
+      throw new AdvSQLiteException(SysTranslations.DatabaseVacuumError.GetLang(GetClassAndMethodName, ex.Message), ex);
     }
   }
 
@@ -203,7 +207,7 @@ public class SQLiteNetORM : SQLiteConnection
     }
     catch ( Exception ex )
     {
-      throw; // TODO new AdvSQLiteException(SysTranslations.DatabaseSetSynchronousError.GetLang(), ex);
+      throw new AdvSQLiteException(SysTranslations.DatabaseVacuumError.GetLang(GetClassAndMethodName, ex.Message), ex);
     }
   }
 
@@ -218,7 +222,7 @@ public class SQLiteNetORM : SQLiteConnection
     }
     catch ( Exception ex )
     {
-      throw; // TODO new AdvSQLiteException(SysTranslations.DatabaseSetJournalModeError.GetLang(), ex);
+      throw new AdvSQLiteException(SysTranslations.DatabaseVacuumError.GetLang(GetClassAndMethodName, ex.Message), ex);
     }
   }
 
@@ -230,7 +234,7 @@ public class SQLiteNetORM : SQLiteConnection
     }
     catch ( Exception ex )
     {
-      throw; // TODO new AdvSQLiteException(SysTranslations.DatabaseSetSynchronousError.GetLang(), ex);
+      throw new AdvSQLiteException(SysTranslations.DatabaseVacuumError.GetLang(GetClassAndMethodName, ex.Message), ex);
     }
   }
 
@@ -347,7 +351,7 @@ public class SQLiteNetORM : SQLiteConnection
     }
     catch ( Exception ex )
     {
-      throw new AdvSQLiteException($"Error in {nameof(CheckIndex)}", ex);
+      throw new AdvSQLiteException(SysTranslations.DatabaseVacuumError.GetLang(GetClassAndMethodName, ex.Message), ex);
     }
     return false;
   }
@@ -383,7 +387,7 @@ public class SQLiteNetORM : SQLiteConnection
     }
     catch ( Exception ex )
     {
-      throw new AdvSQLiteException($"Error in {nameof(CheckColumn)}", ex);
+      throw new AdvSQLiteException(SysTranslations.DatabaseVacuumError.GetLang(GetClassAndMethodName, ex.Message), ex);
     }
     return false;
   }
@@ -433,7 +437,7 @@ public class SQLiteNetORM : SQLiteConnection
     }
     catch ( Exception ex )
     {
-      throw new AdvSQLiteException($"Error in {nameof(CountRows)}", ex);
+      throw new AdvSQLiteException(SysTranslations.DatabaseVacuumError.GetLang(GetClassAndMethodName, ex.Message), ex);
     }
   }
 

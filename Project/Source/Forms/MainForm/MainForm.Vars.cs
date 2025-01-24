@@ -25,32 +25,51 @@ partial class MainForm
 
   private readonly Properties.Settings Settings = Program.Settings;
 
-  private const long PiDecimalMotifSize = 10;
-
-  private const int FileReadBufferSize = 10_000_000;
+  private const int PiDecimalMotifSize = 10;
 
   private SQLiteNetORM DB;
 
   private string DatabaseFilePath;
 
-  private long PiDecimalsFileSize;
+  private long PiDecimalsFileSize
+  {
+    get => Interlocked.Read(ref _PiDecimalsFileSize);
+    set => Interlocked.Exchange(ref _PiDecimalsFileSize, value);
+  }
+  private long _PiDecimalsFileSize;
 
-  private int SQLiteCacheSize;
+  private long MotifsProcessedCount
+  {
+    get => Interlocked.Read(ref _MotifsProcessedCount);
+    set => Interlocked.Exchange(ref _MotifsProcessedCount, value);
+  }
+  private long _MotifsProcessedCount;
 
-  //private string SQLiteTempDir = @"E:\";
+  private long ReduceRepeatingIteration
+  {
+    get => Interlocked.Read(ref _ReduceRepeatingIteration);
+    set => Interlocked.Exchange(ref _ReduceRepeatingIteration, value);
+  }
+  private long _ReduceRepeatingIteration;
 
-  private bool CanForceTerminateBatch;
+  private long DecupletsRowCount
+  {
+    get => Interlocked.Read(ref _DecupletsRowCount);
+    set => Interlocked.Exchange(ref _DecupletsRowCount, value);
+  }
+  private long _DecupletsRowCount;
 
-  private long MotifsProcessedCount;
+  private bool CanForceTerminateBatch
+  {
+    get => Interlocked.CompareExchange(ref _CanForceTerminateBatch, 0, 0) == 1;
+    set => Interlocked.Exchange(ref _CanForceTerminateBatch, value ? 1 : 0);
+  }
+  private int _CanForceTerminateBatch;
 
-  private long ReduceRepeatingIteration;
+  private volatile ProcessingType Processing;
 
-  private long DecupletsRowCount;
+  private volatile OperationType Operation;
 
-  private ProcessingType Processing;
-
-  private OperationType Operation;
-
-  private Exception Except;
+  private volatile Exception Except;
 
 }

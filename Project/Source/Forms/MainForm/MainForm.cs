@@ -43,11 +43,12 @@ partial class MainForm : Form
     InitializeComponent();
     DoConstructor();
     ColumnIteration.HeaderText = "Itération";
-    ColumnRepeatedCount.HeaderText = "Répétés uniques";
-    ColumnMaxOccurences.HeaderText = "Max occurrences";
-    ColumnRemainingRate.HeaderText = "Taux de restants";
-    ColumnElapsedCounting.HeaderText = "Durée comptage";
-    ColumnElapsedAdditionning.HeaderText = "Durée addition";
+    ColumnAllRepeatingCount.HeaderText = "Tous Répétés";
+    ColumnUniqueRepeatingCount.HeaderText = "Uniques Répété";
+    ColumnMaxOccurences.HeaderText = "Fois";
+    ColumnRemainingRate.HeaderText = "Restants";
+    ColumnElapsedCounting.HeaderText = "Comptage";
+    ColumnElapsedAdditionning.HeaderText = "Addition";
   }
 
   private void MainForm_Load(object sender, EventArgs e)
@@ -220,13 +221,12 @@ partial class MainForm : Form
 
   private void SelectDbCache_SelectedIndexChanged(object sender, EventArgs e)
   {
-    SQLiteCacheSize = (int)SelectDbCache.SelectedItem * (int)MemorySizeInMiB;
     SetDbCache();
   }
 
   private void SetDbCache()
   {
-    DB?.SetCacheSize(SQLiteCacheSize);
+    DB?.SetCacheSize((int)SelectDbCache.SelectedItem * (int)MemorySizeInMiB);
   }
 
   private void ActionDbNew_Click(object sender, EventArgs e)
@@ -280,7 +280,7 @@ partial class MainForm : Form
   {
     string path = SelectPiDecimalsFile.SelectedItem.ToString();
     long size = SystemManager.GetFileSize(path);
-    char[] buffer = new char[FileReadBufferSize];
+    char[] buffer = new char[2];
     using var reader = new StreamReader(path);
     if ( reader.Read(buffer, 0, 2) == 2 )
     {
@@ -306,8 +306,14 @@ partial class MainForm : Form
       e.Value = "?";
     else
     {
-      if ( e.ColumnIndex == ColumnRepeatedCount.Index )
+      if ( e.ColumnIndex == ColumnAllRepeatingCount.Index || e.ColumnIndex == ColumnUniqueRepeatingCount.Index )
         e.Value = ( (long)e.Value ).ToString("N0");
+      else
+      if ( e.ColumnIndex == ColumnMaxOccurences.Index )
+      {
+        var value = (long)e.Value;
+        e.Value = value != 0 ? $"x{value}" : string.Empty;
+      }
       else
       if ( e.ColumnIndex == ColumnRemainingRate.Index )
         e.Value = ( (double)e.Value ).ToString("0.00") + " %";
