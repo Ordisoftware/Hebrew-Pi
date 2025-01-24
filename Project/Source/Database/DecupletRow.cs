@@ -41,6 +41,6 @@ public class DecupletRow
   [NotNull]
   public string Comment { get; set; } = string.Empty;
 
-  public DateTime DateModified { get; set; }
+  public DateTime? DateModified { get; set; }
 
 }

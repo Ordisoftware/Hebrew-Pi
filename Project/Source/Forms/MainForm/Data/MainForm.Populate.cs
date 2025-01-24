@@ -105,6 +105,9 @@ partial class MainForm
           }
         }
       }
+      // TODO
+      //if ( MotifsProcessedCount == 9_999_999_999 ) // Last is missing from the 100GB file because of the "3."
+      //  DB.Insert(new DecupletRow { Position = ++MotifsProcessedCount, Motif = 01912956__ });
       DoCommit();
       UpdateStatusInfo(string.Format(AppTranslations.CreateDataProgress, MotifsProcessedCount.ToString("N0")));
       if ( !CheckIfBatchCanContinueAsync().Result ) return;

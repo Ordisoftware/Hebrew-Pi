@@ -28,7 +28,7 @@ static class SQLHelper
     return [.. DB.Query<(long MotifCount, long MaxOccurrences)>(sql)];
   }
 
-  static internal async Task<int> AddPositionToRepeatingMotifsAsync(this SQLiteNetORM DB)
+  static internal async Task<long> AddPositionToRepeatingMotifsAsync(this SQLiteNetORM DB)
   {
     var sql = @"UPDATE Decuplets
                 SET Motif = Motif + Position
@@ -38,7 +38,9 @@ static class SQLHelper
                   GROUP BY Motif
                   HAVING COUNT(*) > 1
                 );";
-    return DB.Execute(sql);
+
+    int signedResult = DB.Execute(sql);
+    return unchecked((uint)signedResult); // TODO use count(*) if unchecked don't work
   }
 
 }
