@@ -31,15 +31,11 @@ partial class MainForm
 
   private void LoadIterationGrid()
   {
-    void update()
+    GridIterations.SyncUISimple(() =>
     {
       GridIterations.DataSource = new BindingListView<IterationRow>(DB.Table<IterationRow>().ToList());
       GridIterations.ClearSelection();
-    }
-    if ( GridIterations.InvokeRequired )
-      GridIterations.Invoke(update);
-    else
-      update();
+    });
   }
 
   private async Task DoBatchAsync(Action action, bool interruptible = true)

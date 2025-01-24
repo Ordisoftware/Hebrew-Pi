@@ -1,6 +1,4 @@
-﻿using Microsoft.WindowsAPICodePack.Taskbar;
-
-/// <license>
+﻿/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
 /// Copyright 2025 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
@@ -15,6 +13,8 @@
 /// <created> 2025-01 </created>
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
+
+using Microsoft.WindowsAPICodePack.Taskbar;
 
 /// <summary>
 /// The application's main form.
@@ -77,7 +77,7 @@ partial class MainForm
 
   private void UpdateButtons()
   {
-    void update()
+    StatusStrip.SyncUISimple(() =>
     {
       bool dbOpened = DB is not null;
       bool dbOnenedAndNotInBatch = dbOpened && !Globals.IsInBatch;
@@ -97,40 +97,24 @@ partial class MainForm
       ActionPause.Enabled = ( dbOnenedAndInBatch && Globals.CanPause && !Globals.PauseRequired )
                          || ( dbOnenedAndInBatch && Globals.PauseRequired );
       ActionPause.Text = Globals.PauseRequired ? "Continue" : "Pause";
-
-    }
-    if ( StatusStrip.InvokeRequired )
-      StatusStrip.Invoke(update);
-    else
-      update();
+    });
   }
 
   private void ClearStatusBar()
   {
-    void update()
+    StatusStrip.SyncUISimple(() =>
     {
       LabelStatusTimeBatch.Text = "Batch: N/A";
       LabelStatusTimeSubBatch.Text = "Sub-batch: N/A";
       LabelStatusRemaining.Text = AppTranslations.RemainingNAText;
       LabelStatusInfo.Text = "Info: N/A";
       LabelStatusAction.Text = "Action: N/A";
-    }
-    if ( StatusStrip.InvokeRequired )
-      StatusStrip.Invoke(update);
-    else
-      update();
+    });
   }
 
   private void UpdateStatusLabel(ToolStripStatusLabel label, string text)
   {
-    void update()
-    {
-      label.Text = text;
-    }
-    if ( StatusStrip.InvokeRequired )
-      StatusStrip.Invoke(update);
-    else
-      update();
+    StatusStrip.SyncUISimple(() => label.Text = text);
   }
 
   private void UpdateStatusAction(string text)
