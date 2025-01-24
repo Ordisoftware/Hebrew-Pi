@@ -44,6 +44,7 @@ partial class MainForm : Form
     DoConstructor();
     ColumnIteration.HeaderText = "Itération";
     ColumnAllRepeatingCount.HeaderText = "Tous Répétés";
+    ColumnRepeatingRate.HeaderText = "Taux";
     ColumnUniqueRepeatingCount.HeaderText = "Uniques Répété";
     ColumnMaxOccurences.HeaderText = "Fois";
     ColumnRemainingRate.HeaderText = "Restants";
@@ -315,7 +316,7 @@ partial class MainForm : Form
         e.Value = value != 0 ? $"x{value}" : string.Empty;
       }
       else
-      if ( e.ColumnIndex == ColumnRemainingRate.Index )
+      if ( e.ColumnIndex == ColumnRepeatingRate.Index || e.ColumnIndex == ColumnRemainingRate.Index )
         e.Value = ( (double)e.Value ).ToString("0.00") + " %";
       else
       if ( e.ColumnIndex == ColumnElapsedCounting.Index || e.ColumnIndex == ColumnElapsedAdditionning.Index )

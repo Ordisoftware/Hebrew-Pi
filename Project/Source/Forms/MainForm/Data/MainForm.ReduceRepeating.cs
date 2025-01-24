@@ -61,6 +61,11 @@ partial class MainForm
       Processing = ProcessingType.ReduceRepeating;
       Globals.ChronoBatch.Restart();
       // Loop
+      Operation = OperationType.Counting;
+      Globals.ChronoSubBatch.Restart();
+      double countRows = DB.Table<DecupletRow>().Count();
+      Globals.ChronoSubBatch.Stop();
+      Operation = OperationType.Counted;
       for ( ; MotifsProcessedCount > 0; ReduceRepeatingIteration++ )
       {
         // Init current row
@@ -128,12 +133,18 @@ partial class MainForm
             Globals.ChronoSubBatch.Stop();
             Operation = OperationType.Additionned;
             row.ElapsedAdditionning = Globals.ChronoSubBatch.Elapsed;
+            row.RepeatingRate = row.AllRepeatingCount is null || row.AllRepeatingCount == 0
+              ? 0
+              : row.AllRepeatingCount == MotifsProcessedCount
+                ? 100
+                : Math.Round((double)row.AllRepeatingCount * 100 / countRows, 2);
             DB.Update(row);
             LoadIterationGrid();
           }
           else
           {
             row.AllRepeatingCount = 0;
+            row.RepeatingRate = 0;
             row.ElapsedAdditionning = TimeSpan.Zero;
             DB.Update(row);
             LoadIterationGrid();

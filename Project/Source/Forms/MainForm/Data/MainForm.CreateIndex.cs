@@ -25,9 +25,9 @@ partial class MainForm
   {
     Processing = ProcessingType.CreateIndex;
     Operation = OperationType.Indexing;
-    Globals.ChronoBatch.Restart();
+    Globals.ChronoSubBatch.Restart();
     DB.CreateIndex(DecupletRow.TableName, nameof(DecupletRow.Motif), false);
-    Globals.ChronoBatch.Stop();
+    Globals.ChronoSubBatch.Stop();
     if ( !CheckIfBatchCanContinueAsync().Result ) return;
     Operation = OperationType.Indexed;
     IsMotifIndexed = DB?.CheckIndex("Decuplets_Motif") ?? false;

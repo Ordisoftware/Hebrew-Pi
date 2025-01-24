@@ -109,7 +109,7 @@ partial class MainForm
       UpdateStatusInfo(string.Format(AppTranslations.CreateDataProgress, MotifsProcessedCount.ToString("N0")));
       if ( !CheckIfBatchCanContinueAsync().Result ) return;
       if ( EditAutoCreateIndex.Checked )
-        ActionCreateIndex_Click(ActionCreateIndex, EventArgs.Empty);
+        DoCreateIndexAsync();
     }
     catch ( Exception ex )
     {

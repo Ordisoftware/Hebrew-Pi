@@ -28,6 +28,8 @@ public class IterationRow
 
   public long? AllRepeatingCount { get; set; }
 
+  public double? RepeatingRate { get; set; }
+
   public long? UniqueRepeatingCount { get; set; }
 
   public long? MaxOccurences { get; set; }
