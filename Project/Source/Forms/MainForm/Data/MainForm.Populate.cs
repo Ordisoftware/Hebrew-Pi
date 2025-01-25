@@ -32,15 +32,15 @@ partial class MainForm
     }
     long motif;
     long shiftLeft;
-    int maxLoopMotifs;
     long maxMotifsCount = (long)EditMaxMotifs.Value;
-    int readBufferSize = PiDecimalsFileSize > 1_000_000_100 ? 100_000_000 : 10_000_000;
-    int pagingCommit = PiDecimalsFileSize > 1_00_000_100 ? 100_000_000 : 10_000_000;
-    int pagingCurrent;
-    int charsRead;
-    char[] buffer = new char[readBufferSize];
-    bool hasError = false;
+    long maxLoopMotifs;
     bool maxReached = false;
+    int charsRead;
+    int readBufferSize = PiDecimalsFileSize > 1_000_000_100 ? 100_000_000 : 10_000_000;
+    long pagingCommit = PiDecimalsFileSize > 1_00_000_100 ? 100_000_000 : 10_000_000;
+    long pagingCurrent;
+    bool hasError = false;
+    char[] buffer = new char[readBufferSize];
     StreamReader reader = null;
     try
     {

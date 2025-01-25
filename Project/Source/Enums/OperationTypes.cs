@@ -43,10 +43,8 @@ enum OperationType
   Grouped,
   CountingUniqueRepeating,
   CountedUniqueRepeating,
-  //CountingAllRepeating,
-  //CountedAllRepeating,
-  //Dispatching,
-  //Dispatched,
+  CountingAllRepeating,
+  CountedAllRepeating,
   Additionning,
   Additionned,
 

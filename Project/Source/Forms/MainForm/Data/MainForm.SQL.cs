@@ -37,13 +37,13 @@ static class SQLHelper
     return DB.Query<CountMotifsAndMaxOccurences>(sql);
   }
 
-  //static internal async Task<long> CountAllRepeatingMotifs(this SQLiteNetORM DB)
-  //{
-  //  var sql = @"SELECT COUNT(*)
-  //              FROM Decuplets AS Pool
-  //              WHERE Pool.Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)";
-  //  return DB.ExecuteScalar<long>(sql);
-  //}
+  static internal async Task<long> CountAllRepeatingMotifs(this SQLiteNetORM DB)
+  {
+    var sql = @"SELECT COUNT(*)
+                FROM Decuplets AS Pool
+                WHERE Pool.Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)";
+    return DB.ExecuteScalar<long>(sql);
+  }
 
   static internal async Task<long> AddPositionToRepeatingMotifsAsync(this SQLiteNetORM DB)
   {

@@ -160,7 +160,7 @@ public class SQLiteNetORM : SQLiteConnection
   /// <summary>
   /// Sets the database cache dir in KB, 0 for default 8192.
   /// </summary>
-  public void SetCacheSize(int size)
+  public void SetCacheSize(long size)
   {
     try
     {
