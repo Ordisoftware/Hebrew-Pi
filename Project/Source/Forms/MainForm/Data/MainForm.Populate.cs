@@ -14,7 +14,10 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
+using System.Collections.Generic;
+using System.Reflection;
 using Microsoft.WindowsAPICodePack.Taskbar;
+using static System.Net.Mime.MediaTypeNames;
 
 /// <summary>
 /// Provides application's main form.
@@ -104,6 +107,8 @@ partial class MainForm
           }
         }
       }
+      if ( MotifsProcessedCount == 9_999_999_999 ) // Fix for pi_dec_1t_01.txt from pi_dec_1t_02.txt
+        DB.Insert(new DecupletRow { Position = ++MotifsProcessedCount, Motif = 0191295669 });
       DoCommit();
       UpdateStatusInfo(string.Format(AppTranslations.CreateDataProgress, MotifsProcessedCount.ToString("N0")));
       if ( !CheckIfBatchCanContinueAsync().Result ) return;

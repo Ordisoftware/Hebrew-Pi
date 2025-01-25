@@ -118,6 +118,7 @@
       this.TabControl = new System.Windows.Forms.TabControl();
       this.TabPageManage = new System.Windows.Forms.TabPage();
       this.PanelViewManage = new System.Windows.Forms.Panel();
+      this.EditLog = new System.Windows.Forms.TextBox();
       this.SelectPiDecimalsFile = new System.Windows.Forms.ComboBox();
       this.EditMaxMotifs = new System.Windows.Forms.NumericUpDown();
       this.LabelPiDecimalsFile = new System.Windows.Forms.Label();
@@ -131,11 +132,15 @@
       this.ActionPause = new System.Windows.Forms.Button();
       this.ActionCreateIndex = new System.Windows.Forms.Button();
       this.GridIterations = new System.Windows.Forms.DataGridView();
+      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnAllRepeatingCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnRepeatingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnUniqueRepeatingCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnRemainingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnElapsedCounting = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnElapsedAdditionning = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
       this.TabPageGrid = new System.Windows.Forms.TabPage();
       this.PanelViewGrid = new System.Windows.Forms.Panel();
       this.TabPageDecode = new System.Windows.Forms.TabPage();
@@ -188,16 +193,11 @@
       this.TimerTooltip = new System.Windows.Forms.Timer(this.components);
       this.OpenFileDialogDB = new System.Windows.Forms.OpenFileDialog();
       this.SaveFileDialogDB = new System.Windows.Forms.SaveFileDialog();
-      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnRepeatingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
       this.EditSearchTranslation = new Ordisoftware.Core.TextBoxEx();
       this.EditSearchWord = new Ordisoftware.Hebrew.LettersControl();
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
-      this.EditLog = new System.Windows.Forms.TextBox();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -210,13 +210,13 @@
       this.PanelViewManage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.EditMaxMotifs)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).BeginInit();
       this.TabPageGrid.SuspendLayout();
       this.TabPageDecode.SuspendLayout();
       this.PanelViewDecode.SuspendLayout();
       this.PanelTitle.SuspendLayout();
       this.PanelTitleInner.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).BeginInit();
       this.SuspendLayout();
       // 
       // PanelDatabase
@@ -1064,6 +1064,14 @@
       this.PanelViewManage.Size = new System.Drawing.Size(923, 357);
       this.PanelViewManage.TabIndex = 2;
       // 
+      // EditLog
+      // 
+      this.EditLog.Location = new System.Drawing.Point(13, 160);
+      this.EditLog.Multiline = true;
+      this.EditLog.Name = "EditLog";
+      this.EditLog.Size = new System.Drawing.Size(265, 184);
+      this.EditLog.TabIndex = 7;
+      // 
       // SelectPiDecimalsFile
       // 
       this.SelectPiDecimalsFile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1247,6 +1255,16 @@
       this.GridIterations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridIterations_CellFormatting);
       this.GridIterations.Leave += new System.EventHandler(this.GridIterations_Leave);
       // 
+      // ColumnIteration
+      // 
+      this.ColumnIteration.DataPropertyName = "Iteration";
+      this.ColumnIteration.FillWeight = 126.9036F;
+      this.ColumnIteration.HeaderText = "Iteration";
+      this.ColumnIteration.Name = "ColumnIteration";
+      this.ColumnIteration.ReadOnly = true;
+      this.ColumnIteration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnIteration.Width = 55;
+      // 
       // ColumnAllRepeatingCount
       // 
       this.ColumnAllRepeatingCount.DataPropertyName = "AllRepeatingCount";
@@ -1255,6 +1273,15 @@
       this.ColumnAllRepeatingCount.ReadOnly = true;
       this.ColumnAllRepeatingCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
       // 
+      // ColumnRepeatingRate
+      // 
+      this.ColumnRepeatingRate.DataPropertyName = "RepeatingRate";
+      this.ColumnRepeatingRate.HeaderText = "Rate";
+      this.ColumnRepeatingRate.Name = "ColumnRepeatingRate";
+      this.ColumnRepeatingRate.ReadOnly = true;
+      this.ColumnRepeatingRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnRepeatingRate.Width = 50;
+      // 
       // ColumnUniqueRepeatingCount
       // 
       this.ColumnUniqueRepeatingCount.DataPropertyName = "UniqueRepeatingCount";
@@ -1262,6 +1289,16 @@
       this.ColumnUniqueRepeatingCount.Name = "ColumnUniqueRepeatingCount";
       this.ColumnUniqueRepeatingCount.ReadOnly = true;
       this.ColumnUniqueRepeatingCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      // 
+      // ColumnMaxOccurences
+      // 
+      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
+      this.ColumnMaxOccurences.FillWeight = 93.27411F;
+      this.ColumnMaxOccurences.HeaderText = "Max";
+      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
+      this.ColumnMaxOccurences.ReadOnly = true;
+      this.ColumnMaxOccurences.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnMaxOccurences.Width = 40;
       // 
       // ColumnRemainingRate
       // 
@@ -1289,6 +1326,11 @@
       this.ColumnElapsedAdditionning.ReadOnly = true;
       this.ColumnElapsedAdditionning.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
       this.ColumnElapsedAdditionning.Width = 90;
+      // 
+      // BindingSourceIterationRow
+      // 
+      this.BindingSourceIterationRow.AllowNew = true;
+      this.BindingSourceIterationRow.DataSource = typeof(Ordisoftware.Hebrew.Pi.IterationRow);
       // 
       // TabPageGrid
       // 
@@ -1858,40 +1900,6 @@
       // 
       this.SaveFileDialogDB.Filter = "SQLite files (*.sqlite)|*.sqlite";
       // 
-      // ColumnIteration
-      // 
-      this.ColumnIteration.DataPropertyName = "Iteration";
-      this.ColumnIteration.FillWeight = 126.9036F;
-      this.ColumnIteration.HeaderText = "Iteration";
-      this.ColumnIteration.Name = "ColumnIteration";
-      this.ColumnIteration.ReadOnly = true;
-      this.ColumnIteration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnIteration.Width = 55;
-      // 
-      // ColumnRepeatingRate
-      // 
-      this.ColumnRepeatingRate.DataPropertyName = "RepeatingRate";
-      this.ColumnRepeatingRate.HeaderText = "Rate";
-      this.ColumnRepeatingRate.Name = "ColumnRepeatingRate";
-      this.ColumnRepeatingRate.ReadOnly = true;
-      this.ColumnRepeatingRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnRepeatingRate.Width = 50;
-      // 
-      // ColumnMaxOccurences
-      // 
-      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
-      this.ColumnMaxOccurences.FillWeight = 93.27411F;
-      this.ColumnMaxOccurences.HeaderText = "Max";
-      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
-      this.ColumnMaxOccurences.ReadOnly = true;
-      this.ColumnMaxOccurences.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnMaxOccurences.Width = 40;
-      // 
-      // BindingSourceIterationRow
-      // 
-      this.BindingSourceIterationRow.AllowNew = true;
-      this.BindingSourceIterationRow.DataSource = typeof(Ordisoftware.Hebrew.Pi.IterationRow);
-      // 
       // EditSearchTranslation
       // 
       this.EditSearchTranslation.BackColor = System.Drawing.Color.AliceBlue;
@@ -1961,14 +1969,6 @@
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
       // 
-      // EditLog
-      // 
-      this.EditLog.Location = new System.Drawing.Point(13, 160);
-      this.EditLog.Multiline = true;
-      this.EditLog.Name = "EditLog";
-      this.EditLog.Size = new System.Drawing.Size(265, 184);
-      this.EditLog.TabIndex = 7;
-      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2001,6 +2001,7 @@
       this.PanelViewManage.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.EditMaxMotifs)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).EndInit();
       this.TabPageGrid.ResumeLayout(false);
       this.TabPageDecode.ResumeLayout(false);
       this.PanelViewDecode.ResumeLayout(false);
@@ -2008,7 +2009,6 @@
       this.PanelTitle.ResumeLayout(false);
       this.PanelTitleInner.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
