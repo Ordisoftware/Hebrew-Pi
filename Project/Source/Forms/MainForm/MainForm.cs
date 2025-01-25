@@ -57,14 +57,19 @@ partial class MainForm : Form
     DoFormLoad(sender, e);
     TimerMemory_Tick(null, null);
     InitializeListBoxCacheSize();
-    foreach ( string file in Directory.GetFiles(Path.Combine(Globals.DocumentsFolderPath, "PiDecimals"), "*.txt") )
-      SelectPiDecimalsFile.Items.Add(file);
-    SelectPiDecimalsFile.SelectedIndex = 0;
+    InitializeListBoxPiDecimals();
   }
 
   const ulong MemorySizeInKiB = 1024;
   const ulong MemorySizeInMiB = MemorySizeInKiB * 1024;
   const ulong MemorySizeInGiB = MemorySizeInMiB * 1024;
+
+  private void InitializeListBoxPiDecimals()
+  {
+    foreach ( string file in Directory.GetFiles(Path.Combine(Globals.DocumentsFolderPath, "PiDecimals"), "PiDecimals*.txt") )
+      SelectPiDecimalsFile.Items.Add(file);
+    SelectPiDecimalsFile.SelectedIndex = 0;
+  }
 
   private void InitializeListBoxCacheSize()
   {
@@ -340,13 +345,15 @@ partial class MainForm : Form
 
   private void ActionFixDigitsMissingIn100GB_Click(object sender, EventArgs e)
   {
-    string charactersToAdd = "00";
+    string charactersToAdd = "69";
     string filePathText = SelectPiDecimalsFile.SelectedItem.ToString();
     var encoding = SystemManager.GetTextFileEncoding(filePathText);
     using var fs = new FileStream(filePathText, FileMode.Open, FileAccess.Write, FileShare.ReadWrite);
     using var writer = new StreamWriter(fs, encoding);
     fs.Seek(0, SeekOrigin.End);
     writer.Write(charactersToAdd);
+    writer.Close();
+    fs.Close();
     SelectPiDecimalsFile_SelectedIndexChanged(null, null);
   }
 
