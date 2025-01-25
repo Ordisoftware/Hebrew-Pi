@@ -30,9 +30,9 @@ partial class MainForm
 
   private async void LogTime(bool lastline = false)
   {
-    Task.Run(() => EditLog.Invoke(() => EditLog.AppendText(Operation.ToString() + ": " +
-                                                           Globals.ChronoSubBatch.Elapsed.AsReadable() +
-                                                           ( lastline ? Globals.NL2 : Globals.NL ))));
+    EditLog.Invoke(() => EditLog.AppendText(Operation.ToString() + ": " +
+                                            Globals.ChronoSubBatch.Elapsed.AsReadable() +
+                                            ( lastline ? Globals.NL2 : Globals.NL )));
   }
 
   private async Task DoActionReduceRepeatingAsync()
@@ -75,14 +75,28 @@ partial class MainForm
           ReduceRepeatingIteration++;
         }
       }
+      EditLog.Invoke(EditLog.Clear);
       Processing = ProcessingType.ReduceRepeating;
       Globals.ChronoBatch.Restart();
-      Operation = OperationType.CountingAllRows;
-      Globals.ChronoSubBatch.Restart();
-      long countRows = DB.CountRows(DecupletRow.TableName);
-      Globals.ChronoSubBatch.Stop();
-      Operation = OperationType.CountedAllRows;
-      LogTime();
+      // Counting all rows
+      long countRows;
+      switch ( DisplayManager.QueryYesNoCancel("Use PiDecimals file size instead of COUNT(*) all rows?") )
+      {
+        case DialogResult.Yes:
+          countRows = PiDecimalsFileSize;
+          break;
+        case DialogResult.No:
+          Operation = OperationType.CountingAllRows;
+          Globals.ChronoSubBatch.Restart();
+          countRows = DB.ExecuteScalar<long>($"SELECT COUNT(*) FROM [{DecupletRow.TableName}]");
+          Globals.ChronoSubBatch.Stop();
+          LogTime();
+          if ( !CheckIfBatchCanContinueAsync().Result ) break;
+          Operation = OperationType.CountedAllRows;
+          break;
+        case DialogResult.Cancel:
+          return;
+      }
       // Loop
       for ( ; MotifsProcessedCount > 0; ReduceRepeatingIteration++ )
       {
@@ -125,9 +139,10 @@ partial class MainForm
           // Counting all repeating
           Operation = OperationType.CountingAllRepeating;
           long countAllRepeating = DB.CountAllRepeatingMotifs().Result;
-          LogTime();
-          Operation = OperationType.CountedAllRepeating;
           Globals.ChronoSubBatch.Stop();
+          LogTime(true);
+          if ( !CheckIfBatchCanContinueAsync().Result ) break;
+          Operation = OperationType.CountedAllRepeating;
           // Update row
           if ( list.Count == 0 ) throw new AdvSQLiteException("Counting motifs stats error");
           MotifsProcessedCount = list[0].CountMotifs;
@@ -164,8 +179,8 @@ partial class MainForm
             Operation = OperationType.Additionning;
             Globals.ChronoSubBatch.Restart();
             row.AllRepeatingCount = DB.AddPositionToRepeatingMotifsAsync().Result;
-            LogTime(true);
             Globals.ChronoSubBatch.Stop();
+            LogTime(true);
             if ( !CheckIfBatchCanContinueAsync().Result ) break;
             Operation = OperationType.Additionned;
             row.ElapsedAdditionning = Globals.ChronoSubBatch.Elapsed;
