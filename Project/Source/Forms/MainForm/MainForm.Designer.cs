@@ -30,8 +30,8 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
       this.PanelDatabase = new System.Windows.Forms.Panel();
       this.label1 = new System.Windows.Forms.Label();
       this.EditTempDir = new System.Windows.Forms.TextBox();
@@ -263,12 +263,13 @@
       // 
       // ActionFixDigitsMissingIn100GB
       // 
-      this.ActionFixDigitsMissingIn100GB.Location = new System.Drawing.Point(791, 5);
+      this.ActionFixDigitsMissingIn100GB.Location = new System.Drawing.Point(795, 4);
       this.ActionFixDigitsMissingIn100GB.Name = "ActionFixDigitsMissingIn100GB";
       this.ActionFixDigitsMissingIn100GB.Size = new System.Drawing.Size(139, 23);
       this.ActionFixDigitsMissingIn100GB.TabIndex = 2;
       this.ActionFixDigitsMissingIn100GB.Text = "Fix 100GB 2 digits missing";
       this.ActionFixDigitsMissingIn100GB.UseVisualStyleBackColor = true;
+      this.ActionFixDigitsMissingIn100GB.Visible = false;
       this.ActionFixDigitsMissingIn100GB.Click += new System.EventHandler(this.ActionFixDigitsMissingIn100GB_Click);
       // 
       // ActionDbClose
@@ -1223,14 +1224,14 @@
       this.GridIterations.BackgroundColor = System.Drawing.SystemColors.Window;
       this.GridIterations.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.GridIterations.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.GridIterations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.GridIterations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
       this.GridIterations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.GridIterations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnIteration,
@@ -1247,8 +1248,8 @@
       this.GridIterations.Name = "GridIterations";
       this.GridIterations.ReadOnly = true;
       this.GridIterations.RowHeadersVisible = false;
-      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-      this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+      this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle4;
       this.GridIterations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.GridIterations.Size = new System.Drawing.Size(616, 331);
       this.GridIterations.TabIndex = 0;

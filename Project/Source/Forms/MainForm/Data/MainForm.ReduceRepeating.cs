@@ -138,7 +138,7 @@ partial class MainForm
           Operation = OperationType.CountedUniqueRepeating;
           // Counting all repeating
           Operation = OperationType.CountingAllRepeating;
-          long countAllRepeating = DB.CountAllRepeatingMotifs().Result;
+          row.AllRepeatingCount = DB.CountAllRepeatingMotifs().Result;
           Globals.ChronoSubBatch.Stop();
           LogTime(true);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
@@ -177,7 +177,7 @@ partial class MainForm
           {
             Operation = OperationType.Additionning;
             Globals.ChronoSubBatch.Restart();
-            long count = DB.AddPositionToRepeatingMotifsAsync().Result;
+            long count /*row.AllRepeatingCount*/ = DB.AddPositionToRepeatingMotifsAsync().Result;
             Globals.ChronoSubBatch.Stop();
             LogTime(true);
             if ( !CheckIfBatchCanContinueAsync().Result ) break;

@@ -28,8 +28,7 @@ partial class MainForm
     Globals.ChronoBatch.Restart();
     DatabaseFilePath = path;
     DB = new SQLiteNetORM(path);
-    DB.SetCacheSpill(true);
-    DB.SetTempStoreMode(SQLiteTempStoreMode.MEMORY);
+    DB.SetTempStoreMode(SQLiteTempStoreMode.FILE);
     DB.SetJournal(SQLiteJournalMode.OFF);
     DB.SetSynchronous(SQLiteSynchronousMode.OFF);
     DB.SetLocking(SQLiteLockingMode.EXCLUSIVE);
