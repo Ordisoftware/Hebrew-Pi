@@ -32,6 +32,8 @@ A libre and open-source software written in C# that allows decoding decimal sequ
 
 ## Functionalities
 
+- Import Pi decimals from text file.
+- Reduce repetitions: loop to add the position until none remain or there is more.
 - Links to various online resources.
 - English, French.
 
@@ -124,4 +126,4 @@ The refresh view button of the menu at the top redraws the entire form.
 
 #### Version 0.1
 
-- Prototype #1
+- Prototype #1 with data creation and reduction of repeating motifs.
