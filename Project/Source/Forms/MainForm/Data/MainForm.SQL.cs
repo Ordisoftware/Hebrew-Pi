@@ -17,30 +17,39 @@ namespace Ordisoftware.Hebrew.Pi;
 static class SQLHelper
 {
 
-  static internal async Task<List<(long MotifCount, long MaxOccurrences)>> GetRepeatingMotifCountAndMaxOccurencesAsync(this SQLiteNetORM DB)
+  static internal async Task CreateUniqueRepeatingAndOccurencesTempTableAsync(this SQLiteNetORM DB)
+  {
+    DB.Execute("DROP TABLE IF EXISTS UniqueRepeatingMotifs");
+    var sql = @"CREATE TEMPORARY TABLE UniqueRepeatingMotifs AS
+                SELECT Motif, COUNT(*) AS Occurrences
+                FROM Decuplets
+                GROUP BY Motif
+                HAVING COUNT(*) > 1";
+    DB.Execute(sql);
+  }
+
+  static internal async Task<List<(long MotifCount, long MaxOccurrences)>> GetUniqueRepeatingCountAndMaxOccurencesAsync(this SQLiteNetORM DB)
   {
     var sql = @"SELECT COUNT(*) AS UniqueRepeating, MAX(Occurrences) AS MaxOccurrences
-                FROM (
-                  SELECT Motif, COUNT(*) AS Occurrences
-                  FROM Decuplets
-                  GROUP BY Motif
-                  HAVING COUNT(*) > 1);";
+                FROM UniqueRepeatingMotifs";
     return [.. DB.Query<(long MotifCount, long MaxOccurrences)>(sql)];
   }
+
+  //static internal async Task<long> CountAllRepeatingMotifs(this SQLiteNetORM DB)
+  //{
+  //  var sql = @"SELECT COUNT(*)
+  //              FROM Decuplets AS Pool
+  //              WHERE Pool.Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)";
+  //  return DB.ExecuteScalar<long>(sql);
+  //}
 
   static internal async Task<long> AddPositionToRepeatingMotifsAsync(this SQLiteNetORM DB)
   {
     var sql = @"UPDATE Decuplets
                 SET Motif = Motif + Position
-                WHERE Motif IN (
-                  SELECT Motif
-                  FROM Decuplets
-                  GROUP BY Motif
-                  HAVING COUNT(*) > 1
-                );";
-
+                WHERE Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)";
     int signedResult = DB.Execute(sql);
-    return unchecked((uint)signedResult); // TODO use count(*) if unchecked don't work
+    return unchecked((uint)signedResult);
   }
 
 }

@@ -17,24 +17,36 @@ namespace Ordisoftware.Hebrew.Pi;
 enum OperationType
 {
   None,
-  Grouping,
-  Grouped,
-  Counting,
-  Counted,
-  Additionning,
-  Additionned,
-  Committing,
-  Committed,
-  Rollbacking,
-  Rollbacked,
+
+  Opening,
+  Opened,
+  Closing,
+  Closed,
+
+  CountingAllRows,
+  CountedAllRows,
   Emptying,
   Emptied,
   Populating,
   Populated,
+
+  Committing,
+  Committed,
+  Rollbacking,
+  Rollbacked,
+
   Indexing,
   Indexed,
-  Opening,
-  Opened,
-  Closing,
-  Closed
+
+  Grouping,
+  Grouped,
+  CountingUniqueRepeating,
+  CountedUniqueRepeating,
+  CountingAllRepeating,
+  CountedAllRepeating,
+  Dispatching,
+  Dispatched,
+  Additionning,
+  Additionned,
+
 }

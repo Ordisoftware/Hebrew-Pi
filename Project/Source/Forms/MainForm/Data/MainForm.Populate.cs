@@ -48,11 +48,11 @@ partial class MainForm
       reader = new StreamReader(filePathText);
       Processing = ProcessingType.CreateData;
       Globals.ChronoSubBatch.Restart();
-      Operation = OperationType.Counting;
+      Operation = OperationType.CountingAllRows;
       Globals.ChronoSubBatch.Restart();
       DecupletsRowCount = DB.CountRows(DecupletRow.TableName);
       Globals.ChronoSubBatch.Stop();
-      Operation = OperationType.Counted;
+      Operation = OperationType.CountedAllRows;
       if ( DecupletsRowCount > 0 )
         AskWhatToDoOnNonEmptyTable();
       Globals.ChronoSubBatch.Stop();
@@ -127,6 +127,7 @@ partial class MainForm
         DoRollback();
       }
       Except = ex;
+      ex.Manage(ex);
     }
     finally
     {
