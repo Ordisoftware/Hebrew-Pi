@@ -25,6 +25,7 @@ enum OperationType
 
   CountingAllRows,
   CountedAllRows,
+
   Emptying,
   Emptied,
   Populating,
@@ -42,10 +43,10 @@ enum OperationType
   Grouped,
   CountingUniqueRepeating,
   CountedUniqueRepeating,
-  CountingAllRepeating,
-  CountedAllRepeating,
-  Dispatching,
-  Dispatched,
+  //CountingAllRepeating,
+  //CountedAllRepeating,
+  //Dispatching,
+  //Dispatched,
   Additionning,
   Additionned,
 

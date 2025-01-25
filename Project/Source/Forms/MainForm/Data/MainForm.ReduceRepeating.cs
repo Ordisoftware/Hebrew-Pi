@@ -49,8 +49,15 @@ partial class MainForm
         else
         if ( lastRow.ElapsedAdditionning is null )
         {
+          lastRow.MaxOccurences = null;
+          lastRow.AllRepeatingCount = null;
+          lastRow.UniqueRepeatingCount = null;
+          lastRow.RemainingRate = null;
+          lastRow.RepeatingRate = null;
           lastRow.ElapsedCounting = null;
           iteratingStep = IteratingStep.Counting;
+          DB.Update(lastRow);
+          LoadIterationGrid();
         }
         else
         if ( lastRow.UniqueRepeatingCount == 0 && lastRow.RemainingRate == 0 )
@@ -63,12 +70,12 @@ partial class MainForm
       }
       Processing = ProcessingType.ReduceRepeating;
       Globals.ChronoBatch.Restart();
-      // Loop
       Operation = OperationType.CountingAllRows;
       Globals.ChronoSubBatch.Restart();
       double countRows = DB.Table<DecupletRow>().Count();
       Globals.ChronoSubBatch.Stop();
       Operation = OperationType.CountedAllRows;
+      // Loop
       for ( ; MotifsProcessedCount > 0; ReduceRepeatingIteration++ )
       {
         // Init current row
@@ -94,23 +101,26 @@ partial class MainForm
         if ( !CheckIfBatchCanContinueAsync().Result ) break;
         if ( iteratingStep == IteratingStep.Next || iteratingStep == IteratingStep.Counting )
         {
-          // 
           Globals.ChronoSubBatch.Restart();
+          // Grouping
           Operation = OperationType.Grouping;
           DB.CreateUniqueRepeatingAndOccurencesTempTableAsync();
-          Globals.ChronoSubBatch.Stop();
-          Operation = OperationType.Grouped;
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
-          // 
-          Globals.ChronoSubBatch.Restart();
+          Operation = OperationType.Grouped;
+          // Counting unique repeating
           Operation = OperationType.CountingUniqueRepeating;
           var list = DB.GetUniqueRepeatingCountAndMaxOccurencesAsync().Result;
-          Globals.ChronoSubBatch.Stop();
-          Operation = OperationType.CountedUniqueRepeating;
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
-          // 
+          Operation = OperationType.CountedUniqueRepeating;
+          //// Counting all repeating
+          //Operation = OperationType.CountingAllRepeating;
+          //long countAllRepeating = DB.CountAllRepeatingMotifs().Result;
+          //Operation = OperationType.CountedAllRepeating;
+          Globals.ChronoSubBatch.Stop();
+          // Update row
           MotifsProcessedCount = list[0].MotifCount;
           row.UniqueRepeatingCount = MotifsProcessedCount;
+          //row.AllRepeatingCount = countAllRepeating;
           row.MaxOccurences = list[0].MaxOccurrences;
           row.RemainingRate = MotifsProcessedCount == 0
               ? 0
@@ -118,14 +128,6 @@ partial class MainForm
                 ? 100
                 : Math.Round((double)MotifsProcessedCount * 100 / countPrevious, 2);
           row.ElapsedCounting = Globals.ChronoSubBatch.Elapsed;
-          // 
-          //Globals.ChronoSubBatch.Restart();
-          //Operation = OperationType.CountingAllRepeating;
-          //long countAllRepeating = DB.CountAllRepeatingMotifs().Result;
-          //Globals.ChronoSubBatch.Stop();
-          //Operation = OperationType.CountedAllRepeating;
-          //if ( !CheckIfBatchCanContinueAsync().Result ) break;
-          //row.AllRepeatingCount = countAllRepeating;
           DB.Update(row);
           LoadIterationGrid();
           if ( ReduceRepeatingIteration > 0 && MotifsProcessedCount > countPrevious
@@ -151,6 +153,7 @@ partial class MainForm
             Globals.ChronoSubBatch.Restart();
             row.AllRepeatingCount = DB.AddPositionToRepeatingMotifsAsync().Result;
             Globals.ChronoSubBatch.Stop();
+            if ( !CheckIfBatchCanContinueAsync().Result ) break;
             Operation = OperationType.Additionned;
             row.ElapsedAdditionning = Globals.ChronoSubBatch.Elapsed;
             row.RepeatingRate = row.AllRepeatingCount is null || row.AllRepeatingCount == 0

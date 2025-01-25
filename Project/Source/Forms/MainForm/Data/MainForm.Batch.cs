@@ -40,12 +40,12 @@ partial class MainForm
 
   private async Task DoBatchAsync(Action action, bool interruptible = true)
   {
+    if ( Processing != ProcessingType.None ) return;
     try
     {
       SetBatchState(true, interruptible);
       UpdateButtons();
       ClearStatusBar();
-      await Task.Delay(1000);
       await Task.Run(async () => action());
     }
     finally

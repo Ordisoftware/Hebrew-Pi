@@ -184,6 +184,18 @@ public class SQLiteNetORM : SQLiteConnection
     }
   }
 
+  public void SetCacheSpill(bool enabled)
+  {
+    try
+    {
+      Execute($"PRAGMA temp_store = {Convert.ToInt32(enabled)};");
+    }
+    catch ( Exception ex )
+    {
+      throw new AdvSQLiteException(SysTranslations.ErrorInMethod.GetLang(GetClassAndMethodName(), ex.Message), ex);
+    }
+  }
+
   public void SetLocking(SQLiteLockingMode mode)
   {
     try
