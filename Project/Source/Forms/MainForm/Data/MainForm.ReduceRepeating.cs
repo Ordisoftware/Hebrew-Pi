@@ -79,7 +79,7 @@ partial class MainForm
       Processing = ProcessingType.ReduceRepeating;
       Globals.ChronoBatch.Restart();
       // Counting all rows
-      long countRows;
+      long countRows = 0;
       switch ( DisplayManager.QueryYesNoCancel("Use PiDecimals file size instead of COUNT(*) all rows?") )
       {
         case DialogResult.Yes:
