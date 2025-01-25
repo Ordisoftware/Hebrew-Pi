@@ -30,12 +30,13 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
       this.PanelDatabase = new System.Windows.Forms.Panel();
       this.label1 = new System.Windows.Forms.Label();
       this.EditTempDir = new System.Windows.Forms.TextBox();
       this.SelectDbCache = new System.Windows.Forms.ComboBox();
+      this.ActionFixDigitsMissingIn100GB = new System.Windows.Forms.Button();
       this.ActionDbClose = new System.Windows.Forms.Button();
       this.ActionDbNew = new System.Windows.Forms.Button();
       this.ActionDbOpen = new System.Windows.Forms.Button();
@@ -115,12 +116,6 @@
       this.PanelMainInner = new System.Windows.Forms.Panel();
       this.PanelMainCenter = new System.Windows.Forms.Panel();
       this.TabControl = new System.Windows.Forms.TabControl();
-      this.TabPageDecode = new System.Windows.Forms.TabPage();
-      this.PanelViewDecode = new System.Windows.Forms.Panel();
-      this.textBox1 = new System.Windows.Forms.TextBox();
-      this.ActionSquare = new System.Windows.Forms.Button();
-      this.TabPageGrid = new System.Windows.Forms.TabPage();
-      this.PanelViewGrid = new System.Windows.Forms.Panel();
       this.TabPageManage = new System.Windows.Forms.TabPage();
       this.PanelViewManage = new System.Windows.Forms.Panel();
       this.SelectPiDecimalsFile = new System.Windows.Forms.ComboBox();
@@ -146,6 +141,12 @@
       this.ColumnElapsedCounting = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnElapsedAdditionning = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
+      this.TabPageGrid = new System.Windows.Forms.TabPage();
+      this.PanelViewGrid = new System.Windows.Forms.Panel();
+      this.TabPageDecode = new System.Windows.Forms.TabPage();
+      this.PanelViewDecode = new System.Windows.Forms.Panel();
+      this.textBox1 = new System.Windows.Forms.TextBox();
+      this.ActionSquare = new System.Windows.Forms.Button();
       this.PanelSepTop = new System.Windows.Forms.Panel();
       this.PanelTitle = new System.Windows.Forms.Panel();
       this.PanelTitleInner = new System.Windows.Forms.Panel();
@@ -205,14 +206,14 @@
       this.PanelMainInner.SuspendLayout();
       this.PanelMainCenter.SuspendLayout();
       this.TabControl.SuspendLayout();
-      this.TabPageDecode.SuspendLayout();
-      this.PanelViewDecode.SuspendLayout();
-      this.TabPageGrid.SuspendLayout();
       this.TabPageManage.SuspendLayout();
       this.PanelViewManage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.EditMaxMotifs)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).BeginInit();
+      this.TabPageGrid.SuspendLayout();
+      this.TabPageDecode.SuspendLayout();
+      this.PanelViewDecode.SuspendLayout();
       this.PanelTitle.SuspendLayout();
       this.PanelTitleInner.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).BeginInit();
@@ -223,6 +224,7 @@
       this.PanelDatabase.Controls.Add(this.label1);
       this.PanelDatabase.Controls.Add(this.EditTempDir);
       this.PanelDatabase.Controls.Add(this.SelectDbCache);
+      this.PanelDatabase.Controls.Add(this.ActionFixDigitsMissingIn100GB);
       this.PanelDatabase.Controls.Add(this.ActionDbClose);
       this.PanelDatabase.Controls.Add(this.ActionDbNew);
       this.PanelDatabase.Controls.Add(this.ActionDbOpen);
@@ -258,6 +260,16 @@
       this.SelectDbCache.Size = new System.Drawing.Size(50, 21);
       this.SelectDbCache.TabIndex = 3;
       this.SelectDbCache.SelectedIndexChanged += new System.EventHandler(this.SelectDbCache_SelectedIndexChanged);
+      // 
+      // ActionFix100GB
+      // 
+      this.ActionFixDigitsMissingIn100GB.Location = new System.Drawing.Point(791, 5);
+      this.ActionFixDigitsMissingIn100GB.Name = "ActionFix100GB";
+      this.ActionFixDigitsMissingIn100GB.Size = new System.Drawing.Size(139, 23);
+      this.ActionFixDigitsMissingIn100GB.TabIndex = 2;
+      this.ActionFixDigitsMissingIn100GB.Text = "Fix 100GB 2 digits missing";
+      this.ActionFixDigitsMissingIn100GB.UseVisualStyleBackColor = true;
+      this.ActionFixDigitsMissingIn100GB.Click += new System.EventHandler(this.ActionFixDigitsMissingIn100GB_Click);
       // 
       // ActionDbClose
       // 
@@ -1017,70 +1029,6 @@
       this.TabControl.TabStop = false;
       this.TabControl.Visible = false;
       // 
-      // TabPageDecode
-      // 
-      this.TabPageDecode.Controls.Add(this.PanelViewDecode);
-      this.TabPageDecode.Location = new System.Drawing.Point(4, 22);
-      this.TabPageDecode.Name = "TabPageDecode";
-      this.TabPageDecode.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageDecode.Size = new System.Drawing.Size(929, 363);
-      this.TabPageDecode.TabIndex = 1;
-      this.TabPageDecode.Text = "Decode";
-      this.TabPageDecode.UseVisualStyleBackColor = true;
-      // 
-      // PanelViewDecode
-      // 
-      this.PanelViewDecode.BackColor = System.Drawing.SystemColors.Control;
-      this.PanelViewDecode.Controls.Add(this.textBox1);
-      this.PanelViewDecode.Controls.Add(this.ActionSquare);
-      this.PanelViewDecode.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.PanelViewDecode.Location = new System.Drawing.Point(3, 3);
-      this.PanelViewDecode.Name = "PanelViewDecode";
-      this.PanelViewDecode.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewDecode.Size = new System.Drawing.Size(923, 357);
-      this.PanelViewDecode.TabIndex = 0;
-      // 
-      // textBox1
-      // 
-      this.textBox1.Location = new System.Drawing.Point(146, 102);
-      this.textBox1.Multiline = true;
-      this.textBox1.Name = "textBox1";
-      this.textBox1.Size = new System.Drawing.Size(467, 167);
-      this.textBox1.TabIndex = 7;
-      // 
-      // ActionSquare
-      // 
-      this.ActionSquare.Location = new System.Drawing.Point(146, 44);
-      this.ActionSquare.Name = "ActionSquare";
-      this.ActionSquare.Size = new System.Drawing.Size(58, 23);
-      this.ActionSquare.TabIndex = 2;
-      this.ActionSquare.Text = "Square";
-      this.ActionSquare.UseVisualStyleBackColor = true;
-      this.ActionSquare.Click += new System.EventHandler(this.ActionSquare_Click);
-      // 
-      // TabPageGrid
-      // 
-      this.TabPageGrid.Controls.Add(this.PanelViewGrid);
-      this.TabPageGrid.Location = new System.Drawing.Point(4, 22);
-      this.TabPageGrid.Name = "TabPageGrid";
-      this.TabPageGrid.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageGrid.Size = new System.Drawing.Size(929, 363);
-      this.TabPageGrid.TabIndex = 0;
-      this.TabPageGrid.Text = "Grid";
-      this.TabPageGrid.UseVisualStyleBackColor = true;
-      // 
-      // PanelViewGrid
-      // 
-      this.PanelViewGrid.AutoScroll = true;
-      this.PanelViewGrid.AutoScrollMinSize = new System.Drawing.Size(50, 0);
-      this.PanelViewGrid.BackColor = System.Drawing.SystemColors.Control;
-      this.PanelViewGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.PanelViewGrid.Location = new System.Drawing.Point(3, 3);
-      this.PanelViewGrid.Name = "PanelViewGrid";
-      this.PanelViewGrid.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewGrid.Size = new System.Drawing.Size(923, 357);
-      this.PanelViewGrid.TabIndex = 22;
-      // 
       // TabPageManage
       // 
       this.TabPageManage.Controls.Add(this.PanelViewManage);
@@ -1278,14 +1226,14 @@
       this.GridIterations.BackgroundColor = System.Drawing.SystemColors.Window;
       this.GridIterations.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.GridIterations.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-      dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-      dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.GridIterations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.GridIterations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
       this.GridIterations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.GridIterations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnIteration,
@@ -1302,8 +1250,8 @@
       this.GridIterations.Name = "GridIterations";
       this.GridIterations.ReadOnly = true;
       this.GridIterations.RowHeadersVisible = false;
-      dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-      this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle6;
+      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+      this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle4;
       this.GridIterations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.GridIterations.Size = new System.Drawing.Size(616, 331);
       this.GridIterations.TabIndex = 0;
@@ -1386,6 +1334,70 @@
       // 
       this.BindingSourceIterationRow.AllowNew = true;
       this.BindingSourceIterationRow.DataSource = typeof(Ordisoftware.Hebrew.Pi.IterationRow);
+      // 
+      // TabPageGrid
+      // 
+      this.TabPageGrid.Controls.Add(this.PanelViewGrid);
+      this.TabPageGrid.Location = new System.Drawing.Point(4, 22);
+      this.TabPageGrid.Name = "TabPageGrid";
+      this.TabPageGrid.Padding = new System.Windows.Forms.Padding(3);
+      this.TabPageGrid.Size = new System.Drawing.Size(929, 363);
+      this.TabPageGrid.TabIndex = 0;
+      this.TabPageGrid.Text = "Grid";
+      this.TabPageGrid.UseVisualStyleBackColor = true;
+      // 
+      // PanelViewGrid
+      // 
+      this.PanelViewGrid.AutoScroll = true;
+      this.PanelViewGrid.AutoScrollMinSize = new System.Drawing.Size(50, 0);
+      this.PanelViewGrid.BackColor = System.Drawing.SystemColors.Control;
+      this.PanelViewGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.PanelViewGrid.Location = new System.Drawing.Point(3, 3);
+      this.PanelViewGrid.Name = "PanelViewGrid";
+      this.PanelViewGrid.Padding = new System.Windows.Forms.Padding(10);
+      this.PanelViewGrid.Size = new System.Drawing.Size(923, 357);
+      this.PanelViewGrid.TabIndex = 22;
+      // 
+      // TabPageDecode
+      // 
+      this.TabPageDecode.Controls.Add(this.PanelViewDecode);
+      this.TabPageDecode.Location = new System.Drawing.Point(4, 22);
+      this.TabPageDecode.Name = "TabPageDecode";
+      this.TabPageDecode.Padding = new System.Windows.Forms.Padding(3);
+      this.TabPageDecode.Size = new System.Drawing.Size(929, 363);
+      this.TabPageDecode.TabIndex = 1;
+      this.TabPageDecode.Text = "Decode";
+      this.TabPageDecode.UseVisualStyleBackColor = true;
+      // 
+      // PanelViewDecode
+      // 
+      this.PanelViewDecode.BackColor = System.Drawing.SystemColors.Control;
+      this.PanelViewDecode.Controls.Add(this.textBox1);
+      this.PanelViewDecode.Controls.Add(this.ActionSquare);
+      this.PanelViewDecode.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.PanelViewDecode.Location = new System.Drawing.Point(3, 3);
+      this.PanelViewDecode.Name = "PanelViewDecode";
+      this.PanelViewDecode.Padding = new System.Windows.Forms.Padding(10);
+      this.PanelViewDecode.Size = new System.Drawing.Size(923, 357);
+      this.PanelViewDecode.TabIndex = 0;
+      // 
+      // textBox1
+      // 
+      this.textBox1.Location = new System.Drawing.Point(146, 102);
+      this.textBox1.Multiline = true;
+      this.textBox1.Name = "textBox1";
+      this.textBox1.Size = new System.Drawing.Size(467, 167);
+      this.textBox1.TabIndex = 7;
+      // 
+      // ActionSquare
+      // 
+      this.ActionSquare.Location = new System.Drawing.Point(146, 44);
+      this.ActionSquare.Name = "ActionSquare";
+      this.ActionSquare.Size = new System.Drawing.Size(58, 23);
+      this.ActionSquare.TabIndex = 2;
+      this.ActionSquare.Text = "Square";
+      this.ActionSquare.UseVisualStyleBackColor = true;
+      this.ActionSquare.Click += new System.EventHandler(this.ActionSquare_Click);
       // 
       // PanelSepTop
       // 
@@ -1987,16 +1999,16 @@
       this.PanelMainInner.ResumeLayout(false);
       this.PanelMainCenter.ResumeLayout(false);
       this.TabControl.ResumeLayout(false);
-      this.TabPageDecode.ResumeLayout(false);
-      this.PanelViewDecode.ResumeLayout(false);
-      this.PanelViewDecode.PerformLayout();
-      this.TabPageGrid.ResumeLayout(false);
       this.TabPageManage.ResumeLayout(false);
       this.PanelViewManage.ResumeLayout(false);
       this.PanelViewManage.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.EditMaxMotifs)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).EndInit();
+      this.TabPageGrid.ResumeLayout(false);
+      this.TabPageDecode.ResumeLayout(false);
+      this.PanelViewDecode.ResumeLayout(false);
+      this.PanelViewDecode.PerformLayout();
       this.PanelTitle.ResumeLayout(false);
       this.PanelTitleInner.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).EndInit();
@@ -2171,5 +2183,6 @@
     private DataGridViewTextBoxColumn ColumnRemainingRate;
     private DataGridViewTextBoxColumn ColumnElapsedCounting;
     private DataGridViewTextBoxColumn ColumnElapsedAdditionning;
+    private Button ActionFixDigitsMissingIn100GB;
   }
 }

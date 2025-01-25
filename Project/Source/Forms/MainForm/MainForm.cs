@@ -253,8 +253,8 @@ partial class MainForm : Form
 
   private void ActionCreateData_Click(object sender, EventArgs e)
   {
-    string path = SelectPiDecimalsFile.SelectedItem.ToString();
-    DoBatchAsync(() => DoActionPopulateAsync(path));
+    string filePathText = SelectPiDecimalsFile.SelectedItem.ToString();
+    DoBatchAsync(() => DoActionPopulateAsync(filePathText));
   }
 
   private void ActionCreateIndex_Click(object sender, EventArgs e)
@@ -288,6 +288,8 @@ partial class MainForm : Form
       string str = new(buffer, 0, 2);
       if ( str == "3." || str == "3," ) size -= 2;
     }
+    PiDecimalsFileSize = size;
+    ActionFixDigitsMissingIn100GB.Enabled = size == 99999999998;
     EditMaxMotifs.Value = size / 10;
   }
 
@@ -334,6 +336,18 @@ partial class MainForm : Form
   {
     foreach ( var row in DB.Query<DecupletRow>("select * from Decuplets limit 0, 10") )
       textBox1.AppendText(row.Motif.ToString() + Environment.NewLine);
+  }
+
+  private void ActionFixDigitsMissingIn100GB_Click(object sender, EventArgs e)
+  {
+    string charactersToAdd = "00";
+    string filePathText = SelectPiDecimalsFile.SelectedItem.ToString();
+    var encoding = SystemManager.GetTextFileEncoding(filePathText);
+    using var fs = new FileStream(filePathText, FileMode.Open, FileAccess.Write, FileShare.ReadWrite);
+    using var writer = new StreamWriter(fs, encoding);
+    fs.Seek(0, SeekOrigin.End);
+    writer.Write(charactersToAdd);
+    SelectPiDecimalsFile_SelectedIndexChanged(null, null);
   }
 
   //private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)

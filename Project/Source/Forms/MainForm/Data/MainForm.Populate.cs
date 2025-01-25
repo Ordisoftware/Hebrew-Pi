@@ -25,7 +25,6 @@ partial class MainForm
 
   private async Task DoActionPopulateAsync(string filePathText)
   {
-    PiDecimalsFileSize = SystemManager.GetFileSize(filePathText);
     if ( !File.Exists(filePathText) )
     {
       DisplayManager.Show(SysTranslations.FileNotFound.GetLang(filePathText));
