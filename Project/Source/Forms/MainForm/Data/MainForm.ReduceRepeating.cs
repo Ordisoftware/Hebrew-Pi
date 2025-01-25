@@ -136,13 +136,16 @@ partial class MainForm
           LogTime();
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.CountedUniqueRepeating;
+
           // Counting all repeating
+          // remove if result of add query work
           Operation = OperationType.CountingAllRepeating;
           row.AllRepeatingCount = DB.CountAllRepeatingMotifs().Result;
           Globals.ChronoSubBatch.Stop();
           LogTime(true);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.CountedAllRepeating;
+
           // Update row
           if ( list.Count == 0 ) throw new AdvSQLiteException("Counting motifs stats error");
           MotifsProcessedCount = list[0].CountMotifs;
@@ -184,16 +187,19 @@ partial class MainForm
             if ( row.AllRepeatingCount != count )
             {
               DisplayManager.ShowError("Counted: " + row.AllRepeatingCount + Globals.NL +
-                                       "Added: " + count);
+                                       "Auditioned: " + count);
               EditNormalizeAutoLoop.Invoke(() => EditNormalizeAutoLoop.Checked = false);
             }
             Operation = OperationType.Additionned;
             row.ElapsedAdditionning = Globals.ChronoSubBatch.Elapsed;
+
+            // move to count if result of query don't work
             row.RepeatingRate = row.AllRepeatingCount is null || row.AllRepeatingCount == 0
               ? 0
               : row.AllRepeatingCount == MotifsProcessedCount
                 ? 100
                 : Math.Round((double)row.AllRepeatingCount * 100 / countRows, 2);
+
             DB.Update(row);
             LoadIterationGrid();
           }
