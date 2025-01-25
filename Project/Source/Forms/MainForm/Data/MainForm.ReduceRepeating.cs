@@ -147,7 +147,6 @@ partial class MainForm
           if ( list.Count == 0 ) throw new AdvSQLiteException("Counting motifs stats error");
           MotifsProcessedCount = list[0].CountMotifs;
           row.UniqueRepeatingCount = MotifsProcessedCount;
-          //row.AllRepeatingCount = countAllRepeating;
           row.MaxOccurences = list[0].MaxOccurrences;
           row.RemainingRate = MotifsProcessedCount == 0
               ? 0
@@ -178,10 +177,16 @@ partial class MainForm
           {
             Operation = OperationType.Additionning;
             Globals.ChronoSubBatch.Restart();
-            row.AllRepeatingCount = DB.AddPositionToRepeatingMotifsAsync().Result;
+            long count = DB.AddPositionToRepeatingMotifsAsync().Result;
             Globals.ChronoSubBatch.Stop();
             LogTime(true);
             if ( !CheckIfBatchCanContinueAsync().Result ) break;
+            if ( row.AllRepeatingCount != count )
+            {
+              DisplayManager.ShowError("Counted: " + row.AllRepeatingCount + Globals.NL +
+                                       "Added: " + count);
+              EditNormalizeAutoLoop.Invoke(() => EditNormalizeAutoLoop.Checked = false);
+            }
             Operation = OperationType.Additionned;
             row.ElapsedAdditionning = Globals.ChronoSubBatch.Elapsed;
             row.RepeatingRate = row.AllRepeatingCount is null || row.AllRepeatingCount == 0
