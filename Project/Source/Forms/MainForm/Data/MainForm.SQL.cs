@@ -14,10 +14,12 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
+using CountMotifsAndMaxOccurences = (long CountMotifs, long MaxOccurrences);
+
 static class SQLHelper
 {
 
-  static internal async Task CreateUniqueRepeatingAndOccurencesTempTableAsync(this SQLiteNetORM DB)
+  static internal async Task CreateUniqueRepeatingMotifsTempTableAsync(this SQLiteNetORM DB)
   {
     DB.Execute("DROP TABLE IF EXISTS UniqueRepeatingMotifs");
     var sql = @"CREATE TEMPORARY TABLE UniqueRepeatingMotifs AS
@@ -28,11 +30,11 @@ static class SQLHelper
     DB.Execute(sql);
   }
 
-  static internal async Task<List<(long MotifCount, long MaxOccurrences)>> GetUniqueRepeatingCountAndMaxOccurencesAsync(this SQLiteNetORM DB)
+  static internal async Task<List<CountMotifsAndMaxOccurences>> GetUniqueRepeatingStatsAsync(this SQLiteNetORM DB)
   {
     var sql = @"SELECT COUNT(*) AS UniqueRepeating, MAX(Occurrences) AS MaxOccurrences
                 FROM UniqueRepeatingMotifs";
-    return [.. DB.Query<(long MotifCount, long MaxOccurrences)>(sql)];
+    return DB.Query<CountMotifsAndMaxOccurences>(sql);
   }
 
   //static internal async Task<long> CountAllRepeatingMotifs(this SQLiteNetORM DB)

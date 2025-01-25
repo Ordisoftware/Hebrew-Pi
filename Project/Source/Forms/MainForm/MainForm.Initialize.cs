@@ -127,28 +127,35 @@ partial class MainForm : Form
     if ( !Globals.IsReady ) return;
     if ( Globals.IsExiting ) return;
     if ( Globals.IsSessionEnding ) return;
-    if ( e.CloseReason != CloseReason.None && e.CloseReason != CloseReason.UserClosing )
-      Globals.IsExiting = true;
-    else
-    if ( !Globals.AllowClose )
+    if ( e.CloseReason == CloseReason.None || e.CloseReason == CloseReason.UserClosing )
     {
-      if ( DisplayManager.QueryYesNo(SysTranslations.AskToTerminateWhileProcessing.GetLang()) )
-      {
-        CanForceTerminateBatch = true;
-        ActionStop.PerformClick();
-      }
-      else
+      if ( !Globals.AllowClose )
       {
         e.Cancel = true;
         return;
       }
-    }
-    else
-    if ( EditConfirmClosing.Checked )
-      if ( !DisplayManager.QueryYesNo(SysTranslations.AskToExitApplication.GetLang()) )
-        e.Cancel = true;
+      if ( Globals.IsInBatch )
+      {
+        if ( DisplayManager.QueryYesNo(SysTranslations.AskToTerminateWhileProcessing.GetLang()) )
+        {
+          CanForceTerminateBatch = true;
+          ActionStop.PerformClick();
+        }
+        else
+        {
+          e.Cancel = true;
+          return;
+        }
+      }
       else
-        Globals.IsExiting = true;
+      if ( EditConfirmClosing.Checked )
+        if ( !DisplayManager.QueryYesNo(SysTranslations.AskToExitApplication.GetLang()) )
+        {
+          e.Cancel = true;
+          return;
+        }
+    }
+    Globals.IsExiting = true;
     if ( ActionDbClose.Enabled )
       ActionDbClose.PerformClick();
   }

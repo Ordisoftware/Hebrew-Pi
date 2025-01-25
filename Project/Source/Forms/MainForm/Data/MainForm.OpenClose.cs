@@ -21,8 +21,9 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm
 {
 
-  private async void DoActionDbOpen(string path)
+  private async void DoActionDbOpenAsync(string path)
   {
+    if ( DB is not null ) DoActionDbCloseAsync();
     Operation = OperationType.Opening;
     Globals.ChronoBatch.Restart();
     DatabaseFilePath = path;
@@ -45,7 +46,7 @@ partial class MainForm
     UpdateButtons();
   }
 
-  private async void DoActionDbClose()
+  private async void DoActionDbCloseAsync()
   {
     if ( DB is null ) return;
     Operation = OperationType.Closing;

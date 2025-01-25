@@ -104,12 +104,12 @@ partial class MainForm
           Globals.ChronoSubBatch.Restart();
           // Grouping
           Operation = OperationType.Grouping;
-          DB.CreateUniqueRepeatingAndOccurencesTempTableAsync();
+          DB.CreateUniqueRepeatingMotifsTempTableAsync();
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.Grouped;
           // Counting unique repeating
           Operation = OperationType.CountingUniqueRepeating;
-          var list = DB.GetUniqueRepeatingCountAndMaxOccurencesAsync().Result;
+          var list = DB.GetUniqueRepeatingStatsAsync().Result;
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.CountedUniqueRepeating;
           //// Counting all repeating
@@ -118,7 +118,8 @@ partial class MainForm
           //Operation = OperationType.CountedAllRepeating;
           Globals.ChronoSubBatch.Stop();
           // Update row
-          MotifsProcessedCount = list[0].MotifCount;
+          if ( list.Count == 0 ) throw new AdvSQLiteException("Counting motifs stats error");
+          MotifsProcessedCount = list[0].CountMotifs;
           row.UniqueRepeatingCount = MotifsProcessedCount;
           //row.AllRepeatingCount = countAllRepeating;
           row.MaxOccurences = list[0].MaxOccurrences;

@@ -236,19 +236,19 @@ partial class MainForm : Form
     {
       if ( File.Exists(SaveFileDialogDB.FileName) )
         File.Delete(SaveFileDialogDB.FileName);
-      DoActionDbOpen(SaveFileDialogDB.FileName);
+      DoActionDbOpenAsync(SaveFileDialogDB.FileName);
     }
   }
 
   private void ActionDbOpen_Click(object sender, EventArgs e)
   {
     if ( OpenFileDialogDB.ShowDialog() == DialogResult.OK )
-      DoBatchAsync(() => DoActionDbOpen(OpenFileDialogDB.FileName));
+      DoBatchAsync(() => DoActionDbOpenAsync(OpenFileDialogDB.FileName));
   }
 
   private void ActionDbClose_Click(object sender, EventArgs e)
   {
-    DoBatchAsync(DoActionDbClose);
+    DoBatchAsync(DoActionDbCloseAsync);
   }
 
   private void ActionCreateData_Click(object sender, EventArgs e)
