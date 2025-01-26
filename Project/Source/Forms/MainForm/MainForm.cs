@@ -46,10 +46,10 @@ partial class MainForm : Form
     ColumnAllRepeatingCount.HeaderText = "Total Reps";
     ColumnRepeatingRate.HeaderText = "Taux";
     ColumnUniqueRepeatingCount.HeaderText = "Uniques Reps";
-    ColumnMaxOccurences.HeaderText = "Fois";
+    ColumnMaxOccurences.HeaderText = "Max";
     ColumnRemainingRate.HeaderText = "Restants";
     ColumnElapsedCounting.HeaderText = "Comptage";
-    ColumnElapsedAdditionning.HeaderText = "Addition";
+    ColumnElapsedAdditionning.HeaderText = "Additions";
   }
 
   private void MainForm_Load(object sender, EventArgs e)
@@ -324,7 +324,7 @@ partial class MainForm : Form
       }
       else
       if ( e.ColumnIndex == ColumnRepeatingRate.Index || e.ColumnIndex == ColumnRemainingRate.Index )
-        e.Value = ( (double)e.Value ).ToString("0.00") + " %";
+        e.Value = ( (double)e.Value ).ToString("0.00") + "%";
       else
       if ( e.ColumnIndex == ColumnElapsedCounting.Index || e.ColumnIndex == ColumnElapsedAdditionning.Index )
       {

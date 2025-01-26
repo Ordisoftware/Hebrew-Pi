@@ -80,6 +80,7 @@ partial class MainForm
       Globals.ChronoBatch.Restart();
       // Counting all rows
       long countRows = 0;
+      EditLog.Invoke(() => EditLog.AppendText("ITERATION #" + ReduceRepeatingIteration + Globals.NL));
       switch ( DisplayManager.QueryYesNoCancel("Use PiDecimals file size instead of COUNT(*) all rows?") )
       {
         case DialogResult.Yes:
