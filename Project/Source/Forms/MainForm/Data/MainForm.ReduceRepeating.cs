@@ -28,7 +28,7 @@ partial class MainForm
     Additionning
   }
 
-  private async void LogTime(bool lastline = false)
+  private async void LogTime(bool isSubBatch, bool lastline)
   {
     EditLog.Invoke(() => EditLog.AppendText(Operation.ToString() + ": " +
                                             Globals.ChronoSubBatch.Elapsed.AsReadable() +
@@ -91,7 +91,7 @@ partial class MainForm
           Globals.ChronoSubBatch.Restart();
           countRows = DB.ExecuteScalar<long>($"SELECT COUNT(*) FROM [{DecupletRow.TableName}]");
           Globals.ChronoSubBatch.Stop();
-          LogTime();
+          LogTime(false, false);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.CountedAllRows;
           break;
@@ -128,13 +128,13 @@ partial class MainForm
           // Grouping
           Operation = OperationType.Grouping;
           DB.CreateUniqueRepeatingMotifsTempTableAsync();
-          LogTime();
+          LogTime(true, false);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.Grouped;
           // Counting unique repeating
           Operation = OperationType.CountingUniqueRepeating;
           var list = DB.GetUniqueRepeatingStatsAsync().Result;
-          LogTime();
+          LogTime(true, false);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.CountedUniqueRepeating;
 
@@ -143,7 +143,7 @@ partial class MainForm
           Operation = OperationType.CountingAllRepeating;
           row.AllRepeatingCount = DB.CountAllRepeatingMotifs().Result;
           Globals.ChronoSubBatch.Stop();
-          LogTime(true);
+          LogTime(true, false);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.CountedAllRepeating;
 
@@ -183,7 +183,7 @@ partial class MainForm
             Globals.ChronoSubBatch.Restart();
             long count /*row.AllRepeatingCount*/ = DB.AddPositionToRepeatingMotifsAsync().Result;
             Globals.ChronoSubBatch.Stop();
-            LogTime(true);
+            LogTime(false, true);
             if ( !CheckIfBatchCanContinueAsync().Result ) break;
             if ( row.AllRepeatingCount != count )
             {
