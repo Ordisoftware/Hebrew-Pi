@@ -30,7 +30,8 @@ partial class MainForm
 
   private async void LogTime(bool isSubBatch, bool lastline)
   {
-    EditLog.Invoke(() => EditLog.AppendText(Operation.ToString() + ": " +
+    EditLog.Invoke(() => EditLog.AppendText(( isSubBatch ? "    " : string.Empty ) +
+                                            Operation.ToString() + ": " +
                                             Globals.ChronoSubBatch.Elapsed.AsReadable() +
                                             ( lastline ? Globals.NL2 : Globals.NL )));
   }
