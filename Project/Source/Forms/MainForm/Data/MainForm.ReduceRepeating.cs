@@ -25,7 +25,7 @@ partial class MainForm
   {
     Next,
     Counting,
-    Additionning
+    Adding
   }
 
   private async void LogTime(bool isSubBatch, bool lastline)
@@ -55,7 +55,7 @@ partial class MainForm
         if ( lastRow.ElapsedCounting is null )
           iteratingStep = IteratingStep.Counting;
         else
-        if ( lastRow.ElapsedAdditionning is null )
+        if ( lastRow.ElapsedAdding is null )
         {
           lastRow.MaxOccurences = null;
           lastRow.AllRepeatingCount = null;
@@ -117,7 +117,7 @@ partial class MainForm
             lastRow = table[table.Count - 2];
             countPrevious = (long)lastRow.UniqueRepeatingCount;
           }
-          if ( iteratingStep == IteratingStep.Additionning )
+          if ( iteratingStep == IteratingStep.Adding )
             MotifsProcessedCount = (long)row.UniqueRepeatingCount;
         }
         LoadIterationGrid();
@@ -176,11 +176,11 @@ partial class MainForm
         countPrevious = MotifsProcessedCount;
         // Add position to repeating motifs
         if ( !CheckIfBatchCanContinueAsync().Result ) break;
-        if ( iteratingStep == IteratingStep.Next || iteratingStep == IteratingStep.Additionning )
+        if ( iteratingStep == IteratingStep.Next || iteratingStep == IteratingStep.Adding )
         {
           if ( MotifsProcessedCount > 0 )
           {
-            Operation = OperationType.Additionning;
+            Operation = OperationType.Adding;
             Globals.ChronoSubBatch.Restart();
             long count /*row.AllRepeatingCount*/ = DB.AddPositionToRepeatingMotifsAsync().Result;
             Globals.ChronoSubBatch.Stop();
@@ -189,11 +189,11 @@ partial class MainForm
             if ( row.AllRepeatingCount != count )
             {
               DisplayManager.ShowError("Counted: " + row.AllRepeatingCount + Globals.NL +
-                                       "Auditioned: " + count);
+                                       "Added: " + count);
               EditNormalizeAutoLoop.Invoke(() => EditNormalizeAutoLoop.Checked = false);
             }
-            Operation = OperationType.Additionned;
-            row.ElapsedAdditionning = Globals.ChronoSubBatch.Elapsed;
+            Operation = OperationType.Added;
+            row.ElapsedAdding = Globals.ChronoSubBatch.Elapsed;
 
             // move to count if result of query don't work
             row.RepeatingRate = row.AllRepeatingCount is null || row.AllRepeatingCount == 0
@@ -209,7 +209,7 @@ partial class MainForm
           {
             row.AllRepeatingCount = 0;
             row.RepeatingRate = 0;
-            row.ElapsedAdditionning = TimeSpan.Zero;
+            row.ElapsedAdding = TimeSpan.Zero;
             DB.Update(row);
             LoadIterationGrid();
           }

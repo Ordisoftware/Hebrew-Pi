@@ -49,7 +49,7 @@ partial class MainForm : Form
     ColumnMaxOccurences.HeaderText = "Max";
     ColumnRemainingRate.HeaderText = "Restants";
     ColumnElapsedCounting.HeaderText = "Comptage";
-    ColumnElapsedAdditionning.HeaderText = "Additions";
+    ColumnElapsedAdding.HeaderText = "Additions";
   }
 
   private void MainForm_Load(object sender, EventArgs e)
@@ -326,7 +326,7 @@ partial class MainForm : Form
       if ( e.ColumnIndex == ColumnRepeatingRate.Index || e.ColumnIndex == ColumnRemainingRate.Index )
         e.Value = ( (double)e.Value ).ToString("0.00") + "%";
       else
-      if ( e.ColumnIndex == ColumnElapsedCounting.Index || e.ColumnIndex == ColumnElapsedAdditionning.Index )
+      if ( e.ColumnIndex == ColumnElapsedCounting.Index || e.ColumnIndex == ColumnElapsedAdding.Index )
       {
         var value = (TimeSpan)e.Value;
         if ( value != TimeSpan.Zero )

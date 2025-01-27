@@ -38,6 +38,6 @@ public class IterationRow
 
   public TimeSpan? ElapsedCounting { get; set; }
 
-  public TimeSpan? ElapsedAdditionning { get; set; }
+  public TimeSpan? ElapsedAdding { get; set; }
 
 }

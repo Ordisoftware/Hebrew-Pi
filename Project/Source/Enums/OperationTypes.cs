@@ -45,7 +45,7 @@ enum OperationType
   CountedUniqueRepeating,
   CountingAllRepeating,
   CountedAllRepeating,
-  Additionning,
-  Additionned,
+  Adding,
+  Added,
 
 }
