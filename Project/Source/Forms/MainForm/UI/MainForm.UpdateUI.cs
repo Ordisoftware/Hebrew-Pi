@@ -152,26 +152,13 @@ partial class MainForm
       case ProcessingType.CreateData:
         UpdateStatusAction(Operation.ToString());
         UpdateStatusInfo(string.Format(AppTranslations.CreateDataProgress, MotifsProcessedCount.ToString("N0")));
-        try
-        {
-          var elapsed = Globals.ChronoBatch.Elapsed;
-          long max = PiDecimalsFileSize / PiDecimalMotifSize;
-          max = Math.Min(PiDecimalsFileSize, (long)EditMaxMotifs.Value);
-          double countDone = MotifsProcessedCount - DecupletsRowCount;
-          double countToDo = max - DecupletsRowCount;
-          double progress = countDone <= 0 || countToDo <= 0 ? 1 : countDone / countToDo;
-          var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
-          UpdateStatusRemaining(string.Format(AppTranslations.RemainingText, remaining.AsReadable()));
-          TaskbarManager.Instance.SetProgressValue((int)( progress * 100 ), 100);
-        }
-        catch ( Exception ex )
-        {
-          UpdateStatusRemaining(ex.Message);
-        }
+        showRemainingTimeCreate();
         break;
       case ProcessingType.ReduceRepeating:
         UpdateStatusAction(Operation.ToString());
-        UpdateStatusInfo(string.Format(AppTranslations.IterationText, ReduceRepeatingIteration, MotifsProcessedCount));
+        UpdateStatusInfo(string.Format(AppTranslations.IterationText, ReduceRepeatingIteration, AllRepeatingCount));
+        //UpdateStatusInfo(string.Format(AppTranslations.IterationText2, ReduceRepeatingIteration, AllRepeatingCount, RepeatingAddedCount));
+        //showRemainingTimeAdd();
         break;
       case ProcessingType.CreateIndex:
         UpdateStatusAction(Operation.ToString());
@@ -180,6 +167,44 @@ partial class MainForm
         LabelStatusRemaining.Text = AppTranslations.RemainingNAText;
         break;
     }
+    //
+    void showRemainingTimeCreate()
+    {
+      try
+      {
+        var elapsed = Globals.ChronoBatch.Elapsed;
+        long max = PiDecimalsFileSize / PiDecimalMotifSize;
+        max = Math.Min(PiDecimalsFileSize, (long)EditMaxMotifs.Value);
+        double countDone = MotifsProcessedCount - DecupletsRowCount;
+        double countToDo = max - DecupletsRowCount;
+        double progress = countDone <= 0 || countToDo <= 0 ? 1 : countDone / countToDo;
+        var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
+        UpdateStatusRemaining(string.Format(AppTranslations.RemainingText, remaining.AsReadable()));
+        TaskbarManager.Instance.SetProgressValue((int)( progress * 100 ), 100);
+      }
+      catch ( Exception ex )
+      {
+        UpdateStatusRemaining(ex.Message);
+      }
+    }
+    //
+    //void showRemainingTimeAdd()
+    //{
+    //  try
+    //  {
+    //    var elapsed = Globals.ChronoSubBatch.Elapsed;
+    //    double countDone = RepeatingAddedCount;
+    //    double countToDo = AllRepeatingCount;
+    //    double progress = countDone <= 0 || countToDo <= 0 ? 1 : countDone / countToDo;
+    //    var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
+    //    UpdateStatusRemaining(string.Format(AppTranslations.RemainingText, remaining.AsReadable()));
+    //    TaskbarManager.Instance.SetProgressValue((int)( progress * 100 ), 100);
+    //  }
+    //  catch ( Exception ex )
+    //  {
+    //    UpdateStatusRemaining(ex.Message);
+    //  }
+    //}
   }
 
 }

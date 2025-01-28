@@ -21,12 +21,9 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm
 {
 
-  enum IteratingStep
-  {
-    Next,
-    Counting,
-    Adding
-  }
+  enum IteratingStep { Next, Counting, Adding }
+  private long AllRepeatingCount;
+  private long RepeatingAddedCount;
 
   private async void LogTime(bool isSubBatch, bool lastline)
   {
@@ -78,16 +75,17 @@ partial class MainForm
       }
       EditLog.Invoke(EditLog.Clear);
       Processing = ProcessingType.ReduceRepeating;
-      Globals.ChronoBatch.Restart();
       // Counting all rows
       long countRows = 0;
       EditLog.Invoke(() => EditLog.AppendText("ITERATION #" + ReduceRepeatingIteration + Globals.NL));
-      switch ( DisplayManager.QueryYesNoCancel("Use PiDecimals file size instead of COUNT(*) all rows?") )
+      switch ( DisplayManager.QueryYesNoCancel("Use file size instead of COUNT(*) all rows?" + Globals.NL2 + EditMaxMotifs.Value) )
       {
         case DialogResult.Yes:
-          countRows = PiDecimalsFileSize;
+          Globals.ChronoBatch.Restart();
+          countRows = (long)EditMaxMotifs.Value;
           break;
         case DialogResult.No:
+          Globals.ChronoBatch.Restart();
           Operation = OperationType.CountingAllRows;
           Globals.ChronoSubBatch.Restart();
           countRows = DB.ExecuteScalar<long>($"SELECT COUNT(*) FROM [{DecupletRow.TableName}]");
@@ -128,36 +126,45 @@ partial class MainForm
           Globals.ChronoSubBatch.Restart();
           // Grouping
           Operation = OperationType.Grouping;
-          DB.CreateUniqueRepeatingMotifsTempTableAsync();
+          DB.CreateUniqueRepeatingMotifsTempTable();
           LogTime(true, false);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.Grouped;
+          // Degrouping
+          Operation = OperationType.Degrouping;
+          DB.CreateAllRepeatingMotifsTempTable();
+          LogTime(true, false);
+          if ( !CheckIfBatchCanContinueAsync().Result ) break;
+          Operation = OperationType.Degrouped;
           // Counting unique repeating
           Operation = OperationType.CountingUniqueRepeating;
-          var list = DB.GetUniqueRepeatingStatsAsync().Result;
+          var list = DB.GetUniqueRepeatingStats();
           LogTime(true, false);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.CountedUniqueRepeating;
-
           // Counting all repeating
-          // remove if result of add query work
           Operation = OperationType.CountingAllRepeating;
-          row.AllRepeatingCount = DB.CountAllRepeatingMotifs().Result;
+          AllRepeatingCount = DB.CountRows("AllRepeatingMotifs");
           Globals.ChronoSubBatch.Stop();
           LogTime(true, false);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.CountedAllRepeating;
-
           // Update row
           if ( list.Count == 0 ) throw new AdvSQLiteException("Counting motifs stats error");
           MotifsProcessedCount = list[0].CountMotifs;
           row.UniqueRepeatingCount = MotifsProcessedCount;
+          row.AllRepeatingCount = AllRepeatingCount;
           row.MaxOccurences = list[0].MaxOccurrences;
-          row.RemainingRate = MotifsProcessedCount == 0
+          row.RepeatingRate = row.AllRepeatingCount == 0
+            ? 0
+            : row.AllRepeatingCount == row.UniqueRepeatingCount
+              ? 100
+              : Math.Round((double)row.AllRepeatingCount * 100 / countRows, 2);
+          row.RemainingRate = row.UniqueRepeatingCount == 0
               ? 0
               : ReduceRepeatingIteration == 0
                 ? 100
-                : Math.Round((double)MotifsProcessedCount * 100 / countPrevious, 2);
+                : Math.Round((double)row.UniqueRepeatingCount * 100 / countPrevious, 2);
           row.ElapsedCounting = Globals.ChronoSubBatch.Elapsed;
           DB.Update(row);
           LoadIterationGrid();
@@ -182,7 +189,7 @@ partial class MainForm
           {
             Operation = OperationType.Adding;
             Globals.ChronoSubBatch.Restart();
-            long count /*row.AllRepeatingCount*/ = DB.AddPositionToRepeatingMotifsAsync().Result;
+            long count = DB.AddPositionToRepeatingMotifs();
             Globals.ChronoSubBatch.Stop();
             LogTime(false, true);
             if ( !CheckIfBatchCanContinueAsync().Result ) break;
@@ -194,14 +201,6 @@ partial class MainForm
             }
             Operation = OperationType.Added;
             row.ElapsedAdding = Globals.ChronoSubBatch.Elapsed;
-
-            // move to count if result of query don't work
-            row.RepeatingRate = row.AllRepeatingCount is null || row.AllRepeatingCount == 0
-              ? 0
-              : row.AllRepeatingCount == MotifsProcessedCount
-                ? 100
-                : Math.Round((double)row.AllRepeatingCount * 100 / countRows, 2);
-
             DB.Update(row);
             LoadIterationGrid();
           }

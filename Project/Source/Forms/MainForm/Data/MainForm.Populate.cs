@@ -14,10 +14,7 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-using System.Collections.Generic;
-using System.Reflection;
 using Microsoft.WindowsAPICodePack.Taskbar;
-using static System.Net.Mime.MediaTypeNames;
 
 /// <summary>
 /// Provides application's main form.

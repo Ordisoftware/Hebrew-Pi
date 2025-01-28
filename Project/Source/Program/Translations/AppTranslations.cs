@@ -73,7 +73,6 @@ static partial class AppTranslations
   static public string StartNextIteration = "Start the next iteration?";
   static public string AskStartNextIfLess = $"{LessAtIteration}{PreviousAndCurrentCount}{StartNextIteration}";
   static public string AskStartNextIfMore = $"{MoreAtIteration}{PreviousAndCurrentCount}{StartNextIteration}";
-  //static public string NoRepeatedText = "There is no repeating motif at iteration {0}";
 
   static public string CreateDataProgress = "{0} inserted";
   static public string IterationText = "Iteration #{0}, {1} repeating";

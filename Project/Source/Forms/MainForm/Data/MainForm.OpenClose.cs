@@ -52,12 +52,12 @@ partial class MainForm
     Globals.ChronoBatch.Restart();
     DB.Close();
     Globals.ChronoBatch.Stop();
-    Operation = OperationType.Closed;
     DB.Dispose();
     DB = null;
     GridIterations.Invoke(() => GridIterations.DataSource = null);
     GridIterations.Invoke(() => LabelTitleCenter.Text = string.Empty);
     UpdateButtons();
+    Operation = OperationType.Closed;
   }
 
 }

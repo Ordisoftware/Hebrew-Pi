@@ -19,7 +19,7 @@ using CountMotifsAndMaxOccurences = (long CountMotifs, long MaxOccurrences);
 static class SQLHelper
 {
 
-  static internal async Task CreateUniqueRepeatingMotifsTempTableAsync(this SQLiteNetORM DB)
+  static internal void CreateUniqueRepeatingMotifsTempTable(this SQLiteNetORM DB)
   {
     DB.Execute("DROP TABLE IF EXISTS UniqueRepeatingMotifs");
     var sql = @"CREATE TEMPORARY TABLE UniqueRepeatingMotifs AS
@@ -30,28 +30,47 @@ static class SQLHelper
     DB.Execute(sql);
   }
 
-  static internal async Task<List<CountMotifsAndMaxOccurences>> GetUniqueRepeatingStatsAsync(this SQLiteNetORM DB)
+  static internal List<CountMotifsAndMaxOccurences> GetUniqueRepeatingStats(this SQLiteNetORM DB)
   {
     var sql = @"SELECT COUNT(*) AS UniqueRepeating, MAX(Occurrences) AS MaxOccurrences
                 FROM UniqueRepeatingMotifs";
     return DB.Query<CountMotifsAndMaxOccurences>(sql);
   }
 
-  static internal async Task<long> CountAllRepeatingMotifs(this SQLiteNetORM DB)
+  static internal void CreateAllRepeatingMotifsTempTable(this SQLiteNetORM DB)
   {
-    var sql = @"SELECT COUNT(*)
-                FROM Decuplets AS Pool
-                WHERE Pool.Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)";
-    return DB.ExecuteScalar<long>(sql);
+    DB.Execute("DROP TABLE IF EXISTS AllRepeatingMotifs");
+    var sql = @"CREATE TEMPORARY TABLE AllRepeatingMotifs AS
+                SELECT Position
+                FROM Decuplets
+                WHERE Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)";
+    DB.Execute(sql);
   }
 
-  static internal async Task<long> AddPositionToRepeatingMotifsAsync(this SQLiteNetORM DB)
+  /*static internal long CountAllRepeatingMotifs(this SQLiteNetORM DB)
+  {
+    var sql = @"SELECT COUNT(*)
+                FROM Decuplets
+                WHERE Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)";
+    return DB.ExecuteScalar<long>(sql);
+  }*/
+
+  static internal long AddPositionToRepeatingMotifs(this SQLiteNetORM DB)
   {
     var sql = @"UPDATE Decuplets
                 SET Motif = Motif + Position
-                WHERE Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)";
+                WHERE Position IN (SELECT Position FROM AllRepeatingMotifs)";
     int signedResult = DB.Execute(sql);
     return unchecked((uint)signedResult);
   }
+
+  //static internal long AddPositionToRepeatingMotifs(this SQLiteNetORM DB)
+  //{
+  //  var sql = @"UPDATE Decuplets
+  //              SET Motif = Motif + Position
+  //              WHERE Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)";
+  //  int signedResult = DB.Execute(sql);
+  //  return unchecked((uint)signedResult);
+  //}
 
 }

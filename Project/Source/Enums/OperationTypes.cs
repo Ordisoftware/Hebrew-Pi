@@ -41,6 +41,8 @@ enum OperationType
 
   Grouping,
   Grouped,
+  Degrouping,
+  Degrouped,
   CountingUniqueRepeating,
   CountedUniqueRepeating,
   CountingAllRepeating,
