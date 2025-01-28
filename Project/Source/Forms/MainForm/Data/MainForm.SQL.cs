@@ -47,14 +47,6 @@ static class SQLHelper
     DB.Execute(sql);
   }
 
-  /*static internal long CountAllRepeatingMotifs(this SQLiteNetORM DB)
-  {
-    var sql = @"SELECT COUNT(*)
-                FROM Decuplets
-                WHERE Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)";
-    return DB.ExecuteScalar<long>(sql);
-  }*/
-
   static internal long AddPositionToRepeatingMotifs(this SQLiteNetORM DB)
   {
     var sql = @"UPDATE Decuplets
@@ -63,14 +55,5 @@ static class SQLHelper
     int signedResult = DB.Execute(sql);
     return unchecked((uint)signedResult);
   }
-
-  //static internal long AddPositionToRepeatingMotifs(this SQLiteNetORM DB)
-  //{
-  //  var sql = @"UPDATE Decuplets
-  //              SET Motif = Motif + Position
-  //              WHERE Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)";
-  //  int signedResult = DB.Execute(sql);
-  //  return unchecked((uint)signedResult);
-  //}
 
 }
