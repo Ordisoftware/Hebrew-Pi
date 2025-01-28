@@ -130,7 +130,7 @@ partial class MainForm
           LogTime(true, false);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.Grouped;
-          // Degrouping
+          //Degrouping
           Operation = OperationType.Degrouping;
           DB.CreateAllRepeatingMotifsTempTable();
           LogTime(true, false);
