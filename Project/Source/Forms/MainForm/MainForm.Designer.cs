@@ -30,8 +30,8 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.PanelDatabase = new System.Windows.Forms.Panel();
       this.label1 = new System.Windows.Forms.Label();
       this.EditTempDir = new System.Windows.Forms.TextBox();
@@ -198,6 +198,7 @@
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
+      this.SelectMemoryTempStore = new System.Windows.Forms.CheckBox();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -208,19 +209,20 @@
       this.TabControl.SuspendLayout();
       this.TabPageManage.SuspendLayout();
       this.PanelViewManage.SuspendLayout();
-      ( (System.ComponentModel.ISupportInitialize)( this.EditMaxMotifs ) ).BeginInit();
-      ( (System.ComponentModel.ISupportInitialize)( this.GridIterations ) ).BeginInit();
-      ( (System.ComponentModel.ISupportInitialize)( this.BindingSourceIterationRow ) ).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.EditMaxMotifs)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).BeginInit();
       this.TabPageGrid.SuspendLayout();
       this.TabPageDecode.SuspendLayout();
       this.PanelViewDecode.SuspendLayout();
       this.PanelTitle.SuspendLayout();
       this.PanelTitleInner.SuspendLayout();
-      ( (System.ComponentModel.ISupportInitialize)( this.SelectSearchPaging ) ).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).BeginInit();
       this.SuspendLayout();
       // 
       // PanelDatabase
       // 
+      this.PanelDatabase.Controls.Add(this.SelectMemoryTempStore);
       this.PanelDatabase.Controls.Add(this.label1);
       this.PanelDatabase.Controls.Add(this.EditTempDir);
       this.PanelDatabase.Controls.Add(this.SelectDbCache);
@@ -415,7 +417,7 @@
       // 
       this.ActionExit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
       this.ActionExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionExit.Image = ( (System.Drawing.Image)( resources.GetObject("ActionExit.Image") ) );
+      this.ActionExit.Image = ((System.Drawing.Image)(resources.GetObject("ActionExit.Image")));
       this.ActionExit.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionExit.Name = "ActionExit";
       this.ActionExit.Padding = new System.Windows.Forms.Padding(4);
@@ -435,7 +437,7 @@
       // 
       this.ActionPreferences.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
       this.ActionPreferences.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionPreferences.Image = ( (System.Drawing.Image)( resources.GetObject("ActionPreferences.Image") ) );
+      this.ActionPreferences.Image = ((System.Drawing.Image)(resources.GetObject("ActionPreferences.Image")));
       this.ActionPreferences.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionPreferences.Name = "ActionPreferences";
       this.ActionPreferences.Padding = new System.Windows.Forms.Padding(4);
@@ -447,7 +449,7 @@
       // ActionViewDecode
       // 
       this.ActionViewDecode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionViewDecode.Image = ( (System.Drawing.Image)( resources.GetObject("ActionViewDecode.Image") ) );
+      this.ActionViewDecode.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewDecode.Image")));
       this.ActionViewDecode.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionViewDecode.Name = "ActionViewDecode";
       this.ActionViewDecode.Padding = new System.Windows.Forms.Padding(4);
@@ -459,7 +461,7 @@
       // ActionViewGrid
       // 
       this.ActionViewGrid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionViewGrid.Image = ( (System.Drawing.Image)( resources.GetObject("ActionViewGrid.Image") ) );
+      this.ActionViewGrid.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewGrid.Image")));
       this.ActionViewGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionViewGrid.Name = "ActionViewGrid";
       this.ActionViewGrid.Padding = new System.Windows.Forms.Padding(4);
@@ -471,7 +473,7 @@
       // ActionViewManage
       // 
       this.ActionViewManage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionViewManage.Image = ( (System.Drawing.Image)( resources.GetObject("ActionViewManage.Image") ) );
+      this.ActionViewManage.Image = ((System.Drawing.Image)(resources.GetObject("ActionViewManage.Image")));
       this.ActionViewManage.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionViewManage.Name = "ActionViewManage";
       this.ActionViewManage.Padding = new System.Windows.Forms.Padding(5);
@@ -498,7 +500,7 @@
             this.ActionOpenFolderExport,
             this.ActionOpenFolderBackup,
             this.ActionOpenFolderDatabase});
-      this.ActionDatabase.Image = ( (System.Drawing.Image)( resources.GetObject("ActionDatabase.Image") ) );
+      this.ActionDatabase.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabase.Image")));
       this.ActionDatabase.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionDatabase.Name = "ActionDatabase";
       this.ActionDatabase.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
@@ -506,7 +508,7 @@
       // 
       // ActionDatabaseNew
       // 
-      this.ActionDatabaseNew.Image = ( (System.Drawing.Image)( resources.GetObject("ActionDatabaseNew.Image") ) );
+      this.ActionDatabaseNew.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabaseNew.Image")));
       this.ActionDatabaseNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionDatabaseNew.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionDatabaseNew.Name = "ActionDatabaseNew";
@@ -521,7 +523,7 @@
       // 
       // ActionDatabaseOpen
       // 
-      this.ActionDatabaseOpen.Image = ( (System.Drawing.Image)( resources.GetObject("ActionDatabaseOpen.Image") ) );
+      this.ActionDatabaseOpen.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabaseOpen.Image")));
       this.ActionDatabaseOpen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionDatabaseOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionDatabaseOpen.Name = "ActionDatabaseOpen";
@@ -531,7 +533,7 @@
       // 
       // ActionDatabaseClose
       // 
-      this.ActionDatabaseClose.Image = ( (System.Drawing.Image)( resources.GetObject("ActionDatabaseClose.Image") ) );
+      this.ActionDatabaseClose.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabaseClose.Image")));
       this.ActionDatabaseClose.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionDatabaseClose.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionDatabaseClose.Name = "ActionDatabaseClose";
@@ -546,7 +548,7 @@
       // 
       // ActionDatabaseRestore
       // 
-      this.ActionDatabaseRestore.Image = ( (System.Drawing.Image)( resources.GetObject("ActionDatabaseRestore.Image") ) );
+      this.ActionDatabaseRestore.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabaseRestore.Image")));
       this.ActionDatabaseRestore.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionDatabaseRestore.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionDatabaseRestore.Name = "ActionDatabaseRestore";
@@ -555,7 +557,7 @@
       // 
       // ActionDatabaseBackup
       // 
-      this.ActionDatabaseBackup.Image = ( (System.Drawing.Image)( resources.GetObject("ActionDatabaseBackup.Image") ) );
+      this.ActionDatabaseBackup.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabaseBackup.Image")));
       this.ActionDatabaseBackup.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionDatabaseBackup.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionDatabaseBackup.Name = "ActionDatabaseBackup";
@@ -569,7 +571,7 @@
       // 
       // ActionVacuum
       // 
-      this.ActionVacuum.Image = ( (System.Drawing.Image)( resources.GetObject("ActionVacuum.Image") ) );
+      this.ActionVacuum.Image = ((System.Drawing.Image)(resources.GetObject("ActionVacuum.Image")));
       this.ActionVacuum.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionVacuum.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionVacuum.Name = "ActionVacuum";
@@ -578,7 +580,7 @@
       // 
       // ActionDatabaseSetttings
       // 
-      this.ActionDatabaseSetttings.Image = ( (System.Drawing.Image)( resources.GetObject("ActionDatabaseSetttings.Image") ) );
+      this.ActionDatabaseSetttings.Image = ((System.Drawing.Image)(resources.GetObject("ActionDatabaseSetttings.Image")));
       this.ActionDatabaseSetttings.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionDatabaseSetttings.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionDatabaseSetttings.Name = "ActionDatabaseSetttings";
@@ -593,17 +595,17 @@
       // 
       // ActionOpenFolderExport
       // 
-      this.ActionOpenFolderExport.Image = ( (System.Drawing.Image)( resources.GetObject("ActionOpenFolderExport.Image") ) );
+      this.ActionOpenFolderExport.Image = ((System.Drawing.Image)(resources.GetObject("ActionOpenFolderExport.Image")));
       this.ActionOpenFolderExport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionOpenFolderExport.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionOpenFolderExport.Name = "ActionOpenFolderExport";
-      this.ActionOpenFolderExport.ShortcutKeys = ( (System.Windows.Forms.Keys)( ( System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E ) ) );
+      this.ActionOpenFolderExport.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
       this.ActionOpenFolderExport.Size = new System.Drawing.Size(210, 22);
       this.ActionOpenFolderExport.Text = "Open export folder";
       // 
       // ActionOpenFolderBackup
       // 
-      this.ActionOpenFolderBackup.Image = ( (System.Drawing.Image)( resources.GetObject("ActionOpenFolderBackup.Image") ) );
+      this.ActionOpenFolderBackup.Image = ((System.Drawing.Image)(resources.GetObject("ActionOpenFolderBackup.Image")));
       this.ActionOpenFolderBackup.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionOpenFolderBackup.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionOpenFolderBackup.Name = "ActionOpenFolderBackup";
@@ -612,7 +614,7 @@
       // 
       // ActionOpenFolderDatabase
       // 
-      this.ActionOpenFolderDatabase.Image = ( (System.Drawing.Image)( resources.GetObject("ActionOpenFolderDatabase.Image") ) );
+      this.ActionOpenFolderDatabase.Image = ((System.Drawing.Image)(resources.GetObject("ActionOpenFolderDatabase.Image")));
       this.ActionOpenFolderDatabase.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionOpenFolderDatabase.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionOpenFolderDatabase.Name = "ActionOpenFolderDatabase";
@@ -642,7 +644,7 @@
             this.ActionCopyToClipboard,
             this.ActionRefresh,
             this.SeparatorImportConcordances});
-      this.ActionTools.Image = ( (System.Drawing.Image)( resources.GetObject("ActionTools.Image") ) );
+      this.ActionTools.Image = ((System.Drawing.Image)(resources.GetObject("ActionTools.Image")));
       this.ActionTools.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionTools.Name = "ActionTools";
       this.ActionTools.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
@@ -655,21 +657,21 @@
       // 
       // ActionShowTranscriptionGuide
       // 
-      this.ActionShowTranscriptionGuide.Image = ( (System.Drawing.Image)( resources.GetObject("ActionShowTranscriptionGuide.Image") ) );
+      this.ActionShowTranscriptionGuide.Image = ((System.Drawing.Image)(resources.GetObject("ActionShowTranscriptionGuide.Image")));
       this.ActionShowTranscriptionGuide.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionShowTranscriptionGuide.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionShowTranscriptionGuide.Name = "ActionShowTranscriptionGuide";
-      this.ActionShowTranscriptionGuide.ShortcutKeys = ( (System.Windows.Forms.Keys)( ( System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L ) ) );
+      this.ActionShowTranscriptionGuide.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
       this.ActionShowTranscriptionGuide.Size = new System.Drawing.Size(263, 22);
       this.ActionShowTranscriptionGuide.Text = "Transcription guide";
       // 
       // ActionShowGrammarGuide
       // 
-      this.ActionShowGrammarGuide.Image = ( (System.Drawing.Image)( resources.GetObject("ActionShowGrammarGuide.Image") ) );
+      this.ActionShowGrammarGuide.Image = ((System.Drawing.Image)(resources.GetObject("ActionShowGrammarGuide.Image")));
       this.ActionShowGrammarGuide.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionShowGrammarGuide.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionShowGrammarGuide.Name = "ActionShowGrammarGuide";
-      this.ActionShowGrammarGuide.ShortcutKeys = ( (System.Windows.Forms.Keys)( ( System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G ) ) );
+      this.ActionShowGrammarGuide.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
       this.ActionShowGrammarGuide.Size = new System.Drawing.Size(263, 22);
       this.ActionShowGrammarGuide.Text = "Grammar guide";
       // 
@@ -680,21 +682,21 @@
       // 
       // ActionOpenHebrewLetters
       // 
-      this.ActionOpenHebrewLetters.Image = ( (System.Drawing.Image)( resources.GetObject("ActionOpenHebrewLetters.Image") ) );
+      this.ActionOpenHebrewLetters.Image = ((System.Drawing.Image)(resources.GetObject("ActionOpenHebrewLetters.Image")));
       this.ActionOpenHebrewLetters.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionOpenHebrewLetters.Name = "ActionOpenHebrewLetters";
-      this.ActionOpenHebrewLetters.ShortcutKeys = ( (System.Windows.Forms.Keys)( ( System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H ) ) );
+      this.ActionOpenHebrewLetters.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
       this.ActionOpenHebrewLetters.Size = new System.Drawing.Size(263, 22);
       this.ActionOpenHebrewLetters.Text = "Hebrew Letters";
       // 
       // ActionOpenCalculator
       // 
       this.ActionOpenCalculator.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-      this.ActionOpenCalculator.Image = ( (System.Drawing.Image)( resources.GetObject("ActionOpenCalculator.Image") ) );
+      this.ActionOpenCalculator.Image = ((System.Drawing.Image)(resources.GetObject("ActionOpenCalculator.Image")));
       this.ActionOpenCalculator.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionOpenCalculator.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionOpenCalculator.Name = "ActionOpenCalculator";
-      this.ActionOpenCalculator.ShortcutKeys = ( (System.Windows.Forms.Keys)( ( System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C ) ) );
+      this.ActionOpenCalculator.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
       this.ActionOpenCalculator.Size = new System.Drawing.Size(263, 22);
       this.ActionOpenCalculator.Text = "Calculator";
       // 
@@ -705,16 +707,16 @@
       // 
       // ActionTakeScreenshotWindow
       // 
-      this.ActionTakeScreenshotWindow.Image = ( (System.Drawing.Image)( resources.GetObject("ActionTakeScreenshotWindow.Image") ) );
+      this.ActionTakeScreenshotWindow.Image = ((System.Drawing.Image)(resources.GetObject("ActionTakeScreenshotWindow.Image")));
       this.ActionTakeScreenshotWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionTakeScreenshotWindow.Name = "ActionTakeScreenshotWindow";
-      this.ActionTakeScreenshotWindow.ShortcutKeys = ( (System.Windows.Forms.Keys)( ( System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F12 ) ) );
+      this.ActionTakeScreenshotWindow.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F12)));
       this.ActionTakeScreenshotWindow.Size = new System.Drawing.Size(263, 22);
       this.ActionTakeScreenshotWindow.Text = "Screenshot of the window";
       // 
       // ActionTakeScreenshotView
       // 
-      this.ActionTakeScreenshotView.Image = ( (System.Drawing.Image)( resources.GetObject("ActionTakeScreenshotView.Image") ) );
+      this.ActionTakeScreenshotView.Image = ((System.Drawing.Image)(resources.GetObject("ActionTakeScreenshotView.Image")));
       this.ActionTakeScreenshotView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionTakeScreenshotView.Name = "ActionTakeScreenshotView";
       this.ActionTakeScreenshotView.ShortcutKeyDisplayString = "Shift + F12";
@@ -728,16 +730,16 @@
       // 
       // ActionCopyToClipboard
       // 
-      this.ActionCopyToClipboard.Image = ( (System.Drawing.Image)( resources.GetObject("ActionCopyToClipboard.Image") ) );
+      this.ActionCopyToClipboard.Image = ((System.Drawing.Image)(resources.GetObject("ActionCopyToClipboard.Image")));
       this.ActionCopyToClipboard.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionCopyToClipboard.Name = "ActionCopyToClipboard";
-      this.ActionCopyToClipboard.ShortcutKeys = ( (System.Windows.Forms.Keys)( ( System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F8 ) ) );
+      this.ActionCopyToClipboard.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F8)));
       this.ActionCopyToClipboard.Size = new System.Drawing.Size(263, 22);
       this.ActionCopyToClipboard.Text = "Copy view";
       // 
       // ActionRefresh
       // 
-      this.ActionRefresh.Image = ( (System.Drawing.Image)( resources.GetObject("ActionRefresh.Image") ) );
+      this.ActionRefresh.Image = ((System.Drawing.Image)(resources.GetObject("ActionRefresh.Image")));
       this.ActionRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionRefresh.Name = "ActionRefresh";
       this.ActionRefresh.ShortcutKeys = System.Windows.Forms.Keys.F8;
@@ -753,7 +755,7 @@
       // ActionWebLinks
       // 
       this.ActionWebLinks.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionWebLinks.Image = ( (System.Drawing.Image)( resources.GetObject("ActionWebLinks.Image") ) );
+      this.ActionWebLinks.Image = ((System.Drawing.Image)(resources.GetObject("ActionWebLinks.Image")));
       this.ActionWebLinks.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionWebLinks.Name = "ActionWebLinks";
       this.ActionWebLinks.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
@@ -762,7 +764,7 @@
       // ActionInformation
       // 
       this.ActionInformation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ActionInformation.Image = ( (System.Drawing.Image)( resources.GetObject("ActionInformation.Image") ) );
+      this.ActionInformation.Image = ((System.Drawing.Image)(resources.GetObject("ActionInformation.Image")));
       this.ActionInformation.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionInformation.Name = "ActionInformation";
       this.ActionInformation.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
@@ -792,7 +794,7 @@
             this.EditShowSuccessDialogs,
             this.toolStripSeparator15,
             this.EditConfirmClosing});
-      this.ActionSettings.Image = ( (System.Drawing.Image)( resources.GetObject("ActionSettings.Image") ) );
+      this.ActionSettings.Image = ((System.Drawing.Image)(resources.GetObject("ActionSettings.Image")));
       this.ActionSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ActionSettings.Name = "ActionSettings";
       this.ActionSettings.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
@@ -807,7 +809,7 @@
             this.EditScreenBottomLeft,
             this.EditScreenBottomRight,
             this.EditScreenCenter});
-      this.ActionScreenPosition.Image = ( (System.Drawing.Image)( resources.GetObject("ActionScreenPosition.Image") ) );
+      this.ActionScreenPosition.Image = ((System.Drawing.Image)(resources.GetObject("ActionScreenPosition.Image")));
       this.ActionScreenPosition.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionScreenPosition.Name = "ActionScreenPosition";
       this.ActionScreenPosition.Size = new System.Drawing.Size(323, 22);
@@ -818,7 +820,7 @@
       this.EditScreenNone.CheckOnClick = true;
       this.EditScreenNone.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenNone.Name = "EditScreenNone";
-      this.EditScreenNone.ShortcutKeys = ( (System.Windows.Forms.Keys)( ( System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D0 ) ) );
+      this.EditScreenNone.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D0)));
       this.EditScreenNone.Size = new System.Drawing.Size(178, 22);
       this.EditScreenNone.Text = "Loose";
       this.EditScreenNone.Click += new System.EventHandler(this.EditScreenPosition_Click);
@@ -828,7 +830,7 @@
       this.EditScreenTopLeft.CheckOnClick = true;
       this.EditScreenTopLeft.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenTopLeft.Name = "EditScreenTopLeft";
-      this.EditScreenTopLeft.ShortcutKeys = ( (System.Windows.Forms.Keys)( ( System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D1 ) ) );
+      this.EditScreenTopLeft.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D1)));
       this.EditScreenTopLeft.Size = new System.Drawing.Size(178, 22);
       this.EditScreenTopLeft.Text = "Top left";
       this.EditScreenTopLeft.Click += new System.EventHandler(this.EditScreenPosition_Click);
@@ -838,7 +840,7 @@
       this.EditScreenTopRight.CheckOnClick = true;
       this.EditScreenTopRight.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenTopRight.Name = "EditScreenTopRight";
-      this.EditScreenTopRight.ShortcutKeys = ( (System.Windows.Forms.Keys)( ( System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D2 ) ) );
+      this.EditScreenTopRight.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D2)));
       this.EditScreenTopRight.Size = new System.Drawing.Size(178, 22);
       this.EditScreenTopRight.Text = "Top right";
       this.EditScreenTopRight.Click += new System.EventHandler(this.EditScreenPosition_Click);
@@ -848,7 +850,7 @@
       this.EditScreenBottomLeft.CheckOnClick = true;
       this.EditScreenBottomLeft.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenBottomLeft.Name = "EditScreenBottomLeft";
-      this.EditScreenBottomLeft.ShortcutKeys = ( (System.Windows.Forms.Keys)( ( System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D3 ) ) );
+      this.EditScreenBottomLeft.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D3)));
       this.EditScreenBottomLeft.Size = new System.Drawing.Size(178, 22);
       this.EditScreenBottomLeft.Text = "Bottom left";
       this.EditScreenBottomLeft.Click += new System.EventHandler(this.EditScreenPosition_Click);
@@ -858,7 +860,7 @@
       this.EditScreenBottomRight.CheckOnClick = true;
       this.EditScreenBottomRight.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenBottomRight.Name = "EditScreenBottomRight";
-      this.EditScreenBottomRight.ShortcutKeys = ( (System.Windows.Forms.Keys)( ( System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D4 ) ) );
+      this.EditScreenBottomRight.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D4)));
       this.EditScreenBottomRight.Size = new System.Drawing.Size(178, 22);
       this.EditScreenBottomRight.Text = "Bottom right";
       this.EditScreenBottomRight.Click += new System.EventHandler(this.EditScreenPosition_Click);
@@ -868,14 +870,14 @@
       this.EditScreenCenter.CheckOnClick = true;
       this.EditScreenCenter.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.EditScreenCenter.Name = "EditScreenCenter";
-      this.EditScreenCenter.ShortcutKeys = ( (System.Windows.Forms.Keys)( ( System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D5 ) ) );
+      this.EditScreenCenter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D5)));
       this.EditScreenCenter.Size = new System.Drawing.Size(178, 22);
       this.EditScreenCenter.Text = "Center";
       this.EditScreenCenter.Click += new System.EventHandler(this.EditScreenPosition_Click);
       // 
       // ActionResetWinSettings
       // 
-      this.ActionResetWinSettings.Image = ( (System.Drawing.Image)( resources.GetObject("ActionResetWinSettings.Image") ) );
+      this.ActionResetWinSettings.Image = ((System.Drawing.Image)(resources.GetObject("ActionResetWinSettings.Image")));
       this.ActionResetWinSettings.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionResetWinSettings.Name = "ActionResetWinSettings";
       this.ActionResetWinSettings.Size = new System.Drawing.Size(323, 22);
@@ -889,7 +891,7 @@
       // 
       // ActionShowKeyboardNotice
       // 
-      this.ActionShowKeyboardNotice.Image = ( (System.Drawing.Image)( resources.GetObject("ActionShowKeyboardNotice.Image") ) );
+      this.ActionShowKeyboardNotice.Image = ((System.Drawing.Image)(resources.GetObject("ActionShowKeyboardNotice.Image")));
       this.ActionShowKeyboardNotice.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.ActionShowKeyboardNotice.Name = "ActionShowKeyboardNotice";
       this.ActionShowKeyboardNotice.Size = new System.Drawing.Size(323, 22);
@@ -1217,21 +1219,21 @@
       this.GridIterations.AllowUserToAddRows = false;
       this.GridIterations.AllowUserToDeleteRows = false;
       this.GridIterations.AllowUserToResizeRows = false;
-      this.GridIterations.Anchor = ( (System.Windows.Forms.AnchorStyles)( ( ( ( System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom )
-            | System.Windows.Forms.AnchorStyles.Left )
-            | System.Windows.Forms.AnchorStyles.Right ) ) );
+      this.GridIterations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.GridIterations.AutoGenerateColumns = false;
       this.GridIterations.BackgroundColor = System.Drawing.SystemColors.Window;
       this.GridIterations.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.GridIterations.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ( (byte)( 0 ) ));
-      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.GridIterations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.GridIterations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
       this.GridIterations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.GridIterations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnIteration,
@@ -1248,8 +1250,8 @@
       this.GridIterations.Name = "GridIterations";
       this.GridIterations.ReadOnly = true;
       this.GridIterations.RowHeadersVisible = false;
-      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-      this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+      this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle2;
       this.GridIterations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.GridIterations.Size = new System.Drawing.Size(616, 331);
       this.GridIterations.TabIndex = 0;
@@ -1645,11 +1647,11 @@
       // 
       // ActionSearchClear
       // 
-      this.ActionSearchClear.Anchor = ( (System.Windows.Forms.AnchorStyles)( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
+      this.ActionSearchClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ActionSearchClear.Enabled = false;
       this.ActionSearchClear.FlatAppearance.BorderSize = 0;
       this.ActionSearchClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ActionSearchClear.Image = ( (System.Drawing.Image)( resources.GetObject("ActionSearchClear.Image") ) );
+      this.ActionSearchClear.Image = ((System.Drawing.Image)(resources.GetObject("ActionSearchClear.Image")));
       this.ActionSearchClear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
       this.ActionSearchClear.Location = new System.Drawing.Point(50, 267);
       this.ActionSearchClear.Margin = new System.Windows.Forms.Padding(0);
@@ -1660,11 +1662,11 @@
       // 
       // ActionSearchNavigateLast
       // 
-      this.ActionSearchNavigateLast.Anchor = ( (System.Windows.Forms.AnchorStyles)( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right ) ) );
+      this.ActionSearchNavigateLast.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.ActionSearchNavigateLast.Enabled = false;
       this.ActionSearchNavigateLast.FlatAppearance.BorderSize = 0;
       this.ActionSearchNavigateLast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ActionSearchNavigateLast.Image = ( (System.Drawing.Image)( resources.GetObject("ActionSearchNavigateLast.Image") ) );
+      this.ActionSearchNavigateLast.Image = ((System.Drawing.Image)(resources.GetObject("ActionSearchNavigateLast.Image")));
       this.ActionSearchNavigateLast.ImeMode = System.Windows.Forms.ImeMode.NoControl;
       this.ActionSearchNavigateLast.Location = new System.Drawing.Point(-341, 267);
       this.ActionSearchNavigateLast.Margin = new System.Windows.Forms.Padding(0);
@@ -1675,11 +1677,11 @@
       // 
       // ActionSearchNavigateNext
       // 
-      this.ActionSearchNavigateNext.Anchor = ( (System.Windows.Forms.AnchorStyles)( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right ) ) );
+      this.ActionSearchNavigateNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.ActionSearchNavigateNext.Enabled = false;
       this.ActionSearchNavigateNext.FlatAppearance.BorderSize = 0;
       this.ActionSearchNavigateNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ActionSearchNavigateNext.Image = ( (System.Drawing.Image)( resources.GetObject("ActionSearchNavigateNext.Image") ) );
+      this.ActionSearchNavigateNext.Image = ((System.Drawing.Image)(resources.GetObject("ActionSearchNavigateNext.Image")));
       this.ActionSearchNavigateNext.ImeMode = System.Windows.Forms.ImeMode.NoControl;
       this.ActionSearchNavigateNext.Location = new System.Drawing.Point(-374, 267);
       this.ActionSearchNavigateNext.Margin = new System.Windows.Forms.Padding(0);
@@ -1690,11 +1692,11 @@
       // 
       // ActionSearchNavigatePrevious
       // 
-      this.ActionSearchNavigatePrevious.Anchor = ( (System.Windows.Forms.AnchorStyles)( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right ) ) );
+      this.ActionSearchNavigatePrevious.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.ActionSearchNavigatePrevious.Enabled = false;
       this.ActionSearchNavigatePrevious.FlatAppearance.BorderSize = 0;
       this.ActionSearchNavigatePrevious.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ActionSearchNavigatePrevious.Image = ( (System.Drawing.Image)( resources.GetObject("ActionSearchNavigatePrevious.Image") ) );
+      this.ActionSearchNavigatePrevious.Image = ((System.Drawing.Image)(resources.GetObject("ActionSearchNavigatePrevious.Image")));
       this.ActionSearchNavigatePrevious.ImeMode = System.Windows.Forms.ImeMode.NoControl;
       this.ActionSearchNavigatePrevious.Location = new System.Drawing.Point(-534, 267);
       this.ActionSearchNavigatePrevious.Margin = new System.Windows.Forms.Padding(0);
@@ -1705,11 +1707,11 @@
       // 
       // ActionNavigateSearchFirst
       // 
-      this.ActionNavigateSearchFirst.Anchor = ( (System.Windows.Forms.AnchorStyles)( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right ) ) );
+      this.ActionNavigateSearchFirst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.ActionNavigateSearchFirst.Enabled = false;
       this.ActionNavigateSearchFirst.FlatAppearance.BorderSize = 0;
       this.ActionNavigateSearchFirst.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ActionNavigateSearchFirst.Image = ( (System.Drawing.Image)( resources.GetObject("ActionNavigateSearchFirst.Image") ) );
+      this.ActionNavigateSearchFirst.Image = ((System.Drawing.Image)(resources.GetObject("ActionNavigateSearchFirst.Image")));
       this.ActionNavigateSearchFirst.ImeMode = System.Windows.Forms.ImeMode.NoControl;
       this.ActionNavigateSearchFirst.Location = new System.Drawing.Point(-567, 267);
       this.ActionNavigateSearchFirst.Margin = new System.Windows.Forms.Padding(0);
@@ -1720,11 +1722,11 @@
       // 
       // ActionSearchRun
       // 
-      this.ActionSearchRun.Anchor = ( (System.Windows.Forms.AnchorStyles)( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
+      this.ActionSearchRun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ActionSearchRun.Enabled = false;
       this.ActionSearchRun.FlatAppearance.BorderSize = 0;
       this.ActionSearchRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ActionSearchRun.Image = ( (System.Drawing.Image)( resources.GetObject("ActionSearchRun.Image") ) );
+      this.ActionSearchRun.Image = ((System.Drawing.Image)(resources.GetObject("ActionSearchRun.Image")));
       this.ActionSearchRun.ImeMode = System.Windows.Forms.ImeMode.NoControl;
       this.ActionSearchRun.Location = new System.Drawing.Point(5, 267);
       this.ActionSearchRun.Margin = new System.Windows.Forms.Padding(0);
@@ -1735,7 +1737,7 @@
       // 
       // EditSearchInTorah
       // 
-      this.EditSearchInTorah.Anchor = ( (System.Windows.Forms.AnchorStyles)( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
+      this.EditSearchInTorah.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.EditSearchInTorah.AutoSize = true;
       this.EditSearchInTorah.Checked = true;
       this.EditSearchInTorah.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1750,7 +1752,7 @@
       // 
       // EditSearchInNeviim
       // 
-      this.EditSearchInNeviim.Anchor = ( (System.Windows.Forms.AnchorStyles)( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
+      this.EditSearchInNeviim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.EditSearchInNeviim.AutoSize = true;
       this.EditSearchInNeviim.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
       this.EditSearchInNeviim.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -1763,7 +1765,7 @@
       // 
       // EditSearchInKetouvim
       // 
-      this.EditSearchInKetouvim.Anchor = ( (System.Windows.Forms.AnchorStyles)( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
+      this.EditSearchInKetouvim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.EditSearchInKetouvim.AutoSize = true;
       this.EditSearchInKetouvim.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
       this.EditSearchInKetouvim.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -1776,7 +1778,7 @@
       // 
       // SelectSearchPaging
       // 
-      this.SelectSearchPaging.Anchor = ( (System.Windows.Forms.AnchorStyles)( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right ) ) );
+      this.SelectSearchPaging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.SelectSearchPaging.AutoSize = false;
       this.SelectSearchPaging.Enabled = false;
       this.SelectSearchPaging.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -1791,8 +1793,8 @@
       // 
       // SelectSearchInBook
       // 
-      this.SelectSearchInBook.Anchor = ( (System.Windows.Forms.AnchorStyles)( ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left )
-            | System.Windows.Forms.AnchorStyles.Right ) ) );
+      this.SelectSearchInBook.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.SelectSearchInBook.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.SelectSearchInBook.Enabled = false;
       this.SelectSearchInBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
@@ -1805,7 +1807,7 @@
       // 
       // ActionSearchInAddAll
       // 
-      this.ActionSearchInAddAll.Anchor = ( (System.Windows.Forms.AnchorStyles)( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
+      this.ActionSearchInAddAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ActionSearchInAddAll.FlatAppearance.BorderSize = 0;
       this.ActionSearchInAddAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.ActionSearchInAddAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
@@ -1820,7 +1822,7 @@
       // 
       // ActionSearchInRemoveAll
       // 
-      this.ActionSearchInRemoveAll.Anchor = ( (System.Windows.Forms.AnchorStyles)( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
+      this.ActionSearchInRemoveAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ActionSearchInRemoveAll.FlatAppearance.BorderSize = 0;
       this.ActionSearchInRemoveAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.ActionSearchInRemoveAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold);
@@ -1837,7 +1839,7 @@
       // 
       this.ActionSearchWordOpenInLetters.FlatAppearance.BorderSize = 0;
       this.ActionSearchWordOpenInLetters.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ActionSearchWordOpenInLetters.Image = ( (System.Drawing.Image)( resources.GetObject("ActionSearchWordOpenInLetters.Image") ) );
+      this.ActionSearchWordOpenInLetters.Image = ((System.Drawing.Image)(resources.GetObject("ActionSearchWordOpenInLetters.Image")));
       this.ActionSearchWordOpenInLetters.ImeMode = System.Windows.Forms.ImeMode.NoControl;
       this.ActionSearchWordOpenInLetters.Location = new System.Drawing.Point(10, 24);
       this.ActionSearchWordOpenInLetters.Margin = new System.Windows.Forms.Padding(0);
@@ -1931,7 +1933,7 @@
       // 
       // EditSearchPaging
       // 
-      this.EditSearchPaging.Anchor = ( (System.Windows.Forms.AnchorStyles)( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right ) ) );
+      this.EditSearchPaging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.EditSearchPaging.CaretAfterPaste = Ordisoftware.Core.CaretPositionAfterPaste.Ending;
       this.EditSearchPaging.Enabled = false;
       this.EditSearchPaging.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
@@ -1970,6 +1972,16 @@
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
       // 
+      // SelectMemoryTempStore
+      // 
+      this.SelectMemoryTempStore.AutoSize = true;
+      this.SelectMemoryTempStore.Location = new System.Drawing.Point(431, 7);
+      this.SelectMemoryTempStore.Name = "SelectMemoryTempStore";
+      this.SelectMemoryTempStore.Size = new System.Drawing.Size(153, 17);
+      this.SelectMemoryTempStore.TabIndex = 6;
+      this.SelectMemoryTempStore.Text = "Memory temp store else file";
+      this.SelectMemoryTempStore.UseVisualStyleBackColor = true;
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2000,16 +2012,16 @@
       this.TabPageManage.ResumeLayout(false);
       this.PanelViewManage.ResumeLayout(false);
       this.PanelViewManage.PerformLayout();
-      ( (System.ComponentModel.ISupportInitialize)( this.EditMaxMotifs ) ).EndInit();
-      ( (System.ComponentModel.ISupportInitialize)( this.GridIterations ) ).EndInit();
-      ( (System.ComponentModel.ISupportInitialize)( this.BindingSourceIterationRow ) ).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.EditMaxMotifs)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.GridIterations)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.BindingSourceIterationRow)).EndInit();
       this.TabPageGrid.ResumeLayout(false);
       this.TabPageDecode.ResumeLayout(false);
       this.PanelViewDecode.ResumeLayout(false);
       this.PanelViewDecode.PerformLayout();
       this.PanelTitle.ResumeLayout(false);
       this.PanelTitleInner.ResumeLayout(false);
-      ( (System.ComponentModel.ISupportInitialize)( this.SelectSearchPaging ) ).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.SelectSearchPaging)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -2182,5 +2194,6 @@
     private DataGridViewTextBoxColumn ColumnElapsedAdding;
     private Button ActionFixDigitsMissingIn100GB;
     private TextBox EditLog;
+    private CheckBox SelectMemoryTempStore;
   }
 }

@@ -28,12 +28,12 @@ partial class MainForm
     Globals.ChronoBatch.Restart();
     DatabaseFilePath = path;
     DB = new SQLiteNetORM(path);
-    DB.SetTempStoreMode(SQLiteTempStoreMode.FILE);
+    DB.SetTempDir(EditTempDir.Text);
+    DB.SetTempStoreMode(SelectMemoryTempStore.Checked ? SQLiteTempStoreMode.MEMORY : SQLiteTempStoreMode.FILE);
     DB.SetJournal(SQLiteJournalMode.OFF);
     DB.SetSynchronous(SQLiteSynchronousMode.OFF);
     DB.SetLocking(SQLiteLockingMode.EXCLUSIVE);
     DB.SetPageSize(SQLitePageSize._32768);
-    DB.SetTempDir(EditTempDir.Text);
     SetDbCache();
     DB.CreateTable<DecupletRow>();
     DB.CreateTable<IterationRow>();
