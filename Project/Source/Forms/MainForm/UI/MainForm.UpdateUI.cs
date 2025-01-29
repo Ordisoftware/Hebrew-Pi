@@ -162,6 +162,7 @@ partial class MainForm
         //showRemainingTimeAdd();
         break;
       case ProcessingType.CreateIndex:
+      case ProcessingType.OpenClose:
         UpdateStatusAction(Operation.ToString());
         break;
       default:

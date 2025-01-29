@@ -16,9 +16,9 @@ namespace Ordisoftware.Hebrew.Pi;
 
 //using SQLHelper = SQLHelper_NoTemp_InMotif;
 //using SQLHelper = SQLHelper_WithTemp_InPos;
-//using SQLHelper = SQLHelper_WithTemp_InPos_PK;
+using SQLHelper = SQLHelper_WithTemp_InPos_PK;
 //using SQLHelper = SQLHelper_WithTemp_InMotif;
-using SQLHelper = SQLHelper_WithTemp_InMotif_PK;
+//using SQLHelper = SQLHelper_WithTemp_InMotif_PK;
 
 /// <summary>
 /// Provides application's main form.

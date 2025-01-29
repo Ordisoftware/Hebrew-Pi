@@ -17,6 +17,7 @@ namespace Ordisoftware.Hebrew.Pi;
 enum ProcessingType
 {
   None,
+  OpenClose,
   CreateData,
   CreateIndex,
   ReduceRepeating,

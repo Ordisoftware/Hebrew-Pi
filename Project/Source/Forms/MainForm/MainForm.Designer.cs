@@ -119,6 +119,7 @@
       this.TabControl = new System.Windows.Forms.TabControl();
       this.TabPageManage = new System.Windows.Forms.TabPage();
       this.PanelViewManage = new System.Windows.Forms.Panel();
+      this.SelectCountAllRows = new System.Windows.Forms.CheckBox();
       this.EditLog = new System.Windows.Forms.TextBox();
       this.SelectPiDecimalsFile = new System.Windows.Forms.ComboBox();
       this.EditMaxMotifs = new System.Windows.Forms.NumericUpDown();
@@ -199,7 +200,6 @@
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
-      this.SelectCountAllRows = new System.Windows.Forms.CheckBox();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -240,8 +240,6 @@
       // SelectMemoryTempStore
       // 
       this.SelectMemoryTempStore.AutoSize = true;
-      this.SelectMemoryTempStore.Checked = true;
-      this.SelectMemoryTempStore.CheckState = System.Windows.Forms.CheckState.Checked;
       this.SelectMemoryTempStore.Location = new System.Drawing.Point(431, 7);
       this.SelectMemoryTempStore.Name = "SelectMemoryTempStore";
       this.SelectMemoryTempStore.Size = new System.Drawing.Size(153, 17);
@@ -1081,6 +1079,18 @@
       this.PanelViewManage.Size = new System.Drawing.Size(923, 457);
       this.PanelViewManage.TabIndex = 2;
       // 
+      // SelectCountAllRows
+      // 
+      this.SelectCountAllRows.AutoSize = true;
+      this.SelectCountAllRows.Checked = true;
+      this.SelectCountAllRows.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.SelectCountAllRows.Location = new System.Drawing.Point(189, 99);
+      this.SelectCountAllRows.Name = "SelectCountAllRows";
+      this.SelectCountAllRows.Size = new System.Drawing.Size(79, 17);
+      this.SelectCountAllRows.TabIndex = 8;
+      this.SelectCountAllRows.Text = "Count rows";
+      this.SelectCountAllRows.UseVisualStyleBackColor = true;
+      // 
       // EditLog
       // 
       this.EditLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1361,7 +1371,7 @@
       this.TabPageGrid.Location = new System.Drawing.Point(4, 22);
       this.TabPageGrid.Name = "TabPageGrid";
       this.TabPageGrid.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageGrid.Size = new System.Drawing.Size(929, 363);
+      this.TabPageGrid.Size = new System.Drawing.Size(929, 463);
       this.TabPageGrid.TabIndex = 0;
       this.TabPageGrid.Text = "Grid";
       this.TabPageGrid.UseVisualStyleBackColor = true;
@@ -1375,7 +1385,7 @@
       this.PanelViewGrid.Location = new System.Drawing.Point(3, 3);
       this.PanelViewGrid.Name = "PanelViewGrid";
       this.PanelViewGrid.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewGrid.Size = new System.Drawing.Size(923, 357);
+      this.PanelViewGrid.Size = new System.Drawing.Size(923, 457);
       this.PanelViewGrid.TabIndex = 22;
       // 
       // TabPageDecode
@@ -1384,7 +1394,7 @@
       this.TabPageDecode.Location = new System.Drawing.Point(4, 22);
       this.TabPageDecode.Name = "TabPageDecode";
       this.TabPageDecode.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageDecode.Size = new System.Drawing.Size(929, 363);
+      this.TabPageDecode.Size = new System.Drawing.Size(929, 463);
       this.TabPageDecode.TabIndex = 1;
       this.TabPageDecode.Text = "Decode";
       this.TabPageDecode.UseVisualStyleBackColor = true;
@@ -1398,7 +1408,7 @@
       this.PanelViewDecode.Location = new System.Drawing.Point(3, 3);
       this.PanelViewDecode.Name = "PanelViewDecode";
       this.PanelViewDecode.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewDecode.Size = new System.Drawing.Size(923, 357);
+      this.PanelViewDecode.Size = new System.Drawing.Size(923, 457);
       this.PanelViewDecode.TabIndex = 0;
       // 
       // textBox1
@@ -1991,18 +2001,6 @@
       this.EditChapterELS50.Size = new System.Drawing.Size(728, 234);
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
-      // 
-      // SelectCountAllRows
-      // 
-      this.SelectCountAllRows.AutoSize = true;
-      this.SelectCountAllRows.Checked = true;
-      this.SelectCountAllRows.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.SelectCountAllRows.Location = new System.Drawing.Point(189, 99);
-      this.SelectCountAllRows.Name = "SelectCountAllRows";
-      this.SelectCountAllRows.Size = new System.Drawing.Size(79, 17);
-      this.SelectCountAllRows.TabIndex = 8;
-      this.SelectCountAllRows.Text = "Count rows";
-      this.SelectCountAllRows.UseVisualStyleBackColor = true;
       // 
       // MainForm
       // 

@@ -59,13 +59,12 @@ partial class MainForm
         case ProcessingType.Finished:
         case ProcessingType.Canceled:
           UpdateStatusAction(Processing.ToString());
-          Processing = ProcessingType.None;
           break;
         case ProcessingType.Error:
           UpdateStatusAction(Processing.ToString() + ": " + Except.Message.Replace(Environment.NewLine, " "));
-          Processing = ProcessingType.None;
           break;
       }
+      Processing = ProcessingType.None;
     }
   }
 

@@ -24,6 +24,7 @@ partial class MainForm
   private async void DoActionDbOpenAsync(string path)
   {
     if ( DB is not null ) DoActionDbCloseAsync();
+    Processing = ProcessingType.OpenClose;
     Operation = OperationType.Opening;
     Globals.ChronoBatch.Restart();
     DatabaseFilePath = path;
@@ -48,16 +49,17 @@ partial class MainForm
   private async void DoActionDbCloseAsync()
   {
     if ( DB is null ) return;
+    Processing = ProcessingType.OpenClose;
     Operation = OperationType.Closing;
     Globals.ChronoBatch.Restart();
+    GridIterations.Invoke(() => GridIterations.DataSource = null);
     DB.Close();
-    Globals.ChronoBatch.Stop();
     DB.Dispose();
     DB = null;
-    GridIterations.Invoke(() => GridIterations.DataSource = null);
     GridIterations.Invoke(() => LabelTitleCenter.Text = string.Empty);
-    UpdateButtons();
+    Globals.ChronoBatch.Stop();
     Operation = OperationType.Closed;
+    UpdateButtons();
   }
 
 }
