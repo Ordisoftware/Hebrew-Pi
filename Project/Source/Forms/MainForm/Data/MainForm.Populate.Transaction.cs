@@ -21,7 +21,7 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm
 {
 
-  private async void DoCommit(bool partial = false)
+  private void DoCommit(bool partial = false)
   {
     Operation = OperationType.Committing;
     Task.Run(() =>
@@ -41,7 +41,7 @@ partial class MainForm
     }
   }
 
-  private async void DoRollback()
+  private void DoRollback()
   {
     Operation = OperationType.Rollbacking;
     Task.Run(() =>

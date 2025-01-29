@@ -83,6 +83,7 @@ partial class MainForm
       bool dbOnenedAndNotInBatch = dbOpened && !Globals.IsInBatch;
       bool dbOnenedAndInBatch = dbOpened && Globals.IsInBatch;
       EditTempDir.Enabled = !Globals.IsInBatch;
+      SelectMemoryTempStore.Enabled = !Globals.IsInBatch;
       SelectDbCache.Enabled = !Globals.IsInBatch;
       SelectPiDecimalsFile.Enabled = !Globals.IsInBatch;
       EditMaxMotifs.Enabled = !Globals.IsInBatch;
@@ -156,7 +157,7 @@ partial class MainForm
         break;
       case ProcessingType.ReduceRepeating:
         UpdateStatusAction(Operation.ToString());
-        UpdateStatusInfo(string.Format(AppTranslations.IterationText, ReduceRepeatingIteration, AllRepeatingCount));
+        UpdateStatusInfo(string.Format(AppTranslations.IterationText, ReduceRepeatingIteration, IterationAllRepeatingCount));
         //UpdateStatusInfo(string.Format(AppTranslations.IterationText2, ReduceRepeatingIteration, AllRepeatingCount, RepeatingAddedCount));
         //showRemainingTimeAdd();
         break;

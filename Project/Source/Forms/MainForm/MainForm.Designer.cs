@@ -33,6 +33,7 @@
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.PanelDatabase = new System.Windows.Forms.Panel();
+      this.SelectMemoryTempStore = new System.Windows.Forms.CheckBox();
       this.label1 = new System.Windows.Forms.Label();
       this.EditTempDir = new System.Windows.Forms.TextBox();
       this.SelectDbCache = new System.Windows.Forms.ComboBox();
@@ -198,7 +199,7 @@
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
-      this.SelectMemoryTempStore = new System.Windows.Forms.CheckBox();
+      this.SelectCountAllRows = new System.Windows.Forms.CheckBox();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -235,6 +236,18 @@
       this.PanelDatabase.Name = "PanelDatabase";
       this.PanelDatabase.Size = new System.Drawing.Size(939, 40);
       this.PanelDatabase.TabIndex = 1;
+      // 
+      // SelectMemoryTempStore
+      // 
+      this.SelectMemoryTempStore.AutoSize = true;
+      this.SelectMemoryTempStore.Checked = true;
+      this.SelectMemoryTempStore.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.SelectMemoryTempStore.Location = new System.Drawing.Point(431, 7);
+      this.SelectMemoryTempStore.Name = "SelectMemoryTempStore";
+      this.SelectMemoryTempStore.Size = new System.Drawing.Size(153, 17);
+      this.SelectMemoryTempStore.TabIndex = 6;
+      this.SelectMemoryTempStore.Text = "Memory temp store else file";
+      this.SelectMemoryTempStore.UseVisualStyleBackColor = true;
       // 
       // label1
       // 
@@ -320,7 +333,7 @@
             this.LabelStatusSep4,
             this.LabelStatusAction,
             this.LabelStatusFreeMem});
-      this.StatusStrip.Location = new System.Drawing.Point(0, 539);
+      this.StatusStrip.Location = new System.Drawing.Point(0, 639);
       this.StatusStrip.Name = "StatusStrip";
       this.StatusStrip.Size = new System.Drawing.Size(959, 22);
       this.StatusStrip.TabIndex = 2;
@@ -984,7 +997,7 @@
       this.PanelMain.Location = new System.Drawing.Point(0, 54);
       this.PanelMain.Name = "PanelMain";
       this.PanelMain.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelMain.Size = new System.Drawing.Size(959, 485);
+      this.PanelMain.Size = new System.Drawing.Size(959, 585);
       this.PanelMain.TabIndex = 10;
       // 
       // PanelMainOuter
@@ -995,7 +1008,7 @@
       this.PanelMainOuter.Location = new System.Drawing.Point(10, 84);
       this.PanelMainOuter.Name = "PanelMainOuter";
       this.PanelMainOuter.Padding = new System.Windows.Forms.Padding(1);
-      this.PanelMainOuter.Size = new System.Drawing.Size(939, 391);
+      this.PanelMainOuter.Size = new System.Drawing.Size(939, 491);
       this.PanelMainOuter.TabIndex = 18;
       // 
       // PanelMainInner
@@ -1005,7 +1018,7 @@
       this.PanelMainInner.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMainInner.Location = new System.Drawing.Point(1, 1);
       this.PanelMainInner.Name = "PanelMainInner";
-      this.PanelMainInner.Size = new System.Drawing.Size(937, 389);
+      this.PanelMainInner.Size = new System.Drawing.Size(937, 489);
       this.PanelMainInner.TabIndex = 0;
       // 
       // PanelMainCenter
@@ -1015,7 +1028,7 @@
       this.PanelMainCenter.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMainCenter.Location = new System.Drawing.Point(0, 0);
       this.PanelMainCenter.Name = "PanelMainCenter";
-      this.PanelMainCenter.Size = new System.Drawing.Size(937, 389);
+      this.PanelMainCenter.Size = new System.Drawing.Size(937, 489);
       this.PanelMainCenter.TabIndex = 0;
       // 
       // TabControl
@@ -1027,7 +1040,7 @@
       this.TabControl.Location = new System.Drawing.Point(0, 0);
       this.TabControl.Name = "TabControl";
       this.TabControl.SelectedIndex = 0;
-      this.TabControl.Size = new System.Drawing.Size(937, 389);
+      this.TabControl.Size = new System.Drawing.Size(937, 489);
       this.TabControl.TabIndex = 8;
       this.TabControl.TabStop = false;
       this.TabControl.Visible = false;
@@ -1038,7 +1051,7 @@
       this.TabPageManage.Location = new System.Drawing.Point(4, 22);
       this.TabPageManage.Name = "TabPageManage";
       this.TabPageManage.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageManage.Size = new System.Drawing.Size(929, 363);
+      this.TabPageManage.Size = new System.Drawing.Size(929, 463);
       this.TabPageManage.TabIndex = 3;
       this.TabPageManage.Text = "Manage";
       this.TabPageManage.UseVisualStyleBackColor = true;
@@ -1046,6 +1059,7 @@
       // PanelViewManage
       // 
       this.PanelViewManage.BackColor = System.Drawing.SystemColors.Control;
+      this.PanelViewManage.Controls.Add(this.SelectCountAllRows);
       this.PanelViewManage.Controls.Add(this.EditLog);
       this.PanelViewManage.Controls.Add(this.SelectPiDecimalsFile);
       this.PanelViewManage.Controls.Add(this.EditMaxMotifs);
@@ -1064,15 +1078,17 @@
       this.PanelViewManage.Location = new System.Drawing.Point(3, 3);
       this.PanelViewManage.Name = "PanelViewManage";
       this.PanelViewManage.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewManage.Size = new System.Drawing.Size(923, 357);
+      this.PanelViewManage.Size = new System.Drawing.Size(923, 457);
       this.PanelViewManage.TabIndex = 2;
       // 
       // EditLog
       // 
-      this.EditLog.Location = new System.Drawing.Point(13, 160);
+      this.EditLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+      this.EditLog.Location = new System.Drawing.Point(13, 173);
       this.EditLog.Multiline = true;
       this.EditLog.Name = "EditLog";
-      this.EditLog.Size = new System.Drawing.Size(265, 184);
+      this.EditLog.Size = new System.Drawing.Size(265, 271);
       this.EditLog.TabIndex = 7;
       // 
       // SelectPiDecimalsFile
@@ -1142,7 +1158,9 @@
       // EditAutoCreateIndex
       // 
       this.EditAutoCreateIndex.AutoSize = true;
-      this.EditAutoCreateIndex.Location = new System.Drawing.Point(191, 122);
+      this.EditAutoCreateIndex.Checked = true;
+      this.EditAutoCreateIndex.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.EditAutoCreateIndex.Location = new System.Drawing.Point(188, 145);
       this.EditAutoCreateIndex.Name = "EditAutoCreateIndex";
       this.EditAutoCreateIndex.Size = new System.Drawing.Size(90, 17);
       this.EditAutoCreateIndex.TabIndex = 4;
@@ -1152,7 +1170,9 @@
       // EditNormalizeAutoLoop
       // 
       this.EditNormalizeAutoLoop.AutoSize = true;
-      this.EditNormalizeAutoLoop.Location = new System.Drawing.Point(191, 99);
+      this.EditNormalizeAutoLoop.Checked = true;
+      this.EditNormalizeAutoLoop.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.EditNormalizeAutoLoop.Location = new System.Drawing.Point(189, 122);
       this.EditNormalizeAutoLoop.Name = "EditNormalizeAutoLoop";
       this.EditNormalizeAutoLoop.Size = new System.Drawing.Size(71, 17);
       this.EditNormalizeAutoLoop.TabIndex = 4;
@@ -1253,7 +1273,7 @@
       dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
       this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle2;
       this.GridIterations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.GridIterations.Size = new System.Drawing.Size(616, 331);
+      this.GridIterations.Size = new System.Drawing.Size(616, 431);
       this.GridIterations.TabIndex = 0;
       this.GridIterations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridIterations_CellFormatting);
       this.GridIterations.Leave += new System.EventHandler(this.GridIterations_Leave);
@@ -1972,21 +1992,23 @@
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
       // 
-      // SelectMemoryTempStore
+      // SelectCountAllRows
       // 
-      this.SelectMemoryTempStore.AutoSize = true;
-      this.SelectMemoryTempStore.Location = new System.Drawing.Point(431, 7);
-      this.SelectMemoryTempStore.Name = "SelectMemoryTempStore";
-      this.SelectMemoryTempStore.Size = new System.Drawing.Size(153, 17);
-      this.SelectMemoryTempStore.TabIndex = 6;
-      this.SelectMemoryTempStore.Text = "Memory temp store else file";
-      this.SelectMemoryTempStore.UseVisualStyleBackColor = true;
+      this.SelectCountAllRows.AutoSize = true;
+      this.SelectCountAllRows.Checked = true;
+      this.SelectCountAllRows.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.SelectCountAllRows.Location = new System.Drawing.Point(189, 99);
+      this.SelectCountAllRows.Name = "SelectCountAllRows";
+      this.SelectCountAllRows.Size = new System.Drawing.Size(79, 17);
+      this.SelectCountAllRows.TabIndex = 8;
+      this.SelectCountAllRows.Text = "Count rows";
+      this.SelectCountAllRows.UseVisualStyleBackColor = true;
       // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(959, 561);
+      this.ClientSize = new System.Drawing.Size(959, 661);
       this.Controls.Add(this.PanelMain);
       this.Controls.Add(this.StatusStrip);
       this.Controls.Add(this.ToolStrip);
@@ -2195,5 +2217,6 @@
     private Button ActionFixDigitsMissingIn100GB;
     private TextBox EditLog;
     private CheckBox SelectMemoryTempStore;
+    private CheckBox SelectCountAllRows;
   }
 }

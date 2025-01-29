@@ -330,7 +330,7 @@ partial class MainForm : Form
       {
         var value = (TimeSpan)e.Value;
         if ( value != TimeSpan.Zero )
-          e.Value = ( value ).AsReadable();
+          e.Value = value.AsReadable();
         else
           e.Value = string.Empty;
       }
