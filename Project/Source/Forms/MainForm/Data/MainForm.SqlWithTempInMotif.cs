@@ -20,7 +20,6 @@ class SqlWithTempInMotif : SqlBase
   public override void CreateAllRepeatingMotifsTempTable(SQLiteNetORM DB)
   {
     DB.Execute("DROP TABLE IF EXISTS AllRepeatingMotifs");
-
     var sql = @"CREATE TEMPORARY TABLE AllRepeatingMotifs AS
                 SELECT Motif
                 FROM Decuplets

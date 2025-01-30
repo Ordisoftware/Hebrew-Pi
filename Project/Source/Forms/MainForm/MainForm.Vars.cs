@@ -27,11 +27,8 @@ partial class MainForm
 
   private SqlBase[] SqlHelperList =
   [
-    new SqlNoTempInMotif(),
-    new SqlWithTempInPos(),
     new SqlWithTempInPosPK(),
     new SqlWithTempInMotif(),
-    new SqlWithTempInMotifPK(),
     new SqlWithTempLoopPosPK()
   ];
 
@@ -92,7 +89,7 @@ partial class MainForm
 
   private volatile ProcessingType Processing;
 
-  private volatile OperationType Operation;
+  internal volatile OperationType Operation;
 
   private volatile Exception Except;
 

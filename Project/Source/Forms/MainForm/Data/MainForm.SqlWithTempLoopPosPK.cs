@@ -30,27 +30,36 @@ class SqlWithTempLoopPosPK : SqlBase
 
   public override long CountAllRepeatingMotifs(SQLiteNetORM DB)
   {
-    return DB.ExecuteScalar<long>("SELECT COUNT(*) FROM Decuplets WHERE Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)");
+    return DB.ExecuteScalar<long>("SELECT COUNT(*) FROM AllRepeatingMotifs");
   }
 
   public override long AddPositionToRepeatingMotifs(SQLiteNetORM DB)
   {
+    const string querySelect = "select * from AllRepeatingMotifs limit {0} offset {1}";
+    const string queryUpdate = "update Decuplets set Motif = Motif + Position where Position = {0}";
+    long pagingCommit = MainForm.Instance.AllRepeatingCount > 10_000_100 ? 1_000_000 : 100_000;
     long step = 0;
-    long pagingCommit = MainForm.Instance.AllRepeatingCount > 100_000_100 ? 10_000_000 : 1_000_000;
     MainForm.Instance.RepeatingAddedCount = 0;
     List<PositionWithMotifRow> items = null;
-    while ( true )
+    var cases = new StringBuilder();
+    var positions = new List<long>();
+    do
     {
       if ( MainForm.Instance.CanForceTerminateBatch && !MainForm.Instance.CheckIfBatchCanContinueAsync().Result ) break;
-      items = DB.Query<PositionWithMotifRow>($"select * from AllRepeatingMotifs limit {pagingCommit} offset {step}");
-      if ( items.Count == 0 ) break;
+      items = DB.Query<PositionWithMotifRow>(string.Format(querySelect, pagingCommit, step));
+      DB.BeginTransaction();
+      MainForm.Instance.Operation = OperationType.Adding;
       foreach ( var item in items )
       {
-        DB.Execute($"update Decuplets set Motif = Motif + Position where Position = {item.Position}");
+        DB.Execute(string.Format(queryUpdate, item.Position));
         MainForm.Instance.RepeatingAddedCount++;
       }
+      MainForm.Instance.Operation = OperationType.Committing;
+      DB.Commit();
+      MainForm.Instance.Operation = OperationType.Committed;
       step += pagingCommit;
     }
+    while ( items.Count != 0 );
     return MainForm.Instance.RepeatingAddedCount;
   }
 

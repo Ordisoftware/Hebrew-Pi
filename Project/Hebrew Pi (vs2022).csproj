@@ -403,10 +403,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Forms\MainForm\Data\MainForm.SqlWithTempLoopPosPK.cs" />
-    <Compile Include="Source\Forms\MainForm\Data\MainForm.SqlNoTempInMotif.cs" />
     <Compile Include="Source\Forms\MainForm\Data\MainForm.SqlWithTempInPosPK.cs" />
-    <Compile Include="Source\Forms\MainForm\Data\MainForm.SqlWithTempInPos.cs" />
-    <Compile Include="Source\Forms\MainForm\Data\MainForm.SqlWithTempInMotifPK.cs" />
     <Compile Include="Source\Forms\MainForm\Data\MainForm.SqlWithTempInMotif.cs" />
     <Compile Include="Source\Forms\MainForm\Data\MainForm.SqlBase.cs" />
     <Compile Include="Source\Forms\MainForm\Data\MainForm.Populate.cs">
