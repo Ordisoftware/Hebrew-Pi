@@ -82,10 +82,11 @@ partial class MainForm
       bool dbOpened = DB is not null;
       bool dbOnenedAndNotInBatch = dbOpened && !Globals.IsInBatch;
       bool dbOnenedAndInBatch = dbOpened && Globals.IsInBatch;
-      EditTempDir.Enabled = !Globals.IsInBatch;
-      SelectMemoryTempStore.Enabled = !Globals.IsInBatch;
+      EditTempDir.Enabled = !dbOpened;
+      SelectMemoryTempStore.Enabled = !dbOpened;
       SelectDbCache.Enabled = !Globals.IsInBatch;
       SelectPiDecimalsFile.Enabled = !Globals.IsInBatch;
+      SelectSqlHelper.Enabled = !Globals.IsInBatch;
       EditMaxMotifs.Enabled = !Globals.IsInBatch;
       ActionDbOpen.Enabled = !dbOpened;
       ActionDbNew.Enabled = ActionDbOpen.Enabled;
@@ -157,9 +158,20 @@ partial class MainForm
         break;
       case ProcessingType.ReduceRepeating:
         UpdateStatusAction(Operation.ToString());
-        UpdateStatusInfo(string.Format(AppTranslations.IterationText, ReduceRepeatingIteration, IterationAllRepeatingCount));
-        //UpdateStatusInfo(string.Format(AppTranslations.IterationText2, ReduceRepeatingIteration, AllRepeatingCount, RepeatingAddedCount));
-        //showRemainingTimeAdd();
+        if ( SqlHelper is not SqlWithTempLoopPosPK )
+        {
+          UpdateStatusInfo(string.Format(AppTranslations.IterationText,
+                                         ReduceRepeatingIteration,
+                                         AllRepeatingCount.ToString("N0")));
+        }
+        else
+        {
+          UpdateStatusInfo(string.Format(AppTranslations.IterationTextLoop,
+                                         ReduceRepeatingIteration,
+                                         AllRepeatingCount.ToString("N0"),
+                                         RepeatingAddedCount.ToString("N0")));
+          showRemainingTimeAdd();
+        }
         break;
       case ProcessingType.CreateIndex:
       case ProcessingType.OpenClose:
@@ -190,23 +202,23 @@ partial class MainForm
       }
     }
     //
-    //void showRemainingTimeAdd()
-    //{
-    //  try
-    //  {
-    //    var elapsed = Globals.ChronoSubBatch.Elapsed;
-    //    double countDone = RepeatingAddedCount;
-    //    double countToDo = AllRepeatingCount;
-    //    double progress = countDone <= 0 || countToDo <= 0 ? 1 : countDone / countToDo;
-    //    var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
-    //    UpdateStatusRemaining(string.Format(AppTranslations.RemainingText, remaining.AsReadable()));
-    //    TaskbarManager.Instance.SetProgressValue((int)( progress * 100 ), 100);
-    //  }
-    //  catch ( Exception ex )
-    //  {
-    //    UpdateStatusRemaining(ex.Message);
-    //  }
-    //}
+    void showRemainingTimeAdd()
+    {
+      try
+      {
+        var elapsed = Globals.ChronoSubBatch.Elapsed;
+        double countDone = RepeatingAddedCount;
+        double countToDo = AllRepeatingCount;
+        double progress = countDone <= 0 || countToDo <= 0 ? 1 : countDone / countToDo;
+        var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
+        UpdateStatusRemaining(string.Format(AppTranslations.RemainingText, remaining.AsReadable()));
+        TaskbarManager.Instance.SetProgressValue((int)( progress * 100 ), 100);
+      }
+      catch ( Exception ex )
+      {
+        UpdateStatusRemaining(ex.Message);
+      }
+    }
   }
 
 }

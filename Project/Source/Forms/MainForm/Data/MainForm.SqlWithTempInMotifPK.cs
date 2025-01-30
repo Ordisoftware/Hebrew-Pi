@@ -14,7 +14,7 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-class SqlHelperWithTempInPosPK : SqlHelperBase
+class SqlWithTempInMotifPK : SqlBase
 {
 
   public override void CreateAllRepeatingMotifsTempTable(SQLiteNetORM DB)
@@ -36,7 +36,7 @@ class SqlHelperWithTempInPosPK : SqlHelperBase
   public override long AddPositionToRepeatingMotifs(SQLiteNetORM DB)
   {
     var sql = @"UPDATE Decuplets SET Motif = Motif + Position
-                WHERE Position IN (SELECT Position FROM AllRepeatingMotifs)";
+                WHERE Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)";
     int signedResult = DB.Execute(sql);
     return unchecked((uint)signedResult);
   }

@@ -243,7 +243,7 @@
       // 
       this.SelectSqlHelper.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.SelectSqlHelper.FormattingEnabled = true;
-      this.SelectSqlHelper.Location = new System.Drawing.Point(765, 5);
+      this.SelectSqlHelper.Location = new System.Drawing.Point(263, 5);
       this.SelectSqlHelper.Name = "SelectSqlHelper";
       this.SelectSqlHelper.Size = new System.Drawing.Size(166, 21);
       this.SelectSqlHelper.TabIndex = 7;
@@ -253,7 +253,7 @@
       // SelectMemoryTempStore
       // 
       this.SelectMemoryTempStore.AutoSize = true;
-      this.SelectMemoryTempStore.Location = new System.Drawing.Point(431, 7);
+      this.SelectMemoryTempStore.Location = new System.Drawing.Point(591, 7);
       this.SelectMemoryTempStore.Name = "SelectMemoryTempStore";
       this.SelectMemoryTempStore.Size = new System.Drawing.Size(153, 17);
       this.SelectMemoryTempStore.TabIndex = 6;
@@ -263,7 +263,7 @@
       // label1
       // 
       this.label1.AutoSize = true;
-      this.label1.Location = new System.Drawing.Point(271, 8);
+      this.label1.Location = new System.Drawing.Point(440, 9);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(48, 13);
       this.label1.TabIndex = 5;
@@ -271,7 +271,7 @@
       // 
       // EditTempDir
       // 
-      this.EditTempDir.Location = new System.Drawing.Point(325, 5);
+      this.EditTempDir.Location = new System.Drawing.Point(494, 5);
       this.EditTempDir.Name = "EditTempDir";
       this.EditTempDir.Size = new System.Drawing.Size(86, 20);
       this.EditTempDir.TabIndex = 4;
@@ -289,7 +289,7 @@
       // 
       // ActionFixDigitsMissingIn100GB
       // 
-      this.ActionFixDigitsMissingIn100GB.Location = new System.Drawing.Point(620, 4);
+      this.ActionFixDigitsMissingIn100GB.Location = new System.Drawing.Point(795, 4);
       this.ActionFixDigitsMissingIn100GB.Name = "ActionFixDigitsMissingIn100GB";
       this.ActionFixDigitsMissingIn100GB.Size = new System.Drawing.Size(139, 23);
       this.ActionFixDigitsMissingIn100GB.TabIndex = 2;
@@ -301,7 +301,7 @@
       // ActionDbClose
       // 
       this.ActionDbClose.Enabled = false;
-      this.ActionDbClose.Location = new System.Drawing.Point(189, 4);
+      this.ActionDbClose.Location = new System.Drawing.Point(194, 4);
       this.ActionDbClose.Name = "ActionDbClose";
       this.ActionDbClose.Size = new System.Drawing.Size(58, 23);
       this.ActionDbClose.TabIndex = 2;
@@ -312,7 +312,7 @@
       // ActionDbNew
       // 
       this.ActionDbNew.Enabled = false;
-      this.ActionDbNew.Location = new System.Drawing.Point(61, 4);
+      this.ActionDbNew.Location = new System.Drawing.Point(66, 4);
       this.ActionDbNew.Name = "ActionDbNew";
       this.ActionDbNew.Size = new System.Drawing.Size(58, 23);
       this.ActionDbNew.TabIndex = 2;
@@ -323,7 +323,7 @@
       // ActionDbOpen
       // 
       this.ActionDbOpen.Enabled = false;
-      this.ActionDbOpen.Location = new System.Drawing.Point(125, 4);
+      this.ActionDbOpen.Location = new System.Drawing.Point(130, 4);
       this.ActionDbOpen.Name = "ActionDbOpen";
       this.ActionDbOpen.Size = new System.Drawing.Size(58, 23);
       this.ActionDbOpen.TabIndex = 2;
@@ -1183,7 +1183,7 @@
       this.EditAutoCreateIndex.AutoSize = true;
       this.EditAutoCreateIndex.Checked = true;
       this.EditAutoCreateIndex.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.EditAutoCreateIndex.Location = new System.Drawing.Point(188, 145);
+      this.EditAutoCreateIndex.Location = new System.Drawing.Point(189, 145);
       this.EditAutoCreateIndex.Name = "EditAutoCreateIndex";
       this.EditAutoCreateIndex.Size = new System.Drawing.Size(90, 17);
       this.EditAutoCreateIndex.TabIndex = 4;

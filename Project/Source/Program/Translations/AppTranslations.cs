@@ -76,6 +76,7 @@ static partial class AppTranslations
 
   static public string CreateDataProgress = "{0} inserted";
   static public string IterationText = "Iteration #{0}, {1} repeating";
+  static public string IterationTextLoop = "Iteration #{0}, {1} repeating, {2} updated";
 
   static public string BatchElapsedText = "Batch: {0}";
   static public string SubBatchElapsedText = "Sub-batch: {0}";

@@ -16,7 +16,7 @@ namespace Ordisoftware.Hebrew.Pi;
 
 using CountMotifsAndMaxOccurences = (long CountMotifs, long MaxOccurrences);
 
-abstract class SqlHelperBase
+abstract class SqlBase
 {
 
   public void CreateUniqueRepeatingMotifsTempTable(SQLiteNetORM DB)

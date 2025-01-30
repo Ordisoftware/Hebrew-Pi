@@ -14,14 +14,14 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-class SqlHelperWithTempInMotifPK : SqlHelperBase
+class SqlWithTempInPos : SqlBase
 {
 
   public override void CreateAllRepeatingMotifsTempTable(SQLiteNetORM DB)
   {
     DB.Execute("DROP TABLE IF EXISTS AllRepeatingMotifs");
-    DB.Execute("CREATE TEMPORARY TABLE AllRepeatingMotifs (Position INTEGER PRIMARY KEY)");
-    var sql = @"INSERT INTO AllRepeatingMotifs (Position)
+
+    var sql = @"CREATE TEMPORARY TABLE AllRepeatingMotifs AS
                 SELECT Position
                 FROM Decuplets
                 WHERE Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)";
@@ -36,7 +36,7 @@ class SqlHelperWithTempInMotifPK : SqlHelperBase
   public override long AddPositionToRepeatingMotifs(SQLiteNetORM DB)
   {
     var sql = @"UPDATE Decuplets SET Motif = Motif + Position
-                WHERE Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)";
+                WHERE Position IN (SELECT Position FROM AllRepeatingMotifs)";
     int signedResult = DB.Execute(sql);
     return unchecked((uint)signedResult);
   }

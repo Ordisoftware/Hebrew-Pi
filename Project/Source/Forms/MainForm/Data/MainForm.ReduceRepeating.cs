@@ -30,7 +30,7 @@ partial class MainForm
     IterationRow lastRow = table.LastOrDefault();
     IterationRow row;
     ReduceRepeatingIteration = 0;
-    IterationAllRepeatingCount = 1;
+    AllRepeatingCount = 1;
     long countPrevious = 0;
     bool hasError = false;
     try
@@ -85,7 +85,7 @@ partial class MainForm
         countRows = (long)EditMaxMotifs.Value;
       }
       // Loop
-      for ( ; IterationAllRepeatingCount > 0; ReduceRepeatingIteration++ )
+      for ( ; AllRepeatingCount > 0; ReduceRepeatingIteration++ )
       {
         EditLog.Invoke(() => EditLog.AppendText("ITERATION #" + ReduceRepeatingIteration + Globals.NL));
         // Init current row
@@ -104,7 +104,7 @@ partial class MainForm
             countPrevious = (long)lastRow.AllRepeatingCount;
           }
           if ( iteratingStep == ReduceIteratingStep.Adding )
-            IterationAllRepeatingCount = (long)row.AllRepeatingCount;
+            AllRepeatingCount = (long)row.AllRepeatingCount;
         }
         LoadIterationGrid();
         // Count repeating motifs
@@ -134,12 +134,12 @@ partial class MainForm
           Operation = OperationType.Degrouped;
           // Counting all repeating
           Operation = OperationType.CountingAllRepeating;
-          IterationAllRepeatingCount = SqlHelper.CountAllRepeatingMotifs(DB);
+          AllRepeatingCount = SqlHelper.CountAllRepeatingMotifs(DB);
           Globals.ChronoSubBatch.Stop();
           WriteLogTime(true);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.CountedAllRepeating;
-          row.AllRepeatingCount = IterationAllRepeatingCount;
+          row.AllRepeatingCount = AllRepeatingCount;
           // Calculate rates and update row
           row.RepeatingRate = row.AllRepeatingCount == 0
             ? 0
@@ -154,11 +154,11 @@ partial class MainForm
           row.ElapsedCounting = Globals.ChronoSubBatch.Elapsed;
           DB.Update(row);
           LoadIterationGrid();
-          if ( ReduceRepeatingIteration > 0 && IterationAllRepeatingCount > countPrevious
+          if ( ReduceRepeatingIteration > 0 && AllRepeatingCount > countPrevious
             && !DisplayManager.QueryYesNo(string.Format(AppTranslations.AskStartNextIfMore,
                                                         ReduceRepeatingIteration,
                                                         countPrevious,
-                                                        IterationAllRepeatingCount)) )
+                                                        AllRepeatingCount)) )
           {
             Globals.CancelRequired = true;
             break;
@@ -166,12 +166,12 @@ partial class MainForm
           if ( iteratingStep != ReduceIteratingStep.Next )
             iteratingStep = ReduceIteratingStep.Next;
         }
-        countPrevious = IterationAllRepeatingCount;
+        countPrevious = AllRepeatingCount;
         // Add position to repeating motifs
         if ( !CheckIfBatchCanContinueAsync().Result ) break;
         if ( iteratingStep == ReduceIteratingStep.Next || iteratingStep == ReduceIteratingStep.Adding )
         {
-          if ( IterationAllRepeatingCount > 0 )
+          if ( AllRepeatingCount > 0 )
           {
             Operation = OperationType.Adding;
             Globals.ChronoSubBatch.Restart();

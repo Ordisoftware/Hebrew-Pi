@@ -14,7 +14,7 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-class SqlHelperNoTempInMotif : SqlHelperBase
+class SqlNoTempInMotif : SqlBase
 {
 
   public override void CreateAllRepeatingMotifsTempTable(SQLiteNetORM DB)

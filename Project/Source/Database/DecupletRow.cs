@@ -28,14 +28,20 @@ public class DecupletRow
 
   public long Motif { get; set; }
 
-  //public string Fragments { get; set; } = string.Empty;
+  //public string Fragments { get; set; }
 
-  //public string Hebrew { get; set; } = string.Empty;
+  //public string Hebrew { get; set; }
 
-  //public string Translation { get; set; } = string.Empty;
+  //public string Translation { get; set; }
 
-  //public string Comment { get; set; } = string.Empty;
+  //public string Comment { get; set; }
 
   //public DateTime? DateModified { get; set; }
 
+}
+
+public class PositionWithMotifRow
+{
+  public long Position { get; set; }
+  public long Motif { get; set; }
 }
