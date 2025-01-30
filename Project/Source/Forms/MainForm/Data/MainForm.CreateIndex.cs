@@ -30,7 +30,7 @@ partial class MainForm
     Globals.ChronoSubBatch.Stop();
     if ( !CheckIfBatchCanContinueAsync().Result ) return;
     Operation = OperationType.Indexed;
-    IsMotifIndexed = DB?.CheckIndex("Decuplets_Motif") ?? false;
+    IsMotifColumnIndexed = DB?.CheckIndex("Decuplets_Motif") ?? false;
   }
 
 }

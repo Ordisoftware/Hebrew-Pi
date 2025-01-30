@@ -33,6 +33,7 @@
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.PanelDatabase = new System.Windows.Forms.Panel();
+      this.SelectSqlHelper = new System.Windows.Forms.ComboBox();
       this.SelectMemoryTempStore = new System.Windows.Forms.CheckBox();
       this.label1 = new System.Windows.Forms.Label();
       this.EditTempDir = new System.Windows.Forms.TextBox();
@@ -223,6 +224,7 @@
       // 
       // PanelDatabase
       // 
+      this.PanelDatabase.Controls.Add(this.SelectSqlHelper);
       this.PanelDatabase.Controls.Add(this.SelectMemoryTempStore);
       this.PanelDatabase.Controls.Add(this.label1);
       this.PanelDatabase.Controls.Add(this.EditTempDir);
@@ -236,6 +238,17 @@
       this.PanelDatabase.Name = "PanelDatabase";
       this.PanelDatabase.Size = new System.Drawing.Size(939, 40);
       this.PanelDatabase.TabIndex = 1;
+      // 
+      // SelectSqlHelper
+      // 
+      this.SelectSqlHelper.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.SelectSqlHelper.FormattingEnabled = true;
+      this.SelectSqlHelper.Location = new System.Drawing.Point(765, 5);
+      this.SelectSqlHelper.Name = "SelectSqlHelper";
+      this.SelectSqlHelper.Size = new System.Drawing.Size(166, 21);
+      this.SelectSqlHelper.TabIndex = 7;
+      this.SelectSqlHelper.SelectedIndexChanged += new System.EventHandler(this.SelectSqlHelper_SelectedIndexChanged);
+      this.SelectSqlHelper.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.SelectSqlHelper_Format);
       // 
       // SelectMemoryTempStore
       // 
@@ -276,7 +289,7 @@
       // 
       // ActionFixDigitsMissingIn100GB
       // 
-      this.ActionFixDigitsMissingIn100GB.Location = new System.Drawing.Point(795, 4);
+      this.ActionFixDigitsMissingIn100GB.Location = new System.Drawing.Point(620, 4);
       this.ActionFixDigitsMissingIn100GB.Name = "ActionFixDigitsMissingIn100GB";
       this.ActionFixDigitsMissingIn100GB.Size = new System.Drawing.Size(139, 23);
       this.ActionFixDigitsMissingIn100GB.TabIndex = 2;
@@ -2216,5 +2229,6 @@
     private TextBox EditLog;
     private CheckBox SelectMemoryTempStore;
     private CheckBox SelectCountAllRows;
+    private ComboBox SelectSqlHelper;
   }
 }

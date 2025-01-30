@@ -14,12 +14,6 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-//using SQLHelper = SQLHelper_NoTemp_InMotif;
-//using SQLHelper = SQLHelper_WithTemp_InPos;
-using SQLHelper = SQLHelper_WithTemp_InPos_PK;
-//using SQLHelper = SQLHelper_WithTemp_InMotif;
-//using SQLHelper = SQLHelper_WithTemp_InMotif_PK;
-
 /// <summary>
 /// Provides application's main form.
 /// </summary>
@@ -27,31 +21,11 @@ using SQLHelper = SQLHelper_WithTemp_InPos_PK;
 partial class MainForm
 {
 
-  enum IteratingStep { Next, Counting, Adding }
-
-  private long IterationAllRepeatingCount;
-  //private long RepeatingAddedCount;
-
-  private async void WriteLog(string str)
-  {
-    EditLog.Invoke(() => EditLog.AppendText(str));
-  }
-
-  private async void WriteLogLine(string str = "")
-  {
-    WriteLog(str + Globals.NL);
-  }
-
-  private async void WriteLogTime(bool isSubBatch)
-  {
-    WriteLogLine(( isSubBatch ? "    " : string.Empty ) +
-                 Operation.ToString() + ": " +
-                 Globals.ChronoSubBatch.Elapsed.AsReadable());
-  }
+  enum ReduceIteratingStep { Next, Counting, Adding }
 
   private async Task DoActionReduceRepeatingAsync()
   {
-    IteratingStep iteratingStep = IteratingStep.Next;
+    ReduceIteratingStep iteratingStep = ReduceIteratingStep.Next;
     var table = DB.Table<IterationRow>().ToList();
     IterationRow lastRow = table.LastOrDefault();
     IterationRow row;
@@ -66,7 +40,7 @@ partial class MainForm
       {
         ReduceRepeatingIteration = lastRow.Iteration;
         if ( lastRow.ElapsedCounting is null )
-          iteratingStep = IteratingStep.Counting;
+          iteratingStep = ReduceIteratingStep.Counting;
         else
         if ( lastRow.ElapsedAdding is null )
         {
@@ -76,7 +50,7 @@ partial class MainForm
           lastRow.RemainingRate = null;
           lastRow.RepeatingRate = null;
           lastRow.ElapsedCounting = null;
-          iteratingStep = IteratingStep.Counting;
+          iteratingStep = ReduceIteratingStep.Counting;
           DB.Update(lastRow);
           LoadIterationGrid();
         }
@@ -116,7 +90,7 @@ partial class MainForm
         EditLog.Invoke(() => EditLog.AppendText("ITERATION #" + ReduceRepeatingIteration + Globals.NL));
         // Init current row
         if ( !CheckIfBatchCanContinueAsync().Result ) break;
-        if ( iteratingStep == IteratingStep.Next )
+        if ( iteratingStep == ReduceIteratingStep.Next )
         {
           row = new IterationRow { Iteration = ReduceRepeatingIteration };
           DB.Insert(row);
@@ -129,24 +103,24 @@ partial class MainForm
             lastRow = table[table.Count - 2];
             countPrevious = (long)lastRow.AllRepeatingCount;
           }
-          if ( iteratingStep == IteratingStep.Adding )
+          if ( iteratingStep == ReduceIteratingStep.Adding )
             IterationAllRepeatingCount = (long)row.AllRepeatingCount;
         }
         LoadIterationGrid();
         // Count repeating motifs
         if ( !CheckIfBatchCanContinueAsync().Result ) break;
-        if ( iteratingStep == IteratingStep.Next || iteratingStep == IteratingStep.Counting )
+        if ( iteratingStep == ReduceIteratingStep.Next || iteratingStep == ReduceIteratingStep.Counting )
         {
           Globals.ChronoSubBatch.Restart();
           // Grouping unique repeating
           Operation = OperationType.Grouping;
-          SQLHelper.CreateUniqueRepeatingMotifsTempTable(DB);
+          SqlHelper.CreateUniqueRepeatingMotifsTempTable(DB);
           WriteLogTime(true);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.Grouped;
           // Counting unique repeating
           Operation = OperationType.CountingUniqueRepeating;
-          var list = SQLHelper.GetUniqueRepeatingStats(DB);
+          var list = SqlHelper.GetUniqueRepeatingStats(DB);
           WriteLogTime(true);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.CountedUniqueRepeating;
@@ -154,13 +128,13 @@ partial class MainForm
           row.UniqueRepeatingCount = list[0].CountMotifs;
           //Degrouping all repeating
           Operation = OperationType.Degrouping;
-          SQLHelper.CreateAllRepeatingMotifsTempTable(DB);
+          SqlHelper.CreateAllRepeatingMotifsTempTable(DB);
           WriteLogTime(true);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.Degrouped;
           // Counting all repeating
           Operation = OperationType.CountingAllRepeating;
-          IterationAllRepeatingCount = SQLHelper.CountAllRepeatingMotifs(DB);
+          IterationAllRepeatingCount = SqlHelper.CountAllRepeatingMotifs(DB);
           Globals.ChronoSubBatch.Stop();
           WriteLogTime(true);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
@@ -189,19 +163,19 @@ partial class MainForm
             Globals.CancelRequired = true;
             break;
           }
-          if ( iteratingStep != IteratingStep.Next )
-            iteratingStep = IteratingStep.Next;
+          if ( iteratingStep != ReduceIteratingStep.Next )
+            iteratingStep = ReduceIteratingStep.Next;
         }
         countPrevious = IterationAllRepeatingCount;
         // Add position to repeating motifs
         if ( !CheckIfBatchCanContinueAsync().Result ) break;
-        if ( iteratingStep == IteratingStep.Next || iteratingStep == IteratingStep.Adding )
+        if ( iteratingStep == ReduceIteratingStep.Next || iteratingStep == ReduceIteratingStep.Adding )
         {
           if ( IterationAllRepeatingCount > 0 )
           {
             Operation = OperationType.Adding;
             Globals.ChronoSubBatch.Restart();
-            long count = SQLHelper.AddPositionToRepeatingMotifs(DB);
+            long count = SqlHelper.AddPositionToRepeatingMotifs(DB);
             Globals.ChronoSubBatch.Stop();
             WriteLogTime(false);
             WriteLogLine();
@@ -225,8 +199,8 @@ partial class MainForm
             DB.Update(row);
             LoadIterationGrid();
           }
-          if ( iteratingStep != IteratingStep.Next )
-            iteratingStep = IteratingStep.Next;
+          if ( iteratingStep != ReduceIteratingStep.Next )
+            iteratingStep = ReduceIteratingStep.Next;
         }
         if ( !EditNormalizeAutoLoop.Checked ) break;
       }

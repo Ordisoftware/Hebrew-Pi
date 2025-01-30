@@ -57,12 +57,19 @@ partial class MainForm : Form
     DoFormLoad(sender, e);
     TimerMemory_Tick(null, null);
     InitializeListBoxCacheSize();
-    InitializeListBoxPiDecimals();
+    InitializeComboBoxSqlHelper();
   }
 
   const ulong MemorySizeInKiB = 1024;
   const ulong MemorySizeInMiB = MemorySizeInKiB * 1024;
   const ulong MemorySizeInGiB = MemorySizeInMiB * 1024;
+
+  private void InitializeComboBoxSqlHelper()
+  {
+    foreach ( var item in SqlHelperList )
+      SelectSqlHelper.Items.Add(item);
+    SelectSqlHelper.SelectedIndex = 0;
+  }
 
   private void InitializeListBoxPiDecimals()
   {
@@ -225,6 +232,16 @@ partial class MainForm : Form
     CanForceTerminateBatch = EditAllowInterruption.Checked;
   }
 
+  private void SelectSqlHelper_Format(object sender, ListControlConvertEventArgs e)
+  {
+    e.Value = e.Value.GetType().Name;
+  }
+
+  private void SelectSqlHelper_SelectedIndexChanged(object sender, EventArgs e)
+  {
+    SqlHelper = (SqlHelperBase)SelectSqlHelper.SelectedItem;
+  }
+
   private void SelectDbCache_SelectedIndexChanged(object sender, EventArgs e)
   {
     SetDbCache();
@@ -241,7 +258,7 @@ partial class MainForm : Form
     {
       if ( File.Exists(SaveFileDialogDB.FileName) )
         File.Delete(SaveFileDialogDB.FileName);
-      DoActionDbOpenAsync(SaveFileDialogDB.FileName);
+      DoBatchAsync(() => DoActionDbOpenAsync(SaveFileDialogDB.FileName));
     }
   }
 

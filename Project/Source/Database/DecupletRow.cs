@@ -26,21 +26,16 @@ public class DecupletRow
   [PrimaryKey]
   public long Position { get; set; }
 
-  [NotNull]
   public long Motif { get; set; }
 
-  [NotNull]
-  public string Fragments { get; set; } = string.Empty;
+  //public string Fragments { get; set; } = string.Empty;
 
-  [NotNull]
-  public string Hebrew { get; set; } = string.Empty;
+  //public string Hebrew { get; set; } = string.Empty;
 
-  [NotNull]
-  public string Translation { get; set; } = string.Empty;
+  //public string Translation { get; set; } = string.Empty;
 
-  [NotNull]
-  public string Comment { get; set; } = string.Empty;
+  //public string Comment { get; set; } = string.Empty;
 
-  public DateTime? DateModified { get; set; }
+  //public DateTime? DateModified { get; set; }
 
 }

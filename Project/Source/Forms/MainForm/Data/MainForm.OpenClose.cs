@@ -38,7 +38,7 @@ partial class MainForm
     SetDbCache();
     DB.CreateTable<DecupletRow>();
     DB.CreateTable<IterationRow>();
-    IsMotifIndexed = DB.CheckIndex("Decuplets_Motif");
+    IsMotifColumnIndexed = DB.CheckIndex("Decuplets_Motif");
     Globals.ChronoBatch.Stop();
     Operation = OperationType.Opened;
     LabelTitleCenter.Invoke(() => LabelTitleCenter.Text = Path.GetFileName(path));

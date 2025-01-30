@@ -92,7 +92,7 @@ partial class MainForm
       ActionDbClose.Enabled = dbOnenedAndNotInBatch;
       ActionCreateData.Enabled = dbOnenedAndNotInBatch;
       ActionNormalize.Enabled = dbOnenedAndNotInBatch;
-      ActionCreateIndex.Enabled = dbOnenedAndNotInBatch && !IsMotifIndexed;
+      ActionCreateIndex.Enabled = dbOnenedAndNotInBatch && !IsMotifColumnIndexed;
       ActionStop.Enabled = dbOnenedAndInBatch && Globals.CanCancel;
       ActionPause.Enabled = ( dbOnenedAndInBatch && Globals.CanPause && !Globals.PauseRequired )
                          || ( dbOnenedAndInBatch && Globals.PauseRequired );

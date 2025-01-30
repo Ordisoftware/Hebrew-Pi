@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-
-/// <license>
+﻿/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
 /// Copyright 2025 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
@@ -27,9 +25,20 @@ partial class MainForm
 
   private const int PiDecimalMotifSize = 10;
 
+  private SqlHelperBase[] SqlHelperList =
+  [
+    new SqlHelperNoTempInMotif(),
+    new SqlHelperWithTempInPos(),
+    new SqlHelperWithTempInPosPK(),
+    new SqlHelperWithTempInMotif(),
+    new SqlHelperWithTempInMotifPK()
+  ];
+
+  private SqlHelperBase SqlHelper;
+
   private SQLiteNetORM DB;
 
-  private string DatabaseFilePath;
+  private volatile string DatabaseFilePath;
 
   private long PiDecimalsFileSize
   {
@@ -52,6 +61,13 @@ partial class MainForm
   }
   private long _ReduceRepeatingIteration;
 
+  private long IterationAllRepeatingCount
+  {
+    get => Interlocked.Read(ref _IterationAllRepeatingCount);
+    set => Interlocked.Exchange(ref _IterationAllRepeatingCount, value);
+  }
+  private long _IterationAllRepeatingCount;
+
   private long DecupletsRowCount
   {
     get => Interlocked.Read(ref _DecupletsRowCount);
@@ -71,5 +87,9 @@ partial class MainForm
   private volatile OperationType Operation;
 
   private volatile Exception Except;
+
+  private volatile bool IsMotifColumnIndexed;
+
+  private volatile bool BatchMutex;
 
 }

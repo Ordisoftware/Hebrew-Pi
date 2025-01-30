@@ -24,10 +24,24 @@ using Microsoft.WindowsAPICodePack.Taskbar;
 partial class MainForm
 {
 
-  private bool IsMotifIndexed;
-
   [DllImport("e_sqlite3", CallingConvention = CallingConvention.Cdecl)]
   public static extern void sqlite3_interrupt(IntPtr db);
+
+  private async void WriteLog(string str)
+  {
+    EditLog.Invoke(() => EditLog.AppendText(str));
+  }
+
+  private async void WriteLogLine(string str = "")
+  {
+    WriteLog(str + Globals.NL);
+  }
+
+  private async void WriteLogTime(bool isSubBatch)
+  {
+    string time = Globals.ChronoSubBatch.Elapsed.AsReadable();
+    WriteLogLine($"{( isSubBatch ? "    " : string.Empty )}{Operation.ToString()}: {time}");
+  }
 
   private void LoadIterationGrid()
   {
@@ -40,7 +54,8 @@ partial class MainForm
 
   private async Task DoBatchAsync(Action action, bool interruptible = true)
   {
-    if ( Processing != ProcessingType.None ) return;
+    if ( BatchMutex ) return;
+    BatchMutex = true;
     try
     {
       SetBatchState(true, interruptible);
@@ -50,6 +65,7 @@ partial class MainForm
     }
     finally
     {
+      BatchMutex = false;
       Globals.ChronoBatch.Stop();
       Globals.ChronoSubBatch.Stop();
       SetBatchState(false);
