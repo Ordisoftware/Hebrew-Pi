@@ -135,14 +135,6 @@
       this.ActionPause = new System.Windows.Forms.Button();
       this.ActionCreateIndex = new System.Windows.Forms.Button();
       this.GridIterations = new System.Windows.Forms.DataGridView();
-      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnAllRepeatingCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnRepeatingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnUniqueRepeatingCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnRemainingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnElapsedCounting = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnElapsedAdding = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
       this.TabPageGrid = new System.Windows.Forms.TabPage();
       this.PanelViewGrid = new System.Windows.Forms.Panel();
@@ -201,6 +193,14 @@
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
+      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnAllRepeatingCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnRepeatingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnRemainingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnUniqueRepeatingCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnElapsedCounting = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnElapsedAdding = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -1282,9 +1282,9 @@
             this.ColumnIteration,
             this.ColumnAllRepeatingCount,
             this.ColumnRepeatingRate,
+            this.ColumnRemainingRate,
             this.ColumnUniqueRepeatingCount,
             this.ColumnMaxOccurences,
-            this.ColumnRemainingRate,
             this.ColumnElapsedCounting,
             this.ColumnElapsedAdding});
       this.GridIterations.DataSource = this.BindingSourceIterationRow;
@@ -1300,78 +1300,6 @@
       this.GridIterations.TabIndex = 0;
       this.GridIterations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridIterations_CellFormatting);
       this.GridIterations.Leave += new System.EventHandler(this.GridIterations_Leave);
-      // 
-      // ColumnIteration
-      // 
-      this.ColumnIteration.DataPropertyName = "Iteration";
-      this.ColumnIteration.FillWeight = 126.9036F;
-      this.ColumnIteration.HeaderText = "Iteration";
-      this.ColumnIteration.Name = "ColumnIteration";
-      this.ColumnIteration.ReadOnly = true;
-      this.ColumnIteration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnIteration.Width = 55;
-      // 
-      // ColumnAllRepeatingCount
-      // 
-      this.ColumnAllRepeatingCount.DataPropertyName = "AllRepeatingCount";
-      this.ColumnAllRepeatingCount.HeaderText = "Total Reps";
-      this.ColumnAllRepeatingCount.Name = "ColumnAllRepeatingCount";
-      this.ColumnAllRepeatingCount.ReadOnly = true;
-      this.ColumnAllRepeatingCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      // 
-      // ColumnRepeatingRate
-      // 
-      this.ColumnRepeatingRate.DataPropertyName = "RepeatingRate";
-      this.ColumnRepeatingRate.HeaderText = "Rate";
-      this.ColumnRepeatingRate.Name = "ColumnRepeatingRate";
-      this.ColumnRepeatingRate.ReadOnly = true;
-      this.ColumnRepeatingRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnRepeatingRate.Width = 50;
-      // 
-      // ColumnUniqueRepeatingCount
-      // 
-      this.ColumnUniqueRepeatingCount.DataPropertyName = "UniqueRepeatingCount";
-      this.ColumnUniqueRepeatingCount.HeaderText = "Unique Reps";
-      this.ColumnUniqueRepeatingCount.Name = "ColumnUniqueRepeatingCount";
-      this.ColumnUniqueRepeatingCount.ReadOnly = true;
-      this.ColumnUniqueRepeatingCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      // 
-      // ColumnMaxOccurences
-      // 
-      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
-      this.ColumnMaxOccurences.FillWeight = 93.27411F;
-      this.ColumnMaxOccurences.HeaderText = "Max";
-      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
-      this.ColumnMaxOccurences.ReadOnly = true;
-      this.ColumnMaxOccurences.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnMaxOccurences.Width = 40;
-      // 
-      // ColumnRemainingRate
-      // 
-      this.ColumnRemainingRate.DataPropertyName = "RemainingRate";
-      this.ColumnRemainingRate.HeaderText = "Remaining";
-      this.ColumnRemainingRate.Name = "ColumnRemainingRate";
-      this.ColumnRemainingRate.ReadOnly = true;
-      this.ColumnRemainingRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnRemainingRate.Width = 65;
-      // 
-      // ColumnElapsedCounting
-      // 
-      this.ColumnElapsedCounting.DataPropertyName = "ElapsedCounting";
-      this.ColumnElapsedCounting.HeaderText = "Counting";
-      this.ColumnElapsedCounting.Name = "ColumnElapsedCounting";
-      this.ColumnElapsedCounting.ReadOnly = true;
-      this.ColumnElapsedCounting.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnElapsedCounting.Width = 90;
-      // 
-      // ColumnElapsedAdding
-      // 
-      this.ColumnElapsedAdding.DataPropertyName = "ElapsedAdding";
-      this.ColumnElapsedAdding.HeaderText = "Adding";
-      this.ColumnElapsedAdding.Name = "ColumnElapsedAdding";
-      this.ColumnElapsedAdding.ReadOnly = true;
-      this.ColumnElapsedAdding.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnElapsedAdding.Width = 90;
       // 
       // BindingSourceIterationRow
       // 
@@ -2015,6 +1943,78 @@
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
       // 
+      // ColumnIteration
+      // 
+      this.ColumnIteration.DataPropertyName = "Iteration";
+      this.ColumnIteration.FillWeight = 126.9036F;
+      this.ColumnIteration.HeaderText = "Iteration";
+      this.ColumnIteration.Name = "ColumnIteration";
+      this.ColumnIteration.ReadOnly = true;
+      this.ColumnIteration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnIteration.Width = 55;
+      // 
+      // ColumnAllRepeatingCount
+      // 
+      this.ColumnAllRepeatingCount.DataPropertyName = "AllRepeatingCount";
+      this.ColumnAllRepeatingCount.HeaderText = "Total Reps";
+      this.ColumnAllRepeatingCount.Name = "ColumnAllRepeatingCount";
+      this.ColumnAllRepeatingCount.ReadOnly = true;
+      this.ColumnAllRepeatingCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      // 
+      // ColumnRepeatingRate
+      // 
+      this.ColumnRepeatingRate.DataPropertyName = "RepeatingRate";
+      this.ColumnRepeatingRate.HeaderText = "Rate";
+      this.ColumnRepeatingRate.Name = "ColumnRepeatingRate";
+      this.ColumnRepeatingRate.ReadOnly = true;
+      this.ColumnRepeatingRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnRepeatingRate.Width = 50;
+      // 
+      // ColumnRemainingRate
+      // 
+      this.ColumnRemainingRate.DataPropertyName = "RemainingRate";
+      this.ColumnRemainingRate.HeaderText = "Remaining";
+      this.ColumnRemainingRate.Name = "ColumnRemainingRate";
+      this.ColumnRemainingRate.ReadOnly = true;
+      this.ColumnRemainingRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnRemainingRate.Width = 65;
+      // 
+      // ColumnUniqueRepeatingCount
+      // 
+      this.ColumnUniqueRepeatingCount.DataPropertyName = "UniqueRepeatingCount";
+      this.ColumnUniqueRepeatingCount.HeaderText = "Unique Reps";
+      this.ColumnUniqueRepeatingCount.Name = "ColumnUniqueRepeatingCount";
+      this.ColumnUniqueRepeatingCount.ReadOnly = true;
+      this.ColumnUniqueRepeatingCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      // 
+      // ColumnMaxOccurences
+      // 
+      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
+      this.ColumnMaxOccurences.FillWeight = 93.27411F;
+      this.ColumnMaxOccurences.HeaderText = "Max";
+      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
+      this.ColumnMaxOccurences.ReadOnly = true;
+      this.ColumnMaxOccurences.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnMaxOccurences.Width = 40;
+      // 
+      // ColumnElapsedCounting
+      // 
+      this.ColumnElapsedCounting.DataPropertyName = "ElapsedCounting";
+      this.ColumnElapsedCounting.HeaderText = "Counting";
+      this.ColumnElapsedCounting.Name = "ColumnElapsedCounting";
+      this.ColumnElapsedCounting.ReadOnly = true;
+      this.ColumnElapsedCounting.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnElapsedCounting.Width = 90;
+      // 
+      // ColumnElapsedAdding
+      // 
+      this.ColumnElapsedAdding.DataPropertyName = "ElapsedAdding";
+      this.ColumnElapsedAdding.HeaderText = "Adding";
+      this.ColumnElapsedAdding.Name = "ColumnElapsedAdding";
+      this.ColumnElapsedAdding.ReadOnly = true;
+      this.ColumnElapsedAdding.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnElapsedAdding.Width = 90;
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2217,18 +2217,18 @@
     private Label label1;
     private TextBox EditTempDir;
     private ToolStripSeparator toolStripSeparator3;
-    private DataGridViewTextBoxColumn ColumnIteration;
-    private DataGridViewTextBoxColumn ColumnAllRepeatingCount;
-    private DataGridViewTextBoxColumn ColumnRepeatingRate;
-    private DataGridViewTextBoxColumn ColumnUniqueRepeatingCount;
-    private DataGridViewTextBoxColumn ColumnMaxOccurences;
-    private DataGridViewTextBoxColumn ColumnRemainingRate;
-    private DataGridViewTextBoxColumn ColumnElapsedCounting;
-    private DataGridViewTextBoxColumn ColumnElapsedAdding;
     private Button ActionFixDigitsMissingIn100GB;
     private TextBox EditLog;
     private CheckBox SelectMemoryTempStore;
     private CheckBox SelectCountAllRows;
     private ComboBox SelectSqlHelper;
+    private DataGridViewTextBoxColumn ColumnIteration;
+    private DataGridViewTextBoxColumn ColumnAllRepeatingCount;
+    private DataGridViewTextBoxColumn ColumnRepeatingRate;
+    private DataGridViewTextBoxColumn ColumnRemainingRate;
+    private DataGridViewTextBoxColumn ColumnUniqueRepeatingCount;
+    private DataGridViewTextBoxColumn ColumnMaxOccurences;
+    private DataGridViewTextBoxColumn ColumnElapsedCounting;
+    private DataGridViewTextBoxColumn ColumnElapsedAdding;
   }
 }

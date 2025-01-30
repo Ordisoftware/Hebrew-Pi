@@ -30,11 +30,11 @@ public class IterationRow
 
   public double? RepeatingRate { get; set; }
 
+  public double? RemainingRate { get; set; }
+
   public long? UniqueRepeatingCount { get; set; }
 
   public long? MaxOccurences { get; set; }
-
-  public double? RemainingRate { get; set; }
 
   public TimeSpan? ElapsedCounting { get; set; }
 
