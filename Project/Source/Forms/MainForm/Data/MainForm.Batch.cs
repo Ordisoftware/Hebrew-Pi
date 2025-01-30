@@ -111,7 +111,7 @@ partial class MainForm
       Globals.ChronoBatch.Start();
   }
 
-  private async Task<bool> CheckIfBatchCanContinueAsync()
+  internal async Task<bool> CheckIfBatchCanContinueAsync()
   {
     if ( Globals.CancelRequired ) return false;
     while ( Globals.PauseRequired && !Globals.CancelRequired )

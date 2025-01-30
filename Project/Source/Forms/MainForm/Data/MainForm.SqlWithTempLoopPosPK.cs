@@ -41,6 +41,7 @@ class SqlWithTempLoopPosPK : SqlBase
     List<PositionWithMotifRow> items = null;
     while ( true )
     {
+      if ( MainForm.Instance.CanForceTerminateBatch && !MainForm.Instance.CheckIfBatchCanContinueAsync().Result ) break;
       items = DB.Query<PositionWithMotifRow>($"select * from AllRepeatingMotifs limit {pagingCommit} offset {step}");
       if ( items.Count == 0 ) break;
       foreach ( var item in items )

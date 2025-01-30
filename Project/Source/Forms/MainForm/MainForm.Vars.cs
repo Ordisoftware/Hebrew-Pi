@@ -83,7 +83,7 @@ partial class MainForm
   }
   private long _DecupletsRowCount;
 
-  private bool CanForceTerminateBatch
+  internal bool CanForceTerminateBatch
   {
     get => Interlocked.CompareExchange(ref _CanForceTerminateBatch, 0, 0) == 1;
     set => Interlocked.Exchange(ref _CanForceTerminateBatch, value ? 1 : 0);
