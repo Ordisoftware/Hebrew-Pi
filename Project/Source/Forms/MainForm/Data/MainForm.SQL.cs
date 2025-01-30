@@ -14,7 +14,7 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-record struct CountMotifsAndMaxOccurences(long CountMotifs, long MaxOccurrences);
+using CountMotifsAndMaxOccurences = (long CountMotifs, long MaxOccurrences);
 
 abstract class SqlHelperBase
 {

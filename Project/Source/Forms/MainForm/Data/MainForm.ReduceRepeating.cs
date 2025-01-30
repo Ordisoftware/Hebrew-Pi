@@ -146,11 +146,11 @@ partial class MainForm
             : row.AllRepeatingCount == row.UniqueRepeatingCount
               ? 100
               : Math.Round((double)row.AllRepeatingCount * 100 / countRows, 2);
-          row.RemainingRate = row.UniqueRepeatingCount == 0
+          row.RemainingRate = row.AllRepeatingCount == 0
               ? 0
               : ReduceRepeatingIteration == 0
                 ? 100
-                : Math.Round((double)row.UniqueRepeatingCount * 100 / countPrevious, 2);
+                : Math.Round((double)row.AllRepeatingCount * 100 / countPrevious, 2);
           row.ElapsedCounting = Globals.ChronoSubBatch.Elapsed;
           DB.Update(row);
           LoadIterationGrid();
