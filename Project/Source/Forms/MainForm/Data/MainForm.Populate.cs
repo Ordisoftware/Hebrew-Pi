@@ -86,7 +86,7 @@ partial class MainForm
         maxLoopMotifs = charsRead - PiDecimalMotifSize;
         for ( int indexBuffer = 0; indexBuffer <= maxLoopMotifs; indexBuffer += PiDecimalMotifSize )
         {
-          if ( MotifsProcessedCount >= maxMotifsCount )
+          if ( MotifsProcessedCount >= maxMotifsCount || !CheckIfBatchCanContinueAsync().Result )
             maxReached = true;
           else
           {
@@ -100,11 +100,7 @@ partial class MainForm
             MotifsProcessedCount++;
             DB.Insert(new DecupletRow { Position = MotifsProcessedCount, Motif = motif });
             if ( MotifsProcessedCount % pagingCommit == 0 )
-            {
               DoCommit(true);
-              if ( !CheckIfBatchCanContinueAsync().Result )
-                maxReached = true;
-            }
           }
         }
       }
