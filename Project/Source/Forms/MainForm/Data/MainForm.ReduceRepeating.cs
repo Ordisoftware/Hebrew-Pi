@@ -66,13 +66,13 @@ partial class MainForm
       EditLog.Invoke(EditLog.Clear);
       Processing = ProcessingType.ReduceRepeating;
       // Count all rows
-      long countRows = 0;
+      long countAllRows = 0;
       if ( SelectCountAllRows.Checked )
       {
         Globals.ChronoBatch.Restart();
         Operation = OperationType.CountingAllRows;
         Globals.ChronoSubBatch.Restart();
-        countRows = DB.ExecuteScalar<long>($"SELECT COUNT(*) FROM [{DecupletRow.TableName}]");
+        countAllRows = DB.ExecuteScalar<long>($"SELECT COUNT(*) FROM [{DecupletRow.TableName}]");
         Globals.ChronoSubBatch.Stop();
         WriteLogTime(false);
         WriteLogLine();
@@ -82,7 +82,7 @@ partial class MainForm
       else
       {
         Globals.ChronoBatch.Restart();
-        countRows = (long)EditMaxMotifs.Value;
+        countAllRows = (long)EditMaxMotifs.Value;
       }
       // Loop
       for ( ; AllRepeatingCount > 0; ReduceRepeatingIteration++ )
@@ -145,7 +145,7 @@ partial class MainForm
             ? 0
             : row.AllRepeatingCount == row.UniqueRepeatingCount
               ? 100
-              : Math.Round((double)row.AllRepeatingCount * 100 / countRows, 2);
+              : Math.Round((double)row.AllRepeatingCount * 100 / countAllRows, 2);
           row.RemainingRate = row.AllRepeatingCount == 0
               ? 0
               : ReduceRepeatingIteration == 0
@@ -178,14 +178,13 @@ partial class MainForm
             long count = SqlHelper.AddPositionToRepeatingMotifs(DB);
             Globals.ChronoSubBatch.Stop();
             WriteLogTime(false);
-            WriteLogLine();
             if ( !CheckIfBatchCanContinueAsync().Result ) break;
             if ( row.AllRepeatingCount != count )
             {
-              WriteLogLine("Counted: " + row.AllRepeatingCount);
-              WriteLogLine("Added: " + count);
-              WriteLogLine();
+              WriteLogLine("    Counted: " + row.AllRepeatingCount);
+              WriteLogLine("    Added: " + count);
             }
+            WriteLogLine();
             Operation = OperationType.Added;
             row.ElapsedAdding = Globals.ChronoSubBatch.Elapsed;
             DB.Update(row);
