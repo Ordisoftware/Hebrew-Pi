@@ -25,14 +25,13 @@ partial class MainForm
 
   private const int PiDecimalMotifSize = 10;
 
-  private SqlBase[] SqlHelperList =
+  private SqlReduceRepeating[] SqlHelperList =
   [
-    new SqlWithTempInPosPK(),
-    new SqlWithTempInMotif(),
-    new SqlWithTempLoopPosPK()
+    new SqlReduceRepeatingAll(),
+    new SqlReduceRepeatingLoop()
   ];
 
-  private SqlBase SqlHelper;
+  private SqlReduceRepeating SqlHelper;
 
   private SQLiteNetORM DB;
 

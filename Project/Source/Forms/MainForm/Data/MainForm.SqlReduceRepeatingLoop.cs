@@ -1,4 +1,6 @@
-﻿/// <license>
+﻿using SQLite;
+
+/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
 /// Copyright 2025 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
@@ -14,7 +16,7 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-class SqlWithTempInPosPK : SqlBase
+class SqlReduceRepeatingLoop : SqlReduceRepeating
 {
 
   public override void CreateAllRepeatingMotifsTempTable(SQLiteNetORM DB)
@@ -35,10 +37,33 @@ class SqlWithTempInPosPK : SqlBase
 
   public override long AddPositionToRepeatingMotifs(SQLiteNetORM DB)
   {
-    var sql = @"UPDATE Decuplets SET Motif = Motif + Position
-                WHERE Position IN (SELECT Position FROM AllRepeatingMotifs)";
-    int signedResult = DB.Execute(sql);
-    return unchecked((uint)signedResult);
+    const string querySelect = "select * from AllRepeatingMotifs limit {0} offset {1}";
+    const string queryUpdate = "UPDATE Decuplets SET Motif = Motif + Position WHERE Position = {0}";
+    long pagingCommit = MainForm.Instance.AllRepeatingCount > 10_000_100 ? 1_000_000 : 100_000;
+    long step = 0;
+    MainForm.Instance.RepeatingAddedCount = 0;
+    List<PositionWithMotifRow> items = null;
+    var cases = new StringBuilder();
+    var positions = new List<long>();
+    do
+    {
+      if ( !MainForm.Instance.CheckIfBatchCanContinueAsync().Result && DisplayManager.QueryYesNo("Cancel adding?") )
+        break;
+      items = DB.Query<PositionWithMotifRow>(string.Format(querySelect, pagingCommit, step));
+      DB.BeginTransaction();
+      MainForm.Instance.Operation = OperationType.Adding;
+      foreach ( var item in items )
+      {
+        DB.Execute(string.Format(queryUpdate, item.Position));
+        MainForm.Instance.RepeatingAddedCount++;
+      }
+      MainForm.Instance.Operation = OperationType.Committing;
+      DB.Commit();
+      MainForm.Instance.Operation = OperationType.Committed;
+      step += pagingCommit;
+    }
+    while ( items.Count != 0 );
+    return MainForm.Instance.RepeatingAddedCount;
   }
 
 }

@@ -14,7 +14,7 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-class SqlWithTempLoopPosPK : SqlBase
+class SqlReduceRepeatingAll : SqlReduceRepeating
 {
 
   public override void CreateAllRepeatingMotifsTempTable(SQLiteNetORM DB)
@@ -35,32 +35,10 @@ class SqlWithTempLoopPosPK : SqlBase
 
   public override long AddPositionToRepeatingMotifs(SQLiteNetORM DB)
   {
-    const string querySelect = "select * from AllRepeatingMotifs limit {0} offset {1}";
-    const string queryUpdate = "update Decuplets set Motif = Motif + Position where Position = {0}";
-    long pagingCommit = MainForm.Instance.AllRepeatingCount > 10_000_100 ? 1_000_000 : 100_000;
-    long step = 0;
-    MainForm.Instance.RepeatingAddedCount = 0;
-    List<PositionWithMotifRow> items = null;
-    var cases = new StringBuilder();
-    var positions = new List<long>();
-    do
-    {
-      if ( MainForm.Instance.CanForceTerminateBatch && !MainForm.Instance.CheckIfBatchCanContinueAsync().Result ) break;
-      items = DB.Query<PositionWithMotifRow>(string.Format(querySelect, pagingCommit, step));
-      DB.BeginTransaction();
-      MainForm.Instance.Operation = OperationType.Adding;
-      foreach ( var item in items )
-      {
-        DB.Execute(string.Format(queryUpdate, item.Position));
-        MainForm.Instance.RepeatingAddedCount++;
-      }
-      MainForm.Instance.Operation = OperationType.Committing;
-      DB.Commit();
-      MainForm.Instance.Operation = OperationType.Committed;
-      step += pagingCommit;
-    }
-    while ( items.Count != 0 );
-    return MainForm.Instance.RepeatingAddedCount;
+    var sql = @"UPDATE Decuplets SET Motif = Motif + Position
+                WHERE Position IN (SELECT Position FROM AllRepeatingMotifs)";
+    int signedResult = DB.Execute(sql);
+    return unchecked((uint)signedResult);
   }
 
 }

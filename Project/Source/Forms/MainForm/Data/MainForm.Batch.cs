@@ -100,15 +100,26 @@ partial class MainForm
       sqlite3_interrupt(DB.Handle.DangerousGetHandle());
   }
 
+  private bool ChronoBatchPaused;
+  private bool ChronoSubBatchPaused;
+
   private void DoActionPauseContinue()
   {
     Globals.PauseRequired = !Globals.PauseRequired;
     TaskbarManager.Instance.SetProgressState(Globals.PauseRequired ? TaskbarProgressBarState.Paused : TaskbarProgressBarState.Normal);
     UpdateButtons();
     if ( Globals.PauseRequired )
+    {
+      ChronoBatchPaused = Globals.ChronoBatch.IsRunning;
+      ChronoSubBatchPaused = Globals.ChronoSubBatch.IsRunning;
       Globals.ChronoBatch.Stop();
+      Globals.ChronoSubBatch.Stop();
+    }
     else
-      Globals.ChronoBatch.Start();
+    {
+      if ( ChronoBatchPaused ) Globals.ChronoBatch.Start();
+      if ( ChronoSubBatchPaused ) Globals.ChronoSubBatch.Start();
+    }
   }
 
   internal async Task<bool> CheckIfBatchCanContinueAsync()

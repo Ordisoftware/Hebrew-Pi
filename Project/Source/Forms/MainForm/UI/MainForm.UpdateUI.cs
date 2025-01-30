@@ -158,7 +158,7 @@ partial class MainForm
         break;
       case ProcessingType.ReduceRepeating:
         UpdateStatusAction(Operation.ToString());
-        if ( SqlHelper is not SqlWithTempLoopPosPK )
+        if ( SqlHelper is not SqlReduceRepeatingLoop )
         {
           UpdateStatusInfo(string.Format(AppTranslations.IterationText,
                                          ReduceRepeatingIteration,

@@ -240,7 +240,7 @@ partial class MainForm : Form
 
   private void SelectSqlHelper_SelectedIndexChanged(object sender, EventArgs e)
   {
-    SqlHelper = (SqlBase)SelectSqlHelper.SelectedItem;
+    SqlHelper = (SqlReduceRepeating)SelectSqlHelper.SelectedItem;
   }
 
   private void SelectDbCache_SelectedIndexChanged(object sender, EventArgs e)
