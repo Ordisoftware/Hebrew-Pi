@@ -56,6 +56,7 @@ partial class MainForm : Form
   {
     DoFormLoad(sender, e);
     TimerMemory_Tick(null, null);
+    InitializeListBoxPiDecimals();
     InitializeListBoxCacheSize();
     InitializeComboBoxSqlHelper();
   }

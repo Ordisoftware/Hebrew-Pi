@@ -37,7 +37,7 @@ partial class MainForm
     bool maxReached = false;
     int charsRead;
     int readBufferSize = PiDecimalsFileSize > 1_000_000_100 ? 100_000_000 : 10_000_000;
-    long pagingCommit = PiDecimalsFileSize > 1_00_000_100 ? 100_000_000 : 10_000_000;
+    long pagingCommit = PiDecimalsFileSize > 1_000_000_100 ? 100_000_000 : 10_000_000;
     long pagingCurrent;
     bool hasError = false;
     char[] buffer = new char[readBufferSize];
