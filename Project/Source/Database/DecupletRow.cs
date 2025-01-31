@@ -39,9 +39,3 @@ public class DecupletRow
   //public DateTime? DateModified { get; set; }
 
 }
-
-public class PositionWithMotifRow
-{
-  public long Position { get; set; }
-  public long Motif { get; set; }
-}
