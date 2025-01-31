@@ -22,22 +22,42 @@ abstract class SqlReduceRepeating
   public void CreateUniqueRepeatingMotifsTempTable(SQLiteNetORM DB)
   {
     DB.Execute("DROP TABLE IF EXISTS UniqueRepeatingMotifs");
-    var sql = @"CREATE TEMPORARY TABLE UniqueRepeatingMotifs AS
-                SELECT Motif, COUNT(*) AS Occurrences
-                FROM Decuplets
-                GROUP BY Motif
-                HAVING COUNT(*) > 1";
-    DB.Execute(sql);
+    DB.Execute("""
+               CREATE TEMPORARY TABLE UniqueRepeatingMotifs AS
+               SELECT Motif, COUNT(*) AS Occurrences
+               FROM Decuplets
+               GROUP BY Motif
+               HAVING COUNT(*) > 1
+               """);
   }
 
   public List<CountMotifsAndMaxOccurences> GetUniqueRepeatingStats(SQLiteNetORM DB)
   {
-    return DB.Query<CountMotifsAndMaxOccurences>("SELECT COUNT(*) AS UniqueRepeating, MAX(Occurrences) AS MaxOccurrences FROM UniqueRepeatingMotifs");
+    return DB.Query<CountMotifsAndMaxOccurences>("""
+                                                  SELECT
+                                                    COUNT(*) AS UniqueRepeating,
+                                                    MAX(Occurrences) AS MaxOccurrences
+                                                  FROM UniqueRepeatingMotifs
+                                                  """);
   }
 
-  abstract public void CreateAllRepeatingMotifsTempTable(SQLiteNetORM DB);
+  public void CreateAllRepeatingMotifsTempTable(SQLiteNetORM DB)
+  {
+    DB.Execute("DROP TABLE IF EXISTS AllRepeatingMotifs");
+    DB.Execute("CREATE TEMPORARY TABLE AllRepeatingMotifs (Position INTEGER PRIMARY KEY)");
+    DB.Execute("""
+               INSERT INTO AllRepeatingMotifs (Position)
+               SELECT Position
+               FROM Decuplets
+               WHERE Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)
+               """);
+  }
 
-  abstract public long CountAllRepeatingMotifs(SQLiteNetORM DB);
+  public long CountAllRepeatingMotifs(SQLiteNetORM DB)
+  {
+    return DB.ExecuteScalar<long>("SELECT COUNT(*) FROM AllRepeatingMotifs");
+  }
 
   abstract public long AddPositionToRepeatingMotifs(SQLiteNetORM DB);
+
 }

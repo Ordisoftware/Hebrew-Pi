@@ -1,6 +1,4 @@
-﻿using SQLite;
-
-/// <license>
+﻿/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
 /// Copyright 2025 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
@@ -19,25 +17,9 @@ namespace Ordisoftware.Hebrew.Pi;
 class SqlReduceRepeatingLoop : SqlReduceRepeating
 {
 
-  public override void CreateAllRepeatingMotifsTempTable(SQLiteNetORM DB)
-  {
-    DB.Execute("DROP TABLE IF EXISTS AllRepeatingMotifs");
-    DB.Execute("CREATE TEMPORARY TABLE AllRepeatingMotifs (Position INTEGER PRIMARY KEY)");
-    var sql = @"INSERT INTO AllRepeatingMotifs (Position)
-                SELECT Position
-                FROM Decuplets
-                WHERE Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)";
-    DB.Execute(sql);
-  }
-
-  public override long CountAllRepeatingMotifs(SQLiteNetORM DB)
-  {
-    return DB.ExecuteScalar<long>("SELECT COUNT(*) FROM AllRepeatingMotifs");
-  }
-
   public override long AddPositionToRepeatingMotifs(SQLiteNetORM DB)
   {
-    const string querySelect = "select * from AllRepeatingMotifs limit {0} offset {1}";
+    const string querySelect = "SELECT * FROM AllRepeatingMotifs LIMIT {0} OFFSET {1}";
     const string queryUpdate = "UPDATE Decuplets SET Motif = Motif + Position WHERE Position = {0}";
     long pagingCommit = MainForm.Instance.AllRepeatingCount > 10_000_100 ? 1_000_000 : 100_000;
     long step = 0;

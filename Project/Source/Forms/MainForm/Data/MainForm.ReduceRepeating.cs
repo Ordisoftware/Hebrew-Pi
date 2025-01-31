@@ -126,7 +126,7 @@ partial class MainForm
           Operation = OperationType.CountedUniqueRepeating;
           row.MaxOccurences = list[0].MaxOccurrences;
           row.UniqueRepeatingCount = list[0].CountMotifs;
-          //Degrouping all repeating
+          // Degrouping all repeating
           Operation = OperationType.Degrouping;
           SqlHelper.CreateAllRepeatingMotifsTempTable(DB);
           WriteLogTime(true);

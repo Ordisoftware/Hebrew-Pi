@@ -17,27 +17,12 @@ namespace Ordisoftware.Hebrew.Pi;
 class SqlReduceRepeatingAll : SqlReduceRepeating
 {
 
-  public override void CreateAllRepeatingMotifsTempTable(SQLiteNetORM DB)
-  {
-    DB.Execute("DROP TABLE IF EXISTS AllRepeatingMotifs");
-    DB.Execute("CREATE TEMPORARY TABLE AllRepeatingMotifs (Position INTEGER PRIMARY KEY)");
-    var sql = @"INSERT INTO AllRepeatingMotifs (Position)
-                SELECT Position
-                FROM Decuplets
-                WHERE Motif IN (SELECT Motif FROM UniqueRepeatingMotifs)";
-    DB.Execute(sql);
-  }
-
-  public override long CountAllRepeatingMotifs(SQLiteNetORM DB)
-  {
-    return DB.ExecuteScalar<long>("SELECT COUNT(*) FROM AllRepeatingMotifs");
-  }
-
   public override long AddPositionToRepeatingMotifs(SQLiteNetORM DB)
   {
-    var sql = @"UPDATE Decuplets SET Motif = Motif + Position
-                WHERE Position IN (SELECT Position FROM AllRepeatingMotifs)";
-    int signedResult = DB.Execute(sql);
+    int signedResult = DB.Execute("""
+                                  UPDATE Decuplets SET Motif = Motif + Position
+                                  WHERE Position IN (SELECT Position FROM AllRepeatingMotifs)
+                                  """);
     return unchecked((uint)signedResult);
   }
 
