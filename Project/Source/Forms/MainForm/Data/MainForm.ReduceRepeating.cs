@@ -126,6 +126,8 @@ partial class MainForm
           Operation = OperationType.CountedUniqueRepeating;
           row.MaxOccurences = list[0].MaxOccurrences;
           row.UniqueRepeatingCount = list[0].CountMotifs;
+          DB.Update(row);
+          LoadIterationGrid();
           // Degrouping all repeating
           Operation = OperationType.Degrouping;
           SqlHelper.CreateAllRepeatingMotifsTempTable(DB);
@@ -140,6 +142,8 @@ partial class MainForm
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.CountedAllRepeating;
           row.AllRepeatingCount = AllRepeatingCount;
+          DB.Update(row);
+          LoadIterationGrid();
           // Calculate rates and update row
           row.RepeatingRate = row.AllRepeatingCount == 0
             ? 0
