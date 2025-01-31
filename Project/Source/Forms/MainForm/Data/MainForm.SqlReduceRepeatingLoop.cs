@@ -24,19 +24,17 @@ class SqlReduceRepeatingLoop : SqlReduceRepeating
     long pagingCommit = MainForm.Instance.AllRepeatingCount > 10_000_100 ? 1_000_000 : 100_000;
     long step = 0;
     MainForm.Instance.RepeatingAddedCount = 0;
-    List<PositionWithMotifRow> items = null;
-    var cases = new StringBuilder();
-    var positions = new List<long>();
+    List<long> positions;
     do
     {
       if ( !MainForm.Instance.CheckIfBatchCanContinueAsync().Result && DisplayManager.QueryYesNo("Cancel adding?") )
         break;
-      items = DB.Query<PositionWithMotifRow>(string.Format(querySelect, pagingCommit, step));
-      DB.BeginTransaction();
+      positions = DB.Query<long>(string.Format(querySelect, pagingCommit, step));
       MainForm.Instance.Operation = OperationType.Adding;
-      foreach ( var item in items )
+      DB.BeginTransaction();
+      foreach ( var position in positions )
       {
-        DB.Execute(string.Format(queryUpdate, item.Position));
+        DB.Execute(string.Format(queryUpdate, position));
         MainForm.Instance.RepeatingAddedCount++;
       }
       MainForm.Instance.Operation = OperationType.Committing;
@@ -44,7 +42,7 @@ class SqlReduceRepeatingLoop : SqlReduceRepeating
       MainForm.Instance.Operation = OperationType.Committed;
       step += pagingCommit;
     }
-    while ( items.Count != 0 );
+    while ( positions.Count != 0 );
     return MainForm.Instance.RepeatingAddedCount;
   }
 
