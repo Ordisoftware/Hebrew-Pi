@@ -407,11 +407,11 @@
     <Compile Include="Source\Forms\MainForm\Data\MainForm.Populate.NotEmpty.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\MainForm\Data\ReduceRepeatingBase.cs" />
-    <Compile Include="Source\Forms\MainForm\Data\ReduceRepeatingBigList.cs" />
-    <Compile Include="Source\Forms\MainForm\Data\ReduceRepeatingSqlLoop.cs" />
-    <Compile Include="Source\Forms\MainForm\Data\ReduceRepeatingSqlUpdate.cs" />
-    <Compile Include="Source\Forms\MainForm\Data\ReduceRepeatingSqlBase.cs" />
+    <Compile Include="Source\Database\ReduceRepeatingBase.cs" />
+    <Compile Include="Source\Database\ReduceRepeatingBigList.cs" />
+    <Compile Include="Source\Database\ReduceRepeatingSqlLoop.cs" />
+    <Compile Include="Source\Database\ReduceRepeatingSqlUpdate.cs" />
+    <Compile Include="Source\Database\ReduceRepeatingSqlBase.cs" />
     <Compile Include="Source\Forms\MainForm\Data\MainForm.Populate.cs">
       <SubType>Form</SubType>
     </Compile>
