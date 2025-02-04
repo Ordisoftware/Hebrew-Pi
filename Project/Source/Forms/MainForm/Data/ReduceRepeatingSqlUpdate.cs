@@ -14,11 +14,12 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-class SqlReduceRepeatingAll : SqlReduceRepeating
+class ReduceRepeatingSqlUpdate : ReduceRepeatingSqlBase
 {
 
-  public override long AddPositionToRepeatingMotifs(SQLiteNetORM DB)
+  public override long AddPositionToRepeatingMotifs()
   {
+    CheckDatabaseNotNull();
     int signedResult = DB.Execute("""
                                   UPDATE Decuplets SET Motif = Motif + Position
                                   WHERE Position IN (SELECT Position FROM AllRepeatingMotifs)

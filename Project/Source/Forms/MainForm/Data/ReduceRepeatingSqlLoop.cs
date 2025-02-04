@@ -14,11 +14,12 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-class SqlReduceRepeatingLoop : SqlReduceRepeating
+class ReduceRepeatingSqlLoop : ReduceRepeatingSqlBase
 {
 
-  public override long AddPositionToRepeatingMotifs(SQLiteNetORM DB)
+  public override long AddPositionToRepeatingMotifs()
   {
+    CheckDatabaseNotNull();
     const string querySelect = "SELECT * FROM AllRepeatingMotifs LIMIT {0} OFFSET {1}";
     const string queryUpdate = "UPDATE Decuplets SET Motif = Motif + Position WHERE Position = {0}";
     long pagingCommit = MainForm.Instance.AllRepeatingCount > 10_000_100 ? 1_000_000 : 100_000;
@@ -29,7 +30,7 @@ class SqlReduceRepeatingLoop : SqlReduceRepeating
     {
       if ( !MainForm.Instance.CheckIfBatchCanContinueAsync().Result && DisplayManager.QueryYesNo("Cancel adding?") )
         break;
-      positions = DB.Query<long>(string.Format(querySelect, pagingCommit, step));
+      positions = DB.QueryScalars<long>(string.Format(querySelect, pagingCommit, step));
       MainForm.Instance.Operation = OperationType.Adding;
       DB.BeginTransaction();
       foreach ( var position in positions )

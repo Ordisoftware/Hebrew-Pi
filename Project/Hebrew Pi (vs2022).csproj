@@ -55,6 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dependencies\BigArray.cs" />
+    <Compile Include="Dependencies\BigList.cs" />
     <Compile Include="Dependencies\CoolPrintPreviewDialog\CoolPrintPreviewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -84,6 +86,9 @@
     <Compile Include="Dependencies\Meziantou.AccessToken\TokenPrivilegeEntry.cs" />
     <Compile Include="Dependencies\Meziantou.AccessToken\TokenType.cs" />
     <Compile Include="Dependencies\Meziantou.AccessToken\WellKnownSidType.cs" />
+    <Compile Include="Dependencies\PlatformManager.cs" />
+    <Compile Include="Dependencies\PlatformServices.cs" />
+    <Compile Include="Dependencies\TemporaryStream.cs" />
     <Compile Include="Dependencies\Windows Global Hotkey\Hotkey.cs" />
     <Compile Include="Dependencies\Windows Global Hotkey\HotkeyAction.cs" />
     <Compile Include="Dependencies\Windows Global Hotkey\HotkeyEventArgs.cs" />
@@ -402,9 +407,11 @@
     <Compile Include="Source\Forms\MainForm\Data\MainForm.Populate.NotEmpty.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\MainForm\Data\MainForm.SqlReduceRepeatingLoop.cs" />
-    <Compile Include="Source\Forms\MainForm\Data\MainForm.SqlReduceRepeatingAll.cs" />
-    <Compile Include="Source\Forms\MainForm\Data\MainForm.SqlReduceRepeating.cs" />
+    <Compile Include="Source\Forms\MainForm\Data\ReduceRepeatingBase.cs" />
+    <Compile Include="Source\Forms\MainForm\Data\ReduceRepeatingBigList.cs" />
+    <Compile Include="Source\Forms\MainForm\Data\ReduceRepeatingSqlLoop.cs" />
+    <Compile Include="Source\Forms\MainForm\Data\ReduceRepeatingSqlUpdate.cs" />
+    <Compile Include="Source\Forms\MainForm\Data\ReduceRepeatingSqlBase.cs" />
     <Compile Include="Source\Forms\MainForm\Data\MainForm.Populate.cs">
       <SubType>Form</SubType>
     </Compile>

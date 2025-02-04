@@ -16,11 +16,19 @@ namespace Ordisoftware.Hebrew.Pi;
 
 using CountMotifsAndMaxOccurences = (long CountMotifs, long MaxOccurrences);
 
-abstract class SqlReduceRepeating
+abstract class ReduceRepeatingSqlBase : ReduceRepeatingBase
 {
 
-  public void CreateUniqueRepeatingMotifsTempTable(SQLiteNetORM DB)
+  protected SQLiteNetORM DB => MainForm.Instance.DB;
+
+  protected void CheckDatabaseNotNull()
   {
+    if ( DB is null ) throw new ArgumentNullException("DB");
+  }
+
+  public override void CreateUniqueRepeatingMotifsTempTable()
+  {
+    CheckDatabaseNotNull();
     DB.Execute("DROP TABLE IF EXISTS UniqueRepeatingMotifs");
     DB.Execute("""
                CREATE TEMPORARY TABLE UniqueRepeatingMotifs AS
@@ -31,8 +39,9 @@ abstract class SqlReduceRepeating
                """);
   }
 
-  public List<CountMotifsAndMaxOccurences> GetUniqueRepeatingStats(SQLiteNetORM DB)
+  public override List<CountMotifsAndMaxOccurences> GetUniqueRepeatingStats()
   {
+    CheckDatabaseNotNull();
     return DB.Query<CountMotifsAndMaxOccurences>("""
                                                   SELECT
                                                     COUNT(*) AS UniqueRepeating,
@@ -41,8 +50,9 @@ abstract class SqlReduceRepeating
                                                   """);
   }
 
-  public void CreateAllRepeatingMotifsTempTable(SQLiteNetORM DB)
+  public override void CreateAllRepeatingMotifsTempTable()
   {
+    CheckDatabaseNotNull();
     DB.Execute("DROP TABLE IF EXISTS AllRepeatingMotifs");
     DB.Execute("CREATE TEMPORARY TABLE AllRepeatingMotifs (Position INTEGER PRIMARY KEY)");
     DB.Execute("""
@@ -53,11 +63,10 @@ abstract class SqlReduceRepeating
                """);
   }
 
-  public long CountAllRepeatingMotifs(SQLiteNetORM DB)
+  public override long CountAllRepeatingMotifs()
   {
+    CheckDatabaseNotNull();
     return DB.ExecuteScalar<long>("SELECT COUNT(*) FROM AllRepeatingMotifs");
   }
-
-  abstract public long AddPositionToRepeatingMotifs(SQLiteNetORM DB);
 
 }

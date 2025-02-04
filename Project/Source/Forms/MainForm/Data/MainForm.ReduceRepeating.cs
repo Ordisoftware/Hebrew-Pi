@@ -114,13 +114,13 @@ partial class MainForm
           Globals.ChronoSubBatch.Restart();
           // Grouping unique repeating
           Operation = OperationType.Grouping;
-          SqlHelper.CreateUniqueRepeatingMotifsTempTable(DB);
+          SqlHelper.CreateUniqueRepeatingMotifsTempTable();
           WriteLogTime(true);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.Grouped;
           // Counting unique repeating
           Operation = OperationType.CountingUniqueRepeating;
-          var list = SqlHelper.GetUniqueRepeatingStats(DB);
+          var list = SqlHelper.GetUniqueRepeatingStats();
           WriteLogTime(true);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.CountedUniqueRepeating;
@@ -130,13 +130,13 @@ partial class MainForm
           LoadIterationGrid();
           // Degrouping all repeating
           Operation = OperationType.Degrouping;
-          SqlHelper.CreateAllRepeatingMotifsTempTable(DB);
+          SqlHelper.CreateAllRepeatingMotifsTempTable();
           WriteLogTime(true);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.Degrouped;
           // Counting all repeating
           Operation = OperationType.CountingAllRepeating;
-          AllRepeatingCount = SqlHelper.CountAllRepeatingMotifs(DB);
+          AllRepeatingCount = SqlHelper.CountAllRepeatingMotifs();
           Globals.ChronoSubBatch.Stop();
           WriteLogTime(true);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
@@ -179,7 +179,7 @@ partial class MainForm
           {
             Operation = OperationType.Adding;
             Globals.ChronoSubBatch.Restart();
-            long count = SqlHelper.AddPositionToRepeatingMotifs(DB);
+            long count = SqlHelper.AddPositionToRepeatingMotifs();
             Globals.ChronoSubBatch.Stop();
             WriteLogTime(false);
             if ( !CheckIfBatchCanContinueAsync().Result ) break;
