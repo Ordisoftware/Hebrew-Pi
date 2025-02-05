@@ -33,6 +33,8 @@
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
       this.PanelDatabase = new System.Windows.Forms.Panel();
+      this.label2 = new System.Windows.Forms.Label();
+      this.EditWorkingDir = new System.Windows.Forms.TextBox();
       this.SelectSqlHelper = new System.Windows.Forms.ComboBox();
       this.SelectMemoryTempStore = new System.Windows.Forms.CheckBox();
       this.label1 = new System.Windows.Forms.Label();
@@ -201,8 +203,6 @@
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
-      this.label2 = new System.Windows.Forms.Label();
-      this.EditWorkingDir = new System.Windows.Forms.TextBox();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -243,6 +243,23 @@
       this.PanelDatabase.Size = new System.Drawing.Size(939, 60);
       this.PanelDatabase.TabIndex = 1;
       // 
+      // label2
+      // 
+      this.label2.AutoSize = true;
+      this.label2.Location = new System.Drawing.Point(442, 8);
+      this.label2.Name = "label2";
+      this.label2.Size = new System.Drawing.Size(61, 13);
+      this.label2.TabIndex = 9;
+      this.label2.Text = "Working dir";
+      // 
+      // EditWorkingDir
+      // 
+      this.EditWorkingDir.Location = new System.Drawing.Point(509, 5);
+      this.EditWorkingDir.Name = "EditWorkingDir";
+      this.EditWorkingDir.Size = new System.Drawing.Size(86, 20);
+      this.EditWorkingDir.TabIndex = 8;
+      this.EditWorkingDir.Text = "e:\\";
+      // 
       // SelectSqlHelper
       // 
       this.SelectSqlHelper.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -279,7 +296,7 @@
       this.EditTempDir.Name = "EditTempDir";
       this.EditTempDir.Size = new System.Drawing.Size(86, 20);
       this.EditTempDir.TabIndex = 4;
-      this.EditTempDir.Text = "f:\\";
+      this.EditTempDir.Text = "e:\\";
       // 
       // SelectDbCache
       // 
@@ -1388,7 +1405,7 @@
       this.TabPageGrid.Location = new System.Drawing.Point(4, 22);
       this.TabPageGrid.Name = "TabPageGrid";
       this.TabPageGrid.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageGrid.Size = new System.Drawing.Size(929, 463);
+      this.TabPageGrid.Size = new System.Drawing.Size(929, 443);
       this.TabPageGrid.TabIndex = 0;
       this.TabPageGrid.Text = "Grid";
       this.TabPageGrid.UseVisualStyleBackColor = true;
@@ -1402,7 +1419,7 @@
       this.PanelViewGrid.Location = new System.Drawing.Point(3, 3);
       this.PanelViewGrid.Name = "PanelViewGrid";
       this.PanelViewGrid.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewGrid.Size = new System.Drawing.Size(923, 457);
+      this.PanelViewGrid.Size = new System.Drawing.Size(923, 437);
       this.PanelViewGrid.TabIndex = 22;
       // 
       // TabPageDecode
@@ -1411,7 +1428,7 @@
       this.TabPageDecode.Location = new System.Drawing.Point(4, 22);
       this.TabPageDecode.Name = "TabPageDecode";
       this.TabPageDecode.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageDecode.Size = new System.Drawing.Size(929, 463);
+      this.TabPageDecode.Size = new System.Drawing.Size(929, 443);
       this.TabPageDecode.TabIndex = 1;
       this.TabPageDecode.Text = "Decode";
       this.TabPageDecode.UseVisualStyleBackColor = true;
@@ -1425,7 +1442,7 @@
       this.PanelViewDecode.Location = new System.Drawing.Point(3, 3);
       this.PanelViewDecode.Name = "PanelViewDecode";
       this.PanelViewDecode.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewDecode.Size = new System.Drawing.Size(923, 457);
+      this.PanelViewDecode.Size = new System.Drawing.Size(923, 437);
       this.PanelViewDecode.TabIndex = 0;
       // 
       // textBox1
@@ -2018,23 +2035,6 @@
       this.EditChapterELS50.Size = new System.Drawing.Size(728, 234);
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
-      // 
-      // label2
-      // 
-      this.label2.AutoSize = true;
-      this.label2.Location = new System.Drawing.Point(442, 8);
-      this.label2.Name = "label2";
-      this.label2.Size = new System.Drawing.Size(61, 13);
-      this.label2.TabIndex = 9;
-      this.label2.Text = "Working dir";
-      // 
-      // EditWorkingDir
-      // 
-      this.EditWorkingDir.Location = new System.Drawing.Point(509, 5);
-      this.EditWorkingDir.Name = "EditWorkingDir";
-      this.EditWorkingDir.Size = new System.Drawing.Size(86, 20);
-      this.EditWorkingDir.TabIndex = 8;
-      this.EditWorkingDir.Text = "e:\\";
       // 
       // MainForm
       // 

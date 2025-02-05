@@ -83,6 +83,7 @@ partial class MainForm
       bool dbOnenedAndNotInBatch = dbOpened && !Globals.IsInBatch;
       bool dbOnenedAndInBatch = dbOpened && Globals.IsInBatch;
       EditTempDir.Enabled = !dbOpened;
+      EditWorkingDir.Enabled = !dbOpened;
       SelectMemoryTempStore.Enabled = !dbOpened;
       SelectDbCache.Enabled = !Globals.IsInBatch;
       SelectPiDecimalsFile.Enabled = !Globals.IsInBatch;
