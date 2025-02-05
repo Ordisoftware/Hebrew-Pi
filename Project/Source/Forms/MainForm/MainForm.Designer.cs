@@ -30,8 +30,8 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
       this.PanelDatabase = new System.Windows.Forms.Panel();
       this.SelectSqlHelper = new System.Windows.Forms.ComboBox();
       this.SelectMemoryTempStore = new System.Windows.Forms.CheckBox();
@@ -135,6 +135,14 @@
       this.ActionPause = new System.Windows.Forms.Button();
       this.ActionCreateIndex = new System.Windows.Forms.Button();
       this.GridIterations = new System.Windows.Forms.DataGridView();
+      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnAllRepeatingCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnRepeatingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnRemainingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnUniqueRepeatingCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnElapsedCounting = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnElapsedAdding = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.BindingSourceIterationRow = new System.Windows.Forms.BindingSource(this.components);
       this.TabPageGrid = new System.Windows.Forms.TabPage();
       this.PanelViewGrid = new System.Windows.Forms.Panel();
@@ -193,14 +201,8 @@
       this.EditSearchPaging = new Ordisoftware.Core.TextBoxEx();
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
-      this.ColumnIteration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnAllRepeatingCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnRepeatingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnRemainingRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnUniqueRepeatingCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnMaxOccurences = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnElapsedCounting = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnElapsedAdding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.label2 = new System.Windows.Forms.Label();
+      this.EditWorkingDir = new System.Windows.Forms.TextBox();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -224,6 +226,8 @@
       // 
       // PanelDatabase
       // 
+      this.PanelDatabase.Controls.Add(this.label2);
+      this.PanelDatabase.Controls.Add(this.EditWorkingDir);
       this.PanelDatabase.Controls.Add(this.SelectSqlHelper);
       this.PanelDatabase.Controls.Add(this.SelectMemoryTempStore);
       this.PanelDatabase.Controls.Add(this.label1);
@@ -236,7 +240,7 @@
       this.PanelDatabase.Dock = System.Windows.Forms.DockStyle.Top;
       this.PanelDatabase.Location = new System.Drawing.Point(10, 10);
       this.PanelDatabase.Name = "PanelDatabase";
-      this.PanelDatabase.Size = new System.Drawing.Size(939, 40);
+      this.PanelDatabase.Size = new System.Drawing.Size(939, 60);
       this.PanelDatabase.TabIndex = 1;
       // 
       // SelectSqlHelper
@@ -253,7 +257,7 @@
       // SelectMemoryTempStore
       // 
       this.SelectMemoryTempStore.AutoSize = true;
-      this.SelectMemoryTempStore.Location = new System.Drawing.Point(591, 7);
+      this.SelectMemoryTempStore.Location = new System.Drawing.Point(604, 8);
       this.SelectMemoryTempStore.Name = "SelectMemoryTempStore";
       this.SelectMemoryTempStore.Size = new System.Drawing.Size(153, 17);
       this.SelectMemoryTempStore.TabIndex = 6;
@@ -263,7 +267,7 @@
       // label1
       // 
       this.label1.AutoSize = true;
-      this.label1.Location = new System.Drawing.Point(440, 9);
+      this.label1.Location = new System.Drawing.Point(442, 34);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(48, 13);
       this.label1.TabIndex = 5;
@@ -271,11 +275,11 @@
       // 
       // EditTempDir
       // 
-      this.EditTempDir.Location = new System.Drawing.Point(494, 5);
+      this.EditTempDir.Location = new System.Drawing.Point(509, 31);
       this.EditTempDir.Name = "EditTempDir";
       this.EditTempDir.Size = new System.Drawing.Size(86, 20);
       this.EditTempDir.TabIndex = 4;
-      this.EditTempDir.Text = "e:\\";
+      this.EditTempDir.Text = "f:\\";
       // 
       // SelectDbCache
       // 
@@ -1016,10 +1020,10 @@
       this.PanelMainOuter.BackColor = System.Drawing.SystemColors.ControlDarkDark;
       this.PanelMainOuter.Controls.Add(this.PanelMainInner);
       this.PanelMainOuter.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.PanelMainOuter.Location = new System.Drawing.Point(10, 84);
+      this.PanelMainOuter.Location = new System.Drawing.Point(10, 104);
       this.PanelMainOuter.Name = "PanelMainOuter";
       this.PanelMainOuter.Padding = new System.Windows.Forms.Padding(1);
-      this.PanelMainOuter.Size = new System.Drawing.Size(939, 491);
+      this.PanelMainOuter.Size = new System.Drawing.Size(939, 471);
       this.PanelMainOuter.TabIndex = 18;
       // 
       // PanelMainInner
@@ -1029,7 +1033,7 @@
       this.PanelMainInner.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMainInner.Location = new System.Drawing.Point(1, 1);
       this.PanelMainInner.Name = "PanelMainInner";
-      this.PanelMainInner.Size = new System.Drawing.Size(937, 489);
+      this.PanelMainInner.Size = new System.Drawing.Size(937, 469);
       this.PanelMainInner.TabIndex = 0;
       // 
       // PanelMainCenter
@@ -1039,7 +1043,7 @@
       this.PanelMainCenter.Dock = System.Windows.Forms.DockStyle.Fill;
       this.PanelMainCenter.Location = new System.Drawing.Point(0, 0);
       this.PanelMainCenter.Name = "PanelMainCenter";
-      this.PanelMainCenter.Size = new System.Drawing.Size(937, 489);
+      this.PanelMainCenter.Size = new System.Drawing.Size(937, 469);
       this.PanelMainCenter.TabIndex = 0;
       // 
       // TabControl
@@ -1051,7 +1055,7 @@
       this.TabControl.Location = new System.Drawing.Point(0, 0);
       this.TabControl.Name = "TabControl";
       this.TabControl.SelectedIndex = 0;
-      this.TabControl.Size = new System.Drawing.Size(937, 489);
+      this.TabControl.Size = new System.Drawing.Size(937, 469);
       this.TabControl.TabIndex = 8;
       this.TabControl.TabStop = false;
       this.TabControl.Visible = false;
@@ -1062,7 +1066,7 @@
       this.TabPageManage.Location = new System.Drawing.Point(4, 22);
       this.TabPageManage.Name = "TabPageManage";
       this.TabPageManage.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPageManage.Size = new System.Drawing.Size(929, 463);
+      this.TabPageManage.Size = new System.Drawing.Size(929, 443);
       this.TabPageManage.TabIndex = 3;
       this.TabPageManage.Text = "Manage";
       this.TabPageManage.UseVisualStyleBackColor = true;
@@ -1089,7 +1093,7 @@
       this.PanelViewManage.Location = new System.Drawing.Point(3, 3);
       this.PanelViewManage.Name = "PanelViewManage";
       this.PanelViewManage.Padding = new System.Windows.Forms.Padding(10);
-      this.PanelViewManage.Size = new System.Drawing.Size(923, 457);
+      this.PanelViewManage.Size = new System.Drawing.Size(923, 437);
       this.PanelViewManage.TabIndex = 2;
       // 
       // SelectCountAllRows
@@ -1111,7 +1115,7 @@
       this.EditLog.Location = new System.Drawing.Point(13, 173);
       this.EditLog.Multiline = true;
       this.EditLog.Name = "EditLog";
-      this.EditLog.Size = new System.Drawing.Size(265, 271);
+      this.EditLog.Size = new System.Drawing.Size(265, 251);
       this.EditLog.TabIndex = 7;
       // 
       // SelectPiDecimalsFile
@@ -1269,14 +1273,14 @@
       this.GridIterations.BackgroundColor = System.Drawing.SystemColors.Window;
       this.GridIterations.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.GridIterations.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.GridIterations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.GridIterations.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
       this.GridIterations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.GridIterations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnIteration,
@@ -1293,13 +1297,85 @@
       this.GridIterations.Name = "GridIterations";
       this.GridIterations.ReadOnly = true;
       this.GridIterations.RowHeadersVisible = false;
-      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-      this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+      this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle4;
       this.GridIterations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.GridIterations.Size = new System.Drawing.Size(616, 431);
+      this.GridIterations.Size = new System.Drawing.Size(616, 411);
       this.GridIterations.TabIndex = 0;
       this.GridIterations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridIterations_CellFormatting);
       this.GridIterations.Leave += new System.EventHandler(this.GridIterations_Leave);
+      // 
+      // ColumnIteration
+      // 
+      this.ColumnIteration.DataPropertyName = "Iteration";
+      this.ColumnIteration.FillWeight = 126.9036F;
+      this.ColumnIteration.HeaderText = "Iteration";
+      this.ColumnIteration.Name = "ColumnIteration";
+      this.ColumnIteration.ReadOnly = true;
+      this.ColumnIteration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnIteration.Width = 55;
+      // 
+      // ColumnAllRepeatingCount
+      // 
+      this.ColumnAllRepeatingCount.DataPropertyName = "AllRepeatingCount";
+      this.ColumnAllRepeatingCount.HeaderText = "Total Reps";
+      this.ColumnAllRepeatingCount.Name = "ColumnAllRepeatingCount";
+      this.ColumnAllRepeatingCount.ReadOnly = true;
+      this.ColumnAllRepeatingCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      // 
+      // ColumnRepeatingRate
+      // 
+      this.ColumnRepeatingRate.DataPropertyName = "RepeatingRate";
+      this.ColumnRepeatingRate.HeaderText = "Rate";
+      this.ColumnRepeatingRate.Name = "ColumnRepeatingRate";
+      this.ColumnRepeatingRate.ReadOnly = true;
+      this.ColumnRepeatingRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnRepeatingRate.Width = 50;
+      // 
+      // ColumnRemainingRate
+      // 
+      this.ColumnRemainingRate.DataPropertyName = "RemainingRate";
+      this.ColumnRemainingRate.HeaderText = "Remaining";
+      this.ColumnRemainingRate.Name = "ColumnRemainingRate";
+      this.ColumnRemainingRate.ReadOnly = true;
+      this.ColumnRemainingRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnRemainingRate.Width = 65;
+      // 
+      // ColumnUniqueRepeatingCount
+      // 
+      this.ColumnUniqueRepeatingCount.DataPropertyName = "UniqueRepeatingCount";
+      this.ColumnUniqueRepeatingCount.HeaderText = "Unique Reps";
+      this.ColumnUniqueRepeatingCount.Name = "ColumnUniqueRepeatingCount";
+      this.ColumnUniqueRepeatingCount.ReadOnly = true;
+      this.ColumnUniqueRepeatingCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      // 
+      // ColumnMaxOccurences
+      // 
+      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
+      this.ColumnMaxOccurences.FillWeight = 93.27411F;
+      this.ColumnMaxOccurences.HeaderText = "Max";
+      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
+      this.ColumnMaxOccurences.ReadOnly = true;
+      this.ColumnMaxOccurences.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnMaxOccurences.Width = 40;
+      // 
+      // ColumnElapsedCounting
+      // 
+      this.ColumnElapsedCounting.DataPropertyName = "ElapsedCounting";
+      this.ColumnElapsedCounting.HeaderText = "Counting";
+      this.ColumnElapsedCounting.Name = "ColumnElapsedCounting";
+      this.ColumnElapsedCounting.ReadOnly = true;
+      this.ColumnElapsedCounting.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnElapsedCounting.Width = 90;
+      // 
+      // ColumnElapsedAdding
+      // 
+      this.ColumnElapsedAdding.DataPropertyName = "ElapsedAdding";
+      this.ColumnElapsedAdding.HeaderText = "Adding";
+      this.ColumnElapsedAdding.Name = "ColumnElapsedAdding";
+      this.ColumnElapsedAdding.ReadOnly = true;
+      this.ColumnElapsedAdding.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.ColumnElapsedAdding.Width = 90;
       // 
       // BindingSourceIterationRow
       // 
@@ -1373,7 +1449,7 @@
       // PanelSepTop
       // 
       this.PanelSepTop.Dock = System.Windows.Forms.DockStyle.Top;
-      this.PanelSepTop.Location = new System.Drawing.Point(10, 74);
+      this.PanelSepTop.Location = new System.Drawing.Point(10, 94);
       this.PanelSepTop.Name = "PanelSepTop";
       this.PanelSepTop.Size = new System.Drawing.Size(939, 10);
       this.PanelSepTop.TabIndex = 16;
@@ -1383,7 +1459,7 @@
       this.PanelTitle.BackColor = System.Drawing.SystemColors.ControlDarkDark;
       this.PanelTitle.Controls.Add(this.PanelTitleInner);
       this.PanelTitle.Dock = System.Windows.Forms.DockStyle.Top;
-      this.PanelTitle.Location = new System.Drawing.Point(10, 50);
+      this.PanelTitle.Location = new System.Drawing.Point(10, 70);
       this.PanelTitle.Name = "PanelTitle";
       this.PanelTitle.Padding = new System.Windows.Forms.Padding(1);
       this.PanelTitle.Size = new System.Drawing.Size(939, 24);
@@ -1943,77 +2019,22 @@
       this.EditChapterELS50.TabIndex = 1;
       this.EditChapterELS50.Text = "";
       // 
-      // ColumnIteration
+      // label2
       // 
-      this.ColumnIteration.DataPropertyName = "Iteration";
-      this.ColumnIteration.FillWeight = 126.9036F;
-      this.ColumnIteration.HeaderText = "Iteration";
-      this.ColumnIteration.Name = "ColumnIteration";
-      this.ColumnIteration.ReadOnly = true;
-      this.ColumnIteration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnIteration.Width = 55;
+      this.label2.AutoSize = true;
+      this.label2.Location = new System.Drawing.Point(442, 8);
+      this.label2.Name = "label2";
+      this.label2.Size = new System.Drawing.Size(61, 13);
+      this.label2.TabIndex = 9;
+      this.label2.Text = "Working dir";
       // 
-      // ColumnAllRepeatingCount
+      // EditWorkingDir
       // 
-      this.ColumnAllRepeatingCount.DataPropertyName = "AllRepeatingCount";
-      this.ColumnAllRepeatingCount.HeaderText = "Total Reps";
-      this.ColumnAllRepeatingCount.Name = "ColumnAllRepeatingCount";
-      this.ColumnAllRepeatingCount.ReadOnly = true;
-      this.ColumnAllRepeatingCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      // 
-      // ColumnRepeatingRate
-      // 
-      this.ColumnRepeatingRate.DataPropertyName = "RepeatingRate";
-      this.ColumnRepeatingRate.HeaderText = "Rate";
-      this.ColumnRepeatingRate.Name = "ColumnRepeatingRate";
-      this.ColumnRepeatingRate.ReadOnly = true;
-      this.ColumnRepeatingRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnRepeatingRate.Width = 50;
-      // 
-      // ColumnRemainingRate
-      // 
-      this.ColumnRemainingRate.DataPropertyName = "RemainingRate";
-      this.ColumnRemainingRate.HeaderText = "Remaining";
-      this.ColumnRemainingRate.Name = "ColumnRemainingRate";
-      this.ColumnRemainingRate.ReadOnly = true;
-      this.ColumnRemainingRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnRemainingRate.Width = 65;
-      // 
-      // ColumnUniqueRepeatingCount
-      // 
-      this.ColumnUniqueRepeatingCount.DataPropertyName = "UniqueRepeatingCount";
-      this.ColumnUniqueRepeatingCount.HeaderText = "Unique Reps";
-      this.ColumnUniqueRepeatingCount.Name = "ColumnUniqueRepeatingCount";
-      this.ColumnUniqueRepeatingCount.ReadOnly = true;
-      this.ColumnUniqueRepeatingCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      // 
-      // ColumnMaxOccurences
-      // 
-      this.ColumnMaxOccurences.DataPropertyName = "MaxOccurences";
-      this.ColumnMaxOccurences.FillWeight = 93.27411F;
-      this.ColumnMaxOccurences.HeaderText = "Max";
-      this.ColumnMaxOccurences.Name = "ColumnMaxOccurences";
-      this.ColumnMaxOccurences.ReadOnly = true;
-      this.ColumnMaxOccurences.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnMaxOccurences.Width = 40;
-      // 
-      // ColumnElapsedCounting
-      // 
-      this.ColumnElapsedCounting.DataPropertyName = "ElapsedCounting";
-      this.ColumnElapsedCounting.HeaderText = "Counting";
-      this.ColumnElapsedCounting.Name = "ColumnElapsedCounting";
-      this.ColumnElapsedCounting.ReadOnly = true;
-      this.ColumnElapsedCounting.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnElapsedCounting.Width = 90;
-      // 
-      // ColumnElapsedAdding
-      // 
-      this.ColumnElapsedAdding.DataPropertyName = "ElapsedAdding";
-      this.ColumnElapsedAdding.HeaderText = "Adding";
-      this.ColumnElapsedAdding.Name = "ColumnElapsedAdding";
-      this.ColumnElapsedAdding.ReadOnly = true;
-      this.ColumnElapsedAdding.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      this.ColumnElapsedAdding.Width = 90;
+      this.EditWorkingDir.Location = new System.Drawing.Point(509, 5);
+      this.EditWorkingDir.Name = "EditWorkingDir";
+      this.EditWorkingDir.Size = new System.Drawing.Size(86, 20);
+      this.EditWorkingDir.TabIndex = 8;
+      this.EditWorkingDir.Text = "e:\\";
       // 
       // MainForm
       // 
@@ -2230,5 +2251,7 @@
     private DataGridViewTextBoxColumn ColumnMaxOccurences;
     private DataGridViewTextBoxColumn ColumnElapsedCounting;
     private DataGridViewTextBoxColumn ColumnElapsedAdding;
+    private Label label2;
+    private TextBox EditWorkingDir;
   }
 }

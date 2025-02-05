@@ -240,7 +240,7 @@ partial class MainForm : Form
 
   private void SelectSqlHelper_SelectedIndexChanged(object sender, EventArgs e)
   {
-    SqlHelper = (ReduceRepeatingSqlBase)SelectSqlHelper.SelectedItem;
+    SqlHelper = (ReduceRepeatingBase)SelectSqlHelper.SelectedItem;
   }
 
   private void SelectDbCache_SelectedIndexChanged(object sender, EventArgs e)
@@ -250,7 +250,7 @@ partial class MainForm : Form
 
   private async void SetDbCache()
   {
-    SelectDbCache.Invoke(() => DB?.SetCacheSize((int)SelectDbCache.SelectedItem * (int)MemorySizeInMiB));
+    SelectDbCache.Invoke(() => DB?.SetCacheSize((int)SelectDbCache.SelectedItem * (int)MemorySizeInMiB, NameWorkingDB));
   }
 
   private void ActionDbNew_Click(object sender, EventArgs e)

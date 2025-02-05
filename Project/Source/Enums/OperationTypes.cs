@@ -49,5 +49,7 @@ enum OperationType
   CountedAllRepeating,
   Adding,
   Added,
+  LoadMotifs,
+  LoadedMotifs
 
 }

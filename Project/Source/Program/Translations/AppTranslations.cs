@@ -75,6 +75,7 @@ static partial class AppTranslations
   static public string AskStartNextIfMore = $"{MoreAtIteration}{PreviousAndCurrentCount}{StartNextIteration}";
 
   static public string CreateDataProgress = "{0} inserted";
+  static public string LoadDataProgress = "{0} loaded";
   static public string IterationText = "Iteration #{0}, {1} repeating";
   static public string IterationTextLoop = "Iteration #{0}, {1} repeating, {2} updated";
 

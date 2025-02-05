@@ -20,10 +20,10 @@ class ReduceRepeatingSqlUpdate : ReduceRepeatingSqlBase
   public override long AddPositionToRepeatingMotifs()
   {
     CheckDatabaseNotNull();
-    int signedResult = DB.Execute("""
-                                  UPDATE Decuplets SET Motif = Motif + Position
-                                  WHERE Position IN (SELECT Position FROM AllRepeatingMotifs)
-                                  """);
+    int signedResult = DB.Execute($"""
+                                   UPDATE Decuplets SET Motif = Motif + Position
+                                   WHERE Position IN (SELECT Position FROM {MainForm.Instance.NameWorkingDB}.AllRepeatingMotifs)
+                                   """);
     return unchecked((uint)signedResult);
   }
 

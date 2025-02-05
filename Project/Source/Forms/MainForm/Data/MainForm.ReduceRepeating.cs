@@ -66,13 +66,12 @@ partial class MainForm
       EditLog.Invoke(EditLog.Clear);
       Processing = ProcessingType.ReduceRepeating;
       // Count all rows
-      long countAllRows = 0;
+      Globals.ChronoBatch.Restart();
       if ( SelectCountAllRows.Checked )
       {
-        Globals.ChronoBatch.Restart();
         Operation = OperationType.CountingAllRows;
         Globals.ChronoSubBatch.Restart();
-        countAllRows = DB.ExecuteScalar<long>($"SELECT COUNT(*) FROM [{DecupletRow.TableName}]");
+        AllRowsCount = SqlHelper.GetRowsCount();
         Globals.ChronoSubBatch.Stop();
         WriteLogTime(false);
         WriteLogLine();
@@ -80,10 +79,7 @@ partial class MainForm
         Operation = OperationType.CountedAllRows;
       }
       else
-      {
-        Globals.ChronoBatch.Restart();
-        countAllRows = (long)EditMaxMotifs.Value;
-      }
+        AllRowsCount = (long)EditMaxMotifs.Value;
       // Loop
       for ( ; AllRepeatingCount > 0; ReduceRepeatingIteration++ )
       {
@@ -149,7 +145,7 @@ partial class MainForm
             ? 0
             : row.AllRepeatingCount == row.UniqueRepeatingCount
               ? 100
-              : Math.Round((double)row.AllRepeatingCount * 100 / countAllRows, 2);
+              : Math.Round((double)row.AllRepeatingCount * 100 / AllRowsCount, 2);
           row.RemainingRate = row.AllRepeatingCount == 0
               ? 0
               : ReduceRepeatingIteration == 0
@@ -205,6 +201,8 @@ partial class MainForm
           if ( iteratingStep != ReduceIteratingStep.Next )
             iteratingStep = ReduceIteratingStep.Next;
         }
+        DB.DropTableIfExists($"{NameWorkingDB}.UniqueRepeatingMotifs");
+        DB.DropTableIfExists($"{NameWorkingDB}.AllRepeatingMotifs");
         if ( !EditNormalizeAutoLoop.Checked ) break;
       }
     }

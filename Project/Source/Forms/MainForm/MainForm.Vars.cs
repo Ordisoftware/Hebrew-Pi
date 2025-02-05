@@ -25,13 +25,16 @@ partial class MainForm
 
   private const int PiDecimalMotifSize = 10;
 
-  private ReduceRepeatingSqlBase[] SqlHelperList =
+  private ReduceRepeatingBase[] SqlHelperList =
   [
     new ReduceRepeatingSqlUpdate(),
-    new ReduceRepeatingSqlLoop()
+    new ReduceRepeatingSqlLoop(),
+    //new ReduceRepeatinBigList()
   ];
 
-  private ReduceRepeatingSqlBase SqlHelper;
+  private ReduceRepeatingBase SqlHelper;
+
+  internal string NameWorkingDB = "WorkingDB";
 
   internal SQLiteNetORM DB;
 
@@ -57,6 +60,20 @@ partial class MainForm
     set => Interlocked.Exchange(ref _ReduceRepeatingIteration, value);
   }
   private long _ReduceRepeatingIteration;
+
+  internal long AllRowsCount
+  {
+    get => Interlocked.Read(ref _countAllRows);
+    set => Interlocked.Exchange(ref _countAllRows, value);
+  }
+  private long _countAllRows;
+
+  internal long LoadedCount
+  {
+    get => Interlocked.Read(ref _LoadedCount);
+    set => Interlocked.Exchange(ref _LoadedCount, value);
+  }
+  private long _LoadedCount;
 
   internal long AllRepeatingCount
   {

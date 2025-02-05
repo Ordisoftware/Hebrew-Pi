@@ -20,8 +20,8 @@ class ReduceRepeatingSqlLoop : ReduceRepeatingSqlBase
   public override long AddPositionToRepeatingMotifs()
   {
     CheckDatabaseNotNull();
-    const string querySelect = "SELECT * FROM AllRepeatingMotifs LIMIT {0} OFFSET {1}";
-    const string queryUpdate = "UPDATE Decuplets SET Motif = Motif + Position WHERE Position = {0}";
+    string querySelect = $"SELECT Position FROM {MainForm.Instance.NameWorkingDB}.AllRepeatingMotifs LIMIT {{0}} OFFSET {{1}}";
+    string queryUpdate = "UPDATE Decuplets SET Motif = Motif + Position WHERE Position = {0}";
     long pagingCommit = MainForm.Instance.AllRepeatingCount > 10_000_100 ? 1_000_000 : 100_000;
     long step = 0;
     MainForm.Instance.RepeatingAddedCount = 0;

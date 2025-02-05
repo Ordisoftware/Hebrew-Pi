@@ -14,19 +14,32 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-using CountMotifsAndMaxOccurences = (long CountMotifs, long MaxOccurrences);
+using CountMotifsAndMaxOccurencesTuple = (long CountMotifs, long MaxOccurrences);
 
 abstract class ReduceRepeatingBase
 {
 
+  protected SQLiteNetORM DB => MainForm.Instance.DB;
+
   abstract public void CreateUniqueRepeatingMotifsTempTable();
 
-  abstract public List<CountMotifsAndMaxOccurences> GetUniqueRepeatingStats();
+  abstract public List<CountMotifsAndMaxOccurencesTuple> GetUniqueRepeatingStats();
 
   abstract public void CreateAllRepeatingMotifsTempTable();
 
   abstract public long CountAllRepeatingMotifs();
 
   abstract public long AddPositionToRepeatingMotifs();
+
+  protected void CheckDatabaseNotNull()
+  {
+    if ( DB is null ) throw new ArgumentNullException("DB");
+  }
+
+  public virtual long GetRowsCount()
+  {
+    CheckDatabaseNotNull();
+    return DB.ExecuteScalar<long>($"SELECT COUNT(*) FROM [{DecupletRow.TableName}]");
+  }
 
 }

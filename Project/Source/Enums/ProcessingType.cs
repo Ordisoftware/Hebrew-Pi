@@ -20,6 +20,7 @@ enum ProcessingType
   OpenClose,
   CreateData,
   CreateIndex,
+  Load,
   ReduceRepeating,
   Finished,
   Canceled,
