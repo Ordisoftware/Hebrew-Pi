@@ -16,7 +16,7 @@ namespace Ordisoftware.Hebrew.Pi;
 
 using CountMotifsAndMaxOccurencesTuple = (long CountMotifs, long MaxOccurrences);
 
-abstract class ReduceRepeatingBase
+abstract public class ReduceRepeatingBase
 {
 
   protected SQLiteNetORM DB => MainForm.Instance.DB;

@@ -14,13 +14,13 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-class ReduceRepeatingSqlLoop : ReduceRepeatingSqlBase
+public class ReduceRepeatingSqlLoop : ReduceRepeatingSqlBase
 {
 
   public override long AddPositionToRepeatingMotifs()
   {
     CheckDatabaseNotNull();
-    string querySelect = $"SELECT Position FROM {MainForm.Instance.NameWorkingDB}.AllRepeatingMotifs LIMIT {{0}} OFFSET {{1}}";
+    string querySelect = $"SELECT Position FROM {MainForm.Instance.TableNameAllRepeatingMotifs} LIMIT {{0}} OFFSET {{1}}";
     string queryUpdate = "UPDATE Decuplets SET Motif = Motif + Position WHERE Position = {0}";
     long pagingCommit = MainForm.Instance.AllRepeatingCount > 10_000_100 ? 1_000_000 : 100_000;
     long step = 0;

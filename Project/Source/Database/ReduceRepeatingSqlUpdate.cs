@@ -14,7 +14,7 @@
 /// <edited> 2025-01 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
-class ReduceRepeatingSqlUpdate : ReduceRepeatingSqlBase
+public class ReduceRepeatingSqlUpdate : ReduceRepeatingSqlBase
 {
 
   public override long AddPositionToRepeatingMotifs()
@@ -22,7 +22,7 @@ class ReduceRepeatingSqlUpdate : ReduceRepeatingSqlBase
     CheckDatabaseNotNull();
     int signedResult = DB.Execute($"""
                                    UPDATE Decuplets SET Motif = Motif + Position
-                                   WHERE Position IN (SELECT Position FROM {MainForm.Instance.NameWorkingDB}.AllRepeatingMotifs)
+                                   WHERE Position IN (SELECT Position FROM {MainForm.Instance.TableNameAllRepeatingMotifs})
                                    """);
     return unchecked((uint)signedResult);
   }
