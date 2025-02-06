@@ -19,13 +19,13 @@ using CountMotifsAndMaxOccurencesTuple = (long CountMotifs, long MaxOccurrences)
 abstract public class ReduceRepeatingSqlBase : ReduceRepeatingBase
 {
 
-  public override void CreateUniqueRepeatingMotifsTempTable()
+  public override bool CreateUniqueRepeatingMotifsTempTable()
   {
     CheckDatabaseNotNull();
-    string table = MainForm.Instance.TableNameUniqueRepeatingMotifs;
-    if ( DB.CheckTable(table)
-     && !DisplayManager.QueryYesNo($"{table} already exists, use it without repopulate it?") )
-      return;
+    string table = MainForm.Instance.TableFullNameUniqueRepeatingMotifs;
+    if ( DB.CheckTable(MainForm.Instance.TableNameUniqueRepeatingMotifs, attached: MainForm.Instance.NameWorkingDB)
+     && DisplayManager.QueryYesNo($"{table} already exists, use it without repopulate it?") )
+      return false;
     DB.DropTableIfExists(table);
     DB.Execute($"""
                 CREATE TABLE {table} AS
@@ -34,6 +34,7 @@ abstract public class ReduceRepeatingSqlBase : ReduceRepeatingBase
                 GROUP BY Motif
                 HAVING COUNT(*) > 1
                 """);
+    return true;
   }
 
   public override List<CountMotifsAndMaxOccurencesTuple> GetUniqueRepeatingStats()
@@ -43,31 +44,32 @@ abstract public class ReduceRepeatingSqlBase : ReduceRepeatingBase
                                                        SELECT
                                                          COUNT(*) AS CountMotifs,
                                                          MAX(Occurrences) AS MaxOccurrences
-                                                       FROM {MainForm.Instance.TableNameUniqueRepeatingMotifs}
+                                                       FROM {MainForm.Instance.TableFullNameUniqueRepeatingMotifs}
                                                        """);
   }
 
-  public override void CreateAllRepeatingMotifsTempTable()
+  public override bool CreateAllRepeatingMotifsTempTable()
   {
     CheckDatabaseNotNull();
-    string table = $"{MainForm.Instance.TableNameAllRepeatingMotifs}";
-    if ( DB.CheckTable(table)
-     && !DisplayManager.QueryYesNo($"{table} already exists, use it without repopulate it?") )
-      return;
+    string table = MainForm.Instance.TableFullNameAllRepeatingMotifs;
+    if ( DB.CheckTable(MainForm.Instance.TableNameAllRepeatingMotifs, attached: MainForm.Instance.NameWorkingDB)
+     && DisplayManager.QueryYesNo($"{table} already exists, use it without repopulate it?") )
+      return false;
     DB.DropTableIfExists($"{table}");
     DB.Execute($"CREATE TABLE {table} (Position INTEGER PRIMARY KEY)");
     DB.Execute($"""
                 INSERT INTO {table} (Position)
                 SELECT Position
                 FROM Decuplets
-                WHERE Motif IN (SELECT Motif FROM {MainForm.Instance.TableNameUniqueRepeatingMotifs})
+                WHERE Motif IN (SELECT Motif FROM {MainForm.Instance.TableFullNameUniqueRepeatingMotifs})
                 """);
+    return true;
   }
 
   public override long CountAllRepeatingMotifs()
   {
     CheckDatabaseNotNull();
-    return DB.ExecuteScalar<long>($"SELECT COUNT(*) FROM {MainForm.Instance.TableNameAllRepeatingMotifs}");
+    return DB.ExecuteScalar<long>($"SELECT COUNT(*) FROM {MainForm.Instance.TableFullNameAllRepeatingMotifs}");
   }
 
 }

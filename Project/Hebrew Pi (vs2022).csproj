@@ -374,6 +374,7 @@
     <Compile Include="Source\Database\Database.cs" />
     <Compile Include="Source\Database\IterationRow.cs" />
     <Compile Include="Source\Database\DecupletRow.cs" />
+    <Compile Include="Source\Database\ReduceRepeatingBigList.cs" />
     <Compile Include="Source\Enums\ExportDocumentModel.cs" />
     <Compile Include="Source\Enums\ExportDocumentTheme.cs" />
     <Compile Include="Source\Enums\HebrewWordClickAction.cs" />
@@ -658,6 +659,9 @@
     </PackageReference>
     <PackageReference Include="GregsStack.InputSimulatorStandard">
       <Version>1.3.5</Version>
+    </PackageReference>
+    <PackageReference Include="LargeCollections">
+      <Version>2.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell">
       <Version>1.1.5</Version>

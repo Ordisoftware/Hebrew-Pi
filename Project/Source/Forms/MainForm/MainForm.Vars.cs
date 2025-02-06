@@ -28,16 +28,19 @@ partial class MainForm
   private ReduceRepeatingBase[] SqlHelperList =
   [
     new ReduceRepeatingSqlUpdate(),
-    new ReduceRepeatingSqlLoop()
+    new ReduceRepeatingSqlLoop(),
+    //new ReduceRepeatingBigList()
   ];
 
   private ReduceRepeatingBase SqlHelper;
 
   internal string NameWorkingDB = "WorkingDB";
 
-  internal string TableNameUniqueRepeatingMotifs => $"{NameWorkingDB}.UniqueRepeatingMotifs";
+  internal string TableNameUniqueRepeatingMotifs => "UniqueRepeatingMotifs";
+  internal string TableFullNameUniqueRepeatingMotifs => $"{NameWorkingDB}.{TableNameUniqueRepeatingMotifs}";
 
-  internal string TableNameAllRepeatingMotifs => $"{NameWorkingDB}.AllRepeatingMotifs";
+  internal string TableNameAllRepeatingMotifs => "AllRepeatingMotifs";
+  internal string TableFullNameAllRepeatingMotifs => $"{NameWorkingDB}.{TableNameAllRepeatingMotifs}";
 
   internal SQLiteNetORM DB;
 

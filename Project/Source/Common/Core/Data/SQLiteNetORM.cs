@@ -322,12 +322,15 @@ public class SQLiteNetORM : SQLiteConnection
   /// <param name="table">The table name.</param>
   /// <param name="sql">The sql query to create the table, can be empty to only check.</param>
   /// <returns>True if the table exists else false even if created.</returns>
-  public bool CheckTable(string table, string sql = "")
+  public bool CheckTable(string table, string sql = null, string attached = null)
   {
     try
     {
       if ( table.IsNullOrEmpty() ) throw new ArgumentNullException(nameof(table));
-      const string sqlSelect = "SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = ?";
+
+      string sqlSelect = attached.IsNullOrEmpty()
+        ? "SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = ?"
+        : $"SELECT count(*) FROM {attached}.sqlite_master WHERE type = 'table' AND name = ?";
       if ( ExecuteScalar<long>(sqlSelect, table) != 0 ) return true;
       if ( !sql.IsNullOrEmpty() )
         try
@@ -352,7 +355,7 @@ public class SQLiteNetORM : SQLiteConnection
   /// <param name="index">The index name.</param>
   /// <param name="sql">The sql query to create the table, can be empty to only check.</param>
   /// <returns>True if the index exists else false even if created.</returns>
-  public bool CheckIndex(string index, string sql = "")
+  public bool CheckIndex(string index, string sql = null)
   {
     try
     {
@@ -386,7 +389,7 @@ public class SQLiteNetORM : SQLiteConnection
   /// <param name="column">The column name.</param>
   /// <param name="sql">The sql query to create the column, can be empty to only check</param>
   /// <returns>True if the column exists else false even if created.</returns>
-  public bool CheckColumn(string table, string column, string sql = "")
+  public bool CheckColumn(string table, string column, string sql = null)
   {
     try
     {

@@ -28,9 +28,9 @@ partial class MainForm
     Operation = OperationType.Opening;
     Globals.ChronoBatch.Restart();
     DatabaseFilePath = path;
-    string pathWordkingDB = Path.Combine(EditWorkingDir.Text, Path.GetFileName(path) + "-Working.sqlite");
+    string pathWordkingDB = Path.Combine(EditWorkingDir.Text, Path.GetFileNameWithoutExtension(path) + " (Working).sqlite");
     DB = new SQLiteNetORM(path);
-    DB.Execute($"ATTACH DATABASE ? AS {MainForm.Instance.NameWorkingDB}", pathWordkingDB);
+    DB.Execute($"ATTACH DATABASE ? AS {NameWorkingDB}", pathWordkingDB);
     DB.SetTempDir(EditTempDir.Text, NameWorkingDB);
     DB.SetTempStore(SelectMemoryTempStore.Checked ? SQLiteTempStoreMode.MEMORY : SQLiteTempStoreMode.FILE, NameWorkingDB);
     DB.SetJournal(SQLiteJournalMode.OFF, NameWorkingDB);

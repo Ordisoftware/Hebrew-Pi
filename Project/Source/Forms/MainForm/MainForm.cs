@@ -69,14 +69,14 @@ partial class MainForm : Form
   {
     foreach ( var item in SqlHelperList )
       SelectSqlHelper.Items.Add(item);
-    SelectSqlHelper.SelectedIndex = 0;
+    SelectSqlHelper.SelectedIndex = 1;
   }
 
   private void InitializeListBoxPiDecimals()
   {
     foreach ( string file in Directory.GetFiles(Path.Combine(Globals.DocumentsFolderPath, "PiDecimals"), "PiDecimals*.txt") )
       SelectPiDecimalsFile.Items.Add(file);
-    SelectPiDecimalsFile.SelectedIndex = 0;
+    SelectPiDecimalsFile.SelectedIndex = 2;
   }
 
   private void InitializeListBoxCacheSize()
@@ -89,7 +89,7 @@ partial class MainForm : Form
       SelectDbCache.Items.Add(indexStep);
       if ( indexStep <= memFree ) indexList++;
     }
-    SelectDbCache.SelectedIndex = indexList / 2;
+    SelectDbCache.SelectedIndex = indexList / 4;
   }
 
   private void MainForm_Shown(object sender, EventArgs e)

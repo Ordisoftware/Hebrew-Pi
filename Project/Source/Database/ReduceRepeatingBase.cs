@@ -21,15 +21,19 @@ abstract public class ReduceRepeatingBase
 
   protected SQLiteNetORM DB => MainForm.Instance.DB;
 
-  abstract public void CreateUniqueRepeatingMotifsTempTable();
+  abstract public bool CreateUniqueRepeatingMotifsTempTable();
 
   abstract public List<CountMotifsAndMaxOccurencesTuple> GetUniqueRepeatingStats();
 
-  abstract public void CreateAllRepeatingMotifsTempTable();
+  abstract public bool CreateAllRepeatingMotifsTempTable();
 
   abstract public long CountAllRepeatingMotifs();
 
   abstract public long AddPositionToRepeatingMotifs();
+
+  //public virtual void LoadAll()
+  //{
+  //}
 
   protected void CheckDatabaseNotNull()
   {

@@ -22,7 +22,7 @@ public class ReduceRepeatingSqlUpdate : ReduceRepeatingSqlBase
     CheckDatabaseNotNull();
     int signedResult = DB.Execute($"""
                                    UPDATE Decuplets SET Motif = Motif + Position
-                                   WHERE Position IN (SELECT Position FROM {MainForm.Instance.TableNameAllRepeatingMotifs})
+                                   WHERE Position IN (SELECT Position FROM {MainForm.Instance.TableFullNameAllRepeatingMotifs})
                                    """);
     return unchecked((uint)signedResult);
   }

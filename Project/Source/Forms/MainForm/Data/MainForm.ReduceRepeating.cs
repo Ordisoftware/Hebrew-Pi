@@ -108,38 +108,50 @@ partial class MainForm
         if ( iteratingStep == ReduceIteratingStep.Next || iteratingStep == ReduceIteratingStep.Counting )
         {
           Globals.ChronoSubBatch.Restart();
+          // Load motifs
+          //Operation = OperationType.LoadMotifs;
+          //SqlHelper.LoadAll();
+          //WriteLogTime(true);
+          //if ( !CheckIfBatchCanContinueAsync().Result ) break;
+          //Operation = OperationType.LoadedMotifs;
           // Grouping unique repeating
           Operation = OperationType.Grouping;
-          SqlHelper.CreateUniqueRepeatingMotifsTempTable();
+          bool countUniqueToDo = SqlHelper.CreateUniqueRepeatingMotifsTempTable();
           WriteLogTime(true);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.Grouped;
           // Counting unique repeating
-          Operation = OperationType.CountingUniqueRepeating;
-          var list = SqlHelper.GetUniqueRepeatingStats();
-          WriteLogTime(true);
-          if ( !CheckIfBatchCanContinueAsync().Result ) break;
-          Operation = OperationType.CountedUniqueRepeating;
-          row.MaxOccurences = list[0].MaxOccurrences;
-          row.UniqueRepeatingCount = list[0].CountMotifs;
-          DB.Update(row);
-          LoadIterationGrid();
+          if ( countUniqueToDo )
+          {
+            Operation = OperationType.CountingUniqueRepeating;
+            var list = SqlHelper.GetUniqueRepeatingStats();
+            WriteLogTime(true);
+            if ( !CheckIfBatchCanContinueAsync().Result ) break;
+            Operation = OperationType.CountedUniqueRepeating;
+            row.MaxOccurences = list[0].MaxOccurrences;
+            row.UniqueRepeatingCount = list[0].CountMotifs;
+            DB.Update(row);
+            LoadIterationGrid();
+          }
           // Degrouping all repeating
           Operation = OperationType.Degrouping;
-          SqlHelper.CreateAllRepeatingMotifsTempTable();
+          bool countAllToDo = SqlHelper.CreateAllRepeatingMotifsTempTable();
           WriteLogTime(true);
           if ( !CheckIfBatchCanContinueAsync().Result ) break;
           Operation = OperationType.Degrouped;
           // Counting all repeating
-          Operation = OperationType.CountingAllRepeating;
-          AllRepeatingCount = SqlHelper.CountAllRepeatingMotifs();
-          Globals.ChronoSubBatch.Stop();
-          WriteLogTime(true);
-          if ( !CheckIfBatchCanContinueAsync().Result ) break;
-          Operation = OperationType.CountedAllRepeating;
-          row.AllRepeatingCount = AllRepeatingCount;
-          DB.Update(row);
-          LoadIterationGrid();
+          if ( countAllToDo )
+          {
+            Operation = OperationType.CountingAllRepeating;
+            AllRepeatingCount = SqlHelper.CountAllRepeatingMotifs();
+            Globals.ChronoSubBatch.Stop();
+            WriteLogTime(true);
+            if ( !CheckIfBatchCanContinueAsync().Result ) break;
+            Operation = OperationType.CountedAllRepeating;
+            row.AllRepeatingCount = AllRepeatingCount;
+            DB.Update(row);
+            LoadIterationGrid();
+          }
           // Calculate rates and update row
           row.RepeatingRate = row.AllRepeatingCount == 0
             ? 0

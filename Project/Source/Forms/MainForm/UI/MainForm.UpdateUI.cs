@@ -83,7 +83,6 @@ partial class MainForm
       bool dbOnenedAndNotInBatch = dbOpened && !Globals.IsInBatch;
       bool dbOnenedAndInBatch = dbOpened && Globals.IsInBatch;
       EditTempDir.Enabled = !dbOpened;
-      EditWorkingDir.Enabled = !dbOpened;
       SelectMemoryTempStore.Enabled = !dbOpened;
       SelectDbCache.Enabled = !Globals.IsInBatch;
       SelectPiDecimalsFile.Enabled = !Globals.IsInBatch;
@@ -159,19 +158,19 @@ partial class MainForm
         break;
       case ProcessingType.ReduceRepeating:
         UpdateStatusAction(Operation.ToString());
-        if ( SqlHelper is not ReduceRepeatingSqlLoop /*&& SqlHelper is not ReduceRepeatinBigList*/ )
+        if ( SqlHelper is not ReduceRepeatingSqlLoop /*&& SqlHelper is not ReduceRepeatingBigList*/ )
         {
           UpdateStatusInfo(string.Format(AppTranslations.IterationText,
                                          ReduceRepeatingIteration,
                                          AllRepeatingCount.ToString("N0")));
         }
-        //else
+        else
         //if ( Operation == OperationType.LoadMotifs )
         //{
         //  UpdateStatusInfo(string.Format(AppTranslations.LoadDataProgress, LoadedCount.ToString("N0")));
         //  showRemainingTimeLoad();
         //}
-        else
+        //else
         {
           UpdateStatusInfo(string.Format(AppTranslations.IterationTextLoop,
                                          ReduceRepeatingIteration,
