@@ -218,6 +218,14 @@ partial class MainForm : Form
     // TODO
   }
 
+  private void NotifyIcon_Click(object sender, EventArgs e)
+  {
+    if ( Visible )
+      Hide();
+    else
+      Show();
+  }
+
   private void TimerMemory_Tick(object sender, EventArgs e)
   {
     DoTimerMemory();
