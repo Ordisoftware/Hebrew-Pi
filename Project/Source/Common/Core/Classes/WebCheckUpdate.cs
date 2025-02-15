@@ -165,7 +165,7 @@ static public class WebCheckUpdate
       version = partsVersion.Length switch
       {
         2 => new Version(Convert.ToInt32(partsVersion[0]),
-                                         Convert.ToInt32(partsVersion[1])),
+                         Convert.ToInt32(partsVersion[1])),
         3 => new Version(Convert.ToInt32(partsVersion[0]),
                          Convert.ToInt32(partsVersion[1]),
                          Convert.ToInt32(partsVersion[2])),

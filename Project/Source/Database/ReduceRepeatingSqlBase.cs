@@ -23,9 +23,14 @@ abstract public class ReduceRepeatingSqlBase : ReduceRepeatingBase
   {
     CheckDatabaseNotNull();
     string table = MainForm.Instance.TableFullNameUniqueRepeatingMotifs;
-    if ( DB.CheckTable(MainForm.Instance.TableNameUniqueRepeatingMotifs, attached: MainForm.Instance.NameWorkingDB)
-     && DisplayManager.QueryYesNo($"{table} already exists, use it without repopulate it?") )
-      return false;
+    if ( DB.CheckTable(MainForm.Instance.TableNameUniqueRepeatingMotifs, attached: MainForm.Instance.NameWorkingDB) )
+      switch ( DisplayManager.QueryYesNoCancel($"{table} already exists, use it without repopulate it?") )
+      {
+        case DialogResult.Yes:
+          return false;
+        case DialogResult.Cancel:
+          throw new AbortException();
+      }
     DB.DropTableIfExists(table);
     DB.Execute($"""
                 CREATE TABLE {table} AS
@@ -52,9 +57,14 @@ abstract public class ReduceRepeatingSqlBase : ReduceRepeatingBase
   {
     CheckDatabaseNotNull();
     string table = MainForm.Instance.TableFullNameAllRepeatingMotifs;
-    if ( DB.CheckTable(MainForm.Instance.TableNameAllRepeatingMotifs, attached: MainForm.Instance.NameWorkingDB)
-     && DisplayManager.QueryYesNo($"{table} already exists, use it without repopulate it?") )
-      return false;
+    if ( DB.CheckTable(MainForm.Instance.TableNameAllRepeatingMotifs, attached: MainForm.Instance.NameWorkingDB) )
+      switch ( DisplayManager.QueryYesNoCancel($"{table} already exists, use it without repopulate it?") )
+      {
+        case DialogResult.Yes:
+          return false;
+        case DialogResult.Cancel:
+          throw new AbortException();
+      }
     DB.DropTableIfExists($"{table}");
     DB.Execute($"CREATE TABLE {table} (Position INTEGER PRIMARY KEY)");
     DB.Execute($"""
