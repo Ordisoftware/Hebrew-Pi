@@ -37,31 +37,37 @@ partial class MainForm
     {
       // Prepare
       if ( lastRow is not null )
-      {
-        ReduceRepeatingIteration = lastRow.Iteration;
-        iteratingStep = ReduceIteratingStep.Counting;
-        //if ( lastRow.ElapsedCounting is null )
-        //  iteratingStep = ReduceIteratingStep.Counting;
-        //else
-        //if ( lastRow.ElapsedAdding is null )
-        //{
-        //  lastRow.MaxOccurences = null;
-        //  lastRow.AllRepeatingCount = null;
-        //  lastRow.UniqueRepeatingCount = null;
-        //  lastRow.RemainingRate = null;
-        //  lastRow.RepeatingRate = null;
-        //  lastRow.ElapsedCounting = null;
-        //  iteratingStep = ReduceIteratingStep.Counting;
-        //  DB.Update(lastRow);
-        //  LoadIterationGrid();
-        //}
-        //else
-        if ( lastRow.UniqueRepeatingCount == 0 && lastRow.RemainingRate == 0 )
-          return;
+        if ( lastRow.ElapsedAdding is not null )
+        {
+          ReduceRepeatingIteration = lastRow.Iteration + 1;
+          iteratingStep = ReduceIteratingStep.Next;
+        }
         else
-        if ( lastRow.UniqueRepeatingCount.HasValue )
-          countPrevious = (long)lastRow.UniqueRepeatingCount;
-      }
+        {
+          ReduceRepeatingIteration = lastRow.Iteration;
+          iteratingStep = ReduceIteratingStep.Counting;
+          //if ( lastRow.ElapsedCounting is null )
+          //  iteratingStep = ReduceIteratingStep.Counting;
+          //else
+          //if ( lastRow.ElapsedAdding is null )
+          //{
+          //  lastRow.MaxOccurences = null;
+          //  lastRow.AllRepeatingCount = null;
+          //  lastRow.UniqueRepeatingCount = null;
+          //  lastRow.RemainingRate = null;
+          //  lastRow.RepeatingRate = null;
+          //  lastRow.ElapsedCounting = null;
+          //  iteratingStep = ReduceIteratingStep.Counting;
+          //  DB.Update(lastRow);
+          //  LoadIterationGrid();
+          //}
+          //else
+          if ( lastRow.UniqueRepeatingCount == 0 && lastRow.RemainingRate == 0 )
+            return;
+          else
+          if ( lastRow.UniqueRepeatingCount.HasValue )
+            countPrevious = (long)lastRow.UniqueRepeatingCount;
+        }
       EditLog.Invoke(EditLog.Clear);
       Processing = ProcessingType.ReduceRepeating;
       // Count all rows
