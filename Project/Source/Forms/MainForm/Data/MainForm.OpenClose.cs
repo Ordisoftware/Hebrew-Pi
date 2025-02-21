@@ -21,7 +21,7 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm
 {
 
-  private async void DoActionDbOpenAsync(string path)
+  private async Task DoActionDbOpenAsync(string path)
   {
     if ( DB is not null ) DoActionDbCloseAsync();
     Processing = ProcessingType.OpenClose;
@@ -48,7 +48,7 @@ partial class MainForm
     UpdateButtons();
   }
 
-  private async void DoActionDbCloseAsync()
+  private async Task DoActionDbCloseAsync()
   {
     if ( DB is null ) return;
     Processing = ProcessingType.OpenClose;

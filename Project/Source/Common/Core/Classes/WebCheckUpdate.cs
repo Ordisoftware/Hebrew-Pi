@@ -140,7 +140,7 @@ static public class WebCheckUpdate
     try
     {
       string path = useGitHub ? Globals.CheckUpdateGitHubURL : Globals.CheckUpdateURL;
-      lines = client.DownloadString(path).SplitNoEmptyLines(useGitHub).Take(2).ToList();
+      lines = [.. client.DownloadString(path).SplitNoEmptyLines(useGitHub).Take(2)];
     }
     catch ( Exception ex )
     {

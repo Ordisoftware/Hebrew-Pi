@@ -40,7 +40,7 @@ partial class MainForm
   private async void WriteLogTime(bool isSubBatch)
   {
     string time = Globals.ChronoSubBatch.Elapsed.AsReadable();
-    WriteLogLine($"{( isSubBatch ? "    " : string.Empty )}{Operation.ToString()}: {time}");
+    WriteLogLine($"{( isSubBatch ? "    " : string.Empty )}{Operation}: {time}");
   }
 
   private void LoadIterationGrid()

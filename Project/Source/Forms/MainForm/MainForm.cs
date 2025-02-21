@@ -67,8 +67,7 @@ partial class MainForm : Form
 
   private void InitializeComboBoxSqlHelper()
   {
-    foreach ( var item in SqlHelperList )
-      SelectSqlHelper.Items.Add(item);
+    SelectSqlHelper.Items.AddRange(SqlHelperList);
     SelectSqlHelper.SelectedIndex = 1;
   }
 
@@ -221,9 +220,13 @@ partial class MainForm : Form
   private void NotifyIcon_Click(object sender, EventArgs e)
   {
     if ( Visible )
+    {
       Hide();
+    }
     else
-      Show();
+    {
+      this.Popup();
+    }
   }
 
   private void TimerMemory_Tick(object sender, EventArgs e)
