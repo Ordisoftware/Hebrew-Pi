@@ -134,7 +134,10 @@ partial class MainForm
           }
           else
           if ( row.ElapsedCounting.HasValue )
+          {
             Globals.ChronoSubBatch.AddElapsed(row.ElapsedCounting.Value);
+            Globals.ChronoBatch.AddElapsed(row.ElapsedCounting.Value);
+          }
           // Degrouping all repeating
           if ( !CheckIfBatchCanContinueAsync().Result ) return;
           Operation = OperationType.Degrouping;
@@ -156,7 +159,10 @@ partial class MainForm
           }
           else
           if ( row.ElapsedCounting.HasValue )
+          {
             Globals.ChronoSubBatch.AddElapsed(row.ElapsedCounting.Value);
+            Globals.ChronoBatch.AddElapsed(row.ElapsedCounting.Value);
+          }
           // Calculate rates and update row
           row.RepeatingRate = row.AllRepeatingCount == 0
             ? 0

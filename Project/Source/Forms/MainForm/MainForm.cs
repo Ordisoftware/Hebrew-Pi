@@ -282,7 +282,7 @@ partial class MainForm : Form
 
   private void ActionDbClose_Click(object sender, EventArgs e)
   {
-    DoBatchAsync(DoActionDbCloseAsync);
+    DoBatchAsync(() => DoActionDbCloseAsync());
   }
 
   private void ActionCreateData_Click(object sender, EventArgs e)
