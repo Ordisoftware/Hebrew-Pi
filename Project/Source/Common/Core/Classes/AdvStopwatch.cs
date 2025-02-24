@@ -33,11 +33,11 @@ public class AdvStopwatch
     _Stopwatch.Restart();
   }
 
+  public void AddElapsed(TimeSpan additionalTime) => _Offset += additionalTime;
+
   public void Start() => _Stopwatch.Start();
 
   public void Stop() => _Stopwatch.Stop();
-
-  public void AddElapsed(TimeSpan additionalTime) => _Offset += additionalTime;
 
   public TimeSpan Elapsed => _Stopwatch.Elapsed + _Offset;
 

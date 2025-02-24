@@ -85,7 +85,10 @@ partial class MainForm
             lastRow = table[table.Count - 2];
         }
         if ( ReduceRepeatingIteration > 0 )
-          countPrevious = (long)lastRow.AllRepeatingCount;
+        {
+          AllRepeatingCount = (long)lastRow.AllRepeatingCount;
+          countPrevious = AllRepeatingCount;
+        }
         if ( iteratingStep == ReduceIteratingStep.Adding )
           AllRepeatingCount = (long)row.AllRepeatingCount;
         LoadIterationGrid();
@@ -140,10 +143,13 @@ partial class MainForm
             LoadIterationGrid();
           }
           else
-          if ( row.ElapsedCounting.HasValue )
           {
-            Globals.ChronoSubBatch.AddElapsed(row.ElapsedCounting.Value);
-            Globals.ChronoBatch.AddElapsed(row.ElapsedCounting.Value);
+            AllRepeatingCount = (long)row.AllRepeatingCount;
+            if ( row.ElapsedCounting.HasValue )
+            {
+              Globals.ChronoSubBatch.AddElapsed(row.ElapsedCounting.Value);
+              Globals.ChronoBatch.AddElapsed(row.ElapsedCounting.Value);
+            }
           }
           // Calculate rates and update row
           row.RepeatingRate = row.AllRepeatingCount == 0

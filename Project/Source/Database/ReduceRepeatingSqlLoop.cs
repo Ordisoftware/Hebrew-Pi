@@ -22,9 +22,14 @@ public class ReduceRepeatingSqlLoop : ReduceRepeatingSqlBase
     CheckDatabaseNotNull();
     string querySelect = $"SELECT Position FROM {MainForm.Instance.TableFullNameAllRepeatingMotifs} LIMIT {{0}} OFFSET {{1}}";
     string queryUpdate = "UPDATE Decuplets SET Motif = Motif + Position WHERE Position = {0}";
-    long pagingCommit = MainForm.Instance.AllRepeatingCount > 100_000_100
-      ? 2_500_000
-      : MainForm.Instance.AllRepeatingCount > 10_000_100 ? 1_000_000 : 100_000;
+    string queryUpdateFake = "UPDATE Decuplets SET Motif = Motif + Position WHERE Position = -1";
+    long pagingLoading = 1_000_000;
+    long pagingCommit = MainForm.Instance.AllRepeatingCount > 1_000_000_100 ? 100_000_000 : 10_000_000;
+    //long pagingCommit = MainForm.Instance.AllRepeatingCount > 100_000_100
+    //  ? 2_000_000
+    //  : MainForm.Instance.AllRepeatingCount > 10_000_100
+    //    ? 1_000_000
+    //    : 100_000;
     long step = 0;
     MainForm.Instance.RepeatingAddedCount = 0;
     List<long> positions;
@@ -32,21 +37,33 @@ public class ReduceRepeatingSqlLoop : ReduceRepeatingSqlBase
     {
       if ( !MainForm.Instance.CheckIfBatchCanContinueAsync().Result && DisplayManager.QueryYesNo("Cancel adding?") )
         break;
-      positions = DB.QueryScalars<long>(string.Format(querySelect, pagingCommit, step));
+      MainForm.Instance.Operation = OperationType.LoadingMotifs;
+      positions = DB.QueryScalars<long>(string.Format(querySelect, pagingLoading, step));
+      MainForm.Instance.Operation = OperationType.LoadedMotifs;
       MainForm.Instance.Operation = OperationType.Adding;
-      DB.BeginTransaction();
+      if ( !DB.IsInTransaction )
+        if ( positions.Count != 0 )
+          DB.BeginTransaction();
+        else
+          break;
       foreach ( var position in positions )
       {
-        DB.Execute(string.Format(queryUpdate, position));
+        DB.Execute(string.Format(queryUpdateFake, position));
         MainForm.Instance.RepeatingAddedCount++;
       }
+      step += pagingLoading;
+      if ( step % pagingCommit == 0 ) doCommit();
+    }
+    while ( positions.Count != 0 );
+    if ( DB.IsInTransaction ) doCommit();
+    return MainForm.Instance.RepeatingAddedCount;
+    //
+    void doCommit()
+    {
       MainForm.Instance.Operation = OperationType.Committing;
       DB.Commit();
       MainForm.Instance.Operation = OperationType.Committed;
-      step += pagingCommit;
     }
-    while ( positions.Count != 0 );
-    return MainForm.Instance.RepeatingAddedCount;
   }
 
 }
