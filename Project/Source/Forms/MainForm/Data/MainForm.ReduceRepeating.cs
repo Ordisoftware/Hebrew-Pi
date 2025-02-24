@@ -44,29 +44,9 @@ partial class MainForm
         }
         else
         {
+          if ( lastRow.UniqueRepeatingCount == 0 && lastRow.RemainingRate == 0 ) return;
           ReduceRepeatingIteration = lastRow.Iteration;
           iteratingStep = ReduceIteratingStep.Counting;
-          //if ( lastRow.ElapsedCounting is null )
-          //  iteratingStep = ReduceIteratingStep.Counting;
-          //else
-          //if ( lastRow.ElapsedAdding is null )
-          //{
-          //  lastRow.MaxOccurences = null;
-          //  lastRow.AllRepeatingCount = null;
-          //  lastRow.UniqueRepeatingCount = null;
-          //  lastRow.RemainingRate = null;
-          //  lastRow.RepeatingRate = null;
-          //  lastRow.ElapsedCounting = null;
-          //  iteratingStep = ReduceIteratingStep.Counting;
-          //  DB.Update(lastRow);
-          //  LoadIterationGrid();
-          //}
-          //else
-          if ( lastRow.UniqueRepeatingCount == 0 && lastRow.RemainingRate == 0 )
-            return;
-          else
-          if ( lastRow.UniqueRepeatingCount.HasValue )
-            countPrevious = (long)lastRow.UniqueRepeatingCount;
         }
       EditLog.Invoke(EditLog.Clear);
       Processing = ProcessingType.ReduceRepeating;
@@ -92,20 +72,21 @@ partial class MainForm
         if ( !CheckIfBatchCanContinueAsync().Result ) break;
         if ( iteratingStep == ReduceIteratingStep.Next )
         {
+          lastRow = table[table.Count - 1];
           row = new IterationRow { Iteration = ReduceRepeatingIteration };
           DB.Insert(row);
         }
         else
         {
           row = lastRow;
-          if ( ReduceRepeatingIteration > 0 )
-          {
-            lastRow = table[table.Count - 2];
-            countPrevious = (long)lastRow.AllRepeatingCount;
-          }
-          if ( iteratingStep == ReduceIteratingStep.Adding )
-            AllRepeatingCount = (long)row.AllRepeatingCount;
+          lastRow = table[table.Count - 2];
         }
+        if ( ReduceRepeatingIteration > 0 )
+        {
+          countPrevious = (long)lastRow.AllRepeatingCount;
+        }
+        if ( iteratingStep == ReduceIteratingStep.Adding )
+          AllRepeatingCount = (long)row.AllRepeatingCount;
         LoadIterationGrid();
         // Count repeating motifs
         if ( iteratingStep == ReduceIteratingStep.Next || iteratingStep == ReduceIteratingStep.Counting )
@@ -179,7 +160,7 @@ partial class MainForm
           LoadIterationGrid();
           Globals.ChronoSubBatch.Stop();
           if ( ReduceRepeatingIteration > 0 && AllRepeatingCount > countPrevious
-            && !DisplayManager.QueryYesNo(string.Format(AppTranslations.AskStartNextIfMore,
+            && !DisplayManager.QueryYesNo(string.Format(AppTranslations.AskProcessAddingIfMore,
                                                         ReduceRepeatingIteration,
                                                         countPrevious,
                                                         AllRepeatingCount)) )

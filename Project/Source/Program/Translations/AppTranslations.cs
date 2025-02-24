@@ -70,9 +70,9 @@ static partial class AppTranslations
   static public string RepeatedAtIteration = $"repeating motifs at iteration #{{0}}{Globals.NL2}";
   static public string LessAtIteration = $"There are less {RepeatedAtIteration}{Globals.NL2}";
   static public string MoreAtIteration = $"There are more {RepeatedAtIteration}{Globals.NL2}";
-  static public string StartNextIteration = "Start the next iteration?";
-  static public string AskStartNextIfLess = $"{LessAtIteration}{PreviousAndCurrentCount}{StartNextIteration}";
-  static public string AskStartNextIfMore = $"{MoreAtIteration}{PreviousAndCurrentCount}{StartNextIteration}";
+  static public string StartProcessAdding = "Process adding positions?";
+  //static public string AskProcessAddingIfLess = $"{LessAtIteration}{PreviousAndCurrentCount}{StartProcessAdding}";
+  static public string AskProcessAddingIfMore = $"{MoreAtIteration}{PreviousAndCurrentCount}{StartProcessAdding}";
 
   static public string CreateDataProgress = "{0} inserted";
   static public string LoadDataProgress = "{0} loaded";
