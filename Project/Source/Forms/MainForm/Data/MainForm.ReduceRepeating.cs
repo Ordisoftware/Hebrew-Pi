@@ -72,19 +72,20 @@ partial class MainForm
         if ( !CheckIfBatchCanContinueAsync().Result ) break;
         if ( iteratingStep == ReduceIteratingStep.Next )
         {
-          lastRow = table[table.Count - 1];
+          if ( ReduceRepeatingIteration > 0 )
+            lastRow = table[table.Count - 1];
           row = new IterationRow { Iteration = ReduceRepeatingIteration };
           DB.Insert(row);
+          table.Add(row);
         }
         else
         {
           row = lastRow;
-          lastRow = table[table.Count - 2];
+          if ( ReduceRepeatingIteration > 0 )
+            lastRow = table[table.Count - 2];
         }
         if ( ReduceRepeatingIteration > 0 )
-        {
           countPrevious = (long)lastRow.AllRepeatingCount;
-        }
         if ( iteratingStep == ReduceIteratingStep.Adding )
           AllRepeatingCount = (long)row.AllRepeatingCount;
         LoadIterationGrid();
