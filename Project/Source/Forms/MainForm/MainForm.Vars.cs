@@ -29,7 +29,6 @@ partial class MainForm
   [
     new ReduceRepeatingSqlUpdate(),
     new ReduceRepeatingSqlLoop(),
-    //new ReduceRepeatingBigList()
   ];
 
   private ReduceRepeatingBase SqlHelper;

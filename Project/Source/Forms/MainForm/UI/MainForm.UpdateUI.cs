@@ -83,6 +83,7 @@ partial class MainForm
       bool dbOnenedAndNotInBatch = dbOpened && !Globals.IsInBatch;
       bool dbOnenedAndInBatch = dbOpened && Globals.IsInBatch;
       EditTempDir.Enabled = !dbOpened;
+      EditWorkingDir.Enabled = !dbOpened;
       SelectMemoryTempStore.Enabled = !dbOpened;
       SelectDbCache.Enabled = !Globals.IsInBatch;
       SelectPiDecimalsFile.Enabled = !Globals.IsInBatch;
@@ -135,7 +136,7 @@ partial class MainForm
 
   private void DoTimerMemory()
   {
-    LabelStatusFreeMem.Text = "Free memory: " + SystemManager.PhysicalMemoryFreeValue.FormatBytesSize();
+    LabelStatusFreeMem.Text = "Freemem: " + SystemManager.PhysicalMemoryFreeValue.FormatBytesSize();
     LabelTitleRight.Text = DB is null
       ? "CLOSED"
       : $"OPENED ({SystemManager.GetFileSize(DatabaseFilePath).FormatBytesSize()})";
@@ -158,19 +159,13 @@ partial class MainForm
         break;
       case ProcessingType.ReduceRepeating:
         UpdateStatusAction(Operation.ToString());
-        if ( SqlHelper is not ReduceRepeatingSqlLoop /*&& SqlHelper is not ReduceRepeatingBigList*/ )
+        if ( SqlHelper is not ReduceRepeatingSqlLoop )
         {
           UpdateStatusInfo(string.Format(AppTranslations.IterationText,
                                          ReduceRepeatingIteration,
                                          AllRepeatingCount.ToString("N0")));
         }
         else
-        //if ( Operation == OperationType.LoadMotifs )
-        //{
-        //  UpdateStatusInfo(string.Format(AppTranslations.LoadDataProgress, LoadedCount.ToString("N0")));
-        //  showRemainingTimeLoad();
-        //}
-        //else
         {
           UpdateStatusInfo(string.Format(AppTranslations.IterationTextLoop,
                                          ReduceRepeatingIteration,
@@ -207,25 +202,6 @@ partial class MainForm
         UpdateStatusRemaining(ex.Message);
       }
     }
-    //
-    //void showRemainingTimeLoad()
-    //{
-    //  try
-    //  {
-    //    var elapsed = Globals.ChronoSubBatch.Elapsed;
-    //    double countDone = LoadedCount;
-    //    double countToDo = AllRowsCount;
-    //    double progress = countDone <= 0 || countToDo <= 0 ? 1 : countDone / countToDo;
-    //    var remaining = TimeSpan.FromSeconds(( elapsed.TotalSeconds / progress ) - elapsed.TotalSeconds);
-    //    UpdateStatusRemaining(string.Format(AppTranslations.RemainingText, remaining.AsReadable()));
-    //    TaskbarManager.Instance.SetProgressValue((int)( progress * 100 ), 100);
-    //  }
-    //  catch ( Exception ex )
-    //  {
-    //    UpdateStatusRemaining(ex.Message);
-    //  }
-    //}
-    //
     void showRemainingTimeAdd()
     {
       try
