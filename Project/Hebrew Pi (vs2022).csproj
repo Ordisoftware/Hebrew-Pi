@@ -372,10 +372,8 @@
     <Compile Include="Source\Common\Hebrew\WinForms\CelebrationVersesBoardForm.Designer.cs">
       <DependentUpon>CelebrationVersesBoardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Source\Database\Database.cs" />
     <Compile Include="Source\Database\IterationRow.cs" />
     <Compile Include="Source\Database\DecupletRow.cs" />
-    <Compile Include="Source\Database\ReduceRepeatingBigList.cs" />
     <Compile Include="Source\Enums\ExportDocumentModel.cs" />
     <Compile Include="Source\Enums\ExportDocumentTheme.cs" />
     <Compile Include="Source\Enums\HebrewWordClickAction.cs" />

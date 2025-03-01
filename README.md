@@ -48,8 +48,6 @@ A libre and open-source software written in C# that allows decoding decimal sequ
 
 **What's new in the latest version**
 
-- Prototype #1.
-
 [Last release](https://github.com/Ordisoftware/Hebrew-Pi/releases/latest)
 
 ## Screenshots
@@ -81,10 +79,6 @@ This will erase all settings as well as those of old versions, which should reso
 When enabled, this will speed up rendering of the main form when it is displayed, but it may cause a slight black flicker.
 
 When disabled, top menu and some controls painting may cause latency, and dynamic items can be generated slowly the larger the number.
-
-#### What to do if there is a problem with the display?
-
-The refresh view button of the menu at the top redraws the entire form.
 
 ## Application Frequently asked questions
 
@@ -127,3 +121,5 @@ The refresh view button of the menu at the top redraws the entire form.
 #### Version 0.1
 
 - Prototype #1 with data creation and reduction of repeating motifs.
+- Research and feasibility study code, partially organized and refactored.
+- No really defined user interface yet.
