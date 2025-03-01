@@ -1,0 +1,3 @@
+Because of the integer part and the comma, the file pi_dec_1t_01.txt is missing the last two digits: these are at the beginning of pi_dec_1t_02.txt and the last pattern to insert is therefore 0191295669 after 0674614692.
+
+SQL: insert into Decuplets values (10000000000, 0191295669, '', '', '', '', 0)

@@ -1,0 +1,83 @@
+﻿; --------------------------------------------------------------------------------------------------
+; File format for web links
+; --------------------------------------------------------------------------------------------------
+; To create a folder else items will be at root level: Lang/[short code] = Title
+; Use the tag FOLDER-SEPARATOR to insert a separator menu item between folders.
+; --------------------------------------------------------------------------------------------------
+; Name = Title
+; URL = Web link
+; --------------------------------------------------------------------------------------------------
+; Use the "-" char at the beginning of a line to insert a separator
+; --------------------------------------------------------------------------------------------------
+
+Lang/EN = Egyptian language
+Lang/FR = Langage égyptien
+
+Name = (EN) Old egyptian @ en.wikipedia.org
+URL = https://en.wikipedia.org/wiki/Egyptian_language
+
+Name = (FR) Égyptien ancien @ fr.wikipedia.org
+URL = https://fr.wikipedia.org/wiki/%C3%89gyptien_ancien
+
+-
+
+Name = (EN) Egyptian hieroglyphs @ en.wikipedia.org
+URL = https://en.wikipedia.org/wiki/Egyptian_hieroglyphs
+
+Name = (FR) Écriture hiéroglyphique égyptienne @ fr.wikipedia.org
+URL = https://fr.wikipedia.org/wiki/%C3%89criture_hi%C3%A9roglyphique_%C3%A9gyptienne
+
+Name = (FR) Grammaire d'égyptien hiéroglyphique @ fr.wikipedia.org
+URL = https://fr.wikipedia.org/wiki/Grammaire_d%27%C3%A9gyptien_hi%C3%A9roglyphique
+
+-
+
+Name = (EN) Gardiner's sign list @ en.wikipedia.org
+URL = https://en.wikipedia.org/wiki/Gardiner%27s_sign_list
+
+Name = (EN) List of Egyptian hieroglyphs @ en.wikipedia.org
+URL = https://en.wikipedia.org/wiki/List_of_Egyptian_hieroglyphs
+
+Name = (EN) Egyptian numerals @ en.wikipedia.org
+URL = https://en.wikipedia.org/wiki/Egyptian_numerals
+
+-
+
+Name = (FR/EN) Gardiner’s Sign List of Egyptian Hieroglyphs (Auto-translated) @ ganino.com
+URL = https://www.ganino.com/anteanus/gardiner_s_sign_list_of_egyptian_hieroglyphs
+
+Name = (EN) The 1071 hieroglyphs appearance and sources @ st-andrews.ac.uk
+URL = https://mjn.host.cs.st-andrews.ac.uk/egyptian/unicode/tablemain.html
+
+Name = (EN) The 1071 hieroglyphs functions and meanings @ st-andrews.ac.uk
+URL = https://mjn.host.cs.st-andrews.ac.uk/egyptian/unicode/tablemeaning.html
+
+Name = (EN) List of all the signs referenced in the database @ phrp.be
+URL = https://www.phrp.be/ListAllSigns.php
+
+Name = (EN) A palaeography of polychrome hieroglyphs @ phrp.be
+URL = https://www.phrp.be/Palaeography.php
+
+-
+
+Name = (FR) Dictionnaire @ hieroglyphs.net
+URL = http://hieroglyphs.net
+
+Name = (EN) The Google's Fabricius Workbench
+URL = https://artsexperiments.withgoogle.com/fabricius
+
+-
+
+Name = (FR) Histoire du déchiffrement des hiéroglyphes @ jfbradu.free.fr
+URL = http://jfbradu.free.fr/egypte/HIEROGLYPHES/DECHIFFREMENT/DECHIFFREMENT.php3
+
+Name = (FR) Listes de shenous ou cartouches @ egyptos.net
+URL = https://www.egyptos.net
+
+Name = (FR) Projet Rosette @ projetrosette.info
+URL = http://www.projetrosette.info
+
+-
+
+Name = (FR) Signes hiéroglyphiques (PDF 1.35 Mio)
+URL = http://ankhonline.com/langue_egyptienne_pharaonique_signes_hieroglyphiques.pdf

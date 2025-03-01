@@ -1,0 +1,121 @@
+﻿; --------------------------------------------------------------------------------------------------
+; File format for web links
+; --------------------------------------------------------------------------------------------------
+; To create a folder else items will be at root level: Lang/[short code] = Title
+; Use the tag FOLDER-SEPARATOR to insert a separator menu item between folders.
+; --------------------------------------------------------------------------------------------------
+; Name = Title
+; URL = Web link
+; --------------------------------------------------------------------------------------------------
+; Use the "-" char at the beginning of a line to insert a separator
+; --------------------------------------------------------------------------------------------------
+
+Lang/EN = Judaism websites
+Lang/FR = Sites Web sur le judaïsme
+
+Name = (EN) Judaism 101 (Jew FAQ)
+URL = https://www.jewfaq.org
+
+Name = (EN) Mussar Center (Books and middot lists)
+URL = https://mussar.center/books.html
+
+- 
+
+Name = (FR) Pniné Halakha (Har Bracha Institut)
+URL = https://ph.yhb.org.il/fr/
+
+Name = (EN) Peninei Halakha (Har Bracha Institut)
+URL = https://ph.yhb.org.il/en/
+
+Name = (IW) Peninei Halakha (Har Bracha Institut)
+URL = https://ph.yhb.org.il/
+
+-
+
+Name = (FR) Beit HaZohar
+URL = https://www.beithazohar.com
+
+Name = (FR) Dvar Torah
+URL = https://www.dvartorah.org
+
+Name = (FR) Espace Torah
+URL = http://www.espacetorah.com
+
+Name = (FR) Inspiration Juive
+URL = https://inspirationjuive.com
+
+Name = (FR) Israël Torah
+URL = https://www.israeltorah.com
+
+Name = (FR) La Yéchiva des étudiants
+URL = http://yechiva.com
+
+Name = (FR) Pureté Juive
+URL = https://www.puretejuive.com
+
+Name = (FR) Torah de Vie
+URL = http://www.torahdevie.com
+
+Name = (FR) Torah Times
+URL = https://torahtimes.fr
+
+Name = (FR) Tsarfat
+URL = https://www.tsarfat.com
+
+-
+
+Name = (EN) My Jewish Learning
+URL = https://www.myjewishlearning.com
+
+Name = (EN) TheTorah.com
+URL = https://www.thetorah.com
+
+Name = (EN) Torah.org
+URL = https://torah.org
+
+Name = (EN) Torah Anytime
+URL = https://www.torahanytime.com
+
+Name = (EN) Torah Café
+URL = https://www.torahcafe.com
+
+Name = (EN) Torah Jews
+URL = https://www.truetorahjews.org
+
+-
+
+Name = (FR) Beth Loubavitch
+URL = https://www.loubavitch.fr
+
+Name = (FR) 'Habad Loubavitch
+URL = https://fr.chabad.org
+
+Name = (EN) 'Habad Loubavitch
+URL = https://www.chabad.org
+
+-
+
+Name = (FR) Aish
+URL = https://www.aish.fr
+
+Name = (EN) Aish
+URL = https://www.aish.com
+
+Name = (IW) Aish
+URL = https://www.aish.co.il
+
+-
+
+Name = (FR) Hidabroot
+URL = https://www.hidabroot.fr
+
+Name = (EN) Hidabrut
+URL = https://www.hidabroot.com
+
+Name = (IW) Hidabrut
+URL = https://www.hidabroot.org
+
+-
+
+Name = (FR) Lamed.fr
+URL = https://www.lamed.fr

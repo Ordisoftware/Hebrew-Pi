@@ -1,0 +1,27 @@
+﻿; --------------------------------------------------------------------------------------------------
+; File format for web links
+; --------------------------------------------------------------------------------------------------
+; To create a folder else items will be at root level: Lang/[short code] = Title
+; Use the tag FOLDER-SEPARATOR to insert a separator menu item between folders.
+; --------------------------------------------------------------------------------------------------
+; Name = Title
+; URL = Web link
+; --------------------------------------------------------------------------------------------------
+; Use the "-" char at the beginning of a line to insert a separator
+; --------------------------------------------------------------------------------------------------
+
+Name = (FR) Proposition logique pour un monde meilleur
+URL = https://asherhaimhalevi.ordisoftware.com
+
+Name = (FR) Théorie de santé-aide-justice
+URL = https://asherhaimhalevi.ordisoftware.com/logical-proposition/health-help-justice-theory/
+
+-
+
+Name = (FR) Bibliographie
+URL = https://asherhaimhalevi.ordisoftware.com/works/bibliography/
+
+-
+
+Name = (FR/EN) GitHub Archive (Software and Books)
+URL = https://github.com/Ordisoftware
