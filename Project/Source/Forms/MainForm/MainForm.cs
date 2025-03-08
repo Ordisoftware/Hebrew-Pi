@@ -42,6 +42,7 @@ partial class MainForm : Form
   {
     InitializeComponent();
     DoConstructor();
+    Globals.AllowClose = false;
     ColumnIteration.HeaderText = "Itération";
     ColumnAllRepeatingCount.HeaderText = "Total Reps";
     ColumnRepeatingRate.HeaderText = "Taux";
@@ -108,13 +109,20 @@ partial class MainForm : Form
 
   private void ActionExit_Click(object sender, EventArgs e)
   {
-    Close();
+    Hide();
   }
 
   private void ActionExit_MouseUp(object sender, MouseEventArgs e)
   {
     if ( e.Button == MouseButtons.Right )
       ActionExit_Click(ActionExit, null);
+  }
+
+  private void ActionShutdown_Click(object sender, EventArgs e)
+  {
+    Globals.AllowClose = true;
+    Close();
+    Globals.AllowClose = Globals.IsExiting;
   }
 
   internal void EditScreenPosition_Click(object sender, EventArgs e)
@@ -217,8 +225,9 @@ partial class MainForm : Form
     // TODO
   }
 
-  private void NotifyIcon_Click(object sender, EventArgs e)
+  private void NotifyIcon_MouseClick(object sender, MouseEventArgs e)
   {
+    if ( e.Button == MouseButtons.Right ) return;
     if ( Visible )
     {
       Hide();
@@ -378,8 +387,15 @@ partial class MainForm : Form
 
   private void ActionFixDigitsMissingIn100GB_Click(object sender, EventArgs e)
   {
-    string charactersToAdd = "69";
     string filePathText = SelectPiDecimalsFile.SelectedItem.ToString();
+    string charactersToAdd_1 = "69";
+    string charactersToAdd_2 = "00";
+    string charactersToAdd = filePathText.EndsWith("-1")
+      ? charactersToAdd_1
+      : filePathText.EndsWith("-2")
+        ? charactersToAdd_2
+        : string.Empty;
+    if ( charactersToAdd.Length == 0 ) return;
     var encoding = SystemManager.GetTextFileEncoding(filePathText);
     using var fs = new FileStream(filePathText, FileMode.Open, FileAccess.Write, FileShare.ReadWrite);
     using var writer = new StreamWriter(fs, encoding);

@@ -131,6 +131,7 @@ partial class MainForm : Form
     {
       if ( !Globals.AllowClose )
       {
+        Hide();
         e.Cancel = true;
         return;
       }
