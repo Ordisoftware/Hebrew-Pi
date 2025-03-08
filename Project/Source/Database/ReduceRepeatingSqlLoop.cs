@@ -50,6 +50,7 @@ public class ReduceRepeatingSqlLoop : ReduceRepeatingSqlBase
     }
     while ( positions.Count != 0 );
     if ( DB.IsInTransaction ) doCommit();
+    MainForm.Instance.Operation = OperationType.Adding;
     return MainForm.Instance.RepeatingAddedCount;
     //
     void doCommit()
