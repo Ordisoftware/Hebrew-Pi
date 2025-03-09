@@ -1,0 +1,10 @@
+Because of the integer part and the comma, each file pi_dec_1t_[NN].txt is missing the last two digits.
+
+These are at the beginning of each pi_dec_1t_[NN+1].txt and The last motif to insert is therefore:
+
+- 01: 0191295669 after 0674614692
+- 02: __________ after __________
+
+SQL query:
+
+INSERT INTO Decuplets VALUES (10000000000, Motif, '', '', '', '', 0);
