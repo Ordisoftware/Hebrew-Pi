@@ -115,7 +115,7 @@ partial class MainForm : Form
   private void ActionExit_MouseUp(object sender, MouseEventArgs e)
   {
     if ( e.Button == MouseButtons.Right )
-      ActionExit_Click(ActionExit, null);
+      ActionShutdown.PerformClick();
   }
 
   private void ActionShutdown_Click(object sender, EventArgs e)
@@ -323,7 +323,17 @@ partial class MainForm : Form
   private void SelectPiDecimalsFile_SelectedIndexChanged(object sender, EventArgs e)
   {
     string path = SelectPiDecimalsFile.SelectedItem.ToString();
+    if ( !File.Exists(path) )
+    {
+      DisplayManager.ShowError(SysTranslations.FileNotFound.GetLang(path));
+      return;
+    }
     long size = SystemManager.GetFileSize(path);
+    if ( size <= 2 )
+    {
+      DisplayManager.ShowError(SysTranslations.LoadFileError.GetLang(path, "Size = " + size));
+      return;
+    }
     char[] buffer = new char[2];
     using var reader = new StreamReader(path);
     if ( reader.Read(buffer, 0, 2) == 2 )
@@ -390,9 +400,9 @@ partial class MainForm : Form
     string filePathText = SelectPiDecimalsFile.SelectedItem.ToString();
     string charactersToAdd_1 = "69";
     string charactersToAdd_2 = "00";
-    string charactersToAdd = filePathText.EndsWith("-1")
+    string charactersToAdd = filePathText.EndsWith("-1.txt")
       ? charactersToAdd_1
-      : filePathText.EndsWith("-2")
+      : filePathText.EndsWith("-2.txt")
         ? charactersToAdd_2
         : string.Empty;
     if ( charactersToAdd.Length == 0 ) return;
