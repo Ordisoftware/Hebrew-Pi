@@ -42,6 +42,7 @@ partial class MainForm : Form
   {
     InitializeComponent();
     DoConstructor();
+    Globals.AllowClose = false;
     ColumnIteration.HeaderText = "Itération";
     ColumnAllRepeatingCount.HeaderText = "Total Reps";
     ColumnRepeatingRate.HeaderText = "Taux";
@@ -108,13 +109,20 @@ partial class MainForm : Form
 
   private void ActionExit_Click(object sender, EventArgs e)
   {
-    Close();
+    Hide();
   }
 
   private void ActionExit_MouseUp(object sender, MouseEventArgs e)
   {
     if ( e.Button == MouseButtons.Right )
-      ActionExit_Click(ActionExit, null);
+      ActionShutdown.PerformClick();
+  }
+
+  private void ActionShutdown_Click(object sender, EventArgs e)
+  {
+    Globals.AllowClose = true;
+    Close();
+    Globals.AllowClose = Globals.IsExiting;
   }
 
   internal void EditScreenPosition_Click(object sender, EventArgs e)
@@ -217,8 +225,9 @@ partial class MainForm : Form
     // TODO
   }
 
-  private void NotifyIcon_Click(object sender, EventArgs e)
+  private void NotifyIcon_MouseClick(object sender, MouseEventArgs e)
   {
+    if ( e.Button == MouseButtons.Right ) return;
     if ( Visible )
     {
       Hide();
@@ -314,7 +323,17 @@ partial class MainForm : Form
   private void SelectPiDecimalsFile_SelectedIndexChanged(object sender, EventArgs e)
   {
     string path = SelectPiDecimalsFile.SelectedItem.ToString();
+    if ( !File.Exists(path) )
+    {
+      DisplayManager.ShowError(SysTranslations.FileNotFound.GetLang(path));
+      return;
+    }
     long size = SystemManager.GetFileSize(path);
+    if ( size <= 2 )
+    {
+      DisplayManager.ShowError(SysTranslations.LoadFileError.GetLang(path, "Size = " + size));
+      return;
+    }
     char[] buffer = new char[2];
     using var reader = new StreamReader(path);
     if ( reader.Read(buffer, 0, 2) == 2 )
@@ -342,27 +361,31 @@ partial class MainForm : Form
     if ( e.Value is null )
       e.Value = "?";
     else
+    if ( e.ColumnIndex == ColumnIteration.Index )
+      e.Value = (long)e.Value + 1;
+    else
+    if ( e.ColumnIndex == ColumnAllRepeatingCount.Index || e.ColumnIndex == ColumnUniqueRepeatingCount.Index )
+      e.Value = ( (long)e.Value ).ToString("N0");
+    else
+    if ( e.ColumnIndex == ColumnMaxOccurences.Index )
     {
-      if ( e.ColumnIndex == ColumnAllRepeatingCount.Index || e.ColumnIndex == ColumnUniqueRepeatingCount.Index )
-        e.Value = ( (long)e.Value ).ToString("N0");
+      var value = (long)e.Value;
+      e.Value = value != 0 ? $"x{value}" : string.Empty;
+    }
+    else
+    if ( e.ColumnIndex == ColumnRepeatingRate.Index )
+      e.Value = ( (double)e.Value ).ToString("0.00") + "%";
+    else
+    if ( e.ColumnIndex == ColumnRemainingRate.Index )
+      e.Value = ( (double)e.Value ).ToString("0.00") + "%";
+    else
+    if ( e.ColumnIndex == ColumnElapsedCounting.Index || e.ColumnIndex == ColumnElapsedAdding.Index )
+    {
+      var value = (TimeSpan)e.Value;
+      if ( value != TimeSpan.Zero )
+        e.Value = value.AsReadable();
       else
-      if ( e.ColumnIndex == ColumnMaxOccurences.Index )
-      {
-        var value = (long)e.Value;
-        e.Value = value != 0 ? $"x{value}" : string.Empty;
-      }
-      else
-      if ( e.ColumnIndex == ColumnRepeatingRate.Index || e.ColumnIndex == ColumnRemainingRate.Index )
-        e.Value = ( (double)e.Value ).ToString("0.00") + "%";
-      else
-      if ( e.ColumnIndex == ColumnElapsedCounting.Index || e.ColumnIndex == ColumnElapsedAdding.Index )
-      {
-        var value = (TimeSpan)e.Value;
-        if ( value != TimeSpan.Zero )
-          e.Value = value.AsReadable();
-        else
-          e.Value = string.Empty;
-      }
+        e.Value = string.Empty;
     }
   }
 
@@ -374,8 +397,15 @@ partial class MainForm : Form
 
   private void ActionFixDigitsMissingIn100GB_Click(object sender, EventArgs e)
   {
-    string charactersToAdd = "69";
     string filePathText = SelectPiDecimalsFile.SelectedItem.ToString();
+    string charactersToAdd_1 = "69";
+    string charactersToAdd_2 = "00";
+    string charactersToAdd = filePathText.EndsWith("-1.txt")
+      ? charactersToAdd_1
+      : filePathText.EndsWith("-2.txt")
+        ? charactersToAdd_2
+        : string.Empty;
+    if ( charactersToAdd.Length == 0 ) return;
     var encoding = SystemManager.GetTextFileEncoding(filePathText);
     using var fs = new FileStream(filePathText, FileMode.Open, FileAccess.Write, FileShare.ReadWrite);
     using var writer = new StreamWriter(fs, encoding);
@@ -384,6 +414,30 @@ partial class MainForm : Form
     writer.Close();
     fs.Close();
     SelectPiDecimalsFile_SelectedIndexChanged(null, null);
+  }
+
+  private void ActionDiffPiTrf_Click(object sender, EventArgs e)
+  {
+    string pi1 = "3,1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679";
+    string pi2 = "3,1415926536897932385026433832855028841975693993752058209749565923078178062862091586280348433421170699";
+    WriteLogLine();
+    WriteLog(HighlightDifferences(pi1, pi2));
+  }
+
+  public static string HighlightDifferences(string str1, string str2)
+  {
+    int maxLength = Math.Max(str1.Length, str2.Length);
+    string result = "";
+    for ( int i = 0; i < maxLength; i++ )
+    {
+      char char1 = ( i < str1.Length ) ? str1[i] : '\0'; // Utiliser '\0' si str1 est plus court
+      char char2 = ( i < str2.Length ) ? str2[i] : '\0'; // Utiliser '\0' si str2 est plus court
+      if ( char1 != char2 )
+        result += $"<span style=\"color: blue; font-weight: bold;\">{char2}</span>";
+      else
+        result += char2;
+    }
+    return result;
   }
 
   //private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)

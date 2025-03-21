@@ -67,7 +67,7 @@ partial class MainForm
       // Loop
       for ( ; AllRepeatingCount > 0; ReduceRepeatingIteration++ )
       {
-        EditLog.Invoke(() => EditLog.AppendText("ITERATION #" + ReduceRepeatingIteration + Globals.NL));
+        EditLog.Invoke(() => EditLog.AppendText("ITERATION #" + ( ReduceRepeatingIteration + 1 ) + Globals.NL));
         // Init current row
         if ( !CheckIfBatchCanContinueAsync().Result ) break;
         if ( iteratingStep == ReduceIteratingStep.Next )

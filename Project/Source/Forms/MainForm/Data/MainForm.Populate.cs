@@ -65,7 +65,7 @@ partial class MainForm
       reader.Close();
       reader.Dispose();
       reader = new StreamReader(filePathText);
-      if ( str == "3." || str == "3," )
+      if ( EditForceSkip2.Checked || str == "3." || str == "3," )
       {
         reader.BaseStream.Seek(2, SeekOrigin.Begin);
         PiDecimalsFileSize -= 2;
@@ -104,8 +104,18 @@ partial class MainForm
           }
         }
       }
-      if ( MotifsProcessedCount == 9_999_999_999 ) // Fix for pi_dec_1t_01.txt from pi_dec_1t_02.txt
-        DB.Insert(new DecupletRow { Position = ++MotifsProcessedCount, Motif = 0191295669 });
+      if ( MotifsProcessedCount == 9_999_999_999 ) // Fix for pi_dec_1t_01.txt from pi_dec_1t_02.txt and so on
+      {
+        long motifToAdd_1 = 0191295669;
+        long motifToAdd_2 = 5623831000;
+        long motifToAdd = filePathText.EndsWith("-1.txt")
+          ? motifToAdd_1
+          : filePathText.EndsWith("-2.txt")
+            ? motifToAdd_2
+            : -1;
+        if ( motifToAdd != -1 )
+          DB.Insert(new DecupletRow { Position = ++MotifsProcessedCount, Motif = motifToAdd });
+      }
       DoCommit();
       UpdateStatusInfo(string.Format(AppTranslations.CreateDataProgress, MotifsProcessedCount.ToString("N0")));
       if ( !CheckIfBatchCanContinueAsync().Result ) return;

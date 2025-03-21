@@ -40,6 +40,7 @@
       this.label1 = new System.Windows.Forms.Label();
       this.EditTempDir = new System.Windows.Forms.TextBox();
       this.SelectDbCache = new System.Windows.Forms.ComboBox();
+      this.ActionDiffPiTrf = new System.Windows.Forms.Button();
       this.ActionFixDigitsMissingIn100GB = new System.Windows.Forms.Button();
       this.ActionDbClose = new System.Windows.Forms.Button();
       this.ActionDbNew = new System.Windows.Forms.Button();
@@ -122,6 +123,7 @@
       this.TabControl = new System.Windows.Forms.TabControl();
       this.TabPageManage = new System.Windows.Forms.TabPage();
       this.PanelViewManage = new System.Windows.Forms.Panel();
+      this.EditForceSkip2 = new System.Windows.Forms.CheckBox();
       this.SelectCountAllRows = new System.Windows.Forms.CheckBox();
       this.EditLog = new System.Windows.Forms.TextBox();
       this.SelectPiDecimalsFile = new System.Windows.Forms.ComboBox();
@@ -204,6 +206,8 @@
       this.EditChapterOriginal = new Ordisoftware.Core.RichTextBoxEx();
       this.EditChapterELS50 = new Ordisoftware.Core.RichTextBoxEx();
       this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+      this.MenuTray = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.ActionShutdown = new System.Windows.Forms.ToolStripMenuItem();
       this.PanelDatabase.SuspendLayout();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
@@ -223,6 +227,7 @@
       this.PanelTitle.SuspendLayout();
       this.PanelTitleInner.SuspendLayout();
       ( (System.ComponentModel.ISupportInitialize)( this.SelectSearchPaging ) ).BeginInit();
+      this.MenuTray.SuspendLayout();
       this.SuspendLayout();
       // 
       // PanelDatabase
@@ -234,6 +239,7 @@
       this.PanelDatabase.Controls.Add(this.label1);
       this.PanelDatabase.Controls.Add(this.EditTempDir);
       this.PanelDatabase.Controls.Add(this.SelectDbCache);
+      this.PanelDatabase.Controls.Add(this.ActionDiffPiTrf);
       this.PanelDatabase.Controls.Add(this.ActionFixDigitsMissingIn100GB);
       this.PanelDatabase.Controls.Add(this.ActionDbClose);
       this.PanelDatabase.Controls.Add(this.ActionDbNew);
@@ -309,6 +315,17 @@
       this.SelectDbCache.TabIndex = 3;
       this.SelectDbCache.SelectedIndexChanged += new System.EventHandler(this.SelectDbCache_SelectedIndexChanged);
       // 
+      // ActionDiffPiTrf
+      // 
+      this.ActionDiffPiTrf.Location = new System.Drawing.Point(797, 31);
+      this.ActionDiffPiTrf.Name = "ActionDiffPiTrf";
+      this.ActionDiffPiTrf.Size = new System.Drawing.Size(139, 23);
+      this.ActionDiffPiTrf.TabIndex = 2;
+      this.ActionDiffPiTrf.Text = "Create HTML Diff Pi Trf";
+      this.ActionDiffPiTrf.UseVisualStyleBackColor = true;
+      this.ActionDiffPiTrf.Visible = false;
+      this.ActionDiffPiTrf.Click += new System.EventHandler(this.ActionDiffPiTrf_Click);
+      // 
       // ActionFixDigitsMissingIn100GB
       // 
       this.ActionFixDigitsMissingIn100GB.Location = new System.Drawing.Point(795, 4);
@@ -317,7 +334,6 @@
       this.ActionFixDigitsMissingIn100GB.TabIndex = 2;
       this.ActionFixDigitsMissingIn100GB.Text = "Fix 100GB 2 digits missing";
       this.ActionFixDigitsMissingIn100GB.UseVisualStyleBackColor = true;
-      this.ActionFixDigitsMissingIn100GB.Visible = false;
       this.ActionFixDigitsMissingIn100GB.Click += new System.EventHandler(this.ActionFixDigitsMissingIn100GB_Click);
       // 
       // ActionDbClose
@@ -1092,6 +1108,7 @@
       // PanelViewManage
       // 
       this.PanelViewManage.BackColor = System.Drawing.SystemColors.Control;
+      this.PanelViewManage.Controls.Add(this.EditForceSkip2);
       this.PanelViewManage.Controls.Add(this.SelectCountAllRows);
       this.PanelViewManage.Controls.Add(this.EditLog);
       this.PanelViewManage.Controls.Add(this.SelectPiDecimalsFile);
@@ -1114,11 +1131,21 @@
       this.PanelViewManage.Size = new System.Drawing.Size(923, 437);
       this.PanelViewManage.TabIndex = 2;
       // 
+      // EditForceSkip2
+      // 
+      this.EditForceSkip2.AutoSize = true;
+      this.EditForceSkip2.Checked = true;
+      this.EditForceSkip2.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.EditForceSkip2.Location = new System.Drawing.Point(13, 95);
+      this.EditForceSkip2.Name = "EditForceSkip2";
+      this.EditForceSkip2.Size = new System.Drawing.Size(84, 17);
+      this.EditForceSkip2.TabIndex = 3;
+      this.EditForceSkip2.Text = "Force skip 2";
+      this.EditForceSkip2.UseVisualStyleBackColor = true;
+      // 
       // SelectCountAllRows
       // 
       this.SelectCountAllRows.AutoSize = true;
-      this.SelectCountAllRows.Checked = true;
-      this.SelectCountAllRows.CheckState = System.Windows.Forms.CheckState.Checked;
       this.SelectCountAllRows.Location = new System.Drawing.Point(189, 99);
       this.SelectCountAllRows.Name = "SelectCountAllRows";
       this.SelectCountAllRows.Size = new System.Drawing.Size(79, 17);
@@ -1192,7 +1219,7 @@
       // EditAllowInterruption
       // 
       this.EditAllowInterruption.AutoSize = true;
-      this.EditAllowInterruption.Location = new System.Drawing.Point(13, 124);
+      this.EditAllowInterruption.Location = new System.Drawing.Point(13, 147);
       this.EditAllowInterruption.Name = "EditAllowInterruption";
       this.EditAllowInterruption.Size = new System.Drawing.Size(106, 17);
       this.EditAllowInterruption.TabIndex = 4;
@@ -1205,18 +1232,16 @@
       this.EditAutoCreateIndex.AutoSize = true;
       this.EditAutoCreateIndex.Checked = true;
       this.EditAutoCreateIndex.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.EditAutoCreateIndex.Location = new System.Drawing.Point(189, 145);
+      this.EditAutoCreateIndex.Location = new System.Drawing.Point(108, 95);
       this.EditAutoCreateIndex.Name = "EditAutoCreateIndex";
-      this.EditAutoCreateIndex.Size = new System.Drawing.Size(90, 17);
+      this.EditAutoCreateIndex.Size = new System.Drawing.Size(76, 17);
       this.EditAutoCreateIndex.TabIndex = 4;
-      this.EditAutoCreateIndex.Text = "Auto indexing";
+      this.EditAutoCreateIndex.Text = "Auto index";
       this.EditAutoCreateIndex.UseVisualStyleBackColor = true;
       // 
       // EditNormalizeAutoLoop
       // 
       this.EditNormalizeAutoLoop.AutoSize = true;
-      this.EditNormalizeAutoLoop.Checked = true;
-      this.EditNormalizeAutoLoop.CheckState = System.Windows.Forms.CheckState.Checked;
       this.EditNormalizeAutoLoop.Location = new System.Drawing.Point(189, 122);
       this.EditNormalizeAutoLoop.Name = "EditNormalizeAutoLoop";
       this.EditNormalizeAutoLoop.Size = new System.Drawing.Size(71, 17);
@@ -1227,7 +1252,7 @@
       // ActionStop
       // 
       this.ActionStop.Enabled = false;
-      this.ActionStop.Location = new System.Drawing.Point(13, 95);
+      this.ActionStop.Location = new System.Drawing.Point(13, 118);
       this.ActionStop.Name = "ActionStop";
       this.ActionStop.Size = new System.Drawing.Size(89, 23);
       this.ActionStop.TabIndex = 2;
@@ -1260,7 +1285,7 @@
       // ActionPause
       // 
       this.ActionPause.Enabled = false;
-      this.ActionPause.Location = new System.Drawing.Point(108, 95);
+      this.ActionPause.Location = new System.Drawing.Point(108, 118);
       this.ActionPause.Name = "ActionPause";
       this.ActionPause.Size = new System.Drawing.Size(75, 23);
       this.ActionPause.TabIndex = 2;
@@ -2039,10 +2064,25 @@
       // 
       // NotifyIcon
       // 
+      this.NotifyIcon.ContextMenuStrip = this.MenuTray;
       this.NotifyIcon.Icon = ( (System.Drawing.Icon)( resources.GetObject("NotifyIcon.Icon") ) );
       this.NotifyIcon.Text = "Hebrew Pi";
       this.NotifyIcon.Visible = true;
-      this.NotifyIcon.Click += new System.EventHandler(this.NotifyIcon_Click);
+      this.NotifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseClick);
+      // 
+      // MenuTray
+      // 
+      this.MenuTray.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ActionShutdown});
+      this.MenuTray.Name = "MenuTray";
+      this.MenuTray.Size = new System.Drawing.Size(129, 26);
+      // 
+      // ActionShutdown
+      // 
+      this.ActionShutdown.Name = "ActionShutdown";
+      this.ActionShutdown.Size = new System.Drawing.Size(128, 22);
+      this.ActionShutdown.Text = "Shutdown";
+      this.ActionShutdown.Click += new System.EventHandler(this.ActionShutdown_Click);
       // 
       // MainForm
       // 
@@ -2084,6 +2124,7 @@
       this.PanelTitle.ResumeLayout(false);
       this.PanelTitleInner.ResumeLayout(false);
       ( (System.ComponentModel.ISupportInitialize)( this.SelectSearchPaging ) ).EndInit();
+      this.MenuTray.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -2262,5 +2303,9 @@
     private Label label2;
     private TextBox EditWorkingDir;
     private NotifyIcon NotifyIcon;
+    private Button ActionDiffPiTrf;
+    private CheckBox EditForceSkip2;
+    private ContextMenuStrip MenuTray;
+    private ToolStripMenuItem ActionShutdown;
   }
 }
