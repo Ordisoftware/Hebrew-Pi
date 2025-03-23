@@ -10,8 +10,8 @@
 /// relevant directory) where a recipient would be likely to look for such a notice.
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
-/// <created> 2025-01 </created>
-/// <edited> 2025-01 </edited>
+/// <created> 2025-03 </created>
+/// <edited> 2025-03 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 /// <summary>
@@ -20,6 +20,10 @@ namespace Ordisoftware.Hebrew.Pi;
 /// <seealso cref="T:System.Windows.Forms.Form"/>
 partial class MainForm : Form
 {
+
+  const ulong MemorySizeInKiB = 1024;
+  const ulong MemorySizeInMiB = MemorySizeInKiB * 1024;
+  const ulong MemorySizeInGiB = MemorySizeInMiB * 1024;
 
   #region Singleton
 
@@ -61,10 +65,6 @@ partial class MainForm : Form
     InitializeListBoxCacheSize();
     InitializeComboBoxSqlHelper();
   }
-
-  const ulong MemorySizeInKiB = 1024;
-  const ulong MemorySizeInMiB = MemorySizeInKiB * 1024;
-  const ulong MemorySizeInGiB = MemorySizeInMiB * 1024;
 
   private void InitializeComboBoxSqlHelper()
   {
@@ -339,7 +339,7 @@ partial class MainForm : Form
     if ( reader.Read(buffer, 0, 2) == 2 )
     {
       string str = new(buffer, 0, 2);
-      if ( str == "3." || str == "3," ) size -= 2;
+      if ( EditForceSkip2.Checked || str == "3." || str == "3," ) size -= 2;
     }
     PiDecimalsFileSize = size;
     ActionFixDigitsMissingIn100GB.Enabled = size == 99999999998;
@@ -398,13 +398,7 @@ partial class MainForm : Form
   private void ActionFixDigitsMissingIn100GB_Click(object sender, EventArgs e)
   {
     string filePathText = SelectPiDecimalsFile.SelectedItem.ToString();
-    string charactersToAdd_1 = "69";
-    string charactersToAdd_2 = "00";
-    string charactersToAdd = filePathText.EndsWith("-1.txt")
-      ? charactersToAdd_1
-      : filePathText.EndsWith("-2.txt")
-        ? charactersToAdd_2
-        : string.Empty;
+    string charactersToAdd = DecupletRow.GetMissingDigitsFor100G(filePathText);
     if ( charactersToAdd.Length == 0 ) return;
     var encoding = SystemManager.GetTextFileEncoding(filePathText);
     using var fs = new FileStream(filePathText, FileMode.Open, FileAccess.Write, FileShare.ReadWrite);

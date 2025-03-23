@@ -22,7 +22,7 @@ public class ReduceRepeatingSqlLoop : ReduceRepeatingSqlBase
     CheckDatabaseNotNull();
     string querySelect = $"SELECT Position FROM {MainForm.Instance.TableFullNameAllRepeatingMotifs} LIMIT {{0}} OFFSET {{1}}";
     string queryUpdate = "UPDATE Decuplets SET Motif = Motif + Position WHERE Position = {0}";
-    long pagingLoading = 1_000_000;
+    long pagingLoading = 250_000;
     long pagingCommit = MainForm.Instance.AllRepeatingCount > 1_000_000_100 ? 100_000_000 : 10_000_000;
     long step = 0;
     MainForm.Instance.RepeatingAddedCount = 0;
@@ -57,6 +57,7 @@ public class ReduceRepeatingSqlLoop : ReduceRepeatingSqlBase
     {
       MainForm.Instance.Operation = OperationType.Committing;
       DB.Commit();
+      GC.Collect();
       MainForm.Instance.Operation = OperationType.Committed;
     }
   }
