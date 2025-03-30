@@ -320,6 +320,12 @@ partial class MainForm : Form
     DoActionPauseContinue();
   }
 
+  private void ActionResetChronos_Click(object sender, EventArgs e)
+  {
+    Globals.ChronoBatch.Reset();
+    Globals.ChronoSubBatch.Reset();
+  }
+
   private void SelectPiDecimalsFile_SelectedIndexChanged(object sender, EventArgs e)
   {
     string path = SelectPiDecimalsFile.SelectedItem.ToString();
