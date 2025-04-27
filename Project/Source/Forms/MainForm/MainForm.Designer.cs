@@ -639,6 +639,7 @@
       this.ActionVacuum.Name = "ActionVacuum";
       this.ActionVacuum.Size = new System.Drawing.Size(210, 22);
       this.ActionVacuum.Text = "Optimize";
+      this.ActionVacuum.Click += new System.EventHandler(this.ActionVacuum_Click);
       // 
       // ActionDatabaseSetttings
       // 
@@ -1137,9 +1138,9 @@
       this.EditForceSkip2.CheckState = System.Windows.Forms.CheckState.Checked;
       this.EditForceSkip2.Location = new System.Drawing.Point(13, 95);
       this.EditForceSkip2.Name = "EditForceSkip2";
-      this.EditForceSkip2.Size = new System.Drawing.Size(84, 17);
+      this.EditForceSkip2.Size = new System.Drawing.Size(92, 17);
       this.EditForceSkip2.TabIndex = 3;
-      this.EditForceSkip2.Text = "Force skip 2";
+      this.EditForceSkip2.Text = "Force skip 2pi";
       this.EditForceSkip2.UseVisualStyleBackColor = true;
       // 
       // SelectCountAllRows
@@ -1206,8 +1207,6 @@
       // EditAutoCreateIndex
       // 
       this.EditAutoCreateIndex.AutoSize = true;
-      this.EditAutoCreateIndex.Checked = true;
-      this.EditAutoCreateIndex.CheckState = System.Windows.Forms.CheckState.Checked;
       this.EditAutoCreateIndex.Location = new System.Drawing.Point(108, 95);
       this.EditAutoCreateIndex.Name = "EditAutoCreateIndex";
       this.EditAutoCreateIndex.Size = new System.Drawing.Size(76, 17);
@@ -1218,6 +1217,8 @@
       // EditNormalizeAutoLoop
       // 
       this.EditNormalizeAutoLoop.AutoSize = true;
+      this.EditNormalizeAutoLoop.Checked = true;
+      this.EditNormalizeAutoLoop.CheckState = System.Windows.Forms.CheckState.Checked;
       this.EditNormalizeAutoLoop.Location = new System.Drawing.Point(189, 122);
       this.EditNormalizeAutoLoop.Name = "EditNormalizeAutoLoop";
       this.EditNormalizeAutoLoop.Size = new System.Drawing.Size(71, 17);

@@ -11,7 +11,7 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-03 </created>
-/// <edited> 2025-03 </edited>
+/// <edited> 2025-04 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 /// <summary>
@@ -438,6 +438,19 @@ partial class MainForm : Form
         result += char2;
     }
     return result;
+  }
+
+  private void ActionVacuum_Click(object sender, EventArgs e)
+  {
+    DoBatchAsync(() => DoActionVacuumAsync());
+  }
+
+  private async Task DoActionVacuumAsync()
+  {
+    Globals.ChronoBatch.Restart();
+    Processing = ProcessingType.Vacuum;
+    DB.Vacuum();
+    Processing = ProcessingType.Finished;
   }
 
   //private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
