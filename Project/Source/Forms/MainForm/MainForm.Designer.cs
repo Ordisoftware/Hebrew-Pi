@@ -33,6 +33,8 @@
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.PanelDatabase = new System.Windows.Forms.Panel();
+      this.EditFontSpace = new System.Windows.Forms.NumericUpDown();
+      this.TrackBarFontSize = new System.Windows.Forms.TrackBar();
       this.label2 = new System.Windows.Forms.Label();
       this.EditWorkingDir = new System.Windows.Forms.TextBox();
       this.SelectSqlHelper = new System.Windows.Forms.ComboBox();
@@ -208,6 +210,8 @@
       this.MenuTray = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.ActionShutdown = new System.Windows.Forms.ToolStripMenuItem();
       this.PanelDatabase.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.EditFontSpace)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.TrackBarFontSize)).BeginInit();
       this.StatusStrip.SuspendLayout();
       this.ToolStrip.SuspendLayout();
       this.PanelMain.SuspendLayout();
@@ -231,6 +235,8 @@
       // 
       // PanelDatabase
       // 
+      this.PanelDatabase.Controls.Add(this.EditFontSpace);
+      this.PanelDatabase.Controls.Add(this.TrackBarFontSize);
       this.PanelDatabase.Controls.Add(this.label2);
       this.PanelDatabase.Controls.Add(this.EditWorkingDir);
       this.PanelDatabase.Controls.Add(this.SelectSqlHelper);
@@ -249,6 +255,36 @@
       this.PanelDatabase.Size = new System.Drawing.Size(939, 60);
       this.PanelDatabase.TabIndex = 1;
       // 
+      // EditFontSpace
+      // 
+      this.EditFontSpace.Location = new System.Drawing.Point(86, 32);
+      this.EditFontSpace.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+      this.EditFontSpace.Name = "EditFontSpace";
+      this.EditFontSpace.Size = new System.Drawing.Size(38, 20);
+      this.EditFontSpace.TabIndex = 11;
+      this.EditFontSpace.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+      this.EditFontSpace.ValueChanged += new System.EventHandler(this.TrackBarFontSize_Scroll);
+      // 
+      // TrackBarFontSize
+      // 
+      this.TrackBarFontSize.AutoSize = false;
+      this.TrackBarFontSize.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+      this.TrackBarFontSize.Location = new System.Drawing.Point(0, 35);
+      this.TrackBarFontSize.Minimum = 6;
+      this.TrackBarFontSize.Name = "TrackBarFontSize";
+      this.TrackBarFontSize.Size = new System.Drawing.Size(80, 20);
+      this.TrackBarFontSize.TabIndex = 10;
+      this.TrackBarFontSize.Value = 8;
+      this.TrackBarFontSize.Scroll += new System.EventHandler(this.TrackBarFontSize_Scroll);
+      // 
       // label2
       // 
       this.label2.AutoSize = true;
@@ -263,8 +299,8 @@
       this.EditWorkingDir.Location = new System.Drawing.Point(509, 5);
       this.EditWorkingDir.Name = "EditWorkingDir";
       this.EditWorkingDir.Size = new System.Drawing.Size(86, 20);
-      this.EditWorkingDir.TabIndex = 8;
-      this.EditWorkingDir.Text = "D:\\";
+      this.EditWorkingDir.TabIndex = 5;
+      this.EditWorkingDir.Text = "D:\\.Hebrew Pi\\";
       // 
       // SelectSqlHelper
       // 
@@ -273,7 +309,7 @@
       this.SelectSqlHelper.Location = new System.Drawing.Point(263, 5);
       this.SelectSqlHelper.Name = "SelectSqlHelper";
       this.SelectSqlHelper.Size = new System.Drawing.Size(166, 21);
-      this.SelectSqlHelper.TabIndex = 7;
+      this.SelectSqlHelper.TabIndex = 4;
       this.SelectSqlHelper.SelectedIndexChanged += new System.EventHandler(this.SelectSqlHelper_SelectedIndexChanged);
       this.SelectSqlHelper.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.SelectSqlHelper_Format);
       // 
@@ -283,14 +319,14 @@
       this.SelectMemoryTempStore.Location = new System.Drawing.Point(604, 8);
       this.SelectMemoryTempStore.Name = "SelectMemoryTempStore";
       this.SelectMemoryTempStore.Size = new System.Drawing.Size(153, 17);
-      this.SelectMemoryTempStore.TabIndex = 6;
+      this.SelectMemoryTempStore.TabIndex = 7;
       this.SelectMemoryTempStore.Text = "Memory temp store else file";
       this.SelectMemoryTempStore.UseVisualStyleBackColor = true;
       // 
       // label1
       // 
       this.label1.AutoSize = true;
-      this.label1.Location = new System.Drawing.Point(442, 34);
+      this.label1.Location = new System.Drawing.Point(442, 35);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(48, 13);
       this.label1.TabIndex = 5;
@@ -298,11 +334,11 @@
       // 
       // EditTempDir
       // 
-      this.EditTempDir.Location = new System.Drawing.Point(509, 31);
+      this.EditTempDir.Location = new System.Drawing.Point(509, 32);
       this.EditTempDir.Name = "EditTempDir";
       this.EditTempDir.Size = new System.Drawing.Size(86, 20);
-      this.EditTempDir.TabIndex = 4;
-      this.EditTempDir.Text = "D:\\";
+      this.EditTempDir.TabIndex = 6;
+      this.EditTempDir.Text = "D:\\.Hebrew Pi\\";
       // 
       // SelectDbCache
       // 
@@ -311,7 +347,7 @@
       this.SelectDbCache.Location = new System.Drawing.Point(5, 5);
       this.SelectDbCache.Name = "SelectDbCache";
       this.SelectDbCache.Size = new System.Drawing.Size(50, 21);
-      this.SelectDbCache.TabIndex = 3;
+      this.SelectDbCache.TabIndex = 0;
       this.SelectDbCache.SelectedIndexChanged += new System.EventHandler(this.SelectDbCache_SelectedIndexChanged);
       // 
       // ActionDiffPiTrf
@@ -319,7 +355,7 @@
       this.ActionDiffPiTrf.Location = new System.Drawing.Point(797, 31);
       this.ActionDiffPiTrf.Name = "ActionDiffPiTrf";
       this.ActionDiffPiTrf.Size = new System.Drawing.Size(139, 23);
-      this.ActionDiffPiTrf.TabIndex = 2;
+      this.ActionDiffPiTrf.TabIndex = 9;
       this.ActionDiffPiTrf.Text = "Create HTML Diff Pi Trf";
       this.ActionDiffPiTrf.UseVisualStyleBackColor = true;
       this.ActionDiffPiTrf.Visible = false;
@@ -330,7 +366,7 @@
       this.ActionFixDigitsMissingIn100GB.Location = new System.Drawing.Point(795, 4);
       this.ActionFixDigitsMissingIn100GB.Name = "ActionFixDigitsMissingIn100GB";
       this.ActionFixDigitsMissingIn100GB.Size = new System.Drawing.Size(139, 23);
-      this.ActionFixDigitsMissingIn100GB.TabIndex = 2;
+      this.ActionFixDigitsMissingIn100GB.TabIndex = 8;
       this.ActionFixDigitsMissingIn100GB.Text = "Fix 100GB 2 digits missing";
       this.ActionFixDigitsMissingIn100GB.UseVisualStyleBackColor = true;
       this.ActionFixDigitsMissingIn100GB.Visible = false;
@@ -342,7 +378,7 @@
       this.ActionDbClose.Location = new System.Drawing.Point(194, 4);
       this.ActionDbClose.Name = "ActionDbClose";
       this.ActionDbClose.Size = new System.Drawing.Size(58, 23);
-      this.ActionDbClose.TabIndex = 2;
+      this.ActionDbClose.TabIndex = 3;
       this.ActionDbClose.Text = "Close";
       this.ActionDbClose.UseVisualStyleBackColor = true;
       this.ActionDbClose.Click += new System.EventHandler(this.ActionDbClose_Click);
@@ -353,7 +389,7 @@
       this.ActionDbNew.Location = new System.Drawing.Point(66, 4);
       this.ActionDbNew.Name = "ActionDbNew";
       this.ActionDbNew.Size = new System.Drawing.Size(58, 23);
-      this.ActionDbNew.TabIndex = 2;
+      this.ActionDbNew.TabIndex = 1;
       this.ActionDbNew.Text = "New";
       this.ActionDbNew.UseVisualStyleBackColor = true;
       this.ActionDbNew.Click += new System.EventHandler(this.ActionDbNew_Click);
@@ -1139,17 +1175,17 @@
       this.EditForceSkip2.Location = new System.Drawing.Point(13, 95);
       this.EditForceSkip2.Name = "EditForceSkip2";
       this.EditForceSkip2.Size = new System.Drawing.Size(92, 17);
-      this.EditForceSkip2.TabIndex = 3;
+      this.EditForceSkip2.TabIndex = 7;
       this.EditForceSkip2.Text = "Force skip 2pi";
       this.EditForceSkip2.UseVisualStyleBackColor = true;
       // 
       // SelectCountAllRows
       // 
       this.SelectCountAllRows.AutoSize = true;
-      this.SelectCountAllRows.Location = new System.Drawing.Point(189, 99);
+      this.SelectCountAllRows.Location = new System.Drawing.Point(189, 95);
       this.SelectCountAllRows.Name = "SelectCountAllRows";
       this.SelectCountAllRows.Size = new System.Drawing.Size(79, 17);
-      this.SelectCountAllRows.TabIndex = 8;
+      this.SelectCountAllRows.TabIndex = 9;
       this.SelectCountAllRows.Text = "Count rows";
       this.SelectCountAllRows.UseVisualStyleBackColor = true;
       // 
@@ -1161,7 +1197,7 @@
       this.EditLog.Multiline = true;
       this.EditLog.Name = "EditLog";
       this.EditLog.Size = new System.Drawing.Size(265, 251);
-      this.EditLog.TabIndex = 7;
+      this.EditLog.TabIndex = 14;
       // 
       // SelectPiDecimalsFile
       // 
@@ -1170,7 +1206,7 @@
       this.SelectPiDecimalsFile.Location = new System.Drawing.Point(13, 39);
       this.SelectPiDecimalsFile.Name = "SelectPiDecimalsFile";
       this.SelectPiDecimalsFile.Size = new System.Drawing.Size(265, 21);
-      this.SelectPiDecimalsFile.TabIndex = 3;
+      this.SelectPiDecimalsFile.TabIndex = 0;
       this.SelectPiDecimalsFile.SelectedIndexChanged += new System.EventHandler(this.SelectPiDecimalsFile_SelectedIndexChanged);
       this.SelectPiDecimalsFile.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.SelectPiDecimalsFile_Format);
       // 
@@ -1184,7 +1220,7 @@
             0});
       this.EditMaxMotifs.Name = "EditMaxMotifs";
       this.EditMaxMotifs.Size = new System.Drawing.Size(266, 20);
-      this.EditMaxMotifs.TabIndex = 6;
+      this.EditMaxMotifs.TabIndex = 1;
       this.EditMaxMotifs.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
       this.EditMaxMotifs.ThousandsSeparator = true;
       this.EditMaxMotifs.Value = new decimal(new int[] {
@@ -1199,7 +1235,7 @@
       this.EditAllowInterruption.Location = new System.Drawing.Point(108, 122);
       this.EditAllowInterruption.Name = "EditAllowInterruption";
       this.EditAllowInterruption.Size = new System.Drawing.Size(76, 17);
-      this.EditAllowInterruption.TabIndex = 4;
+      this.EditAllowInterruption.TabIndex = 11;
       this.EditAllowInterruption.Text = "Force stop";
       this.EditAllowInterruption.UseVisualStyleBackColor = true;
       this.EditAllowInterruption.CheckedChanged += new System.EventHandler(this.EditAllowInterruption_CheckedChanged);
@@ -1210,7 +1246,7 @@
       this.EditAutoCreateIndex.Location = new System.Drawing.Point(108, 95);
       this.EditAutoCreateIndex.Name = "EditAutoCreateIndex";
       this.EditAutoCreateIndex.Size = new System.Drawing.Size(76, 17);
-      this.EditAutoCreateIndex.TabIndex = 4;
+      this.EditAutoCreateIndex.TabIndex = 8;
       this.EditAutoCreateIndex.Text = "Auto index";
       this.EditAutoCreateIndex.UseVisualStyleBackColor = true;
       // 
@@ -1222,7 +1258,7 @@
       this.EditNormalizeAutoLoop.Location = new System.Drawing.Point(189, 122);
       this.EditNormalizeAutoLoop.Name = "EditNormalizeAutoLoop";
       this.EditNormalizeAutoLoop.Size = new System.Drawing.Size(71, 17);
-      this.EditNormalizeAutoLoop.TabIndex = 4;
+      this.EditNormalizeAutoLoop.TabIndex = 10;
       this.EditNormalizeAutoLoop.Text = "Auto loop";
       this.EditNormalizeAutoLoop.UseVisualStyleBackColor = true;
       // 
@@ -1232,7 +1268,7 @@
       this.ActionStop.Location = new System.Drawing.Point(13, 118);
       this.ActionStop.Name = "ActionStop";
       this.ActionStop.Size = new System.Drawing.Size(89, 23);
-      this.ActionStop.TabIndex = 2;
+      this.ActionStop.TabIndex = 5;
       this.ActionStop.Text = "Stop";
       this.ActionStop.UseVisualStyleBackColor = true;
       this.ActionStop.Click += new System.EventHandler(this.ActionStop_Click);
@@ -1253,7 +1289,7 @@
       this.ActionResetChronos.Location = new System.Drawing.Point(108, 144);
       this.ActionResetChronos.Name = "ActionResetChronos";
       this.ActionResetChronos.Size = new System.Drawing.Size(170, 23);
-      this.ActionResetChronos.TabIndex = 2;
+      this.ActionResetChronos.TabIndex = 12;
       this.ActionResetChronos.Text = "Reset chronos";
       this.ActionResetChronos.UseVisualStyleBackColor = true;
       this.ActionResetChronos.Click += new System.EventHandler(this.ActionResetChronos_Click);
@@ -1264,7 +1300,7 @@
       this.ActionNormalize.Location = new System.Drawing.Point(189, 66);
       this.ActionNormalize.Name = "ActionNormalize";
       this.ActionNormalize.Size = new System.Drawing.Size(89, 23);
-      this.ActionNormalize.TabIndex = 2;
+      this.ActionNormalize.TabIndex = 4;
       this.ActionNormalize.Text = "Normalize";
       this.ActionNormalize.UseVisualStyleBackColor = true;
       this.ActionNormalize.Click += new System.EventHandler(this.ActionNormalize_Click);
@@ -1275,7 +1311,7 @@
       this.ActionPause.Location = new System.Drawing.Point(13, 144);
       this.ActionPause.Name = "ActionPause";
       this.ActionPause.Size = new System.Drawing.Size(89, 23);
-      this.ActionPause.TabIndex = 2;
+      this.ActionPause.TabIndex = 6;
       this.ActionPause.Text = "Pause";
       this.ActionPause.UseVisualStyleBackColor = true;
       this.ActionPause.Click += new System.EventHandler(this.ActionPauseContinue_Click);
@@ -1286,7 +1322,7 @@
       this.ActionCreateIndex.Location = new System.Drawing.Point(108, 66);
       this.ActionCreateIndex.Name = "ActionCreateIndex";
       this.ActionCreateIndex.Size = new System.Drawing.Size(75, 23);
-      this.ActionCreateIndex.TabIndex = 2;
+      this.ActionCreateIndex.TabIndex = 3;
       this.ActionCreateIndex.Text = "Create index";
       this.ActionCreateIndex.UseVisualStyleBackColor = true;
       this.ActionCreateIndex.Click += new System.EventHandler(this.ActionCreateIndex_Click);
@@ -1331,7 +1367,7 @@
       this.GridIterations.RowsDefaultCellStyle = dataGridViewCellStyle2;
       this.GridIterations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.GridIterations.Size = new System.Drawing.Size(616, 411);
-      this.GridIterations.TabIndex = 0;
+      this.GridIterations.TabIndex = 13;
       this.GridIterations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridIterations_CellFormatting);
       this.GridIterations.Leave += new System.EventHandler(this.GridIterations_Leave);
       // 
@@ -2089,6 +2125,8 @@
       this.Shown += new System.EventHandler(this.MainForm_Shown);
       this.PanelDatabase.ResumeLayout(false);
       this.PanelDatabase.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.EditFontSpace)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.TrackBarFontSize)).EndInit();
       this.StatusStrip.ResumeLayout(false);
       this.StatusStrip.PerformLayout();
       this.ToolStrip.ResumeLayout(false);
@@ -2293,5 +2331,7 @@
     private ContextMenuStrip MenuTray;
     private ToolStripMenuItem ActionShutdown;
     private Button ActionResetChronos;
+    private TrackBar TrackBarFontSize;
+    private NumericUpDown EditFontSpace;
   }
 }

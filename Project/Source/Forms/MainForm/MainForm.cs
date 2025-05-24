@@ -55,6 +55,7 @@ partial class MainForm : Form
     ColumnRemainingRate.HeaderText = "Restants";
     ColumnElapsedCounting.HeaderText = "Comptage";
     ColumnElapsedAdding.HeaderText = "Additions";
+    TrackBarFontSize.Value = (int)GridIterations.Font.Size;
   }
 
   private void MainForm_Load(object sender, EventArgs e)
@@ -74,8 +75,8 @@ partial class MainForm : Form
 
   private void InitializeListBoxPiDecimals()
   {
-    foreach ( string file in Directory.GetFiles(Path.Combine(Globals.DocumentsFolderPath, "PiDecimals"), "PiDecimals*.txt") )
-      SelectPiDecimalsFile.Items.Add(file);
+    var list = Directory.GetFiles(Path.Combine(Globals.DocumentsFolderPath, "PiDecimals"), "PiDecimals*.txt");
+    SelectPiDecimalsFile.Items.AddRange(list);
     SelectPiDecimalsFile.SelectedIndex = 2;
   }
 
@@ -95,6 +96,7 @@ partial class MainForm : Form
   private void MainForm_Shown(object sender, EventArgs e)
   {
     DoFormShown(sender, e);
+    UpdateRowsHeight();
   }
 
   private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -350,11 +352,27 @@ partial class MainForm : Form
     PiDecimalsFileSize = size;
     ActionFixDigitsMissingIn100GB.Enabled = size == 99999999998;
     EditMaxMotifs.Value = size / 10;
+    if ( EditMaxMotifs.Value == 0 ) EditMaxMotifs.Value = 10000000000;
   }
 
   private void SelectPiDecimalsFile_Format(object sender, ListControlConvertEventArgs e)
   {
     e.Value = Path.GetFileNameWithoutExtension(e.Value.ToString());
+  }
+
+  private void TrackBarFontSize_Scroll(object sender, EventArgs e)
+  {
+    GridIterations.Font = new Font(GridIterations.Font.Name, TrackBarFontSize.Value);
+    UpdateRowsHeight();
+  }
+
+  private void UpdateRowsHeight()
+  {
+    int newRowHeight = TextRenderer.MeasureText("0123456789%", GridIterations.DefaultCellStyle.Font).Height
+                     + (int)EditFontSpace.Value;
+    GridIterations.RowTemplate.Height = newRowHeight;
+    foreach ( DataGridViewRow row in GridIterations.Rows )
+      row.Height = newRowHeight;
   }
 
   private void GridIterations_Leave(object sender, EventArgs e)
