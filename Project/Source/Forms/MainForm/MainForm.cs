@@ -10,8 +10,8 @@
 /// relevant directory) where a recipient would be likely to look for such a notice.
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
-/// <created> 2025-01 </created>
-/// <edited> 2025-01 </edited>
+/// <created> 2025-03 </created>
+/// <edited> 2025-04 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 /// <summary>
@@ -20,6 +20,10 @@ namespace Ordisoftware.Hebrew.Pi;
 /// <seealso cref="T:System.Windows.Forms.Form"/>
 partial class MainForm : Form
 {
+
+  const ulong MemorySizeInKiB = 1024;
+  const ulong MemorySizeInMiB = MemorySizeInKiB * 1024;
+  const ulong MemorySizeInGiB = MemorySizeInMiB * 1024;
 
   #region Singleton
 
@@ -51,6 +55,7 @@ partial class MainForm : Form
     ColumnRemainingRate.HeaderText = "Restants";
     ColumnElapsedCounting.HeaderText = "Comptage";
     ColumnElapsedAdding.HeaderText = "Additions";
+    TrackBarFontSize.Value = (int)GridIterations.Font.Size;
   }
 
   private void MainForm_Load(object sender, EventArgs e)
@@ -62,10 +67,6 @@ partial class MainForm : Form
     InitializeComboBoxSqlHelper();
   }
 
-  const ulong MemorySizeInKiB = 1024;
-  const ulong MemorySizeInMiB = MemorySizeInKiB * 1024;
-  const ulong MemorySizeInGiB = MemorySizeInMiB * 1024;
-
   private void InitializeComboBoxSqlHelper()
   {
     SelectSqlHelper.Items.AddRange(SqlHelperList);
@@ -74,8 +75,8 @@ partial class MainForm : Form
 
   private void InitializeListBoxPiDecimals()
   {
-    foreach ( string file in Directory.GetFiles(Path.Combine(Globals.DocumentsFolderPath, "PiDecimals"), "PiDecimals*.txt") )
-      SelectPiDecimalsFile.Items.Add(file);
+    var list = Directory.GetFiles(Path.Combine(Globals.DocumentsFolderPath, "PiDecimals"), "PiDecimals*.txt");
+    SelectPiDecimalsFile.Items.AddRange(list);
     SelectPiDecimalsFile.SelectedIndex = 2;
   }
 
@@ -95,6 +96,7 @@ partial class MainForm : Form
   private void MainForm_Shown(object sender, EventArgs e)
   {
     DoFormShown(sender, e);
+    UpdateRowsHeight();
   }
 
   private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -320,6 +322,12 @@ partial class MainForm : Form
     DoActionPauseContinue();
   }
 
+  private void ActionResetChronos_Click(object sender, EventArgs e)
+  {
+    Globals.ChronoBatch.Reset();
+    Globals.ChronoSubBatch.Reset();
+  }
+
   private void SelectPiDecimalsFile_SelectedIndexChanged(object sender, EventArgs e)
   {
     string path = SelectPiDecimalsFile.SelectedItem.ToString();
@@ -339,16 +347,32 @@ partial class MainForm : Form
     if ( reader.Read(buffer, 0, 2) == 2 )
     {
       string str = new(buffer, 0, 2);
-      if ( str == "3." || str == "3," ) size -= 2;
+      if ( EditForceSkip2.Checked || str == "3." || str == "3," ) size -= 2;
     }
     PiDecimalsFileSize = size;
     ActionFixDigitsMissingIn100GB.Enabled = size == 99999999998;
     EditMaxMotifs.Value = size / 10;
+    if ( EditMaxMotifs.Value == 0 ) EditMaxMotifs.Value = 10000000000;
   }
 
   private void SelectPiDecimalsFile_Format(object sender, ListControlConvertEventArgs e)
   {
     e.Value = Path.GetFileNameWithoutExtension(e.Value.ToString());
+  }
+
+  private void TrackBarFontSize_Scroll(object sender, EventArgs e)
+  {
+    GridIterations.Font = new Font(GridIterations.Font.Name, TrackBarFontSize.Value);
+    UpdateRowsHeight();
+  }
+
+  private void UpdateRowsHeight()
+  {
+    int newRowHeight = TextRenderer.MeasureText("0123456789%", GridIterations.DefaultCellStyle.Font).Height
+                     + (int)EditFontSpace.Value;
+    GridIterations.RowTemplate.Height = newRowHeight;
+    foreach ( DataGridViewRow row in GridIterations.Rows )
+      row.Height = newRowHeight;
   }
 
   private void GridIterations_Leave(object sender, EventArgs e)
@@ -398,13 +422,7 @@ partial class MainForm : Form
   private void ActionFixDigitsMissingIn100GB_Click(object sender, EventArgs e)
   {
     string filePathText = SelectPiDecimalsFile.SelectedItem.ToString();
-    string charactersToAdd_1 = "69";
-    string charactersToAdd_2 = "00";
-    string charactersToAdd = filePathText.EndsWith("-1.txt")
-      ? charactersToAdd_1
-      : filePathText.EndsWith("-2.txt")
-        ? charactersToAdd_2
-        : string.Empty;
+    string charactersToAdd = DecupletRow.GetMissingDigitsFor100G(filePathText);
     if ( charactersToAdd.Length == 0 ) return;
     var encoding = SystemManager.GetTextFileEncoding(filePathText);
     using var fs = new FileStream(filePathText, FileMode.Open, FileAccess.Write, FileShare.ReadWrite);
@@ -438,6 +456,19 @@ partial class MainForm : Form
         result += char2;
     }
     return result;
+  }
+
+  private void ActionVacuum_Click(object sender, EventArgs e)
+  {
+    DoBatchAsync(() => DoActionVacuumAsync());
+  }
+
+  private async Task DoActionVacuumAsync()
+  {
+    Globals.ChronoBatch.Restart();
+    Processing = ProcessingType.Vacuum;
+    DB.Vacuum();
+    Processing = ProcessingType.Finished;
   }
 
   //private void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)

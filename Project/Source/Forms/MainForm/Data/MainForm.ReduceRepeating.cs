@@ -64,6 +64,8 @@ partial class MainForm
       }
       else
         AllRowsCount = (long)EditMaxMotifs.Value;
+      if ( AllRowsCount == 0 )
+        DisplayManager.ShowAndAbort("AllRowsCount = 0");
       // Loop
       for ( ; AllRepeatingCount > 0; ReduceRepeatingIteration++ )
       {
@@ -157,6 +159,7 @@ partial class MainForm
             : row.AllRepeatingCount == row.UniqueRepeatingCount
               ? 100
               : Math.Round((double)row.AllRepeatingCount * 100 / AllRowsCount, 2);
+
           row.RemainingRate = row.AllRepeatingCount == 0
               ? 0
               : ReduceRepeatingIteration == 0

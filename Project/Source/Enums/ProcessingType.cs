@@ -11,7 +11,7 @@
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
 /// <created> 2025-01 </created>
-/// <edited> 2025-01 </edited>
+/// <edited> 2025-04 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 enum ProcessingType
@@ -24,5 +24,6 @@ enum ProcessingType
   ReduceRepeating,
   Finished,
   Canceled,
-  Error
+  Error,
+  Vacuum
 }

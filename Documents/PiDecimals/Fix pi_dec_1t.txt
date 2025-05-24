@@ -4,7 +4,8 @@ These are at the beginning of each pi_dec_1t_[NN+1].txt and The last motif to in
 
 - 01: 0191295669 after 0674614692
 - 02: 5623831042 after 9082820114
-- 03: 07802553-- after 0236124516
+- 03: 0780255325 after 0236124516
+- 04: 3353406089 after 7418760375
 
 SQL query:
 

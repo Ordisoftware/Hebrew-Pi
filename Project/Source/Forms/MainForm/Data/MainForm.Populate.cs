@@ -10,8 +10,8 @@
 /// relevant directory) where a recipient would be likely to look for such a notice.
 /// You may add additional accurate notices of copyright ownership.
 /// </license>
-/// <created> 2025-01 </created>
-/// <edited> 2025-01 </edited>
+/// <created> 2025-03 </created>
+/// <edited> 2025-03 </edited>
 namespace Ordisoftware.Hebrew.Pi;
 
 using Microsoft.WindowsAPICodePack.Taskbar;
@@ -106,15 +106,8 @@ partial class MainForm
       }
       if ( MotifsProcessedCount == 9_999_999_999 ) // Fix for pi_dec_1t_01.txt from pi_dec_1t_02.txt and so on
       {
-        long motifToAdd_1 = 0191295669;
-        long motifToAdd_2 = 5623831000;
-        long motifToAdd = filePathText.EndsWith("-1.txt")
-          ? motifToAdd_1
-          : filePathText.EndsWith("-2.txt")
-            ? motifToAdd_2
-            : -1;
-        if ( motifToAdd != -1 )
-          DB.Insert(new DecupletRow { Position = ++MotifsProcessedCount, Motif = motifToAdd });
+        long motifToAdd = DecupletRow.GetMissingMotifFor100G(filePathText);
+        if ( motifToAdd != -1 ) DB.Insert(new DecupletRow { Position = ++MotifsProcessedCount, Motif = motifToAdd });
       }
       DoCommit();
       UpdateStatusInfo(string.Format(AppTranslations.CreateDataProgress, MotifsProcessedCount.ToString("N0")));
