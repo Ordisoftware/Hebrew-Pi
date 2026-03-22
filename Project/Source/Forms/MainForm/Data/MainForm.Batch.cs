@@ -52,6 +52,7 @@ partial class MainForm
     });
   }
 
+  [SuppressMessage("Correctness", "SS018:Add cases for missing enum member.", Justification = "N/A")]
   private async Task DoBatchAsync(Action action, bool interruptible = true)
   {
     if ( BatchMutex ) return;

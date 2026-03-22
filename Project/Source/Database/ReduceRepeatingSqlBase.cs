@@ -19,6 +19,7 @@ using CountMotifsAndMaxOccurencesTuple = (long CountMotifs, long MaxOccurrences)
 abstract public class ReduceRepeatingSqlBase : ReduceRepeatingBase
 {
 
+  [SuppressMessage("Correctness", "SS018:Add cases for missing enum member.", Justification = "N/A")]
   public override bool CreateUniqueRepeatingMotifsTempTable()
   {
     CheckDatabaseNotNull();

@@ -142,6 +142,7 @@ partial class MainForm
       : $"OPENED ({SystemManager.GetFileSize(DatabaseFilePath).FormatBytesSize()})";
   }
 
+  [SuppressMessage("Correctness", "SS018:Add cases for missing enum member.", Justification = "N/A")]
   private void DoTimerStatus()
   {
     LabelStatusTimeBatch.Text = Globals.ChronoBatch.Elapsed.TotalSeconds == 0

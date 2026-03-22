@@ -17,6 +17,7 @@ namespace Ordisoftware.Hebrew.Pi;
 public class ReduceRepeatingSqlLoop : ReduceRepeatingSqlBase
 {
 
+  [SuppressMessage("Roslynator", "RCS1118:Mark local variable as const", Justification = "N/A (readability)")]
   public override long AddPositionToRepeatingMotifs()
   {
     CheckDatabaseNotNull();

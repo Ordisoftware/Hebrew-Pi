@@ -21,9 +21,10 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm
 {
 
+  [SuppressMessage("Correctness", "SS019:Switch should have default label.", Justification = "N/A")]
   private void AskWhatToDoOnNonEmptyTable()
   {
-    string title = "Table is not empty";
+    const string title = "Table is not empty";
     string msg = $"""
                         Table has {DecupletsRowCount:N0} rows already inserted.
 

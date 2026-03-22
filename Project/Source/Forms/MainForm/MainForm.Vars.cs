@@ -25,7 +25,7 @@ partial class MainForm
 
   private const int PiDecimalMotifSize = 10;
 
-  private ReduceRepeatingBase[] SqlHelperList =
+  private readonly ReduceRepeatingBase[] SqlHelperList =
   [
     new ReduceRepeatingSqlUpdate(),
     new ReduceRepeatingSqlLoop(),
