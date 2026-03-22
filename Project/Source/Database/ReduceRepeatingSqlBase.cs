@@ -1,6 +1,6 @@
 ﻿/// <license>
 /// file is part of Ordisoftware Hebrew Pi.
-/// Copyright 2025 Olivier Rogier.
+/// Copyright 2026 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
 /// Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 /// If a copy of the MPL was not distributed with file, You can obtain one at
