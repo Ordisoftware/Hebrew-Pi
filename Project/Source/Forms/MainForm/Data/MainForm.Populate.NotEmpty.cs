@@ -1,6 +1,6 @@
 ﻿/// <license>
 /// This file is part of Ordisoftware Hebrew Pi.
-/// Copyright 2025 Olivier Rogier.
+/// Copyright 2026 Olivier Rogier.
 /// See www.ordisoftware.com for more information.
 /// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 /// If a copy of the MPL was not distributed with this file, You can obtain one at
@@ -21,9 +21,10 @@ namespace Ordisoftware.Hebrew.Pi;
 partial class MainForm
 {
 
+  [SuppressMessage("Correctness", "SS019:Switch should have default label.", Justification = "N/A")]
   private void AskWhatToDoOnNonEmptyTable()
   {
-    string title = "Table is not empty";
+    const string title = "Table is not empty";
     string msg = $"""
                         Table has {DecupletsRowCount:N0} rows already inserted.
 
