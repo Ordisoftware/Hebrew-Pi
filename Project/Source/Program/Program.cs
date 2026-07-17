@@ -20,6 +20,9 @@ namespace Ordisoftware.Hebrew.Pi;
 static partial class Program
 {
 
+  private const string SoftpediaURL = "";
+  private const string AlternativeToURL = "";
+
   /// <summary>
   /// Process startup method.
   /// </summary>
@@ -32,8 +35,8 @@ static partial class Program
       Application.SetCompatibleTextRenderingDefault(false);
       //
       Globals.ChronoStartingApp.Start();
-      Globals.SoftpediaURL = "";
-      Globals.AlternativeToURL = string.Empty;
+      Globals.SoftpediaURL = SoftpediaURL;
+      Globals.AlternativeToURL = AlternativeToURL;
       CommonMenusControl.PreviewFunctions = AppTranslations.PreviewFunctions;
       //
       var lang = Settings.LanguageSelected;
